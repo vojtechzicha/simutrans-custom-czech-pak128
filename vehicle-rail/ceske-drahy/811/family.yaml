@@ -1,0 +1,45 @@
+agency: CeskeDrahy
+type: "811"
+copyright: Sim
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "RegioMouse"
+  family_cs: "RegioMouse"
+
+# Single railcar — modernized class 810 with new angular cab (RegioMouse).
+# Source: pak128cs rail-psg mail/810/811.dat (CD_811-1). Treated as standalone here
+# (the upstream class with Btax trailers is out of scope).
+
+vehicles:
+  - id: "811"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    fields:
+      cost: 1092600
+      payload: 73
+      speed: 80
+      weight: 20
+      runningcost: 16
+      fixed_cost: 82
+      intro_year: 1997
+      intro_month: 2
+      retire_year: 2030
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 155
+      smoke: Diesel_black
+      gear: 108
+    extended:
+      axles: 2
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+    source: pak128cs/rail-psg mail/810/811_predni.png (ČD red — recolor to Najbrt 2 blue with red doors)

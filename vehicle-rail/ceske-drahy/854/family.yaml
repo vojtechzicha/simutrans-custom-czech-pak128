@@ -1,0 +1,50 @@
+agency: CeskeDrahy
+type: "854"
+copyright: Sim
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: '"Hydra"'
+  family_cs: '"Hydra"'
+
+# Single motor car — rebuilt class 851 (ex T 478.1) with refurbished interior
+# and new front (1996-). Source DAT: pak128cs rail-psg mail/850_851/851.dat (CD_851-1).
+# 851 shares the powertrain family with 854; speed reduced to 100 km/h to match real-world
+# 854 spec, and intro year shifted to the 1996 rebuild.
+
+vehicles:
+  - id: "854"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    fields:
+      cost: 2942400
+      payload: 80
+      speed: 100
+      weight: 50
+      runningcost: 120
+      fixed_cost: 845
+      intro_year: 1996
+      intro_month: 1
+      retire_year: 2035
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+      engine_type: diesel
+      power: 588
+      smoke: Diesel
+      gear: 107
+    extended:
+      axles: 4
+
+liveries:
+  - color: cervenokremova
+    name_en: "red-cream"
+    name_cs: "červeno-krémová"
+    source: pak128cs/rail-psg mail/850_851/851_CSD.png row 0 (ČSD cream+red — direct color match)
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+    source: pak128cs/rail-psg mail/850_851/851.png row 0 (ČD red — recolor to Najbrt 2 blue with red doors)

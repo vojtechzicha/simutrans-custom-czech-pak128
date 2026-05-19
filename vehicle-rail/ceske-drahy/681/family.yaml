@@ -1,0 +1,207 @@
+agency: CeskeDrahy
+type: "681"
+copyright: TommPa9
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "Pendolino"
+  family_cs: "Pendolino"
+
+# 7-car tilting EMU (681+081+683+084+684+082+682). Source DAT:
+# pak128cs rail-psg mail/680/cd_680_pendolino.dat (upstream labels it 680/081/etc;
+# ČD reclassified the set to 681). All figures verbatim from the source.
+
+vehicles:
+  - id: "681"
+    role_en: "front motor"
+    role_cs: "přední motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["081"]
+    fields:
+      cost: 18384000
+      payload: 53
+      speed: 230
+      weight: 57
+      runningcost: 60
+      fixed_cost: 883
+      intro_year: 2003
+      intro_month: 6
+      retire_year: 2073
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: Electric
+      power: 1000
+      gear: 190
+    extended:
+      axles: 4
+
+  - id: "081"
+    role_en: "1st class trailer"
+    role_cs: "vůz 1. třídy"
+    row: 1
+    head: false
+    tail: false
+    prev: ["681"]
+    next: ["683"]
+    fields:
+      cost: 18384000
+      payload: 52
+      speed: 230
+      weight: 57
+      runningcost: 60
+      fixed_cost: 883
+      intro_year: 2003
+      intro_month: 6
+      retire_year: 2073
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "683"
+    role_en: "motor bistro"
+    role_cs: "motorový vůz s bistrem"
+    row: 2
+    head: false
+    tail: false
+    prev: ["081"]
+    next: ["084"]
+    fields:
+      cost: 18384000
+      payload: 24
+      speed: 230
+      weight: 56
+      runningcost: 60
+      fixed_cost: 883
+      intro_year: 2003
+      intro_month: 6
+      retire_year: 2073
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+      engine_type: Electric
+      power: 1000
+      gear: 190
+    extended:
+      axles: 4
+
+  - id: "084"
+    role_en: "middle trailer"
+    role_cs: "vložený vůz"
+    row: 3
+    head: false
+    tail: false
+    prev: ["683"]
+    next: ["684"]
+    fields:
+      cost: 18384000
+      payload: 46
+      speed: 230
+      weight: 44
+      runningcost: 60
+      fixed_cost: 883
+      intro_year: 2003
+      intro_month: 6
+      retire_year: 2073
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "684"
+    role_en: "middle motor"
+    role_cs: "vložený motorový vůz"
+    row: 4
+    head: false
+    tail: false
+    prev: ["084"]
+    next: ["082"]
+    fields:
+      cost: 18384000
+      payload: 53
+      speed: 230
+      weight: 56
+      runningcost: 60
+      fixed_cost: 883
+      intro_year: 2003
+      intro_month: 6
+      retire_year: 2073
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+      engine_type: Electric
+      power: 1000
+      gear: 190
+    extended:
+      axles: 4
+
+  - id: "082"
+    role_en: "1st class trailer"
+    role_cs: "vůz 1. třídy"
+    row: 5
+    head: false
+    tail: false
+    prev: ["684"]
+    next: ["682"]
+    fields:
+      cost: 18384000
+      payload: 52
+      speed: 230
+      weight: 57
+      runningcost: 60
+      fixed_cost: 883
+      intro_year: 2003
+      intro_month: 6
+      retire_year: 2073
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "682"
+    role_en: "rear motor"
+    role_cs: "zadní motorový vůz"
+    row: 6
+    head: false
+    tail: true
+    prev: ["082"]
+    next: []
+    fields:
+      cost: 18384000
+      payload: 53
+      speed: 230
+      weight: 57
+      runningcost: 60
+      fixed_cost: 883
+      intro_year: 2003
+      intro_month: 6
+      retire_year: 2073
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: Electric
+      power: 1000
+      gear: 190
+    extended:
+      axles: 4
+
+liveries:
+  - color: cdpendolino
+    name_en: "ČD Pendolino"
+    name_cs: "ČD pendolino"
+    source: pak128cs/rail-psg mail/680/cd_680_pendolino.png (ČD Pendolino livery — direct match)

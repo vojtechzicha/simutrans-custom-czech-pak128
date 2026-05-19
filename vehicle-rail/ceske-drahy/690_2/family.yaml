@@ -1,0 +1,74 @@
+agency: CeskeDrahy
+type: "690.2"
+copyright: TommPa9, VojtechZicha
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "RegioPanter"
+  family_cs: "RegioPanter"
+
+# 2-car battery-electric Škoda RegioPanter EMU (690.2 + 691.2). Source DAT:
+# pak128_czr vehicles-rail-emu/CD/690.dat. Note engine_type=Battery for battery operation.
+
+vehicles:
+  - id: "690.2"
+    role_en: "motor cab car"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["691.2"]
+    fields:
+      cost: 18384000
+      payload: 110
+      speed: 160
+      weight: 53
+      runningcost: 60
+      fixed_cost: 614
+      intro_year: 2024
+      intro_month: 1
+      retire_year: 2085
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: Battery
+      power: 680
+      gear: 180
+    extended:
+      axles: 4
+
+  - id: "691.2"
+    role_en: "cab trailer"
+    role_cs: "řídicí vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["690.2"]
+    next: []
+    fields:
+      cost: 18384000
+      payload: 110
+      speed: 160
+      weight: 53
+      runningcost: 40
+      fixed_cost: 410
+      intro_year: 2024
+      intro_month: 1
+      retire_year: 2085
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: Battery
+      power: 680
+    extended:
+      axles: 4
+
+liveries:
+  - color: cdzelenomodrobila
+    name_en: "ČD green-blue-white"
+    name_cs: "ČD zeleno-modro-bílá"
+    source: pak128_czr/vehicles-rail-emu/CD/690.png (ČD green+blue battery livery — direct match)

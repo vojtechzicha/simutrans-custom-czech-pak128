@@ -1,0 +1,78 @@
+agency: CeskeDrahy
+type: "650"
+copyright: TommPa9
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "RegioPanter"
+  family_cs: "RegioPanter"
+
+# 2-car Škoda RegioPanter EMU (650 + 651). Source DAT:
+# pak128_czr vehicles-rail-emu/CD/650_P2.dat (CZR-CD-650_P2 + 651_P2).
+
+vehicles:
+  - id: "650"
+    role_en: "motor cab car"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["651"]
+    fields:
+      cost: 18384000
+      payload: 110
+      speed: 160
+      weight: 53
+      runningcost: 60
+      fixed_cost: 614
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2083
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: Electric
+      power: 680
+      gear: 180
+    extended:
+      axles: 4
+
+  - id: "651"
+    role_en: "cab trailer"
+    role_cs: "řídicí vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["650"]
+    next: []
+    fields:
+      cost: 18384000
+      payload: 110
+      speed: 160
+      weight: 53
+      runningcost: 40
+      fixed_cost: 410
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2083
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: Electric
+      power: 680
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt1_2
+    name_en: "Najbrt 1.2"
+    name_cs: "Najbrt 1.2"
+    source: pak128_czr/vehicles-rail-emu/CD/650_P2.png (ČD blue+yellow — close match; touch up waistband for Najbrt 1.2)
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+    source: pak128_czr/vehicles-rail-emu/CD/650_P2.png (ČD blue+yellow — recolor doors to bright red for Najbrt 2)

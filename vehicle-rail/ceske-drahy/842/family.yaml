@@ -1,0 +1,48 @@
+agency: CeskeDrahy
+type: "842"
+copyright: Sim
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: '"Kvatro"'
+  family_cs: '"Kvatro"'
+
+# Single motor car. Source: pak128cs rail-psg mail/842_843/842.dat (CD_842-1, freight row).
+# Mail trailer variant intentionally dropped.
+
+vehicles:
+  - id: "842"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    fields:
+      cost: 2679000
+      payload: 103
+      speed: 100
+      weight: 46
+      runningcost: 95
+      fixed_cost: 608
+      intro_year: 1993
+      intro_month: 5
+      retire_year: 2030
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+      engine_type: diesel
+      power: 424
+      smoke: Diesel
+      gear: 105
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt1
+    name_en: "Najbrt 1"
+    name_cs: "Najbrt 1"
+    source: pak128cs/rail-psg mail/842_843/842.png row 0 (ČD red — recolor to Najbrt 1 blue+white)
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+    source: pak128cs/rail-psg mail/842_843/842.png row 0 (ČD red — recolor to Najbrt 2 blue with red doors)

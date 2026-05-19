@@ -1,0 +1,52 @@
+agency: CeskeDrahy
+type: "843"
+copyright: Sim
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: '"Rakev"'
+  family_cs: '"Rakev"'
+
+# Single motor car. Source: pak128cs rail-psg mail/842_843/843.dat (CD_843-1, freight row).
+# Mail trailer variant intentionally dropped.
+
+vehicles:
+  - id: "843"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    fields:
+      cost: 3126800
+      payload: 105
+      speed: 110
+      weight: 56
+      runningcost: 133
+      fixed_cost: 936
+      intro_year: 1996
+      intro_month: 3
+      retire_year: 2030
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: diesel
+      power: 600
+      smoke: Diesel
+      gear: 125
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt1
+    name_en: "Najbrt 1"
+    name_cs: "Najbrt 1"
+    source: pak128cs/rail-psg mail/842_843/843.png row 0 (ČD red — recolor to Najbrt 1 blue+white)
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+    source: pak128cs/rail-psg mail/842_843/843.png row 0 (ČD red — recolor to Najbrt 2 blue with red doors)
+  - color: cervenokremova
+    name_en: "red-cream"
+    name_cs: "červeno-krémová"
+    source: pak128cs/rail-psg mail/842_843/843.png row 0 (ČD red — touch up cream/grey roof if needed; closest match in catalogue)

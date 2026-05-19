@@ -1,0 +1,79 @@
+agency: CeskeDrahy
+type: "844"
+copyright: Sim
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "RegioShark"
+  family_cs: "RegioShark"
+
+# Two-car PESA LINK II DMU. Source: pak128_czr vehicles-rail-dmu/CD/844.dat.
+# Layout: head motor (row 1) + trailer (row 0). Either order valid in the source;
+# we model as fixed front motor -> rear trailer.
+
+vehicles:
+  - id: "844"
+    role_en: "front motor car"
+    role_cs: "motorový vůz"
+    row: 1
+    head: true
+    tail: false
+    prev: []
+    next: ["844b"]
+    fields:
+      cost: 1759600
+      payload: 162
+      speed: 140
+      weight: 42
+      runningcost: 54
+      fixed_cost: 311
+      intro_year: 2012
+      intro_month: 12
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 309
+      smoke: Diesel
+      gear: 129
+    extended:
+      axles: 4
+
+  - id: "844b"
+    display_id: "844"
+    role_en: "rear trailer"
+    role_cs: "řídicí vůz"
+    row: 0
+    head: false
+    tail: true
+    prev: ["844"]
+    next: []
+    fields:
+      cost: 1450000
+      payload: 163
+      speed: 140
+      weight: 41
+      runningcost: 4
+      fixed_cost: 18
+      intro_year: 2012
+      intro_month: 12
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt1
+    name_en: "Najbrt 1"
+    name_cs: "Najbrt 1"
+    source: pak128_czr/vehicles-rail-dmu/CD/844.png (ČD blue/white — direct match, no recolor needed)
+  - color: pardubickykraj
+    name_en: "Pardubický kraj"
+    name_cs: "Pardubický kraj"
+    source: pak128_czr/vehicles-rail-dmu/CD/844.png (ČD blue — recolor to Pardubický kraj white+red+yellow)

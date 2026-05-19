@@ -1,0 +1,100 @@
+agency: CeskeDrahy
+type: "660.0"
+copyright: TommPa9
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "InterPanter"
+  family_cs: "InterPanter"
+
+# 3-car Škoda 7Ev InterPanter EMU (660.0 + 662.0 + 661.0). No exact DAT source;
+# figures derived from the pak128_czr 640.dat (same RegioPanter family bodyshell)
+# with adjustments for the InterPanter sub-series (long-distance interior, higher cost).
+
+vehicles:
+  - id: "660.0"
+    role_en: "front motor car"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["662.0"]
+    fields:
+      cost: 20000000
+      payload: 100
+      speed: 160
+      weight: 53
+      runningcost: 60
+      fixed_cost: 640
+      intro_year: 2015
+      intro_month: 1
+      retire_year: 2085
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: Electric
+      power: 1000
+      gear: 180
+    extended:
+      axles: 4
+
+  - id: "662.0"
+    role_en: "middle motor car"
+    role_cs: "vložený motorový vůz"
+    row: 2
+    head: false
+    tail: false
+    prev: ["660.0"]
+    next: ["661.0"]
+    fields:
+      cost: 19000000
+      payload: 136
+      speed: 160
+      weight: 54
+      runningcost: 22
+      fixed_cost: 240
+      intro_year: 2015
+      intro_month: 1
+      retire_year: 2085
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: Electric
+      power: 1000
+    extended:
+      axles: 4
+
+  - id: "661.0"
+    role_en: "rear cab car"
+    role_cs: "řídicí vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["662.0"]
+    next: []
+    fields:
+      cost: 19000000
+      payload: 100
+      speed: 160
+      weight: 53
+      runningcost: 40
+      fixed_cost: 420
+      intro_year: 2015
+      intro_month: 1
+      retire_year: 2085
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+    source: pak128_czr/vehicles-rail-emu/CD/640.png (ČD Najbrt 2 — direct color match, may need fine-tune for InterPanter front)

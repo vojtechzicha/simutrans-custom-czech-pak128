@@ -49,8 +49,8 @@ vehicles:
       freight: Passagiere
       length: 7
       engine_type: diesel
-      smoke: Diesel
       power: 242
+      smoke: Diesel
       gear: 105
     extended:
       axles: 2
@@ -64,3 +64,19 @@ liveries:
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"
     source: pak128_czr/vehicles-rail-dmu/CD/814-2a_Blue.png (Najbrt 2 — direct match)
+  - color: plzenskykraj
+    name_en: "Plzeňský kraj"
+    name_cs: "Plzeňský kraj"
+    source: hand-painted Plzeňský kraj livery
+  - color: pardubickykraj
+    name_en: "Pardubický kraj"
+    name_cs: "Pardubický kraj"
+    source: hand-painted Pardubický kraj livery
+  - color: vysocina
+    name_en: "Kraj Vysočina"
+    name_cs: "Kraj Vysočina"
+    source: hand-painted Kraj Vysočina livery
+  - color: pidsedocervena
+    name_en: "PID šedo-červená"
+    name_cs: "PID šedo-červená"
+    source: hand-painted PID šedo-červená livery

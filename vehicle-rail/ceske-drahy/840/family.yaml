@@ -1,0 +1,44 @@
+agency: CeskeDrahy
+type: "840"
+copyright: Lubak91
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "RegioSpider"
+  family_cs: "RegioSpider"
+
+# Single Stadler Regio-Shuttle RS1 railcar. Source: pak128cs rail-psg mail/840_841/zssk_840.dat
+# (the upstream models it as 3 segments — we flatten to one car with combined values).
+
+vehicles:
+  - id: "840"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    fields:
+      cost: 3191200
+      payload: 113
+      speed: 115
+      weight: 58
+      runningcost: 71
+      fixed_cost: 1148
+      intro_year: 2003
+      intro_month: 1
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+      engine_type: diesel
+      power: 550
+      smoke: Diesel_small
+      gear: 135
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt1
+    name_en: "Najbrt 1"
+    name_cs: "Najbrt 1"
+    source: pak128cs/rail-psg mail/840_841/zssk_840_a_freight.png (ZSSK silver — recolor to Najbrt 1 blue+white)

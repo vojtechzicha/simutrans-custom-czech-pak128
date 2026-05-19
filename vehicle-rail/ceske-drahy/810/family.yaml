@@ -1,0 +1,60 @@
+agency: CeskeDrahy
+type: "810"
+copyright: Sim
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: '"Šukafon"'
+  family_cs: '"Šukafon"'
+
+# Single railcar. Class 810 = ex ČSD M 152.0 (1973-).
+# Source: pak128cs rail-psg mail/810/810.dat (CD_810).
+
+vehicles:
+  - id: "810"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    fields:
+      cost: 1022400
+      payload: 95
+      speed: 80
+      weight: 20
+      runningcost: 23
+      fixed_cost: 118
+      intro_year: 1997
+      intro_month: 2
+      retire_year: 2025
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 155
+      smoke: Diesel_black
+      gear: 105
+    extended:
+      axles: 2
+
+liveries:
+  - color: najbrt1
+    name_en: "Najbrt 1"
+    name_cs: "Najbrt 1"
+    source: pak128cs/rail-psg mail/810/810_modry.png (ČD light blue — recolor to Najbrt 1 blue+white)
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+    source: pak128cs/rail-psg mail/810/810_modry.png (ČD light blue — recolor to Najbrt 2 blue with red doors)
+  - color: cervenokremova
+    name_en: "red-cream"
+    name_cs: "červeno-krémová"
+    source: pak128cs/rail-psg mail/810/810_CSD.png (ČSD red+grey — recolor to ČD red+cream)
+  - color: pardubickykraj
+    name_en: "Pardubický kraj"
+    name_cs: "Pardubický kraj"
+    source: pak128cs/rail-psg mail/810/810.png (ČD red — recolor to Pardubický kraj white+red+yellow)
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white"
+    name_cs: "PID červeno-modro-bílá"
+    source: pak128cs/rail-psg mail/810/810.png (ČD red — recolor to PID red+blue+white)

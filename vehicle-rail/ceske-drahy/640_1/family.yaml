@@ -1,0 +1,105 @@
+agency: CeskeDrahy
+type: "640.1"
+copyright: TommPa9
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "RegioPanter"
+  family_cs: "RegioPanter"
+
+# 3-car Škoda RegioPanter EMU (640.1 + 642.1 + 641.1) — later batch of 640 family.
+# No exact DAT source; values match the 640 base with intro year shifted.
+
+vehicles:
+  - id: "640.1"
+    role_en: "front motor"
+    role_cs: "přední motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["642.1"]
+    fields:
+      cost: 18384000
+      payload: 110
+      speed: 160
+      weight: 53
+      runningcost: 60
+      fixed_cost: 614
+      intro_year: 2017
+      intro_month: 1
+      retire_year: 2085
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: Electric
+      power: 680
+      gear: 180
+    extended:
+      axles: 4
+
+  - id: "642.1"
+    role_en: "middle car"
+    role_cs: "vložený vůz"
+    row: 2
+    head: false
+    tail: false
+    prev: ["640.1"]
+    next: ["641.1"]
+    fields:
+      cost: 18384000
+      payload: 136
+      speed: 160
+      weight: 54
+      runningcost: 22
+      fixed_cost: 225
+      intro_year: 2017
+      intro_month: 1
+      retire_year: 2085
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: Electric
+      power: 680
+    extended:
+      axles: 4
+
+  - id: "641.1"
+    role_en: "rear cab car"
+    role_cs: "řídicí vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["642.1"]
+    next: []
+    fields:
+      cost: 18384000
+      payload: 110
+      speed: 160
+      weight: 53
+      runningcost: 40
+      fixed_cost: 410
+      intro_year: 2017
+      intro_month: 1
+      retire_year: 2085
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: Electric
+      power: 680
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt1_2
+    name_en: "Najbrt 1.2"
+    name_cs: "Najbrt 1.2"
+    source: pak128_czr/vehicles-rail-emu/CD/640.png (ČD blue+yellow — close match for Najbrt 1.2)
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+    source: pak128_czr/vehicles-rail-emu/CD/640.png (ČD blue+yellow — direct match for Najbrt 2)

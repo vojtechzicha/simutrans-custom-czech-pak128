@@ -1,0 +1,48 @@
+agency: CeskeDrahy
+type: "809"
+copyright: Sim
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: '"Šukafon"'
+  family_cs: '"Šukafon"'
+
+# Single railcar — rebuild of class 810 with refreshed interior.
+# Source: pak128cs rail-psg mail/810/809.dat (CD_809).
+
+vehicles:
+  - id: "809"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    fields:
+      cost: 1057800
+      payload: 95
+      speed: 80
+      weight: 20
+      runningcost: 20
+      fixed_cost: 102
+      intro_year: 1996
+      intro_month: 4
+      retire_year: 2030
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 155
+      smoke: Diesel_black
+      gear: 105
+    extended:
+      axles: 2
+
+liveries:
+  - color: najbrt1
+    name_en: "Najbrt 1"
+    name_cs: "Najbrt 1"
+    source: pak128cs/rail-psg mail/810/809.png (ČD red — recolor to Najbrt 1 blue+white)
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+    source: pak128cs/rail-psg mail/810/809.png (ČD red — recolor to Najbrt 2 blue with red doors)
