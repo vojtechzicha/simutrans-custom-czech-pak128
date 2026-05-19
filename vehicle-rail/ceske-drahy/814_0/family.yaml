@@ -1,0 +1,66 @@
+agency: CeskeDrahy
+type: "814.0"
+copyright: Sim
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "RegioNova"
+  family_cs: "RegioNova"
+
+vehicles:
+  - id: "914"
+    role_en: "cab car"
+    role_cs: "řídicí vůz"
+    row: 0
+    fields:
+      cost: 979000
+      payload: 97
+      speed: 80
+      weight: 17
+      runningcost: 3
+      fixed_cost: 15
+      intro_year: 2005
+      intro_month: 11
+      retire_year: 2035
+      retire_month: 5
+      waytype: track
+      freight: Passagiere
+      length: 7
+    extended:
+      axles: 2
+
+  - id: "814.0"
+    role_en: "motor car"
+    role_cs: "motorový vůz"
+    row: 1
+    fields:
+      cost: 1317800
+      payload: 92
+      speed: 80
+      weight: 23
+      runningcost: 29
+      fixed_cost: 148
+      intro_year: 2005
+      intro_month: 11
+      retire_year: 2035
+      retire_month: 5
+      waytype: track
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      smoke: Diesel
+      power: 242
+      gear: 105
+    extended:
+      axles: 2
+
+liveries:
+  - color: zlutozelena
+    name_en: "yellow-green"
+    name_cs: "žluto-zelená"
+    source: original upstream žluto-zelená livery
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+    source: pak128_czr/vehicles-rail-dmu/CD/814-2a_Blue.png (Najbrt 2 — direct match)

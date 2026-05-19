@@ -1,0 +1,19 @@
+# Default: normalize text files to LF in the repo, leave native in working tree
+* text=auto eol=lf
+
+# Windows-native scripts keep CRLF
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Explicit text formats (Simutrans data files are plain text)
+*.py    text eol=lf
+*.yaml  text eol=lf
+*.yml   text eol=lf
+*.md    text eol=lf
+*.dat   text eol=lf
+*.tab   text eol=lf
+
+# Binary
+*.png   binary
+*.pak   binary

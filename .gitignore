@@ -1,0 +1,29 @@
+# Generated build artifacts
+build/
+dist/
+*.pak
+
+# Reference material (third-party paks; not redistributed)
+inspiration/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
