@@ -86,12 +86,12 @@ Shared base for all three regional liveries:
 
 | Zone                   | RAL/PMS    | RGB (decimal)    | Hex     |
 | ---------------------- | ---------- | ---------------- | ------- |
-| Accent band            | RAL 5015 Himmelblau | `0, 124, 176` | #007CB0 |
+| Accent band (shipped)  | —          | `63, 72, 204`    | #3F48CC |
 | Logo curve — blue      | logo blue  | `0, 114, 188`    | #0072BC |
 | Logo curve — green     | logo green | `141, 198, 63`   | #8DC63F |
 | Logo curve — yellow    | logo yellow| `255, 214, 0`    | #FFD600 |
 
-The kraj's three-curve colors only appear in the side decal, not as body fields. Reference: [plzensky-kraj.cz/symboly-pk](https://www.plzensky-kraj.cz/symboly-pk).
+The shipped 128px sprite uses a brighter accent blue (#3F48CC) rather than the RAL 5015 sky-blue documented for the real-world livery — chosen for contrast against the white body at pak128 scale. The kraj's three-curve colors only appear in the side decal, not as body fields. Reference: [plzensky-kraj.cz/symboly-pk](https://www.plzensky-kraj.cz/symboly-pk).
 
 ---
 
@@ -116,10 +116,10 @@ Reference: [Pardubický kraj — logo manuál (PDF)](https://pardubice.eu/data/f
 
 | Zone                  | RAL/PMS     | RGB (decimal)    | Hex     |
 | --------------------- | ----------- | ---------------- | ------- |
-| Doors + side stripe   | PMS 368 C / RAL 6018 | `120, 190, 33` | #78BE21 |
+| Doors + side stripe (shipped) | —   | `34, 177, 76`    | #22B14C |
 | Kraj logotype         | PMS 2748 C  | `0, 24, 113`     | #001871 |
 
-The kraj's green graphic mark is the dominant accent — applied as both door fill and a continuous band; logotype text on the side is dark blue. Reference: [Kraj Vysočina — logomanuál (PDF)](https://ezak.kr-vysocina.cz/document_47757/f2d420d542be55d09e1d4bb5d27d3e9a-logomanual-pdf).
+The shipped 128px sprite uses #22B14C — a slightly deeper, more emerald green than the documented PMS 368 C / RAL 6018 light green of the real-world livery. The kraj's green graphic mark is the dominant accent — applied as both door fill and a continuous band; logotype text on the side is dark blue. Reference: [Kraj Vysočina — logomanuál (PDF)](https://ezak.kr-vysocina.cz/document_47757/f2d420d542be55d09e1d4bb5d27d3e9a-logomanual-pdf).
 
 ---
 
