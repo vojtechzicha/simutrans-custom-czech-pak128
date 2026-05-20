@@ -26,7 +26,21 @@ Additional vehicle families are in progress and live on the
 - Python 3.7+
 - [`pyyaml`](https://pypi.org/project/PyYAML/) (`pip install pyyaml`)
 - `makeobj` from a matching Simutrans build, on `PATH` or pointed to by
-  `MAKEOBJ_PATH`
+  `MAKEOBJ_PATH` (see [Configuration](#configuration))
+
+## Configuration
+
+`build.py` auto-loads a `.env` file from the project root on startup. Copy the
+template and edit the path to your local `makeobj`:
+
+```sh
+cp .env.example .env
+# then edit .env, e.g.
+# MAKEOBJ_PATH=D:\gameBin\simutrans-makeobj.exe
+```
+
+Variables already set in the process environment take precedence over `.env`.
+`.env` is git-ignored; `.env.example` is the template that's committed.
 
 ## Building
 

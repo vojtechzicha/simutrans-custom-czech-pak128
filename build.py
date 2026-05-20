@@ -12,7 +12,8 @@ Usage:
     python build.py <family-dir>   # build a single family by directory or yaml path
 
 ``makeobj`` is located via the ``MAKEOBJ_PATH`` environment variable; if unset,
-``makeobj`` on PATH is used.
+``makeobj`` on PATH is used. A ``.env`` file in the project root is auto-loaded
+on startup (existing environment variables take precedence); see ``.env.example``.
 """
 
 from __future__ import annotations
@@ -31,6 +32,27 @@ BUILD = ROOT / "build"
 DIST = ROOT / "dist"
 
 DIRECTIONS = ["w", "nw", "n", "ne", "e", "se", "s", "sw"]
+
+
+def load_dotenv(path: Path) -> None:
+    """Minimal .env loader. KEY=VALUE per line; blank lines and ``#`` comments
+    are ignored. Optional surrounding single/double quotes are stripped. Existing
+    environment variables are NOT overwritten."""
+    if not path.is_file():
+        return
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        if "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        key = key.strip()
+        value = value.strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in ("'", '"'):
+            value = value[1:-1]
+        if key and key not in os.environ:
+            os.environ[key] = value
 
 
 def slug(s: str) -> str:
@@ -196,6 +218,8 @@ def main() -> int:
         help="Wipe build/ and dist/ before building.",
     )
     args = parser.parse_args()
+
+    load_dotenv(ROOT / ".env")
 
     if args.clean:
         for d in (BUILD, DIST):
