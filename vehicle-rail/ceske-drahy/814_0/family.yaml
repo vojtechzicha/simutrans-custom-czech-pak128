@@ -8,11 +8,27 @@ display:
   family_en: "RegioNova"
   family_cs: "RegioNova"
 
+# Two-car push-pull DMU with cab cars at the outer ends. The source PNG draws
+# each car with its cab on one specific physical side, so each sprite is only
+# correct in ONE convoy position. We model both orientations:
+#
+#   [914-front + 814.0-rear]                — cab car leads (natural sprites)
+#   [814.0-front + 914-rear]                — motor car leads (reverse: true,
+#                                              column index shifted +4 mod 8)
+#
+# Constraints reject single-car consists and cross-mixed orientations: each
+# normal car can only pair with the other normal car, and each reverse car
+# can only pair with the other reverse car.
+
 vehicles:
   - id: "914"
-    role_en: "cab car"
-    role_cs: "řídicí vůz"
+    role_en: "front cab car"
+    role_cs: "přední řídicí vůz"
     row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["814.0"]
     fields:
       cost: 979000
       payload: 97
@@ -31,9 +47,13 @@ vehicles:
       axles: 2
 
   - id: "814.0"
-    role_en: "motor car"
-    role_cs: "motorový vůz"
+    role_en: "rear motor car"
+    role_cs: "zadní motorový vůz"
     row: 1
+    head: false
+    tail: true
+    prev: ["914"]
+    next: []
     fields:
       cost: 1317800
       payload: 92
@@ -52,6 +72,64 @@ vehicles:
       power: 242
       smoke: Diesel
       gear: 105
+    extended:
+      axles: 2
+
+  - id: "814.0-reverse"
+    display_id: "814.0"
+    role_en: "front motor car"
+    role_cs: "přední motorový vůz"
+    row: 1
+    reverse: true
+    head: true
+    tail: false
+    prev: []
+    next: ["914-reverse"]
+    fields:
+      cost: 1317800
+      payload: 92
+      speed: 80
+      weight: 23
+      runningcost: 29
+      fixed_cost: 148
+      intro_year: 2005
+      intro_month: 11
+      retire_year: 2035
+      retire_month: 5
+      waytype: track
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 242
+      smoke: Diesel
+      gear: 105
+    extended:
+      axles: 2
+
+  - id: "914-reverse"
+    display_id: "914"
+    role_en: "rear cab car"
+    role_cs: "zadní řídicí vůz"
+    row: 0
+    reverse: true
+    head: false
+    tail: true
+    prev: ["814.0-reverse"]
+    next: []
+    fields:
+      cost: 979000
+      payload: 97
+      speed: 80
+      weight: 17
+      runningcost: 3
+      fixed_cost: 15
+      intro_year: 2005
+      intro_month: 11
+      retire_year: 2035
+      retire_month: 5
+      waytype: track
+      freight: Passagiere
+      length: 7
     extended:
       axles: 2
 
