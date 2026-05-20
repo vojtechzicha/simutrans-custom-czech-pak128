@@ -13,10 +13,14 @@ python build.py <path>         # narrow to one agency-mode pak (family dir,
                                # family.yaml, or agency dir all work — the
                                # target is always expanded to the full
                                # agency-mode group, never partial)
+python build.py --no-install   # skip the post-build install step
+python build.py -y             # auto-confirm orphan deletion during install
 .\build.ps1                    # PowerShell wrapper, same args
 ```
 
 On every run the build also **auto-prunes** any `dist/VZ-*.pak` whose name no longer matches a current agency-mode group (e.g. legacy per-livery paks), so `dist/` stays in sync with the source tree.
+
+After a successful build, if `PAK_TARGET_DIR` is set in `.env` (or the process environment) and points to an existing directory, `build.py` also syncs `dist/VZ-*.pak` into it: any `VZ-*.pak` in the target without a counterpart in `dist/` is treated as an orphan and the user is prompted before it's deleted (`-y` auto-confirms). Then every `dist/VZ-*.pak` is copied over, overwriting any same-named file. If `PAK_TARGET_DIR` is unset, missing, or `--no-install` is passed, the install step is skipped.
 
 `makeobj` is located via the `MAKEOBJ_PATH` environment variable; if unset, the build runs `makeobj` from `PATH`. Requires `pyyaml` (`pip install pyyaml`) and Python 3.7+.
 

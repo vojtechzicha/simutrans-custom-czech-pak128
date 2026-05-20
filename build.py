@@ -12,6 +12,15 @@ Usage:
     python build.py --clean        # wipe build/ and dist/ first, then build
     python build.py <path>         # build the agency-mode pak that <path> belongs to
                                    # (family dir, family.yaml, or agency dir all work)
+    python build.py --no-install   # skip the install step (see below)
+    python build.py -y             # auto-confirm orphan deletion during install
+
+After a successful build, if ``PAK_TARGET_DIR`` is set in the environment (or
+``.env``), the script also syncs ``dist/VZ-*.pak`` into that directory: it
+prompts before deleting any VZ-*.pak that exists in the target but not in dist
+(``-y`` skips the prompt), then copies the freshly built paks over. The install
+step is silently skipped if ``PAK_TARGET_DIR`` is unset or ``--no-install`` is
+passed.
 
 ``makeobj`` is located via the ``MAKEOBJ_PATH`` environment variable; if unset,
 ``makeobj`` on PATH is used. A ``.env`` file in the project root is auto-loaded
@@ -283,6 +292,63 @@ def prune_stale_paks(planned: set[str]) -> int:
     return count
 
 
+def install_paks(target_dir: Path, assume_yes: bool) -> int:
+    """Sync dist/VZ-*.pak into target_dir.
+
+    Steps: list every VZ-*.pak in target. Any that have NO matching file in dist/
+    are 'orphans' (would be lost without replacement). If orphans exist, prompt
+    once with the full list — unless ``assume_yes`` is true, in which case delete
+    them silently. Then copy every dist/VZ-*.pak into target_dir (overwriting any
+    same-named file already there). Returns the count of files copied."""
+    dist_paks = {p.name: p for p in DIST.glob("VZ-*.pak")}
+    target_paks = {p.name: p for p in target_dir.glob("VZ-*.pak")}
+    orphans = [target_paks[n] for n in sorted(target_paks) if n not in dist_paks]
+
+    if orphans:
+        print(f"\n{len(orphans)} VZ-*.pak file(s) in {target_dir} have no match in dist/:")
+        for o in orphans:
+            print(f"  - {o.name}")
+        if assume_yes:
+            print("  (auto-deleting, -y given)")
+            delete = True
+        else:
+            try:
+                ans = input("Delete these orphans? [y/N] ").strip().lower()
+            except EOFError:
+                ans = ""
+            delete = ans in ("y", "yes")
+        if delete:
+            for o in orphans:
+                o.unlink()
+                print(f"  removed {o.name}")
+        else:
+            print("  keeping orphans")
+
+    copied = 0
+    for name, src in sorted(dist_paks.items()):
+        shutil.copy2(src, target_dir / name)
+        copied += 1
+    if copied:
+        print(f"\ninstalled {copied} pak(s) to {target_dir}")
+    return copied
+
+
+def run_install(assume_yes: bool) -> None:
+    target = os.environ.get("PAK_TARGET_DIR")
+    if not target:
+        print("\nPAK_TARGET_DIR not set — skipping install step")
+        return
+    target_dir = Path(target)
+    if not target_dir.is_dir():
+        print(
+            f"\nPAK_TARGET_DIR={target} does not exist or is not a directory — "
+            "skipping install step",
+            file=sys.stderr,
+        )
+        return
+    install_paks(target_dir, assume_yes)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Build VZ pak128 addons.")
     parser.add_argument(
@@ -295,6 +361,16 @@ def main() -> int:
         "--clean",
         action="store_true",
         help="Wipe build/ and dist/ before building.",
+    )
+    parser.add_argument(
+        "--no-install",
+        action="store_true",
+        help="Skip copying built paks into PAK_TARGET_DIR even when it is set.",
+    )
+    parser.add_argument(
+        "-y", "--yes",
+        action="store_true",
+        help="Auto-confirm orphan deletion during the install step.",
     )
     args = parser.parse_args()
 
@@ -329,6 +405,10 @@ def main() -> int:
         total_fail += fail
 
     print(f"\nbuilt {total_ok} liveries | failed {total_fail}")
+
+    if total_fail == 0 and not args.no_install:
+        run_install(assume_yes=args.yes)
+
     return 0 if total_fail == 0 else 2
 
 

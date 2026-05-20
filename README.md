@@ -34,16 +34,35 @@ Additional vehicle families are in progress and live on the
 ## Configuration
 
 `build.py` auto-loads a `.env` file from the project root on startup. Copy the
-template and edit the path to your local `makeobj`:
+template and edit:
 
 ```sh
 cp .env.example .env
-# then edit .env, e.g.
-# MAKEOBJ_PATH=D:\gameBin\simutrans-makeobj.exe
 ```
+
+Variables:
+
+| Variable | Purpose |
+| --- | --- |
+| `MAKEOBJ_PATH` | Absolute path to the matching Simutrans `makeobj` binary. If unset, the build runs `makeobj` from `PATH`. |
+| `PAK_TARGET_DIR` | Optional. Absolute path to your Simutrans pakset / addons directory. When set, the build syncs `dist/VZ-*.pak` there after each successful run (see [Install step](#install-step)). |
 
 Variables already set in the process environment take precedence over `.env`.
 `.env` is git-ignored; `.env.example` is the template that's committed.
+
+## Install step
+
+If `PAK_TARGET_DIR` points to an existing directory, after a successful build
+`build.py` syncs the freshly built `.pak` files into it:
+
+1. Scans the target for `VZ-*.pak` files with **no matching file in `dist/`**
+   (orphans — likely paks from a deleted family or a renamed agency-mode group).
+2. If any orphans exist, prints the list and prompts before deleting them.
+   Pass `-y` (or `--yes`) to auto-confirm. Answer `n` (the default) to keep them.
+3. Copies every `dist/VZ-*.pak` into the target, overwriting any same-named file.
+
+If `PAK_TARGET_DIR` is unset, missing, or you pass `--no-install`, the install
+step is skipped silently.
 
 ## Building
 
@@ -52,6 +71,8 @@ python build.py                # build every agency-mode pak
 python build.py --clean        # wipe build/ and dist/ first
 python build.py <path>         # narrow to the agency-mode pak that contains
                                # <path> (family.yaml, family dir, or agency dir)
+python build.py --no-install   # skip the post-build install step
+python build.py -y             # auto-confirm orphan deletion during install
 
 # Windows
 .\build.ps1                    # same arguments
