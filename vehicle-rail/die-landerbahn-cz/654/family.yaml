@@ -13,9 +13,10 @@ display:
 # via Jacobs bogies. Die Länderbahn CZ operates these on the U28 Děčín–Rumburk
 # and Trilex routes in DÚK livery.
 #
-# Sprites: TODO — split the 840/841 RegioShuttle sprite into 3 horizontal tiles
-# (front cab + middle body + rear cab). Row 0 = motor (used by both end pieces
-# via reverse: true), row 1 = middle trailer. Final PNG 1024×256 per livery.
+# Sprites: 1024×256, row 0 = motor (used by both end pieces via reverse: true),
+# row 1 = middle trailer. Per-section lengths borrowed from the Škoda 15T tram
+# template (8/7/8). The DÚK placeholder is seeded from the 15T sprite sheet —
+# overlay matching 840/841 RegioShuttle parts on top, then recolor to DÚK.
 #
 # Constraint structure mirrors ČD 814.2 trio: front motor heads, middle in
 # between, rear motor tails (reverse: true shifts its direction columns +4 mod 8
@@ -45,7 +46,7 @@ vehicles:
       retire_month: 1
       waytype: track
       freight: Passagiere
-      length: 10
+      length: 8
       engine_type: diesel
       power: 390
       smoke: Diesel_small
@@ -101,7 +102,7 @@ vehicles:
       retire_month: 1
       waytype: track
       freight: Passagiere
-      length: 10
+      length: 8
       engine_type: diesel
       power: 390
       smoke: Diesel_small
@@ -113,4 +114,4 @@ liveries:
   - color: dukzelenobila
     name_en: "DÚK green-white"
     name_cs: "DÚK zeleno-bílá"
-    source: TODO — split 840/841 RegioShuttle sprite into 3 sections (motor + middle + motor), recolor to DÚK zeleno-bílá to match ČD 841.2 livery
+    source: placeholder seeded from Škoda 15T sprite sheet (rows 0–1, cols 0–7); overlay 840/841 RegioShuttle motor/middle bodywork and recolor to DÚK zeleno-bílá
