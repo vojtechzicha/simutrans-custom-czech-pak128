@@ -9,7 +9,8 @@ display:
   family_cs: "RegioSpider"
 
 # Single Stadler Regio-Shuttle RS1 railcar — class 841.2 (regional operator series).
-# No source DAT; values match the 841 base model with cost and intro adjusted.
+# Sprites are the 841 template (extracted from pak128.cs vehicle.motorak.840_841.pak
+# object CD_841 via tools/pak_extract.py); recolor each livery PNG manually.
 
 vehicles:
   - id: "841.2"
@@ -41,12 +42,12 @@ liveries:
   - color: dukzelenobila
     name_en: "DÚK green-white"
     name_cs: "DÚK zeleno-bílá"
-    source: pak128cs/rail-psg mail/840_841/zssk_840_a_freight.png (ZSSK silver — recolor to DÚK zeleno-bílá)
+    source: 841 template copy (ČD silver — recolor to DÚK zeleno-bílá)
   - color: hzlkremovacervena
     name_en: "HZL cream-red"
     name_cs: "HZL krémovo-červená"
-    source: pak128cs/rail-psg mail/840_841/zssk_840_a_freight.png (ZSSK silver — recolor to HZL krémovo-červená)
+    source: 841 template copy (ČD silver — recolor to HZL krémovo-červená)
   - color: pardubickykraj
     name_en: "Pardubický kraj"
     name_cs: "Pardubický kraj"
-    source: pak128cs/rail-psg mail/840_841/zssk_840_a_freight.png (ZSSK silver — recolor to Pardubický kraj white+red+yellow)
+    source: 841 template copy (ČD silver — recolor to Pardubický kraj white+red+yellow)

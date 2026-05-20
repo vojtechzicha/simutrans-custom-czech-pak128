@@ -9,8 +9,9 @@ display:
   family_cs: "RegioSpider"
 
 # Single Stadler Regio-Shuttle RS1 railcar — class 841 (later batch, slight tweaks vs 840).
-# No source DAT; values derived from the 840 family with adjustments for real-world differences
-# (newer build year, slightly higher cost).
+# Sprites extracted from pak128.cs vehicle.motorak.840_841.pak (object CD_841)
+# via tools/pak_extract.py. Values derived from the 840 family with adjustments
+# for newer build year and slightly higher cost.
 
 vehicles:
   - id: "841"
@@ -42,4 +43,4 @@ liveries:
   - color: najbrt1
     name_en: "Najbrt 1"
     name_cs: "Najbrt 1"
-    source: pak128cs/rail-psg mail/840_841/zssk_840_a_freight.png (ZSSK silver — recolor to Najbrt 1 blue+white)
+    source: extracted from pak128.cs vehicle.motorak.840_841.pak object CD_841 (ČD livery — body shown as silver/grey placeholder for player-color pixels; recolor to Najbrt 1 as desired)
