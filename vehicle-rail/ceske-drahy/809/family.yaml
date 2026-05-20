@@ -38,11 +38,7 @@ vehicles:
       axles: 2
 
 liveries:
-  - color: najbrt1
-    name_en: "Najbrt 1"
-    name_cs: "Najbrt 1"
-    source: pak128cs/rail-psg mail/810/809.png (ČD red — recolor to Najbrt 1 blue+white)
   - color: najbrt2
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"
-    source: pak128cs/rail-psg mail/810/809.png (ČD red — recolor to Najbrt 2 blue with red doors)
+    source: pak128cs/rail-psg mail/810/809_balkan.png (balkan blue — recolor to Najbrt 2 blue with red doors)

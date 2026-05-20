@@ -30,8 +30,7 @@ Legend for livery palettes:
 
 ## 809 "Šukafon"
 
-- [ ] `809/sprites/najbrt1.png` — placeholder is red ČD 809. Recolor to **Najbrt 1**.
-- [ ] `809/sprites/najbrt2.png` — placeholder is red ČD 809. Recolor to **Najbrt 2**.
+- [x] `809/sprites/najbrt2.png` — placeholder was balkan-blue ČD 809 from pak128cs. Recolored to **Najbrt 2**.
 
 ## 810 "Šukafon"
 
