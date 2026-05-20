@@ -9,7 +9,10 @@ display:
   family_cs: "Siemens Desiro Classic"
 
 # Two-car articulated DMU. Source: pak128cs db_desiro.dat (db_642_a + db_642_b).
-# Either half can lead; full set is a-b, and longer runs alternate a-b-a-b...
+# Both halves are required: 642a always leads, 642b always trails. Minimum consist
+# is a-b; longer runs alternate a-b-a-b. (Simutrans has no bidirectional flag
+# here, so symmetric head/tail would allow a single half to run alone — which is
+# wrong for an articulated DMU.)
 
 vehicles:
   - id: "642a"
@@ -18,7 +21,7 @@ vehicles:
     role_cs: "polovůz A"
     row: 0
     head: true
-    tail: true
+    tail: false
     prev: ["642b"]
     next: ["642b"]
     fields:
@@ -47,7 +50,7 @@ vehicles:
     role_en: "half-set B"
     role_cs: "polovůz B"
     row: 1
-    head: true
+    head: false
     tail: true
     prev: ["642a"]
     next: ["642a"]
