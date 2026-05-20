@@ -191,6 +191,16 @@ Display string templates (built into `build.py`):
 
 `<id>` uses the natural dotted form (e.g. `Class 814.0`). Encoding: UTF-8 (no BOM). Czech display strings use full diacritics; diacritics-free forms are reserved for filenames and object `name=`.
 
+### Livery `name_en` / `name_cs` convention
+
+Translate color descriptions; keep proper nouns (agency names, region names, designer names) in Czech in both languages.
+
+- `žluto-zelená` → `name_en: "yellow-green"` (color: translated)
+- `šedo-červená` → `name_en: "grey-red"` (color: translated)
+- `PID šedo-červená` → `name_en: "PID grey-red"` (PID kept; color translated)
+- `Plzeňský kraj`, `Pardubický kraj`, `Kraj Vysočina` → `name_en` stays identical to `name_cs` (region names not translated, retain diacritics)
+- `Najbrt 2` → `name_en` stays identical to `name_cs` (designer name)
+
 ## Scope rules
 
 - Only ship variants the user has explicitly asked for. Upstream sets often include trio, bike-carrier, etc. variants — leave them out unless requested.
