@@ -104,3 +104,7 @@ liveries:
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"
     source: pak128_czr/vehicles-rail-dmu/CD/814-2a_Blue.png + 814-2b_Blue.png (Najbrt 2 — direct match)
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"
+    source: hand-painted PID šedo-červená livery
