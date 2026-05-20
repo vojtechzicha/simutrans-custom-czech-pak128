@@ -14,10 +14,10 @@ the upstream pak being shadowed.
 
 | Family | Liveries on `main` |
 | --- | --- |
-| ČD řada 814.0 (RegioNova) | žluto-zelená, Najbrt 2 |
+| ČD řada 814.0 (RegioNova) | žluto-zelená, Najbrt 2, Plzeňský kraj, Pardubický kraj, Kraj Vysočina, PID šedo-červená |
+| ČD řada 814.2 (RegioNova Trio) | žluto-zelená, Najbrt 2, PID šedo-červená |
 
-Additional vehicle families and additional 814.0 liveries (Plzeňský kraj, Pardubický
-kraj, Kraj Vysočina, PID šedo-červená, …) are in progress and live on the
+Additional vehicle families are in progress and live on the
 [`inprogress`](../../tree/inprogress) branch.
 
 ## Requirements
