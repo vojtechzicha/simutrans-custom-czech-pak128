@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 """Build script for the VZ pak128 addon set.
 
-Walks every ``vehicle-*/.../family.yaml`` under the project root, expands each
-family across its liveries, writes per-livery DAT / PNG / .tab files into a
-temporary ``build/`` tree, and invokes ``makeobj`` to emit ``.pak`` files into
-``dist/``.
+Walks every ``vehicle-*/.../family.yaml`` under the project root, groups them by
+(agency, mode), and emits one ``.pak`` per group into ``dist/`` — e.g.
+``dist/VZ-CeskeDrahy-rail.pak`` contains every family and livery for ČD's rail
+fleet. Per-livery DAT / PNG files live side-by-side inside one shared build
+directory so a single ``makeobj`` invocation bundles them.
 
 Usage:
-    python build.py                # build everything
+    python build.py                # build every agency-mode pak
     python build.py --clean        # wipe build/ and dist/ first, then build
-    python build.py <family-dir>   # build a single family by directory or yaml path
+    python build.py <path>         # build the agency-mode pak that <path> belongs to
+                                   # (family dir, family.yaml, or agency dir all work)
 
 ``makeobj`` is located via the ``MAKEOBJ_PATH`` environment variable; if unset,
 ``makeobj`` on PATH is used. A ``.env`` file in the project root is auto-loaded
@@ -23,6 +25,7 @@ import os
 import shutil
 import subprocess
 import sys
+from collections import defaultdict
 from pathlib import Path
 
 import yaml
@@ -60,7 +63,22 @@ def slug(s: str) -> str:
 
 
 def basename_for(family: dict, livery: dict) -> str:
+    """The per-livery object basename: used for object name=, the livery's PNG
+    file in the shared build dir, and sprite refs inside the .dat."""
     return f"VZ-{family['agency']}-{slug(family['type'])}-{livery['color']}"
+
+
+def mode_for(family_yaml: Path) -> str:
+    """Derive the transport mode from the top-level folder (vehicle-rail → rail)."""
+    rel = family_yaml.relative_to(ROOT)
+    top = rel.parts[0]
+    assert top.startswith("vehicle-"), f"unexpected top folder: {top}"
+    return top[len("vehicle-"):]
+
+
+def pak_basename_for(agency: str, mode: str) -> str:
+    """The output .pak basename: VZ-<Agency>-<mode>."""
+    return f"VZ-{agency}-{mode}"
 
 
 def emit_dat(family: dict, livery: dict) -> str:
@@ -107,21 +125,22 @@ def emit_dat(family: dict, livery: dict) -> str:
     return sep.join(blocks) + "\n"
 
 
-def emit_tab(family: dict, livery: dict, lang: str) -> str:
+def emit_tab_entries(family: dict, livery: dict, lang: str) -> list[str]:
+    """Return the per-object lines (object name + display string + blank) for one
+    family×livery in a given language. The header is written once per .tab file
+    by the caller."""
     bn = basename_for(family, livery)
     disp = family["display"]
     if lang == "en":
-        header = "# Language: English"
         agency, fam_name = disp["agency_en"], disp["family_en"]
         livery_name, class_word, role_key = livery["name_en"], "Class", "role_en"
     elif lang == "cs":
-        header = "# Language: Čeština"
         agency, fam_name = disp["agency_cs"], disp["family_cs"]
         livery_name, class_word, role_key = livery["name_cs"], "řada", "role_cs"
     else:
         raise ValueError(f"unsupported lang: {lang}")
 
-    out = [header, ""]
+    out: list[str] = []
     for v in family["vehicles"]:
         obj_name = f"{bn}-{slug(v['id'])}"
         disp_id = v.get("display_id", v["id"])
@@ -129,79 +148,139 @@ def emit_tab(family: dict, livery: dict, lang: str) -> str:
         out.append(obj_name)
         out.append(display)
         out.append("")
-    return "\n".join(out)
+    return out
 
 
-def build_family(family_yaml: Path) -> tuple[int, int]:
-    """Build all liveries of one family. Returns (succeeded, failed)."""
-    family = yaml.safe_load(family_yaml.read_text(encoding="utf-8"))
-    family_dir = family_yaml.parent
-    makeobj = os.environ.get("MAKEOBJ_PATH", "makeobj")
+TAB_HEADERS = {"en": "# Language: English", "cs": "# Language: Čeština"}
+
+
+def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, int]:
+    """Build a single agency-mode pak from the given family.yaml files.
+    Returns (succeeded_liveries, failed_liveries)."""
+    pak_bn = pak_basename_for(agency, mode)
+    out_dir = BUILD / pak_bn
+    if out_dir.exists():
+        shutil.rmtree(out_dir)
+    out_dir.mkdir(parents=True)
     DIST.mkdir(exist_ok=True)
 
+    en_lines: list[str] = [TAB_HEADERS["en"], ""]
+    cs_lines: list[str] = [TAB_HEADERS["cs"], ""]
+
     ok = fail = 0
-    for livery in family["liveries"]:
-        bn = basename_for(family, livery)
-        png_src = family_dir / "sprites" / f"{livery['color']}.png"
-        if not png_src.exists():
-            print(f"  [skip] {bn}: missing sprite {png_src}", file=sys.stderr)
-            fail += 1
-            continue
-
-        out_dir = BUILD / bn
-        if out_dir.exists():
-            shutil.rmtree(out_dir)
-        out_dir.mkdir(parents=True)
-
-        shutil.copy2(png_src, out_dir / f"{bn}.png")
-        (out_dir / f"{bn}.dat").write_text(emit_dat(family, livery), encoding="utf-8")
-        (out_dir / f"{bn}.en.tab").write_text(emit_tab(family, livery, "en"), encoding="utf-8")
-        (out_dir / f"{bn}.cs.tab").write_text(emit_tab(family, livery, "cs"), encoding="utf-8")
-
-        pak = DIST / f"{bn}.pak"
-        try:
-            result = subprocess.run(
-                [makeobj, "pak128", str(pak), str(out_dir)],
-                capture_output=True,
-                text=True,
-            )
-        except FileNotFoundError:
-            print(
-                f"  [fail] {bn}: makeobj not found (set MAKEOBJ_PATH or add it to PATH)",
-                file=sys.stderr,
-            )
-            fail += 1
-            continue
-
-        if result.returncode != 0:
-            print(f"  [fail] {bn}: makeobj exit {result.returncode}", file=sys.stderr)
-            if result.stdout:
-                print(result.stdout, file=sys.stderr)
-            if result.stderr:
-                print(result.stderr, file=sys.stderr)
-            fail += 1
-        else:
-            print(f"  [ok]   {bn} -> {pak.relative_to(ROOT)}")
+    for fy in sorted(family_yamls):
+        family = yaml.safe_load(fy.read_text(encoding="utf-8"))
+        family_dir = fy.parent
+        for livery in family["liveries"]:
+            bn = basename_for(family, livery)
+            png_src = family_dir / "sprites" / f"{livery['color']}.png"
+            if not png_src.exists():
+                print(f"  [skip] {bn}: missing sprite {png_src}", file=sys.stderr)
+                fail += 1
+                continue
+            shutil.copy2(png_src, out_dir / f"{bn}.png")
+            (out_dir / f"{bn}.dat").write_text(emit_dat(family, livery), encoding="utf-8")
+            en_lines.extend(emit_tab_entries(family, livery, "en"))
+            cs_lines.extend(emit_tab_entries(family, livery, "cs"))
             ok += 1
+
+    (out_dir / f"{pak_bn}.en.tab").write_text("\n".join(en_lines), encoding="utf-8")
+    (out_dir / f"{pak_bn}.cs.tab").write_text("\n".join(cs_lines), encoding="utf-8")
+
+    if ok == 0:
+        print(f"  [skip] {pak_bn}: no liveries built", file=sys.stderr)
+        return ok, fail
+
+    pak = DIST / f"{pak_bn}.pak"
+    makeobj = os.environ.get("MAKEOBJ_PATH", "makeobj")
+    try:
+        # makeobj on Windows silently writes an empty pak when given absolute,
+        # backslash, or trailing-slashless input dir paths. So: forward slashes,
+        # relative to ROOT, and a trailing slash on the input directory.
+        rel_pak = pak.relative_to(ROOT).as_posix()
+        rel_out = out_dir.relative_to(ROOT).as_posix() + "/"
+        result = subprocess.run(
+            [makeobj, "pak128", rel_pak, rel_out],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+    except FileNotFoundError:
+        print(
+            f"  [fail] {pak_bn}: makeobj not found (set MAKEOBJ_PATH or add it to PATH)",
+            file=sys.stderr,
+        )
+        return 0, ok + fail
+
+    if result.returncode != 0:
+        print(f"  [fail] {pak_bn}: makeobj exit {result.returncode}", file=sys.stderr)
+        if result.stdout:
+            print(result.stdout, file=sys.stderr)
+        if result.stderr:
+            print(result.stderr, file=sys.stderr)
+        return 0, ok + fail
+
+    print(f"  [ok]   {pak_bn} -> {pak.relative_to(ROOT)} ({ok} liveries)")
     return ok, fail
 
 
-def discover_families(target: Path | None) -> list[Path]:
+def all_families() -> list[Path]:
+    """All family.yaml files anywhere under a vehicle-* root."""
+    return [
+        p
+        for p in ROOT.rglob("family.yaml")
+        if p.relative_to(ROOT).parts and p.relative_to(ROOT).parts[0].startswith("vehicle-")
+    ]
+
+
+def group_by_agency_mode(family_yamls: list[Path]) -> dict[tuple[str, str], list[Path]]:
+    groups: dict[tuple[str, str], list[Path]] = defaultdict(list)
+    for fy in family_yamls:
+        family = yaml.safe_load(fy.read_text(encoding="utf-8"))
+        groups[(family["agency"], mode_for(fy))].append(fy)
+    return groups
+
+
+def select_target_groups(target: Path | None, all_groups: dict[tuple[str, str], list[Path]]) -> dict[tuple[str, str], list[Path]]:
+    """If target is None, return every group. Otherwise expand the target up to
+    the agency-mode pak(s) it belongs to: a family path picks its own group; an
+    agency dir picks every group whose families live under it."""
     if target is None:
-        return [
-            p
-            for p in ROOT.rglob("family.yaml")
-            if p.relative_to(ROOT).parts and p.relative_to(ROOT).parts[0].startswith("vehicle-")
-        ]
+        return all_groups
     target = target.resolve()
+    if not target.exists():
+        print(f"no such path: {target}", file=sys.stderr)
+        return {}
+
     if target.is_file() and target.name == "family.yaml":
-        return [target]
+        family = yaml.safe_load(target.read_text(encoding="utf-8"))
+        key = (family["agency"], mode_for(target))
+        return {key: all_groups.get(key, [])} if key in all_groups else {}
+
     if target.is_dir():
-        candidate = target / "family.yaml"
-        if candidate.is_file():
-            return [candidate]
-    print(f"no family.yaml found at {target}", file=sys.stderr)
-    return []
+        selected: dict[tuple[str, str], list[Path]] = {}
+        for key, fys in all_groups.items():
+            if any(target in fy.parents for fy in fys):
+                selected[key] = fys
+        if selected:
+            return selected
+
+    print(f"no family.yaml found at or under {target}", file=sys.stderr)
+    return {}
+
+
+def prune_stale_paks(planned: set[str]) -> int:
+    """Delete VZ-*.pak files in dist/ that don't match a planned output for
+    *any* agency-mode group in the project. Returns the count deleted."""
+    if not DIST.is_dir():
+        return 0
+    count = 0
+    for pak in DIST.glob("VZ-*.pak"):
+        if pak.name not in planned:
+            pak.unlink()
+            print(f"pruned stale {pak.relative_to(ROOT)}")
+            count += 1
+    return count
 
 
 def main() -> int:
@@ -210,7 +289,7 @@ def main() -> int:
         "target",
         nargs="?",
         type=Path,
-        help="Optional family directory or family.yaml to build (default: all).",
+        help="Optional path to narrow the build. Resolves to the agency-mode pak(s) it belongs to.",
     )
     parser.add_argument(
         "--clean",
@@ -227,20 +306,29 @@ def main() -> int:
                 shutil.rmtree(d)
                 print(f"cleaned {d.relative_to(ROOT)}")
 
-    families = discover_families(args.target)
+    families = all_families()
     if not families:
         print("no families found", file=sys.stderr)
         return 1
 
+    all_groups = group_by_agency_mode(families)
+    planned_paks = {f"{pak_basename_for(a, m)}.pak" for (a, m) in all_groups}
+    prune_stale_paks(planned_paks)
+
+    target_groups = select_target_groups(args.target, all_groups)
+    if not target_groups:
+        return 1
+
     total_ok = total_fail = 0
-    for fy in sorted(families):
-        rel = fy.relative_to(ROOT)
-        print(f"== {rel} ==")
-        ok, fail = build_family(fy)
+    for (agency, mode), fys in sorted(target_groups.items()):
+        pak_bn = pak_basename_for(agency, mode)
+        family_list = ", ".join(sorted(fy.parent.name for fy in fys))
+        print(f"== {pak_bn} ({family_list}) ==")
+        ok, fail = build_pak(agency, mode, fys)
         total_ok += ok
         total_fail += fail
 
-    print(f"\nbuilt {total_ok} | failed {total_fail}")
+    print(f"\nbuilt {total_ok} liveries | failed {total_fail}")
     return 0 if total_fail == 0 else 2
 
 

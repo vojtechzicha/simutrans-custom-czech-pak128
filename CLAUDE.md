@@ -4,28 +4,41 @@ Custom Czech addon set for Simutrans (Extended) pak128. Maintained by vojtechzic
 
 ## How the build works
 
-`.dat`, `.tab`, and per-livery `.pak` files are **generated**, not hand-written. Each vehicle family is described once in a `family.yaml`; the build script (`build.py`) expands that file across every livery, drops the result into `build/<basename>/`, and invokes `makeobj` to produce `dist/<basename>.pak`.
+`.dat`, `.tab`, and `.pak` files are **generated**, not hand-written. Each vehicle family is described once in a `family.yaml`; the build script (`build.py`) groups families by `(agency, transport-mode)`, expands every livery, drops the result into a shared `build/VZ-<Agency>-<mode>/` directory, and invokes `makeobj` once per group to produce `dist/VZ-<Agency>-<mode>.pak`.
 
 ```
-python build.py                # build everything
+python build.py                # build every agency-mode pak
 python build.py --clean        # wipe build/ and dist/ first
-python build.py <family-dir>   # build one family
+python build.py <path>         # narrow to one agency-mode pak (family dir,
+                               # family.yaml, or agency dir all work — the
+                               # target is always expanded to the full
+                               # agency-mode group, never partial)
 .\build.ps1                    # PowerShell wrapper, same args
 ```
+
+On every run the build also **auto-prunes** any `dist/VZ-*.pak` whose name no longer matches a current agency-mode group (e.g. legacy per-livery paks), so `dist/` stays in sync with the source tree.
 
 `makeobj` is located via the `MAKEOBJ_PATH` environment variable; if unset, the build runs `makeobj` from `PATH`. Requires `pyyaml` (`pip install pyyaml`) and Python 3.7+.
 
 **Do not hand-edit `.dat` or `.tab` files.** Edit the relevant `family.yaml` or the per-livery PNG instead.
 
-## File-naming convention
+## Naming convention
 
-`VZ-<Agency>-<Type>-<Color>`
+Two distinct names matter — one for the shipped `.pak` and one for individual objects/sprites inside it.
+
+**Pak filename** (one per agency × transport-mode): `VZ-<Agency>-<mode>.pak`
 
 - `Agency` — PascalCase Czech transport agency name (e.g. `CeskeDrahy`, `RegioJet`, `LeoExpress`, `DPP`).
-- `Type` — class designation of the lead/named unit of the family; dots replaced with underscores (e.g. `814.0` → `814_0`).
-- `Color` — livery name in Czech without diacritics (e.g. `zlutozelena`, `modra`, `cervena`, `najbrt2`).
+- `mode` — the `vehicle-*/` root folder slug without the `vehicle-` prefix (`rail`, `road`, `water`, `air`).
+- Example: `dist/VZ-CeskeDrahy-rail.pak` contains every ČD rail family and every livery thereof.
 
-Generated extensions per livery: `.dat`, `.png`, `.en.tab`, `.cs.tab`, `.pak`. A single `.dat` + `.png` pair holds the entire matched set (e.g. cab + motor of one DMU).
+**Object basename** (used for `name=`, per-livery PNG file inside the build dir, and sprite refs in `.dat`): `VZ-<Agency>-<Type>-<Color>`
+
+- `Type` — class designation of the lead/named unit of the family; dots replaced with underscores (e.g. `814.0` → `814_0`).
+- `Color` — livery name in Czech without diacritics (e.g. `zlutozelena`, `najbrt2`, `pidsedocervena`).
+- Final object `name=` adds the per-vehicle id suffix: `VZ-CeskeDrahy-814_0-zlutozelena-914`.
+
+A single `family.yaml` + `<color>.png` pair holds the entire matched set (e.g. cab + motor of one DMU). The build emits one `.dat` + one `.png` per family×livery inside the shared agency-mode build dir, plus one `.en.tab` and one `.cs.tab` per agency-mode pak listing every object's display string.
 
 ## Directory layout
 
@@ -42,7 +55,7 @@ simutrans-custom-czech-pak128/
           <color>.png             # one consolidated 1024×N PNG per livery
 ```
 
-Transport modes: `vehicle-rail/`, `vehicle-road/`, `vehicle-water/`, `vehicle-air/`. The build script walks every `vehicle-*/...family.yaml` regardless of depth, so the agency level is purely organizational. Family folder names are conventionally the slugified type (`814.0` → `814_0`) so they match the generated `.pak` filename.
+Transport modes: `vehicle-rail/`, `vehicle-road/`, `vehicle-water/`, `vehicle-air/`. The build script walks every `vehicle-*/...family.yaml` regardless of depth and groups by the `agency:` field plus the `vehicle-*` mode root. Family folder names are conventionally the slugified type (`814.0` → `814_0`); the agency folder name is organizational only — the canonical agency identifier is the `agency:` field inside `family.yaml`.
 
 ## `family.yaml` schema
 
@@ -95,10 +108,12 @@ Canonical examples: `vehicle-rail/ceske-drahy/814_0/family.yaml` (simple 2-car p
 
 ## Object naming inside `.dat`
 
-The `name=` field is `<basename>-<id_underscored>`. Every object in a multi-vehicle file gets a unique suffix. Examples:
+The `name=` field is `<object-basename>-<id_underscored>`, where the object basename is the per-livery `VZ-<Agency>-<Type>-<Color>` form (not the agency-mode pak basename). Every object in a multi-vehicle file gets a unique suffix. Examples:
 
 - `VZ-CeskeDrahy-814_0-zlutozelena-914`    (control trailer, class 914)
 - `VZ-CeskeDrahy-814_0-zlutozelena-814_0`  (motor car, class 814.0)
+
+Object names are stable across the per-livery → per-agency-mode pak repackaging: existing savegames that reference these names continue to work.
 
 ## Copyright
 
@@ -173,7 +188,7 @@ With these constraints, the only buildable consist is `front + middle + rear`.
 
 ## Localization
 
-For each `<basename>.dat`, the build emits `<basename>.en.tab` and `<basename>.cs.tab`. Each `.tab` file:
+For each agency-mode pak, the build emits one `<pak-basename>.en.tab` and one `<pak-basename>.cs.tab` (e.g. `VZ-CeskeDrahy-rail.en.tab`) covering every object across every family and livery in the pak. Each `.tab` file:
 
 ```
 # Language: <Name>
