@@ -59,7 +59,7 @@ simutrans-custom-czech-pak128/
           <color>.png             # one consolidated 1024×N PNG per livery
 ```
 
-Transport modes: `vehicle-rail/`, `vehicle-road/`, `vehicle-water/`, `vehicle-air/`. The build script walks every `vehicle-*/...family.yaml` regardless of depth and groups by the `agency:` field plus the `vehicle-*` mode root. Family folder names are conventionally the slugified type (`814.0` → `814_0`); the agency folder name is organizational only — the canonical agency identifier is the `agency:` field inside `family.yaml`.
+Transport modes: `vehicle-rail/`, `vehicle-bus/`, `vehicle-tram/`, `vehicle-water/`, `vehicle-air/` (plus any future `vehicle-trolleybus/` etc.). Bus and tram are split into their own modes rather than bundled under a generic `vehicle-road/` so trolleybuses can later live alongside buses without mixing rolling stock. The build script walks every `vehicle-*/...family.yaml` regardless of depth and groups by the `agency:` field plus the `vehicle-*` mode root. Family folder names are conventionally the slugified type (`814.0` → `814_0`); the agency folder name is organizational only — the canonical agency identifier is the `agency:` field inside `family.yaml`.
 
 ## `family.yaml` schema
 
@@ -202,11 +202,15 @@ For each agency-mode pak, the build emits one `en.<pak-basename>.tab` and one `c
 <display name in this language>
 ```
 
-Display string templates (built into `build.py`):
-- EN: `<agency_en> Class <id> <family_en> <role_en> (<name_en>)`
-- CS: `<agency_cs> řada <id> <family_cs> <role_cs> (<name_cs>)`
+Display string templates (built into `build.py`) — vary by mode:
+- Rail (uses Czech railway "class/řada" nomenclature):
+  - EN: `<agency_en> Class <id> <family_en> <role_en> (<name_en>)`
+  - CS: `<agency_cs> řada <id> <family_cs> <role_cs> (<name_cs>)`
+- Bus, tram, and all other modes (no class numbering scheme — the family name names the model):
+  - EN: `<agency_en> <family_en> <role_en> (<name_en>)`
+  - CS: `<agency_cs> <family_cs> <role_cs> (<name_cs>)`
 
-`<id>` uses the natural dotted form (e.g. `Class 814.0`). Encoding: UTF-8 (no BOM). Czech display strings use full diacritics; diacritics-free forms are reserved for filenames and object `name=`.
+The set of class-prefix modes is defined as `MODES_WITH_CLASS_PREFIX` in `build.py` (currently `{"rail"}`). `<id>` uses the natural dotted form (e.g. `Class 814.0`). Encoding: UTF-8 (no BOM). Czech display strings use full diacritics; diacritics-free forms are reserved for filenames and object `name=`.
 
 ### Livery `name_en` / `name_cs` convention
 

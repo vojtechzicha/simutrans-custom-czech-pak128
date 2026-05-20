@@ -1,0 +1,78 @@
+agency: DPMostLitvinov
+type: "Urbanway_18M"
+copyright: Lubak91
+
+display:
+  agency_en: "DPmML"
+  agency_cs: "DPmML"
+  family_en: "Iveco Urbanway 18M"
+  family_cs: "Iveco Urbanway 18M"
+
+# Iveco Urbanway 18M — 18-metre articulated city bus. Two-section fixed
+# consist: front section A (unpowered driver's cab end) + powered rear
+# section B (carries the engine on this prototype). Both halves required.
+#
+# Source PNGs are two separate files (Iveco-Urbnaway-18M-A.png / -B.png with
+# the original `Urbnaway` typo) at 1152×128 each, using cols 1–8 with col 0
+# as the stacked-extras column. The build input PNG here merges them into a
+# single 1024×256 sheet: row 0 = A (front), row 1 = B (rear).
+
+vehicles:
+  - id: "Urbanway_18M-A"
+    display_id: "Urbanway 18M"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["Urbanway_18M-B"]
+    fields:
+      cost: 500000
+      payload: 86
+      speed: 80
+      weight: 10
+      runningcost: 20
+      fixed_cost: 102
+      intro_year: 2001
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+
+  - id: "Urbanway_18M-B"
+    display_id: "Urbanway 18M"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["Urbanway_18M-A"]
+    next: []
+    fields:
+      cost: 477785
+      payload: 70
+      speed: 80
+      weight: 8
+      runningcost: 14
+      fixed_cost: 72
+      intro_year: 2001
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 213
+      gear: 67
+      smoke: Diesel_small
+
+liveries:
+  - color: mostzlutocervena
+    name_en: "Most, yellow-red"
+    name_cs: "Most, žluto-červená"
+    source: pak128_czr/vehicles-bus/Most/Iveco-Urbnaway-18M-{A,B}.png merged to 1024×256, cols 1–8 → 0–7

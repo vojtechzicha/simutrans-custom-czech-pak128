@@ -139,7 +139,15 @@ def emit_dat(family: dict, livery: dict) -> str:
     return sep.join(blocks) + "\n"
 
 
-def emit_tab_entries(family: dict, livery: dict, lang: str) -> list[str]:
+# Modes that use Czech railway "class" nomenclature in display strings. For
+# these, display strings include a "Class <id>" / "řada <id>" prefix between
+# agency and family name. Other modes (bus, tram, …) drop the prefix because
+# buses/trams don't have a class numbering scheme in Czech transport usage —
+# the family name (e.g. "Tatra T3", "Irisbus Citelis 12M") already names them.
+MODES_WITH_CLASS_PREFIX = {"rail"}
+
+
+def emit_tab_entries(family: dict, livery: dict, lang: str, mode: str) -> list[str]:
     """Return the per-object lines (object name + display string) for one
     family×livery in a given language. The lines are emitted as bare pairs with
     no blank separator (matching the upstream tab format Simutrans expects)."""
@@ -154,11 +162,16 @@ def emit_tab_entries(family: dict, livery: dict, lang: str) -> list[str]:
     else:
         raise ValueError(f"unsupported lang: {lang}")
 
+    use_class = mode in MODES_WITH_CLASS_PREFIX
+
     out: list[str] = []
     for v in family["vehicles"]:
         obj_name = f"{bn}-{slug(v['id'])}"
-        disp_id = v.get("display_id", v["id"])
-        display = f"{agency} {class_word} {disp_id} {fam_name} {v[role_key]} ({livery_name})"
+        if use_class:
+            disp_id = v.get("display_id", v["id"])
+            display = f"{agency} {class_word} {disp_id} {fam_name} {v[role_key]} ({livery_name})"
+        else:
+            display = f"{agency} {fam_name} {v[role_key]} ({livery_name})"
         out.append(obj_name)
         out.append(display)
     return out
@@ -202,7 +215,7 @@ def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, in
             shutil.copy2(png_src, out_dir / f"{bn}.png")
             (out_dir / f"{bn}.dat").write_text(emit_dat(family, livery), encoding="utf-8")
             for lang in TAB_LANGS:
-                tab_lines[lang].extend(emit_tab_entries(family, livery, lang))
+                tab_lines[lang].extend(emit_tab_entries(family, livery, lang, mode))
             ok += 1
 
     if ok == 0:
