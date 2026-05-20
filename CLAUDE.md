@@ -18,9 +18,9 @@ python build.py -y             # auto-confirm orphan deletion during install
 .\build.ps1                    # PowerShell wrapper, same args
 ```
 
-On every run the build also **auto-prunes** any `dist/VZ-*.pak` whose name no longer matches a current agency-mode group (e.g. legacy per-livery paks), so `dist/` stays in sync with the source tree.
+On every run the build also **auto-prunes** stale artifacts in `dist/`: any `dist/VZ-*.pak` or `dist/text/<lang>.VZ-*.tab` whose name no longer matches a current agency-mode group is deleted so `dist/` stays in sync with the source tree.
 
-After a successful build, if `PAK_TARGET_DIR` is set in `.env` (or the process environment) and points to an existing directory, `build.py` also syncs `dist/VZ-*.pak` into it: any `VZ-*.pak` in the target without a counterpart in `dist/` is treated as an orphan and the user is prompted before it's deleted (`-y` auto-confirms). Then every `dist/VZ-*.pak` is copied over, overwriting any same-named file. If `PAK_TARGET_DIR` is unset, missing, or `--no-install` is passed, the install step is skipped.
+After a successful build, if `PAK_TARGET_DIR` is set in `.env` (or the process environment) and points to an existing directory, `build.py` syncs both layers into it: `dist/VZ-*.pak` → `PAK_TARGET_DIR/`, and `dist/text/<lang>.VZ-*.tab` → `PAK_TARGET_DIR/text/`. Tabs MUST live in the pak's `text/` subfolder and use a dot-separated language prefix (`cz.VZ-…tab`, not `cz_VZ-…tab`) — Simutrans's `translator::load_files_from_folder` only scans `text/*.tab` and only matches the dot form. Any VZ artifact in the target without a counterpart in `dist/` is an orphan and the user is prompted before it's deleted (`-y` auto-confirms); legacy tab filenames at the pak root from older build.py versions (`<lang>_VZ-*.tab`, `VZ-*.<lang>.tab`) are also swept up. If `PAK_TARGET_DIR` is unset, missing, or `--no-install` is passed, the install step is skipped.
 
 `makeobj` is located via the `MAKEOBJ_PATH` environment variable; if unset, the build runs `makeobj` from `PATH`. Requires `pyyaml` (`pip install pyyaml`) and Python 3.7+.
 
@@ -192,11 +192,9 @@ With these constraints, the only buildable consist is `front + middle + rear`.
 
 ## Localization
 
-For each agency-mode pak, the build emits one `<pak-basename>.en.tab` and one `<pak-basename>.cs.tab` (e.g. `VZ-CeskeDrahy-rail.en.tab`) covering every object across every family and livery in the pak. Each `.tab` file:
+For each agency-mode pak, the build emits one `en.<pak-basename>.tab` and one `cz.<pak-basename>.tab` (e.g. `en.VZ-CeskeDrahy-rail.tab`, `cz.VZ-CeskeDrahy-rail.tab`) into `dist/text/`, covering every object across every family and livery in the pak. These files install into `PAK_TARGET_DIR/text/` alongside the pak's main `cz.tab` / `en.tab` — that's the only place Simutrans's translator scans for loose translation files. Filename rules (from `translator::load_files_from_folder`): the language code must be a dot-separated prefix or suffix (`cz.foo.tab` or `foo.cz.tab` both match; `cz_foo.tab` does not). Czech uses `cz`, not `cs`, to match this pak's language code. Files are UTF-8 with BOM — Simutrans's `is_unicode_file()` auto-detects the BOM and decodes correctly for any language, so full Czech diacritics are preserved in both `cz` and `en` strings. Each `.tab` file is a bare list of pairs:
 
 ```
-# Language: <Name>
-
 <object name #1>
 <display name in this language>
 

@@ -16,11 +16,16 @@ Usage:
     python build.py -y             # auto-confirm orphan deletion during install
 
 After a successful build, if ``PAK_TARGET_DIR`` is set in the environment (or
-``.env``), the script also syncs ``dist/VZ-*.pak`` into that directory: it
-prompts before deleting any VZ-*.pak that exists in the target but not in dist
-(``-y`` skips the prompt), then copies the freshly built paks over. The install
-step is silently skipped if ``PAK_TARGET_DIR`` is unset or ``--no-install`` is
-passed.
+``.env``), the script syncs both the paks and their translation files:
+``dist/VZ-*.pak`` is copied to ``PAK_TARGET_DIR/`` and
+``dist/text/<lang>.VZ-*.tab`` is copied to ``PAK_TARGET_DIR/text/``. (Simutrans
+only loads loose translation tabs from the pak's ``text/`` subfolder, and only
+matches a dot-separated language prefix/suffix in the filename — see
+``translator::load_files_from_folder`` in simutrans-extended.) It prompts before
+deleting any VZ artifact that exists in the target but not in dist (``-y`` skips
+the prompt); legacy tab filenames left at the pak root by older builds are
+swept up by the same prompt. Skip the install step with ``--no-install`` or by
+leaving ``PAK_TARGET_DIR`` unset.
 
 ``makeobj`` is located via the ``MAKEOBJ_PATH`` environment variable; if unset,
 ``makeobj`` on PATH is used. A ``.env`` file in the project root is auto-loaded
@@ -135,15 +140,15 @@ def emit_dat(family: dict, livery: dict) -> str:
 
 
 def emit_tab_entries(family: dict, livery: dict, lang: str) -> list[str]:
-    """Return the per-object lines (object name + display string + blank) for one
-    family×livery in a given language. The header is written once per .tab file
-    by the caller."""
+    """Return the per-object lines (object name + display string) for one
+    family×livery in a given language. The lines are emitted as bare pairs with
+    no blank separator (matching the upstream tab format Simutrans expects)."""
     bn = basename_for(family, livery)
     disp = family["display"]
     if lang == "en":
         agency, fam_name = disp["agency_en"], disp["family_en"]
         livery_name, class_word, role_key = livery["name_en"], "Class", "role_en"
-    elif lang == "cs":
+    elif lang == "cz":
         agency, fam_name = disp["agency_cs"], disp["family_cs"]
         livery_name, class_word, role_key = livery["name_cs"], "řada", "role_cs"
     else:
@@ -156,11 +161,19 @@ def emit_tab_entries(family: dict, livery: dict, lang: str) -> list[str]:
         display = f"{agency} {class_word} {disp_id} {fam_name} {v[role_key]} ({livery_name})"
         out.append(obj_name)
         out.append(display)
-        out.append("")
     return out
 
 
-TAB_HEADERS = {"en": "# Language: English", "cs": "# Language: Čeština"}
+# Languages emitted for each agency-mode pak. Filenames are <lang>.<pak_bn>.tab
+# (e.g. cz.VZ-CeskeDrahy-rail.tab) — Simutrans's translator::load_files_from_folder
+# only matches a DOT-separated language prefix/suffix, not the underscore form
+# used by some upstream orphan files at the pak root. Czech uses 'cz' (not 'cs')
+# to match this pak's language code. Encoding is UTF-8 with BOM: Simutrans
+# auto-detects via is_unicode_file() and decodes correctly for both languages,
+# so we keep full diacritics in both en and cz.
+TAB_LANGS = ("en", "cz")
+TAB_DIRNAME = "text"
+UTF8_BOM = b"\xef\xbb\xbf"
 
 
 def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, int]:
@@ -173,8 +186,7 @@ def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, in
     out_dir.mkdir(parents=True)
     DIST.mkdir(exist_ok=True)
 
-    en_lines: list[str] = [TAB_HEADERS["en"], ""]
-    cs_lines: list[str] = [TAB_HEADERS["cs"], ""]
+    tab_lines: dict[str, list[str]] = {lang: [] for lang in TAB_LANGS}
 
     ok = fail = 0
     for fy in sorted(family_yamls):
@@ -189,16 +201,19 @@ def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, in
                 continue
             shutil.copy2(png_src, out_dir / f"{bn}.png")
             (out_dir / f"{bn}.dat").write_text(emit_dat(family, livery), encoding="utf-8")
-            en_lines.extend(emit_tab_entries(family, livery, "en"))
-            cs_lines.extend(emit_tab_entries(family, livery, "cs"))
+            for lang in TAB_LANGS:
+                tab_lines[lang].extend(emit_tab_entries(family, livery, lang))
             ok += 1
-
-    (out_dir / f"{pak_bn}.en.tab").write_text("\n".join(en_lines), encoding="utf-8")
-    (out_dir / f"{pak_bn}.cs.tab").write_text("\n".join(cs_lines), encoding="utf-8")
 
     if ok == 0:
         print(f"  [skip] {pak_bn}: no liveries built", file=sys.stderr)
         return ok, fail
+
+    tab_out = DIST / TAB_DIRNAME
+    tab_out.mkdir(exist_ok=True)
+    for lang in TAB_LANGS:
+        body = "\n".join(tab_lines[lang]) + "\n"
+        (tab_out / f"{lang}.{pak_bn}.tab").write_bytes(UTF8_BOM + body.encode("utf-8"))
 
     pak = DIST / f"{pak_bn}.pak"
     makeobj = os.environ.get("MAKEOBJ_PATH", "makeobj")
@@ -278,36 +293,93 @@ def select_target_groups(target: Path | None, all_groups: dict[tuple[str, str], 
     return {}
 
 
-def prune_stale_paks(planned: set[str]) -> int:
-    """Delete VZ-*.pak files in dist/ that don't match a planned output for
-    *any* agency-mode group in the project. Returns the count deleted."""
-    if not DIST.is_dir():
-        return 0
+def planned_pak_names(groups: dict[tuple[str, str], list[Path]]) -> set[str]:
+    """Pak filenames the build is expected to produce in dist/ for the given
+    agency-mode groups."""
+    return {f"{pak_basename_for(a, m)}.pak" for (a, m) in groups}
+
+
+def planned_tab_names(groups: dict[tuple[str, str], list[Path]]) -> set[str]:
+    """Tab filenames the build is expected to produce in dist/text/."""
+    return {
+        f"{lang}.{pak_basename_for(a, m)}.tab"
+        for (a, m) in groups
+        for lang in TAB_LANGS
+    }
+
+
+def prune_stale_artifacts(planned_paks: set[str], planned_tabs: set[str]) -> int:
+    """Delete VZ-*.pak files in dist/ and <lang>.VZ-*.tab files in dist/text/
+    that no longer match a planned output for any agency-mode group."""
     count = 0
-    for pak in DIST.glob("VZ-*.pak"):
-        if pak.name not in planned:
-            pak.unlink()
-            print(f"pruned stale {pak.relative_to(ROOT)}")
-            count += 1
+    if DIST.is_dir():
+        for pak in DIST.glob("VZ-*.pak"):
+            if pak.name not in planned_paks:
+                pak.unlink()
+                print(f"pruned stale {pak.relative_to(ROOT)}")
+                count += 1
+    tab_dir = DIST / TAB_DIRNAME
+    if tab_dir.is_dir():
+        for lang in TAB_LANGS:
+            for tab in tab_dir.glob(f"{lang}.VZ-*.tab"):
+                if tab.name not in planned_tabs:
+                    tab.unlink()
+                    print(f"pruned stale {tab.relative_to(ROOT)}")
+                    count += 1
     return count
 
 
-def install_paks(target_dir: Path, assume_yes: bool) -> int:
-    """Sync dist/VZ-*.pak into target_dir.
+def _collect_paks(directory: Path) -> dict[str, Path]:
+    """Map filename -> path for every VZ-*.pak in directory."""
+    if not directory.is_dir():
+        return {}
+    return {p.name: p for p in directory.glob("VZ-*.pak")}
 
-    Steps: list every VZ-*.pak in target. Any that have NO matching file in dist/
-    are 'orphans' (would be lost without replacement). If orphans exist, prompt
-    once with the full list — unless ``assume_yes`` is true, in which case delete
-    them silently. Then copy every dist/VZ-*.pak into target_dir (overwriting any
-    same-named file already there). Returns the count of files copied."""
-    dist_paks = {p.name: p for p in DIST.glob("VZ-*.pak")}
-    target_paks = {p.name: p for p in target_dir.glob("VZ-*.pak")}
-    orphans = [target_paks[n] for n in sorted(target_paks) if n not in dist_paks]
+
+def _collect_tabs(directory: Path) -> dict[str, Path]:
+    """Map filename -> path for every <lang>.VZ-*.tab in directory."""
+    if not directory.is_dir():
+        return {}
+    found: dict[str, Path] = {}
+    for lang in TAB_LANGS:
+        for p in directory.glob(f"{lang}.VZ-*.tab"):
+            found[p.name] = p
+    return found
+
+
+# Legacy filenames previously written to the pak root by older build.py versions.
+# They were never loaded by Simutrans (wrong location, wrong filename convention),
+# but they linger in PAK_TARGET_DIR and should be cleaned up on install.
+_LEGACY_TAB_PATTERNS = ("en_VZ-*.tab", "cz_VZ-*.tab", "VZ-*.en.tab", "VZ-*.cs.tab")
+
+
+def install_paks(target_dir: Path, assume_yes: bool) -> int:
+    """Sync VZ-*.pak from dist/ into target_dir and <lang>.VZ-*.tab from
+    dist/text/ into target_dir/text/.
+
+    Any VZ artifact in either target location without a counterpart in dist is
+    an orphan; prompt once before deleting (``assume_yes`` skips the prompt).
+    Returns the count of files copied."""
+    dist_paks = _collect_paks(DIST)
+    dist_tabs = _collect_tabs(DIST / TAB_DIRNAME)
+    target_text = target_dir / TAB_DIRNAME
+
+    pak_orphans = [
+        p for n, p in sorted(_collect_paks(target_dir).items()) if n not in dist_paks
+    ]
+    tab_orphans = [
+        p for n, p in sorted(_collect_tabs(target_text).items()) if n not in dist_tabs
+    ]
+    # Legacy tabs at the pak root from old build.py versions are always orphans.
+    legacy_orphans: list[Path] = []
+    for pattern in _LEGACY_TAB_PATTERNS:
+        legacy_orphans.extend(target_dir.glob(pattern))
+    orphans = pak_orphans + tab_orphans + legacy_orphans
 
     if orphans:
-        print(f"\n{len(orphans)} VZ-*.pak file(s) in {target_dir} have no match in dist/:")
+        print(f"\n{len(orphans)} VZ artifact(s) in {target_dir} have no match in dist/:")
         for o in orphans:
-            print(f"  - {o.name}")
+            print(f"  - {o.relative_to(target_dir)}")
         if assume_yes:
             print("  (auto-deleting, -y given)")
             delete = True
@@ -320,7 +392,7 @@ def install_paks(target_dir: Path, assume_yes: bool) -> int:
         if delete:
             for o in orphans:
                 o.unlink()
-                print(f"  removed {o.name}")
+                print(f"  removed {o.relative_to(target_dir)}")
         else:
             print("  keeping orphans")
 
@@ -328,8 +400,13 @@ def install_paks(target_dir: Path, assume_yes: bool) -> int:
     for name, src in sorted(dist_paks.items()):
         shutil.copy2(src, target_dir / name)
         copied += 1
+    if dist_tabs:
+        target_text.mkdir(exist_ok=True)
+        for name, src in sorted(dist_tabs.items()):
+            shutil.copy2(src, target_text / name)
+            copied += 1
     if copied:
-        print(f"\ninstalled {copied} pak(s) to {target_dir}")
+        print(f"\ninstalled {copied} file(s) to {target_dir}")
     return copied
 
 
@@ -388,8 +465,7 @@ def main() -> int:
         return 1
 
     all_groups = group_by_agency_mode(families)
-    planned_paks = {f"{pak_basename_for(a, m)}.pak" for (a, m) in all_groups}
-    prune_stale_paks(planned_paks)
+    prune_stale_artifacts(planned_pak_names(all_groups), planned_tab_names(all_groups))
 
     target_groups = select_target_groups(args.target, all_groups)
     if not target_groups:
