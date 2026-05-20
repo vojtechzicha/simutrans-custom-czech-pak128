@@ -137,3 +137,16 @@ The PID unified visual style as applied to ČD trains. The rolling-stock applica
 The signature element is the **full-height red vertical band at every door position** — wraps from below the windows down to the skirt, doors included. The folder/livery name `pidsedocervena` ("grey-red") is accurate for the train application.
 
 Reference: [pid.cz — Veřejná doprava v Praze bude mít novou podobu](https://pid.cz/verejna-doprava-praze-bude-mit-novou-podobu/) (full design manual; trains use the simplified grey+red subset).
+
+---
+
+## DÚK zeleno-bílá (`dukzelenobila`)
+
+DÚK ("Doprava Ústeckého kraje") regional livery for Ústí Region transit. Two-tone green wrapping the bodyside on a white/grey base — shipped on the Siemens Desiro Classic (class 642).
+
+| Zone                       | RAL/PMS | RGB (decimal)    | Hex     |
+| -------------------------- | ------- | ---------------- | ------- |
+| Body / upper green         | —       | `104, 181, 92`   | #68B55C |
+| Lower band / darker green  | —       | `85, 148, 75`    | #55944B |
+
+The shipped 128px sprite uses these two hand-picked greens (no official RAL/PMS match recorded); the lower band reads as a shaded continuation of the body color rather than a contrasting accent.

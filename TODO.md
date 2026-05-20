@@ -26,7 +26,7 @@ Legend for livery palettes:
 
 ## 642 Siemens Desiro Classic
 
-- [ ] `642/sprites/dukzelenobila.png` — placeholder is DB-red Desiro from pak128cs. Recolor to **DÚK zeleno-bílá** (white body, green DÚK band, green ends).
+- [x] `642/sprites/dukzelenobila.png` — placeholder is DB-red Desiro from pak128cs. Recolor to **DÚK zeleno-bílá** (white body, green DÚK band, green ends).
 
 ## 809 "Šukafon"
 
