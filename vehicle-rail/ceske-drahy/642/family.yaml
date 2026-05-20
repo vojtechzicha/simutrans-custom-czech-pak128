@@ -1,0 +1,79 @@
+agency: CeskeDrahy
+type: "642"
+copyright: Lubak91/Sim
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "Siemens Desiro Classic"
+  family_cs: "Siemens Desiro Classic"
+
+# Two-car articulated DMU. Source: pak128cs db_desiro.dat (db_642_a + db_642_b).
+# Either half can lead; full set is a-b, and longer runs alternate a-b-a-b...
+
+vehicles:
+  - id: "642a"
+    display_id: "642"
+    role_en: "half-set A"
+    role_cs: "polovůz A"
+    row: 0
+    head: true
+    tail: true
+    prev: ["642b"]
+    next: ["642b"]
+    fields:
+      cost: 2020200
+      payload: 101
+      speed: 120
+      weight: 34
+      runningcost: 70
+      fixed_cost: 538
+      intro_year: 1999
+      intro_month: 1
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 275
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 2
+
+  - id: "642b"
+    display_id: "642"
+    role_en: "half-set B"
+    role_cs: "polovůz B"
+    row: 1
+    head: true
+    tail: true
+    prev: ["642a"]
+    next: ["642a"]
+    fields:
+      cost: 1970200
+      payload: 119
+      speed: 120
+      weight: 34
+      runningcost: 65
+      fixed_cost: 499
+      intro_year: 1999
+      intro_month: 1
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 275
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 2
+
+liveries:
+  - color: dukzelenobila
+    name_en: "DÚK green-white"
+    name_cs: "DÚK zeleno-bílá"
+    source: pak128cs/rail-psg mail/db_desiro.png (DB red — recolor to DÚK zeleno-bílá)
