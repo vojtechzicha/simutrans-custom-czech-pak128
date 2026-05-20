@@ -1,0 +1,116 @@
+agency: DieLanderbahnCZ
+type: "654"
+copyright: Lubak91
+
+display:
+  agency_en: "Die Länderbahn CZ"
+  agency_cs: "Die Länderbahn CZ"
+  family_en: "Pesa LINK II"
+  family_cs: "Pesa LINK II"
+
+# Pesa LINK II (DB BR 654, factory designation Pesa 622M) — 3-section articulated
+# diesel multiple unit. Two outer motor cars share a middle non-powered trailer
+# via Jacobs bogies. Die Länderbahn CZ operates these on the U28 Děčín–Rumburk
+# and Trilex routes in DÚK livery.
+#
+# Sprites: TODO — split the 840/841 RegioShuttle sprite into 3 horizontal tiles
+# (front cab + middle body + rear cab). Row 0 = motor (used by both end pieces
+# via reverse: true), row 1 = middle trailer. Final PNG 1024×256 per livery.
+#
+# Constraint structure mirrors ČD 814.2 trio: front motor heads, middle in
+# between, rear motor tails (reverse: true shifts its direction columns +4 mod 8
+# so its cab points the opposite way using the same sprite row). The only
+# buildable consist is front + middle + rear.
+
+vehicles:
+  - id: "654-front"
+    display_id: "654"
+    role_en: "front motor car"
+    role_cs: "přední motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["054"]
+    fields:
+      cost: 2200000
+      payload: 45
+      speed: 140
+      weight: 31
+      runningcost: 50
+      fixed_cost: 700
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2055
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 390
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 2
+
+  - id: "054"
+    role_en: "middle car"
+    role_cs: "vložený vůz"
+    row: 1
+    head: false
+    tail: false
+    prev: ["654-front"]
+    next: ["654-rear"]
+    fields:
+      cost: 1300000
+      payload: 60
+      speed: 140
+      weight: 29
+      runningcost: 5
+      fixed_cost: 200
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2055
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 7
+    extended:
+      axles: 2
+
+  - id: "654-rear"
+    display_id: "654"
+    role_en: "rear motor car"
+    role_cs: "zadní motorový vůz"
+    row: 0
+    reverse: true
+    head: false
+    tail: true
+    prev: ["054"]
+    next: []
+    fields:
+      cost: 2200000
+      payload: 45
+      speed: 140
+      weight: 31
+      runningcost: 50
+      fixed_cost: 700
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2055
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 390
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 2
+
+liveries:
+  - color: dukzelenobila
+    name_en: "DÚK green-white"
+    name_cs: "DÚK zeleno-bílá"
+    source: TODO — split 840/841 RegioShuttle sprite into 3 sections (motor + middle + motor), recolor to DÚK zeleno-bílá to match ČD 841.2 livery
