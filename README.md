@@ -18,6 +18,9 @@ the upstream pak being shadowed.
 | ČD řada 814.2 (RegioNova Trio) | žluto-zelená, Najbrt 2, PID šedo-červená |
 | ČD řada 642 (Siemens Desiro Classic) | DÚK zeleno-bílá |
 | ČD řada 809 ("Šukafon") | Najbrt 2 |
+| ČD řada 840 (Stadler RegioSpider) | Najbrt 1 |
+| ČD řada 841 (Stadler RegioSpider) | Najbrt 1 |
+| ČD řada 841.2 (Stadler RegioSpider) | DÚK zeleno-bílá, HZL krémovo-červená, Pardubický kraj, PID šedo-červená |
 
 Additional vehicle families are in progress and live on the
 [`inprogress`](../../tree/inprogress) branch.

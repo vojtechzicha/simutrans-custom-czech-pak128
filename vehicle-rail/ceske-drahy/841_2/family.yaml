@@ -1,0 +1,57 @@
+agency: CeskeDrahy
+type: "841.2"
+copyright: Lubak91
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "RegioSpider"
+  family_cs: "RegioSpider"
+
+# Single Stadler Regio-Shuttle RS1 railcar — class 841.2 (regional operator series).
+# Sprites are the 841 template (extracted from pak128.cs vehicle.motorak.840_841.pak
+# object CD_841 via tools/pak_extract.py); recolor each livery PNG manually.
+
+vehicles:
+  - id: "841.2"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    fields:
+      cost: 3290000
+      payload: 113
+      speed: 120
+      weight: 58
+      runningcost: 71
+      fixed_cost: 1148
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+      engine_type: diesel
+      power: 550
+      smoke: Diesel_small
+      gear: 135
+    extended:
+      axles: 4
+
+liveries:
+  - color: dukzelenobila
+    name_en: "DÚK green-white"
+    name_cs: "DÚK zeleno-bílá"
+    source: 841 template copy (ČD silver — recolor to DÚK zeleno-bílá)
+  - color: hzlkremovacervena
+    name_en: "HZL cream-red"
+    name_cs: "HZL krémovo-červená"
+    source: 841 template copy (ČD silver — recolor to HZL krémovo-červená)
+  - color: pardubickykraj
+    name_en: "Pardubický kraj"
+    name_cs: "Pardubický kraj"
+    source: 841 template copy (ČD silver — recolor to Pardubický kraj white+red+yellow)
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"
+    source: 841 template copy (ČD silver — recolor to PID šedo-červená)
