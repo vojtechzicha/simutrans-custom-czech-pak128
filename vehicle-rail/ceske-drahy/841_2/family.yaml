@@ -51,3 +51,7 @@ liveries:
     name_en: "Pardubický kraj"
     name_cs: "Pardubický kraj"
     source: 841 template copy (ČD silver — recolor to Pardubický kraj white+red+yellow)
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"
+    source: 841 template copy (ČD silver — recolor to PID šedo-červená)
