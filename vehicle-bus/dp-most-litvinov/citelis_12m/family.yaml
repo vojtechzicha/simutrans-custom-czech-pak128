@@ -1,0 +1,49 @@
+agency: DPMostLitvinov
+type: "Citelis_12M"
+copyright: Lubak91
+
+display:
+  agency_en: "DPmML"
+  agency_cs: "DPmML"
+  family_en: "Irisbus Citelis 12M"
+  family_cs: "Irisbus Citelis 12M"
+
+# Irisbus Citelis 12M — 12-metre rigid city bus. Source PNG packs sprites in
+# cols 1–8 (col 0 was a stacked-extras column); the source .dat had its last
+# emptyimage entry truncated to `.0.obj` due to a copy/paste bug — the build
+# input PNG here drops col 0 so we can use the canonical row.col 0–7 indexing.
+
+vehicles:
+  - id: "Citelis_12M"
+    display_id: "Citelis 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 648664
+      payload: 99
+      speed: 80
+      weight: 11
+      runningcost: 24
+      fixed_cost: 123
+      intro_year: 1996
+      intro_month: 1
+      retire_year: 2030
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 9
+      engine_type: diesel
+      power: 189
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: mostzlutocervena
+    name_en: "Most, yellow-red"
+    name_cs: "Most, žluto-červená"
+    source: pak128_czr/vehicles-bus/Most/Irisbus_Citelis_12M.png (cols 1–8 → 0–7; col 0 dropped)

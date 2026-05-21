@@ -1,0 +1,48 @@
+agency: DPMostLitvinov
+type: "NBG_12"
+copyright: VTPsim
+
+display:
+  agency_en: "DPmML"
+  agency_cs: "DPmML"
+  family_en: "SOR NBG 12"
+  family_cs: "SOR NBG 12"
+
+# SOR NBG 12 — 12-metre rigid city bus from SOR Libchavy, CNG variant.
+# Source PNG uses cols 1–8 (col 0 stacked extras dropped). Source dat
+# lacked an explicit `length`; set to 9 to match the Citelis 12M (same
+# vehicle category).
+
+vehicles:
+  - id: "NBG_12"
+    display_id: "NBG 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 730546
+      payload: 92
+      speed: 80
+      weight: 11
+      runningcost: 18
+      fixed_cost: 92
+      intro_year: 2014
+      intro_month: 5
+      retire_year: 2050
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 9
+      engine_type: diesel
+      power: 213
+      gear: 54
+
+liveries:
+  - color: mostzlutocervena
+    name_en: "Most, yellow-red"
+    name_cs: "Most, žluto-červená"
+    source: pak128_czr/vehicles-bus/Most/SOR_NBG_12.png (cols 1–8 → 0–7; col 0 dropped)

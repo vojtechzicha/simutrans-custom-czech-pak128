@@ -1,0 +1,77 @@
+agency: DPMostLitvinov
+type: "EVO2"
+copyright: TommPa9
+
+display:
+  agency_en: "DPmML"
+  agency_cs: "DPmML"
+  family_en: "Inekon EVO 2"
+  family_cs: "Inekon EVO 2"
+
+# Inekon EVO 2 — two-section articulated low-floor tram. Source PNG (3 rows × 9 cols
+# in upstream pak128_czr) provides rows 0–1 as the two sections; col 8 holds track
+# decoration extras and is dropped. Source dates (1986/2018) tagged a Tatra T6A5 by
+# mistake — corrected here to real Inekon EVO 2 era.
+#
+# Constraint structure: EVO2 (head section) and EVO2b (rear section) must couple
+# together, but the pair can also be coupled to additional pairs — EVO2+EVO2b
+# +EVO2+EVO2b — so EVO2.prev allows another EVO2b and EVO2b.next allows another
+# EVO2.
+
+vehicles:
+  - id: "EVO2"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: ["EVO2b"]
+    next: ["EVO2b"]
+    fields:
+      cost: 38600
+      payload: 66
+      speed: 65
+      weight: 14
+      runningcost: 22
+      fixed_cost: 91
+      intro_year: 2007
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 180
+
+  - id: "EVO2b"
+    display_id: "EVO2"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["EVO2"]
+    next: ["EVO2"]
+    fields:
+      cost: 38600
+      payload: 66
+      speed: 65
+      weight: 14
+      runningcost: 20
+      fixed_cost: 58
+      intro_year: 2007
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 180
+
+liveries:
+  - color: mostzlutocervena
+    name_en: "Most, yellow-red"
+    name_cs: "Most, žluto-červená"
+    source: pak128_czr/vehicles-tram/Most/EVO2.png (rows 0–1, cols 0–7; row 2 and col 8 dropped)

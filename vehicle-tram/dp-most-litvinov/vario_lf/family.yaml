@@ -1,0 +1,50 @@
+agency: DPMostLitvinov
+type: "Vario_LF"
+copyright: TommPa9
+
+display:
+  agency_en: "DPmML"
+  agency_cs: "DPmML"
+  family_en: "Pragoimex Vario LF"
+  family_cs: "Pragoimex Vario LF"
+
+# Pragoimex Vario LF — partially low-floor modernisation of the Tatra T3 body.
+# Source dat referenced a Vario_LF2b partner that was never defined in the
+# upstream files — dropped here; this is modelled as a single self-couplable
+# tram car (one Vario_LF or a Vario_LF + Vario_LF pair).
+#
+# Source PNG is 1152×128 with the standard 8 directional tiles in cols 0–7;
+# col 8 is the upstream stacked-extras column and is dropped.
+
+vehicles:
+  - id: "Vario_LF"
+    display_id: "Vario LF"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: true
+    tail: true
+    prev: ["Vario_LF"]
+    next: ["Vario_LF"]
+    fields:
+      cost: 18600
+      payload: 116
+      speed: 65
+      weight: 21
+      runningcost: 14
+      fixed_cost: 58
+      intro_year: 2005
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 12
+      engine_type: electric
+      power: 360
+
+liveries:
+  - color: mostzlutocervena
+    name_en: "Most, yellow-red"
+    name_cs: "Most, žluto-červená"
+    source: pak128_czr/vehicles-tram/Most/Vario_LF.png (cols 0–7; col 8 dropped)
