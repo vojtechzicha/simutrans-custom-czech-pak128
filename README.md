@@ -1,8 +1,8 @@
 # simutrans-custom-czech-pak128
 
 A custom Czech addon set for [Simutrans (Extended)](https://www.simutrans.com/) pak128.
-Ships Czech rail vehicles (and eventually road / water / air) in real-world liveries,
-matching pak128 art conventions.
+Ships Czech rail, bus, and tram vehicles (and eventually water / air) in real-world
+liveries, matching pak128 art conventions.
 
 The addon prefix `VZ-` is used on every shipped `.pak` so the set never collides with
 the upstream pak being shadowed.
@@ -23,6 +23,12 @@ A single pak file per agency and transport mode — for example, every shipped
 | ČD řada 840 (Stadler RegioSpider) | Najbrt 1 |
 | ČD řada 841 (Stadler RegioSpider) | Najbrt 1 |
 | ČD řada 841.2 (Stadler RegioSpider) | DÚK zeleno-bílá, HZL krémovo-červená, Pardubický kraj, PID šedo-červená |
+| DPmML Irisbus Citelis 12M (bus) | Most žluto-červená |
+| DPmML SOR NBG 12 (bus) | Most žluto-červená |
+| DPmML Iveco Urbanway 18M (bus) | Most žluto-červená |
+| DPmML Inekon EVO 2 (tram) | Most žluto-červená |
+| DPmML Tatra T3 (tram) | Most žluto-červená |
+| DPmML Pragoimex Vario LF (tram) | Most žluto-červená |
 
 Additional vehicle families are in progress and live on the
 [`inprogress`](../../tree/inprogress) branch.
