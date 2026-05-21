@@ -12,6 +12,9 @@ the upstream pak being shadowed.
 
 ## What `main` currently ships
 
+A single pak file per agency and transport mode — for example, every shipped
+ČD rail family lives in `dist/VZ-CeskeDrahy-rail.pak`.
+
 | Family | Liveries on `main` |
 | --- | --- |
 | ČD řada 814.0 (RegioNova) | žluto-zelená, Najbrt 2, Plzeňský kraj, Pardubický kraj, Kraj Vysočina, PID šedo-červená |
@@ -36,28 +39,68 @@ Additional vehicle families are in progress and live on the
 - Python 3.7+
 - [`pyyaml`](https://pypi.org/project/PyYAML/) (`pip install pyyaml`)
 - `makeobj` from a matching Simutrans build, on `PATH` or pointed to by
-  `MAKEOBJ_PATH`
+  `MAKEOBJ_PATH` (see [Configuration](#configuration))
+
+## Configuration
+
+`build.py` auto-loads a `.env` file from the project root on startup. Copy the
+template and edit:
+
+```sh
+cp .env.example .env
+```
+
+Variables:
+
+| Variable | Purpose |
+| --- | --- |
+| `MAKEOBJ_PATH` | Absolute path to the matching Simutrans `makeobj` binary. If unset, the build runs `makeobj` from `PATH`. |
+| `PAK_TARGET_DIR` | Optional. Absolute path to your Simutrans pakset / addons directory. When set, the build syncs `dist/VZ-*.pak` there after each successful run (see [Install step](#install-step)). |
+
+Variables already set in the process environment take precedence over `.env`.
+`.env` is git-ignored; `.env.example` is the template that's committed.
+
+## Install step
+
+If `PAK_TARGET_DIR` points to an existing directory, after a successful build
+`build.py` syncs the freshly built `.pak` files into it:
+
+1. Scans the target for `VZ-*.pak` files with **no matching file in `dist/`**
+   (orphans — likely paks from a deleted family or a renamed agency-mode group).
+2. If any orphans exist, prints the list and prompts before deleting them.
+   Pass `-y` (or `--yes`) to auto-confirm. Answer `n` (the default) to keep them.
+3. Copies every `dist/VZ-*.pak` into the target, overwriting any same-named file.
+
+If `PAK_TARGET_DIR` is unset, missing, or you pass `--no-install`, the install
+step is skipped silently.
 
 ## Building
 
 ```sh
-python build.py                # build every family across every livery
+python build.py                # build every agency-mode pak
 python build.py --clean        # wipe build/ and dist/ first
-python build.py <family-dir>   # build a single family
+python build.py <path>         # narrow to the agency-mode pak that contains
+                               # <path> (family.yaml, family dir, or agency dir)
+python build.py --no-install   # skip the post-build install step
+python build.py -y             # auto-confirm orphan deletion during install
 
 # Windows
 .\build.ps1                    # same arguments
 ```
 
-Final `.pak` files land in `dist/`. Drop them into your Simutrans `addons/pak128/`
-folder (or the equivalent for your install).
+Each run also auto-prunes any stale `VZ-*.pak` in `dist/` that no longer matches
+a current agency-mode group (for instance, legacy per-livery paks).
+
+Final `.pak` files land in `dist/` — one per agency × transport mode, e.g.
+`VZ-CeskeDrahy-rail.pak`. Drop them into your Simutrans `addons/pak128/` folder
+(or the equivalent for your install).
 
 ## How the build works
 
-`.dat`, `.tab`, and per-livery `.pak` files are **generated** from a single
-`family.yaml` per vehicle family. The build script expands that file across every
-livery into `build/<basename>/`, then calls `makeobj` to produce
-`dist/<basename>.pak`.
+`.dat`, `.tab`, and `.pak` files are **generated** from one `family.yaml` per
+vehicle family. The build script groups families by `(agency, transport-mode)`,
+expands every livery into a shared `build/VZ-<Agency>-<mode>/` directory, and
+calls `makeobj` once per group to produce `dist/VZ-<Agency>-<mode>.pak`.
 
 **Do not hand-edit `.dat` or `.tab` files** — edit the `family.yaml` or the per-livery
 PNG instead. The full schema, naming convention, sprite layout, and multi-vehicle
@@ -82,11 +125,17 @@ Other transport-mode roots (`vehicle-water/`, `vehicle-air/`, …) are supported
 the build script — the agency level is purely organizational and the build walks
 every `vehicle-*/.../family.yaml` regardless of depth.
 
-## File-naming convention
+## Naming convention
 
-`VZ-<Agency>-<Type>-<Color>` — for example `VZ-CeskeDrahy-814_0-zlutozelena.pak`.
+**Pak filename** (one per agency × transport-mode): `VZ-<Agency>-<mode>.pak` —
+for example `dist/VZ-CeskeDrahy-rail.pak`.
+
+**Object basename** (inside the pak, for `name=`, sprite refs, and per-livery
+PNGs in the build dir): `VZ-<Agency>-<Type>-<Color>` — for example
+`VZ-CeskeDrahy-814_0-zlutozelena`.
 
 - **Agency** — PascalCase Czech operator name (`CeskeDrahy`, `RegioJet`, `LeoExpress`, `DPP`, …)
+- **mode** — transport mode slug derived from the `vehicle-*/` folder (`rail`, `road`, `water`, `air`)
 - **Type** — class designation; dots replaced with underscores (`814.0` → `814_0`)
 - **Color** — livery name in Czech without diacritics (`zlutozelena`, `najbrt2`, …)
 

@@ -4,28 +4,45 @@ Custom Czech addon set for Simutrans (Extended) pak128. Maintained by vojtechzic
 
 ## How the build works
 
-`.dat`, `.tab`, and per-livery `.pak` files are **generated**, not hand-written. Each vehicle family is described once in a `family.yaml`; the build script (`build.py`) expands that file across every livery, drops the result into `build/<basename>/`, and invokes `makeobj` to produce `dist/<basename>.pak`.
+`.dat`, `.tab`, and `.pak` files are **generated**, not hand-written. Each vehicle family is described once in a `family.yaml`; the build script (`build.py`) groups families by `(agency, transport-mode)`, expands every livery, drops the result into a shared `build/VZ-<Agency>-<mode>/` directory, and invokes `makeobj` once per group to produce `dist/VZ-<Agency>-<mode>.pak`.
 
 ```
-python build.py                # build everything
+python build.py                # build every agency-mode pak
 python build.py --clean        # wipe build/ and dist/ first
-python build.py <family-dir>   # build one family
+python build.py <path>         # narrow to one agency-mode pak (family dir,
+                               # family.yaml, or agency dir all work — the
+                               # target is always expanded to the full
+                               # agency-mode group, never partial)
+python build.py --no-install   # skip the post-build install step
+python build.py -y             # auto-confirm orphan deletion during install
 .\build.ps1                    # PowerShell wrapper, same args
 ```
+
+On every run the build also **auto-prunes** stale artifacts in `dist/`: any `dist/VZ-*.pak` or `dist/text/<lang>.VZ-*.tab` whose name no longer matches a current agency-mode group is deleted so `dist/` stays in sync with the source tree.
+
+After a successful build, if `PAK_TARGET_DIR` is set in `.env` (or the process environment) and points to an existing directory, `build.py` syncs both layers into it: `dist/VZ-*.pak` → `PAK_TARGET_DIR/`, and `dist/text/<lang>.VZ-*.tab` → `PAK_TARGET_DIR/text/`. Tabs MUST live in the pak's `text/` subfolder and use a dot-separated language prefix (`cz.VZ-…tab`, not `cz_VZ-…tab`) — Simutrans's `translator::load_files_from_folder` only scans `text/*.tab` and only matches the dot form. Any VZ artifact in the target without a counterpart in `dist/` is an orphan and the user is prompted before it's deleted (`-y` auto-confirms); legacy tab filenames at the pak root from older build.py versions (`<lang>_VZ-*.tab`, `VZ-*.<lang>.tab`) are also swept up. If `PAK_TARGET_DIR` is unset, missing, or `--no-install` is passed, the install step is skipped.
 
 `makeobj` is located via the `MAKEOBJ_PATH` environment variable; if unset, the build runs `makeobj` from `PATH`. Requires `pyyaml` (`pip install pyyaml`) and Python 3.7+.
 
 **Do not hand-edit `.dat` or `.tab` files.** Edit the relevant `family.yaml` or the per-livery PNG instead.
 
-## File-naming convention
+## Naming convention
 
-`VZ-<Agency>-<Type>-<Color>`
+Two distinct names matter — one for the shipped `.pak` and one for individual objects/sprites inside it.
+
+**Pak filename** (one per agency × transport-mode): `VZ-<Agency>-<mode>.pak`
 
 - `Agency` — PascalCase Czech transport agency name (e.g. `CeskeDrahy`, `RegioJet`, `LeoExpress`, `DPP`).
-- `Type` — class designation of the lead/named unit of the family; dots replaced with underscores (e.g. `814.0` → `814_0`).
-- `Color` — livery name in Czech without diacritics (e.g. `zlutozelena`, `modra`, `cervena`, `najbrt2`).
+- `mode` — the `vehicle-*/` root folder slug without the `vehicle-` prefix (`rail`, `road`, `water`, `air`).
+- Example: `dist/VZ-CeskeDrahy-rail.pak` contains every ČD rail family and every livery thereof.
 
-Generated extensions per livery: `.dat`, `.png`, `.en.tab`, `.cs.tab`, `.pak`. A single `.dat` + `.png` pair holds the entire matched set (e.g. cab + motor of one DMU).
+**Object basename** (used for `name=`, per-livery PNG file inside the build dir, and sprite refs in `.dat`): `VZ-<Agency>-<Type>-<Color>`
+
+- `Type` — class designation of the lead/named unit of the family; dots replaced with underscores (e.g. `814.0` → `814_0`).
+- `Color` — livery name in Czech without diacritics (e.g. `zlutozelena`, `najbrt2`, `pidsedocervena`).
+- Final object `name=` adds the per-vehicle id suffix: `VZ-CeskeDrahy-814_0-zlutozelena-914`.
+
+A single `family.yaml` + `<color>.png` pair holds the entire matched set (e.g. cab + motor of one DMU). The build emits one `.dat` + one `.png` per family×livery inside the shared agency-mode build dir, plus one `.en.tab` and one `.cs.tab` per agency-mode pak listing every object's display string.
 
 ## Directory layout
 
@@ -42,7 +59,7 @@ simutrans-custom-czech-pak128/
           <color>.png             # one consolidated 1024×N PNG per livery
 ```
 
-Transport modes: `vehicle-rail/`, `vehicle-road/`, `vehicle-water/`, `vehicle-air/`. The build script walks every `vehicle-*/...family.yaml` regardless of depth, so the agency level is purely organizational. Family folder names are conventionally the slugified type (`814.0` → `814_0`) so they match the generated `.pak` filename.
+Transport modes: `vehicle-rail/`, `vehicle-bus/`, `vehicle-tram/`, `vehicle-water/`, `vehicle-air/` (plus any future `vehicle-trolleybus/` etc.). Bus and tram are split into their own modes rather than bundled under a generic `vehicle-road/` so trolleybuses can later live alongside buses without mixing rolling stock. The build script walks every `vehicle-*/...family.yaml` regardless of depth and groups by the `agency:` field plus the `vehicle-*` mode root. Family folder names are conventionally the slugified type (`814.0` → `814_0`); the agency folder name is organizational only — the canonical agency identifier is the `agency:` field inside `family.yaml`.
 
 ## `family.yaml` schema
 
@@ -95,10 +112,12 @@ Canonical examples: `vehicle-rail/ceske-drahy/814_0/family.yaml` (simple 2-car p
 
 ## Object naming inside `.dat`
 
-The `name=` field is `<basename>-<id_underscored>`. Every object in a multi-vehicle file gets a unique suffix. Examples:
+The `name=` field is `<object-basename>-<id_underscored>`, where the object basename is the per-livery `VZ-<Agency>-<Type>-<Color>` form (not the agency-mode pak basename). Every object in a multi-vehicle file gets a unique suffix. Examples:
 
 - `VZ-CeskeDrahy-814_0-zlutozelena-914`    (control trailer, class 914)
 - `VZ-CeskeDrahy-814_0-zlutozelena-814_0`  (motor car, class 814.0)
+
+Object names are stable across the per-livery → per-agency-mode pak repackaging: existing savegames that reference these names continue to work.
 
 ## Copyright
 
@@ -173,11 +192,9 @@ With these constraints, the only buildable consist is `front + middle + rear`.
 
 ## Localization
 
-For each `<basename>.dat`, the build emits `<basename>.en.tab` and `<basename>.cs.tab`. Each `.tab` file:
+For each agency-mode pak, the build emits one `en.<pak-basename>.tab` and one `cz.<pak-basename>.tab` (e.g. `en.VZ-CeskeDrahy-rail.tab`, `cz.VZ-CeskeDrahy-rail.tab`) into `dist/text/`, covering every object across every family and livery in the pak. These files install into `PAK_TARGET_DIR/text/` alongside the pak's main `cz.tab` / `en.tab` — that's the only place Simutrans's translator scans for loose translation files. Filename rules (from `translator::load_files_from_folder`): the language code must be a dot-separated prefix or suffix (`cz.foo.tab` or `foo.cz.tab` both match; `cz_foo.tab` does not). Czech uses `cz`, not `cs`, to match this pak's language code. Files are UTF-8 with BOM — Simutrans's `is_unicode_file()` auto-detects the BOM and decodes correctly for any language, so full Czech diacritics are preserved in both `cz` and `en` strings. Each `.tab` file is a bare list of pairs:
 
 ```
-# Language: <Name>
-
 <object name #1>
 <display name in this language>
 
@@ -185,11 +202,15 @@ For each `<basename>.dat`, the build emits `<basename>.en.tab` and `<basename>.c
 <display name in this language>
 ```
 
-Display string templates (built into `build.py`):
-- EN: `<agency_en> Class <id> <family_en> <role_en> (<name_en>)`
-- CS: `<agency_cs> řada <id> <family_cs> <role_cs> (<name_cs>)`
+Display string templates (built into `build.py`) — vary by mode:
+- Rail (uses Czech railway "class/řada" nomenclature):
+  - EN: `<agency_en> Class <id> <family_en> <role_en> (<name_en>)`
+  - CS: `<agency_cs> řada <id> <family_cs> <role_cs> (<name_cs>)`
+- Bus, tram, and all other modes (no class numbering scheme — the family name names the model):
+  - EN: `<agency_en> <family_en> <role_en> (<name_en>)`
+  - CS: `<agency_cs> <family_cs> <role_cs> (<name_cs>)`
 
-`<id>` uses the natural dotted form (e.g. `Class 814.0`). Encoding: UTF-8 (no BOM). Czech display strings use full diacritics; diacritics-free forms are reserved for filenames and object `name=`.
+The set of class-prefix modes is defined as `MODES_WITH_CLASS_PREFIX` in `build.py` (currently `{"rail"}`). `<id>` uses the natural dotted form (e.g. `Class 814.0`). Encoding: UTF-8 (no BOM). Czech display strings use full diacritics; diacritics-free forms are reserved for filenames and object `name=`.
 
 ### Livery `name_en` / `name_cs` convention
 
