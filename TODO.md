@@ -46,17 +46,18 @@ Legend for livery palettes:
 
 ## 840 RegioSpider
 
-- [ ] `840/sprites/najbrt1.png` — placeholder is ZSSK silver/blue RS1. Repaint to **Najbrt 1** (navy + white). Also: the source's middle "zssk_840_b" engine pod is dropped — our model is a single car, so the cab silhouette should be the only thing visible.
+- [x] `840/sprites/najbrt1.png` — placeholder is ZSSK silver/blue RS1. Repaint to **Najbrt 1** (navy + white). Also: the source's middle "zssk_840_b" engine pod is dropped — our model is a single car, so the cab silhouette should be the only thing visible.
 
 ## 841 RegioSpider
 
-- [ ] `841/sprites/najbrt1.png` — same source/work as 840.
+- [x] `841/sprites/najbrt1.png` — same source/work as 840.
 
 ## 841.2 RegioSpider
 
-- [ ] `841_2/sprites/dukzelenobila.png` — ZSSK silver source → **DÚK zeleno-bílá** (white body, green waistband).
-- [ ] `841_2/sprites/hzlkremovacervena.png` — ZSSK silver source → **HZL krémovo-červená** (cream + red).
-- [ ] `841_2/sprites/pardubickykraj.png` — ZSSK silver source → **Pardubický kraj** (white+red+gold).
+- [x] `841_2/sprites/dukzelenobila.png` — ZSSK silver source → **DÚK zeleno-bílá** (white body, green waistband).
+- [x] `841_2/sprites/hzlkremovacervena.png` — ZSSK silver source → **HZL krémovo-červená** (cream + red).
+- [x] `841_2/sprites/pardubickykraj.png` — ZSSK silver source → **Pardubický kraj** (white+red+gold).
+- [x] `841_2/sprites/pidsedocervena.png` — ZSSK silver source → **PID šedo-červená** (grey body + red door pillars).
 
 ## 842 "Kvatro"
 
