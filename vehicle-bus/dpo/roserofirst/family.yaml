@@ -1,0 +1,43 @@
+agency: DPOstrava
+type: "RoseroFirst"
+copyright: VTPsim
+
+display:
+  agency_en: "DPO"
+  agency_cs: "DPO"
+  family_en: "Rošero First CNG"
+  family_cs: "Rošero First CNG"
+
+# Sprite placeholder: borrows Iveco-Dekstra LE 37 art until Rošero sprites exist.
+# Real-world: Iveco Daily-based CNG midibus, ~8 m, ~30 passengers, ~110 kW.
+# DPO took delivery of ~5 units 2018–2021; all currently in service.
+
+vehicles:
+  - id: "RoseroFirst"
+    role_en: "minibus"
+    role_cs: "minibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 245000
+      payload: 30
+      speed: 100
+      weight: 5
+      runningcost: 18
+      fixed_cost: 85
+      intro_year: 2018
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: strasse
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 110
+      gear: 55
+
+liveries:
+  - color: dpotyrkysova
+    name_en: "DPO turquoise"
+    name_cs: "DPO tyrkysová"

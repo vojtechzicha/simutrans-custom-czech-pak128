@@ -1,0 +1,68 @@
+agency: DPOstrava
+type: "39T"
+copyright: TommPa9
+
+display:
+  agency_en: "DPO"
+  agency_cs: "DPO"
+  family_en: "Škoda 39T ForCity Smart"
+  family_cs: "Škoda 39T ForCity Smart"
+
+# Sprite placeholder: borrows Stadler Tango NF2 art until 39T sprites exist.
+# Real-world specs: 31 m, 7-section bidirectional 100% low-floor tram,
+# 285 passengers (75 seated), 4×120 kW = 480 kW, 70 km/h.
+# DPO took delivery of 38 cars 2021–2024; all currently in service.
+
+vehicles:
+  - id: "39T"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    tail: false
+    prev: []
+    next: ["39T_2"]
+    fields:
+      cost: 45000
+      payload: 150
+      speed: 70
+      weight: 25
+      runningcost: 26
+      fixed_cost: 105
+      intro_year: 2021
+      intro_month: 8
+      retire_year: 2080
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 10
+      engine_type: electric
+      power: 240
+
+  - id: "39T_2"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    prev: ["39T"]
+    next: []
+    fields:
+      cost: 45000
+      payload: 135
+      speed: 70
+      weight: 25
+      runningcost: 24
+      fixed_cost: 95
+      intro_year: 2021
+      intro_month: 8
+      retire_year: 2080
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 10
+      engine_type: electric
+      power: 240
+
+liveries:
+  - color: dpotyrkysova
+    name_en: "DPO turquoise"
+    name_cs: "DPO tyrkysová"

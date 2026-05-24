@@ -1,0 +1,45 @@
+agency: DPOstrava
+type: "SolarisTrollino_15AC"
+copyright: TommPa9
+
+display:
+  agency_en: "DPO"
+  agency_cs: "DPO"
+  family_en: "Solaris Trollino 15 AC"
+  family_cs: "Solaris Trollino 15 AC"
+
+# Auto-extracted from CZ-vehicle-trolleybus.pak via tools/pak_extract.py families.
+# Numeric fields below come straight from the binary VHCL payload — verify
+# against real-world data (cost / speed / payload / power / dates) before
+# building. Role labels and family display names are TODOs.
+
+vehicles:
+  - id: "SolarisTrollino_15AC"
+    # original pak name: CZ-Ostrava-SolarisTrollino_15AC
+    role_en: "trolleybus"
+    role_cs: "trolejbus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 912498
+      payload: 187
+      speed: 75
+      weight: 13
+      runningcost: 31
+      fixed_cost: 149
+      intro_year: 2011
+      intro_month: 1
+      retire_year: 2025
+      retire_month: 2
+      waytype: strasse
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 265
+      gear: 61
+
+liveries:
+  - color: dpomodrozluta
+    name_en: "DPO blue-yellow"
+    name_cs: "DPO modro-žlutá"

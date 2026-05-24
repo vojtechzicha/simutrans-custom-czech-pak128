@@ -1,0 +1,70 @@
+agency: DPOstrava
+type: "T6A5"
+copyright: TommPa9
+
+display:
+  agency_en: "DPO"
+  agency_cs: "DPO"
+  family_en: "Tatra T6A5"
+  family_cs: "Tatra T6A5"
+
+# Auto-extracted from CZ-vehicle-tram.pak via tools/pak_extract.py families.
+# Numeric fields below come straight from the binary VHCL payload — verify
+# against real-world data (cost / speed / payload / power / dates) before
+# building. Role labels and family display names are TODOs.
+
+vehicles:
+  - id: "T6A5"
+    # original pak name: CZ-Ostrava-T6A5
+    role_en: "front car"
+    role_cs: "přední vůz"
+    row: 0
+    tail: false
+    prev: []
+    next: ["T6A5-2"]
+    fields:
+      cost: 88600
+      payload: 115
+      speed: 65
+      weight: 20
+      runningcost: 26
+      fixed_cost: 108
+      intro_year: 1991
+      intro_month: 1
+      retire_year: 2030
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 12
+      engine_type: electric
+      power: 180
+
+  - id: "T6A5-2"
+    # original pak name: CZ-Ostrava-T6A5-2
+    role_en: "rear car"
+    role_cs: "zadní vůz"
+    row: 1
+    head: false
+    prev: ["T6A5"]
+    next: []
+    fields:
+      cost: 88600
+      payload: 115
+      speed: 65
+      weight: 20
+      runningcost: 21
+      fixed_cost: 108
+      intro_year: 1991
+      intro_month: 1
+      retire_year: 2030
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 12
+      engine_type: electric
+      power: 180
+
+liveries:
+  - color: dpomodrozluta
+    name_en: "DPO blue-yellow"
+    name_cs: "DPO modro-žlutá"

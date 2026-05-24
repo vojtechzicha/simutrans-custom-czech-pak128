@@ -1,0 +1,46 @@
+agency: DPOstrava
+type: "36TrSolaris"
+copyright: TommPa9
+
+display:
+  agency_en: "DPO"
+  agency_cs: "DPO"
+  family_en: "Škoda 36Tr Solaris"
+  family_cs: "Škoda 36Tr Solaris"
+
+# Škoda 36Tr Solaris — in-motion-charging (IMC) variant of the 26Tr, with
+# onboard traction battery so the trolleybus can detach from the catenary and
+# run for a limited range on battery alone. Sprites are reused from 26Tr (same
+# Solaris Trollino 12 body). DPO Ostrava began receiving 36Tr units in 2020.
+#
+# engine_type=battery models the off-wire capability; in pak128.cs this means
+# the vehicle can operate on roads without overhead lines.
+
+vehicles:
+  - id: "36TrSolaris"
+    role_en: "trolleybus (IMC)"
+    role_cs: "parciální trolejbus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 1075000
+      payload: 96
+      speed: 70
+      weight: 16
+      runningcost: 19
+      fixed_cost: 88
+      intro_year: 2020
+      intro_month: 1
+      retire_year: 2055
+      retire_month: 1
+      waytype: strasse
+      freight: Passagiere
+      length: 8
+      engine_type: battery
+      power: 175
+
+liveries:
+  - color: dpotyrkysova
+    name_en: "DPO turquoise"
+    name_cs: "DPO tyrkysová"

@@ -1,0 +1,72 @@
+agency: DPOstrava
+type: "VarioLF2"
+copyright: TommPa9
+
+display:
+  agency_en: "DPO"
+  agency_cs: "DPO"
+  family_en: "Pragoimex Vario LF2"
+  family_cs: "Pragoimex Vario LF2"
+
+# Two-section articulated short low-floor tram (front + rear must couple).
+# Two DPO Ostrava liveries: blue-yellow (modro-žlutá) and turquoise (tyrkysová).
+# Auto-extracted fields verified against real-world DPO service history.
+
+vehicles:
+  - id: "A"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["A_2"]
+    fields:
+      cost: 38600
+      payload: 83
+      speed: 65
+      weight: 19
+      runningcost: 22
+      fixed_cost: 91
+      intro_year: 2008
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 180
+
+  - id: "A_2"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["A"]
+    next: []
+    fields:
+      cost: 38600
+      payload: 83
+      speed: 65
+      weight: 19
+      runningcost: 20
+      fixed_cost: 58
+      intro_year: 2008
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 180
+
+liveries:
+  - color: dpomodrozluta
+    name_en: "DPO blue-yellow"
+    name_cs: "DPO modro-žlutá"
+  - color: dpotyrkysova
+    name_en: "DPO turquoise"
+    name_cs: "DPO tyrkysová"

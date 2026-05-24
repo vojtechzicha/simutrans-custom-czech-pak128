@@ -1,0 +1,71 @@
+agency: DPOstrava
+type: "SolarisUrbino18_s3"
+copyright: TommPa9
+
+display:
+  agency_en: "DPO"
+  agency_cs: "DPO"
+  family_en: "Solaris Urbino 18 III"
+  family_cs: "Solaris Urbino 18 III"
+
+# Auto-extracted from CZ-vehicle-bus.pak via tools/pak_extract.py families.
+# Numeric fields below come straight from the binary VHCL payload — verify
+# against real-world data (cost / speed / payload / power / dates) before
+# building. Role labels and family display names are TODOs.
+
+vehicles:
+  - id: "SolarisUrbino18_s3"
+    # original pak name: CZ-Ostrava-SolarisUrbino18_s3
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    tail: false
+    prev: []
+    next: ["SolarisUrbino18_s3_2"]
+    fields:
+      cost: 500000
+      payload: 142
+      speed: 75
+      weight: 9
+      runningcost: 15
+      fixed_cost: 72
+      intro_year: 2008
+      intro_month: 1
+      retire_year: 2035
+      retire_month: 1
+      waytype: strasse
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 0
+
+  - id: "SolarisUrbino18_s3_2"
+    # original pak name: CZ-Ostrava-SolarisUrbino18_s3_2
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    prev: ["SolarisUrbino18_s3"]
+    next: []
+    fields:
+      cost: 619123
+      payload: 56
+      speed: 75
+      weight: 7
+      runningcost: 16
+      fixed_cost: 77
+      intro_year: 2008
+      intro_month: 1
+      retire_year: 2035
+      retire_month: 1
+      waytype: strasse
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 283
+      gear: 61
+
+liveries:
+  - color: dpomodrozluta
+    name_en: "DPO blue-yellow"
+    name_cs: "DPO modro-žlutá"

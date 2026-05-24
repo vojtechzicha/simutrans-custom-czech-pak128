@@ -31,7 +31,16 @@ A single pak file per agency and transport mode — for example, every shipped
 | DPmML Pragoimex Vario LF (tram) | Most žluto-červená |
 
 Additional vehicle families are in progress and live on the
-[`inprogress`](../../tree/inprogress) branch.
+[`inprogress`](../../tree/inprogress) branch. Highlights currently in flight:
+
+- **DP Ostrava (DPO)** — full city fleet across all three urban modes (introduces
+  the `vehicle-trolleybus/` mode): 11 bus families, 12 tram families, 9 trolleybus
+  families. Verified against the 2025–2026 active roster; real-world retirement
+  dates set on the handful of types that have left service.
+- **ČD rail** — assorted DMU and EMU classes (810/811 Šukafon · 842/843/844 ·
+  847 RegioFox · 854 Hydra · 471 CityElefant · 440/640/650/660/681/690 Panter
+  family) in various stages of sprite repaint; see [`TODO.md`](TODO.md).
+- **Die Länderbahn CZ** — 654 Pesa LINK II.
 
 ## Requirements
 

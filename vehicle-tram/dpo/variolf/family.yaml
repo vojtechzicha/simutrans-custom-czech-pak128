@@ -1,0 +1,47 @@
+agency: DPOstrava
+type: "VarioLF"
+copyright: TommPa9
+
+display:
+  agency_en: "DPO"
+  agency_cs: "DPO"
+  family_en: "Pragoimex Vario LF"
+  family_cs: "Pragoimex Vario LF"
+
+# Single-car partially low-floor T3 modernization. Two DPO Ostrava liveries:
+# the original blue-yellow scheme and a later turquoise rebrand. Auto-extracted
+# fields verified against real-world DPO data.
+
+vehicles:
+  - id: "VarioLF"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 18600
+      payload: 116
+      speed: 65
+      weight: 21
+      runningcost: 14
+      fixed_cost: 58
+      intro_year: 2005
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 12
+      engine_type: electric
+      power: 360
+
+liveries:
+  - color: dpomodrozluta
+    name_en: "DPO blue-yellow"
+    name_cs: "DPO modro-žlutá"
+  - color: dpotyrkysova
+    name_en: "DPO turquoise"
+    name_cs: "DPO tyrkysová"

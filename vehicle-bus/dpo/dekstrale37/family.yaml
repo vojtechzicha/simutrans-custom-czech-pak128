@@ -1,0 +1,45 @@
+agency: DPOstrava
+type: "DekstraLE37"
+copyright: VTPsim
+
+display:
+  agency_en: "DPO"
+  agency_cs: "DPO"
+  family_en: "Iveco-Dekstra LE 37"
+  family_cs: "Iveco-Dekstra LE 37"
+
+# Auto-extracted from CZ-vehicle-bus.pak via tools/pak_extract.py families.
+# Numeric fields below come straight from the binary VHCL payload — verify
+# against real-world data (cost / speed / payload / power / dates) before
+# building. Role labels and family display names are TODOs.
+
+vehicles:
+  - id: "DekstraLE37"
+    # original pak name: CZ-Ostrava-DekstraLE37
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 393578
+      payload: 74
+      speed: 80
+      weight: 7
+      runningcost: 23
+      fixed_cost: 118
+      intro_year: 2009
+      intro_month: 9
+      retire_year: 2035
+      retire_month: 12
+      waytype: strasse
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 185
+      gear: 52
+
+liveries:
+  - color: dpotyrkysova
+    name_en: "DPO turquoise"
+    name_cs: "DPO tyrkysová"

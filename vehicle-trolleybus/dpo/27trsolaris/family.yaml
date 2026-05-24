@@ -1,0 +1,71 @@
+agency: DPOstrava
+type: "27TrSolaris"
+copyright: TommPa9
+
+display:
+  agency_en: "DPO"
+  agency_cs: "DPO"
+  family_en: "Škoda 27Tr Solaris"
+  family_cs: "Škoda 27Tr Solaris"
+
+# Auto-extracted from CZ-vehicle-trolleybus.pak via tools/pak_extract.py families.
+# Numeric fields below come straight from the binary VHCL payload — verify
+# against real-world data (cost / speed / payload / power / dates) before
+# building. Role labels and family display names are TODOs.
+
+vehicles:
+  - id: "27TrSolaris"
+    # original pak name: CZ-Ostrava-27TrSolaris
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    tail: false
+    prev: []
+    next: ["27TrSolaris_2"]
+    fields:
+      cost: 500000
+      payload: 142
+      speed: 75
+      weight: 9
+      runningcost: 15
+      fixed_cost: 72
+      intro_year: 2008
+      intro_month: 1
+      retire_year: 2045
+      retire_month: 1
+      waytype: strasse
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 0
+
+  - id: "27TrSolaris_2"
+    # original pak name: CZ-Ostrava-27TrSolaris_2
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    prev: ["27TrSolaris"]
+    next: []
+    fields:
+      cost: 619123
+      payload: 56
+      speed: 75
+      weight: 7
+      runningcost: 16
+      fixed_cost: 77
+      intro_year: 2008
+      intro_month: 1
+      retire_year: 2045
+      retire_month: 1
+      waytype: strasse
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 265
+      gear: 61
+
+liveries:
+  - color: dpotyrkysova
+    name_en: "DPO turquoise"
+    name_cs: "DPO tyrkysová"

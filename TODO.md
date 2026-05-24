@@ -175,3 +175,28 @@ use the same source: pak128cs `cd_471a.png` (3 rows already laid out front motor
 
 - [x] `690_2/sprites/cdzelenomodrobila.png` — pak128_czr `690.png` is already the
   battery-electric **ČD zeleno-modro-bílá** livery. Direct match.
+
+---
+
+# DPO Ostrava (bus / tram / trolleybus)
+
+Most DPO rolling stock was extracted from the upstream `CZ-vehicle-bus.pak` /
+`CZ-vehicle-tram.pak` / `CZ-vehicle-trolleybus.pak` via `tools/pak_extract.py`,
+so its sprites already carry the correct DPO modro-žlutá and tyrkysová liveries
+— no repaint work pending there. Two newer fleet additions ship with placeholder
+art borrowed from a visually similar family until proper sprites exist.
+
+## Škoda 39T ForCity Smart (tram)
+
+- [ ] `vehicle-tram/dpo/39t_forcitysmart/sprites/dpotyrkysova.png` — placeholder is
+  the Stadler Tango NF2 (2-section) sprite. The 39T is a 7-section, 100% low-floor,
+  bidirectional 31 m car (delivered 2021–2024, 38 cars in DPO turquoise) — its
+  silhouette is longer, sleeker, and symmetrical end-to-end. Repaint or redraw to
+  match the real ForCity Smart Ostrava body.
+
+## Rošero First CNG (bus)
+
+- [ ] `vehicle-bus/dpo/roserofirst/sprites/dpotyrkysova.png` — placeholder is the
+  Iveco-Dekstra LE 37 sprite. The Rošero First is also an ~8 m Iveco-Daily-based
+  CNG midibus so the body proportions are close, but the front and roof gas-tank
+  silhouette differ. Touch up to match the Rošero First profile.

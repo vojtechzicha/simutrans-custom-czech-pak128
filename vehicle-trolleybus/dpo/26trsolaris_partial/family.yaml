@@ -1,0 +1,43 @@
+agency: DPOstrava
+type: "26TrSolaris_partial"
+copyright: TommPa9
+
+display:
+  agency_en: "DPO"
+  agency_cs: "DPO"
+  family_en: "Škoda 26Tr Solaris (partial)"
+  family_cs: "Škoda 26Tr Solaris (parciální)"
+
+# Partial-trolleybus variant of the standard 26Tr — same Solaris Trollino 12
+# body, fitted with a traction battery so the vehicle can leave the catenary
+# and run off-wire for a limited range. Sprites are reused from the pure 26Tr
+# family (same chassis & livery), only the powertrain spec differs.
+
+vehicles:
+  - id: "26TrSolaris_partial"
+    role_en: "trolleybus (partial)"
+    role_cs: "parciální trolejbus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 1030000
+      payload: 96
+      speed: 70
+      weight: 16
+      runningcost: 19
+      fixed_cost: 85
+      intro_year: 2010
+      intro_month: 1
+      retire_year: 2045
+      retire_month: 1
+      waytype: strasse
+      freight: Passagiere
+      length: 8
+      engine_type: battery
+      power: 175
+
+liveries:
+  - color: dpotyrkysova
+    name_en: "DPO turquoise"
+    name_cs: "DPO tyrkysová"
