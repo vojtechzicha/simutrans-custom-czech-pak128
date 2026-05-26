@@ -32,7 +32,7 @@ vehicles:
       intro_month: 1
       retire_year: 2050
       retire_month: 1
-      waytype: strasse
+      waytype: road
       freight: Passagiere
       length: 8
       engine_type: diesel

@@ -38,11 +38,15 @@ from PIL import Image
 TRANSPARENT = (231, 255, 255, 255)
 
 # Pak IMG node ordering inside vehicle paks vs this project's PNG column
-# convention. The project stores columns in makeobj's standard
-# [w, nw, n, ne, e, se, s, sw] order; pak128.cs source vehicles instead store
-# the IMG list in [w, n, ne, nw, e, s, sw, se] order. This table maps each
-# project column to the pak's IMG index that should fill it.
-PAK_TO_PROJECT_DIR = [1, 3, 0, 2, 5, 7, 4, 6]
+# convention. build.py emits PNG columns in makeobj's standard
+# [w, nw, n, ne, e, se, s, sw] order. pak128.cs vehicle paks store their
+# 8-direction IMG list in [s, w, sw, se, n, e, ne, nw] order (verified
+# empirically against CZ-vehicle-bus/tram/trolleybus.pak by matching extracted
+# silhouettes to the corrected sheets). This table maps each project column
+# index to the pak IMG index that fills it.
+#   project col:  0=w   1=nw  2=n   3=ne  4=e   5=se  6=s   7=sw
+#   pak IMG idx:  1     7     4     6     5     3     0     2
+PAK_TO_PROJECT_DIR = [1, 7, 4, 6, 5, 3, 0, 2]
 
 # Placeholder palette for simutrans special pixels (player colors etc.).
 # Range 0x8000..0x801F is the player-color band: pak128.cs typically paints
