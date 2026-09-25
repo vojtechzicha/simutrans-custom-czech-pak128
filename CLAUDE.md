@@ -156,6 +156,14 @@ Convention: a vehicle's windows light up at night **only while passengers are ab
 
 This Simutrans build does **not** support `bidirectional=1` (auto-flip) or `can_lead_from_rear=1`. Don't emit them. Multi-vehicle consists are modelled by **separate vehicle definitions per consist position**, each with its own sprite row.
 
+### Section placement for `length` ≠ 8 (gaps at the joints)
+
+Simutrans anchors every vehicle at its **front** and places the next vehicle's anchor `length` carunits behind it (16 carunits = 1 tile; `convoi_t`: `dist = driven - vlen`). A sprite drawn like a native 8-carunit section (body centred in the tile) has its body centre 4 carunits behind its anchor. So a section of length `L` must have its body shifted **along its direction of travel by (4 − L/2) carunits** relative to a tile-centred drawing: `L = 12` → 2 carunits backward, `L = 10` → 1 backward, `L = 6` → 1 forward. Centring every section regardless of length leaves gaps or overlaps between sections of different lengths (a 12 + 6 tram drawn centred shows a 3-carunit gap). The body must also be `L` carunits long (1 carunit = 1.5 m in these sprites).
+
+Screen pixels per carunit of travel: n/s/e/w `(±4, ±2)`, ne/sw `(±5.66, 0)`, nw/se `(0, ±2.83)`.
+
+Check every multi-section vehicle with `python tools/consist_preview.py <sheet.png> <len0,len1,...> <out.png>` (lengths in consist order, lead first; `--rows` to pick sprite rows). It composites the rows with the engine's spacing and draw order in all 8 directions; sections must meet at the joints in every view. Upstream multi-section sprites (e.g. the DPO Tango NF2, 8 + 6) already follow this.
+
 ### Simple 2-car (cab + motor), e.g. 814.0
 
 The cab and motor sprite series in the source already have their cabs at opposite physical ends, so one definition per vehicle is enough. Each gets reciprocal constraints with `none`:
