@@ -1,0 +1,66 @@
+agency: DPPraha
+type: "E_City_36BB"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses, same as the ENS 12 / TNS 12 renders), so no shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Škoda E'City 36BB"
+  family_cs: "Škoda E'City 36BB"
+
+# Škoda E'City 36BB, 12 m battery bus on the Temsa Avenue Electron body, DPP
+# 3001-3014 (14 buses), first passenger run 17 Jan 2022 (line 213, depot
+# Vršovice). 12.095 x 2.55 x 3.30 m, wheelbase 5.805 m, 13.2 t, 3 double doors
+# (2-2-2, door 3 behind the rear axle), 28 seats / 83 total (DPP; the tender
+# sheet says 69), Škoda 160 kW motor (DPP's page says 187 kW), 80 km/h, >100 km
+# range. Charged by a roof-mounted 2-pole pantograph from the tram wire at
+# Strašnická / Želivského (up to 150 kW); drawn folded down as in normal
+# running: single-arm pantograph hinged on the black front roof cap, grey arm
+# lying backwards, dark collector head with the two contact shoes across the
+# roof just behind the cap (photo seznam-autobusu 353480: 3011 charging).
+# Livery: PID grey-red: grey body, black window band, glossy black front cap
+# over the windscreen, destination display and the front ~1.2 m of the roof;
+# black band under the windscreen and black swoosh headlight clusters, grey
+# lower mask with the red block on the vehicle's left; red panels over both
+# axles (behind door 1 / from door 3 forward) repeated as red bands over the
+# roof fairing; grey rear roof cap, black rear window area with an amber route
+# number, grey lower rear with the red block on the left, tail-lamp bar.
+# Sprite: new 8-direction box render (no upstream art exists for this body),
+# dimensions and panel positions measured from photos (seznam-autobusu 340997,
+# 356084, 450903, 353480; Wikimedia "Škoda 36BB E City").
+
+vehicles:
+  - id: "E_City_36BB"
+    display_id: "E'City 36BB"
+    role_en: "electric bus"
+    role_cs: "elektrobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 604405
+      payload: 83
+      speed: 80
+      weight: 13
+      runningcost: 31
+      fixed_cost: 198
+      intro_year: 2022
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: battery
+      power: 160
+      gear: 53
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"

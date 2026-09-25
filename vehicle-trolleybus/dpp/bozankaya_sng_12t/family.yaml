@@ -1,0 +1,66 @@
+agency: DPPraha
+type: "SNG_12T"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses, same as the ENS 12 / TNS 12 renders), so no shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Bozankaya SNG 12T"
+  family_cs: "Bozankaya SNG 12T"
+
+# Bozankaya SNG 12T, 12 m low-floor battery trolleybus (Medcom traction
+# equipment, >=15 km off wire), DPP 515-544: 30 delivered 2025-26, 13 in
+# passenger service since September 2026 (lines 51, 52, 53, depot Řepy), the
+# rest being accepted during autumn 2026. 12.15 x 2.55 x 3.50 m, 3 double
+# doors (door 1 ahead of the front axle, door 2 ahead of the rear axle, door 3
+# behind it), 32 seats / 82 total, about 180 kW (Gdynia spec for the same
+# type), 70 km/h; empty weight not published (~13 t estimated).
+# Livery: PID grey-red: very tall black glazing incl. the doors, grey lower
+# body, black windscreen and destination panel under a light-grey roof cap,
+# black light band across the front at headlight height, red block right of
+# centre (vehicle's left) on the lower front; red panels from door 1 back over
+# the front axle and from door 2 back over the rear axle, both continued as
+# red bands over the grey roof equipment pods; grey rear corner pillars, tall
+# black rear window, red block on the vehicle's left of the lower rear; poles
+# hinged on the roof pod behind the front red band, silver with a yellow upper
+# quarter (photos of 515 / 527 / 537; the research notes say black).
+# Sprite: new 8-direction box render (no upstream art exists for this body),
+# panel positions from photos (Wikimedia "Bozankaya SNG 12T (515, Praha)",
+# seznam-autobusu 451242 / 451773, cs-dopravak.cz 2026-02 photos of 515);
+# pole tips aimed at the pak128.cs wire of the vehicle's own lane.
+
+vehicles:
+  - id: "SNG_12T"
+    display_id: "SNG 12T"
+    role_en: "trolleybus"
+    role_cs: "trolejbus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 604405
+      payload: 82
+      speed: 70
+      weight: 13
+      runningcost: 31
+      fixed_cost: 198
+      intro_year: 2026
+      intro_month: 9
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 180
+      gear: 53
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"

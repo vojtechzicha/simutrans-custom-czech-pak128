@@ -1,0 +1,63 @@
+agency: DPPraha
+type: "36Tr"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses, same as the ENS 12 / TNS 12 renders), so no shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Škoda 36Tr T'City"
+  family_cs: "Škoda 36Tr T'City"
+
+# Škoda 36Tr T'City, 12 m battery trolleybus on the Temsa Avenue Electron body
+# (the E'City 36BB's shell), Škoda SJ 10 equipment, 160 kW, TBS5 battery (up to
+# 15 km off wire), 65 km/h. Single prototype DPP 509: built 2022, on lease in
+# Prague from 3/2023 (line 58), bought by DPP 12/2024, now on lines 51-53.
+# 12.02 x 2.55 x 3.42 m, wheelbase 5.805 m, 3 double doors (2-2-2), 27 seats /
+# 75 total (Prague interior, seznam-autobusu); empty weight not published
+# (~13 t estimated).
+# Livery: shipped in the PID grey-red it wore 7/2025-5/2026 (and on line 52);
+# since 5/2026 it carries a temporary purple "90 years of trolleybuses" wrap,
+# which is not modelled. Grey body and roof fairing, black window band, black
+# windscreen surround / front face of the roof dome, grey lower mask with the
+# red block on the vehicle's left, red panels over both axles repeated on the
+# roof fairing, grey rear cap, black rear window, red block on the lower rear;
+# trolley poles hinged above door 2: silver-grey with a black hinge end and a
+# yellow insulated upper quarter (photos; not black as the research notes say).
+# Sprite: new 8-direction box render of the Temsa body (shared geometry with the
+# E'City 36BB family), placed from the pure side view seznam-autobusu 443343;
+# pole tips aimed at the pak128.cs wire of the vehicle's own lane.
+
+vehicles:
+  - id: "36Tr"
+    role_en: "trolleybus"
+    role_cs: "trolejbus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 604405
+      payload: 75
+      speed: 65
+      weight: 13
+      runningcost: 31
+      fixed_cost: 198
+      intro_year: 2023
+      intro_month: 3
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 160
+      gear: 53
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"
