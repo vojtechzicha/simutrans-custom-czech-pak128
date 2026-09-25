@@ -1,7 +1,7 @@
 agency: DPOstrava
 type: "ScaniaUNVIUrbisDD"
-# Sprites were extracted from the compiled upstream pak with their tile
-# placement baked in, so no extra shift (the default [0, 4] sank them 4 px).
+# Sprite carries its own tile placement (native 12 m bus footprint), so no
+# extra shift (the default [0, 4] would sink it 4 px).
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -13,10 +13,15 @@ display:
   family_en: "Scania UNVI Urbis DD"
   family_cs: "Scania UNVI Urbis DD"
 
-# Auto-extracted from CZ-vehicle-bus.pak via tools/pak_extract.py families.
-# Numeric fields below come straight from the binary VHCL payload — verify
-# against real-world data (cost / speed / payload / power / dates) before
-# building. Role labels and family display names are TODOs.
+# Scania N280UD / Unvi Urbis 2.5 DD CNG, 2 buses (7991, 7992) delivered
+# October 2020, in service from 2 Nov 2020 (express line 78, later sightseeing
+# line 88). Real bus: 12.3 m x 2.55 m x 4.0 m, two axles, two double doors
+# (ramp at the second), 68 seats, CNG 235 kW, ZF Ecolife, plexiglass roof.
+# Sprite drawn from scratch from photos of 7991/7992 (box model rendered in
+# the pak128 projection, native 12 m bus proportions): DPO turquoise, dark
+# upper and lower window decks, white Ostrava skyline graphic between the
+# decks, silver line along the lower body, tinted glass roof with turquoise
+# ribs, black destination display between the two front windscreens.
 
 vehicles:
   - id: "ScaniaUNVIUrbisDD"
@@ -33,15 +38,15 @@ vehicles:
       weight: 13
       runningcost: 31
       fixed_cost: 149
-      intro_year: 2010
-      intro_month: 1
+      intro_year: 2020
+      intro_month: 11
       retire_year: 2035
       retire_month: 1
       waytype: road
       freight: Passagiere
       length: 8
       engine_type: diesel
-      power: 265
+      power: 235
       gear: 53
 
 liveries:

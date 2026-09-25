@@ -35,7 +35,7 @@ vehicles:
       fixed_cost: 100
       intro_year: 1962
       intro_month: 1
-      retire_year: 2010
+      retire_year: 2030
       retire_month: 1
       waytype: schiene_tram
       freight: Passagiere

@@ -35,7 +35,7 @@ vehicles:
       weight: 16
       runningcost: 19
       fixed_cost: 88
-      intro_year: 2020
+      intro_year: 2023
       intro_month: 1
       retire_year: 2055
       retire_month: 1

@@ -33,10 +33,10 @@ vehicles:
       weight: 10
       runningcost: 16
       fixed_cost: 82
-      intro_year: 2017
+      intro_year: 2010
       intro_month: 1
-      retire_year: 2045
-      retire_month: 1
+      retire_year: 2021
+      retire_month: 7
       waytype: road
       freight: Passagiere
       length: 8

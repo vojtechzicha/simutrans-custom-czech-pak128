@@ -36,7 +36,7 @@ vehicles:
       fixed_cost: 99
       intro_year: 1998
       intro_month: 1
-      retire_year: 2018
+      retire_year: 2032
       retire_month: 1
       waytype: schiene_tram
       freight: Passagiere
@@ -62,7 +62,7 @@ vehicles:
       fixed_cost: 45
       intro_year: 1998
       intro_month: 1
-      retire_year: 2018
+      retire_year: 2032
       retire_month: 1
       waytype: schiene_tram
       freight: Passagiere
@@ -87,7 +87,7 @@ vehicles:
       fixed_cost: 54
       intro_year: 1998
       intro_month: 1
-      retire_year: 2018
+      retire_year: 2032
       retire_month: 1
       waytype: schiene_tram
       freight: Passagiere

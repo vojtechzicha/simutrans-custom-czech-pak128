@@ -33,8 +33,8 @@ vehicles:
       weight: 7
       runningcost: 23
       fixed_cost: 118
-      intro_year: 2009
-      intro_month: 9
+      intro_year: 2018
+      intro_month: 1
       retire_year: 2035
       retire_month: 12
       waytype: road
