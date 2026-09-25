@@ -1,0 +1,105 @@
+agency: DPPraha
+type: "52T"
+copyright: TommPa9
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] sank them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Škoda 52T ForCity Plus"
+  family_cs: "Škoda 52T ForCity Plus"
+
+# Scaffolded by scripts/import_tram_fleets.py — see TRAM_BACKLOG.md.
+# PLACEHOLDER ART: 15T PID-livery sprite (CZ-Praha-15TForCityAlfa-B), 3 rows. The real
+# 52T is a 5-section, 32 m, fully low-floor car delivered in the PID red-grey scheme;
+# regular service from Nov 2025 (nos. 9501–; 20 by end 2025, 40 by end 2026, options to
+# 200). Needs a redraw with 5 sections. Every other active Prague type is already
+# shipped by CZR-vehicles-tram-Praha.pak / CZ-vehicle-tram.pak.
+
+vehicles:
+  - id: "52T"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["52T_2"]
+    fields:
+      cost: 450000
+      payload: 60
+      speed: 80
+      weight: 15
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2025
+      intro_month: 11
+      retire_year: 2090
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 720
+
+  - id: "52T_2"
+    display_id: "52T"
+    role_en: "middle section"
+    role_cs: "střední díl"
+    row: 1
+    head: false
+    tail: false
+    prev: ["52T"]
+    next: ["52T_3"]
+    fields:
+      cost: 450000
+      payload: 80
+      speed: 80
+      weight: 12
+      runningcost: 15
+      fixed_cost: 77
+      intro_year: 2025
+      intro_month: 11
+      retire_year: 2090
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 7
+      engine_type: electric
+      power: 0
+
+  - id: "52T_3"
+    display_id: "52T"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 2
+    head: false
+    tail: true
+    prev: ["52T_2"]
+    next: []
+    fields:
+      cost: 450000
+      payload: 70
+      speed: 80
+      weight: 15
+      runningcost: 20
+      fixed_cost: 102
+      intro_year: 2025
+      intro_month: 11
+      retire_year: 2090
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 0
+
+liveries:
+  - color: pidcervenoseda
+    name_en: "PID red-grey"
+    name_cs: "PID červeno-šedá"
