@@ -91,6 +91,9 @@ vehicles:
     # next: ["partner_id", …] # explicit Constraint[Next] partners (default: all OTHER vehicles in family)
     # reverse: false          # if true, share another row's sprites but rotate direction labels 180°
     #                         # (col index shifts by +4 mod 8 — used for the rear motor of a trio)
+    # couple_liveries: false  # if true, each prev/next partner id resolves to that vehicle in EVERY
+    #                         # livery of the family, so cars of different paint can couple into one
+    #                         # consist (e.g. a tram that runs solo or as a mixed-livery 2-car set)
     fields:                   # core simutrans vehicle fields, emitted in order
       cost: 979000
       payload: 97

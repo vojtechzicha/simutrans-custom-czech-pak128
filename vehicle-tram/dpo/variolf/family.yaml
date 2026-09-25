@@ -20,10 +20,11 @@ vehicles:
     role_en: "tram car"
     role_cs: "tramvajový vůz"
     row: 0
-    head: true
-    tail: true
-    prev: []
-    next: []
+    head: true                 # can run solo (Constraint[Prev][0]=none)
+    tail: true                 # can run solo (Constraint[Next][0]=none)
+    prev: ["VarioLF"]          # ...or couple behind another VarioLF
+    next: ["VarioLF"]          # ...or couple in front of another VarioLF
+    couple_liveries: true      # partner may be either livery (mixed pairs)
     fields:
       cost: 18600
       payload: 116

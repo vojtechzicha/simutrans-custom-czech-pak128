@@ -130,8 +130,14 @@ def emit_dat(family: dict, livery: dict) -> str:
         can_tail = v.get("tail", True)
         prev_partners = v.get("prev", other_ids[v["id"]])
         next_partners = v.get("next", other_ids[v["id"]])
-        prev_entries = (["none"] if can_head else []) + [f"{bn}-{slug(pid)}" for pid in prev_partners]
-        next_entries = (["none"] if can_tail else []) + [f"{bn}-{slug(pid)}" for pid in next_partners]
+        # couple_liveries: a partner id resolves to that vehicle in EVERY livery
+        # of the family (so cars of different paint can couple), not just this one.
+        partner_bns = ([basename_for(family, lv) for lv in family["liveries"]]
+                       if v.get("couple_liveries", False) else [bn])
+        prev_entries = (["none"] if can_head else []) + [
+            f"{b}-{slug(pid)}" for pid in prev_partners for b in partner_bns]
+        next_entries = (["none"] if can_tail else []) + [
+            f"{b}-{slug(pid)}" for pid in next_partners for b in partner_bns]
         for idx, entry in enumerate(prev_entries):
             lines.append(f"Constraint[Prev][{idx}]={entry}")
         for idx, entry in enumerate(next_entries):
