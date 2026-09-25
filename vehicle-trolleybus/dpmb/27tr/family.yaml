@@ -1,0 +1,85 @@
+agency: DPBrno
+type: "27Tr"
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Škoda 27Tr Solaris"
+  family_cs: "Škoda 27Tr Solaris"
+
+# Škoda 27Tr Solaris, 18 m three-axle articulated trolleybus on the Solaris
+# Urbino 18 IV body. DPMB runs 40 (3648-3687, delivered 11/2021-2/2023).
+# 18.0 m, 16.8 t, 132 total (DPMB), 260 kW, 65 km/h. DPMB white-red on the
+# Urbino IV (DPMB drawing tr27.png): white body and roof, black window band
+# that runs up to the roof edge over the front half of the front section
+# (split by a white diagonal stripe) and over the rear section except next
+# to the joint, white belt, red skirt with red wheel-arch panels, poles on
+# the front of the rear section; green destination displays (lit).
+# Sprite: TommPa9's CZR-Brno-Skoda_27Tr + 27Tr-B (pak128_czr vehicles-bus/
+# Brno): glass converted to the lit-window specials, roof lightened, DPMB
+# red, the Urbino IV black roof-edge zones and red wheel arches painted in;
+# lane placement already on the native median. Sections keep the upstream
+# 8 + 8 spacing the art was drawn for (joints checked in all 8 directions).
+
+vehicles:
+  - id: "27Tr"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["27Tr-B"]
+    fields:
+      cost: 500000
+      payload: 80
+      speed: 65
+      weight: 9
+      runningcost: 15
+      fixed_cost: 72
+      intro_year: 2021
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+
+  - id: "27Tr-B"
+    display_id: "27Tr"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["27Tr"]
+    next: []
+    fields:
+      cost: 619123
+      payload: 52
+      speed: 65
+      weight: 8
+      runningcost: 16
+      fixed_cost: 77
+      intro_year: 2021
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 260
+      gear: 62
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"

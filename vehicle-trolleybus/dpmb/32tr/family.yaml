@@ -1,0 +1,59 @@
+agency: DPBrno
+type: "32Tr"
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Škoda 32Tr SOR"
+  family_cs: "Škoda 32Tr SOR"
+
+# Škoda 32Tr SOR, 12 m two-axle trolleybus on the SOR NS 12 body with an LTO
+# traction battery (partial trolleybus). DPMB runs 40 (3311-3350, delivered
+# 8/2023-1/2025). 12.0 m, 11.2 t, 75 total (DPMB), 160 kW, 65 km/h. DPMB
+# NS-body scheme (DPMB drawing 32tr.png, photos of 3322/3323/3327): white
+# body and roof, red skirt, full-length black window band that continues
+# round the windscreen as a black cap over the front roof edge, red swoosh
+# from the roof edge down the front pillars, white lower front with the red
+# bumper and red lower rear; green destination displays (lit). Modelled as a
+# plain electric trolleybus (the upstream dat does not mark the battery).
+# Sprite: VTPsim's CZR-Brno-Skoda_32Tr (pak128_czr vehicles-bus/Brno),
+# repainted to the NS-body scheme (grey roof -> white, black band and cap,
+# swoosh, 2-row white belt + red skirt, doors kept as framed glass), glass
+# converted to the lit-window specials, lane placement normalised (upstream
+# sat up to 12 px off the native lane).
+
+vehicles:
+  - id: "32Tr"
+    role_en: "trolleybus"
+    role_cs: "trolejbus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 604405
+      payload: 75
+      speed: 65
+      weight: 11
+      runningcost: 31
+      fixed_cost: 198
+      intro_year: 2023
+      intro_month: 8
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 160
+      gear: 53
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"

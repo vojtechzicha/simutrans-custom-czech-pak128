@@ -1,0 +1,82 @@
+agency: DPBrno
+type: "31Tr"
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Škoda 31Tr SOR"
+  family_cs: "Škoda 31Tr SOR"
+
+# Škoda 31Tr SOR, 18.75 m three-axle articulated trolleybus on the SOR NB 18
+# body. DPMB runs 30 (3618-3647, 2015; 3618 first in service 22 May 2015).
+# 18.75 m, 17.7 t, 148 total (DPMB), 250 kW, 65 km/h. DPMB white-red (DPMB
+# drawing tr31.png): white body and roof, tall black window band, thin white
+# belt, red skirt, black front mask, grey bellows, light-grey poles on the
+# front of the rear section.
+# Sprite: VTPsim's CZR-Brno-Skoda_31Tr + 31Tr-B (pak128_czr vehicles-bus/
+# Brno): glass converted to the lit-window specials, DPMB red; lane
+# placement already on the native median. Sections keep the upstream 8 + 8
+# spacing the art was drawn for (joints checked in all 8 directions).
+
+vehicles:
+  - id: "31Tr"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["31Tr-B"]
+    fields:
+      cost: 500000
+      payload: 90
+      speed: 65
+      weight: 9
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2015
+      intro_month: 5
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+
+  - id: "31Tr-B"
+    display_id: "31Tr"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["31Tr"]
+    next: []
+    fields:
+      cost: 363453
+      payload: 58
+      speed: 65
+      weight: 9
+      runningcost: 11
+      fixed_cost: 56
+      intro_year: 2015
+      intro_month: 5
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 250
+      gear: 62
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"

@@ -1,0 +1,55 @@
+agency: DPBrno
+type: "26Tr"
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Škoda 26Tr Solaris"
+  family_cs: "Škoda 26Tr Solaris"
+
+# Škoda 26Tr Solaris, 12 m two-axle trolleybus on the Solaris Trollino 12
+# body (Urbino III front, photos of 3303) with an auxiliary traction battery.
+# DPMB runs all 10 (3301-3310, 2018; 3301 first in service 29 Mar 2018).
+# 12.0 m, 12.7 t, 80 total (DPMB), 160 kW, 65 km/h. DPMB white-red: white
+# body and roof with white roof fairings, continuous black band above the
+# black-tinted windows, white belt, red skirt; black windscreen, white lower
+# front with the red bumper; green destination displays (lit). Modelled as a
+# plain electric trolleybus (the upstream dat does not mark the battery).
+# Sprite: TommPa9's CZR-Brno-Skoda_26Tr (pak128_czr vehicles-bus/Brno):
+# glass converted to the lit-window specials, grey roof top lightened to
+# white, DPMB red, lane placement normalised (se view).
+
+vehicles:
+  - id: "26Tr"
+    role_en: "trolleybus"
+    role_cs: "trolejbus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 896844
+      payload: 80
+      speed: 65
+      weight: 13
+      runningcost: 18
+      fixed_cost: 81
+      intro_year: 2018
+      intro_month: 3
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 160
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"
