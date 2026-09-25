@@ -1,0 +1,57 @@
+agency: DPPraha
+type: "ENS_12"
+# Sprites are drawn at the native pak128.cs lane position (body footprint on
+# the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "SOR ENS 12"
+  family_cs: "SOR ENS 12"
+
+# SOR ENS 12 (the SOR NS 12 electric, renamed 2025; Škoda Electric traction),
+# 12.0 x 2.55 x 3.30 m battery bus with roof battery pods, 3 double doors
+# (2-2-2), 29 seats / 92 total, 160 kW, 80 km/h, 12.9 t, 308 kWh. DPP 3015-3032
+# (3022 written off 05/2026): 17 in service Sep 2026, in DPP service from
+# 12/2025; 14 more due by 15 Dec 2026 (about 31). PID 2021 scheme: grey body,
+# black window band and black front cap over the roof front, red columns over
+# both wheel arches (behind door 1 / ahead of door 3) continued as red bands
+# across the grey battery fairings, red block on the lower front, yellow door
+# steps. Replaces the upstream CZR-Praha-SorNS12 placeholder (old PID livery,
+# no roof batteries).
+# Sprite: original 8-direction render of the NS 12 body (no upstream pixels;
+# sized and lane-placed like the native pak128 12 m buses, e.g. CZR SOR NB 12).
+
+vehicles:
+  - id: "ENS_12"
+    role_en: "electric bus"
+    role_cs: "elektrobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 604405
+      payload: 92
+      speed: 80
+      weight: 13
+      runningcost: 31
+      fixed_cost: 198
+      intro_year: 2025
+      intro_month: 12
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: battery
+      power: 160
+      gear: 53
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"

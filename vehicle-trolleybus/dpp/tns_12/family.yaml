@@ -1,0 +1,55 @@
+agency: DPPraha
+type: "TNS_12"
+# Sprites are drawn at the native pak128.cs lane position (body footprint on
+# the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "SOR TNS 12"
+  family_cs: "SOR TNS 12"
+
+# SOR TNS 12, 12 m battery trolleybus on the SOR NS 12 body: 4 cars (511-514)
+# built 2022-23 for DSZO Zlín, supplied to DPP as compensation and re-equipped
+# with Škoda traction gear; in DPP service from 17 Apr 2026 (lines 51, 52,
+# depot Řepy). 3 doors, 80 passengers (DPP), 175 kW, 65 km/h, about 12 t empty
+# (not published; DPP's 19 t is the gross weight). PID 2021 scheme like the
+# ENS 12: grey, black window band and front cap, red columns over the wheel
+# arches carried across the grey roof equipment fairing, black trolley poles.
+# Sprite: original 8-direction render of the NS 12 body (no upstream pixels,
+# sized and lane-placed like the native pak128 12 m buses) with trolley poles
+# whose tips end on the pak128.cs trolleybus wire of the own lane.
+
+vehicles:
+  - id: "TNS_12"
+    role_en: "trolleybus"
+    role_cs: "trolejbus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 604405
+      payload: 80
+      speed: 65
+      weight: 12
+      runningcost: 31
+      fixed_cost: 198
+      intro_year: 2026
+      intro_month: 4
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 175
+      gear: 53
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"

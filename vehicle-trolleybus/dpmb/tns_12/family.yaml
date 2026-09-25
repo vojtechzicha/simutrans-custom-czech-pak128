@@ -1,0 +1,57 @@
+agency: DPBrno
+type: "TNS_12"
+# Sprites are drawn at the native pak128.cs lane position (body footprint on
+# the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "SOR TNS 12"
+  family_cs: "SOR TNS 12"
+
+# SOR TNS 12, 12 m trolleybus on the SOR NS 12 body, kits assembled by DPMB at
+# the Komín depot with Rail Electronics CZ traction gear: 12 cars 3065-3076
+# (3065 "Mario" and 3066 "Luigi" from 6/2023, the rest 2024 to 1/2025); 28
+# more (battery) kits remain under the framework with no firm date. 3 double
+# doors, 35 seats / 104 total (DPMB), 175 kW, 65 km/h, 12.0 t. DPMB white-red
+# as on the Brno 32Tr: white body and roof, red skirt, black window band that
+# continues up round the windscreen as a black cap over the roof front,
+# red-over-white swoosh at the upper front corner; plain white roof pod (no
+# battery module, no Škoda branding).
+# Sprite: original 8-direction render of the NS 12 body (no upstream pixels,
+# sized and lane-placed like the native pak128 12 m buses) with trolley poles
+# whose tips end on the pak128.cs trolleybus wire of the own lane.
+
+vehicles:
+  - id: "TNS_12"
+    role_en: "trolleybus"
+    role_cs: "trolejbus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 604405
+      payload: 104
+      speed: 65
+      weight: 12
+      runningcost: 31
+      fixed_cost: 198
+      intro_year: 2023
+      intro_month: 6
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 175
+      gear: 53
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"
