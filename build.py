@@ -211,13 +211,16 @@ def emit_dat(family: dict, livery: dict) -> str:
             if v.get("couple_liveries", False):
                 return [basename_for(family, lv) for lv in family["liveries"] if in_livery(pv, lv)]
             return [bn] if in_livery(pv, livery) else []
-        prev_entries = (["none"] if can_head else []) + [
-            f"{b}-{slug(pid)}" for pid in prev_partners for b in partner_bns(pid)]
-        next_entries = (["none"] if can_tail else []) + [
-            f"{b}-{slug(pid)}" for pid in next_partners for b in partner_bns(pid)]
-        for idx, entry in enumerate(prev_entries):
+        # prev/next: any -> no constraint on that side at all, so the vehicle couples
+        # with anything, like native locomotives and coaches (loco-hauled stock).
+        def entries(partners, open_end: bool) -> list[str]:
+            if partners == "any":
+                return []
+            return (["none"] if open_end else []) + [
+                f"{b}-{slug(pid)}" for pid in partners for b in partner_bns(pid)]
+        for idx, entry in enumerate(entries(prev_partners, can_head)):
             lines.append(f"Constraint[Prev][{idx}]={entry}")
-        for idx, entry in enumerate(next_entries):
+        for idx, entry in enumerate(entries(next_partners, can_tail)):
             lines.append(f"Constraint[Next][{idx}]={entry}")
         blocks.append("\n".join(lines))
 
