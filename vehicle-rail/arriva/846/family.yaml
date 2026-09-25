@@ -1,0 +1,108 @@
+agency: Arriva
+type: "846"
+copyright: vojtechzicha      # original art, drawn from scratch
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Arriva"
+  agency_cs: "Arriva"
+  family_en: "Alstom Coradia LINT 41"
+  family_cs: "Alstom Coradia LINT 41"
+
+# Alstom Coradia LINT 41, CZ class 846 of Arriva vlaky: 7 two-car units
+# 846.278/778, 279/779, 281/781, 283/783, 285/785, 287/787, 289/789 (ex-HEX /
+# Transdev Sachsen-Anhalt, built 2005; owner Beacon Rail, leased through Leo
+# Express Tenders and sub-leased to Arriva), Zlínský kraj regional lines (Vsetín
+# and Veselí n. M. depots) from 15 Dec 2019 to the end of the contract in Dec 2029.
+# 2 cars on B'2'B' bogies: one MTU of 390 kW per car, 120 km/h, 41.81 m over
+# couplers, 2.75 m wide, tare 68 t, 120 seats.
+# Liveries:
+#   arrivamodra   Arriva blue wrap applied from 10 Apr 2020 (all ten Zlín LINTs
+#                 within about a month): the LE white replaced by blue; the
+#                 anthracite roof shoulder, cab front, cab-side swoosh and lower
+#                 band and the orange anti-climber kept; silver doors; white
+#                 "arriva" wordmarks.
+#   bilooranzova  Dec 2019 - Apr 2020: the LE Tenders white/anthracite/orange
+#                 scheme with the Leo Express branding removed.
+# Sources: zdopravy.cz 10 Apr 2020 (wrap), 55p.cz Arriva Zlín 2026 roster,
+# seznam-autobusu.cz; photos of 846/832 at Uherské Hradiště and Salaška.
+#
+# Sprites are rendered from the shared LINT 3D box model (tools/railrender/lint.py
+# of the Leo Express set, `sheet("lint41", <livery>, out)`) with the Arriva
+# colour tables of tools/railrender/arriva_lint.py (regenerate with
+# `python tools/railrender/arriva.py 846`). Car lengths 10 + 10; row 0 = car A
+# (846.2xx, leading cab, headlights), row 1 = car B (846.7xx, trailing cab, tail
+# lights). Units couple in multiple (A-B-A-B...), in any livery mix.
+
+vehicles:
+  - id: "846-A"
+    display_id: "846"
+    role_en: "front motor car"
+    role_cs: "přední motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: ["846-B"]
+    next: ["846-B"]
+    couple_liveries: prev     # the rear car of a unit ahead may wear any livery
+    fields:
+      cost: 2150000
+      payload: 60
+      speed: 120
+      weight: 34
+      runningcost: 85
+      fixed_cost: 560
+      intro_year: 2019
+      intro_month: 12
+      retire_year: 2029
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 390
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 3
+
+  - id: "846-B"
+    display_id: "846"
+    role_en: "rear motor car"
+    role_cs: "zadní motorový vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["846-A"]
+    next: ["846-A"]
+    couple_liveries: next     # the lead car of a unit behind may wear any livery
+    fields:
+      cost: 2150000
+      payload: 60
+      speed: 120
+      weight: 34
+      runningcost: 85
+      fixed_cost: 560
+      intro_year: 2019
+      intro_month: 12
+      retire_year: 2029
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 390
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 3
+
+liveries:
+  - color: arrivamodra
+    name_en: "Arriva blue"
+    name_cs: "Arriva modrá"
+  - color: bilooranzova
+    name_en: "white-orange"
+    name_cs: "bílo-oranžová"

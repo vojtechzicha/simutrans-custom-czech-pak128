@@ -1,0 +1,132 @@
+agency: Arriva
+type: "845"
+copyright: vojtechzicha
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Arriva"
+  agency_cs: "Arriva"
+  family_en: "ex-DB 628.2"
+  family_cs: "ex-DB 628.2"
+
+# Arriva vlaky class 845 + 945 ("Limetka", "švejk"): the ex-DB class 628.2 +
+# 928.2 two-car DMU (Düwag / Waggon Union / LHB / MBB, 1986-89), bought from DB
+# Regio from 2012 and modernised at Pars nova Šumperk (Škoda Pars). 845.001
+# (ex 628 246) entered service 2012/13; the mass rebuild for the state express
+# lines R14/R21/R22/R24/R26 followed 2019-22 (subclasses 845.0/.1/.2/.3, 52 units
+# in stock in 2026). R26 runs to Dec 2027 with a new contract to Dec 2031,
+# option to Dec 2033 (zdopravy.cz, 16 Sep 2026).
+#
+# Real car: 22,700 mm over buffers each (45.4 m per unit), body 21,940 mm,
+# 2,850 mm wide, roof ~4.05 m, bogie pivots 15,100 mm, bogie wheelbase 1,900 mm,
+# 770 mm wheels (nahverkehr-franken.de 628 technical data; cs.wiki Motorová
+# jednotka 845). 845 = motor car (Daimler-Benz OM 444 A, 410 kW, Voith T320
+# hydrodynamic, 2'B'), 40 t, 72 + 8 folding seats; 945 = unpowered driving
+# trailer, 28 t, 61 + 13 folding seats; 120 km/h. Each car has a cab at its
+# outer end only; the inner ends meet at a wide bellows gangway. Doors: a
+# single-leaf door behind each cab on both sides plus one inner-end door per
+# car on the car's own left side (so they alternate along the unit).
+#
+# Sprites: drawn from scratch with the pak128 box raycaster; the sheets are
+# written by tools/railrender/db628.py (regenerate with
+# `python tools/railrender/arriva.py 845`)
+# (geometry + a colour table per livery; do not paint the sheets by hand).
+# Row 0 = 845 motor car (cab at its front, headlights), row 1 = 945 driving
+# trailer (cab at its rear, tail lights). Each car is modelled 11 carunits
+# long (22.7 m / 11 = 2.06 m per carunit) on one unit axis and rendered on the
+# calibrated front anchor, so the joint closes at length 11 + 11.
+# Side layout measured on the broadside of 945.205 (Kačice, Dec 2019) and
+# checked on 845.104 / 845.301 / 845.317 / 945.107 / 945.318 photos.
+#
+# Liveries (all worn in Arriva service):
+#   arrivamodra       Arriva Blue 2019-, ≈47 units: sky blue with individual
+#                     windows on blue pillars, anthracite panel round the window
+#                     behind the cab door, anthracite cab doors / front mask,
+#                     slanted white + pale-blue stripe behind that panel, lime
+#                     skirt edge, white
+#                     "arriva"; light-grey roof with the AC retrofit (cab box +
+#                     saloon box per car, 945.107 2026 photo) and the exhaust.
+#   tyrkysovokremova  turquoise-cream "Limetka" 2012-2019, still on 845.101,
+#                     .102, .104, .201: turquoise, lime cab front/sides and cab
+#                     doors, cream sweep from the roof behind the cab down round
+#                     the door, black mask, lime lower front; no AC.
+#   dbcervena         unmodernised DB Regio Verkehrsrot 628.2 run with Arriva
+#                     stickers on the R lines Dec 2019 - ~2021 (628.224, 229,
+#                     231, 234, 251, 265): red, light-grey lower band, doors and
+#                     roof shoulder, grey front mask; no AC. Successor of the
+#                     savegame's pak128.cs ARR_845_red / ARR_945_red.
+#
+# Coupling: the 845 always leads its unit and the 945 always trails; a unit's
+# 945 may be followed by the next unit's 845, so 2-4 units run in multiple.
+# couple_liveries prev/next: units of any livery couple end to end while the
+# two cars of one unit keep the same livery.
+
+vehicles:
+  - id: "845"
+    role_en: "motor car"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: ["945"]
+    next: ["945"]
+    couple_liveries: prev
+    fields:
+      cost: 2450000
+      payload: 80
+      speed: 120
+      weight: 40
+      runningcost: 88
+      fixed_cost: 560
+      intro_year: 2012
+      intro_month: 12
+      retire_year: 2033
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 11
+      engine_type: diesel
+      power: 410
+      smoke: Diesel
+      gear: 120
+    extended:
+      axles: 4
+
+  - id: "945"
+    role_en: "driving trailer"
+    role_cs: "řídicí vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["845"]
+    next: ["845"]
+    couple_liveries: next
+    fields:
+      cost: 1150000
+      payload: 74
+      speed: 120
+      weight: 28
+      runningcost: 12
+      fixed_cost: 130
+      intro_year: 2012
+      intro_month: 12
+      retire_year: 2033
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 11
+    extended:
+      axles: 4
+
+liveries:
+  - color: arrivamodra
+    name_en: "Arriva blue"
+    name_cs: "Arriva modrá"
+  - color: tyrkysovokremova
+    name_en: "turquoise-cream"
+    name_cs: "tyrkysovo-krémová"
+  - color: dbcervena
+    name_en: "DB red"
+    name_cs: "DB červená"

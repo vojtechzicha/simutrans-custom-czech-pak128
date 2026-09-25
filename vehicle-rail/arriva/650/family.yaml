@@ -1,0 +1,111 @@
+agency: Arriva
+type: "650"
+copyright: TommPa9
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Arriva"
+  agency_cs: "Arriva"
+  family_en: "RegioPanter"
+  family_cs: "RegioPanter"
+
+# Real vehicle: Škoda Vagonka 7Ev RegioPanter, 2-car dual-system EMU (3 kV DC +
+# 25 kV 50 Hz AC), units 650.009-017 + 651.009-017, built 2018 for ČD with EU
+# money for Plzeňský kraj line P1. Arriva vlaky had to buy them at book value
+# when it won the P1 tender and has run them since 10 Dec 2023 (the first vehicle
+# transfer between operators in Czech contracted transport); contract to Dec 2038.
+# P1: Horažďovice předměstí - Nepomuk - Blovice - Plzeň - Kozolupy - Pňovany.
+# 52.9 m over couplers (26.45 m per car), 2.82 m wide, 4.26 m high, 106 t,
+# 160 km/h, 147 seats (cs.wikipedia RegioPanter overview table: Arriva 650,
+# 2 cars, 147 seats, 9 units, 2018). Bo'2' + 2'Bo': each car has one powered
+# bogie with 2 x 340 kW, 1360 kW per unit - modelled as 680 kW on both cars,
+# gear on the 650 only, exactly like the CeskeDrahy 650 family so both
+# operators' units perform alike. Cab at each outer end; the 650 (pantograph
+# car) leads with headlights, the 651 trails with tail lights. Units couple in
+# multiple (650 prev / 651 next accept another unit).
+#
+# Livery (the only one these units wore with Arriva): IDPK "Plzeňský kraj",
+# applied by ČD in 2018, Arriva added only small logos. Royal blue body, white
+# cant rail and white cab hood (slanting back to behind the cab window), black
+# windscreen with blue cap and blue lower front, dark-grey skirt band, bright
+# yellow doors, green / white / yellow Plzeňský kraj swooshes (cab-end group
+# rising from the hood foot, '/' strokes at door 1, '\' strokes at door 2,
+# rising pair under the inner-end high windows), 650: yellow top bar from the
+# hood to door 1, large white PLZEŇSKÝ KRAJ lettering under the first window,
+# dark-blue roof fairings (full length on the 650, groups on the 651), light
+# roof skin, yellow anti-climber. Sources: Commons photos "Blovice, nádraží (2)",
+# "Station Pilsen 2024 3", "Jednotka 650 Arriva, Nepomuk" (Arriva era) and the
+# broadsides "CD 650 + VUZ 794" / "Regiopanter + VUZ 794" (Velim 2018).
+#
+# Sheet: zone-map repaint of the ČD 650 art by TommPa9 (pak128_czr 650_P2, the
+# art of vehicle-rail/ceske-drahy/650), so ČD's and Arriva's RegioPanters are
+# the same train in game. Script tools/railrender/regiopanter_idpk.py (regenerate
+# with `python tools/railrender/arriva.py 650`): the side band of every view is mapped to car coordinates
+# (distance behind the cab nose) through the source's window/door positions and
+# repainted per zone; glass stays the lit special 0x4D4D4D. Rows: 0 = 650,
+# 1 = 651; car lengths 13 + 13 (same as the ČD family, 26.45 m per car).
+
+vehicles:
+  - id: "650"
+    role_en: "motor cab car"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: ["651"]
+    next: ["651"]
+    couple_liveries: prev
+    fields:
+      cost: 18384000
+      payload: 73
+      speed: 160
+      weight: 53
+      runningcost: 60
+      fixed_cost: 614
+      intro_year: 2023
+      intro_month: 12
+      retire_year: 2038
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: Electric
+      power: 680
+      gear: 180
+    extended:
+      axles: 4
+
+  - id: "651"
+    role_en: "cab trailer"
+    role_cs: "řídicí vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["650"]
+    next: ["650"]
+    couple_liveries: next
+    fields:
+      cost: 18384000
+      payload: 74
+      speed: 160
+      weight: 53
+      runningcost: 40
+      fixed_cost: 410
+      intro_year: 2023
+      intro_month: 12
+      retire_year: 2038
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: Electric
+      power: 680
+    extended:
+      axles: 4
+
+liveries:
+  - color: plzenskykraj
+    name_en: "Plzeňský kraj"
+    name_cs: "Plzeňský kraj"

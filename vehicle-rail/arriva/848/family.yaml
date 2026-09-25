@@ -1,0 +1,155 @@
+agency: Arriva
+type: "848"
+copyright: vojtechzicha      # original art, drawn from scratch
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Arriva"
+  agency_cs: "Arriva"
+  family_en: "Stadler GTW 2/6"
+  family_cs: "Stadler GTW 2/6"
+
+# Stadler GTW 2/6 (1st generation) diesel-electric units of Arriva vlaky, one
+# family for both batches (same body):
+#   848.2  ex DB Regio 646.201-213 (built 2002-03, 646 207 scrapped), 12 units,
+#          rebuilt at Pars nova 2020-21, Zlínský kraj (S5, S6, S42, S53 ...),
+#          first run 5 Sep 2020, contract to Dec 2029.
+#   848.4  ex Hessische Landesbahn (built 1999-2001), refurbished at Škoda Pars:
+#          13 units for Jihomoravský kraj (S8, S52, S91, from 15 Dec 2024 to
+#          Dec 2034), 848.413 in Arriva blue, and 11-12 units for Plzeňský kraj
+#          P3 Plzeň - Domažlice (13 Dec 2026 to Dec 2036).
+# Unit: cab car A + short central power module + cab car B, 2'Bo2' (the end cars
+# ride on the module, the powered bogie is under it; low floor 585 mm between).
+# MTU 12V183 diesel, 550 kW, diesel-electric, 120 km/h, 38.66 m over couplers,
+# 3.00 m wide, 3.85 m high, 58.7 t, about 100 fixed + folding seats.
+# Liveries (photos of 848.203 Horní
+# Lideč 2025, 848.2 Staré Město 2022/2023, Kunovice 2021, Rožnov 2022, 848.422
+# Veselí n. M. 2025, 848.4 Břeclav 2025, 848.416 / 848.425 Plzeň 2026):
+#   arrivamodra       Arriva blue (848.2 + 848.413): cyan body incl. the roof and
+#                     the module, anthracite belt (front lamp band continuing as
+#                     a panel round the cab side window), one broad white slanted
+#                     stripe per end car from the sole-bar over the roof, black
+#                     window band, silver doors, yellow plough edge, white
+#                     "arriva" wordmarks, Zlínský kraj logo on the module.
+#   jihomoravskykraj  IDS JMK (848.4 JMK batch): coral-pink roof and cab hood,
+#                     white band over the windows, black body, white sill stripe
+#                     wrapping round the front, coral-red doors, grey louvre on
+#                     the module.
+#   plzenskykraj      IDPK (848.4 Plzeň batch): blue body, white roof and white
+#                     band along the A-pillars, blue visor over the windscreen,
+#                     dark-grey skirt, yellow doors, green / yellow / white
+#                     swooshes above the windows.
+# Not shipped: the HLB silver / red livery (only on units still awaiting
+# refurbishment, never in Arriva passenger service).
+# Sources: Stadler datasheets "GTW 2/6 für die Hessische Landesbahn" / "für die
+# DB AG" (side + plan drawings, data), de.wikipedia Stadler GTW 1. Generation,
+# cs.wikipedia Motorová jednotka 848, seznam-autobusu.cz, zdopravy.cz.
+#
+# Sprites are rendered from a 3D box model with the pak128 raycaster:
+# tools/railrender/gtw.py (render.py + railkit.py); regenerate with
+# `python tools/railrender/arriva.py 848`. Section split measured
+# on a telephoto broadside of an HLB unit, scaled by the datasheet drawing:
+# end car 17.15 m (coupler to body end), bellows 0.30 m, module body 3.76 m,
+# bellows 0.30 m, end car 17.15 m = 8.43 + 2.14 + 8.43 carunits. The lengths
+# below are 8 + 3 + 8 (19 cu = the real 38.66 m); the rows are split at the
+# real joints, so the composed unit is exact. Row 0 = car A (leading cab,
+# headlights), row 1 = power module, row 2 = car B (trailing cab, tail lights).
+# Units couple in multiple (A-M-B-A-M-B...), in any livery mix between units.
+
+vehicles:
+  - id: "848A"
+    display_id: "848"
+    role_en: "cab car A"
+    role_cs: "řídicí vůz A"
+    row: 0
+    head: true
+    tail: false
+    prev: ["848B"]
+    next: ["848M"]
+    couple_liveries: prev     # the rear car of a unit ahead may wear any livery
+    fields:
+      cost: 1150000
+      payload: 55
+      speed: 120
+      weight: 17
+      runningcost: 5
+      fixed_cost: 40
+      intro_year: 2020
+      intro_month: 9
+      retire_year: 2036
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "848M"
+    display_id: "848"
+    role_en: "power module"
+    role_cs: "hnací modul"
+    row: 1
+    head: false
+    tail: false
+    prev: ["848A"]
+    next: ["848B"]
+    fields:
+      cost: 1600000
+      payload: 0
+      speed: 120
+      weight: 25
+      runningcost: 66
+      fixed_cost: 700
+      intro_year: 2020
+      intro_month: 9
+      retire_year: 2036
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 3
+      engine_type: diesel
+      power: 550
+      smoke: Diesel
+      gear: 130
+    extended:
+      axles: 2
+
+  - id: "848B"
+    display_id: "848"
+    role_en: "cab car B"
+    role_cs: "řídicí vůz B"
+    row: 2
+    head: false
+    tail: true
+    prev: ["848M"]
+    next: ["848A"]
+    couple_liveries: next     # the lead car of a unit behind may wear any livery
+    fields:
+      cost: 1150000
+      payload: 55
+      speed: 120
+      weight: 17
+      runningcost: 5
+      fixed_cost: 40
+      intro_year: 2020
+      intro_month: 9
+      retire_year: 2036
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+liveries:
+  - color: arrivamodra
+    name_en: "Arriva blue"
+    name_cs: "Arriva modrá"
+  - color: jihomoravskykraj
+    name_en: "Jihomoravský kraj"
+    name_cs: "Jihomoravský kraj"
+  - color: plzenskykraj
+    name_en: "Plzeňský kraj"
+    name_cs: "Plzeňský kraj"

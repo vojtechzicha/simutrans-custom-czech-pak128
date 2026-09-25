@@ -1,0 +1,126 @@
+agency: Arriva
+type: "642"
+copyright: vojtechzicha      # original art, drawn from scratch
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Arriva"
+  agency_cs: "Arriva"
+  family_en: "Siemens Desiro Classic"
+  family_cs: "Siemens Desiro Classic"
+
+# Siemens Desiro Classic, DB class 642, of Arriva vlaky. The units keep their
+# German numbers (D-ARR / D-DB 95 80 0 642 xxx); Liberecký kraj lines L3
+# Liberec - Turnov - Stará Paka (- Jaroměř) and L31 Železný Brod - Tanvald under
+# the contract from 15 Dec 2019 to Dec 2029. Five units leased from Alpha Trains
+# (642.336/.337/.338/.344/.347, ex RegioJet SK, in Liberec from Dec 2020, lease
+# to 2029) and six DB Regio units (642.005/.013/.039/.131/.140/.217, used on the
+# Prague line S49 to Dec 2024; 2025-26 use unverified). The first DB unit ran for
+# Arriva on the Praha - Benešov trains from June/July 2016.
+# 2 articulated cars on a Jakobs bogie, B'(2)B', cab at each outer end; one MTU
+# 6-cylinder diesel of 275 kW with a mechanical gearbox per car, 120 km/h;
+# 41.7 m over couplers, 2.83 m wide, 60 % low floor (575 mm), tare 68.2 t,
+# 123 seats (DB layout, 13 of them folding) + 90 standing.
+# Liveries (photos of 642.347 at Tanvald 2022,
+# Kuks 2022, 642.336 at Liberec 2025 / Praha-Holešovice 2022, 642.013 at
+# Praha-Libeň 2021):
+#   arrivamodra    Arriva blue (642.337/.338/.344/.347, repainted from Dec 2020):
+#                  cyan body, dark anthracite roof, window band and cab hood over
+#                  the black windscreen, blue lower nose with a black coupler
+#                  recess, black skirt with a lime-yellow plough edge, slanted
+#                  pale-blue + white double stripe behind each cab, silver doors,
+#                  white "arriva" wordmarks.
+#   crystalvalley  "Crystal Valley" / Křišťálové údolí advert wrap on 642.336
+#                  (since 17 Sep 2021): Arriva blue base with large glass
+#                  sculpture graphics (drawn as light cut-glass shapes), "CRYSTAL
+#                  VALLEY" lettering behind the cab, white doors.
+#   dbcervena      DB Verkehrsrot of the DB-owned units (S49, Praha - Benešov):
+#                  red body, light-grey sill band, dark window band, light-grey
+#                  roof and cab hood, black front, Arriva stickers.
+# Sources: Siemens datasheet "Dieselmechanischer Triebzug DESIRO VT 642" (side
+# and plan drawing with dimensions), de.wikipedia Siemens Desiro Classic,
+# seznam-autobusu.cz, zdopravy.cz (Arriva Desiro articles 2020-2021).
+#
+# Sprites are rendered from a 3D box model with the pak128 raycaster:
+# tools/railrender/desiro.py (render.py + railkit.py); regenerate with
+# `python tools/railrender/arriva.py 642`. Door, window, bogie
+# and roof-equipment positions come from the datasheet drawing. Car lengths
+# 10 + 10 (20.85 m each to the Jakobs centre); row 0 = car A (leading cab,
+# headlights), row 1 = car B (trailing cab, tail lights). Units couple in
+# multiple (A-B-A-B...), in any livery mix.
+
+vehicles:
+  - id: "642A"
+    display_id: "642"
+    role_en: "half-set A"
+    role_cs: "polovůz A"
+    row: 0
+    head: true
+    tail: false
+    prev: ["642B"]
+    next: ["642B"]
+    couple_liveries: prev     # the rear car of a unit ahead may wear any livery
+    fields:
+      cost: 2020200
+      payload: 62
+      speed: 120
+      weight: 34
+      runningcost: 70
+      fixed_cost: 538
+      intro_year: 2016
+      intro_month: 6
+      retire_year: 2029
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 275
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 3
+
+  - id: "642B"
+    display_id: "642"
+    role_en: "half-set B"
+    role_cs: "polovůz B"
+    row: 1
+    head: false
+    tail: true
+    prev: ["642A"]
+    next: ["642A"]
+    couple_liveries: next     # the lead car of a unit behind may wear any livery
+    fields:
+      cost: 1970200
+      payload: 61
+      speed: 120
+      weight: 34
+      runningcost: 65
+      fixed_cost: 499
+      intro_year: 2016
+      intro_month: 6
+      retire_year: 2029
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 275
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 3
+
+liveries:
+  - color: arrivamodra
+    name_en: "Arriva blue"
+    name_cs: "Arriva modrá"
+  - color: crystalvalley
+    name_en: "Crystal Valley"
+    name_cs: "Crystal Valley"
+  - color: dbcervena
+    name_en: "DB red"
+    name_cs: "DB červená"

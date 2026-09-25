@@ -1,0 +1,67 @@
+agency: Arriva
+type: "832"
+copyright: vojtechzicha      # original art, drawn from scratch
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Arriva"
+  agency_cs: "Arriva"
+  family_en: "Alstom Coradia LINT 27"
+  family_cs: "Alstom Coradia LINT 27"
+
+# Alstom Coradia LINT 27, CZ class 832 of Arriva vlaky: 832.123, 124, 126 (ex-HEX
+# / Transdev Sachsen-Anhalt, built 2005; owner Beacon Rail, sub-leased via Leo
+# Express Tenders), Zlínský kraj regional lines from 15 Dec 2019 to Dec 2029.
+# Single car on B'2' bogies, 27.26 m over couplers, one MTU of 315 kW,
+# 120 km/h, tare 43 t, 68 seats. Two double plug doors per side.
+# Liveries as the LINT 41 (see ../846/family.yaml): arrivamodra (Arriva blue
+# wrap, Apr 2020-) and bilooranzova (unbranded LE Tenders white, Dec 2019 -
+# Apr 2020).
+#
+# Sprite rendered from the shared LINT 3D box model (tools/railrender/lint.py,
+# `sheet("lint27", <livery>, out)`) with the Arriva colour tables of
+# tools/railrender/arriva_lint.py (regenerate with
+# `python tools/railrender/arriva.py 832`). Length 13; row 0 shows cabs at both
+# ends: headlights at the front end, tail lights at the rear end. Cars couple in
+# multiple, in any livery mix.
+
+vehicles:
+  - id: "832"
+    role_en: "motor car"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: true
+    prev: ["832"]
+    next: ["832"]
+    couple_liveries: true
+    fields:
+      cost: 2700000
+      payload: 68
+      speed: 120
+      weight: 43
+      runningcost: 75
+      fixed_cost: 700
+      intro_year: 2019
+      intro_month: 12
+      retire_year: 2029
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: diesel
+      power: 315
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 4
+
+liveries:
+  - color: arrivamodra
+    name_en: "Arriva blue"
+    name_cs: "Arriva modrá"
+  - color: bilooranzova
+    name_en: "white-orange"
+    name_cs: "bílo-oranžová"
