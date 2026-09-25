@@ -1,0 +1,51 @@
+agency: DPPardubice
+type: "Streetway_12M"
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+copyright: Lubak91
+
+display:
+  agency_en: "DPMP"
+  agency_cs: "DPMP"
+  family_en: "Iveco Streetway 12M"
+  family_cs: "Iveco Streetway 12M"
+
+# Iveco Streetway 12M (Otokar Kent C based). DPMP bought the 2021 Iveco
+# demonstrator (199) in 2022, the first Streetway in Czech service, and runs
+# it in the demonstrator scheme: white body, black glasshouse and front mask,
+# red-orange swoosh on the rear side. 34 seated / 56 standing, Cursor 9
+# 228 kW. Sprite: the Lubak91 Urbanway 12M body reworked with the Streetway
+# front mask and livery.
+
+vehicles:
+  - id: "Streetway_12M"
+    display_id: "Streetway 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 700000
+      payload: 90
+      speed: 85
+      weight: 11
+      runningcost: 25
+      fixed_cost: 130
+      intro_year: 2021
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 228
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: ivecopredvadeci
+    name_en: "Iveco demonstrator"
+    name_cs: "Iveco předváděcí"

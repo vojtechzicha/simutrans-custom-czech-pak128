@@ -1,0 +1,48 @@
+agency: DPPardubice
+type: "32Tr"
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+copyright: VTPsim
+
+display:
+  agency_en: "DPMP"
+  agency_cs: "DPMP"
+  family_en: "Škoda 32Tr SOR"
+  family_cs: "Škoda 32Tr SOR"
+
+# Škoda 32Tr SOR, 12 m trolleybus on the SOR NS 12 body; DPMP's newest and
+# most numerous type: 5 from 2019 (425-429) plus 28 battery-equipped cars
+# from 2023-2025 (460-497). 35 seated / 60 standing, 160 kW, 65 km/h. DPMP
+# scheme on this body: black front mask, white body with a red roofline
+# stripe and a large red lower side panel. Sprite: the VTPsim 32Tr, repainted.
+
+vehicles:
+  - id: "32Tr"
+    role_en: "trolleybus"
+    role_cs: "trolejbus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 950000
+      payload: 95
+      speed: 65
+      weight: 12
+      runningcost: 16
+      fixed_cost: 75
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 160
+      gear: 58
+
+liveries:
+  - color: dpmpbilocervena
+    name_en: "DPMP white-red"
+    name_cs: "DPMP bílo-červená"

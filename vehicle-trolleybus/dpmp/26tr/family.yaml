@@ -1,0 +1,47 @@
+agency: DPPardubice
+type: "26Tr"
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+copyright: TommPa9
+
+display:
+  agency_en: "DPMP"
+  agency_cs: "DPMP"
+  family_en: "Škoda 26Tr Solaris"
+  family_cs: "Škoda 26Tr Solaris"
+
+# Škoda 26Tr Solaris, 12 m trolleybus on the Solaris Urbino III body. DPMP
+# runs 9 (323, 325-332; 2012-2014). 34 seated / 68 standing (102), Škoda
+# 4ML 3444 K/4 160 kW, 65 km/h. Sprite: the TommPa9 26Tr, repainted to the
+# DPMP white-red (NRP) scheme.
+
+vehicles:
+  - id: "26Tr"
+    role_en: "trolleybus"
+    role_cs: "trolejbus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 850000
+      payload: 102
+      speed: 65
+      weight: 11
+      runningcost: 16
+      fixed_cost: 72
+      intro_year: 2010
+      intro_month: 1
+      retire_year: 2038
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 160
+      gear: 58
+
+liveries:
+  - color: dpmpbilocervena
+    name_en: "DPMP white-red"
+    name_cs: "DPMP bílo-červená"

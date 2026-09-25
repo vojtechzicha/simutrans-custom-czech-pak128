@@ -1,0 +1,49 @@
+agency: DPPardubice
+type: "28Tr"
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+copyright: TommPa9
+
+display:
+  agency_en: "DPMP"
+  agency_cs: "DPMP"
+  family_en: "Škoda 28Tr Solaris"
+  family_cs: "Škoda 28Tr Solaris"
+
+# Škoda 28Tr Solaris, 14.6 m three-axle trolleybus (Solaris Urbino 15 body),
+# built for Pardubice from 2008. DPMP still runs the last of them (404 and
+# 406-409 in early 2026; 400 and 401 went to Szeged). 43 seated / 92
+# standing, Škoda 33ML 3550 K/4 240 kW, 65 km/h. Sprite: TommPa9's Solaris
+# Trollino 15 AC (same 3-axle Urbino 15 body, from the DPO set), repainted to
+# the DPMP white-red (NRP) scheme.
+
+vehicles:
+  - id: "28Tr"
+    role_en: "trolleybus"
+    role_cs: "trolejbus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 1000000
+      payload: 135
+      speed: 65
+      weight: 14
+      runningcost: 20
+      fixed_cost: 90
+      intro_year: 2008
+      intro_month: 1
+      retire_year: 2032
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 10
+      engine_type: electric
+      power: 240
+      gear: 60
+
+liveries:
+  - color: dpmpbilocervena
+    name_en: "DPMP white-red"
+    name_cs: "DPMP bílo-červená"

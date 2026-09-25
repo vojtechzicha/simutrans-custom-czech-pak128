@@ -1,0 +1,77 @@
+agency: DPPardubice
+type: "Citelis_12M"
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+copyright: TommPa9
+
+display:
+  agency_en: "DPMP"
+  agency_cs: "DPMP"
+  family_en: "Irisbus Citelis 12M"
+  family_cs: "Irisbus Citelis 12M"
+
+# Irisbus Citelis 12M. DPMP runs 3 diesel cars (183, 186, 194) and 16 CNG
+# cars (207–229) as of 2026 (dpmp.cz / trolejbus.cz). The CNG version is
+# visually distinct by its roof tank fairing, so it is its own vehicle and
+# sprite row. Capacity 28–32 seated / 65 standing; diesel Iveco Cursor 8
+# 180 kW, CNG Cursor 8 CNG 200 kW. Sprite: TommPa9's Praha Citelis 12M,
+# repainted to the DPMP white-red (NRP) scheme; the CNG row adds the raised
+# roof tank fairing over the front ~60 % of the roof.
+
+vehicles:
+  - id: "Citelis_12M"
+    display_id: "Citelis 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 650000
+      payload: 97
+      speed: 80
+      weight: 11
+      runningcost: 24
+      fixed_cost: 123
+      intro_year: 2005
+      intro_month: 1
+      retire_year: 2032
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 180
+      gear: 55
+      smoke: Diesel_small
+
+  - id: "Citelis_12M_CNG"
+    display_id: "Citelis 12M CNG"
+    role_en: "CNG bus"
+    role_cs: "autobus CNG"
+    row: 1
+    prev: []
+    next: []
+    fields:
+      cost: 720000
+      payload: 95
+      speed: 80
+      weight: 12
+      runningcost: 20
+      fixed_cost: 130
+      intro_year: 2007
+      intro_month: 1
+      retire_year: 2032
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 200
+      gear: 55
+
+liveries:
+  - color: dpmpbilocervena
+    name_en: "DPMP white-red"
+    name_cs: "DPMP bílo-červená"

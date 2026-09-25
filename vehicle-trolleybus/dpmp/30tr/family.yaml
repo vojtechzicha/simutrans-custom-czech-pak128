@@ -1,0 +1,48 @@
+agency: DPPardubice
+type: "30Tr"
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+copyright: VTPsim
+
+display:
+  agency_en: "DPMP"
+  agency_cs: "DPMP"
+  family_en: "Škoda 30Tr SOR"
+  family_cs: "Škoda 30Tr SOR"
+
+# Škoda 30Tr SOR, 12.2 m trolleybus on the SOR NB 12 body. DPMP runs 22
+# (333-335 from 2016, 410-424 and the battery-equipped 480-483 from 2018).
+# 104 passengers, Škoda 4ML 3444 K/4 160 kW, 70 km/h. Sprite: VTPsim's
+# Škoda 32Tr (SOR body, poles, roof equipment) with the front redrawn in the
+# white NB 12 style and the DPMP white-red (NRP) scheme.
+
+vehicles:
+  - id: "30Tr"
+    role_en: "trolleybus"
+    role_cs: "trolejbus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 900000
+      payload: 104
+      speed: 70
+      weight: 11
+      runningcost: 16
+      fixed_cost: 75
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2045
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 160
+      gear: 58
+
+liveries:
+  - color: dpmpbilocervena
+    name_en: "DPMP white-red"
+    name_cs: "DPMP bílo-červená"

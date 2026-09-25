@@ -1,0 +1,49 @@
+agency: DPPardubice
+type: "BN_9.5"
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+copyright: VTPsim
+
+display:
+  agency_en: "DPMP"
+  agency_cs: "DPMP"
+  family_en: "SOR BN 9.5"
+  family_cs: "SOR BN 9,5"
+
+# SOR BN 9,5, 9.6 m midibus. DPMP bought two 2013-built cars (21, 22) from
+# SOR in 2023 for the bridge-replacement routes. White body with red roof
+# air-conditioning units. 23-28 seated / 48 standing, Iveco Tector 185 kW.
+# Sprite: the VTPsim SOR BN 9,5, repainted.
+
+vehicles:
+  - id: "BN_9.5"
+    display_id: "BN 9,5"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 455000
+      payload: 71
+      speed: 90
+      weight: 8
+      runningcost: 22
+      fixed_cost: 120
+      intro_year: 2005
+      intro_month: 1
+      retire_year: 2035
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 185
+      gear: 53
+      smoke: Diesel_small
+
+liveries:
+  - color: bila
+    name_en: "white"
+    name_cs: "bílá"

@@ -1,0 +1,76 @@
+agency: DPPardubice
+type: "Crossway_LE_City_12M"
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+copyright: Lubak91
+
+display:
+  agency_en: "DPMP"
+  agency_cs: "DPMP"
+  family_en: "Iveco Crossway LE City 12M"
+  family_cs: "Iveco Crossway LE City 12M"
+
+# Iveco Crossway LE City 12M. DPMP runs 7 diesel cars (63–68, 70; 2015–2026)
+# and one hybrid (69, March 2025; 265 kW diesel + 25 kW electric motor,
+# 37 seated / 53 standing, roof battery pack). Diesel: 31 seated / 65
+# standing, Cursor 9 265 kW. Sprite: Lubak91's Crossway LE City 12M,
+# repainted to the DPMP white-red (NRP) scheme; the hybrid adds its roof
+# equipment box.
+
+vehicles:
+  - id: "Crossway_LE_City_12M"
+    display_id: "Crossway LE City 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 800000
+      payload: 96
+      speed: 85
+      weight: 12
+      runningcost: 28
+      fixed_cost: 140
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2045
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 265
+      gear: 56
+      smoke: Diesel_small
+
+  - id: "Crossway_LE_City_12M_Hybrid"
+    display_id: "Crossway LE City 12M Hybrid"
+    role_en: "hybrid bus"
+    role_cs: "hybridní autobus"
+    row: 1
+    prev: []
+    next: []
+    fields:
+      cost: 880000
+      payload: 90
+      speed: 85
+      weight: 13
+      runningcost: 24
+      fixed_cost: 150
+      intro_year: 2024
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 290
+      gear: 56
+
+liveries:
+  - color: dpmpbilocervena
+    name_en: "DPMP white-red"
+    name_cs: "DPMP bílo-červená"

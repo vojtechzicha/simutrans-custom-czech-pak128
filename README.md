@@ -37,6 +37,11 @@ Additional vehicle families are in progress and live on the
   the `vehicle-trolleybus/` mode): 11 bus families, 12 tram families, 9 trolleybus
   families. Verified against the 2025–2026 active roster; real-world retirement
   dates set on the handful of types that have left service.
+- **DP města Pardubic (DPMP)** — the full active 2026 bus and trolleybus fleet:
+  Irisbus Citybus 12M, Irisbus Citelis 12M (diesel + CNG), Iveco Crossway LE
+  City 12M (diesel + hybrid), Iveco Urbanway 12M (diesel + CNG), Iveco Streetway
+  12M, Isuzu NovoCiti Life, SOR BN 9,5, and Škoda 26Tr, 28Tr, 30Tr and 32Tr
+  trolleybuses, in the DPMP white-red scheme (32Tr in its black-front variant).
 - **ČD rail** — assorted DMU and EMU classes (810/811 Šukafon · 842/843/844 ·
   847 RegioFox · 854 Hydra · 471 CityElefant · 440/640/650/660/681/690 Panter
   family) in various stages of sprite repaint; see [`TODO.md`](TODO.md).

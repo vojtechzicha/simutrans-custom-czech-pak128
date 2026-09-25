@@ -1,0 +1,75 @@
+agency: DPPardubice
+type: "Urbanway_12M"
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+copyright: Lubak91
+
+display:
+  agency_en: "DPMP"
+  agency_cs: "DPMP"
+  family_en: "Iveco Urbanway 12M"
+  family_cs: "Iveco Urbanway 12M"
+
+# Iveco Urbanway 12M — the largest DPMP bus type: 29 diesel cars (100–122,
+# 187–193; 2016–2026) and 4 CNG cars (222–225; 2020–2021). Diesel Cursor 9
+# 228 kW, CNG Cursor 8 CNG 213 kW. Sprite: Lubak91's Urbanway 12M,
+# repainted to the DPMP white-red (NRP) scheme; the CNG version carries the
+# roof tank fairing.
+
+vehicles:
+  - id: "Urbanway_12M"
+    display_id: "Urbanway 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 780000
+      payload: 100
+      speed: 80
+      weight: 12
+      runningcost: 26
+      fixed_cost: 135
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2045
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 228
+      gear: 55
+      smoke: Diesel_small
+
+  - id: "Urbanway_12M_CNG"
+    display_id: "Urbanway 12M CNG"
+    role_en: "CNG bus"
+    role_cs: "autobus CNG"
+    row: 1
+    prev: []
+    next: []
+    fields:
+      cost: 850000
+      payload: 95
+      speed: 80
+      weight: 12
+      runningcost: 22
+      fixed_cost: 140
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2045
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 213
+      gear: 55
+
+liveries:
+  - color: dpmpbilocervena
+    name_en: "DPMP white-red"
+    name_cs: "DPMP bílo-červená"

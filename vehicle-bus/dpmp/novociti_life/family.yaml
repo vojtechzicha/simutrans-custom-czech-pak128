@@ -1,0 +1,50 @@
+agency: DPPardubice
+type: "NovoCiti_Life"
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+copyright: VTPsim
+
+display:
+  agency_en: "DPMP"
+  agency_cs: "DPMP"
+  family_en: "Isuzu NovoCiti Life"
+  family_cs: "Isuzu NovoCiti Life"
+
+# Isuzu NovoCiti Life, 7.9 m low-floor midibus. DPMP bought three nearly new
+# cars (15-17) from Turancar in 2023 for the weight-restricted routes over the
+# Kapitana Bartose bridge (902/906). White body with a black glasshouse and
+# front mask. Isuzu 4HK1 engine. Sprite derived from the VTPsim Solaris
+# Urbino 8 midibus body.
+
+vehicles:
+  - id: "NovoCiti_Life"
+    display_id: "NovoCiti Life"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 450000
+      payload: 57
+      speed: 90
+      weight: 7
+      runningcost: 18
+      fixed_cost: 100
+      intro_year: 2018
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 140
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: bilocerna
+    name_en: "white-black"
+    name_cs: "bílo-černá"
