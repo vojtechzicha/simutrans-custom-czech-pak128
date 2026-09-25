@@ -3,6 +3,8 @@ type: "28Tr"
 # Sprites are placed in the tile to the native pak128.cs lane position (body
 # footprint matched to the median of native 12 m buses), so no extra shift.
 image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
 copyright: TommPa9
 
 display:

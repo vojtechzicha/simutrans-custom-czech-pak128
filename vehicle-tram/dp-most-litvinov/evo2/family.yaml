@@ -2,6 +2,9 @@ agency: DPMostLitvinov
 type: "EVO2"
 copyright: TommPa9
 
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
 display:
   agency_en: "DPmML"
   agency_cs: "DPmML"

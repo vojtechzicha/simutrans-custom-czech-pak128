@@ -2,6 +2,9 @@ agency: DPMostLitvinov
 type: "Urbanway_18M"
 copyright: Lubak91
 
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
 display:
   agency_en: "DPmML"
   agency_cs: "DPmML"

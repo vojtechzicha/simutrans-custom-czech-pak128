@@ -2,6 +2,9 @@ agency: CeskeDrahy
 type: "440"
 copyright: TommPa9
 
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
 display:
   agency_en: "ČD"
   agency_cs: "ČD"
