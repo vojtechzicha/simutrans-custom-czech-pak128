@@ -1,0 +1,62 @@
+agency: DPPraha
+type: "Streetway_12M"
+# Sprites carry their own lane placement (body footprint matched to the DPMP
+# Streetway / native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Iveco Streetway 12M"
+  family_cs: "Iveco Streetway 12M"
+
+# Iveco Streetway 12M (Otokar Kent C body, built in Turkey), DPP Prague
+# 4101-4200: 100 buses delivered Dec 2023 - 2025, the order is complete.
+# 12.0 x 2.54 x 3.245 m, 12.27 t, 3 double doors (2-2-2), 25 seats / 86
+# total (DPP), FPT Cursor 9 228 kW + Voith Diwa 6, 90 km/h.
+# Livery: PID scheme A (superlative.works, 2021): light silver-grey body and
+# roof, continuous black window band, black windscreen / display surround,
+# red vertical columns over both axles (skirt to window line, resuming above
+# the windows and crossing the roof), red block on the vehicle's left of the
+# lower front and lower rear, small red "pid" lettering on the grey panels.
+# Drawn with the original front (4101-~4183); the 2025 cars 4184-4200 have
+# the black-band ADAS front (not modelled).
+# Sprite: pixel-rendered box model of the Kent C body (overhangs 2.70 / 3.40 m,
+# wheelbase 5.90 m, doors and columns placed from photos) at the scale and
+# per-direction lane placement of the repo's DPMP Streetway 12M (the Lubak91
+# Urbanway body reworked); amber front / side / rear displays, roof A/C pod.
+
+vehicles:
+  - id: "Streetway_12M"
+    display_id: "Streetway 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 640000
+      payload: 86
+      speed: 90
+      weight: 12
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2024
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 228
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"

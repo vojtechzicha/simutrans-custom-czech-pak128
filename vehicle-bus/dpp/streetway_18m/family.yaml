@@ -1,0 +1,92 @@
+agency: DPPraha
+type: "Streetway_18M"
+# Sprites carry their own lane placement (front identical to the 12 m body,
+# matched to native pak128.cs buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Iveco Streetway 18M"
+  family_cs: "Iveco Streetway 18M"
+
+# Iveco Streetway 18M (Otokar Kent C 18 articulated, built in Turkey), DPP
+# Prague 5101-: 54 buses (2023: 26, 2024: 15, 2026: 13 so far), about 27
+# more due from the Dec 2025 order. First in passenger service 14 Sep 2023.
+# 18.75 x 2.54 x 3.245 m, 17.79 t, 3 axles (front overhang 2.70 m,
+# wheelbases 5.90 + 6.74 m, rear overhang 3.41 m), 4 double doors, 36 seats /
+# 151 total (DPP), Cursor 9 265 kW pusher + Voith Diwa 6, 90 km/h.
+# Livery: PID scheme A: light silver-grey, black window band, red columns
+# over all three axles (front section: front axle and middle axle up to the
+# bellows; rear section: rear axle), each crossing the roof; red block on the
+# vehicle's left of the lower front and lower rear. Original front (the 2026
+# batch 5142+ has the black-band ADAS front, not modelled).
+# Two sections like the upstream CZR-Praha-SOR_NB_18[1]/[2]: the front
+# section (length 8) is drawn exactly 8 length units from its front to the
+# joint centre, the powered rear section (length 6) starts at the joint centre
+# with the same forward shift, so the sections meet in every direction; the
+# 1.3 m ribbed bellows is split between them. Sprite: the same rendered box
+# model as the Streetway 12M (scale and lane placement of the DPMP Streetway
+# body), extended to the articulated bus.
+
+vehicles:
+  - id: "Streetway_18M-A"
+    display_id: "Streetway 18M"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["Streetway_18M-B"]
+    fields:
+      cost: 520000
+      payload: 90
+      speed: 90
+      weight: 10
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2023
+      intro_month: 9
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+
+  - id: "Streetway_18M-B"
+    display_id: "Streetway 18M"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["Streetway_18M-A"]
+    next: []
+    fields:
+      cost: 380000
+      payload: 61
+      speed: 90
+      weight: 8
+      runningcost: 11
+      fixed_cost: 56
+      intro_year: 2023
+      intro_month: 9
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 265
+      gear: 62
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"
