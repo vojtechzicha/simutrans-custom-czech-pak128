@@ -22,8 +22,9 @@ Notes on format (pak v1003):
         skip = u16; if skip == 0: break (end of row, trailing transparent implicit)
         paint = u16; pixels = u16 × paint
   - Pixel values < 0x8000: RGB565 (with 0x0000 as a valid pure-black color)
-  - Pixel values >= 0x8000: simutrans player/special colors — we render with
-    a placeholder palette so the user can see which pixels are tintable.
+  - Pixel values 0x8000..0x801E: simutrans special colours (player colours,
+    lit windows, lamps, non-darkening greys) — written as their exact
+    image_t::rgbtab RGB so makeobj re-encodes them as the same specials.
 """
 
 import argparse
@@ -48,20 +49,21 @@ TRANSPARENT = (231, 255, 255, 255)
 #   pak IMG idx:  1     7     4     6     5     3     0     2
 PAK_TO_PROJECT_DIR = [1, 7, 4, 6, 5, 3, 0, 2]
 
-# Placeholder palette for simutrans special pixels (player colors etc.).
-# Range 0x8000..0x801F is the player-color band: pak128.cs typically paints
-# vehicle bodies with these, then the simutrans renderer recolors them at
-# draw time per the player's livery. Without that recolor pass we render
-# them as a neutral silver gradient so the silhouette looks roughly like
-# the in-game default — the user is expected to recolor for the target
-# livery anyway.
+# Simutrans special colours (image_t::rgbtab in descriptor/image.cc). A pixel
+# value 0x8000 + i is special colour i: 0-15 player colours (recoloured per
+# company at draw time), 16-30 lit windows, lamps and non-darkening greys
+# (e.g. 21/22 = 0x6B6B6B/0x9B9B9B, the usual pak128.cs glass). Writing the exact
+# rgbtab RGB makes makeobj map the pixel back to the same special, so an
+# extracted sheet rebuilds with the original look and night lighting.
+RGBTAB = [
+    0x244B67, 0x395E7C, 0x4C7191, 0x6084A7, 0x7497BD, 0x88ABD3, 0x9CBEE9, 0xB0D2FF,
+    0x7B5803, 0x8E6F04, 0xA18605, 0xB49D07, 0xC6B408, 0xD9CB0A, 0xECE20B, 0xFFF90D,
+    0x57656F, 0x7F9BF1, 0xFFFF53, 0xFF211D, 0x01DD01, 0x6B6B6B, 0x9B9B9B, 0xB3B3B3,
+    0xC9C9C9, 0xDFDFDF, 0xE3E3FF, 0xC1B1D1, 0x4D4D4D, 0xFF017F, 0x0101FF,
+]
 SPECIAL_PALETTE = {
-    **{0x8000 + i: (
-        int(50 + 180 * (i / 31)),
-        int(50 + 180 * (i / 31)),
-        int(55 + 185 * (i / 31)),
-        255,
-    ) for i in range(32)},
+    0x8000 + i: ((c >> 16) & 0xFF, (c >> 8) & 0xFF, c & 0xFF, 255)
+    for i, c in enumerate(RGBTAB)
 }
 
 
