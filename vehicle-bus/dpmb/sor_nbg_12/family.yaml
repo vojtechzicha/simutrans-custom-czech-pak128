@@ -1,0 +1,58 @@
+agency: DPBrno
+type: "SOR_NBG_12"
+# Sprites are placed in the tile to the native pak128.cs lane position (the
+# upstream Brno NBG 12 already sits on the native 12 m bus median).
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "SOR NBG 12"
+  family_cs: "SOR NBG 12"
+
+# SOR NBG 12 (CNG) — 54 delivered: 7001II-7044II from July 2014 (7001 in
+# service 8 Aug 2014) and 7101II-7116II in April-May 2018; 42 active in 2026
+# (8 stored, 4 scrapped). Iveco Cursor 8 CNG 213 kW; 12 180 x 2 500 mm,
+# 11.5 t, capacity 83, 80 km/h (dpmb.cz); 3 double doors.
+# DPMB white-red (DPMB drawing sor-nbg12.png, photos of 7030/7106): white
+# roof, black window band, white belt, red skirt; black front mask above a
+# white band and a red apron; a tall rounded white CNG tank fairing over the
+# front-middle roof with the A/C unit ahead of it (2014 batch; the 2018 cars
+# have the fairing further forward and the A/C behind it); green LED displays.
+# Sprite: VTPsim's CZR-Brno-SOR_NBG_12 (upstream cols 1-8): its 1-px roof
+# block redrawn as a 2-px fairing plus the A/C unit, near-black roof hatches
+# lightened, glass moved to the lit-window specials, green displays.
+
+vehicles:
+  - id: "SOR_NBG_12"
+    display_id: "NBG 12"
+    role_en: "CNG bus"
+    role_cs: "autobus CNG"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 730000
+      payload: 83
+      speed: 80
+      weight: 12
+      runningcost: 18
+      fixed_cost: 92
+      intro_year: 2014
+      intro_month: 8
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 213
+      gear: 54
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"

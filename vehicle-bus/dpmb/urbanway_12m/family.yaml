@@ -1,0 +1,57 @@
+agency: DPBrno
+type: "Urbanway_12M"
+# Sprites are placed in the tile to the native pak128.cs lane position (the
+# upstream Brno Urbanway 12M already sits on the native 12 m bus median).
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Iveco Urbanway 12M"
+  family_cs: "Iveco Urbanway 12M"
+
+# Iveco Urbanway 12M (diesel, air-conditioned) — 15 delivered in April-May
+# 2019 (7672-7686, first in service 6 May 2019), 13 active in 2026 (2 stored).
+# FPT Tector 7 210 kW; 12 000 x 2 500 mm, 10.64 t, capacity 103 (dpmb.cz),
+# 80 km/h. DPMB white-red city scheme: white body and roof, black window
+# band, white belt, red skirt; green LED destination displays. Flat roof
+# (no CNG tanks) with one long low A/C unit over the front ~40 % of the roof
+# (photos of 7680/7681; the DPMB drawing shows only its rear part).
+# Sprite: Lubak91's CZR-Brno-IVECO_Urbanway_12M (upstream cols 1-8), glass
+# moved to the lit-window specials, green displays, roof A/C drawn on —
+# the same treatment as the Urbanway 12M CNG family.
+
+vehicles:
+  - id: "Urbanway_12M"
+    display_id: "Urbanway 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 650000
+      payload: 103
+      speed: 80
+      weight: 11
+      runningcost: 24
+      fixed_cost: 123
+      intro_year: 2019
+      intro_month: 5
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 210
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"

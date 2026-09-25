@@ -1,0 +1,61 @@
+agency: DPBrno
+type: "Crossway_LE_City_12M"
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Iveco Crossway LE City 12M NP"
+  family_cs: "Iveco Crossway LE City 12M NP"
+
+# Iveco Crossway LE CITY 12M NP (CNG, Cursor 9 NP) — 2 cars, 7829 (built 2021,
+# run by DPMB on lease from Iveco as 2744II from 4 Jun 2021, bought 5/2024)
+# and 7830 (ex-demonstrator built 2019, bought 6/2024). Doors 2-2-1, raised
+# floor behind the middle door. 265 kW; 12 x 2.55 m; ~12 t and ~95 places
+# are type figures (DPMB publishes none for this type); 85 km/h.
+# DPMB white-red after the DPMB drawing crossway-le-2021.png and bmhd.cz
+# photos of 2744II: white body, black window band; a red line under the
+# windows only along the raised rear part (behind the middle door), where the
+# window band ends higher; white belt, red skirt; black windscreen over a red
+# band, white front panel, red bumper; two white CNG tank fairings on the
+# roof (front one longer and taller); green LED displays.
+# Sprite: Lubak91's CZR-Brno-IVECO_Crossway_LE_City_12M (upstream cols 1-8),
+# lane placement normalised (it sat 3-12 px off the native lane), red line
+# cut back to the rear part, roof CNG fairings drawn on, glass moved to the
+# lit-window specials, green displays.
+
+vehicles:
+  - id: "Crossway_LE_City_12M"
+    display_id: "Crossway LE City 12M NP"
+    role_en: "CNG bus"
+    role_cs: "autobus CNG"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 800000
+      payload: 95
+      speed: 85
+      weight: 12
+      runningcost: 24
+      fixed_cost: 140
+      intro_year: 2021
+      intro_month: 6
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 265
+      gear: 56
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"

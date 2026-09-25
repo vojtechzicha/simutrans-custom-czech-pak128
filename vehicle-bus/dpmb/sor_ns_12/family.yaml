@@ -1,0 +1,60 @@
+agency: DPBrno
+type: "SOR_NS_12"
+# Sprites are drawn at the native pak128.cs lane position (body footprint on
+# the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "SOR NS 12"
+  family_cs: "SOR NS 12"
+
+# SOR NS 12 (diesel), DPMB's second most numerous bus: 51 delivered from
+# August 2020 to January 2023 (7687-7737; 7687 in service 28 Aug 2020),
+# 47 active in 2026 (4 stored). FPT Tector 7 210 kW, 12 000 x 2 550 mm,
+# 10.64 t, capacity 105 (dpmb.cz), 80 km/h, 3 double doors.
+# DPMB NS-body scheme (DPMB drawing sor-ns.png, photos of 7689/7690/7732/7737):
+# white body and roof, black window band, white belt, red skirt; a black cap
+# wraps the windscreen and the front roof edge, framed by the red-and-white
+# swoosh up the front corners; black front mask above a white "smile" line and
+# a red apron; green LED displays; one A/C unit on the roof 0.47-0.66 of the
+# length from the front.
+# Sprite: new 8-direction render of the NS 12 body — the same body model as
+# the DPMB TNS 12 trolleybus — replacing VTPsim's CZR-Brno-SOR-NS12, a generic
+# NB-style body with a grey roof and a shallow window band.
+
+vehicles:
+  - id: "SOR_NS_12"
+    display_id: "NS 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 700000
+      payload: 105
+      speed: 80
+      weight: 11
+      runningcost: 24
+      fixed_cost: 120
+      intro_year: 2020
+      intro_month: 8
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 210
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"

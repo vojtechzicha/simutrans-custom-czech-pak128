@@ -1,0 +1,92 @@
+agency: DPBrno
+type: "Solaris_Urbino_18"
+# Sprites carry their own placement: both sections re-placed for lengths 7 + 5
+# (the front section's nose at the convoy anchor like a native 12 m bus, the
+# rear section meeting it at the joint), lane matched to the native 12 m bus
+# median.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Solaris Urbino 18"
+  family_cs: "Solaris Urbino 18"
+
+# Solaris Urbino 18, DPMB's diesel articulated bus, one object for both
+# generations like the upstream: Urbino 18 III 2623II-2658II (36 delivered,
+# in service from 12 Jun 2014; 31 active in 2026, scrapping began 8/2026) and
+# Urbino 18 IV 2659II-2691II (33 delivered July 2020 - July 2021, 30 active).
+# Pusher: the engine sits in the rear section, the front section is unpowered.
+# dpmb.cz (III): 18 000 x 2 550 mm, 16.9 t, capacity 165, 231 kW, 80 km/h
+# (the IV: 16.6 t, 143 places, 270 kW); 4 double doors.
+# DPMB white-red (DPMB drawings solaris-urbino18.png / solaris-18m-e6.png,
+# photos of 2632/2676): white roof with the A/C unit at the front, black
+# window band, white belt, red skirt, black windscreen over a white front
+# panel and red bumper, grey bellows; green LED displays. The IV's red
+# wheel-arch sweeps are not drawn (one sprite for both generations).
+# Sprite: TommPa9's CZR-Brno-Solaris_Urbino_18-A/-B (Solaris_Urbino_18.png rows
+# 7/8, cols 1-8): grey roof painted white, the black joint caps turned into a
+# ribbed grey bellows block, roof A/C drawn on, glass moved to the lit-window
+# specials, green displays; re-placed from the upstream 8 + 8 lengths (a
+# 24 m convoy) to the real 7 + 5 (18 m).
+
+vehicles:
+  - id: "Urbino_18-A"
+    display_id: "Urbino 18"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["Urbino_18-B"]
+    fields:
+      cost: 500000
+      payload: 110
+      speed: 80
+      weight: 9
+      runningcost: 18
+      fixed_cost: 96
+      intro_year: 2014
+      intro_month: 6
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+
+  - id: "Urbino_18-B"
+    display_id: "Urbino 18"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["Urbino_18-A"]
+    next: []
+    fields:
+      cost: 450000
+      payload: 55
+      speed: 80
+      weight: 8
+      runningcost: 16
+      fixed_cost: 77
+      intro_year: 2014
+      intro_month: 6
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 231
+      gear: 62
+      smoke: Diesel
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"

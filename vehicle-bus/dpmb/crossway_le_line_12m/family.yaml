@@ -1,0 +1,62 @@
+agency: DPBrno
+type: "Crossway_LE_Line_12M"
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Iveco Crossway LE Line 12M"
+  family_cs: "Iveco Crossway LE Line 12M"
+
+# Iveco Crossway LE LINE 12M — suburban low-entry bus, 5 delivered in June
+# 2019 (2911II-2915II, in service 24 Jun 2019); 2911-2914 are active in 2026,
+# 2915 is the driving-school bus. 2 double doors (front, middle), Cursor 9
+# 265 kW, 12 050 x 2 550 mm, 11.63 t, capacity 81, 100 km/h (dpmb.cz).
+# DPMB white-red after the DPMB drawing crossway-le-line-12m.png and photos of
+# 2911: white roof, black window band, a red line under the windows along the
+# whole side, white belt, red skirt; black windscreen above a red band, white
+# front panel, red bumper; a low A/C unit over the front-middle roof; green
+# LED displays.
+# Sprite: Lubak91's CZR-Brno-IVECO_Crossway_LE_LINE_12M (upstream cols 1-8),
+# lane placement normalised (it sat 3-12 px off the native lane), the red
+# line under the windows and the red band under the windscreen taken over
+# from the pixel-identical Crossway LE City drawing (the upstream LINE had
+# neither), roof A/C drawn on, glass moved to the lit-window specials, green
+# displays.
+
+vehicles:
+  - id: "Crossway_LE_Line_12M"
+    display_id: "Crossway LE Line 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 720000
+      payload: 81
+      speed: 100
+      weight: 12
+      runningcost: 26
+      fixed_cost: 130
+      intro_year: 2019
+      intro_month: 6
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 265
+      gear: 56
+      smoke: Diesel_small
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"
