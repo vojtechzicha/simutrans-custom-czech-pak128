@@ -1,0 +1,62 @@
+agency: DPBrno
+type: "Crossway_LE_City_14_5M"
+# Sprites carry their own lane placement (body footprint matched to the
+# median of native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Iveco Crossway LE City 14.5M"
+  family_cs: "Iveco Crossway LE City 14,5M"
+
+# Iveco Crossway LE CITY 14,5M, DPMB Brno 7826-7828: built 2021, run by DPMB
+# on lease from Iveco from mid-2021 (as 274xII; bmhd.cz lists incidents from
+# July 2021) and bought in May-June 2024. 3-axle low-entry bus (tag axle
+# behind the drive axle), doors 2-2-1, raised floor behind door 2. Cursor 9
+# 265 kW (bmhd.cz); 14.49 x 2.55 m, 14.0 t, capacity 109 and 85 km/h are the
+# figures of the identical DPP cars (dpp.cz), DPMB publishes none.
+# Livery: DPMB white-red after the DPMB side drawing crossway-le-15m.png:
+# white body and roof, black band from the roof edge down to the window line
+# (1.18 m in the low-entry front, 1.48 m over the raised rear), a red stripe
+# filling that step behind door 2 (curving down to nothing at door 2), white
+# belt, red skirt up to 0.65 m; white front and rear with a red bumper.
+# Sprite: replaces the upstream CZR-Brno-IVECO_Crossway_LE_City_14M
+# (Lubak91; a 2-axle body with non-darkening glass). Same box-model render as
+# the DPP Crossway LE City 14,5M family (axles 2.64/9.52/11.05 m from the
+# front), repainted to the DPMB drawing.
+
+vehicles:
+  - id: "Crossway_LE_City_14_5M"
+    display_id: "Crossway LE City 14,5M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 920000
+      payload: 109
+      speed: 85
+      weight: 14
+      runningcost: 32
+      fixed_cost: 160
+      intro_year: 2021
+      intro_month: 7
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 265
+      gear: 56
+      smoke: Diesel_small
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"

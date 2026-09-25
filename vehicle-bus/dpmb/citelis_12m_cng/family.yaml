@@ -1,0 +1,57 @@
+agency: DPBrno
+type: "Citelis_12M_CNG"
+# Sprites carry their own lane placement (body footprint matched to the
+# median of native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Irisbus Citelis 12M CNG"
+  family_cs: "Irisbus Citelis 12M CNG"
+
+# Irisbus Citelis 12M CNG, DPMB Brno 7008II-7010II and 7012II (4 active of
+# 6 delivered in 2014; 7007II stored). 11.99 x 2.50 m, 12.21 t, capacity
+# 89, Iveco Cursor 8 CNG 213 kW, 80 km/h (dpmb.cz). 3 double doors.
+# Livery: DPMB white-red city scheme after the DPMB side drawing
+# citelis-cng.png: white body and roof, black window band, red skirt, lime
+# LED displays. The white CNG tank fairing covers the rear half of the roof
+# (drawing and rear photo of 7009; the research note "front two-thirds" is
+# wrong), with the Autoclima A/C unit at the front of the roof.
+# Sprite: replaces the upstream CZR-Brno-Irisbus_Citelis_12M (blank sw
+# direction, flat roof). Box-model render calibrated to the repo's DPMP
+# Citelis 12M (TommPa9 body), same projection as the DPP/DPMB bus renders.
+
+vehicles:
+  - id: "Citelis_12M_CNG"
+    display_id: "Citelis 12M CNG"
+    role_en: "CNG bus"
+    role_cs: "autobus CNG"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 700000
+      payload: 89
+      speed: 80
+      weight: 12
+      runningcost: 22
+      fixed_cost: 128
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2032
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 213
+      gear: 55
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"

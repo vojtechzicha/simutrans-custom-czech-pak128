@@ -1,0 +1,64 @@
+agency: DPPraha
+type: "Crossway_LE_City_14_5M"
+# Sprites carry their own lane placement (body footprint matched to the
+# median of native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Iveco Crossway LE City 14.5M"
+  family_cs: "Iveco Crossway LE City 14,5M"
+
+# Iveco Crossway LE CITY 14,5M, DPP Prague 4602-4611 (4602-4607 in service
+# from Apr 2023, 4608-4611 from Sep 2026; seznam-autobusu.cz), mainly on the
+# Airport Express AE and
+# suburban lines. 3-axle low-entry bus: tag axle behind the drive axle,
+# doors 2-2-1 (front, ahead of the tandem, single door in the rear
+# overhang), raised floor and belt line behind door 2. 14.49 x 2.55 x
+# 3.205 m, 14.0 t, capacity 109 (41 seated), Cursor 9 265 kW, 85 km/h
+# (dpp.cz). 4601 (2018, classic white-red) is not modelled.
+# Livery: PID scheme A: light silver-grey body and roof, continuous black
+# window band, black windscreen/display surround, red columns behind door 1
+# over the front axle and behind door 2 over the tandem (skirt to window line,
+# resuming above the windows and crossing the roof), red block on the
+# vehicle's left of the lower front and lower rear.
+# Sprite: replaces the upstream CZR-Praha-IVECO_Crossway_LE_City_14M (Lubak91;
+# a 2-axle copy of the Brno object). Box-model render with the geometry of
+# the DPMB Crossway LE 14,5M side drawing (axles 2.64/9.52/11.05 m from the
+# front), same projection and PID palette as the DPP Streetway set.
+
+vehicles:
+  - id: "Crossway_LE_City_14_5M"
+    display_id: "Crossway LE City 14,5M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 920000
+      payload: 109
+      speed: 85
+      weight: 14
+      runningcost: 32
+      fixed_cost: 160
+      intro_year: 2023
+      intro_month: 4
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 265
+      gear: 56
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"
