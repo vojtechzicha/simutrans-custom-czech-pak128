@@ -11,28 +11,40 @@ display:
   family_en: '"Rakev"'
   family_cs: '"Rakev"'
 
-# Single motor car. Source: pak128cs rail-psg mail/842_843/843.dat (CD_843-1, freight row).
-# Mail trailer variant intentionally dropped.
+# Class 843 diesel-electric railcar (MSV Studénka / ČKD 1995-97, 31 built) and its
+# own trailers: 043 (Btn 753) intermediate car and 943 (Bftn 791) control car.
+# Sets in 2026: 843 solo, 843 + 043 + 943 (Olomouc - Krnov - Ostrava, only place
+# the 943 runs), 843 + 043 + 843 (Brno). The 943 is drawn with its cab at the
+# rear, so it ends a set. Mixed liveries in one set are normal.
+# Sources: pak128cs rail-psg mail/842_843/843_balkan.png, 043_balkan.png,
+# 943_balkan.png (bodies; Najbrt 1 as reference for the zone map).
 
 vehicles:
+  # 25.2 m, 55 seats, 56 t, 2 x 300 kW diesel-electric (600 kW), 110 km/h.
+  # 16 x Najbrt 1, 7 x Najbrt 2, 8 x red-cream (008, 010, 011, 017 at Brno 2025/26).
   - id: "843"
     role_en: "railcar"
     role_cs: "motorový vůz"
     row: 0
+    head: true
+    tail: true
+    prev: ["043"]
+    next: ["043", "943"]
+    couple_liveries: true
     fields:
       cost: 3126800
-      payload: 105
+      payload: 55
       speed: 110
       weight: 56
       runningcost: 133
       fixed_cost: 936
       intro_year: 1996
       intro_month: 3
-      retire_year: 2030
-      retire_month: 1
+      retire_year: 2032
+      retire_month: 12
       waytype: track
       freight: Passagiere
-      length: 13
+      length: 12
       engine_type: diesel
       power: 600
       smoke: Diesel
@@ -40,16 +52,73 @@ vehicles:
     extended:
       axles: 4
 
+  # Btn 753 (ex 043): 19.7 m, 72 seats, 31 t, 120 km/h, 32 built, all in service.
+  # 11 x Najbrt 1, 18 x Najbrt 2, 3 x red-cream (Brno).
+  - id: "043"
+    role_en: "trailer"
+    role_cs: "přípojný vůz"
+    row: 1
+    head: false
+    tail: false
+    prev: ["843", "043"]
+    next: ["043", "943", "843"]
+    couple_liveries: true
+    fields:
+      cost: 1323200
+      payload: 72
+      speed: 120
+      weight: 31
+      runningcost: 11
+      fixed_cost: 84
+      intro_year: 1996
+      intro_month: 6
+      retire_year: 2032
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 9
+    extended:
+      axles: 4
+
+  # Bftn 791 (ex 943): 19.7 m control car, 64 seats, 30 t, 120 km/h, 11 built,
+  # 10 in service at Olomouc. 3 x Najbrt 1, 8 x Najbrt 2 (red-cream is history).
+  - id: "943"
+    role_en: "control car"
+    role_cs: "řídicí vůz"
+    row: 2
+    liveries: [najbrt1, najbrt2]
+    head: false
+    tail: true
+    prev: ["843", "043"]
+    next: []
+    couple_liveries: true
+    fields:
+      cost: 1413200
+      payload: 64
+      speed: 120
+      weight: 30
+      runningcost: 9
+      fixed_cost: 69
+      intro_year: 1996
+      intro_month: 6
+      retire_year: 2032
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 9
+    extended:
+      axles: 4
+
 liveries:
   - color: najbrt1
     name_en: "Najbrt 1"
     name_cs: "Najbrt 1"
-    source: pak128cs/rail-psg mail/842_843/843.png row 0 (ČD red — recolor to Najbrt 1 blue+white)
+    source: painted on the pak128cs 843 / 043 / 943 balkan bodies (work/p2 zone painter; stainless-grey roof)
   - color: najbrt2
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"
-    source: pak128cs/rail-psg mail/842_843/843.png row 0 (ČD red — recolor to Najbrt 2 blue with red doors)
+    source: painted on the same bodies (sapphire roof, light gutter line, sky-blue cab cap)
   - color: cervenokremova
     name_en: "red-cream"
     name_cs: "červeno-krémová"
-    source: pak128cs/rail-psg mail/842_843/843.png row 0 (ČD red — touch up cream/grey roof if needed; closest match in catalogue)
+    source: painted on the same bodies (ČD 1990s red with one cream band at lamp level)

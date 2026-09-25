@@ -11,32 +11,107 @@ display:
   family_en: '"Kvatro"'
   family_cs: '"Kvatro"'
 
-# Single motor car. Source: pak128cs rail-psg mail/842_843/842.dat (CD_842-1, freight row).
-# Mail trailer variant intentionally dropped.
+# Class 842 railcar (MSV Studénka 1988/1993-94, 37 built, re-engined by Pars nova
+# 2009-13) and the push-pull cars it runs with at Brno in 2026: the 054.2
+# intermediate trailers (now Bdtn 756/757) and the 954 control cars (now
+# Bfbrdtn 794 / ABfbrdtn 795), both ex-854 "Hydra" stock. Sets: 842 solo,
+# 842 + 954, 842 + 054 (+ 054) + 954. Mixed liveries in one set are normal
+# (red-cream trailers behind a Najbrt railcar), so any livery couples with any.
+# The 954 is drawn with its cab at the rear: it ends a set, the 842 leads.
+# Sources: pak128cs rail-psg mail/842_843/842_balkan.png (842 body), pak128.cs
+# vehicle.motorak.853_854.pak (954) and vehicle.motorak.854_uni.pak (054).
 
 vehicles:
+  # 25.2 m, 64 seats, 46 t, 2 x 242 kW (Tedom), 100 km/h. Brno "S41/S6" and
+  # Valašské Meziříčí; the Brno contract runs to 2034. 34 x Najbrt 1, 2 x Najbrt 2.
   - id: "842"
     role_en: "railcar"
     role_cs: "motorový vůz"
     row: 0
+    liveries: [najbrt1, najbrt2]
+    head: true
+    tail: true
+    prev: []
+    next: ["054", "954"]
+    couple_liveries: true
     fields:
       cost: 2679000
-      payload: 103
+      payload: 64
       speed: 100
       weight: 46
       runningcost: 95
       fixed_cost: 608
       intro_year: 1993
       intro_month: 5
-      retire_year: 2030
-      retire_month: 1
+      retire_year: 2034
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 12
       engine_type: diesel
-      power: 424
+      power: 484
       smoke: Diesel
       gear: 105
+    extended:
+      axles: 4
+
+  # Bdtn 756 (ex 054.2): 24.5 m, 88 seats, 37 t, 120 km/h; 64 rebuilt by KOS Krnov
+  # 2004-11 from Btn 750/755. Najbrt 2 or the delivery red-cream (still the
+  # majority in 2020-24 data).
+  - id: "054"
+    role_en: "trailer"
+    role_cs: "přípojný vůz"
+    row: 1
+    liveries: [najbrt2, cervenokremova]
+    head: false
+    tail: false
+    prev: ["842", "054"]
+    next: ["054", "954"]
+    couple_liveries: true
+    fields:
+      cost: 1350000
+      payload: 88
+      speed: 120
+      weight: 37
+      runningcost: 10
+      fixed_cost: 80
+      intro_year: 2004
+      intro_month: 6
+      retire_year: 2034
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  # Bfbrdtn 794 / ABfbrdtn 795 (ex 954 / 954.2): 24.5 m control car rebuilt by
+  # Pars nova 2006-10 from Postw vans, 63 seats + bikes, 41 t, 120 km/h; the cab
+  # front is the 854's full front. Najbrt 2 (29 of 34) or red-cream.
+  - id: "954"
+    role_en: "control car"
+    role_cs: "řídicí vůz"
+    row: 2
+    liveries: [najbrt2, cervenokremova]
+    head: false
+    tail: true
+    prev: ["842", "054"]
+    next: []
+    couple_liveries: true
+    fields:
+      cost: 1600000
+      payload: 63
+      speed: 120
+      weight: 41
+      runningcost: 11
+      fixed_cost: 90
+      intro_year: 2006
+      intro_month: 6
+      retire_year: 2034
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 12
     extended:
       axles: 4
 
@@ -44,8 +119,13 @@ liveries:
   - color: najbrt1
     name_en: "Najbrt 1"
     name_cs: "Najbrt 1"
-    source: pak128cs/rail-psg mail/842_843/842.png row 0 (ČD red — recolor to Najbrt 1 blue+white)
+    source: painted on the pak128cs 842_balkan body (work/p2 zone painter, ČD Najbrt palette; umbra roof)
   - color: najbrt2
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"
-    source: pak128cs/rail-psg mail/842_843/842.png row 0 (ČD red — recolor to Najbrt 2 blue with red doors)
+    source: painted on the pak128cs 842 / pak128.cs 854-set bodies (sapphire roof, light gutter line)
+  # trailers only: the 842s left red-cream during the 2009-13 rebuild
+  - color: cervenokremova
+    name_en: "red-cream"
+    name_cs: "červeno-krémová"
+    source: painted on the pak128.cs 954 / 054 bodies (ČD red with the cream band at lamp level)

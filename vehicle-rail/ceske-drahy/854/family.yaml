@@ -11,43 +11,49 @@ display:
   family_en: '"Hydra"'
   family_cs: '"Hydra"'
 
-# Single motor car — rebuilt class 851 (ex T 478.1) with refurbished interior
-# and new front (1996-). Source DAT: pak128cs rail-psg mail/850_851/851.dat (CD_851-1).
-# 851 shares the powertrain family with 854; speed reduced to 100 km/h to match real-world
-# 854 spec, and intro year shifted to the 1996 rebuild.
+# Class 854 railcar: 50 cars rebuilt by Pars nova 1997-2006 from class 852/853
+# (ČSD M 296.2/M 296.1, 1968-70). Last planned ČD working 7 May 2026 (Kladno -
+# Rakovník); about 10-20 remain as reserves at Brno, Praha-Libeň and Trutnov and
+# are being sold or scrapped. Its trailers (954 control cars, 054 intermediate
+# cars) now run behind the 842 and live in that family.
+# Source: pak128.cs vehicle.motorak.853_854.pak ("CD 854 Hydra" body; the ČSD
+# M 296.1 and the uni_854 sheet serve as extra references for the zone map).
 
 vehicles:
+  # 24.79 m, 48 seats, 50 t, 596 kW Caterpillar 3412E, hydrodynamic, 120 km/h.
   - id: "854"
     role_en: "railcar"
     role_cs: "motorový vůz"
     row: 0
     fields:
       cost: 2942400
-      payload: 80
-      speed: 100
+      payload: 48
+      speed: 120
       weight: 50
       runningcost: 120
       fixed_cost: 845
-      intro_year: 1996
+      intro_year: 1997
       intro_month: 1
-      retire_year: 2035
-      retire_month: 1
+      retire_year: 2026
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 12
       engine_type: diesel
-      power: 588
+      power: 596
       smoke: Diesel
       gear: 107
     extended:
       axles: 4
 
 liveries:
+  # the rebuild delivery scheme, on the cars until 2022/23
   - color: cervenokremova
     name_en: "red-cream"
     name_cs: "červeno-krémová"
-    source: pak128cs/rail-psg mail/850_851/851_CSD.png row 0 (ČSD cream+red — direct color match)
+    source: painted on the pak128.cs 854 body (ČD red with the 600 mm cream band round the car)
+  # every ČD car in 2024-26
   - color: najbrt2
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"
-    source: pak128cs/rail-psg mail/850_851/851.png row 0 (ČD red — recolor to Najbrt 2 blue with red doors)
+    source: painted on the pak128.cs 854 body (sapphire roof darkened by exhaust soot, light gutter line)
