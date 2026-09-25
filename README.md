@@ -55,6 +55,27 @@ Also on `main`, still being refined (see [`TODO.md`](TODO.md)):
   City 12M (diesel + hybrid), Iveco Urbanway 12M (diesel + CNG), Iveco Streetway
   12M, Isuzu NovoCiti Life, SOR BN 9,5, and Škoda 26Tr, 28Tr, 30Tr and 32Tr
   trolleybuses, in the DPMP white-red scheme (32Tr in its black-front variant).
+- **DP hl. m. Prahy (DPP) and DP města Brna (DPMB)** — the complete active
+  September 2026 bus, tram and trolleybus fleets of both cities as VZ families,
+  replacing the upstream CZR/CZ Praha and Brno paks. Placeholder art was redrawn
+  (several types from scratch), wrong liveries were repainted, and every sprite
+  sits at the native lane/track position with night-lit windows only when loaded:
+  - DPP trams: Škoda 52T ForCity Plus (5 sections), 15T, 15T4, 14T (PID and
+    original), Tatra KT8D5.RN2P (PID and classic), T3R.P and T3R.PLF (red-cream
+    and wine-silver), T3R.PV, T3M.2-DVC; mixed T3 sets such as T3R.PLF + T3R.P.
+  - DPP buses: Iveco Streetway 12M/18M, Urbanway 18M Hybrid, SOR NB 12, NB 18,
+    BN 12, ENS 12 (with its tram-style charging pantograph), ICN 9,5, Škoda
+    E'City 36BB, Solaris Urbino 8,9 LE and 10,5, Iveco Crossway LE 12,8M and
+    LE CITY 14,5M (3 axles).
+  - DPP trolleybuses: SOR TNS 12 and TNS 18, Škoda-Solaris 24m, Bozankaya SNG
+    12T, Škoda 36Tr.
+  - DPMB trams: Škoda 45T and Pragoimex EVO2 (drawn from scratch), 13T, 03T6
+    Anitra, Pars nova K3R-N, KT8D5R.N2 and KT8D5N, VarioLFR.E and VarioLF2R.E,
+    T6A5, T3G, T3R, T3R.PV and T3R.EV.
+  - DPMB buses: Iveco Urbanway 12M (diesel and CNG) and 18M CNG, SOR NBG 12,
+    NS 12, ICN 9,5, Irisbus Citelis 12M CNG, Iveco Crossway LE CITY 12M NP,
+    LE CITY 14,5M and LE LINE 12M, Solaris Urbino 18.
+  - DPMB trolleybuses: Škoda 26Tr, 27Tr, 31Tr, 32Tr and SOR TNS 12.
 - **Other city (MHD) fleets** — the active September 2026 rosters of 16 more
   towns, imported from the older pak128_czr sets and completed. Placeholder and
   wrong-livery art was repainted, missing types were drawn from the closest body,
