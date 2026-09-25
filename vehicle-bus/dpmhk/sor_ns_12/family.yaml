@@ -1,0 +1,58 @@
+agency: DPHradecKralove
+type: "SOR_NS_12"
+# Sprites carry their own lane placement (bodies drawn on the median footprint
+# of native pak128.cs buses, same as the ENS 12 / TNS 12 renders), so no shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPMHK"
+  agency_cs: "DPMHK"
+  family_en: "SOR NS 12"
+  family_cs: "SOR NS 12"
+
+# SOR NS 12 (diesel), DPMHK 111-116: built 2022, in service 1-2/2023. Iveco
+# Tector 7 210 kW Euro VI-E, ZF EcoLife, 3 doors, ~100 passengers.
+# Livery: DPMHK classic red-yellow-white in its black-front execution for the
+# SOR NS generation: black face with a yellow chin between the silver
+# headlight clusters, red outline strips up the A-pillars and along the black
+# roof cap, silver-white roof, black window band, a thin yellow line over the
+# red lower body; ahead of the front wheel the lower body is black (red skirt
+# strip), the yellow line dropping down in front of the arch; yellow engine lid
+# with a red bumper at the rear. 115 wears a full-body advert (not modelled).
+# Sprite: new 8-direction box render (SOR NS 12 geometry of the ENS 12 / TNS 12
+# renders), AC unit at the front of the roof.
+
+vehicles:
+  - id: "SOR_NS_12"
+    display_id: "NS 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 750000
+      payload: 100
+      speed: 80
+      weight: 11
+      runningcost: 26
+      fixed_cost: 135
+      intro_year: 2023
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 210
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: dpmhkcervenozlutobila
+    name_en: "DPMHK red-yellow-white"
+    name_cs: "DPMHK červeno-žluto-bílá"

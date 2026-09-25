@@ -1,0 +1,83 @@
+agency: DPHradecKralove
+type: "SOR_NS_18"
+# Sprites carry their own lane placement (bodies drawn on the median footprint
+# of native pak128.cs buses, same as the ENS 12 / TNS 12 renders), so no shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPMHK"
+  agency_cs: "DPMHK"
+  family_en: "SOR NS 18"
+  family_cs: "SOR NS 18"
+
+# SOR NS 18 (diesel, articulated), DPMHK 237-240: built 2022, in service
+# 1-2/2023. 18.75 m, Iveco Cursor 9 243 kW driving the rear axle (pusher),
+# ZF EcoLife, 4 double doors, ~150 passengers.
+# Livery: DPMHK classic red-yellow-white, black-front execution (see the
+# SOR NS 12): black face with yellow chin, red A-pillar strips, black window
+# band, thin yellow line over red, yellow engine lid at the rear. 238 and 239
+# carry full-body adverts (not modelled).
+# Sprite: new 8-direction box render (8 + 6 carunit sections at the TNS 18
+# scale, joint at the real 11.1 m), AC units on both sections.
+
+vehicles:
+  - id: "SOR_NS_18-A"
+    display_id: "NS 18"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["SOR_NS_18-B"]
+    fields:
+      cost: 580000
+      payload: 90
+      speed: 80
+      weight: 10
+      runningcost: 16
+      fixed_cost: 80
+      intro_year: 2023
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+
+  - id: "SOR_NS_18-B"
+    display_id: "NS 18"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["SOR_NS_18-A"]
+    next: []
+    fields:
+      cost: 420000
+      payload: 60
+      speed: 80
+      weight: 7
+      runningcost: 12
+      fixed_cost: 55
+      intro_year: 2023
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 243
+      gear: 62
+      smoke: Diesel_small
+
+liveries:
+  - color: dpmhkcervenozlutobila
+    name_en: "DPMHK red-yellow-white"
+    name_cs: "DPMHK červeno-žluto-bílá"

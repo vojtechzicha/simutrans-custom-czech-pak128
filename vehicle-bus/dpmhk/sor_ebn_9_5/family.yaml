@@ -1,0 +1,57 @@
+agency: DPHradecKralove
+type: "SOR_EBN_9.5"
+# Sprites carry their own lane placement (bodies drawn on the median footprint
+# of native pak128.cs buses, same as the ENS 12 / TNS 12 renders), so no shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPMHK"
+  agency_cs: "DPMHK"
+  family_en: "SOR EBN 9.5"
+  family_cs: "SOR EBN 9,5"
+
+# SOR EBN 9.5, DPMHK 401 (2013): the city's first battery bus, still in
+# service in 2026 (battery replaced 2023; photographed in service 6/2026).
+# 9.5 m midibus, 2 doors, ~55 passengers.
+# Livery: "Zelená linka" since 9/2017, the DPMHK classic scheme with green
+# additions: white roof, black window band with a green strip over the windows
+# and a green band with tree silhouettes over the lower glass, thin yellow line
+# over the red lower body, white panel and yellow/red diagonals on the left
+# front corner, red A-pillar strips; black face with a green "smile" under the
+# windscreen, red bumper.
+# Sprite: new 8-direction box render (older SOR e-bus face), battery boxes on
+# the roof.
+
+vehicles:
+  - id: "SOR_EBN_9.5"
+    display_id: "EBN 9.5"
+    role_en: "electric midibus"
+    role_cs: "elektrický midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 600000
+      payload: 55
+      speed: 70
+      weight: 9
+      runningcost: 15
+      fixed_cost: 78
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2030
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: battery
+      power: 120
+      gear: 57
+
+liveries:
+  - color: dpmhkzelenalinka
+    name_en: "DPMHK Zelená linka"
+    name_cs: "DPMHK Zelená linka"

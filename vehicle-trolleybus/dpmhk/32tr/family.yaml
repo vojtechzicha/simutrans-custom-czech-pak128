@@ -1,0 +1,61 @@
+agency: DPHradecKralove
+type: "32Tr"
+# Sprites carry their own lane placement (bodies drawn on the median footprint
+# of native pak128.cs buses, same as the ENS 12 / TNS 12 renders), so no shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPMHK"
+  agency_cs: "DPMHK"
+  family_en: "Škoda 32Tr SOR"
+  family_cs: "Škoda 32Tr SOR"
+
+# Škoda 32Tr SOR, 12 m partial trolleybus on the SOR NS 12 body: DPMHK 39-44,
+# delivered 9/2026 (presented 14 Sep 2026 at the FINEP arena), in passenger
+# service from October 2026; part of a framework contract for up to 18 32Tr +
+# 13 33Tr. 160 kW, 65 km/h, traction battery for up to 15 km off the wire,
+# 3 doors, ~35 seated + 60 standing (type data; the HK figure is unpublished).
+# Livery: the new 2026 DPMHK design ("svislé pruhy s logem G"): black front
+# mask and roof cap with red outline strips up the A-pillars, red chin with the
+# crowned G between the silver headlight clusters; side: black window band,
+# red roof fairing and lower body in the front part, a vertical yellow stripe
+# just ahead of the rear-axle arch, white behind it; a big white G under a
+# yellow crown on the window band ahead of the stripe. No side photo of the
+# 12 m car existed at the time of drawing: the stripe position follows the
+# 33Tr's front section (stripe just ahead of the next axle).
+# Sprite: new 8-direction box render (SOR NS 12 geometry of the ENS 12 / TNS 12
+# renders), poles aimed at the pak128.cs wire of the vehicle's own lane;
+# engine_type battery for the off-wire capability.
+
+vehicles:
+  - id: "32Tr"
+    role_en: "partial trolleybus"
+    role_cs: "parciální trolejbus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 1100000
+      payload: 95
+      speed: 65
+      weight: 12
+      runningcost: 18
+      fixed_cost: 90
+      intro_year: 2026
+      intro_month: 10
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: battery
+      power: 160
+      gear: 58
+
+liveries:
+  - color: dpmhkcervenozlutobilasvisla
+    name_en: "DPMHK red-yellow-white vertical"
+    name_cs: "DPMHK červeno-žluto-bílá svislá"

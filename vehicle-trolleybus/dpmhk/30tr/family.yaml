@@ -1,0 +1,114 @@
+agency: DPHradecKralove
+type: "30Tr"
+# Sprites carry their own lane placement (bodies drawn on the median footprint
+# of native pak128.cs buses, same as the ENS 12 / TNS 12 renders), so no shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPMHK"
+  agency_cs: "DPMHK"
+  family_en: "Škoda 30Tr SOR"
+  family_cs: "Škoda 30Tr SOR"
+
+# Škoda 30Tr SOR, 12 m trolleybus on the SOR TNB 12 (NB 12 City) body, the
+# backbone of the Hradec Králové network (Sep 2026, seznam-autobusu.cz):
+# - 30Tr 11-16 (2011) and 19-28 (2012): 32 seated + 63 standing, 160 kW Škoda
+#   4ML 3444 K/4, 65 km/h, ~10.8 t; 23 was withdrawn 1/2026.
+# - 30Tr with traction battery 29-38 (2018; 38 is the ex-Škoda demonstrator):
+#   ~10 km off the wire, 27 + 70 passengers.
+# - 30TrDG 17-18 (2012): auxiliary diesel generator set for off-wire running,
+#   ~12.8 t, 28 + 38 passengers.
+# 4 doors (the last one behind the rear axle).
+# Livery: DPMHK classic red-yellow-white (since 1995): white roof and front
+# mask, black window band, 2 px yellow band over the red lower body, red
+# bumper; on the left front corner a white panel, then a swept-back yellow and
+# red diagonal; rear: black window, white louvre panel, yellow engine lid, red
+# bumper. Cars in full-body adverts are not modelled.
+# Sprite: new 8-direction box render (SOR NB body, equipment fairing over the
+# front two thirds of the roof, pole base near the rear axle with the silver
+# retriever rack behind it; the battery cars add a box on the rear roof, the
+# 30TrDG the generator housing), poles aimed at the pak128.cs wire of the
+# vehicle's own lane. The battery and DG cars run as engine_type battery /
+# diesel so they are not tied to the wire.
+
+vehicles:
+  - id: "30Tr"
+    role_en: "trolleybus"
+    role_cs: "trolejbus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 900000
+      payload: 95
+      speed: 65
+      weight: 11
+      runningcost: 16
+      fixed_cost: 75
+      intro_year: 2011
+      intro_month: 1
+      retire_year: 2040
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 160
+      gear: 58
+
+  - id: "30Tr_battery"
+    display_id: "30Tr"
+    role_en: "trolleybus with traction battery"
+    role_cs: "parciální trolejbus"
+    row: 1
+    prev: []
+    next: []
+    fields:
+      cost: 1030000
+      payload: 97
+      speed: 65
+      weight: 12
+      runningcost: 18
+      fixed_cost: 85
+      intro_year: 2018
+      intro_month: 1
+      retire_year: 2045
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: battery
+      power: 160
+      gear: 58
+
+  - id: "30TrDG"
+    role_en: "trolleybus with diesel generator"
+    role_cs: "trolejbus s dieselagregátem"
+    row: 2
+    prev: []
+    next: []
+    fields:
+      cost: 1000000
+      payload: 66
+      speed: 65
+      weight: 13
+      runningcost: 20
+      fixed_cost: 85
+      intro_year: 2012
+      intro_month: 1
+      retire_year: 2040
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 160
+      gear: 58
+
+liveries:
+  - color: dpmhkcervenozlutobila
+    name_en: "DPMHK red-yellow-white"
+    name_cs: "DPMHK červeno-žluto-bílá"

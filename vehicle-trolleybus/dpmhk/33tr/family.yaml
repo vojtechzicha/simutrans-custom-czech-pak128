@@ -1,0 +1,87 @@
+agency: DPHradecKralove
+type: "33Tr"
+# Sprites carry their own lane placement (bodies drawn on the median footprint
+# of native pak128.cs buses, same as the ENS 12 / TNS 12 renders), so no shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPMHK"
+  agency_cs: "DPMHK"
+  family_en: "Škoda 33Tr SOR"
+  family_cs: "Škoda 33Tr SOR"
+
+# Škoda 33Tr SOR, 18.75 m articulated partial trolleybus on the SOR NS 18
+# body: DPMHK 51-54, delivered 9/2026, in passenger service from October 2026.
+# Traction battery for ~10 km off the wire, 65 km/h, drive on the rear axle
+# (pusher; 240 kW), 4 double doors (front, middle of the front section, behind
+# the joint, behind the rear axle), ~44 seated + ~86 standing (type data).
+# Livery: the new 2026 DPMHK design: black front mask and roof cap, red chin
+# with the crowned G, red outline strips up the A-pillars; front section red
+# (roof fairing and lower body) under the black window band, a vertical yellow
+# stripe just ahead of the middle-axle arch (press photos of 51 and 54), white
+# behind it and on the whole rear section; a big white G under a yellow crown
+# on the window band ahead of the stripe.
+# Sprite: new 8-direction box render (8 + 6 carunit sections at the TNS 18
+# scale, joint at the real 11.1 m), poles on the front section above the
+# middle door (press photos), aimed at the pak128.cs wire of the own lane.
+
+vehicles:
+  - id: "33Tr-A"
+    display_id: "33Tr"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["33Tr-B"]
+    fields:
+      cost: 950000
+      payload: 77
+      speed: 65
+      weight: 11
+      runningcost: 16
+      fixed_cost: 80
+      intro_year: 2026
+      intro_month: 10
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: battery
+
+  - id: "33Tr-B"
+    display_id: "33Tr"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["33Tr-A"]
+    next: []
+    fields:
+      cost: 650000
+      payload: 53
+      speed: 65
+      weight: 8
+      runningcost: 10
+      fixed_cost: 55
+      intro_year: 2026
+      intro_month: 10
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: battery
+      power: 240
+      gear: 62
+
+liveries:
+  - color: dpmhkcervenozlutobilasvisla
+    name_en: "DPMHK red-yellow-white vertical"
+    name_cs: "DPMHK červeno-žluto-bílá svislá"

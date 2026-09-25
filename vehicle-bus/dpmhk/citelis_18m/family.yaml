@@ -1,0 +1,84 @@
+agency: DPHradecKralove
+type: "Citelis_18M"
+# Sprites carry their own lane placement (bodies drawn on the median footprint
+# of native pak128.cs buses, same as the ENS 12 / TNS 12 renders), so no shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPMHK"
+  agency_cs: "DPMHK"
+  family_en: "Irisbus Citelis 18M"
+  family_cs: "Irisbus Citelis 18M"
+
+# Irisbus Citelis 18M (diesel, articulated), 2010-2012: the last four DPMHK
+# cars, 232 and 234-236, still on the books in Sep 2026 while the Urbanway 18M
+# Hybrids 253-256 replace them (220-231 and 273-275 left 2023-8/2026), so the
+# type retires in 2027. Iveco Cursor 8 213 kW Euro 5 EEV driving the rear axle
+# (pusher), Voith D854.5, 4 double doors, ~150 passengers.
+# Livery: DPMHK classic red-yellow-white: white front with a red bumper, black
+# window band, broad yellow band over red, white panel and yellow/red
+# diagonals on the left front corner; rear white/yellow/red.
+# Sprite: new 8-direction box render (the Urbanway 18M body with the
+# first-generation Citelis/Urbanway face; 8 + 6 carunit sections).
+
+vehicles:
+  - id: "Citelis_18M-A"
+    display_id: "Citelis 18M"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["Citelis_18M-B"]
+    fields:
+      cost: 500000
+      payload: 84
+      speed: 80
+      weight: 10
+      runningcost: 20
+      fixed_cost: 102
+      intro_year: 2010
+      intro_month: 1
+      retire_year: 2027
+      retire_month: 6
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+
+  - id: "Citelis_18M-B"
+    display_id: "Citelis 18M"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["Citelis_18M-A"]
+    next: []
+    fields:
+      cost: 480000
+      payload: 61
+      speed: 80
+      weight: 7
+      runningcost: 14
+      fixed_cost: 72
+      intro_year: 2010
+      intro_month: 1
+      retire_year: 2027
+      retire_month: 6
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 213
+      gear: 67
+      smoke: Diesel_small
+
+liveries:
+  - color: dpmhkcervenozlutobila
+    name_en: "DPMHK red-yellow-white"
+    name_cs: "DPMHK červeno-žluto-bílá"

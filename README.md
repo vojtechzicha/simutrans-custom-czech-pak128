@@ -55,6 +55,14 @@ Also on `main`, still being refined (see [`TODO.md`](TODO.md)):
   City 12M (diesel + hybrid), Iveco Urbanway 12M (diesel + CNG), Iveco Streetway
   12M, Isuzu NovoCiti Life, SOR BN 9,5, and Škoda 26Tr, 28Tr, 30Tr and 32Tr
   trolleybuses, in the DPMP white-red scheme (32Tr in its black-front variant).
+- **DP města Hradce Králové (DPMHK)** — the active September 2026 bus and
+  trolleybus fleet, drawn from scratch with a box renderer (`tools/busrender/`),
+  with night-lit windows only when loaded: Škoda 30Tr (plus the battery and
+  diesel-generator cars), 31Tr, and the new 32Tr and 33Tr; SOR NS 12 (diesel and
+  electric), NS 18, Iveco Urbanway 12M (diesel and Hybrid), Urbanway 18M Hybrid,
+  Irisbus Citelis 18M, and the one-off SOR EBN 9,5 (Zelená linka) and EBN 11.
+  Liveries: the classic DPMHK red-yellow-white (white-front and SOR NS
+  black-front executions) and the 2026 vertical design with the crowned G.
 - **DP hl. m. Prahy (DPP) and DP města Brna (DPMB)** — the complete active
   September 2026 bus, tram and trolleybus fleets of both cities as VZ families,
   replacing the upstream CZR/CZ Praha and Brno paks. Placeholder art was redrawn

@@ -1,0 +1,89 @@
+agency: DPHradecKralove
+type: "Urbanway_12M"
+# Sprites carry their own lane placement (bodies drawn on the median footprint
+# of native pak128.cs buses, same as the ENS 12 / TNS 12 renders), so no shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPMHK"
+  agency_cs: "DPMHK"
+  family_en: "Iveco Urbanway 12M"
+  family_cs: "Iveco Urbanway 12M"
+
+# Iveco Urbanway 12M, the largest DPMHK bus type (Sep 2026):
+# - diesel, first-generation face: 173-195 (2018-2020; Tector 7 210 kW,
+#   28 seated + 78 standing) and 117-127 (2023, in service 2/2024; Cursor 9
+#   228 kW, 27 + 70); Voith DIWA; 34 buses.
+# - Hybrid (2024 facelift face), 128-131 (2025, in service 6-8/2026): Cursor 9
+#   228 kW mild hybrid, Voith DIWA NXT.
+# 3 doors (the rear one behind the rear axle, then the black engine-bay panel).
+# Livery: DPMHK classic red-yellow-white: white roof, black window band up to
+# the roof edge, broad yellow band over red, on the left front corner a white
+# panel, then swept-back yellow and red diagonals; first-generation face white
+# with a silver grille band and a red bumper sweeping up at the corners; the
+# 2024 face has a black windscreen surround, a white band with slim headlights
+# and the IVECO letters, and a red bumper; rear: white top with the black rear
+# window, yellow engine lid, red bumper. 19 of the diesels carry full-body
+# adverts (not modelled).
+# Sprite: new 8-direction box render; AC unit on the roof, the hybrid adds the
+# battery/e-machine box at the front of the roof.
+
+vehicles:
+  - id: "Urbanway_12M"
+    display_id: "Urbanway 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 780000
+      payload: 106
+      speed: 80
+      weight: 11
+      runningcost: 26
+      fixed_cost: 135
+      intro_year: 2018
+      intro_month: 1
+      retire_year: 2045
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 210
+      gear: 55
+      smoke: Diesel_small
+
+  - id: "Urbanway_12M_Hybrid"
+    display_id: "Urbanway 12M Hybrid"
+    role_en: "hybrid bus"
+    role_cs: "hybridní autobus"
+    row: 1
+    prev: []
+    next: []
+    fields:
+      cost: 880000
+      payload: 97
+      speed: 80
+      weight: 12
+      runningcost: 24
+      fixed_cost: 150
+      intro_year: 2026
+      intro_month: 6
+      retire_year: 2055
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 228
+      gear: 56
+
+liveries:
+  - color: dpmhkcervenozlutobila
+    name_en: "DPMHK red-yellow-white"
+    name_cs: "DPMHK červeno-žluto-bílá"

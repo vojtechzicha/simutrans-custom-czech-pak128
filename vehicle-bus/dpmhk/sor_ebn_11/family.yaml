@@ -1,0 +1,55 @@
+agency: DPHradecKralove
+type: "SOR_EBN_11"
+# Sprites carry their own lane placement (bodies drawn on the median footprint
+# of native pak128.cs buses, same as the ENS 12 / TNS 12 renders), so no shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPMHK"
+  agency_cs: "DPMHK"
+  family_en: "SOR EBN 11"
+  family_cs: "SOR EBN 11"
+
+# SOR EBN 11, DPMHK 403: the 2014 IAA premiere car, an ex-SOR demonstrator
+# owned by DPMHK since 12/2016. In 2026 it runs only short peak workings (its
+# charger is broken; photographed in service 2 Jul 2026). 11.1 m, 3 doors,
+# ~85 passengers.
+# Livery: its SOR demonstrator paint, metallic green lower body with a light
+# green belt, white roof and roof boxes, black window band; black face with a
+# white "smile", green bumper.
+# Sprite: new 8-direction box render (older SOR e-bus face), three battery
+# boxes on the roof.
+
+vehicles:
+  - id: "SOR_EBN_11"
+    display_id: "EBN 11"
+    role_en: "electric bus"
+    role_cs: "elektrobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 900000
+      payload: 85
+      speed: 80
+      weight: 12
+      runningcost: 20
+      fixed_cost: 150
+      intro_year: 2016
+      intro_month: 12
+      retire_year: 2030
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: battery
+      power: 120
+      gear: 57
+
+liveries:
+  - color: sorzelenametaliza
+    name_en: "SOR metallic green"
+    name_cs: "SOR zelená metalíza"

@@ -1,0 +1,84 @@
+agency: DPHradecKralove
+type: "Urbanway_18M_Hybrid"
+# Sprites carry their own lane placement (bodies drawn on the median footprint
+# of native pak128.cs buses, same as the ENS 12 / TNS 12 renders), so no shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPMHK"
+  agency_cs: "DPMHK"
+  family_en: "Iveco Urbanway 18M Hybrid"
+  family_cs: "Iveco Urbanway 18M Hybrid"
+
+# Iveco Urbanway 18M Hybrid (2024 facelift face), DPMHK 241-252 (2024, in
+# service 2-5/2025) and 253-256 (2025, in service 4-8/2026): 16 articulated
+# mild hybrids replacing the Citelis 18M. Cursor 9 265 kW driving the rear
+# axle (pusher), Voith DIWA NXT, 4 double doors, 36 seated + 89 standing.
+# Delivered in the classic livery (with a small crowned-G sticker on the nose).
+# Livery: DPMHK classic red-yellow-white (see the Urbanway 12M): black
+# windscreen surround, white band with the IVECO letters, red bumper; broad
+# yellow band over red, white panel and yellow/red diagonals on the left front
+# corner.
+# Sprite: new 8-direction box render (8 + 6 carunit sections, joint at the
+# real ~10.4 m), hybrid box at the front of the roof, AC units on both sections.
+
+vehicles:
+  - id: "Urbanway_18M_Hybrid-A"
+    display_id: "Urbanway 18M Hybrid"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["Urbanway_18M_Hybrid-B"]
+    fields:
+      cost: 620000
+      payload: 72
+      speed: 80
+      weight: 10
+      runningcost: 16
+      fixed_cost: 85
+      intro_year: 2025
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+
+  - id: "Urbanway_18M_Hybrid-B"
+    display_id: "Urbanway 18M Hybrid"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["Urbanway_18M_Hybrid-A"]
+    next: []
+    fields:
+      cost: 480000
+      payload: 53
+      speed: 80
+      weight: 8
+      runningcost: 12
+      fixed_cost: 60
+      intro_year: 2025
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 265
+      gear: 67
+
+liveries:
+  - color: dpmhkcervenozlutobila
+    name_en: "DPMHK red-yellow-white"
+    name_cs: "DPMHK červeno-žluto-bílá"

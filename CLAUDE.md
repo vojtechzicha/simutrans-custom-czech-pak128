@@ -173,6 +173,10 @@ The model scripts are `vectron.py`, `ric.py` (ex-DB IC coaches and the RDC couch
 
 Articulated units are modelled on one u axis and each car's tile keeps only its own pixels. Lettering must read left to right as seen: on the +v side screen-left is the vehicle's rear, on the -v side its front. Locomotives are drawn about 2–3 px taller than coaches, like the natives (ČD 363, 380, ÖBB 1216).
 
+### Rendered bus sprites (`tools/busrender/`)
+
+The DPMHK Hradec Králové families (`vehicle-bus/dpmhk/`, `vehicle-trolleybus/dpmhk/`) are rendered, not painted: `render.py` is the orthographic box raycaster in the pak128 road projection (1.5 px/m across, 4 px/m up; the same one the Prague/Brno SOR NS renders used) and `dpmhk.py` holds one parametric body model (SOR NS, SOR NB, Iveco Urbanway, SOR EBN), the DPMHK liveries as texture rules, trolley poles aimed at the pak128.cs wire of the own lane, and the per-view lane origins (a bare 12 m box on the median footprint of native 12 m buses). Single vehicles are drawn at real length; articulated sections at 4/3 m per carunit with the (4 − L/2) shift, joints at the real positions. Livery bands are whole multiples of 0.25 m, i.e. whole pixel rows in every view. Regenerate with `python tools/busrender/dpmhk.py [family …] [--preview DIR]`; change the model and regenerate rather than editing the PNGs.
+
 ## Multi-vehicle consists
 
 This Simutrans build does **not** support `bidirectional=1` (auto-flip) or `can_lead_from_rear=1`. Don't emit them. Multi-vehicle consists are modelled by **separate vehicle definitions per consist position**, each with its own sprite row.

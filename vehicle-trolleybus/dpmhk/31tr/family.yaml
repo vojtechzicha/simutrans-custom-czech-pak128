@@ -1,0 +1,85 @@
+agency: DPHradecKralove
+type: "31Tr"
+# Sprites carry their own lane placement (bodies drawn on the median footprint
+# of native pak128.cs buses, same as the ENS 12 / TNS 12 renders), so no shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPMHK"
+  agency_cs: "DPMHK"
+  family_en: "Škoda 31Tr SOR"
+  family_cs: "Škoda 31Tr SOR"
+
+# Škoda 31Tr SOR, 18.75 m articulated trolleybus on the SOR TNB 18 (NB 18
+# City) body: DPMHK 61-73 (2010-2013; 61 is the prototype), all 13 in service
+# in Sep 2026. Škoda 2ML 3846 K/6 250 kW driving the rear axle (pusher),
+# 65 km/h, ~15.8 t, 46 seated + 115 standing. Long front section (~12.3 m,
+# 3 doors), short rear section (2 doors, the last behind the rear axle).
+# Livery: DPMHK classic red-yellow-white, as on the 30Tr (white front and roof,
+# black window band, yellow band over red, white panel and yellow/red
+# diagonals on the left front corner). 63 and 66 carry full-body adverts.
+# Sprite: new 8-direction box render, 9 + 5 carunit sections matching the real
+# joint position; AC unit at the front of the roof, equipment fairing ahead of
+# the joint, poles on the front of the rear section with the silver retriever
+# rack behind them, aimed at the pak128.cs wire of the vehicle's own lane.
+
+vehicles:
+  - id: "31Tr-A"
+    display_id: "31Tr"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["31Tr-B"]
+    fields:
+      cost: 780000
+      payload: 106
+      speed: 65
+      weight: 10
+      runningcost: 14
+      fixed_cost: 70
+      intro_year: 2010
+      intro_month: 1
+      retire_year: 2042
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 9
+      engine_type: electric
+
+  - id: "31Tr-B"
+    display_id: "31Tr"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["31Tr-A"]
+    next: []
+    fields:
+      cost: 520000
+      payload: 55
+      speed: 65
+      weight: 6
+      runningcost: 10
+      fixed_cost: 45
+      intro_year: 2010
+      intro_month: 1
+      retire_year: 2042
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: electric
+      power: 250
+      gear: 62
+
+liveries:
+  - color: dpmhkcervenozlutobila
+    name_en: "DPMHK red-yellow-white"
+    name_cs: "DPMHK červeno-žluto-bílá"

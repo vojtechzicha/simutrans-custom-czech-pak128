@@ -1,0 +1,57 @@
+agency: DPHradecKralove
+type: "SOR_NS_12_electric"
+# Sprites carry their own lane placement (bodies drawn on the median footprint
+# of native pak128.cs buses, same as the ENS 12 / TNS 12 renders), so no shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPMHK"
+  agency_cs: "DPMHK"
+  family_en: "SOR NS 12 electric"
+  family_cs: "SOR NS 12 electric"
+
+# SOR NS 12 electric, DPMHK 404-423 (2018): 20 battery buses, 160 kW
+# asynchronous motor, 225 kWh NMC battery (~180 km), 80 km/h, ~12.35 t, 3 doors,
+# 100 passengers (29-35 seated).
+# Livery: DPMHK classic red-yellow-white, black-front execution (see the
+# SOR NS 12 diesel): black face with yellow chin, red A-pillar strips, black
+# window band, thin yellow line over red, black lower body ahead of the front
+# wheel, yellow engine lid at the rear. 404 and 406 carry the white
+# "800 let Hradce Králové" jubilee wrap since 1/2025 (a temporary promotional
+# wrap, not modelled).
+# Sprite: new 8-direction box render (SOR NS 12 geometry), full-length
+# silver-white roof fairing over the batteries.
+
+vehicles:
+  - id: "SOR_NS_12_electric"
+    display_id: "NS 12 electric"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 1000000
+      payload: 100
+      speed: 80
+      weight: 12
+      runningcost: 18
+      fixed_cost: 150
+      intro_year: 2018
+      intro_month: 1
+      retire_year: 2045
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: battery
+      power: 160
+      gear: 53
+
+liveries:
+  - color: dpmhkcervenozlutobila
+    name_en: "DPMHK red-yellow-white"
+    name_cs: "DPMHK červeno-žluto-bílá"
