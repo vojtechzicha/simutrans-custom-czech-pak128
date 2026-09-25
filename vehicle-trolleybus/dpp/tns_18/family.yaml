@@ -1,0 +1,90 @@
+agency: DPPraha
+type: "TNS_18"
+# Sprites carry their own lane placement (bodies drawn on the median footprint
+# of native pak128.cs buses, same as the ENS 12 / TNS 12 renders), so no shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "SOR TNS 18"
+  family_cs: "SOR TNS 18"
+
+# SOR TNS 18, 18.75 x 2.55 x 3.40 m articulated battery trolleybus on the SOR
+# NS 18 body (Cegelec Alva Integra 240 kW, EVC Hulin 106 kWh battery, ~12 km
+# off wire), DPP 101-115: 15 cars on line 58 (depot Klicov), in service from
+# 12/2023 (regular runs 3/2024). 3 axles (2.70 m overhang, 5.90 + 6.75 m
+# wheelbases), 4 double doors (front, mid front section, behind the joint,
+# behind the rear axle), 146 total (DPP), 65 km/h. Empty weight is not
+# published (DPP's 29 t is the gross weight); ~20 t estimated, split 11 + 9 t.
+# Livery: PID grey-red: light-grey body, black window band, black upper front
+# and roof cap with the silver SOR "wing" trim, grey lower front mask with the
+# red block on the vehicle's left, black bumper; red side panels behind door 1
+# over the front axle and behind door 2, both continued as red bands over the
+# front section's roof fairing; red panel round the rear-axle arch (no roof
+# band on the rear section, photos); grey lower rear with the red block,
+# black rear window area; grey bellows; poles on the front of the rear section.
+# Sprite: new 8-direction box render (8 + 6 carunit sections at the ENS 12 /
+# TNS 12 scale, joint at the real 11.1 m), trolley poles aimed at the pak128.cs
+# wire of the vehicle's own lane.
+
+vehicles:
+  - id: "TNS_18-A"
+    display_id: "TNS 18"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["TNS_18-B"]
+    fields:
+      cost: 500000
+      payload: 84
+      speed: 65
+      weight: 11
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2023
+      intro_month: 12
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+
+  - id: "TNS_18-B"
+    display_id: "TNS 18"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["TNS_18-A"]
+    next: []
+    fields:
+      cost: 363453
+      payload: 62
+      speed: 65
+      weight: 9
+      runningcost: 11
+      fixed_cost: 56
+      intro_year: 2023
+      intro_month: 12
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: electric
+      power: 240
+      gear: 62
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"

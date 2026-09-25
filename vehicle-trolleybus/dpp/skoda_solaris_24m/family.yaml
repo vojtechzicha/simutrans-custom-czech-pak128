@@ -1,0 +1,116 @@
+agency: DPPraha
+type: "Skoda_Solaris_24m"
+# Sprites carry their own lane placement (bodies drawn on the median footprint
+# of native pak128.cs buses, same as the ENS 12 / TNS 12 renders), so no shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Škoda-Solaris 24m"
+  family_cs: "Škoda-Solaris 24m"
+
+# Skoda-Solaris 24m (unofficially "Skoda 38Tr"; Solaris Trollino 24 = Urbino 24
+# IV facelift body, Skoda SJ 11 equipment), 24.70 x 2.55 x 3.50 m bi-articulated
+# battery trolleybus, DPP 401-420: 20 cars on the airport line 59 (depot Repy),
+# trial runs from 11/2023, regular service from 7 Mar 2024. 3 sections, 4 axles
+# (8x4: axles 2 and 3 driven by 2 x 160 kW Skoda ML 3438 K/4), 5 double doors,
+# 54 seats / 180 total, 70 km/h, 23.4 t in running order, 60 kWh usable battery
+# (11 km off wire). Joints at 10.37 and 17.2 m from the front (Skoda sheet).
+# Livery: PID grey-red: light-grey body, black window band up to the light-grey
+# roof fairings, black upper front with the grey lower mask carrying the red
+# block on the vehicle's left and the black "smile" headlight wedges; a red
+# panel round each of the four wheel arches; red bands over the roof fairings
+# above axles 1-3 (the rear section's roof carries the black pole rack and no
+# red band, photos of 401/413); black rear window area over a grey lower rear
+# with the red block and the yellow "extra long vehicle" plate; grey bellows.
+# Sprite: new 8-direction box render (8 + 5 + 6 carunit sections at the ENS 12
+# / TNS 12 scale), trolley poles aimed at the pak128.cs wire of the own lane.
+
+vehicles:
+  - id: "Skoda_Solaris_24m-A"
+    display_id: "24m"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["Skoda_Solaris_24m-B"]
+    fields:
+      cost: 500000
+      payload: 76
+      speed: 70
+      weight: 10
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2023
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 160
+      gear: 62
+
+  - id: "Skoda_Solaris_24m-B"
+    display_id: "24m"
+    role_en: "middle section"
+    role_cs: "střední díl"
+    row: 1
+    head: false
+    tail: false
+    prev: ["Skoda_Solaris_24m-A"]
+    next: ["Skoda_Solaris_24m-C"]
+    fields:
+      cost: 280000
+      payload: 47
+      speed: 70
+      weight: 6
+      runningcost: 11
+      fixed_cost: 56
+      intro_year: 2023
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: electric
+      power: 160
+      gear: 62
+
+  - id: "Skoda_Solaris_24m-C"
+    display_id: "24m"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 2
+    head: false
+    tail: true
+    prev: ["Skoda_Solaris_24m-B"]
+    next: []
+    fields:
+      cost: 340000
+      payload: 57
+      speed: 70
+      weight: 7
+      runningcost: 11
+      fixed_cost: 56
+      intro_year: 2023
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: electric
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"
