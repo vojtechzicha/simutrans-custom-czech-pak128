@@ -1,0 +1,61 @@
+agency: DPBrno
+type: "ICN_9.5"
+# Sprites carry their own lane placement (body footprint matched to the median
+# of native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "SOR ICN 9.5"
+  family_cs: "SOR ICN 9,5"
+
+# SOR ICN 9,5 low-entry midibus, DPMB Brno 7527-7546: 20 delivered in
+# batches from January 2025 (19 active in 2026, one stored). 9.55 x 2.525 x
+# 3.12 m, wheelbase 4.30 m, 9.2 t empty, 2 doors (single front + double
+# centre), 25-29 seats / 75 total (DPMB), FPT NEF 6.7 184 kW, 80 km/h.
+# Livery: DPMB city scheme: white body and roof, continuous black window
+# band, red lower body from the skirt to about a third of the side height
+# (a white strip separates it from the windows; photos of 7529 / 7531 - the
+# research note's "~40 %" is too high) continuing round the rear; black
+# windscreen / display mask, white lower front with silver headlamp clusters
+# and a red bumper sweeping up at the corners; short white A/C pod ahead of
+# the rear axle; green LED displays.
+# Sprite: no upstream ICN exists; new 8-direction pixel render of the ICN body
+# (brochure floor plan + flat side photo of 7531) at the scale of the native
+# pak128 buses, same body as the DPP ICN 9,5.
+
+vehicles:
+  - id: "ICN_9.5"
+    display_id: "ICN 9,5"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 455000
+      payload: 75
+      speed: 80
+      weight: 9
+      runningcost: 24
+      fixed_cost: 154
+      intro_year: 2025
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 184
+      gear: 53
+      smoke: Diesel_small
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"
