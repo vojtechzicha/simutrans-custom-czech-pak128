@@ -11,35 +11,47 @@ display:
   family_en: "RegioShark"
   family_cs: "RegioShark"
 
-# Two-car PESA LINK II DMU. Source: pak128_czr vehicles-rail-dmu/CD/844.dat.
-# Layout: head motor (row 1) + trailer (row 0). Either order valid in the source;
-# we model as fixed front motor -> rear trailer.
+# PESA LINK II (223M), 31 built 2011–13 (30 in service; 844.006 written off
+# after the 2021 Milavče collision). One articulated unit: two mirror-image,
+# both-powered cab sections (one MTU 6H1800 engine each, 2 × 390 kW) on a shared
+# Jakobs bogie, 43.73 m, 120 seats + 120 standing, 86 t, 120 km/h.
+#
+# Sprites: the pak128_czr PESA drawing (CZR-CD-847 / 847b, shifted up 4 px for
+# the default image_offset). Row 0 = front section (cab ahead), row 1 = rear
+# section (cab behind); the two are drawn at their own tile positions, so the
+# rear section keeps its own row instead of `reverse: true`. The drawing's
+# sections are ~9.4 carunits long, so `length: 9` closes the Jakobs joint in all
+# 8 views (tools/consist_preview.py). The 844 and 847 share the drawing; the
+# liveries paint their different fronts (847: black grille band).
+#
+# The front section's cab lamps are lit headlights, the rear section's are
+# lit tail lamps.
 
 vehicles:
   - id: "844"
-    role_en: "front motor car"
-    role_cs: "motorový vůz"
-    row: 1
+    role_en: "front section"
+    role_cs: "přední článek"
+    row: 0
     head: true
     tail: false
     prev: []
     next: ["844b"]
     fields:
-      cost: 1759600
-      payload: 162
-      speed: 140
-      weight: 42
-      runningcost: 54
-      fixed_cost: 311
+      cost: 1604800
+      payload: 120
+      speed: 120
+      weight: 43
+      runningcost: 29
+      fixed_cost: 165
       intro_year: 2012
       intro_month: 12
       retire_year: 2045
       retire_month: 1
       waytype: track
       freight: Passagiere
-      length: 10
+      length: 9
       engine_type: diesel
-      power: 309
+      power: 390
       smoke: Diesel
       gear: 129
     extended:
@@ -47,36 +59,53 @@ vehicles:
 
   - id: "844b"
     display_id: "844"
-    role_en: "rear trailer"
-    role_cs: "řídicí vůz"
-    row: 0
+    role_en: "rear section"
+    role_cs: "zadní článek"
+    row: 1
     head: false
     tail: true
     prev: ["844"]
     next: []
     fields:
-      cost: 1450000
-      payload: 163
-      speed: 140
-      weight: 41
-      runningcost: 4
-      fixed_cost: 18
+      cost: 1604800
+      payload: 120
+      speed: 120
+      weight: 43
+      runningcost: 29
+      fixed_cost: 165
       intro_year: 2012
       intro_month: 12
       retire_year: 2045
       retire_month: 1
       waytype: track
       freight: Passagiere
-      length: 10
+      length: 9
+      engine_type: diesel
+      power: 390
+      smoke: Diesel
+      gear: 129
     extended:
       axles: 4
 
 liveries:
-  - color: najbrt1
-    name_en: "Najbrt 1"
-    name_cs: "Najbrt 1"
-    source: pak128_czr/vehicles-rail-dmu/CD/844.png (ČD blue/white — direct match, no recolor needed)
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+    # delivery livery since 2012 (~21 units): sapphire roof and hood, light
+    # cantrail line (yellow over the 1st class), sky-blue window band, sapphire
+    # stripe, light grey lower band, sapphire doors and skirts, sky face panel
+    source: pak128_czr CZR-CD-847 drawing repainted with the p2 zone painter (zones from the upstream blue, teal 844 and PID sheets)
   - color: pardubickykraj
     name_en: "Pardubický kraj"
     name_cs: "Pardubický kraj"
-    source: pak128_czr/vehicles-rail-dmu/CD/844.png (ČD blue — recolor to Pardubický kraj white+red+yellow)
+    # 844.030 "Evik" and 844.031 "Helenka": navy roof and hood, thin red
+    # cantrail stripe, white body, navy stripe and bottom band, yellow doors,
+    # white face panel with the navy ČD logo
+    source: pak128_czr CZR-CD-847 drawing repainted with the p2 zone painter
+  - color: plzenskykraj
+    name_en: "Plzeňský kraj"
+    name_cs: "Plzeňský kraj"
+    # 7 units revitalised in 2026 (first 844.012, Mar 2026): white roof and hood,
+    # IDPK blue body, white arc over the windows, green and yellow bands
+    # descending toward the cab, yellow doors, grey skirt, blue face panel
+    source: pak128_czr CZR-CD-847 drawing repainted with the p2 zone painter

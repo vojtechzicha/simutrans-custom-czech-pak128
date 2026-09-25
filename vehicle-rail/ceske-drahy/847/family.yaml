@@ -11,35 +11,41 @@ display:
   family_en: "RegioFox"
   family_cs: "RegioFox"
 
-# Two-car PESA LINK II 0211 DMU. Source: pak128_czr vehicles-rail-dmu/CD/847.dat.
-# Layout: head motor (row 1) + trailer (row 0). Multiple liveries already exist in source
-# (CD blue, PID, Plzeňský kraj) and can be reused directly.
+# PESA LINK II with the new "fox" front, 106 units delivered 2023–26. One
+# articulated unit: two mirror-image, both-powered cab sections (750 kW,
+# 2 × 375 kW) on a shared Jakobs bogie, 44.47 m, 115 seats + 96 standing, 82 t,
+# 120 km/h permitted (140 design).
+#
+# Sprites: the pak128_czr PESA drawing shared with the 844 (see
+# 844/family.yaml); row 0 = front section, row 1 = rear section, `length: 9`
+# closes the Jakobs joint. The front section shows lit headlights, the rear
+# section lit tail lamps.
 
 vehicles:
   - id: "847"
-    role_en: "front motor car"
-    role_cs: "motorový vůz"
-    row: 1
+    role_en: "front section"
+    role_cs: "přední článek"
+    row: 0
     head: true
     tail: false
     prev: []
     next: ["847b"]
     fields:
-      cost: 1849500
-      payload: 162
-      speed: 140
-      weight: 42
-      runningcost: 56
-      fixed_cost: 320
-      intro_year: 2022
-      intro_month: 1
+      cost: 1674750
+      payload: 105
+      speed: 120
+      weight: 41
+      runningcost: 30
+      fixed_cost: 170
+      intro_year: 2023
+      intro_month: 8
       retire_year: 2055
       retire_month: 1
       waytype: track
       freight: Passagiere
-      length: 10
+      length: 9
       engine_type: diesel
-      power: 390
+      power: 375
       smoke: Diesel
       gear: 135
     extended:
@@ -47,27 +53,31 @@ vehicles:
 
   - id: "847b"
     display_id: "847"
-    role_en: "rear trailer"
-    role_cs: "řídicí vůz"
-    row: 0
+    role_en: "rear section"
+    role_cs: "zadní článek"
+    row: 1
     head: false
     tail: true
     prev: ["847"]
     next: []
     fields:
-      cost: 1500000
-      payload: 163
-      speed: 140
+      cost: 1674750
+      payload: 105
+      speed: 120
       weight: 41
-      runningcost: 4
-      fixed_cost: 20
-      intro_year: 2022
-      intro_month: 1
+      runningcost: 30
+      fixed_cost: 170
+      intro_year: 2023
+      intro_month: 8
       retire_year: 2055
       retire_month: 1
       waytype: track
       freight: Passagiere
-      length: 10
+      length: 9
+      engine_type: diesel
+      power: 375
+      smoke: Diesel
+      gear: 135
     extended:
       axles: 4
 
@@ -75,16 +85,29 @@ liveries:
   - color: najbrt2
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"
-    source: pak128_czr/vehicles-rail-dmu/CD/847.png (ČD blue/white — closest match; touch up red door accents to match Najbrt 2)
+    # 51 units (Jihočeský, Vysočina, Královéhradecký, Karlovarský): sapphire roof
+    # and hood, light cantrail line (yellow over the 1st class), sky-blue window
+    # band, sapphire stripe, light grey lower band, sapphire doors and skirts;
+    # front: black windscreen band, sky-blue ČD panel, black grille band
+    source: pak128_czr CZR-CD-847 drawing repainted with the p2 zone painter (zones from the upstream blue, teal 844 and PID sheets)
   - color: pidsedocervena
     name_en: "PID grey-red"
     name_cs: "PID šedo-červená"
-    source: pak128_czr/vehicles-rail-dmu/CD/847_PID.png (PID livery — direct match, no recolor needed)
+    # 38 units (Rakovník, Praha-Libeň): PID grey (RAL 7038), black window band
+    # and doors, a red block between cab and door, one red front stripe right of
+    # centre, dark grey roof equipment, yellow 1st-class stripe
+    source: pak128_czr CZR-CD-847 drawing repainted with the p2 zone painter (red block positions from the upstream CZR-CD-847_PID sheet)
   - color: plzenskykraj
     name_en: "Plzeňský kraj"
     name_cs: "Plzeňský kraj"
-    source: pak128_czr/vehicles-rail-dmu/CD/847_Plzen.png (Plzeňský kraj livery — direct match, no recolor needed)
+    # 847.067–076 (Plzeň): white roof and hood, aluminium roof equipment, IDPK
+    # blue body with green / white / yellow swooshes, yellow doors, grey skirt,
+    # blue lower front
+    source: pak128_czr CZR-CD-847 drawing repainted with the p2 zone painter
   - color: pardubickykraj
     name_en: "Pardubický kraj"
     name_cs: "Pardubický kraj"
-    source: pak128_czr/vehicles-rail-dmu/CD/847_Plzen.png (Plzeň red/white as closest — recolor to Pardubický kraj white+red+yellow)
+    # 847.011–017 (Havlíčkův Brod): navy roof and hood, thin red cantrail
+    # stripe, white body, navy stripe and bottom band, yellow doors; front keeps
+    # the sky-blue ČD panel
+    source: pak128_czr CZR-CD-847 drawing repainted with the p2 zone painter
