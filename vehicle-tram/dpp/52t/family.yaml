@@ -1,12 +1,11 @@
 agency: DPPraha
 type: "52T"
-copyright: TommPa9
-
-# The source sprites carry the upstream lane placement (their dats use no
-# offset), so no extra shift; the default [0, 4] sank them 4 px.
+# The sprites carry the upstream pak128.cs tram placement (front anchored where
+# the native Škoda 14T/15T sections sit on the track), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
+copyright: TommPa9
 
 display:
   agency_en: "DPP"
@@ -14,58 +13,156 @@ display:
   family_en: "Škoda 52T ForCity Plus"
   family_cs: "Škoda 52T ForCity Plus"
 
-# Scaffolded by scripts/import_tram_fleets.py — see TRAM_BACKLOG.md.
-# PLACEHOLDER ART: 15T PID-livery sprite (CZ-Praha-15TForCityAlfa-B), 3 rows. The real
-# 52T is a 5-section, 32 m, fully low-floor car delivered in the PID red-grey scheme;
-# regular service from Nov 2025 (nos. 9501–; 20 by end 2025, 40 by end 2026, options to
-# 200). Needs a redraw with 5 sections. Every other active Prague type is already
-# shipped by CZR-vehicles-tram-Praha.pak / CZ-vehicle-tram.pak.
+# Škoda 52T ForCity Plus Praha: 5-section, single-ended, 100 % low-floor tram,
+# 31.99 m x 2.50 m, 48.0 t empty, 70 seated + 173 standing (5/m2) = 243, 70 km/h
+# in service. 4 powered bogies (2 pivoting under the end sections 1 and 5, 2
+# partly pivoting under the short sections 2 and 4); section 3 hangs between
+# them. 5 double doors on the right side only (2 in section 1, 1 in section 3,
+# 2 in section 5). Regular service from 3 Nov 2025 (line 12); nos. 9501-9531
+# so far (30 active Sep 2026), 96 ordered under a framework for up to 200.
+# Traction power is not published (8 asynchronous motors, 2 per bogie):
+# 8 x 60 kW = 480 kW is an ASSUMED stand-in, not an official figure.
+#
+# PID livery as delivered (photos of 9503/9506; differs from the 2024 design
+# render): light grey body with full-height red blocks (red lower panel + red
+# roof fairing) on the rear half of section 1, all of section 3 and the front
+# half of section 5; continuous black glazing band; black upper front mask
+# (roof cap, windscreen, headlight band) over a light grey lower front with one
+# red rectangle right of centre; the rear end repeats the scheme with tail
+# lights; dark single-arm pantograph behind the cab.
+#
+# Sprite: drawn new (no 52T exists upstream) with a box model rendered in the
+# pak128 projection. Section lengths follow the Škoda side drawing (9.4 + 4.4 +
+# 4.5 + 4.4 + 9.4 m -> 7 + 3 + 3 + 3 + 7 carunits = 23, like the 31.4 m 15T's
+# 8 + 7 + 8); every section is drawn exactly its own length from the front
+# anchor of TommPa9's native Škoda 14T/15T sections (hence the credit), body
+# height/width matched to the 15T. Economy scaled from CZR-Praha-Skoda_15T by
+# capacity (243 / 210) and split over the sections by length.
 
 vehicles:
   - id: "52T"
+    display_id: "52T"
     role_en: "front section"
-    role_cs: "přední díl"
+    role_cs: "přední článek"
     row: 0
     head: true
     tail: false
     prev: []
     next: ["52T_2"]
     fields:
-      cost: 450000
-      payload: 60
-      speed: 80
-      weight: 15
-      runningcost: 25
-      fixed_cost: 128
+      cost: 475000
+      payload: 62
+      speed: 70
+      weight: 13
+      runningcost: 21
+      fixed_cost: 108
       intro_year: 2025
       intro_month: 11
-      retire_year: 2090
+      retire_year: 2060
       retire_month: 1
       waytype: schiene_tram
       freight: Passagiere
-      length: 8
+      length: 7
       engine_type: electric
-      power: 720
+      power: 480
 
   - id: "52T_2"
     display_id: "52T"
-    role_en: "middle section"
-    role_cs: "střední díl"
+    role_en: "second section"
+    role_cs: "druhý článek"
     row: 1
     head: false
     tail: false
     prev: ["52T"]
     next: ["52T_3"]
     fields:
-      cost: 450000
-      payload: 80
-      speed: 80
-      weight: 12
-      runningcost: 15
-      fixed_cost: 77
+      cost: 204000
+      payload: 34
+      speed: 70
+      weight: 8
+      runningcost: 9
+      fixed_cost: 46
       intro_year: 2025
       intro_month: 11
-      retire_year: 2090
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 3
+      engine_type: electric
+      power: 0
+
+  - id: "52T_3"
+    display_id: "52T"
+    role_en: "middle section"
+    role_cs: "střední článek"
+    row: 2
+    head: false
+    tail: false
+    prev: ["52T_2"]
+    next: ["52T_4"]
+    fields:
+      cost: 204000
+      payload: 34
+      speed: 70
+      weight: 6
+      runningcost: 9
+      fixed_cost: 46
+      intro_year: 2025
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 3
+      engine_type: electric
+      power: 0
+
+  - id: "52T_4"
+    display_id: "52T"
+    role_en: "fourth section"
+    role_cs: "čtvrtý článek"
+    row: 3
+    head: false
+    tail: false
+    prev: ["52T_3"]
+    next: ["52T_5"]
+    fields:
+      cost: 204000
+      payload: 34
+      speed: 70
+      weight: 8
+      runningcost: 9
+      fixed_cost: 46
+      intro_year: 2025
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 3
+      engine_type: electric
+      power: 0
+
+  - id: "52T_5"
+    display_id: "52T"
+    role_en: "rear section"
+    role_cs: "zadní článek"
+    row: 4
+    head: false
+    tail: true
+    prev: ["52T_4"]
+    next: []
+    fields:
+      cost: 475000
+      payload: 79
+      speed: 70
+      weight: 13
+      runningcost: 21
+      fixed_cost: 109
+      intro_year: 2025
+      intro_month: 11
+      retire_year: 2060
       retire_month: 1
       waytype: schiene_tram
       freight: Passagiere
@@ -73,33 +170,7 @@ vehicles:
       engine_type: electric
       power: 0
 
-  - id: "52T_3"
-    display_id: "52T"
-    role_en: "rear section"
-    role_cs: "zadní díl"
-    row: 2
-    head: false
-    tail: true
-    prev: ["52T_2"]
-    next: []
-    fields:
-      cost: 450000
-      payload: 70
-      speed: 80
-      weight: 15
-      runningcost: 20
-      fixed_cost: 102
-      intro_year: 2025
-      intro_month: 11
-      retire_year: 2090
-      retire_month: 1
-      waytype: schiene_tram
-      freight: Passagiere
-      length: 8
-      engine_type: electric
-      power: 0
-
 liveries:
-  - color: pidcervenoseda
-    name_en: "PID red-grey"
-    name_cs: "PID červeno-šedá"
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"
