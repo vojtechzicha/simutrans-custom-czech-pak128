@@ -1,0 +1,122 @@
+agency: CeskeDrahy
+type: "848"
+copyright: Lubak91
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "Stadler GTW 2/6"
+  family_cs: "Stadler GTW 2/6"
+
+# Class 848: 12 second-hand Stadler GTW 2/6 (ex-DB class 646, built 1999–2000),
+# bought from DB Regio in 2018 and modernised by ŽOS Zvolen; first in service
+# 20 May 2020, all 12 modernised by 2022. They run only in the Olomoucký kraj
+# (Olomouc – Senice na Hané / Drahanovice, Olomouc – Hlubočky – Moravský Beroun,
+# Šumperk – Hanušovice / Jeseník / Sobotín, Lipová – Javorník).
+# 38.7 m, 108 seats + 103 standing, 59 t empty, 550 kW MTU diesel-electric in the
+# power module, 120 km/h, axles 2'Bo'2'.
+#
+# Three sections like the real unit: two passenger end cars resting on the short
+# central power module (engine box + the powered bogie). Sprites: the pak128.CS
+# ZSSK 840 drawing (rail-psg mail/840_841/zssk_840_a/b/c), which is the same GTW 2/6
+# body; section lengths 8 + 2 + 8 as drawn. The only buildable consist is
+# front car + power module + rear car.
+
+vehicles:
+  - id: "848-front"
+    display_id: "848"
+    role_en: "front end car"
+    role_cs: "přední článek"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["848-power"]
+    fields:
+      cost: 1278400
+      payload: 105
+      speed: 120
+      weight: 22
+      runningcost: 27
+      fixed_cost: 206
+      intro_year: 2020
+      intro_month: 5
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "848-power"
+    display_id: "848"
+    role_en: "power module"
+    role_cs: "hnací modul"
+    row: 1
+    head: false
+    tail: false
+    prev: ["848-front"]
+    next: ["848-rear"]
+    fields:
+      cost: 634400
+      payload: 0
+      speed: 120
+      weight: 15
+      runningcost: 16
+      fixed_cost: 118
+      intro_year: 2020
+      intro_month: 5
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 2
+      engine_type: diesel
+      power: 550
+      smoke: Diesel_small
+      gear: 135
+    extended:
+      axles: 2
+
+  - id: "848-rear"
+    display_id: "848"
+    role_en: "rear end car"
+    role_cs: "zadní článek"
+    row: 2
+    head: false
+    tail: true
+    prev: ["848-power"]
+    next: []
+    fields:
+      cost: 1278400
+      payload: 106
+      speed: 120
+      weight: 22
+      runningcost: 27
+      fixed_cost: 206
+      intro_year: 2020
+      intro_month: 5
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+    # ČD corporate colours with Olomoucký kraj decals (photos 848.015 / 016, 2025):
+    # sapphire roof, white stripe under the roof edge, a narrow sky-blue band over
+    # the flush black window band, thin sapphire stripe, white lower body, sapphire
+    # doors; the power module keeps the bands with a dark engine-room panel. Front:
+    # sapphire cap, sky-blue windscreen surround and lamp panel with the ČD logo,
+    # sapphire stripe, white cheeks, black skirt with a yellow edge. The two 2026
+    # promotional wraps (848.016 "Konicko", 848.026 "Jesenicko") are not modelled.
+    source: pak128.CS ZSSK 840 (GTW 2/6) body, repainted zone by zone from photos

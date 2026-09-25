@@ -11,11 +11,17 @@ display:
   family_en: "Siemens Desiro Classic"
   family_cs: "Siemens Desiro Classic"
 
-# Two-car articulated DMU. Source: pak128cs db_desiro.dat (db_642_a + db_642_b).
-# Both halves are required: 642a always leads, 642b always trails. Minimum consist
-# is a-b; longer runs alternate a-b-a-b. (Simutrans has no bidirectional flag
-# here, so symmetric head/tail would allow a single half to run alone — which is
-# wrong for an articulated DMU.)
+# ČD's own six Desiro Classic units (642.401–406 + 642.901–906, built ~2005),
+# bought from Hessische Landesbahn in 2023, repainted into the Doprava Ústeckého
+# kraje scheme from Dec 2023 and in service from May 2024 at Děčín (U8 Děčín –
+# Rumburk, Šluknovsko). 41.7 m, 126 seats, 2 × 275 kW, 120 km/h, 2 sections on
+# 3 bogies (Jakobs). (DB Regio's own leased 642s in DB red are not ČD's.)
+#
+# Two-section articulated DMU. Sprites: pak128.CS db_desiro (db_642_a + db_642_b,
+# Lubak91/Sim), repainted. Both halves are required: 642a always leads, 642b always
+# trails. Minimum consist is a-b; longer runs alternate a-b-a-b. (Simutrans has no
+# bidirectional flag here, so symmetric head/tail would allow a single half to run
+# alone — which is wrong for an articulated DMU.)
 
 vehicles:
   - id: "642a"
@@ -34,9 +40,9 @@ vehicles:
       weight: 34
       runningcost: 70
       fixed_cost: 538
-      intro_year: 1999
-      intro_month: 1
-      retire_year: 2040
+      intro_year: 2024
+      intro_month: 5
+      retire_year: 2045
       retire_month: 1
       waytype: track
       freight: Passagiere
@@ -64,9 +70,9 @@ vehicles:
       weight: 34
       runningcost: 65
       fixed_cost: 499
-      intro_year: 1999
-      intro_month: 1
-      retire_year: 2040
+      intro_year: 2024
+      intro_month: 5
+      retire_year: 2045
       retire_month: 1
       waytype: track
       freight: Passagiere
@@ -82,4 +88,8 @@ liveries:
   - color: dukzelenobila
     name_en: "DÚK green-white"
     name_cs: "DÚK zeleno-bílá"
-    source: pak128cs/rail-psg mail/db_desiro.png (DB red — recolor to DÚK zeleno-bílá)
+    # Photos 642 401 / 402 (2024–25): one bright green over body and window band,
+    # light grey roof, a white swoosh from the roof behind the cab down to the lower
+    # front corner, white floor-level stripe, light grey doors, green cab dome and
+    # front number strip, dark grey skirts, black coupler recess; ČD + DÚK logos.
+    source: pak128.CS db_desiro (DB red body), repainted zone by zone from photos of 642 401 / 402
