@@ -1,0 +1,121 @@
+agency: DPBrno
+type: "03T"
+image_offset: [0, 0]       # sprites carry their own placement (upstream convention)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Škoda 03T6 Anitra"
+  family_cs: "Škoda 03T6 Anitra"
+
+# Škoda 03T "Anitra" (Brno name of the Astra / Inekon LTM 10.08): three-section,
+# 50 % low-floor unidirectional tram. The two end sections ride on one motored
+# bogie each; the low-floor middle section is suspended between them
+# (4 axles). DPMB 1805-1821 delivered 2003-2006; the stock is being run down:
+# 6 active in 2026 (1807, 1809, 1812, 1813, 1815, 1817), 1811 / 1818 / 1820
+# stored. 20.09 m, 2.46 m wide, 24.2 t, 4 x 90 kW, 70 km/h, 42 seated + 113
+# standing (DPMB total 155). Doors on the right only: one single door in each
+# end section, two double doors in the middle section. The DPMB drawing
+# (anitra.png) shows the middle as the LONGEST section (6.8 m body vs 5.8 m
+# end bodies) and only two bogies.
+# Livery (DPMB white-red): red roof-edge band over a thin white line, black
+# window band, white line under the windows, red lower body whose top edge
+# sweeps down to the bumper at both ends, white skirt; the low-floor middle
+# section has its windows and bands set lower. Front: upright Astra cab with a
+# large, slightly raked windscreen, white face, black lamp housings, red
+# valance, white bumper; grey roof covers, joint covers over the bellows,
+# single-arm pantograph and a cab air-conditioning box on the front roof.
+# Sprites: redrawn from scratch as a 3D model rendered to the pak128.cs
+# projection (replaces the upstream CZR-Brno-Skoda_03T placeholder, which is
+# the Prague 14T drawing with its raked Porsche nose; the pak128.cs Astra
+# objects share that same silhouette). Sections 4 + 5 + 4 like upstream; the
+# joints are cut at the bellows centres so all three sections keep the
+# drawing's scale. The section placement in the tile follows the native
+# pak128.cs trams.
+# Economy: the upstream CZR-Brno-Skoda_03T fields (cost, running and fixed
+# cost); power split over the two motored end sections. Available until 2028
+# (the type is being withdrawn).
+
+vehicles:
+  - id: "03T"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["03T_2"]
+    fields:
+      cost: 360000
+      payload: 48
+      speed: 70
+      weight: 9
+      runningcost: 22
+      fixed_cost: 99
+      intro_year: 2003
+      intro_month: 1
+      retire_year: 2028
+      retire_month: 12
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 4
+      engine_type: electric
+      power: 180
+
+  - id: "03T_2"
+    display_id: "03T"
+    role_en: "middle section (low-floor)"
+    role_cs: "střední nízkopodlažní díl"
+    row: 1
+    head: false
+    tail: false
+    prev: ["03T"]
+    next: ["03T_3"]
+    fields:
+      cost: 360000
+      payload: 59
+      speed: 70
+      weight: 6
+      runningcost: 10
+      fixed_cost: 45
+      intro_year: 2003
+      intro_month: 1
+      retire_year: 2028
+      retire_month: 12
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 5
+
+  - id: "03T_3"
+    display_id: "03T"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 2
+    head: false
+    tail: true
+    prev: ["03T_2"]
+    next: []
+    fields:
+      cost: 360000
+      payload: 48
+      speed: 70
+      weight: 9
+      runningcost: 12
+      fixed_cost: 54
+      intro_year: 2003
+      intro_month: 1
+      retire_year: 2028
+      retire_month: 12
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 4
+      engine_type: electric
+      power: 180
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"

@@ -1,0 +1,119 @@
+agency: DPBrno
+type: "K3R-N"
+image_offset: [0, 0]       # sprites carry their own placement (upstream convention)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Pars nova K3R-N"
+  family_cs: "Pars nova K3R-N"
+
+# Pars nova / ČKD Tatra K3R-N: DPMB's three-section, partly low-floor tram.
+# 1751 and 1752 are Tatra K2s rebuilt by Pars nova in Šumperk (2003-2004) with
+# a new low-floor middle section inserted; 1753 and 1754 are complete new
+# builds (2006) on the K2 documents. 4 active (1751-1754). 28.25 m body
+# (29.35 m over couplers, DPMB), 2.5 m wide, 36.2 t, 4 bogies each with two
+# 40 kW motors (TV Progress) = 320 kW, 65 km/h, 54 seated + 142 standing
+# (DPMB total 208). Unidirectional, doors on the right only (two 4-leaf doors
+# in each end section, one in the middle). First passenger service 11 Feb 2004
+# (1751 in regular DPMB service from 1 Jul 2004).
+# Livery (DPMB tram "unifik"): light grey roof and cantrail, black window
+# band, a white line under the windows that sweeps down at both ends, red
+# lower body, white skirt; the middle section's white line dips in a V under
+# its low-floor windows. Front and rear: the flat Pars nova (Patrik Kotas)
+# fibreglass masks: red U-frame round the windscreen, light grey strip, black
+# band, white lamp strip, red apron, white bumper. Single-arm pantograph and a
+# white air-conditioning unit over the cab.
+# Sprites: redrawn from scratch as a 3D model rendered to the pak128.cs
+# projection (replaces the upstream CZR-Brno-Tatra_KT3RN placeholder, whose end
+# sections are TommPa9's K2 ends with the round K2 fronts). Section lengths
+# 8 + 5 + 8 like the upstream KT3RN / KT8D5 (the K3R-N is close to a KT8D5 in
+# length); each end section carries the whole bellows at its inner end, the
+# feature layout follows the DPMB side drawing (k3rn.png). The section
+# placement in the tile follows the native pak128.cs trams.
+# Economy: the upstream CZR-Brno-Tatra_KT3RN fields (cost, running and fixed
+# cost); power split over the two motored end sections like upstream.
+
+vehicles:
+  - id: "K3R-N"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["K3R-N_2"]
+    fields:
+      cost: 38600
+      payload: 76
+      speed: 65
+      weight: 14
+      runningcost: 22
+      fixed_cost: 91
+      intro_year: 2004
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 12
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 160
+
+  - id: "K3R-N_2"
+    display_id: "K3R-N"
+    role_en: "middle section (low-floor)"
+    role_cs: "střední nízkopodlažní díl"
+    row: 1
+    head: false
+    tail: false
+    prev: ["K3R-N"]
+    next: ["K3R-N_3"]
+    fields:
+      cost: 38600
+      payload: 56
+      speed: 65
+      weight: 8
+      runningcost: 15
+      fixed_cost: 62
+      intro_year: 2004
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 12
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 5
+
+  - id: "K3R-N_3"
+    display_id: "K3R-N"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 2
+    head: false
+    tail: true
+    prev: ["K3R-N_2"]
+    next: []
+    fields:
+      cost: 38600
+      payload: 76
+      speed: 65
+      weight: 14
+      runningcost: 20
+      fixed_cost: 58
+      intro_year: 2004
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 12
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 160
+
+liveries:
+  - color: dpmbsedobilocervena
+    name_en: "DPMB grey-white-red"
+    name_cs: "DPMB šedo-bílo-červená"
