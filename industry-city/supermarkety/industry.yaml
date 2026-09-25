@@ -1,0 +1,217 @@
+# Czech supermarket chains as city consumer industries (dist/VZ-Supermarkets-city.pak).
+# Sheets are generated: python tools/gen_shops.py industry-city/supermarkety
+# One building model per size class (store 1x1, market 1x2, hyper 2x2) shared by
+# every chain of that class; the chains differ in colours, signs and roof logo.
+group: Supermarkets
+
+defaults:
+  location: city
+  electricity_amount: 0
+  electricity_boost: 0
+  mapcolor: 147
+
+# Input goods per class. Only goods that some pak128.cs factory produces:
+# sugar and soft_drinks (listed by the upstream shops) have no producer.
+# suppliers = how many supply chains the game builds with a new shop.
+goods:
+  store:                          # convenience: fresh food, bakery, drinks
+    - {good: food, capacity: 25, suppliers: 1, factor: 5}
+    - {good: bread, capacity: 15, factor: 6}
+    - {good: dairy_products, capacity: 12, factor: 5}
+    - {good: beer, capacity: 10, factor: 6}
+    - {good: meat, capacity: 8, factor: 4}
+    - {good: canned_food, capacity: 8, factor: 3}
+    - {good: goods_, capacity: 8, factor: 2}
+  market:                         # full grocery range plus a household aisle
+    - {good: food, capacity: 150, suppliers: 2, factor: 20}
+    - {good: meat, capacity: 100, factor: 18}
+    - {good: bread, capacity: 60, factor: 10}
+    - {good: dairy_products, capacity: 60, factor: 9}
+    - {good: beer, capacity: 100, factor: 15}
+    - {good: potatoes, capacity: 50, factor: 8}
+    - {good: canned_food, capacity: 60, factor: 8}
+    - {good: goods_, capacity: 50, factor: 6}
+  hyper:                          # groceries plus non-food: electronics, clothes, books
+    - {good: food, capacity: 220, suppliers: 2, factor: 20}
+    - {good: meat, capacity: 200, factor: 25}
+    - {good: bread, capacity: 130, factor: 13}
+    - {good: dairy_products, capacity: 100, factor: 11}
+    - {good: beer, capacity: 140, factor: 20}
+    - {good: potatoes, capacity: 60, factor: 9}
+    - {good: canned_food, capacity: 110, factor: 12}
+    - {good: goods_, capacity: 200, factor: 20}
+    - {good: electronics, capacity: 130, factor: 13}
+    - {good: textile, capacity: 100, factor: 10}
+    - {good: Bucher, capacity: 50, factor: 6}
+  cash_carry:                     # wholesale for restaurants and shops: bulk food and drink, catering kit
+    - {good: food, capacity: 220, suppliers: 2, factor: 20}
+    - {good: meat, capacity: 220, factor: 28}
+    - {good: dairy_products, capacity: 120, factor: 12}
+    - {good: beer, capacity: 200, factor: 26}
+    - {good: canned_food, capacity: 160, factor: 16}
+    - {good: potatoes, capacity: 80, factor: 10}
+    - {good: bread, capacity: 60, factor: 6}
+    - {good: goods_, capacity: 200, factor: 20}
+    - {good: electronics, capacity: 100, factor: 10}
+    - {good: Moebel, capacity: 60, factor: 6}
+
+classes:
+  store:                          # like pak128.cs Konzum_1990
+    goods: store
+    fields: {productivity: 55, range: 55, passenger_demand: 1, passenger_boost: 12, mail_demand: 1, mail_boost: 6}
+  market:                         # like pak128.cs supermarket
+    goods: market
+    fields: {productivity: 100, range: 100, passenger_demand: 3, passenger_boost: 100, mail_demand: 1, mail_boost: 100}
+  hyper:                          # like pak128.cs Obchodni_centrum
+    goods: hyper
+    fields: {productivity: 200, range: 200, passenger_demand: 6, passenger_boost: 200, mail_demand: 1, mail_boost: 100}
+
+# distributionweight follows the chains' Czech store counts; intro_year is the
+# year the chain (or format) opened its first Czech store.
+objects:
+  # --- small stores (1x1) -------------------------------------------------------
+  - id: Zabka
+    sprite: zabka
+    dims: [1, 1]
+    class: store
+    generate: {model: store, brand: zabka}
+    fields: {distributionweight: 3, intro_year: 2008}
+    name_en: "Žabka"
+    name_cs: "Žabka"
+    details_en: "Convenience store of the Žabka chain, owned by Tesco since 2011. The first Czech Žabka opened in Prague in 2008."
+    details_cs: "Samoobsluha sítě Žabka, od roku 2011 patří Tescu. První česká Žabka otevřela v Praze v roce 2008."
+  - id: TescoExpres
+    sprite: tesco_expres
+    dims: [1, 1]
+    class: store
+    generate: {model: store, brand: tesco_expres}
+    fields: {distributionweight: 2, intro_year: 2007}
+    name_en: "Tesco Expres"
+    name_cs: "Tesco Expres"
+    details_en: "Tesco's small neighbourhood format. The first Tesco Expres opened in Prague in 2007."
+    details_cs: "Malý sousedský formát Tesca. První Tesco Expres otevřelo v Praze v roce 2007."
+  - id: Albert
+    sprite: albert
+    dims: [1, 1]
+    class: store
+    generate: {model: store, brand: albert}
+    fields: {distributionweight: 3, intro_year: 2000}
+    name_en: "Albert Supermarket"
+    name_cs: "Albert supermarket"
+    details_en: "Supermarket of the Albert chain (Ahold), launched in 2000 from the Mana and Sesam stores."
+    details_cs: "Supermarket řetězce Albert (Ahold), který vznikl v roce 2000 z prodejen Mana a Sesam."
+  - id: Coop
+    sprite: coop
+    dims: [1, 1]
+    class: store
+    generate: {model: store, brand: coop}
+    fields: {distributionweight: 6, intro_year: 2007}
+    name_en: "COOP"
+    name_cs: "COOP"
+    details_en: "Consumer co-operative store (Jednota, Tuty, Konzum and village shops), under one COOP brand since 2007. About 2,500 stores, many of them the only shop in the village."
+    details_cs: "Prodejna spotřebního družstva (Jednota, Tuty, Konzum a vesnické obchody), od roku 2007 pod jednou značkou COOP. Asi 2 500 prodejen, často jediný obchod ve vsi."
+
+  # --- supermarkets (1x2) ---------------------------------------------------------
+  - id: Lidl
+    sprite: lidl
+    dims: [1, 2]
+    class: market
+    generate: {model: market, brand: lidl}
+    fields: {distributionweight: 4, intro_year: 2003}
+    name_en: "Lidl"
+    name_cs: "Lidl"
+    details_en: "Discount supermarket. Lidl came to the Czech Republic on 26 June 2003, opening 14 stores at once."
+    details_cs: "Diskontní supermarket. Lidl vstoupil na český trh 26. června 2003 otevřením 14 prodejen najednou."
+  - id: Penny
+    sprite: penny
+    dims: [1, 2]
+    class: market
+    generate: {model: market, brand: penny}
+    fields: {distributionweight: 5, intro_year: 1997}
+    name_en: "Penny"
+    name_cs: "Penny"
+    details_en: "Discount supermarket with about 440 Czech stores. The first Penny Market opened in Plzeň in 1997."
+    details_cs: "Diskontní supermarket s asi 440 českými prodejnami. První Penny Market otevřel v Plzni v roce 1997."
+  - id: Billa
+    sprite: billa
+    dims: [1, 2]
+    class: market
+    generate: {model: market, brand: billa}
+    fields: {distributionweight: 4, intro_year: 1991}
+    name_en: "Billa"
+    name_cs: "Billa"
+    details_en: "Supermarket of the Rewe group. The first Czech Billa opened in Brno-Žabovřesky in 1991."
+    details_cs: "Supermarket skupiny Rewe. První česká Billa otevřela v Brně-Žabovřeskách v roce 1991."
+  - id: Norma
+    sprite: norma
+    dims: [1, 2]
+    class: market
+    generate: {model: market, brand: norma}
+    fields: {distributionweight: 1, intro_year: 1992}
+    name_en: "Norma"
+    name_cs: "Norma"
+    details_en: "German discount supermarket with about fifty Czech stores. The first opened in Prague in 1992."
+    details_cs: "Německý diskontní supermarket s asi padesáti českými prodejnami. První otevřel v Praze v roce 1992."
+  - id: Tesco
+    sprite: tesco
+    dims: [1, 2]
+    class: market
+    generate: {model: market, brand: tesco}
+    fields: {distributionweight: 2, intro_year: 2005}
+    name_en: "Tesco Supermarket"
+    name_cs: "Tesco supermarket"
+    details_en: "Tesco's supermarket format, between Expres and the hypermarkets. The first opened in Mikulov in 2005."
+    details_cs: "Supermarketový formát Tesca, mezi Expresem a hypermarkety. První otevřel v Mikulově v roce 2005."
+
+  # --- hypermarkets (2x2) ------------------------------------------------------------
+  - id: Kaufland
+    sprite: kaufland
+    dims: [2, 2]
+    class: hyper
+    generate: {model: hyper, brand: kaufland}
+    fields: {distributionweight: 3, intro_year: 1998}
+    name_en: "Kaufland"
+    name_cs: "Kaufland"
+    details_en: "Hypermarket of the Schwarz group (like Lidl), in the Czech Republic since 1998."
+    details_cs: "Hypermarket skupiny Schwarz (stejně jako Lidl), v Česku od roku 1998."
+  - id: Globus
+    sprite: globus
+    dims: [2, 2]
+    class: hyper
+    generate: {model: hyper, brand: globus}
+    fields: {distributionweight: 1, intro_year: 1996}
+    name_en: "Globus"
+    name_cs: "Globus"
+    details_en: "Large hypermarket. Globus Brno-Ivanovice, opened on 4 November 1996, was the first hypermarket in the Czech Republic."
+    details_cs: "Velký hypermarket. Globus v Brně-Ivanovicích, otevřený 4. listopadu 1996, byl první hypermarket v Česku."
+  - id: AlbertHypermarket
+    sprite: albert_hyper
+    dims: [2, 2]
+    class: hyper
+    generate: {model: hyper, brand: albert_hyper}
+    fields: {distributionweight: 2, intro_year: 2007}
+    name_en: "Albert Hypermarket"
+    name_cs: "Albert hypermarket"
+    details_en: "Albert's hypermarket format. The first Hyper Albert opened in Vestec in 2007; by 2009 every Hypernova had been renamed Albert."
+    details_cs: "Hypermarketový formát Albertu. První Hyper Albert otevřel ve Vestci v roce 2007, do roku 2009 se přejmenovaly všechny Hypernovy."
+  - id: TescoHypermarket
+    sprite: tesco_hyper
+    dims: [2, 2]
+    class: hyper
+    generate: {model: hyper, brand: tesco_hyper}
+    fields: {distributionweight: 2, intro_year: 1998}
+    name_en: "Tesco Hypermarket"
+    name_cs: "Tesco hypermarket"
+    details_en: "Tesco hypermarket (branded Tesco Extra 2010–2024). The first opened at Prague-Zličín in 1998."
+    details_cs: "Hypermarket Tesco (v letech 2010–2024 pod značkou Tesco Extra). První otevřel na pražském Zličíně v roce 1998."
+  - id: Makro
+    sprite: makro
+    dims: [2, 2]
+    class: hyper
+    goods: cash_carry
+    generate: {model: hyper, brand: makro}
+    fields: {distributionweight: 1, intro_year: 1997, passenger_demand: 4, passenger_boost: 120}
+    name_en: "Makro Cash & Carry"
+    name_cs: "Makro Cash & Carry"
+    details_en: "Wholesale warehouse for restaurants, hotels and shops, part of the Metro group. The first Czech Makro opened in Ostrava in 1997."
+    details_cs: "Velkoobchod pro restaurace, hotely a obchody ze skupiny Metro. První české Makro otevřelo v Ostravě v roce 1997."

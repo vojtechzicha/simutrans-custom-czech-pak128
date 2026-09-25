@@ -4,9 +4,11 @@
 Walks every ``vehicle-*/.../family.yaml`` under the project root, groups them by
 (agency, mode), and emits one ``.pak`` per group into ``dist/`` — e.g.
 ``dist/VZ-CeskeDrahy-rail.pak`` contains every family and livery for ČD's rail
-fleet. Station sets (``station-*/.../station.yaml``) are grouped the same way by
-their ``group`` field, e.g. ``dist/VZ-Stations-rail.pak``. Per-livery DAT / PNG files live side-by-side inside one shared build
-directory so a single ``makeobj`` invocation bundles them.
+fleet. Station sets (``station-*/.../station.yaml``) and industry sets
+(``industry-*/.../industry.yaml``) are grouped the same way by their ``group``
+field, e.g. ``dist/VZ-Stations-rail.pak``, ``dist/VZ-Supermarkets-city.pak``.
+Per-livery DAT / PNG files live side-by-side inside one shared build directory
+so a single ``makeobj`` invocation bundles them.
 
 Usage:
     python build.py                # build every agency-mode pak
@@ -83,12 +85,12 @@ def basename_for(family: dict, livery: dict) -> str:
     return f"VZ-{family['agency']}-{slug(family['type'])}-{livery['color']}"
 
 
-SOURCE_ROOTS = {"family.yaml": "vehicle-", "station.yaml": "station-"}
+SOURCE_ROOTS = {"family.yaml": "vehicle-", "station.yaml": "station-", "industry.yaml": "industry-"}
 
 
 def mode_for(source_yaml: Path) -> str:
     """Derive the transport mode from the top-level folder (vehicle-rail → rail,
-    station-rail → rail)."""
+    station-rail → rail, industry-city → city)."""
     rel = source_yaml.relative_to(ROOT)
     top = rel.parts[0]
     prefix = SOURCE_ROOTS[source_yaml.name]
@@ -97,7 +99,8 @@ def mode_for(source_yaml: Path) -> str:
 
 
 def group_for(source_yaml: Path, data: dict) -> str:
-    """The pak group token: a vehicle family's agency, a station set's group."""
+    """The pak group token: a vehicle family's agency, a station or industry
+    set's group."""
     return data["agency"] if source_yaml.name == "family.yaml" else data["group"]
 
 
@@ -347,6 +350,92 @@ def stage_station_set(station_yaml: Path, mode: str, out_dir: Path,
     return ok, fail
 
 
+# Industry sets (industry-<location>/.../industry.yaml): city consumer
+# factories drawn by tools/gen_shops.py. Every object has four layouts and two
+# seasons on one sheet: row = season * 4 + layout, column = tile y * w + x of
+# that layout, where the odd layouts swap the object's dims. makeobj keys tile
+# images as backimage[layout][y][x][height][phase][season].
+INDUSTRY_LAYOUTS = 4
+INDUSTRY_SEASONS = 2
+
+
+def industry_basename(spec: dict, obj: dict) -> str:
+    return f"VZ-{spec['group']}-{obj['id']}"
+
+
+def industry_fields(spec: dict, obj: dict) -> dict:
+    """Set defaults, then the size class's fields, then the object's own."""
+    fields = dict(spec.get("defaults", {}))
+    fields.update(spec["classes"][obj["class"]].get("fields", {}))
+    fields.update(obj.get("fields", {}))
+    return fields
+
+
+def industry_goods(spec: dict, obj: dict) -> list[dict]:
+    return spec["goods"][obj.get("goods", spec["classes"][obj["class"]]["goods"])]
+
+
+def emit_industry_dat(spec: dict, obj: dict) -> str:
+    bn = industry_basename(spec, obj)
+    credit = spec.get("copyright")
+    lines = [
+        "obj=factory",
+        f"name={bn}",
+        f"copyright={credit + ', ' if credit else ''}vojtechzicha",
+    ]
+    lines += [f"{k}={v}" for k, v in industry_fields(spec, obj).items()]
+    for i, g in enumerate(industry_goods(spec, obj)):
+        lines += [
+            f"inputgood[{i}]={g['good']}",
+            f"inputcapacity[{i}]={g['capacity']}",
+            f"inputsupplier[{i}]={g.get('suppliers', 0)}",
+            f"inputfactor[{i}]={g['factor']}",
+        ]
+    x_dim, y_dim = obj["dims"]
+    lines.append(f"dims={x_dim},{y_dim},{INDUSTRY_LAYOUTS}")
+    lines.append("")
+    for season in range(INDUSTRY_SEASONS):
+        for layout in range(INDUSTRY_LAYOUTS):
+            w, h = (x_dim, y_dim) if layout % 2 == 0 else (y_dim, x_dim)
+            row = season * INDUSTRY_LAYOUTS + layout
+            for y in range(h):
+                for x in range(w):
+                    lines.append(f"backimage[{layout}][{y}][{x}][0][0][{season}]={bn}.{row}.{y * w + x}")
+    return "\n".join(lines) + "\n"
+
+
+def emit_industry_tab_entries(spec: dict, obj: dict, lang: str) -> list[str]:
+    """The factory's name, plus the text of its info window's Details tab
+    (``factory_<name>_details``) when the object has one."""
+    bn = industry_basename(spec, obj)
+    suffix = "en" if lang == "en" else "cs"
+    out = [bn, obj[f"name_{suffix}"]]
+    details = obj.get(f"details_{suffix}")
+    if details:
+        out += [f"factory_{bn}_details", " ".join(details.split())]
+    return out
+
+
+def stage_industry_set(industry_yaml: Path, out_dir: Path,
+                       tab_lines: dict[str, list[str]]) -> tuple[int, int]:
+    """Write the .dat/.png of every object of one industry.yaml into out_dir."""
+    spec = yaml.safe_load(industry_yaml.read_text(encoding="utf-8"))
+    ok = fail = 0
+    for obj in spec["objects"]:
+        bn = industry_basename(spec, obj)
+        png_src = industry_yaml.parent / "sprites" / f"{obj['sprite']}.png"
+        if not png_src.exists():
+            print(f"  [skip] {bn}: missing sprite {png_src}", file=sys.stderr)
+            fail += 1
+            continue
+        shutil.copy2(png_src, out_dir / f"{bn}.png")
+        (out_dir / f"{bn}.dat").write_text(emit_industry_dat(spec, obj), encoding="utf-8")
+        for lang in TAB_LANGS:
+            tab_lines[lang].extend(emit_industry_tab_entries(spec, obj, lang))
+        ok += 1
+    return ok, fail
+
+
 # Languages emitted for each agency-mode pak. Filenames are <lang>.<pak_bn>.tab
 # (e.g. cz.VZ-CeskeDrahy-rail.tab) — Simutrans's translator::load_files_from_folder
 # only matches a DOT-separated language prefix/suffix, not the underscore form
@@ -361,7 +450,8 @@ UTF8_BOM = b"\xef\xbb\xbf"
 
 def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, int]:
     """Build a single agency-mode pak from the given family.yaml (or
-    station.yaml) files. Returns (succeeded, failed) liveries/objects."""
+    station.yaml / industry.yaml) files. Returns (succeeded, failed)
+    liveries/objects."""
     pak_bn = pak_basename_for(agency, mode)
     out_dir = BUILD / pak_bn
     if out_dir.exists():
@@ -373,8 +463,11 @@ def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, in
 
     ok = fail = 0
     for fy in sorted(family_yamls):
-        if fy.name == "station.yaml":
-            s_ok, s_fail = stage_station_set(fy, mode, out_dir, tab_lines)
+        if fy.name in ("station.yaml", "industry.yaml"):
+            if fy.name == "station.yaml":
+                s_ok, s_fail = stage_station_set(fy, mode, out_dir, tab_lines)
+            else:
+                s_ok, s_fail = stage_industry_set(fy, out_dir, tab_lines)
             ok += s_ok
             fail += s_fail
             continue
@@ -439,8 +532,8 @@ def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, in
 
 
 def all_families() -> list[Path]:
-    """All family.yaml files under a vehicle-* root and station.yaml files
-    under a station-* root."""
+    """All family.yaml files under a vehicle-* root, station.yaml files
+    under a station-* root and industry.yaml files under an industry-* root."""
     found = []
     for name, prefix in SOURCE_ROOTS.items():
         found += [
@@ -483,7 +576,7 @@ def select_target_groups(target: Path | None, all_groups: dict[tuple[str, str], 
         if selected:
             return selected
 
-    print(f"no family.yaml or station.yaml found at or under {target}", file=sys.stderr)
+    print(f"no family.yaml, station.yaml or industry.yaml found at or under {target}", file=sys.stderr)
     return {}
 
 

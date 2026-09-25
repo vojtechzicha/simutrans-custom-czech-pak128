@@ -59,7 +59,7 @@ simutrans-custom-czech-pak128/
           <color>.png             # one consolidated 1024×N PNG per livery
 ```
 
-Transport modes: `vehicle-rail/`, `vehicle-bus/`, `vehicle-tram/`, `vehicle-water/`, `vehicle-air/` (plus any future `vehicle-trolleybus/` etc.). Bus and tram are split into their own modes rather than bundled under a generic `vehicle-road/` so trolleybuses can later live alongside buses without mixing rolling stock. The build script walks every `vehicle-*/...family.yaml` regardless of depth and groups by the `agency:` field plus the `vehicle-*` mode root. Family folder names are conventionally the slugified type (`814.0` → `814_0`); the agency folder name is organizational only — the canonical agency identifier is the `agency:` field inside `family.yaml`. Station objects live in parallel `station-*/` roots (see "Stations" below).
+Transport modes: `vehicle-rail/`, `vehicle-bus/`, `vehicle-tram/`, `vehicle-water/`, `vehicle-air/` (plus any future `vehicle-trolleybus/` etc.). Bus and tram are split into their own modes rather than bundled under a generic `vehicle-road/` so trolleybuses can later live alongside buses without mixing rolling stock. The build script walks every `vehicle-*/...family.yaml` regardless of depth and groups by the `agency:` field plus the `vehicle-*` mode root. Family folder names are conventionally the slugified type (`814.0` → `814_0`); the agency folder name is organizational only — the canonical agency identifier is the `agency:` field inside `family.yaml`. Station objects live in parallel `station-*/` roots and city industries in `industry-*/` roots (see "Stations" and "Industries" below).
 
 ## `family.yaml` schema
 
@@ -243,6 +243,34 @@ Layout bits, set by the engine (`simtool.cc` `tool_station_aux`, `hausbauer_t::b
 The engine picks bit 8, not the pak: a tile with no oriented stop around it gets the far side, a tile with a stop on the same track copies that tile's side, and a tile next to a stop on the neighbouring track only gets the opposite side (adjacent platform tracks alternate and form islands). To put several narrow platforms on the same side of their tracks, start each one on a tile with nothing beside it and extend it along the track.
 
 Sheets are **generated**: `python tools/gen_platforms.py station-rail/uzke-nastupiste [--only <sprite>]` (needs numpy + Pillow) ray-marches a small heightfield per layout with pak128 lighting (sun from the south, flat top ×1.0, south faces ×0.835, east faces ×0.61) and writes `sprites/<sprite>.png`. Geometry is matched to pak128.cs: platform edge 0.115 tile from the track axis, like the asphalt platforms, and the crossing band spans a = 0.365–0.635 of the tile, like `Asfaltove_nastupiste_se_sluzebnim_prejezdem`, so a crossing row continues through both. `crossing_end: true` makes the "konec přechodu" variant for the last track: the path covers only the platform side and ramps up onto the platform (which keeps its full height), so it never crosses the track into nothing; the engine can't know which track is the last one, so this is a separate object. Rails over crossing panels are redrawn in screen space on the pak128.cs rail pixels (they sit ½ px below the geometric axis). Change the art in the generator and regenerate; don't paint the sheets by hand.
+
+## Industries (`industry.yaml`)
+
+City consumer industries live under `industry-<location>/<set>/industry.yaml` (e.g. `industry-city/supermarkety/`) and are grouped by `group:` like stations: `group: Supermarkets` in `industry-city/` builds `dist/VZ-Supermarkets-city.pak`. Object `name=` is `VZ-<group>-<id>` (e.g. `VZ-Supermarkets-Kaufland`); `name_en` / `name_cs` are the display names and the optional `details_en` / `details_cs` become the `factory_<name>_details` text of the info window's Details tab.
+
+```yaml
+group: Supermarkets
+defaults: {location: city, electricity_amount: 0, electricity_boost: 0, mapcolor: 147}
+goods:                                # input goods profiles
+  store:
+    - {good: food, capacity: 25, suppliers: 1, factor: 5}   # inputgood/-capacity/-supplier/-factor
+classes:                              # size classes: default goods profile + shared fields
+  store: {goods: store, fields: {productivity: 55, range: 55, passenger_demand: 1, passenger_boost: 12}}
+objects:
+  - id: Zabka                         # name= suffix
+    sprite: zabka                     # sprites/zabka.png
+    dims: [1, 1]
+    class: store
+    # goods: cash_carry               # optional: another goods profile
+    generate: {model: store, brand: zabka}   # tools/gen_shops.py model + brand
+    fields: {distributionweight: 3, intro_year: 2008}
+    name_en: "Žabka"
+    name_cs: "Žabka"
+```
+
+The build emits `obj=factory` with `defaults`, the class fields and the object fields (in that order, later ones win), the goods profile as `inputgood[i]`…, and `dims=X,Y,4`. Every object has **four layouts and two seasons** on one sheet: row = `season * 4 + layout`, column = tile `y * w + x` of that layout (odd layouts swap the dims). makeobj keys tile images as `backimage[layout][y][x][height][phase][season]`. Map rotation turns layout L into L − 1 (`gebaeude_t::rotate90`), so layout L + 1 must be layout L turned a quarter anticlockwise: layout 0 has the shop front facing south, 1 east, 2 north, 3 west. Only use goods that some pak128.cs factory produces; `sugar` and `soft_drinks`, which the upstream shops list, have no producer.
+
+Sheets are **generated**: `python tools/gen_shops.py industry-city/supermarkety [--only <sprite>] [--preview <dir>]` (needs numpy + Pillow). It ray-casts axis-aligned boxes and ellipsoids over a textured ground plane with the same pak128 lighting as `gen_platforms.py`, assigns every sample to the tile its surface stands on (anything that can hide a surface stands further south or east, so the engine's back-to-front tile order reassembles the building), and stamps pixel-font signs onto walls and roof logos in world orientation, so they read left to right in every layout. There is one building model per size class (`store` 1×1, `market` 1×2, `hyper` 2×2), shared by all chains of that class; a chain (`BRANDS` in the generator) sets the colours, sign lockup, emblem, roof logo and lorry livery. Shop glass uses the lit-window specials and sign lettering or lightbox boards the lamp specials, so shops glow at night; roof logos and lorries use plain colours. Grass and snow match the pak128.CS temperate and snow ground textures. Change the art in the generator and regenerate; don't paint the sheets by hand.
 
 ## Localization
 
