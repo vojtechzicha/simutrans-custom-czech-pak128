@@ -1,0 +1,67 @@
+agency: DPBrno
+type: "T3G"
+image_offset: [0, 0]       # sprites carry their own placement (upstream convention)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Tatra T3G"
+  family_cs: "Tatra T3G"
+
+# ČKD Tatra T3G: Brno T3SUCS cars (built 1985-89) modernised 1994-99 with
+# thyristor traction, keeping the classic rounded T3 ends, silver four-leaf
+# folding doors and a diamond pantograph. 15.1 m over couplers, 2.5 m wide,
+# 16.0 t, 4 x 40 kW, 65 km/h, 110 passengers (DPMB "T3"). DPMB: 14 active
+# (1604, 1606-1608, 1611, 1613-1614, 1619, 1631, 1634, 1639-1640, 1651-1652);
+# first conversions 1994 (1639, 1640). Runs solo or as a 2-car set. The 4
+# Tatra T3P (1589, 1620, 1628, 1629; Pars nova 2002-05) keep the same classic
+# body, doors and diamond pantograph (bmhd drawing t3p.svg), so this family also
+# stands in for them.
+#
+# Livery: DPMB tram "unifik" (bmhd register: all non-advert T3G/T3P): light grey
+# roof, dark grey window band with a darker cantrail line, white line under
+# the windows, red lower body, white skirt; red front and rear with the white
+# line and skirt continued (bmhd drawing t3g.svg).
+#
+# Sprite: Lubak91's CZR-Brno-Tatra_T3G (already drawn in this layout), shapes
+# and placement unchanged, repainted: roof lightened, window band and pillars
+# dark grey, silver door leaves over the lit glass, glass on the lit-window
+# specials, side and front displays amber, pantograph yellow. Length 11 as
+# upstream (the drawn body; 2-car sets meet with a coupler gap). Economy as
+# upstream; retirement brought forward (the type is being replaced by the 45T
+# and EVO2).
+
+vehicles:
+  - id: "T3G"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: true                 # runs solo ...
+    tail: true
+    prev: ["T3G"]              # ... or as a 2-car set
+    next: ["T3G"]
+    fields:
+      cost: 840000
+      payload: 110
+      speed: 65
+      weight: 16
+      runningcost: 24
+      fixed_cost: 100
+      intro_year: 1994
+      intro_month: 1
+      retire_year: 2030
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 11
+      engine_type: electric
+      power: 160
+      gear: 130
+
+liveries:
+  - color: dpmbsedobilocervena
+    name_en: "DPMB grey-white-red"
+    name_cs: "DPMB šedo-bílo-červená"

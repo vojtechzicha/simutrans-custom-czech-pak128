@@ -1,0 +1,62 @@
+agency: DPBrno
+type: "VarioLFR.E"
+image_offset: [0, 0]       # sprites carry their own placement (upstream convention)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Pragoimex VarioLFR.E"
+  family_cs: "Pragoimex VarioLFR.E"
+
+# Pragoimex VarioLFR.E: single-car, partly low-floor tram on a T3-based layout
+# with a new body (low-floor middle between the bogies), 16.2 m, 2.48 m wide,
+# 21.2 t, 4 x 90 kW, 65 km/h, 102 passengers (DPMB). DPMB: 32 active (mixed
+# numbers 1497-1630), in service 1 Dec 2006 (1596) to 2018. Runs solo or as a
+# 2-car multiple unit (e.g. 1617 + 1582); in Brno it also couples behind a
+# VarioLF2R.E, which this pak cannot offer (constraints stay inside a family).
+#
+# Livery: DPMB tram "unifik": light grey roof, dark window band, white line
+# under the windows, red lower body that steps down at the low-floor middle,
+# white skirt (DPMB drawing vario_lf1.png, photos of 1617/1582). bmhd register
+# 9/2026: 15 unifik, 2 in the 2020s "Drak" scheme, 15 all-over adverts.
+#
+# Sprite: TommPa9's CZR-Brno-Vario_LF (already drawn in this layout), shapes and
+# placement unchanged: glass on the lit-window specials, green LED displays
+# amber, fixed reds, the lowest red row turned white so the skirt reads as in
+# the drawing, roof equipment boxes and the white cab air-conditioner added,
+# blue coupler cover darkened. Length 12 as upstream. Economy as upstream;
+# capacity and power from DPMB.
+
+vehicles:
+  - id: "VarioLFR.E"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: true                 # runs solo ...
+    tail: true
+    prev: ["VarioLFR.E"]       # ... or as a 2-car set
+    next: ["VarioLFR.E"]
+    fields:
+      cost: 18600
+      payload: 102
+      speed: 65
+      weight: 21
+      runningcost: 14
+      fixed_cost: 58
+      intro_year: 2006
+      intro_month: 12
+      retire_year: 2045
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      power: 360
+      engine_type: electric
+      length: 12
+
+liveries:
+  - color: dpmbsedobilocervena
+    name_en: "DPMB grey-white-red"
+    name_cs: "DPMB šedo-bílo-červená"

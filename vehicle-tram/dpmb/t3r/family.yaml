@@ -1,0 +1,64 @@
+agency: DPBrno
+type: "T3R"
+image_offset: [0, 0]       # sprites carry their own placement (upstream convention)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Tatra T3R"
+  family_cs: "Tatra T3R"
+
+# Tatra T3R: the angular Kardaus-masked T3 modernisation with a single-arm
+# pantograph and dark two-leaf plug doors. 15.1 m over couplers, 2.5 m wide,
+# 16.0 t, 4 x 47 kW, 65 km/h, 110 passengers (DPMB). DPMB: 7 active, the
+# prototype 1615 (ČKD rebuild of a T3SUCS, 1995) and the new-built ČKD DS cars
+# 1661-1666 (in service 17 Apr 1997). Runs solo or as a 2-car set (e.g.
+# 1663 + 1664).
+#
+# Livery: DPMB tram "unifik" as on the T3R.PV: light grey roof, dark grey window
+# band, white line, red lower body, white skirt; both ends are red around the
+# windscreen / rear window up to the roof edge (bmhd drawing t3r.svg, photos
+# of 1663 + 1664).
+#
+# Sprite: the upstream CZR-Brno-Tatra_T3R is only a classic-front T3 body with a
+# single-arm pantograph, so the art starts from the finished T3R.PV sprite of
+# this repo (vehicle-tram/dpmb/t3r_pv: Lubak91's T3R.P drawing with the Kardaus
+# masks, single-arm pantograph and cab air-conditioner, same palette), with
+# the T3R's red end masks and dark two-leaf doors. Length 11 like the T3R.PV.
+# Economy scaled from CZR-Brno-Tatra_T3R (840 000 / 24 / 100, gear 130) with the
+# stronger 4 x 47 kW traction; retirement brought forward (being replaced).
+
+vehicles:
+  - id: "T3R"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: true                 # runs solo ...
+    tail: true
+    prev: ["T3R"]              # ... or as a 2-car set
+    next: ["T3R"]
+    fields:
+      cost: 850000
+      payload: 110
+      speed: 65
+      weight: 16
+      runningcost: 24
+      fixed_cost: 100
+      intro_year: 1995
+      intro_month: 10
+      retire_year: 2032
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 11
+      engine_type: electric
+      power: 188
+      gear: 130
+
+liveries:
+  - color: dpmbsedobilocervena
+    name_en: "DPMB grey-white-red"
+    name_cs: "DPMB šedo-bílo-červená"

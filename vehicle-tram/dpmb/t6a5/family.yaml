@@ -1,0 +1,90 @@
+agency: DPBrno
+type: "T6A5"
+image_offset: [0, 0]       # sprites carry their own placement (upstream convention)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Tatra T6A5"
+  family_cs: "Tatra T6A5"
+
+# ČKD Tatra T6A5, high-floor 4-axle unidirectional tram: 15.64 m, 2.5 m wide,
+# 19.5 t, 4 x 47 kW, 65 km/h, 117 passengers (DPMB). DPMB runs 30: the 21
+# Brno-built ČKD DS cars 1201-1220 and 1235 (in service from 28 Feb 1996) and 9
+# ex-Praha cars bought 2019-20 (1224-1246 with gaps; 1239/1240 stored 1/2026,
+# several scrapped 2024-25). Normally worked as 2-car sets, the second car with
+# its pantograph down (e.g. 1209 + 1210); solo running is possible.
+#
+# Livery: DPMB tram "unifik" (bmhd register: 12 of the 20 active DS cars; the
+# ex-Praha cars still wear the similar "schéma T6A5" with light-grey instead
+# of dark pillars, the rest carry adverts). From the DPMB drawing t6a5.png
+# and photos of 1209, 1211 and 1215: white roof and roof edge, dark grey window
+# band and windscreen mask, white line under the windows, red lower body,
+# white skirt.
+#
+# Sprite: TommPa9's CZR-Brno-Tatra_T6A5 / _T6A5b (pantograph up / down), shapes
+# and placement unchanged, repainted: fixed paint instead of the grey roof and
+# the dark sill line (now the white line), glass on the lit-window specials,
+# the missing white skirt of the east view added. Lengths 12 + 12 as upstream
+# (the drawn bodies meet with a coupler gap). Economy as upstream; capacity,
+# power and weight from DPMB; retirement brought forward (type being run down).
+
+vehicles:
+  - id: "T6A5"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: true                 # runs solo ...
+    tail: true
+    prev: []
+    next: ["T6A5b"]            # ... or leads a 2-car set
+    fields:
+      cost: 88600
+      payload: 117
+      speed: 65
+      weight: 20
+      runningcost: 26
+      fixed_cost: 108
+      intro_year: 1996
+      intro_month: 2
+      retire_year: 2035
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      power: 188
+      engine_type: electric
+      length: 12
+
+  - id: "T6A5b"
+    display_id: "T6A5"
+    role_en: "second car (pantograph down)"
+    role_cs: "druhý vůz (stažený sběrač)"
+    row: 1
+    head: false
+    tail: true
+    prev: ["T6A5"]
+    next: []
+    fields:
+      cost: 88600
+      payload: 117
+      speed: 65
+      weight: 20
+      runningcost: 26
+      fixed_cost: 108
+      intro_year: 1996
+      intro_month: 2
+      retire_year: 2035
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      power: 188
+      engine_type: electric
+      length: 12
+
+liveries:
+  - color: dpmbsedobilocervena
+    name_en: "DPMB grey-white-red"
+    name_cs: "DPMB šedo-bílo-červená"

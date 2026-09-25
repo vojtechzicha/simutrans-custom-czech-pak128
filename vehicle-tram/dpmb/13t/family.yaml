@@ -1,0 +1,170 @@
+agency: DPBrno
+type: "13T"
+image_offset: [0, 0]       # sprites carry their own placement (upstream convention)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Škoda 13T"
+  family_cs: "Škoda 13T"
+
+# Škoda 13T "Elektra", the Brno derivative of the Prague 14T (Porsche Design):
+# 5-section single-ended, partly low-floor tram, 31.06 m, 2.46 m wide, 41.2 t,
+# 6 x 90 kW, 70 km/h, 204 passengers (DPMB). Sections 1, 3 and 5 sit on
+# bogies, 2 and 4 hang between them; doors on the right. DPMB: 1901-1949, all
+# 49 active (subtypes 13T0-13T6), in service 3 Dec 2007 (1901) to 12/2016.
+#
+# Livery: the 2020s DPMB "Drak" white-red scheme, which the bmhd register
+# (9/2026) shows on 24 of the 49 cars (1901-1929 except the adverts); 13 cars
+# (1932-1948) still wear the silver-red unifik version and 12 carry adverts.
+# From photos of 1901 (10/2025) and 1917 (1/2025): white body, black glazing,
+# red band along the roof edge that sweeps down at each section end, red
+# skirt; white front and rear with a black windscreen and a red lower apron.
+#
+# Sprite: TommPa9's CZR-Brno-Skoda_13T (the Praha 14T drawing recoloured; 4
+# drawn rows, sections 2 and 4 share one), shapes and placement unchanged,
+# repainted: grey cantrail -> red roof-edge band, lower red stripe -> white
+# body with a 2 px red skirt, red section-end sweeps next to the bellows, white
+# cab ends with a red apron, glass on the lit-window specials, green LED
+# displays amber. Lengths 4 + 5 + 3 + 5 + 4 as upstream (they join).
+# Economy as upstream CZR-Brno-Skoda_13T; capacity and weight from DPMB, split
+# over the sections by length.
+
+vehicles:
+  - id: "13T"
+    display_id: "13T"
+    role_en: "front section"
+    role_cs: "přední článek"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["13T_2"]
+    fields:
+      cost: 360000
+      payload: 39
+      speed: 70
+      weight: 8
+      runningcost: 22
+      fixed_cost: 99
+      intro_year: 2007
+      intro_month: 12
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 4
+      engine_type: electric
+      power: 540
+
+  - id: "13T_2"
+    display_id: "13T"
+    role_en: "second section"
+    role_cs: "druhý článek"
+    row: 1
+    head: false
+    tail: false
+    prev: ["13T"]
+    next: ["13T_3"]
+    fields:
+      cost: 360000
+      payload: 49
+      speed: 70
+      weight: 10
+      runningcost: 10
+      fixed_cost: 45
+      intro_year: 2007
+      intro_month: 12
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 5
+      engine_type: electric
+      power: 0
+
+  - id: "13T_3"
+    display_id: "13T"
+    role_en: "middle section"
+    role_cs: "střední článek"
+    row: 2
+    head: false
+    tail: false
+    prev: ["13T_2"]
+    next: ["13T_4"]
+    fields:
+      cost: 360000
+      payload: 29
+      speed: 70
+      weight: 6
+      runningcost: 10
+      fixed_cost: 45
+      intro_year: 2007
+      intro_month: 12
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 3
+      engine_type: electric
+      power: 0
+
+  - id: "13T_4"
+    display_id: "13T"
+    role_en: "fourth section"
+    role_cs: "čtvrtý článek"
+    row: 1
+    head: false
+    tail: false
+    prev: ["13T_3"]
+    next: ["13T_5"]
+    fields:
+      cost: 360000
+      payload: 49
+      speed: 70
+      weight: 9
+      runningcost: 10
+      fixed_cost: 45
+      intro_year: 2007
+      intro_month: 12
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 5
+      engine_type: electric
+      power: 0
+
+  - id: "13T_5"
+    display_id: "13T"
+    role_en: "rear section"
+    role_cs: "zadní článek"
+    row: 3
+    head: false
+    tail: true
+    prev: ["13T_4"]
+    next: []
+    fields:
+      cost: 360000
+      payload: 38
+      speed: 70
+      weight: 8
+      runningcost: 12
+      fixed_cost: 54
+      intro_year: 2007
+      intro_month: 12
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 4
+      engine_type: electric
+      power: 0
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"

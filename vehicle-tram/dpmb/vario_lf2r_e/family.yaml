@@ -1,0 +1,90 @@
+agency: DPBrno
+type: "VarioLF2R.E"
+image_offset: [0, 0]       # sprites carry their own placement (upstream convention)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Pragoimex VarioLF2R.E"
+  family_cs: "Pragoimex VarioLF2R.E"
+
+# Pragoimex VarioLF2R.E: 2-section articulated, partly low-floor tram on
+# three bogies (the rear section carries a small shunting cab), 23.7 m, 2.48 m
+# wide, 30.0 t, 6 x 90 kW, 65 km/h, 163 passengers (DPMB). DPMB: 32 active
+# (mixed numbers 1069-1132), in service 7 Nov 2008 (1069) to 2018. In Brno it
+# also runs with a VarioLFR.E coupled behind, which this pak cannot offer
+# (constraints stay inside a family).
+#
+# Livery: DPMB tram "unifik": light grey roof, dark window band, white line
+# under the windows, red band stepping down at the low-floor parts, white skirt
+# (bmhd drawing variolf2r-e.svg, DPMB drawing vario_lf2.png, photo of
+# 1099 + 1069). bmhd register 9/2026: only 3 cars in unifik, the other 29 in
+# all-over adverts, so the base scheme is used.
+#
+# Sprite: TommPa9's CZR-Brno-Vario_LF2 / _LF2b, shapes and placement unchanged:
+# glass on the lit-window specials, green LED displays amber, fixed reds, the
+# lowest red row turned white so the skirt reads as in the drawings, roof
+# equipment boxes and the white cab air-conditioner added, blue coupler cover
+# darkened. Lengths 8 + 8 as upstream (the sections meet at the dark bellows).
+# Economy as upstream; capacity, weight and power (270 kW per section) from DPMB.
+
+vehicles:
+  - id: "VarioLF2R.E"
+    display_id: "VarioLF2R.E"
+    role_en: "front section"
+    role_cs: "přední článek"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["VarioLF2R.E_2"]
+    fields:
+      cost: 38600
+      payload: 82
+      speed: 65
+      weight: 15
+      runningcost: 22
+      fixed_cost: 91
+      intro_year: 2008
+      intro_month: 11
+      retire_year: 2045
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 270
+
+  - id: "VarioLF2R.E_2"
+    display_id: "VarioLF2R.E"
+    role_en: "rear section"
+    role_cs: "zadní článek"
+    row: 1
+    head: false
+    tail: true
+    prev: ["VarioLF2R.E"]
+    next: []
+    fields:
+      cost: 38600
+      payload: 81
+      speed: 65
+      weight: 15
+      runningcost: 20
+      fixed_cost: 58
+      intro_year: 2008
+      intro_month: 11
+      retire_year: 2045
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 270
+
+liveries:
+  - color: dpmbsedobilocervena
+    name_en: "DPMB grey-white-red"
+    name_cs: "DPMB šedo-bílo-červená"
