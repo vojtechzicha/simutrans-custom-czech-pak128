@@ -1,0 +1,183 @@
+agency: DPPraha
+type: "14T"
+image_offset: [0, 0]       # sprites carry their own placement (upstream convention)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Škoda 14T"
+  family_cs: "Škoda 14T"
+
+# Škoda 14T "Elektra" (Porsche Design), 5-section single-ended tram, partly
+# low-floor: 30.25 m x 2.46 m, 39.99 t empty (DPP), 6 x 90 kW = 540 kW,
+# 69 seated + 131 standing = 200 (DPP). Sections 1, 3 and 5 sit on bogies,
+# 2 and 4 hang between them; doors on the right side (1 behind the cab, 2 in
+# each of sections 2 and 4). 60 built 2005-2009, in Prague service from 2006
+# (first cars January 2006); 55 left (9114-9172 with gaps, all at Kobylisy).
+# The periodic overhaul (first car 9136, March 2026) brings a yellow single-arm
+# pantograph, orange LED displays, lacquered PID paint and 70 km/h; 70 km/h is
+# used for both liveries (upstream CZR-Praha-Skoda_14T also has 70).
+#
+# Liveries:
+# - PID grey-red (14 cars so far, rising; repaints since 2023). From photos of
+#   9150, 9158 and 9121, which correct the research note that only sections 2
+#   and 4 carry red: very light grey body, black glazing band; full-height red
+#   blocks (red lower panel + red roof fairing) on section 1 over the door and
+#   front window behind the cab (its rear window keeps a grey "pid" panel), on
+#   sections 2 and 4 over the window between their two doors, and on section 5
+#   over its rear windows; section 3 is all grey. Front: light grey cap, black
+#   windscreen with an orange LED display, light grey nose with one red stripe
+#   on the tram's left half (observer's right) carrying the left headlights;
+#   the rear end repeats it.
+# - DPP silver-red-black, as delivered (41 cars): silver body, red skirt, black
+#   window band, thin red line along the roof edge, red front bumper (photo of
+#   9126).
+#
+# Sprite: TommPa9's CZR-Praha-Skoda_14T (4 drawn rows, sections 2 and 4 share
+# one row), shapes and tile placement unchanged, repainted: fixed paint only,
+# source glass converted to the lit-window specials, green display pixels
+# turned amber, yellow pantograph warmed. Lengths 4 + 5 + 3 + 5 + 4 as
+# upstream (they join). Economy as upstream CZR-Praha-Skoda_14T; capacity and
+# weight split over the sections by length.
+
+vehicles:
+  - id: "14T"
+    display_id: "14T"
+    role_en: "front section"
+    role_cs: "přední článek"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["14T_2"]
+    fields:
+      cost: 360000
+      payload: 38
+      speed: 70
+      weight: 8
+      runningcost: 22
+      fixed_cost: 99
+      intro_year: 2006
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 4
+      engine_type: electric
+      power: 540
+
+  - id: "14T_2"
+    display_id: "14T"
+    role_en: "second section"
+    role_cs: "druhý článek"
+    row: 1
+    head: false
+    tail: false
+    prev: ["14T"]
+    next: ["14T_3"]
+    fields:
+      cost: 360000
+      payload: 48
+      speed: 70
+      weight: 9
+      runningcost: 10
+      fixed_cost: 45
+      intro_year: 2006
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 5
+      engine_type: electric
+      power: 0
+
+  - id: "14T_3"
+    display_id: "14T"
+    role_en: "middle section"
+    role_cs: "střední článek"
+    row: 3
+    head: false
+    tail: false
+    prev: ["14T_2"]
+    next: ["14T_4"]
+    fields:
+      cost: 360000
+      payload: 28
+      speed: 70
+      weight: 6
+      runningcost: 10
+      fixed_cost: 45
+      intro_year: 2006
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 3
+      engine_type: electric
+      power: 0
+
+  - id: "14T_4"
+    display_id: "14T"
+    role_en: "fourth section"
+    role_cs: "čtvrtý článek"
+    row: 1
+    head: false
+    tail: false
+    prev: ["14T_3"]
+    next: ["14T_5"]
+    fields:
+      cost: 360000
+      payload: 48
+      speed: 70
+      weight: 9
+      runningcost: 10
+      fixed_cost: 45
+      intro_year: 2006
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 5
+      engine_type: electric
+      power: 0
+
+  - id: "14T_5"
+    display_id: "14T"
+    role_en: "rear section"
+    role_cs: "zadní článek"
+    row: 2
+    head: false
+    tail: true
+    prev: ["14T_4"]
+    next: []
+    fields:
+      cost: 360000
+      payload: 38
+      speed: 70
+      weight: 8
+      runningcost: 12
+      fixed_cost: 54
+      intro_year: 2006
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 4
+      engine_type: electric
+      power: 0
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"
+  - color: dppstribrnocervenocerna
+    name_en: "DPP silver-red-black"
+    name_cs: "DPP stříbrno-červeno-černá"

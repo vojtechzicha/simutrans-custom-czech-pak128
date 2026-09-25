@@ -1,0 +1,112 @@
+agency: DPBrno
+type: "KT8D5N"
+image_offset: [0, 0]       # sprites carry their own placement (upstream convention)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Tatra KT8D5N"
+  family_cs: "Tatra KT8D5N"
+
+# Tatra KT8D5N: 7 new-built partly low-floor KT8D5 for Brno (1729-1735),
+# delivered December 1998 - December 1999, TV14 IGBT traction; the low-floor
+# middle section later inspired the KT8D5R.N2 rebuilds. 3 sections on 4
+# motored bogies, double-ended, doors on both sides. 30.3 m body, 2.48 m wide,
+# 38.0 t, 8 x 49.3 kW = 394 kW, 65 km/h, 226 passengers (DPMB). All 7 active.
+#
+# Livery: DPMB "unifik" grey-white-red like the KT8D5R.N2 (photo of 1729):
+# light grey roof, dark grey window band, white belt, red lower body, white
+# bottom band; fronts black round the windscreen, white line, red nose.
+#
+# Sprite: the same repainted TommPa9 KT8D5 drawing as vehicle-tram/dpmb/
+# kt8d5r_n2 (identical body; sections 8 + 5 + 8, they join). Compromise: the
+# real KT8D5N carries two single-arm pantographs, the shared drawing shows the
+# R.N2's diamond pantographs. Economy as upstream CZR-Brno-Tatra_KT8D5.N2;
+# capacity and weight split 8 : 5 : 8, power on both cab sections.
+
+vehicles:
+  - id: "KT8D5N"
+    display_id: "KT8D5N"
+    role_en: "front section"
+    role_cs: "přední článek"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["KT8D5N_2"]
+    fields:
+      cost: 38600
+      payload: 86
+      speed: 65
+      weight: 14
+      runningcost: 22
+      fixed_cost: 91
+      intro_year: 1999
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 197
+
+  - id: "KT8D5N_2"
+    display_id: "KT8D5N"
+    role_en: "middle section (low-floor)"
+    role_cs: "střední nízkopodlažní článek"
+    row: 1
+    head: false
+    tail: false
+    prev: ["KT8D5N"]
+    next: ["KT8D5N_3"]
+    fields:
+      cost: 38600
+      payload: 54
+      speed: 65
+      weight: 10
+      runningcost: 15
+      fixed_cost: 62
+      intro_year: 1999
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 5
+      engine_type: electric
+      power: 0
+
+  - id: "KT8D5N_3"
+    display_id: "KT8D5N"
+    role_en: "rear section"
+    role_cs: "zadní článek"
+    row: 2
+    head: false
+    tail: true
+    prev: ["KT8D5N_2"]
+    next: []
+    fields:
+      cost: 38600
+      payload: 86
+      speed: 65
+      weight: 14
+      runningcost: 20
+      fixed_cost: 58
+      intro_year: 1999
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 197
+
+liveries:
+  - color: dpmbsedobilocervena
+    name_en: "DPMB grey-white-red"
+    name_cs: "DPMB šedo-bílo-červená"

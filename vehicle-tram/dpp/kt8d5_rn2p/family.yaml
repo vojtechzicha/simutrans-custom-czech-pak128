@@ -1,0 +1,137 @@
+agency: DPPraha
+type: "KT8D5.RN2P"
+image_offset: [0, 0]       # sprites carry their own placement (upstream convention)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Tatra KT8D5.RN2P"
+  family_cs: "Tatra KT8D5.RN2P"
+
+# Tatra KT8D5.RN2P (a.k.a. KT8D5R.N2P): ČKD Tatra KT8D5 bodies (1986-1990)
+# rebuilt with a new low-floor KOS middle section and TV Progress IGBT
+# traction; 3 sections on 4 motored bogies, double-ended with cabs and doors
+# on both sides. 31.34 m over couplers, 2.48 m wide, 43.1 t (DPP), 8 x 45 kW
+# = 360 kW, 65 km/h, 46 seated + 4 folding + 180 standing = 230 (DPP). First
+# rebuilt car (9082) in regular service September 2005; 62 active (9051-9112),
+# the last ex-Miskolc car (9113) is in rebuild.
+#
+# Liveries:
+# - PID grey-red (18 cars: ex-Miskolc 9106-9112 and repaints 9053, 9054, 9059,
+#   9074, 9077, 9079, 9087, 9088, 9090, 9093, 9097). From the photos of 9053
+#   (Jindřišská 2023; Pankrác 2025): light grey body and roof, black glazing
+#   band from the roof edge to below the windows, light grey lower panels with
+#   full-height red panels (lower panel + red patch on the roof edge) under the
+#   window next to the cab door and under the window at the joint end of each
+#   cab section; the middle section is all grey (the research note that it
+#   carries red is contradicted by both photos). Fronts: black mask around the
+#   windscreen, light grey nose with a red block on the observer's right
+#   carrying the right headlight, red continuing below the bumper.
+# - DPP red-white-grey (the classic KT8D5 scheme, 44 cars; photo of 9054, Jul
+#   2024): light grey roof, black window band, thin white line, red belt, light
+#   grey skirt; fronts black round the windscreen, white stripe, red middle
+#   with the headlights, white lower front. The upstream CZR art had a grey
+#   window band and white-capped fronts; both corrected here.
+#
+# Sprite: TommPa9's CZR-Praha-Tatra_KT8D5.RN2P sheet, shapes and tile
+# placement unchanged (sections 8 + 5 + 8 as upstream; they join); repainted
+# from a per-pixel label map of the upstream colour coding. Rear section keeps
+# its own row (lowered pantograph, tail lights, unlit headlights); its rear
+# windscreen, drawn in plain grey upstream, is now lit-window glass like the
+# rest. The middle section's w view is taken from the identical Brno sheet,
+# because the Prague one frames those windows in white. The upstream yellow
+# diamond pantographs are replaced by the dark single-arm pantographs Prague's
+# RN2P cars carry (photos of 9053 and 9054): raised on the leading section,
+# folded on the trailing one.
+# Economy as upstream CZR-Praha-Tatra_KT8D5.RN2P; capacity and weight split
+# 8 : 5 : 8 over the sections, power on both cab sections as upstream.
+
+vehicles:
+  - id: "KT8D5.RN2P"
+    display_id: "KT8D5.RN2P"
+    role_en: "front section"
+    role_cs: "přední článek"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["KT8D5.RN2P_2"]
+    fields:
+      cost: 38600
+      payload: 88
+      speed: 65
+      weight: 16
+      runningcost: 22
+      fixed_cost: 91
+      intro_year: 2005
+      intro_month: 9
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 180
+
+  - id: "KT8D5.RN2P_2"
+    display_id: "KT8D5.RN2P"
+    role_en: "middle section (low-floor)"
+    role_cs: "střední nízkopodlažní článek"
+    row: 1
+    head: false
+    tail: false
+    prev: ["KT8D5.RN2P"]
+    next: ["KT8D5.RN2P_3"]
+    fields:
+      cost: 38600
+      payload: 54
+      speed: 65
+      weight: 11
+      runningcost: 15
+      fixed_cost: 62
+      intro_year: 2005
+      intro_month: 9
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 5
+      engine_type: electric
+      power: 0
+
+  - id: "KT8D5.RN2P_3"
+    display_id: "KT8D5.RN2P"
+    role_en: "rear section"
+    role_cs: "zadní článek"
+    row: 2
+    head: false
+    tail: true
+    prev: ["KT8D5.RN2P_2"]
+    next: []
+    fields:
+      cost: 38600
+      payload: 88
+      speed: 65
+      weight: 16
+      runningcost: 20
+      fixed_cost: 58
+      intro_year: 2005
+      intro_month: 9
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 180
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"
+  - color: dppcervenobiloseda
+    name_en: "DPP red-white-grey"
+    name_cs: "DPP červeno-bílo-šedá"
