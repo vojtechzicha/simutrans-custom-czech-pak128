@@ -21,7 +21,9 @@ display:
 # as on the Brno 32Tr: white body and roof, red skirt, black window band that
 # continues up round the windscreen as a black cap over the roof front,
 # red-over-white swoosh at the upper front corner; plain white roof pod (no
-# battery module, no Škoda branding).
+# battery module, no Škoda branding); green LED destination displays
+# and yellow sleeves on the upper pole ends (photos of 3065 and 3068); the
+# silver pole tubes are drawn dark for visibility, as on the Brno 32Tr.
 # Sprite: original 8-direction render of the NS 12 body (no upstream pixels,
 # sized and lane-placed like the native pak128 12 m buses) with trolley poles
 # whose tips end on the pak128.cs trolleybus wire of the own lane.
