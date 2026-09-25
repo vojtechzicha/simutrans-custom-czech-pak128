@@ -36,13 +36,11 @@ version.
 
 ## Branch model
 
-- `main` — ships only families/liveries considered production-ready.
-- `inprogress` — everything still being worked on: additional liveries,
-  placeholder sprites, in-progress vehicle families, plus working notes
-  (`TODO.md`, `liveries.md`) and helper scripts.
-
-When a family/livery is ready, it gets promoted from `inprogress` to `main` via a
-PR.
+Everything lives on `main`: finished families, families still being refined
+(placeholder sprites, extra liveries), working notes (`TODO.md`, `liveries.md`)
+and helper scripts. Larger pieces of work can be developed on a short-lived
+feature branch and merged back into `main`. The README lists which families are
+finished and which are still in progress.
 
 ## Reporting issues
 
