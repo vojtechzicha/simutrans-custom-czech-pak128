@@ -1,0 +1,60 @@
+agency: DPPraha
+type: "Crossway_LE_12_8M"
+# Sprites carry their own lane placement (body footprint matched to the
+# median of native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Irisbus Crossway LE 12.8M"
+  family_cs: "Irisbus Crossway LE 12,8M"
+
+# Irisbus Crossway LE 12,8M, DPP Prague 4505-4506 (ex 3515/3520, built 2011;
+# the 2007-08 cars are gone); first DPP Crossway LE in service 15 Jan 2008.
+# 12.76 x 2.55 x 3.215 m, 10.9 t, 3 doors, capacity 105 (dpp.cz), Cursor 8
+# 243 kW, 85 km/h. Also stands in for the two Crossway LE CITY 13M (4508-4509,
+# airport line AE) and the Crossway LE CITY 12M (4510), all in the same scheme.
+# Livery: DPP classic city scheme as painted on the Crossways: white body and
+# roof, black window band, a red stripe directly under the windows and the
+# windscreen, white band, red lower body from the wheel-arch tops, red bumper.
+# Sprite: Lubak91's CZR-Praha-IVECO_Crossway_LE_12.8M; its blue roof (not on
+# the DPP cars) repainted white, the red sill stripe added, glass converted to
+# the lit-window specials, displays amber, lane placement normalised. Upstream
+# weight (18 t) and price (almost three NB 12) were wrong; now scaled from the
+# NB 12. Length 8: the body is drawn as long as the 12 m NB 12.
+
+vehicles:
+  - id: "Crossway_LE_12_8M"
+    display_id: "Crossway LE 12,8M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 650000
+      payload: 105
+      speed: 85
+      weight: 11
+      runningcost: 27
+      fixed_cost: 135
+      intro_year: 2008
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 243
+      gear: 56
+      smoke: Diesel_small
+
+liveries:
+  - color: dppcervenobila
+    name_en: "DPP red-white"
+    name_cs: "DPP červeno-bílá"

@@ -1,0 +1,60 @@
+agency: DPPraha
+type: "SOR_BN_12"
+# Sprites carry their own lane placement (body footprint matched to the
+# median of native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "SOR BN 12"
+  family_cs: "SOR BN 12"
+
+# SOR BN 12 low-entry bus, DPP Prague 4511-4560: 50 buses built 2017-18, in
+# service from May 2018 (plus 3999 of 2012 in the city scheme, and ten
+# 2008-09 rentals in other liveries). 11.79 x 2.525 x 2.95 m, 9.7 t, 2 doors
+# (single front, double centre), capacity 88 (dpp.cz), 210 kW, 80 km/h.
+# Livery: old PID regional scheme (C): dark ultramarine-blue roof and roof
+# edge, black window band, white band under the windows, red lower half;
+# red lower front mask under a white upper mask; amber LED displays.
+# Sprite: VTPsim's CZR-Praha-SOR_BN_12; its mid-blue roof repainted the PID
+# ultramarine (sampled from photos of NB 12 3688, same scheme), the black front
+# mask it copied from the NB 12 City repainted white above the red lower front
+# (photos of 4539 and 3110), glass converted to the lit-window specials, the
+# displays (drawn with the green-light special) made amber, lane placement
+# normalised (the upstream sat up to 10 px off the native lane).
+
+vehicles:
+  - id: "BN_12"
+    display_id: "BN 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 539104
+      payload: 88
+      speed: 80
+      weight: 10
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2018
+      intro_month: 5
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 210
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white"
+    name_cs: "PID červeno-modro-bílá"

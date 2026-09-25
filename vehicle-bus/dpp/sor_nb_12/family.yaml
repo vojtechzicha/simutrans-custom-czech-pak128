@@ -1,0 +1,66 @@
+agency: DPPraha
+type: "SOR_NB_12"
+# Sprites carry their own lane placement (body footprint matched to the
+# median of native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "SOR NB 12 City"
+  family_cs: "SOR NB 12 City"
+
+# SOR NB 12 City, DPP Prague's standard 12 m bus: 393 in service (Sep 2026)
+# out of about 540 delivered 2009-2021 (3641-3686 of 2011, 3687-3688, 3689-3758
+# of 2015-16, 3801-4100 of 2018-21; the 2009-10 cars are gone). First in
+# service 12 Aug 2009. 12.18 x 2.55 x 3.11 m, 10.6 t, 4 double doors, capacity
+# 88 (dpp.cz), Iveco Tector 210 kW (194 kW on the 2011 batch), 80 km/h.
+# Livery: DPP classic city scheme (B): white body and roof, continuous black
+# window band, narrow white band under the windows, red lower body from the
+# wheel-arch tops down, black upper front mask with white headlight corners and
+# a red bumper; amber LED front / side / rear displays.
+# Second livery: old PID regional scheme (C), still worn by 3687-3688 (2013):
+# ultramarine roof and roof edge, black window band, white band, red lower
+# half (as the SOR BN 12); successor of the upstream CZR-Praha-SOR_NB_12_PR.
+# Sprites: VTPsim's CZR-Praha-SOR_NB_12 (already white-roofed) and
+# CZR-Praha-SOR_NB_12_PR (its mid-blue roof repainted the PID ultramarine
+# sampled from photos of 3688), glass converted to the lit-window specials,
+# the displays (drawn with the red-light special) made amber.
+
+vehicles:
+  - id: "NB_12"
+    display_id: "NB 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 604804
+      payload: 88
+      speed: 80
+      weight: 11
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2009
+      intro_month: 8
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 210
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: dppcervenobila
+    name_en: "DPP red-white"
+    name_cs: "DPP červeno-bílá"
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white"
+    name_cs: "PID červeno-modro-bílá"

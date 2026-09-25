@@ -1,0 +1,88 @@
+agency: DPPraha
+type: "SOR_NB_18"
+# Sprites carry their own lane placement (both sections shifted laterally by
+# one common amount to the median of native pak128.cs buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "SOR NB 18 City"
+  family_cs: "SOR NB 18 City"
+
+# SOR NB 18 City, DPP Prague's standard articulated bus: 357 in service
+# (Sep 2026) from 2011-2020 (6711-6769 remnants, 6771-6999, 5001-5100; the
+# 2009-11 cars are being withdrawn). First in service 1 Oct 2009. 18.75 x
+# 2.55 m, 15.7 t, 5 double doors, capacity 143 (dpp.cz), Iveco Cursor 8
+# 243 kW pusher, 80 km/h.
+# Livery: DPP classic city scheme (B) as on the NB 12: white body and roof,
+# black window band, narrow white band, red lower body, black upper front,
+# grey bellows; amber displays (front, door-1 side, rear).
+# Two sections like the upstream CZR-Praha-SOR_NB_18[1]/[2]: the front section
+# (length 8) ends in the bellows, the powered rear section (length 6, about
+# its drawn length) starts right behind it; the joint closes in all 8
+# directions with the engine's 8-unit spacing. Sprite: VTPsim's art, glass
+# converted to the lit-window specials, displays amber; the upstream's second
+# side display over door 4 of the rear section (not on the real bus) removed.
+
+vehicles:
+  - id: "NB_18-A"
+    display_id: "NB 18"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["NB_18-B"]
+    fields:
+      cost: 500000
+      payload: 90
+      speed: 80
+      weight: 9
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2009
+      intro_month: 10
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+
+  - id: "NB_18-B"
+    display_id: "NB 18"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["NB_18-A"]
+    next: []
+    fields:
+      cost: 363453
+      payload: 53
+      speed: 80
+      weight: 7
+      runningcost: 11
+      fixed_cost: 56
+      intro_year: 2009
+      intro_month: 10
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 243
+      gear: 62
+      smoke: Diesel_small
+
+liveries:
+  - color: dppcervenobila
+    name_en: "DPP red-white"
+    name_cs: "DPP červeno-bílá"

@@ -1,0 +1,59 @@
+agency: DPPraha
+type: "Urbino_8_9_LE"
+# Sprites carry their own lane placement (body centred like the native
+# pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Solaris Urbino 8.9 LE"
+  family_cs: "Solaris Urbino 8,9 LE"
+
+# Solaris Urbino 8,9 LE midibus, DPP Prague 2031-2070: 39 in service (2051
+# scrapped 2025), built 2012-2015, first in service 7 Jan 2013. 8.95 x 2.40 x
+# 3.05 m, 8.78 t, 2 doors (single front, double centre), capacity 67
+# (dpp.cz), Cummins ISB6.7 180 kW, 100 km/h.
+# Livery: DPP classic city scheme (B): white body and roof, black window band,
+# red lower band and bumper, black upper front with the display, white mask.
+# Sprite: VTPsim's CZR-Praha-Solaris_Urbino_8 (drawn about 35 px long, in
+# scale with the 51 px NB 12), glass converted to the lit-window specials,
+# displays amber, front indicators (drawn with the red-light special) orange,
+# a stray white bar under the skirt removed, lane placement normalised.
+# Upstream weight (16 t) and price (twice an NB 12) were wrong; price and
+# running costs are now scaled below the NB 12.
+
+vehicles:
+  - id: "Urbino_8_9_LE"
+    display_id: "Urbino 8,9 LE"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 480000
+      payload: 67
+      speed: 100
+      weight: 9
+      runningcost: 22
+      fixed_cost: 110
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 180
+      gear: 57
+      smoke: Diesel_small
+
+liveries:
+  - color: dppcervenobila
+    name_en: "DPP red-white"
+    name_cs: "DPP červeno-bílá"
