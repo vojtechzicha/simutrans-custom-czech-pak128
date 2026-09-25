@@ -11,14 +11,14 @@ Convention:
 - direct match = sprite already correct, no repaint needed
 
 Legend for livery palettes:
-- **Najbrt 1**: dark blue body + white waistband, red door frames (CD pre-2010 "Velkoplošný")
-- **Najbrt 2**: dark blue body + grey roof + bright red doors with white frames (CD 2011+)
-- **červeno-krémová**: red lower half, cream upper half, narrow grey roof (1960s-90s ČSD/ČD legacy)
-- **Pardubický kraj**: white body + red waistband + yellow/gold detail
+- **Najbrt 1**: grey roof, sky-blue window band, thin sapphire stripe under the windows, light-grey lower body, sapphire doors (ČD 2008–2011; no red anywhere)
+- **Najbrt 2**: Najbrt 1 with sapphire roof, cab visor and underframe plus a thin light stripe under the roof edge; doors stay sapphire (ČD 2011+)
+- **červeno-krémová**: red lower half, cream upper half, narrow grey roof (1960s-90s ČSD/ČD legacy). On the 810/010 it is the ČD 1998 variant instead: red window band and doors, cream band below the windows running across the fronts, light-grey roof
+- **Pardubický kraj**: white body + red waistband + yellow/gold detail. On the 810 (2019): light-grey body, dark-blue roof, red strip under the roof edge and red windscreen surround, dark-blue sill stripe, yellow doors
 - **Plzeňský kraj**: red ends, white middle, blue stripe
 - **Kraj Vysočina**: white body + green waistband
-- **PID červeno-modro-bílá**: white body + diagonal red and blue PID livery
-- **PID šedo-červená**: silver/grey body + red doors (older PID look used on city DMUs)
+- **PID červeno-modro-bílá**: the old PID scheme, in horizontal zones: blue roof and window band, white lower body, red doors and bottom edge (810 263 / 289). Not the newer vertical grey-red PID style (`pidsedocervena`)
+- **PID šedo-červená**: silver/grey body + vertical red door bands (the newer PID style used on ČD DMUs/EMUs)
 - **DÚK zeleno-bílá**: white body + green waistband, "Doprava Ústeckého kraje"
 - **HZL krémovo-červená**: cream body + red waistband (Hradecké železniční lokálky)
 
@@ -30,15 +30,19 @@ Legend for livery palettes:
 
 ## 809 "Šukafon"
 
-- [x] `809/sprites/najbrt2.png` — placeholder was balkan-blue ČD 809 from pak128cs. Recolored to **Najbrt 2**.
+- [x] `809/sprites/{najbrt1,najbrt2,cervenokremova}.png` — every livery real 809s wore; same body and art as the 810 railcar.
 
-## 810 "Šukafon"
+## 810 "Šukafon" + 010 trailer
 
-- [ ] `810/sprites/najbrt1.png` — placeholder is light-blue ČD "modrý" 810. Recolor to **Najbrt 1** (darker navy + white waistband, red door frames).
-- [ ] `810/sprites/najbrt2.png` — placeholder is light-blue ČD "modrý" 810. Recolor to **Najbrt 2** (navy + bright red doors).
-- [ ] `810/sprites/cervenokremova.png` — placeholder is ČSD red+dark-grey 810. Adjust grey upper half to **cream** to match the ČD červeno-krémové variant.
-- [ ] `810/sprites/pardubickykraj.png` — placeholder is red ČD 810. Recolor to **Pardubický kraj** (white+red+gold).
-- [ ] `810/sprites/pidcervenomodrobila.png` — placeholder is red ČD 810. Recolor to **PID červeno-modro-bílá** (diagonal PID stripes).
+Both repainted zone by zone from photos (research notes: 810 245, 810 290, 810 578,
+809 179, 810 263, Btax 229 …). Row 0 = 810 railcar, row 1 = 010 (Btax 780) trailer,
+which only exists in the liveries real 010s wore (Najbrt 1, Najbrt 2, red-cream).
+
+- [x] `810/sprites/najbrt1.png` — **Najbrt 1**.
+- [x] `810/sprites/najbrt2.png` — **Najbrt 2**.
+- [x] `810/sprites/cervenokremova.png` — ČD 1998 **red-cream** (red window band, cream band below the windows; the old placeholder was the 1970s ČSD scheme with cream round the windows).
+- [x] `810/sprites/pardubickykraj.png` — the real 2019 **Pardubický kraj** 810 scheme (810 only).
+- [x] `810/sprites/pidcervenomodrobila.png` — old horizontal **PID** scheme (810 263 / 289; 810 only).
 
 ## 811 RegioMouse
 

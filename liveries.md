@@ -121,6 +121,10 @@ Reference: [Pardubický kraj — logo manuál (PDF)](https://pardubice.eu/data/f
 
 The shipped 128px sprite uses #22B14C — a slightly deeper, more emerald green than the documented PMS 368 C / RAL 6018 light green of the real-world livery. The kraj's green graphic mark is the dominant accent — applied as both door fill and a continuous band; logotype text on the side is dark blue. Reference: [Kraj Vysočina — logomanuál (PDF)](https://ezak.kr-vysocina.cz/document_47757/f2d420d542be55d09e1d4bb5d27d3e9a-logomanual-pdf).
 
+### Pardubický kraj on the 810 (2019)
+
+Eight 810s modernised by DPOV in 2019 (810 245, 810 094, …) got a different application: **light-grey body top to bottom** (no sky-blue band), **dark-blue roof, cab visor and underframe**, a **red strip under the roof edge**, a **red windscreen surround**, a dark-blue stripe under the windows and **yellow doors**. Shipped: grey `210, 215, 218`, blue `30, 56, 104`, red `222, 36, 42`, yellow `246, 192, 0`. No 010 trailer wore it, so the set has no 010 in it.
+
 ---
 
 ## PID šedo-červená (`pidsedocervena`)
@@ -150,3 +154,27 @@ DÚK ("Doprava Ústeckého kraje") regional livery for Ústí Region transit. Tw
 | Lower band / darker green  | —       | `85, 148, 75`    | #55944B |
 
 The shipped 128px sprite uses these two hand-picked greens (no official RAL/PMS match recorded); the lower band reads as a shaded continuation of the body color rather than a contrasting accent.
+
+---
+
+## Červeno-krémová on the 810 / 010 (`cervenokremova`) — ČD 1998 scheme
+
+Not the 1970s ČSD scheme with cream round the windows. The **window band, pillars, windscreen surround, doors and lower body are cherry red**; a **cream band about 600 mm high runs just below the windows**, round the whole car and across the cab fronts at lamp level (it stops at the doors). Roof light grey; plough edge yellow. Reference: 810 245 (2008), Btax 780 048.
+
+| Zone            | RGB (shipped)      | Hex     |
+| --------------- | ------------------ | ------- |
+| Red             | `178, 30, 40`      | #B21E28 |
+| Cream band      | `234, 222, 184`    | #EADEB8 |
+| Roof            | `168, 168, 163`    | #A8A8A3 |
+
+---
+
+## PID červeno-modro-bílá (`pidcervenomodrobila`) — old PID scheme
+
+The **older** PID design in horizontal zones (not the newer vertical grey-red `pidsedocervena`), carried by 810 263 (2021) and 810 289: **blue roof, visor and window band** (down to just below the sills), **white lower body** with the lamps, **red doors, bottom edge and underframe skirts**, red buffer beam, yellow plough edge. No 010 trailer wore it, so the set has no 010 in it.
+
+| Zone            | RGB (shipped)      | Hex     |
+| --------------- | ------------------ | ------- |
+| Blue            | `22, 92, 172`      | #165CAC |
+| White           | `236, 236, 236`    | #ECECEC |
+| Red             | `218, 34, 44`      | #DA222C |

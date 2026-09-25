@@ -11,14 +11,22 @@ display:
   family_en: '"Šukafon"'
   family_cs: '"Šukafon"'
 
-# Single railcar. Class 810 = ex ČSD M 152.0 (1973-).
-# Source: pak128cs rail-psg mail/810/810.dat (CD_810).
+# Class 810 railcar (ex ČSD M 152.0, 1973-) and its class 010 trailer (Btax 780).
+# The railcar runs solo or pulls one or more 010s (810+010, 810+010+810, ...);
+# the trailer has no cab and cannot lead. Mixed liveries in one train were
+# normal, so any livery couples with any other.
+# Sources: pak128cs rail-psg mail/810/810.dat (CD_810) and Btax_bez_bagaze.dat (CD_Btax).
 
 vehicles:
   - id: "810"
     role_en: "railcar"
     role_cs: "motorový vůz"
     row: 0
+    head: true
+    tail: true
+    prev: ["010"]
+    next: ["010"]
+    couple_liveries: true
     fields:
       cost: 1022400
       payload: 95
@@ -28,8 +36,8 @@ vehicles:
       fixed_cost: 118
       intro_year: 1997
       intro_month: 2
-      retire_year: 2025
-      retire_month: 1
+      retire_year: 2028             # 41 in service June 2026, ~30 expected in 2027
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 7
@@ -40,24 +48,62 @@ vehicles:
     extended:
       axles: 2
 
+  # 13.97 m, 15 t, 62 seats, 80 km/h; 912 built by Vagónka Studénka 1973-83.
+  # Effectively out of scheduled ČD service by 2025. Only built in the liveries
+  # real 010s wore (none were painted in the Pardubice or PID schemes).
+  - id: "010"
+    role_en: "trailer"
+    role_cs: "přípojný vůz"
+    row: 1
+    liveries: [najbrt1, najbrt2, cervenokremova]
+    head: false
+    tail: true
+    prev: ["810", "010"]
+    next: ["810", "010"]
+    couple_liveries: true
+    fields:
+      cost: 805400
+      payload: 104
+      speed: 80
+      weight: 15
+      runningcost: 6
+      fixed_cost: 31
+      intro_year: 1997
+      intro_month: 2
+      retire_year: 2025
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 7
+    extended:
+      axles: 2
+
+# Sprites: the Sim pak128.CS 810 / Btax 780 bodies (rail-psg mail/810), repainted
+# zone by zone from photos of the real cars. Row 0 = 810, row 1 = 010 (only in
+# the sheets of liveries the 010 exists in).
 liveries:
   - color: najbrt1
     name_en: "Najbrt 1"
     name_cs: "Najbrt 1"
-    source: pak128cs/rail-psg mail/810/810_modry.png (ČD light blue — recolor to Najbrt 1 blue+white)
+    # umbra-grey roof, sky-blue window band, sapphire sill stripe and doors,
+    # light-grey lower body, grey underframe (e.g. 810 578, 810 373)
   - color: najbrt2
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"
-    source: pak128cs/rail-psg mail/810/810_modry.png (ČD light blue — recolor to Najbrt 2 blue with red doors)
+    # as Najbrt 1 plus sapphire roof, visor and underframe and a light stripe
+    # under the roof edge (e.g. 810 290, 809 179, Btax 229)
   - color: cervenokremova
     name_en: "red-cream"
     name_cs: "červeno-krémová"
-    source: pak128cs/rail-psg mail/810/810_CSD.png (ČSD red+grey — recolor to ČD red+cream)
+    # ČD 1998 scheme: cherry-red body incl. window band and doors, cream band
+    # below the windows and across the fronts, light-grey roof (e.g. 810 245)
   - color: pardubickykraj
     name_en: "Pardubický kraj"
     name_cs: "Pardubický kraj"
-    source: pak128cs/rail-psg mail/810/810.png (ČD red — recolor to Pardubický kraj white+red+yellow)
+    # 2019 regional scheme (810 245, 810 094): light-grey body, dark-blue roof,
+    # red roof-edge strip and windscreen surround, yellow doors. 810 only.
   - color: pidcervenomodrobila
     name_en: "PID red-blue-white"
     name_cs: "PID červeno-modro-bílá"
-    source: pak128cs/rail-psg mail/810/810.png (ČD red — recolor to PID red+blue+white)
+    # old (horizontal) PID scheme, 810 263 / 810 289: blue roof and window band,
+    # white lower body, red doors and bottom edge. 810 only.
