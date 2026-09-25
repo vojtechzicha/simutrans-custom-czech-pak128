@@ -9,6 +9,8 @@
 # automatically. The "přechod" variants add a panel crossing across the middle
 # of the tile, lined up with pak128.cs's Asfaltove_nastupiste_se_sluzebnim_prejezdem,
 # so one crossing row runs through the asphalt platform and every narrow one.
+# On the last track use the "konec přechodu" variant: the path arrives at the
+# platform and stops there instead of crossing the track into nowhere.
 #
 # Which side of the track the platform is on is decided by Simutrans, not the
 # pak: a first tile with no platform beside it goes on the far (upper) side,
@@ -39,6 +41,13 @@ objects:
     name_cs: "Úzké nástupiště s přechodem (betonové desky)"
     fields: {level: 1, enables_pax: 1, intro_year: 1960}
 
+  - id: UzkeNastupiste-deska-prechod-konec
+    sprite: uzke-deska-prechod-konec
+    generate: {style: deska, crossing: beton, crossing_end: true}
+    name_en: "Narrow platform, end of track crossing (concrete slabs)"
+    name_cs: "Úzké nástupiště, konec přechodu (betonové desky)"
+    fields: {level: 1, enables_pax: 1, intro_year: 1960}
+
   # --- modernised: interlocking pavers, tactile strip, rubber panel crossings ---
   - id: UzkeNastupiste-dlazba
     sprite: uzke-dlazba
@@ -54,6 +63,13 @@ objects:
     name_cs: "Úzké nástupiště s přechodem (zámková dlažba)"
     fields: {level: 1, enables_pax: 1, intro_year: 1995}
 
+  - id: UzkeNastupiste-dlazba-prechod-konec
+    sprite: uzke-dlazba-prechod-konec
+    generate: {style: dlazba, crossing: pryz, crossing_end: true}
+    name_en: "Narrow platform, end of track crossing (paving blocks)"
+    name_cs: "Úzké nástupiště, konec přechodu (zámková dlažba)"
+    fields: {level: 1, enables_pax: 1, intro_year: 1995}
+
   # --- older: Sudop concrete edge blocks, gravel surface, wooden crossings ---
   - id: UzkeNastupiste-sudop
     sprite: uzke-sudop
@@ -67,6 +83,13 @@ objects:
     generate: {style: sudop, crossing: drevo}
     name_en: "Narrow platform with track crossing (gravel, Sudop edge)"
     name_cs: "Úzké nástupiště s přechodem (sypané, hrana Sudop)"
+    fields: {level: 1, enables_pax: 1, intro_year: 1950}
+
+  - id: UzkeNastupiste-sudop-prechod-konec
+    sprite: uzke-sudop-prechod-konec
+    generate: {style: sudop, crossing: drevo, crossing_end: true}
+    name_en: "Narrow platform, end of track crossing (gravel, Sudop edge)"
+    name_cs: "Úzké nástupiště, konec přechodu (sypané, hrana Sudop)"
     fields: {level: 1, enables_pax: 1, intro_year: 1950}
 
   # --- crossing only: for tracks without a platform on that tile ---
