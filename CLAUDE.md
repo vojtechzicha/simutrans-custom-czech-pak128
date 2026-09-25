@@ -103,6 +103,9 @@ vehicles:
     # couple_liveries: false  # if true, each prev/next partner id resolves to that vehicle in EVERY
     #                         # livery of the family, so cars of different paint can couple into one
     #                         # consist (e.g. a tram that runs solo or as a mixed-livery 2-car set)
+    #                         # `prev` / `next` limit it to that side: multiple units of any livery
+    #                         # couple end to end (lead car `prev`, rear car `next`) while the cars
+    #                         # inside one unit match, so the depot still auto-completes a unit
     # liveries: [color, …]    # only build this vehicle in the listed liveries (default: all), e.g. a
     #                         # trailer that never wore a railcar's regional scheme (810 family's 010).
     #                         # Partner constraints skip liveries the partner doesn't exist in, and

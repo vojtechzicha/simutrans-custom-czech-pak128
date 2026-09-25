@@ -205,19 +205,22 @@ def emit_dat(family: dict, livery: dict, siblings: dict | None = None) -> str:
         next_partners = v.get("next", other_ids[v["id"]])
         # couple_liveries: a partner id resolves to that vehicle in EVERY livery
         # of the family (so cars of different paint can couple), not just this one.
+        # true = both sides; "prev" / "next" = that side only, e.g. multiple units
+        # of any livery couple end to end while the cars inside a unit match.
         # Liveries a partner does not exist in (its `liveries:` list) are skipped.
-        def partner_bns(pid: str) -> list[str]:
+        couple = v.get("couple_liveries", False)
+        def partner_bns(pid: str, side: str) -> list[str]:
             pv = by_id.get(pid, {})
-            if v.get("couple_liveries", False):
+            if couple is True or couple == side:
                 return [basename_for(family, lv) for lv in family["liveries"] if in_livery(pv, lv)]
             return [bn] if in_livery(pv, livery) else []
         # A partner written "<family folder>/<id>" is a vehicle of a sibling family
         # in the same agency-mode pak (e.g. a T3R.PLF leading a T3R.P trailer). It
         # resolves to that family's object in the SAME livery and is skipped when
         # the sibling has no such livery/vehicle, so no dangling constraint is emitted.
-        def partner_entries(pid: str) -> list[str]:
+        def partner_entries(pid: str, side: str) -> list[str]:
             if "/" not in pid:
-                return [f"{b}-{slug(pid)}" for b in partner_bns(pid)]
+                return [f"{b}-{slug(pid)}" for b in partner_bns(pid, side)]
             folder, vid = pid.split("/", 1)
             other = (siblings or {}).get(folder)
             if other is None:
@@ -231,14 +234,14 @@ def emit_dat(family: dict, livery: dict, siblings: dict | None = None) -> str:
             return [f"{basename_for(other, olv)}-{slug(vid)}"]
         # prev/next: any -> no constraint on that side at all, so the vehicle couples
         # with anything, like native locomotives and coaches (loco-hauled stock).
-        def entries(partners, open_end: bool) -> list[str]:
+        def entries(partners, open_end: bool, side: str) -> list[str]:
             if partners == "any":
                 return []
             return (["none"] if open_end else []) + [
-                e for pid in partners for e in partner_entries(pid)]
-        for idx, entry in enumerate(entries(prev_partners, can_head)):
+                e for pid in partners for e in partner_entries(pid, side)]
+        for idx, entry in enumerate(entries(prev_partners, can_head, "prev")):
             lines.append(f"Constraint[Prev][{idx}]={entry}")
-        for idx, entry in enumerate(entries(next_partners, can_tail)):
+        for idx, entry in enumerate(entries(next_partners, can_tail, "next")):
             lines.append(f"Constraint[Next][{idx}]={entry}")
         blocks.append("\n".join(lines))
 
