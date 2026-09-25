@@ -1,0 +1,65 @@
+agency: DPBrno
+type: "T3R.EV"
+# The sprites keep the upstream pak128_czr T3 placement (their dats use no
+# offset), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Pragoimex T3R.EV"
+  family_cs: "Pragoimex T3R.EV"
+
+# Pragoimex T3R.EV: the first VarCB3 new-body T3 (Pragoimex / KOS Krnov), same
+# body and Kardaus masks as the T3R.PV but with asynchronous TV Europulse
+# traction. 14.0 m body (15.1 m over couplers), 2.5 m wide, 14.3 t, 4 x 90 kW,
+# 65 km/h, 23 seated + 87 standing = 110 (DPMB). Single-arm pantograph, cab A/C
+# (Dometic) on the front roof dome. DPMB: 1531, 1560, 1562, 1569 (4 active, all
+# at Medlánky); 1560 was the very first T3R.EV, in service from 1 Jul 2002.
+# Runs solo or in 2-car sets.
+#
+# Livery: DPMB tram "unifik" scheme (light grey roof, dark grey window band,
+# white line under the windows, red lower body, white skirt, red nose with a
+# black bumper). 1560 still carries the older white + red + grey variant, which
+# is not modelled.
+#
+# Sprite: identical to the T3R.PV family (vehicle-tram/dpmb/t3r_pv): Lubak91's
+# T3R.P drawing with the single-arm pantograph of Lubak91's Brno T3R, repainted
+# from the bmhd side drawing t3r-ev.svg and photos of 1569; the two families
+# differ only in their stats. Economy scaled from CZR-Brno-Tatra_T3R (840 000 /
+# 24 / 100) for the stronger, lighter asynchronous car (gear 100 at 360 kW).
+
+vehicles:
+  - id: "T3R.EV"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: true                 # runs solo ...
+    tail: true
+    prev: ["T3R.EV"]           # ... or as a 2-car set
+    next: ["T3R.EV"]
+    fields:
+      cost: 900000
+      payload: 110
+      speed: 65
+      weight: 14
+      runningcost: 23
+      fixed_cost: 100
+      intro_year: 2002
+      intro_month: 7
+      retire_year: 2035
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 11
+      engine_type: electric
+      power: 360
+      gear: 100
+
+liveries:
+  - color: dpmbsedobilocervena
+    name_en: "DPMB grey-white-red"
+    name_cs: "DPMB šedo-bílo-červená"
