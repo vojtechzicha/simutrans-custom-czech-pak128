@@ -59,7 +59,7 @@ simutrans-custom-czech-pak128/
           <color>.png             # one consolidated 1024×N PNG per livery
 ```
 
-Transport modes: `vehicle-rail/`, `vehicle-bus/`, `vehicle-tram/`, `vehicle-water/`, `vehicle-air/` (plus any future `vehicle-trolleybus/` etc.). Bus and tram are split into their own modes rather than bundled under a generic `vehicle-road/` so trolleybuses can later live alongside buses without mixing rolling stock. The build script walks every `vehicle-*/...family.yaml` regardless of depth and groups by the `agency:` field plus the `vehicle-*` mode root. Family folder names are conventionally the slugified type (`814.0` → `814_0`); the agency folder name is organizational only — the canonical agency identifier is the `agency:` field inside `family.yaml`.
+Transport modes: `vehicle-rail/`, `vehicle-bus/`, `vehicle-tram/`, `vehicle-water/`, `vehicle-air/` (plus any future `vehicle-trolleybus/` etc.). Bus and tram are split into their own modes rather than bundled under a generic `vehicle-road/` so trolleybuses can later live alongside buses without mixing rolling stock. The build script walks every `vehicle-*/...family.yaml` regardless of depth and groups by the `agency:` field plus the `vehicle-*` mode root. Family folder names are conventionally the slugified type (`814.0` → `814_0`); the agency folder name is organizational only — the canonical agency identifier is the `agency:` field inside `family.yaml`. Station objects live in parallel `station-*/` roots (see "Stations" below).
 
 ## `family.yaml` schema
 
@@ -189,6 +189,29 @@ vehicles:
 PNG layout: row 0 = motor sprites, row 1 = middle sprites. Total 1024×256.
 
 With these constraints, the only buildable consist is `front + middle + rear`.
+
+## Stations (`station.yaml`)
+
+Station objects live under `station-<mode>/<set>/station.yaml` (e.g. `station-rail/uzke-nastupiste/`) and are grouped by the `group:` field instead of `agency:`: every set with `group: Stations` in `station-rail/` goes into `dist/VZ-Stations-rail.pak` (+ `en.`/`cz.VZ-Stations-rail.tab`). Object `name=` is `VZ-<group>-<id>` (e.g. `VZ-Stations-UzkeNastupiste-deska-prechod`); display names come verbatim from `name_en` / `name_cs`. `copyright:` is optional upstream credit (original work omits it and gets plain `vojtechzicha`).
+
+```yaml
+group: Stations
+objects:
+  - id: UzkeNastupiste-deska          # name= suffix
+    sprite: uzke-deska                # sprites/uzke-deska.png
+    generate: {style: deska}          # parameters for tools/gen_platforms.py
+    name_en: "Narrow platform (concrete slabs)"
+    name_cs: "Úzké nástupiště (betonové desky)"
+    fields: {level: 1, enables_pax: 1, intro_year: 1960}   # extra .dat fields
+```
+
+The build emits `obj=building`, `type=stop`, `waytype=track`, `noinfo=1`, `dims=1,1,16` plus `fields`, and references only non-empty sheet cells. Every station object is a **16-layout through stop** on one standard 1024×1152 sheet: rows 0–1 back images and rows 2–3 front images for season 0 (layouts 0–7 / 8–15 across the columns), rows 4–7 the same for season 1 (snow), row 8 col 0 = build cursor, col 1 = 32×32 toolbar icon (top-left of the cell). Image offset is 0,0 (the art is drawn at the true tile diamond, top vertex at y≈64.5).
+
+Layout bits, set by the engine (`simtool.cc` `tool_station_aux`, `hausbauer_t::build_station_extension_depot`): `1` = east–west track, `2` = no stop tile at the south/east end (ramp there), `4` = none at the north/west end, `8` = platform on the near (east/south, lower-on-screen) side instead of the far side. Near-side platforms go into the **front** image (drawn over the train on that tile); everything at ground level (crossing panels) stays in the **back** image. Map rotation remaps layouts through bit 8 (`gebaeude_t::rotate90`), so the side must always follow bit 8; an object cannot pin its platform to one fixed side.
+
+The engine picks bit 8, not the pak: a tile with no oriented stop around it gets the far side, a tile with a stop on the same track copies that tile's side, and a tile next to a stop on the neighbouring track only gets the opposite side (adjacent platform tracks alternate and form islands). To put several narrow platforms on the same side of their tracks, start each one on a tile with nothing beside it and extend it along the track.
+
+Sheets are **generated**: `python tools/gen_platforms.py station-rail/uzke-nastupiste [--only <sprite>]` (needs numpy + Pillow) ray-marches a small heightfield per layout with pak128 lighting (sun from the south, flat top ×1.0, south faces ×0.835, east faces ×0.61) and writes `sprites/<sprite>.png`. Geometry is matched to pak128.cs: platform edge 0.115 tile from the track axis, like the asphalt platforms, and the crossing band spans a = 0.365–0.635 of the tile, like `Asfaltove_nastupiste_se_sluzebnim_prejezdem`, so a crossing row continues through both. Rails over crossing panels are redrawn in screen space on the pak128.cs rail pixels (they sit ½ px below the geometric axis). Change the art in the generator and regenerate; don't paint the sheets by hand.
 
 ## Localization
 

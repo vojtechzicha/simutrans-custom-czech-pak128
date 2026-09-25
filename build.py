@@ -4,7 +4,8 @@
 Walks every ``vehicle-*/.../family.yaml`` under the project root, groups them by
 (agency, mode), and emits one ``.pak`` per group into ``dist/`` — e.g.
 ``dist/VZ-CeskeDrahy-rail.pak`` contains every family and livery for ČD's rail
-fleet. Per-livery DAT / PNG files live side-by-side inside one shared build
+fleet. Station sets (``station-*/.../station.yaml``) are grouped the same way by
+their ``group`` field, e.g. ``dist/VZ-Stations-rail.pak``. Per-livery DAT / PNG files live side-by-side inside one shared build
 directory so a single ``makeobj`` invocation bundles them.
 
 Usage:
@@ -82,12 +83,22 @@ def basename_for(family: dict, livery: dict) -> str:
     return f"VZ-{family['agency']}-{slug(family['type'])}-{livery['color']}"
 
 
-def mode_for(family_yaml: Path) -> str:
-    """Derive the transport mode from the top-level folder (vehicle-rail → rail)."""
-    rel = family_yaml.relative_to(ROOT)
+SOURCE_ROOTS = {"family.yaml": "vehicle-", "station.yaml": "station-"}
+
+
+def mode_for(source_yaml: Path) -> str:
+    """Derive the transport mode from the top-level folder (vehicle-rail → rail,
+    station-rail → rail)."""
+    rel = source_yaml.relative_to(ROOT)
     top = rel.parts[0]
-    assert top.startswith("vehicle-"), f"unexpected top folder: {top}"
-    return top[len("vehicle-"):]
+    prefix = SOURCE_ROOTS[source_yaml.name]
+    assert top.startswith(prefix), f"unexpected top folder: {top}"
+    return top[len(prefix):]
+
+
+def group_for(source_yaml: Path, data: dict) -> str:
+    """The pak group token: a vehicle family's agency, a station set's group."""
+    return data["agency"] if source_yaml.name == "family.yaml" else data["group"]
 
 
 def pak_basename_for(agency: str, mode: str) -> str:
@@ -177,6 +188,91 @@ def emit_tab_entries(family: dict, livery: dict, lang: str, mode: str) -> list[s
     return out
 
 
+# Station sets (station-<mode>/.../station.yaml). Every object is a 16-layout
+# through stop drawn on the standard sheet written by tools/gen_platforms.py:
+# rows 0-1 back / 2-3 front images for season 0 (layouts 0-7, 8-15), rows 4-7
+# the same for season 1 (snow), row 8 = build cursor (col 0) and 32x32 toolbar
+# icon (col 1). Cells left entirely transparent are not referenced.
+STATION_LAYOUTS = 16
+STATION_SEASONS = 2
+STATION_CURSOR = (8, 0)
+STATION_ICON = (8, 1)
+MODE_WAYTYPES = {"rail": "track"}
+TRANSPARENT_RGB = (231, 255, 255)
+
+
+def station_basename(spec: dict, obj: dict) -> str:
+    return f"VZ-{spec['group']}-{obj['id']}"
+
+
+def station_sheet_cell(kind: str, season: int, layout: int) -> tuple[int, int]:
+    row = (0 if kind == "back" else 2) + season * 4 + layout // 8
+    return row, layout % 8
+
+
+def nonempty_cells(png: Path, tile: int = 128) -> set[tuple[int, int]]:
+    """(row, col) of every sheet cell holding at least one visible pixel."""
+    from PIL import Image
+
+    img = Image.open(png).convert("RGB")
+    cells = set()
+    for r in range(img.height // tile):
+        for c in range(img.width // tile):
+            colors = img.crop((c * tile, r * tile, (c + 1) * tile, (r + 1) * tile)).getcolors(1 << 16)
+            if colors is None or any(rgb != TRANSPARENT_RGB for _, rgb in colors):
+                cells.add((r, c))
+    return cells
+
+
+def emit_station_dat(spec: dict, obj: dict, mode: str, cells: set[tuple[int, int]]) -> str:
+    bn = station_basename(spec, obj)
+    credit = spec.get("copyright")
+    fields = {"type": "stop", "waytype": MODE_WAYTYPES[mode], "noinfo": 1}
+    fields.update(obj.get("fields", {}))
+    lines = [
+        "obj=building",
+        f"name={bn}",
+        f"copyright={credit + ', ' if credit else ''}vojtechzicha",
+        f"dims=1,1,{STATION_LAYOUTS}",
+    ]
+    lines += [f"{k}={v}" for k, v in fields.items()]
+    lines.append(f"icon=> {bn}.{STATION_ICON[0]}.{STATION_ICON[1]}")
+    lines.append(f"cursor={bn}.{STATION_CURSOR[0]}.{STATION_CURSOR[1]}")
+    lines.append("")
+    for season in range(STATION_SEASONS):
+        for layout in range(STATION_LAYOUTS):
+            for kind, key in (("back", "BackImage"), ("front", "FrontImage")):
+                row, col = station_sheet_cell(kind, season, layout)
+                if (row, col) in cells:
+                    lines.append(f"{key}[{layout}][0][0][0][0][{season}]={bn}.{row}.{col}")
+    return "\n".join(lines) + "\n"
+
+
+def emit_station_tab_entries(spec: dict, obj: dict, lang: str) -> list[str]:
+    return [station_basename(spec, obj), obj["name_en"] if lang == "en" else obj["name_cs"]]
+
+
+def stage_station_set(station_yaml: Path, mode: str, out_dir: Path,
+                      tab_lines: dict[str, list[str]]) -> tuple[int, int]:
+    """Write the .dat/.png of every object of one station.yaml into out_dir."""
+    spec = yaml.safe_load(station_yaml.read_text(encoding="utf-8"))
+    ok = fail = 0
+    for obj in spec["objects"]:
+        bn = station_basename(spec, obj)
+        png_src = station_yaml.parent / "sprites" / f"{obj['sprite']}.png"
+        if not png_src.exists():
+            print(f"  [skip] {bn}: missing sprite {png_src}", file=sys.stderr)
+            fail += 1
+            continue
+        shutil.copy2(png_src, out_dir / f"{bn}.png")
+        dat = emit_station_dat(spec, obj, mode, nonempty_cells(png_src))
+        (out_dir / f"{bn}.dat").write_text(dat, encoding="utf-8")
+        for lang in TAB_LANGS:
+            tab_lines[lang].extend(emit_station_tab_entries(spec, obj, lang))
+        ok += 1
+    return ok, fail
+
+
 # Languages emitted for each agency-mode pak. Filenames are <lang>.<pak_bn>.tab
 # (e.g. cz.VZ-CeskeDrahy-rail.tab) — Simutrans's translator::load_files_from_folder
 # only matches a DOT-separated language prefix/suffix, not the underscore form
@@ -190,8 +286,8 @@ UTF8_BOM = b"\xef\xbb\xbf"
 
 
 def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, int]:
-    """Build a single agency-mode pak from the given family.yaml files.
-    Returns (succeeded_liveries, failed_liveries)."""
+    """Build a single agency-mode pak from the given family.yaml (or
+    station.yaml) files. Returns (succeeded, failed) liveries/objects."""
     pak_bn = pak_basename_for(agency, mode)
     out_dir = BUILD / pak_bn
     if out_dir.exists():
@@ -203,6 +299,11 @@ def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, in
 
     ok = fail = 0
     for fy in sorted(family_yamls):
+        if fy.name == "station.yaml":
+            s_ok, s_fail = stage_station_set(fy, mode, out_dir, tab_lines)
+            ok += s_ok
+            fail += s_fail
+            continue
         family = yaml.safe_load(fy.read_text(encoding="utf-8"))
         family_dir = fy.parent
         for livery in family["liveries"]:
@@ -262,19 +363,23 @@ def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, in
 
 
 def all_families() -> list[Path]:
-    """All family.yaml files anywhere under a vehicle-* root."""
-    return [
-        p
-        for p in ROOT.rglob("family.yaml")
-        if p.relative_to(ROOT).parts and p.relative_to(ROOT).parts[0].startswith("vehicle-")
-    ]
+    """All family.yaml files under a vehicle-* root and station.yaml files
+    under a station-* root."""
+    found = []
+    for name, prefix in SOURCE_ROOTS.items():
+        found += [
+            p
+            for p in ROOT.rglob(name)
+            if p.relative_to(ROOT).parts and p.relative_to(ROOT).parts[0].startswith(prefix)
+        ]
+    return found
 
 
 def group_by_agency_mode(family_yamls: list[Path]) -> dict[tuple[str, str], list[Path]]:
     groups: dict[tuple[str, str], list[Path]] = defaultdict(list)
     for fy in family_yamls:
-        family = yaml.safe_load(fy.read_text(encoding="utf-8"))
-        groups[(family["agency"], mode_for(fy))].append(fy)
+        data = yaml.safe_load(fy.read_text(encoding="utf-8"))
+        groups[(group_for(fy, data), mode_for(fy))].append(fy)
     return groups
 
 
@@ -289,9 +394,9 @@ def select_target_groups(target: Path | None, all_groups: dict[tuple[str, str], 
         print(f"no such path: {target}", file=sys.stderr)
         return {}
 
-    if target.is_file() and target.name == "family.yaml":
-        family = yaml.safe_load(target.read_text(encoding="utf-8"))
-        key = (family["agency"], mode_for(target))
+    if target.is_file() and target.name in SOURCE_ROOTS:
+        data = yaml.safe_load(target.read_text(encoding="utf-8"))
+        key = (group_for(target, data), mode_for(target))
         return {key: all_groups.get(key, [])} if key in all_groups else {}
 
     if target.is_dir():
@@ -302,7 +407,7 @@ def select_target_groups(target: Path | None, all_groups: dict[tuple[str, str], 
         if selected:
             return selected
 
-    print(f"no family.yaml found at or under {target}", file=sys.stderr)
+    print(f"no family.yaml or station.yaml found at or under {target}", file=sys.stderr)
     return {}
 
 

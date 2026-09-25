@@ -1,0 +1,92 @@
+# Narrow low platforms ("úzká úrovňová nástupiště") and the level track
+# crossings ("přechody přes koleje") that lead to them — the typical layout of
+# smaller Czech stations such as Světlá nad Sázavou or Nezamyslice: a side
+# platform at the station building, then one narrow platform per further track,
+# all on the building side of their track, reached over the tracks by a crossing.
+#
+# Each tile draws a narrow strip along its own track (same edge line as the
+# pak128.cs asphalt platforms, less than half their width); free ends ramp down
+# automatically. The "přechod" variants add a panel crossing across the middle
+# of the tile, lined up with pak128.cs's Asfaltove_nastupiste_se_sluzebnim_prejezdem,
+# so one crossing row runs through the asphalt platform and every narrow one.
+#
+# Which side of the track the platform is on is decided by Simutrans, not the
+# pak: a first tile with no platform beside it goes on the far (upper) side,
+# further tiles keep the side of their neighbour on the same track, and a tile
+# built right next to a platform on the neighbouring track turns to face it.
+# So for all narrow platforms on the building side, start each one on a tile
+# with no platform beside it (e.g. one tile past the end of the neighbouring
+# platform) and continue along the track from there.
+#
+# Sprites are generated: python tools/gen_platforms.py station-rail/uzke-nastupiste
+
+group: Stations
+# copyright: <upstream credit>   # omitted: original work, the build writes "vojtechzicha"
+
+objects:
+  # --- Světlá nad Sázavou: large concrete slabs, concrete panel crossings ---
+  - id: UzkeNastupiste-deska
+    sprite: uzke-deska
+    generate: {style: deska}
+    name_en: "Narrow platform (concrete slabs)"
+    name_cs: "Úzké nástupiště (betonové desky)"
+    fields: {level: 1, enables_pax: 1, intro_year: 1960}
+
+  - id: UzkeNastupiste-deska-prechod
+    sprite: uzke-deska-prechod
+    generate: {style: deska, crossing: beton}
+    name_en: "Narrow platform with track crossing (concrete slabs)"
+    name_cs: "Úzké nástupiště s přechodem (betonové desky)"
+    fields: {level: 1, enables_pax: 1, intro_year: 1960}
+
+  # --- modernised: interlocking pavers, tactile strip, rubber panel crossings ---
+  - id: UzkeNastupiste-dlazba
+    sprite: uzke-dlazba
+    generate: {style: dlazba}
+    name_en: "Narrow platform (paving blocks)"
+    name_cs: "Úzké nástupiště (zámková dlažba)"
+    fields: {level: 1, enables_pax: 1, intro_year: 1995}
+
+  - id: UzkeNastupiste-dlazba-prechod
+    sprite: uzke-dlazba-prechod
+    generate: {style: dlazba, crossing: pryz}
+    name_en: "Narrow platform with track crossing (paving blocks)"
+    name_cs: "Úzké nástupiště s přechodem (zámková dlažba)"
+    fields: {level: 1, enables_pax: 1, intro_year: 1995}
+
+  # --- older: Sudop concrete edge blocks, gravel surface, wooden crossings ---
+  - id: UzkeNastupiste-sudop
+    sprite: uzke-sudop
+    generate: {style: sudop}
+    name_en: "Narrow platform (gravel, Sudop edge)"
+    name_cs: "Úzké nástupiště (sypané, hrana Sudop)"
+    fields: {level: 1, enables_pax: 1, intro_year: 1950}
+
+  - id: UzkeNastupiste-sudop-prechod
+    sprite: uzke-sudop-prechod
+    generate: {style: sudop, crossing: drevo}
+    name_en: "Narrow platform with track crossing (gravel, Sudop edge)"
+    name_cs: "Úzké nástupiště s přechodem (sypané, hrana Sudop)"
+    fields: {level: 1, enables_pax: 1, intro_year: 1950}
+
+  # --- crossing only: for tracks without a platform on that tile ---
+  - id: Prechod-beton
+    sprite: prechod-beton
+    generate: {crossing: beton, platform: false}
+    name_en: "Track crossing (concrete panels)"
+    name_cs: "Přechod přes koleje (betonové panely)"
+    fields: {level: 1, enables_pax: 1, intro_year: 1960}
+
+  - id: Prechod-pryz
+    sprite: prechod-pryz
+    generate: {crossing: pryz, platform: false}
+    name_en: "Track crossing (rubber panels)"
+    name_cs: "Přechod přes koleje (pryžové panely)"
+    fields: {level: 1, enables_pax: 1, intro_year: 1995}
+
+  - id: Prechod-drevo
+    sprite: prechod-drevo
+    generate: {crossing: drevo, platform: false}
+    name_en: "Track crossing (wooden planks)"
+    name_cs: "Přechod přes koleje (dřevěné fošny)"
+    fields: {level: 1, enables_pax: 1, intro_year: 1900}
