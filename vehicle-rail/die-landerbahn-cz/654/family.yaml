@@ -75,7 +75,7 @@ vehicles:
       retire_month: 1
       waytype: track
       freight: Passagiere
-      length: 7
+      length: 4
     extended:
       axles: 2
 
