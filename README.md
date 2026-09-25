@@ -17,15 +17,22 @@ A single pak file per agency and transport mode — for example, every shipped
 
 | Family | Liveries |
 | --- | --- |
+| ČD řada 642 (Siemens Desiro Classic) | DÚK zeleno-bílá |
+| ČD řada 809 ("Šukafon") | Najbrt 1, Najbrt 2, červeno-krémová, červeno-žlutá |
+| ČD řada 810 ("Šukafon") + 010 trailer | Najbrt 1, Najbrt 2, červeno-krémová; 810 also in Pardubický kraj and PID červeno-modro-bílá |
+| ČD řada 811 (RegioMouse) + 012 trailer | Najbrt 2, Moravskoslezský kraj |
 | ČD řada 814.0 (RegioNova) | žluto-zelená, Najbrt 2, Plzeňský kraj, Pardubický kraj, Kraj Vysočina, PID šedo-červená |
 | ČD řada 814.2 (RegioNova Trio) | žluto-zelená, Najbrt 2, PID šedo-červená |
-| ČD řada 642 (Siemens Desiro Classic) | DÚK zeleno-bílá |
-| ČD řada 809 ("Šukafon") | Najbrt 1, Najbrt 2, červeno-krémová |
-| ČD řada 810 ("Šukafon") + 010 trailer | Najbrt 1, Najbrt 2, červeno-krémová; 810 also in Pardubický kraj and PID červeno-modro-bílá |
-| ČD řada 811 (RegioMouse) | Najbrt 2, Moravskoslezský kraj |
-| ČD řada 840 (Stadler RegioSpider) | Najbrt 1 |
+| ČD řada 840 (Stadler RegioSpider) | Najbrt 1, Liberecký kraj |
 | ČD řada 841 (Stadler RegioSpider) | Najbrt 1 |
-| ČD řada 841.2 (Stadler RegioSpider) | DÚK zeleno-bílá, HZL krémovo-červená, Pardubický kraj, PID šedo-červená |
+| ČD řada 841.2 (Stadler RegioSpider) | DÚK zeleno-bílá, HzL krémovo-červená, Pardubický kraj, PID šedo-červená, Najbrt 2, světle šedá |
+| ČD řada 841.3 (Stadler RegioSpider) | PID šedo-červená |
+| ČD řada 842 ("Kvatro") + 054 / 954 trailers | Najbrt 1, Najbrt 2; trailers Najbrt 2, červeno-krémová |
+| ČD řada 843 ("Rakev") + 043 / 943 trailers | Najbrt 1, Najbrt 2, červeno-krémová (943 Najbrt only) |
+| ČD řada 844 (PESA RegioShark) | Najbrt 2, Pardubický kraj, Plzeňský kraj |
+| ČD řada 847 (PESA RegioFox) | Najbrt 2, PID šedo-červená, Plzeňský kraj, Pardubický kraj |
+| ČD řada 848 (Stadler GTW 2/6) | Najbrt 2 with Olomoucký kraj decals |
+| ČD řada 854 ("Hydra") | Najbrt 2, červeno-krémová |
 | DPmML SOR NB 12, NS 12, NB 18 and NS 18 (bus) | Most žluto-červená |
 | DPmML Irisbus Citelis 12M and Citelis 18M (bus) | Most žluto-červená |
 | DPmML Iveco Urbanway 18M (bus) | Most žluto-červená |
@@ -61,9 +68,9 @@ Also on `main`, still being refined (see [`TODO.md`](TODO.md)):
   - Frýdek-Místek, Třinec, Český Těšín, Nový Jičín, Studénka, Krnov, Hranice
     and Přerov (contracted MHD, town or operator schemes).
   - Kladno, DPMLB Mladá Boleslav, Kolín, Příbram, Benešov and Tábor.
-- **ČD rail** — assorted DMU and EMU classes (842/843/844 · 847 RegioFox ·
-  854 Hydra · 471 CityElefant · 440/640/650/660/681/690 Panter family) in
-  various stages of sprite repaint; see [`TODO.md`](TODO.md).
+- **ČD rail EMUs** — 471 CityElefant and the 440/640/650/660/681/690 Panter
+  family, in various stages of sprite repaint; see [`TODO.md`](TODO.md). (Every
+  ČD diesel unit in service in 2026 is finished; see the table above.)
 - **Die Länderbahn CZ** — 654 Pesa LINK II.
 - **Supermarkets** (city industries, `VZ-Supermarkets-city.pak`) — 14 Czech
   chains as consumer industries in three size classes: 1×1 stores (Žabka, Tesco

@@ -1,9 +1,9 @@
 # Sprite TODO list
 
-Placeholder sprites have been copied from the closest-color upstream source for every
-new DMU livery. Each item below names the placeholder you'll see in-game today, the
-livery it has to become, and any real-world caveats. All work here is manual pixel art —
-no programmatic recoloring has been run.
+The ČD diesel units are finished (see below). The EMU entries further down still
+ship placeholder sprites copied from the closest-colour upstream source; each item
+names the placeholder you'll see in-game today, the livery it has to become, and any
+real-world caveats.
 
 Convention:
 - placeholder: file currently shipped under `vehicle-rail/.../sprites/<color>.png`
@@ -14,97 +14,43 @@ Legend for livery palettes:
 - **Najbrt 1**: grey roof, sky-blue window band, thin sapphire stripe under the windows, light-grey lower body, sapphire doors (ČD 2008–2011; no red anywhere)
 - **Najbrt 2**: Najbrt 1 with sapphire roof, cab visor and underframe plus a thin light stripe under the roof edge; doors stay sapphire (ČD 2011+)
 - **červeno-krémová**: red lower half, cream upper half, narrow grey roof (1960s-90s ČSD/ČD legacy). On the 810/010 it is the ČD 1998 variant instead: red window band and doors, cream band below the windows running across the fronts, light-grey roof
-- **Pardubický kraj**: white body + red waistband + yellow/gold detail. On the 810 (2019): light-grey body, dark-blue roof, red strip under the roof edge and red windscreen surround, dark-blue sill stripe, yellow doors
-- **Plzeňský kraj**: red ends, white middle, blue stripe
-- **Kraj Vysočina**: white body + green waistband
+- **Pardubický kraj**: regional scheme with navy / white / red / yellow elements; it differs per class (RS1, 844/847: navy roof, red cantrail line, white body, yellow doors). On the 810 (2019): light-grey body, dark-blue roof, red strip under the roof edge and red windscreen surround, dark-blue sill stripe, yellow doors
+- **Plzeňský kraj** (IDPK): royal-blue body with white cantrail / roof (and white cab hood on the PESA units), yellow doors, green/yellow/white swooshes and the arc logo, anthracite skirt
+- **Kraj Vysočina**: the Pardubický kraj RegioNova layout (white body, dark-blue roof and bottom band) with light-green roof-edge strip, windscreen frame and doors
 - **PID červeno-modro-bílá**: the old PID scheme, in horizontal zones: blue roof and window band, white lower body, red doors and bottom edge (810 263 / 289). Not the newer vertical grey-red PID style (`pidsedocervena`)
 - **PID šedo-červená**: silver/grey body + vertical red door bands (the newer PID style used on ČD DMUs/EMUs)
-- **DÚK zeleno-bílá**: white body + green waistband, "Doprava Ústeckého kraje"
-- **HZL krémovo-červená**: cream body + red waistband (Hradecké železniční lokálky)
+- **DÚK zeleno-bílá**: "Doprava Ústeckého kraje" bright green with light-grey / white panels (slanted door panels on the RS1, a cab swoosh on the Desiro)
+- **HzL krémovo-červená**: Hohenzollerische Landesbahn cream + raspberry red, the scheme the ex-HzL RS1s (841.2) ran in until their repaint
 
 ---
 
-## 642 Siemens Desiro Classic
+## ČD diesel units (DMUs) — done
 
-- [x] `642/sprites/dukzelenobila.png` — placeholder is DB-red Desiro from pak128cs. Recolor to **DÚK zeleno-bílá** (white body, green DÚK band, green ends).
+Every ČD diesel class and DMU trailer in service in September 2026 is in the set,
+in every livery it runs in (plus a few real older schemes kept from before).
+All sheets were repainted on one upstream body per class with the zone painter
+(photo-researched colours, shared Najbrt palette, lit glass only when loaded) and
+checked in-game on the rail test rings.
 
-## 809 "Šukafon"
+- [x] **642** Desiro Classic (6 ex-HLB units at Děčín since 2024): DÚK zeleno-bílá.
+- [x] **809**: Najbrt 1, Najbrt 2, červeno-krémová, červeno-žlutá (809 281, ČSD unifik 88).
+- [x] **810** + **010** trailer: Najbrt 1, Najbrt 2, červeno-krémová; 810 also Pardubický kraj, old PID.
+- [x] **811** (2020 MSK rebuild) + **012** (BDtax 782) trailer: Najbrt 2 + Moravskoslezský kraj.
+- [x] **814.0 + 914**, **814.2 + 014**: žluto-zelená, Najbrt 2, PID; 814.0 also Plzeňský kraj, Pardubický kraj, Kraj Vysočina.
+- [x] **840**: Najbrt 1, Liberecký kraj (2026). **841**: Najbrt 1.
+- [x] **841.2** (ex-German RS1): DÚK, Pardubický kraj, PID (841.224), Najbrt 2 (841.223), světle šedá, HzL (historical).
+- [x] **841.3** (ex-German RS1, 2025): PID. (Liberecký kraj 841.3s start Dec 2026 — add then.)
+- [x] **842** + **054** (Bdtn 756) + **954** (Bfbrdtn 794 / ABfbrdtn 795): 842 Najbrt 1/2, trailers Najbrt 2 / červeno-krémová.
+- [x] **843** + **043** (Btn 753) + **943** (Bftn 791): Najbrt 1, Najbrt 2, červeno-krémová (943 Najbrt only).
+- [x] **844** RegioShark (2 powered sections): Najbrt 2, Pardubický kraj, Plzeňský kraj (2026).
+- [x] **847** RegioFox (2 powered sections): Najbrt 2, PID, Plzeňský kraj, Pardubický kraj.
+- [x] **848** Stadler GTW 2/6 (ex-DB, Olomoucký kraj): Najbrt 2 with Olomoucký kraj decals.
+- [x] **854** Hydra (reserve only since May 2026): Najbrt 2, červeno-krémová.
 
-- [x] `809/sprites/{najbrt1,najbrt2,cervenokremova}.png` — every livery real 809s wore; same body and art as the 810 railcar.
-
-## 810 "Šukafon" + 010 trailer
-
-Both repainted zone by zone from photos (research notes: 810 245, 810 290, 810 578,
-809 179, 810 263, Btax 229 …). Row 0 = 810 railcar, row 1 = 010 (Btax 780) trailer,
-which only exists in the liveries real 010s wore (Najbrt 1, Najbrt 2, red-cream).
-
-- [x] `810/sprites/najbrt1.png` — **Najbrt 1**.
-- [x] `810/sprites/najbrt2.png` — **Najbrt 2**.
-- [x] `810/sprites/cervenokremova.png` — ČD 1998 **red-cream** (red window band, cream band below the windows; the old placeholder was the 1970s ČSD scheme with cream round the windows).
-- [x] `810/sprites/pardubickykraj.png` — the real 2019 **Pardubický kraj** 810 scheme (810 only).
-- [x] `810/sprites/pidcervenomodrobila.png` — old horizontal **PID** scheme (810 263 / 289; 810 only).
-
-## 811 RegioMouse
-
-- [x] `811/sprites/najbrt2.png` — the 2020 class 811 (14 cars for the Moravskoslezský kraj): 810 body in **Najbrt 2** + MSK logos, with the roof A/C unit. (The old note's "new angular cab" is the Slovak ZSSK 811; the 1997 ČD prototype 811 was red-cream only and is not in the set.)
-
-## 840 RegioSpider
-
-- [x] `840/sprites/najbrt1.png` — placeholder is ZSSK silver/blue RS1. Repaint to **Najbrt 1** (navy + white). Also: the source's middle "zssk_840_b" engine pod is dropped — our model is a single car, so the cab silhouette should be the only thing visible.
-
-## 841 RegioSpider
-
-- [x] `841/sprites/najbrt1.png` — same source/work as 840.
-
-## 841.2 RegioSpider
-
-- [x] `841_2/sprites/dukzelenobila.png` — ZSSK silver source → **DÚK zeleno-bílá** (white body, green waistband).
-- [x] `841_2/sprites/hzlkremovacervena.png` — ZSSK silver source → **HZL krémovo-červená** (cream + red).
-- [x] `841_2/sprites/pardubickykraj.png` — ZSSK silver source → **Pardubický kraj** (white+red+gold).
-- [x] `841_2/sprites/pidsedocervena.png` — ZSSK silver source → **PID šedo-červená** (grey body + red door pillars).
-
-## 842 "Kvatro"
-
-- [ ] `842/sprites/najbrt1.png` — placeholder is red ČD 842. Recolor to **Najbrt 1**.
-- [ ] `842/sprites/najbrt2.png` — placeholder is red ČD 842. Recolor to **Najbrt 2**.
-
-## 843 "Rakev"
-
-- [ ] `843/sprites/najbrt1.png` — placeholder is red ČD 843. Recolor to **Najbrt 1**.
-- [ ] `843/sprites/najbrt2.png` — placeholder is red ČD 843. Recolor to **Najbrt 2**.
-- [ ] `843/sprites/cervenokremova.png` — placeholder is red ČD 843. Almost correct; ensure upper half reads as cream rather than light grey if the upstream is the wrong shade.
-
-## 844 RegioShark
-
-- [x] `844/sprites/najbrt1.png` — pak128_czr 844 blue is already Najbrt 1. **Direct match, no recolor needed.** Spot-check that the red door accents read correctly at 128 px.
-- [ ] `844/sprites/pardubickykraj.png` — ČD blue source → **Pardubický kraj** (white+red+gold). Both halves of the consist need repainting.
-
-## 847 RegioFox
-
-- [ ] `847/sprites/najbrt2.png` — placeholder is ČD blue 847 (Najbrt 1 look). Touch up door frames and waistband to **Najbrt 2** (Najbrt 1 → 2 is mostly a door-color change).
-- [x] `847/sprites/pidsedocervena.png` — pak128_czr 847_PID livery — **direct match**.
-- [x] `847/sprites/plzenskykraj.png` — pak128_czr 847_Plzen livery — **direct match**.
-- [ ] `847/sprites/pardubickykraj.png` — Plzeňský kraj source as closest red/white → repaint waistband to gold to land **Pardubický kraj**.
-
-## 854 "Hydra"
-
-The 854 is a rebuild of class 851, so the pak128cs **851** sprites are the same body
-silhouette — no reshaping needed, just paint.
-
-- [x] `854/sprites/cervenokremova.png` — pak128cs 851_CSD (ČSD cream+red) is already the
-  red-cream livery on the correct body. **Effectively a direct match.** Only fine-detail
-  touch-ups (e.g. ČD logo, modernized front headlights vs the classic ČSD look) if you
-  want it to read as the post-1996 rebuild rather than the 1960s original.
-- [ ] `854/sprites/najbrt2.png` — placeholder is ČD red 851. Recolor to **Najbrt 2** (navy + bright red doors).
-
----
-
-## 814 RegioNova / RegioNova Trio (existing families)
-
-The existing 814.0 and 814.2 sprites are hand-drawn upstream and ship as-is. Each
-livery's source has been annotated in the corresponding `family.yaml` so the link
-to the original art is recorded. Nothing else to do here unless a livery needs a
-refresh.
+Not modelled on purpose: advertising / promo wraps (842.026 ETCS, 848.016/026,
+841.0 town wraps, 814 EU / tourism wraps), delivery-state schemes of second-hand
+RS1s (NEB, BWEGT, OSB, BSB), the retro 854.021 / 1969 854.225 museum schemes, and
+ČD 812 (sold to AŽD in 2026).
 
 ---
 

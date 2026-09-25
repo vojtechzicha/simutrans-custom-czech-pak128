@@ -61,69 +61,70 @@ Notes:
 
 ---
 
-## Regional liveries on RegioNova — how to read these
+## Regional liveries — one name, several designs
 
-The three regional variants below all sit on the **same Najbrt-style base coat** (dark-blue lower trim, light-grey/white upper body, dark roof) and differ only in the *accent colors* — door panels, side stripes, and the kraj graphics. So start from the Najbrt 2 base palette and swap the accent zones for each region.
-
-Validated against photos on [seznam-autobusu.cz — RegioNova Duo, ČD](https://seznam-autobusu.cz/seznam?iddopravce=5943&ntyp=RegioNova&typ=RegioNova+Duo).
-
-Shared base for all three regional liveries:
-
-| Zone                  | RAL    | RGB (decimal)    | Hex     |
-| --------------------- | ------ | ---------------- | ------- |
-| Upper body            | 9010   | Reinweiß / off-white | `244, 244, 244` | #F4F4F4 |
-| Lower trim            | 5003   | Saphirblau (dark blue) | `31, 56, 85` | #1F3855 |
-| Roof                  | 7022   | Umbragrau        | `76, 74, 68`     | #4C4A44 |
-| Under-frame (black)   | 9005   | Tiefschwarz      | `10, 10, 10`     | #0A0A0A |
-
-(The upper body in the photos reads white, not the RAL 7035 grey used on Najbrt 2 corporate trains — these are visibly whiter.)
-
----
+A regional livery is the kraj's design for one vehicle type, so the same slug can
+look different on different classes. The zones below come from photo research
+(September 2026); the shipped values are in each family's painter notes.
 
 ## Plzeňský kraj (`plzenskykraj`)
 
-"modro-bílá s grafikou Plzeňského kraje" — Najbrt-style white + dark-blue base with **light-blue (RAL 5015) accent band** wrapping the lower window line, and the kraj's three-curve logo graphic on the side. Verified: [unit 914 013-6 (foto-busy)](https://foto-busy.eu-central-1.linodeobjects.com/385235.jpg).
+IDPK design: **royal-blue body** with **yellow doors**, the kraj's three-arc logo
+(yellow / green / white) and thin green / yellow / white swooshes on the lower
+side, and a dark anthracite skirt.
 
-| Zone                   | RAL/PMS    | RGB (decimal)    | Hex     |
-| ---------------------- | ---------- | ---------------- | ------- |
-| Accent band (shipped)  | —          | `63, 72, 204`    | #3F48CC |
-| Logo curve — blue      | logo blue  | `0, 114, 188`    | #0072BC |
-| Logo curve — green     | logo green | `141, 198, 63`   | #8DC63F |
-| Logo curve — yellow    | logo yellow| `255, 214, 0`    | #FFD600 |
+- **814 + 914** (6 units, Český les, since 2023): blue roof and body, a white
+  cantrail band and white window frames, white cab hood / windscreen surround,
+  dark-blue headlight mask, blue lower front, yellow bottom strip.
+- **844** (7 units, 2026) and **847** (10 units): white roof and cab hood (847:
+  bare-aluminium roof equipment), blue sides with the arc motif and swooshes,
+  blue lower front, grey skirt.
 
-The shipped 128px sprite uses a brighter accent blue (#3F48CC) rather than the RAL 5015 sky-blue documented for the real-world livery — chosen for contrast against the white body at pak128 scale. The kraj's three-curve colors only appear in the side decal, not as body fields. Reference: [plzensky-kraj.cz/symboly-pk](https://www.plzensky-kraj.cz/symboly-pk).
+| Zone          | RGB (approx.)     | Hex     |
+| ------------- | ----------------- | ------- |
+| Royal blue    | `21–31, 78–86, 158–168` | #1F4E9E |
+| Door yellow   | `242, 194, 0`     | #F2C200 |
+| Swoosh green  | `18–68, 160–165, 71–122` | #44A547 |
+| Skirt         | `58–95, 63–97, 66–99` | #3A3F42 |
 
 ---
 
 ## Pardubický kraj (`pardubickykraj`)
 
-"modro-bílá s červeným pruhem a žlutými dveřmi" — white body, bright **yellow doors**, a **red horizontal stripe** along the window line, and the dark-blue Najbrt trim at the bottom. Verified visually (a class 841 RegioSpider example in the same livery is clear evidence of the same color spec used across kraj rolling stock).
+"modro-bílá s červeným proužkem a žlutými dveřmi" — **white body, navy (dark
+blue) roof and bottom band, a thin red strip along the roof edge, yellow doors**,
+the kraj emblem and lettering in navy.
 
-| Zone                  | RAL/PMS     | RGB (decimal)    | Hex     |
-| --------------------- | ----------- | ---------------- | ------- |
-| Doors                 | RAL 1023 Verkehrsgelb | `247, 181, 0` | #F7B500 |
-| Side stripe (red)     | RAL 3020 / PMS 485 C | `237, 41, 57` | #ED2939 |
-| Kraj logo — blue field| PMS 293 C   | `0, 61, 165`     | #003DA5 |
-| Kraj logo — yellow    | PMS 109 C   | `255, 209, 0`    | #FFD100 |
+- **814 + 914** (from 2018): the red strip continues down the cab as a red frame
+  round the windscreen and headlight mask; light-grey mask, navy lower front,
+  yellow bottom strip.
+- **841.2** RS1 (11 cars, 2023–24), **844** (2 units) and **847** (7 units): navy
+  roof (white A/C boxes on the RS1), red cantrail line, white body, yellow doors
+  (in navy frames on the RS1), navy bottom line and lower front.
+- **810** (2019) is a different application, see below.
 
-Reference: [Pardubický kraj — logo manuál (PDF)](https://pardubice.eu/data/files/5c/2ff/175fe0bcb5a6eb94d4cbff2ba381f368b1f/logomanual.pdf), [zdopravy.cz](https://zdopravy.cz/drahy-oblekly-regionovu-do-barev-pardubickeho-kraje-za-200-tisic-korun-13370/).
+| Zone          | RGB (approx.)     | Hex     |
+| ------------- | ----------------- | ------- |
+| Navy          | `24–38, 51–58, 95–128` | #26365F |
+| Red           | `216–228, 47–64, 40–46` | #D8342E |
+| White         | `236, 238, 239`   | #ECEEEF |
+| Door yellow   | `230–246, 190–210, 0–30` | #F2CF1A |
+
+### Pardubický kraj on the 810 (2019)
+
+Eight 810s modernised by DPOV in 2019 (810 245, 810 094, …) got a different application: **light-grey body top to bottom** (no sky-blue band), **dark-blue roof, cab visor and underframe**, a **red strip under the roof edge**, a **red windscreen surround**, a dark-blue stripe under the windows and **yellow doors**. Shipped: grey `210, 215, 218`, blue `30, 56, 104`, red `222, 36, 42`, yellow `246, 192, 0`. No 010 trailer wore it, so the set has no 010 in it.
 
 ---
 
 ## Kraj Vysočina (`vysocina`)
 
-"modro-bílá se zeleným pruhem a zelenými dveřmi" — white body, **bright green doors**, a green stripe along the window line, dark-blue Najbrt trim below. Verified: [unit 814 041-0 — Pardubice, 16.3.2025 (bmhd.cz)](https://static.bmhd.cz/data-mhdfoto/f/2025/03/24/67e1b240a8e94__thumb_P1190044.JPG).
-
-| Zone                  | RAL/PMS     | RGB (decimal)    | Hex     |
-| --------------------- | ----------- | ---------------- | ------- |
-| Doors + side stripe (shipped) | —   | `34, 177, 76`    | #22B14C |
-| Kraj logotype         | PMS 2748 C  | `0, 24, 113`     | #001871 |
-
-The shipped 128px sprite uses #22B14C — a slightly deeper, more emerald green than the documented PMS 368 C / RAL 6018 light green of the real-world livery. The kraj's green graphic mark is the dominant accent — applied as both door fill and a continuous band; logotype text on the side is dark blue. Reference: [Kraj Vysočina — logomanuál (PDF)](https://ezak.kr-vysocina.cz/document_47757/f2d420d542be55d09e1d4bb5d27d3e9a-logomanual-pdf).
-
-### Pardubický kraj on the 810 (2019)
-
-Eight 810s modernised by DPOV in 2019 (810 245, 810 094, …) got a different application: **light-grey body top to bottom** (no sky-blue band), **dark-blue roof, cab visor and underframe**, a **red strip under the roof edge**, a **red windscreen surround**, a dark-blue stripe under the windows and **yellow doors**. Shipped: grey `210, 215, 218`, blue `30, 56, 104`, red `222, 36, 42`, yellow `246, 192, 0`. No 010 trailer wore it, so the set has no 010 in it.
+Only on the RegioNova, and only on three single cars (814 041, 814 048, 914 018),
+each coupled to a Pardubický kraj partner — a pure Vysočina set in the game is an
+idealisation. The layout is the Pardubický kraj RegioNova one (white body,
+dark-blue roof, bottom band and lower front, yellow bottom strip) with the
+roof-edge strip, the windscreen frame and the **doors in light green**
+(≈ RAL 6018, `109, 190, 69` #6DBE45), the VDV arrow emblem and a large
+"RegioNova" wordmark.
 
 ---
 
@@ -138,6 +139,8 @@ The PID unified visual style as applied to ČD trains. The rolling-stock applica
 | Roof                       | 7016   | Anthrazitgrau     | `41, 49, 51`     | #293133 |
 | Under-frame (black)        | 9005   | Tiefschwarz       | `10, 10, 10`     | #0A0A0A |
 
+Where the red goes depends on the class: on the 847 one red stripe beside each door (and one right of centre on the fronts), on the RS1 (841.2 / 841.3) a red block over the short end section behind each cab, on the RegioNova red bands at the doors.
+
 The signature element is the **full-height red vertical band at every door position** — wraps from below the windows down to the skirt, doors included. The folder/livery name `pidsedocervena` ("grey-red") is accurate for the train application.
 
 Reference: [pid.cz — Veřejná doprava v Praze bude mít novou podobu](https://pid.cz/verejna-doprava-praze-bude-mit-novou-podobu/) (full design manual; trains use the simplified grey+red subset).
@@ -146,18 +149,75 @@ Reference: [pid.cz — Veřejná doprava v Praze bude mít novou podobu](https:/
 
 ## DÚK zeleno-bílá (`dukzelenobila`)
 
-DÚK ("Doprava Ústeckého kraje") regional livery for Ústí Region transit. Two-tone green wrapping the bodyside on a white/grey base — shipped on the Siemens Desiro Classic (class 642).
+DÚK ("Doprava Ústeckého kraje") regional design: **bright green body** with
+**light-grey / near-white** panels.
 
-| Zone                       | RAL/PMS | RGB (decimal)    | Hex     |
-| -------------------------- | ------- | ---------------- | ------- |
-| Body / upper green         | —       | `104, 181, 92`   | #68B55C |
-| Lower band / darker green  | —       | `85, 148, 75`    | #55944B |
+- **642** Desiro Classic (6 ČD units at Děčín since 2024): green body and window
+  band, light-grey roof, a diagonal white swoosh down each cab side, a white
+  floor-level stripe, white door leaves, green cab dome and front number strip,
+  dark-grey skirts.
+- **841.2** RS1 (13 cars since 2023): the HzL layout idea in DÚK colours —
+  yellow-green body, **light-grey slanted parallelogram panels round each door**,
+  a light-grey bottom band and roof, light-grey front mask with green corners.
 
-The shipped 128px sprite uses these two hand-picked greens (no official RAL/PMS match recorded); the lower band reads as a shaded continuation of the body color rather than a contrasting accent.
+| Zone              | RGB (shipped)                    | Hex     |
+| ----------------- | -------------------------------- | ------- |
+| Green (642 / RS1) | `58, 166, 74` / `92, 178, 74`    | #3AA64A |
+| Light grey        | `220–228, 224–231, 226–232`      | #DCE0E2 |
 
 ---
 
-## Červeno-krémová on the 810 / 010 (`cervenokremova`) — ČD 1998 scheme
+## HzL krémovo-červená (`hzlkremovacervena`) — 841.2, historical
+
+The Hohenzollerische Landesbahn scheme the 22 ex-HzL RS1s ran in with ČD logos
+from 2021 until their repaint (last cars mid-2024): **cream body**, **raspberry-red
+slanted panels round each door** and red doors, a **red bottom band**, red lower
+front. Cream `232, 224, 196`, red `184, 36, 60`.
+
+---
+
+## Liberecký kraj (`libereckykraj`) — 840, from 2026
+
+IDOL red-white: **white body**, **red doors**, a **red bottom band sweeping up into
+red cab fronts** (red below the windscreen, thin red windscreen frame), thin red
+"route-map" lines and red ring pictograms. Eight wrap variants exist; the sprite
+shows the common base. Red `200, 32, 30` (≈ RAL 3020).
+
+---
+
+## Světle šedá (`svetlesheda`) — 841.2
+
+Plain light grey (`210, 214, 217`) on 841.225–227 since 2025, roof included; dark
+lower front, yellow skirt edge, dark ČD lettering.
+
+---
+
+## Červeno-žlutá (`cervenozluta`) — 809 281
+
+ČSD "unifik 88": the 810-family red-cream layout with a **golden-yellow band**
+(`235, 185, 50`) instead of cream, **crossing the doors**, on red `160, 32, 44`.
+Only 809 281 (repainted 2006) still runs in it.
+
+---
+
+## Najbrt 2 on the PESA units (844 / 847) and the GTW (848)
+
+Same corporate colours, different split: light cantrail line (yellow over the
+1st class), sky-blue window band, sapphire stripe, **light-grey lower band** and a
+**sapphire bottom band** rising at the cab ends; sky-blue ČD panel and black
+windscreen band on the fronts. The 848 adds a white stripe between the sapphire
+roof and the sky band and carries Olomoucký kraj decals.
+
+---
+
+## Červeno-krémová (`cervenokremova`) — ČD 1990s scheme
+
+The same idea on every class: **cherry-red body with one cream band at lamp
+level**, running round the cab fronts, doors red. On the 842/843/943/043, 854 and
+its 954/054 trailers the band sits just below the windows and is about a quarter
+of the side height; the roof is light grey / stainless.
+
+### On the 810 / 010 — ČD 1998 variant
 
 Not the 1970s ČSD scheme with cream round the windows. The **window band, pillars, windscreen surround, doors and lower body are cherry red**; a **cream band about 600 mm high runs just below the windows**, round the whole car and across the cab fronts at lamp level (it stops at the doors). Roof light grey; plough edge yellow. Reference: 810 245 (2008), Btax 780 048.
 
