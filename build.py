@@ -153,7 +153,7 @@ def check_vehicle_liveries(family: dict) -> None:
             raise ValueError(f"vehicle {v['id']}: unknown liveries {sorted(unknown)}")
 
 
-def emit_dat(family: dict, livery: dict) -> str:
+def emit_dat(family: dict, livery: dict, siblings: dict | None = None) -> str:
     bn = basename_for(family, livery)
     # Upstream credit first, vojtechzicha last and only once (families whose
     # art is drawn here from scratch may name just vojtechzicha).
@@ -211,13 +211,31 @@ def emit_dat(family: dict, livery: dict) -> str:
             if v.get("couple_liveries", False):
                 return [basename_for(family, lv) for lv in family["liveries"] if in_livery(pv, lv)]
             return [bn] if in_livery(pv, livery) else []
+        # A partner written "<family folder>/<id>" is a vehicle of a sibling family
+        # in the same agency-mode pak (e.g. a T3R.PLF leading a T3R.P trailer). It
+        # resolves to that family's object in the SAME livery and is skipped when
+        # the sibling has no such livery/vehicle, so no dangling constraint is emitted.
+        def partner_entries(pid: str) -> list[str]:
+            if "/" not in pid:
+                return [f"{b}-{slug(pid)}" for b in partner_bns(pid)]
+            folder, vid = pid.split("/", 1)
+            other = (siblings or {}).get(folder)
+            if other is None:
+                raise ValueError(f"vehicle {v['id']}: unknown sibling family '{folder}' in partner '{pid}'")
+            ov = {x["id"]: x for x in other["vehicles"]}.get(vid)
+            if ov is None:
+                raise ValueError(f"vehicle {v['id']}: sibling '{folder}' has no vehicle '{vid}'")
+            olv = next((lv for lv in other["liveries"] if lv["color"] == livery["color"]), None)
+            if olv is None or not in_livery(ov, olv):
+                return []
+            return [f"{basename_for(other, olv)}-{slug(vid)}"]
         # prev/next: any -> no constraint on that side at all, so the vehicle couples
         # with anything, like native locomotives and coaches (loco-hauled stock).
         def entries(partners, open_end: bool) -> list[str]:
             if partners == "any":
                 return []
             return (["none"] if open_end else []) + [
-                f"{b}-{slug(pid)}" for pid in partners for b in partner_bns(pid)]
+                e for pid in partners for e in partner_entries(pid)]
         for idx, entry in enumerate(entries(prev_partners, can_head)):
             lines.append(f"Constraint[Prev][{idx}]={entry}")
         for idx, entry in enumerate(entries(next_partners, can_tail)):
@@ -464,6 +482,10 @@ def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, in
 
     tab_lines: dict[str, list[str]] = {lang: [] for lang in TAB_LANGS}
 
+    # Sibling families of this pak, by folder name, for cross-family partners.
+    siblings = {fy.parent.name: yaml.safe_load(fy.read_text(encoding="utf-8"))
+                for fy in family_yamls if fy.name == "family.yaml"}
+
     ok = fail = 0
     for fy in sorted(family_yamls):
         if fy.name in ("station.yaml", "industry.yaml"):
@@ -486,7 +508,7 @@ def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, in
             shutil.copy2(png_src, out_dir / f"{bn}.png")
             if family.get("windows_lit_when_loaded", False):
                 write_unlit_png(png_src, out_dir / f"{bn}{UNLIT_SUFFIX}.png")
-            (out_dir / f"{bn}.dat").write_text(emit_dat(family, livery), encoding="utf-8")
+            (out_dir / f"{bn}.dat").write_text(emit_dat(family, livery, siblings), encoding="utf-8")
             for lang in TAB_LANGS:
                 tab_lines[lang].extend(emit_tab_entries(family, livery, lang, mode))
             ok += 1

@@ -92,6 +92,10 @@ vehicles:
     # tail: true              # whether Constraint[Next] gets `none` (default true)
     # prev: ["partner_id", …] # explicit Constraint[Prev] partners (default: all OTHER vehicles in family)
     # next: ["partner_id", …] # explicit Constraint[Next] partners (default: all OTHER vehicles in family)
+    #                         # a partner "<family folder>/<id>" names a vehicle of a SIBLING family in the
+    #                         # same agency-mode pak (e.g. prev: ["t3r_p/T3R.P"] lets a T3R.PLF couple with
+    #                         # a T3R.P); it resolves to the same livery and is skipped where the sibling
+    #                         # lacks that livery. Declare it on both vehicles (Prev and Next must agree).
     # prev: any / next: any   # no constraint on that side at all: couples with anything, like native
     #                         # locomotives and coaches (loco-hauled stock, the front of a Talgo set)
     # reverse: false          # if true, share another row's sprites but rotate direction labels 180°
