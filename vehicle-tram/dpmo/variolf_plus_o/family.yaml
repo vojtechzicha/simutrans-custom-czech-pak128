@@ -1,0 +1,76 @@
+agency: DPOlomouc
+type: "VarioLF_plus_o"
+copyright: TommPa9
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DPMO"
+  agency_cs: "DPMO"
+  family_en: "Pragoimex VarioLF plus/o"
+  family_cs: "Pragoimex VarioLF plus/o"
+
+# Pragoimex VarioLF plus/o, DPMO 101-114 (2013-14): single-ended with doors on
+# both sides, run back-to-back in pairs (second car turned round).
+
+vehicles:
+  - id: "VarioLF_plus_o"
+    display_id: "VarioLF plus/o"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: true
+    tail: true
+    prev: ["VarioLF_plus_o"]
+    next: ["VarioLF_plus_o-reverse", "VarioLF_plus_o"]
+    fields:
+      cost: 1300000
+      payload: 91
+      speed: 70
+      weight: 21
+      runningcost: 22
+      fixed_cost: 100
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      power: 320
+      engine_type: electric
+      length: 12
+
+  - id: "VarioLF_plus_o-reverse"
+    display_id: "VarioLF plus/o"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["VarioLF_plus_o"]
+    next: []
+    fields:
+      cost: 1300000
+      payload: 91
+      speed: 70
+      weight: 21
+      runningcost: 22
+      fixed_cost: 100
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      power: 320
+      engine_type: electric
+      length: 12
+
+liveries:
+  - color: dpmobilomodrocervena
+    name_en: "DPMO white-blue-red"
+    name_cs: "DPMO bílo-modro-červená"

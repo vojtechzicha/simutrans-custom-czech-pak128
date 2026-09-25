@@ -1,0 +1,49 @@
+agency: DPOlomouc
+type: "Urbino_12_IV"
+copyright: TommPa9
+
+image_offset: [0, 0]            # sprites carry their own tile placement
+windows_lit_when_loaded: true   # empty image = unlit glass, loaded image = lit glass
+
+display:
+  agency_en: "DPMO"
+  agency_cs: "DPMO"
+  family_en: "Solaris Urbino 12 IV"
+  family_cs: "Solaris Urbino 12 IV"
+
+# Solaris Urbino 12 IV, DPMO 645-666 (2016-2022, 662-666 facelift). Sprite:
+# TommPa9's Urbino 12 IV body (DPO sheet) repainted to the DPMO Gen IV variant
+# of the white-blue-red scheme (white fairing with navy ends, black window
+# band, red-framed white lower panel, navy skirt), normalised to the lane.
+
+vehicles:
+  - id: "Urbino_12_IV"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 912498
+      payload: 95
+      speed: 80
+      weight: 12
+      runningcost: 31
+      fixed_cost: 149
+      intro_year: 2016
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 210
+      gear: 53
+
+liveries:
+  - color: dpmobilomodrocervena
+    name_en: "DPMO white-blue-red"
+    name_cs: "DPMO bílo-modro-červená"

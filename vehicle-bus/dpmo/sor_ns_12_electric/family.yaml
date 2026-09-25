@@ -1,0 +1,59 @@
+agency: DPOlomouc
+type: "SOR_NS_12_electric"
+copyright: VTPsim
+
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DPMO"
+  agency_cs: "DPMO"
+  family_en: "SOR NS 12 electric"
+  family_cs: "SOR NS 12 electric"
+
+# SOR NS 12 electric, DPMO 501 (12 m, 3 doors 2-2-2, 33 seats / ~85 total,
+# 160 kW asynchronous motor, roof NMC battery, 80 km/h, 12.35 t).
+# Sprite: VTPsim's SOR NS 12 body (pak128_czr Frýdek-Místek NS 12 electric /
+# NSG 12), repainted in the DPMO scheme: white roof with battery and A/C pods,
+# black window band outlined in red (the line runs round the A-pillar and
+# around the black front section to the front wheel), white band, red stripe
+# arching over the wheels, navy skirt; black front mask with red logo, silver
+# strip and navy bumper. Lane placement normalised.
+
+# Body edits on every view: window band deepened from 5 to 7 rows (real NS 12
+# glazing), door leaves in lighter glass, amber front/side/rear displays.
+
+vehicles:
+  - id: "SOR_NS_12_electric"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 950000
+      payload: 85
+      speed: 80
+      weight: 12
+      runningcost: 20
+      fixed_cost: 150
+      intro_year: 2018
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: battery
+      power: 160
+      gear: 53
+
+liveries:
+  - color: dpmobilomodrocervena
+    name_en: "DPMO white-blue-red"
+    name_cs: "DPMO bílo-modro-červená"

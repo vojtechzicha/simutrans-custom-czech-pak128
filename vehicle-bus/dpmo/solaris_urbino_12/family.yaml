@@ -1,0 +1,56 @@
+agency: DPOlomouc
+type: "Urbino_12"
+copyright: TommPa9
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DPMO"
+  agency_cs: "DPMO"
+  family_en: "Solaris Urbino 12"
+  family_cs: "Solaris Urbino 12"
+
+# Solaris Urbino 12 II/III (same body at this scale), DPMO 615-618 (II, 2005) and
+# 619-644 (III, 2006-2014). Sprite: the pak128_czr Olomouc object in the DPMO
+# scheme, glass converted to lit specials. Of the four II cars, 616-618 run in
+# plain lime green (the base left from a former ZOO advert; 615 is plain white):
+# livery `zelena`, recoloured from the DPMO sheet (body, stripes, roof -> green).
+
+vehicles:
+  - id: "Urbino_12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 753055
+      payload: 100
+      speed: 80
+      weight: 11
+      runningcost: 31
+      fixed_cost: 149
+      intro_year: 2005
+      intro_month: 1
+      retire_year: 2050
+      waytype: road
+      smoke: Diesel
+      freight: Passagiere
+      engine_type: diesel
+      power: 210
+      gear: 53
+      retire_month: 1
+
+liveries:
+  - color: dpmobilomodrocervena
+    name_en: "DPMO white-blue-red"
+    name_cs: "DPMO bílo-modro-červená"
+  - color: zelena
+    name_en: "lime green"
+    name_cs: "zelená"

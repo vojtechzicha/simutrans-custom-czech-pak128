@@ -1,0 +1,102 @@
+agency: DPOlomouc
+type: "01_Trio"
+copyright: TommPa9
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DPMO"
+  agency_cs: "DPMO"
+  family_en: "Inekon 01 Trio"
+  family_cs: "Inekon 01 Trio"
+
+# Inekon 01 Trio, DPMO 205-207 (2006): 3 sections, the end sections on the two
+# bogies and the low-floor centre section suspended between them; single-ended,
+# doors on the right only. Sprite: TommPa9's Trio template (as DPO t2001_trio,
+# same body/placement as the pak128_czr Olomouc Skoda_03T) repainted into the
+# DPMO Trio scheme. Only front + middle + rear builds.
+
+vehicles:
+  - id: "01_Trio"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["01_Trio_2"]
+    fields:
+      cost: 520000
+      payload: 40
+      speed: 70
+      weight: 9
+      runningcost: 20
+      fixed_cost: 89
+      intro_year: 2006
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 4
+      engine_type: electric
+      power: 360
+
+  - id: "01_Trio_2"
+    role_en: "middle section (low-floor)"
+    role_cs: "střední nízkopodlažní díl"
+    row: 1
+    head: false
+    tail: false
+    prev: ["01_Trio"]
+    next: ["01_Trio_3"]
+    fields:
+      cost: 460000
+      payload: 60
+      speed: 70
+      weight: 8
+      runningcost: 9
+      fixed_cost: 41
+      intro_year: 2006
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 5
+      engine_type: electric
+      power: 0
+
+  - id: "01_Trio_3"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 2
+    head: false
+    tail: true
+    prev: ["01_Trio_2"]
+    next: []
+    fields:
+      cost: 520000
+      payload: 40
+      speed: 70
+      weight: 9
+      runningcost: 11
+      fixed_cost: 49
+      intro_year: 2006
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 4
+      engine_type: electric
+      power: 0
+
+liveries:
+  - color: dpmobilomodrocervena
+    name_en: "DPMO white-blue-red"
+    name_cs: "DPMO bílo-modro-červená"

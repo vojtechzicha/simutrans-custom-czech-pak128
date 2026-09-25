@@ -1,0 +1,50 @@
+agency: DPOlomouc
+type: "T3R_P"
+copyright: Lubak91
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DPMO"
+  agency_cs: "DPMO"
+  family_en: "Tatra T3R.P"
+  family_cs: "Tatra T3R.P"
+
+# ČKD Tatra T3SUCS modernised to T3R.P (2000-2007), DPMO 147-183. Runs solo or
+# coupled in pairs. Sprite: pak128_czr Olomouc T3 in the DPMO red-window-frame scheme.
+
+vehicles:
+  - id: "T3R.P"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: true
+    tail: true
+    prev: ["T3R.P"]
+    next: ["T3R.P"]
+    fields:
+      waytype: tram_track
+      engine_type: electric
+      freight: Passagiere
+      payload: 110
+      speed: 65
+      cost: 840000
+      weight: 16
+      power: 160
+      gear: 130
+      length: 11
+      runningcost: 24
+      fixed_cost: 100
+      intro_year: 2000
+      retire_year: 2035
+      intro_month: 1
+      retire_month: 1
+
+liveries:
+  - color: dpmobilomodrocervena
+    name_en: "DPMO white-blue-red"
+    name_cs: "DPMO bílo-modro-červená"

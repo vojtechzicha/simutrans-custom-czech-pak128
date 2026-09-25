@@ -1,0 +1,51 @@
+agency: DPOlomouc
+type: "EVO1"
+copyright: TommPa9
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DPMO"
+  agency_cs: "DPMO"
+  family_en: "Pragoimex EVO1"
+  family_cs: "Pragoimex EVO1"
+
+# Pragoimex EVO1, DPMO 211-215 (2018): single-ended, fully low-floor; solo or pairs.
+# Sprite: TommPa9's Olomouc EVO1 (a Vario LF body) redrawn into the EVO1
+# scheme: red cant band sweeping down at the cab, white strip, white body with
+# the red stripe and navy skirt, grey front mask with red lamp pillars.
+
+vehicles:
+  - id: "EVO1"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: true
+    tail: true
+    prev: ["EVO1"]
+    next: ["EVO1"]
+    fields:
+      cost: 1400000
+      payload: 110
+      speed: 70
+      weight: 20
+      runningcost: 22
+      fixed_cost: 100
+      intro_year: 2018
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      power: 260
+      engine_type: electric
+      length: 12
+
+liveries:
+  - color: dpmobilomodrocervena
+    name_en: "DPMO white-blue-red"
+    name_cs: "DPMO bílo-modro-červená"
