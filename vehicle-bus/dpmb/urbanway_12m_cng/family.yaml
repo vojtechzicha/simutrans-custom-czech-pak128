@@ -1,0 +1,56 @@
+agency: DPBrno
+type: "Urbanway_12M_CNG"
+# Sprites are placed in the tile to the native pak128.cs lane position (the
+# upstream Brno Urbanway 12M already sits on the native 12 m bus median).
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Iveco Urbanway 12M CNG"
+  family_cs: "Iveco Urbanway 12M CNG"
+
+# Iveco Urbanway 12M CNG — DPMB's most numerous 12 m bus: 56 delivered in
+# 2015 (7045II-7100II; first cars reached the Slatina depot on 22 Jan 2015),
+# 54 active in 2026. Iveco Cursor 8 CNG, 213 kW; 12 000 x 2 500 mm, 12.35 t,
+# capacity 81 (dpmb.cz), 80 km/h. DPMB white-red city scheme: white body and
+# roof, black window band, red skirt; green LED destination displays.
+# Unlike the 13 diesel cars (7672-7686) they carry a long white CNG tank
+# fairing over the rear half of the roof (DPMB drawing: ~0.48-0.86 of the
+# length from the front) plus the front roof A/C unit.
+# Sprite: Lubak91's CZR-Brno-IVECO_Urbanway_12M (upstream cols 1-8), glass
+# moved to the lit-window specials, roof tank fairing and A/C drawn on.
+
+vehicles:
+  - id: "Urbanway_12M_CNG"
+    display_id: "Urbanway 12M CNG"
+    role_en: "CNG bus"
+    role_cs: "autobus CNG"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 690000
+      payload: 81
+      speed: 80
+      weight: 12
+      runningcost: 22
+      fixed_cost: 128
+      intro_year: 2015
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 213
+      gear: 55
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"

@@ -1,0 +1,88 @@
+agency: DPBrno
+type: "Urbanway_18M_CNG"
+# Sprites are placed in the tile to the native pak128.cs lane position: the
+# upstream 18M art sat 1-4 px off the lane, so both sections were shifted by
+# the same per-view amount (joint unchanged) onto the Urbanway 12M footprint.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Iveco Urbanway 18M CNG"
+  family_cs: "Iveco Urbanway 18M CNG"
+
+# Iveco Urbanway 18M CNG — articulated CNG bus, 44 delivered 2017-2018
+# (2001II-2044II; first car arrived 24 Oct 2017, first passenger service
+# 27 Nov 2017), 41 active in 2026 — the first articulated CNG buses in CZ/SK.
+# 243 kW, 17 910 x 2 500 mm, capacity 129 (dpmb.cz), 80 km/h. Empty weight is
+# not reliably published (dpmb.cz repeats the length as "17 910 kg"); ~17.5 t
+# assumed, split 10 + 8 t. DPMB white-red city scheme, green LED displays.
+# Roof per the DPMB drawing: a tall rounded CNG tank fairing on both sides of
+# the joint (rear ~40 % of the front section, front ~35 % of the rear
+# section) plus low A/C / tank boxes; the diesel-era upstream art had a flat
+# roof. Two-section fixed consist: front section A (unpowered) + powered rear
+# section B (engine tower at the rear).
+# Sprite: Lubak91's CZR-Brno-Iveco-Urbanway-18M-A/-B (Iveco-Urbnaway-18M-*.png,
+# cols 1-8) merged to rows 0/1; glass moved to the lit-window specials, the
+# photo-textured bellows repainted as a clean grey block, roof equipment drawn.
+
+vehicles:
+  - id: "Urbanway_18M_CNG-A"
+    display_id: "Urbanway 18M CNG"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["Urbanway_18M_CNG-B"]
+    fields:
+      cost: 520000
+      payload: 71
+      speed: 80
+      weight: 10
+      runningcost: 18
+      fixed_cost: 102
+      intro_year: 2017
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+
+  - id: "Urbanway_18M_CNG-B"
+    display_id: "Urbanway 18M CNG"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["Urbanway_18M_CNG-A"]
+    next: []
+    fields:
+      cost: 500000
+      payload: 58
+      speed: 80
+      weight: 8
+      runningcost: 13
+      fixed_cost: 72
+      intro_year: 2017
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 243
+      gear: 67
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"

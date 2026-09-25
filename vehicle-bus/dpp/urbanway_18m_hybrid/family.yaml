@@ -1,0 +1,93 @@
+agency: DPPraha
+type: "Urbanway_18M_Hybrid"
+# Sprites are placed in the tile to the native pak128.cs lane position: the
+# upstream 18M art sat 1-4 px off the lane, so both sections were shifted by
+# the same per-view amount (joint unchanged) onto the Urbanway 12M footprint.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Iveco Urbanway 18M Hybrid"
+  family_cs: "Iveco Urbanway 18M Hybrid"
+
+# Iveco Urbanway 18M Hybrid (mild hybrid, built in Annonay FR) — DPP's
+# articulated diesel-hybrid: 71 in service 2026 (5501-5571; 5521 is the 2023
+# pre-series car, first cars in DPP service from 18 Jun 2024), 30 more ordered
+# Jan 2026. Cursor 9, 265 kW + electric motor/generator, Voith Diwa NXT;
+# 18 003 x 2 500 x 3 165 mm, 18.13 t (split 10 + 8 t), 35 seats / 130 total
+# (press release; the fleet page says 136), 99 km/h (DPP figure). 3 axles,
+# 4 double doors.
+# Livery: PID grey-red 2021 scheme on the 5522+ "new face" (majority of the
+# fleet): light silver-grey body and roof, black glazing band, black upper
+# front and roof cap, grey lower front mask with the red block on the
+# vehicle's left; red side panels behind door 1 over the front axle, from
+# door 2 to the joint and over the rear axle, continued as red roof-edge /
+# transverse roof bands; rear black upper, grey lower with a red block on the
+# vehicle's left; amber LED displays. Roof: battery / A-C pod on the front
+# section, low box plus A-C unit on the rear section.
+# Sprite: Lubak91's CZR-Brno-Iveco-Urbanway-18M-A/-B (same Urbanway body;
+# Iveco-Urbnaway-18M-*.png cols 1-8) merged to rows 0/1 and fully repainted;
+# glass on the lit-window specials, bellows as a clean dark-grey block.
+
+vehicles:
+  - id: "Urbanway_18M_Hybrid-A"
+    display_id: "Urbanway 18M Hybrid"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["Urbanway_18M_Hybrid-B"]
+    fields:
+      cost: 560000
+      payload: 72
+      speed: 99
+      weight: 10
+      runningcost: 17
+      fixed_cost: 108
+      intro_year: 2024
+      intro_month: 6
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+
+  - id: "Urbanway_18M_Hybrid-B"
+    display_id: "Urbanway 18M Hybrid"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["Urbanway_18M_Hybrid-A"]
+    next: []
+    fields:
+      cost: 540000
+      payload: 58
+      speed: 99
+      weight: 8
+      runningcost: 12
+      fixed_cost: 76
+      intro_year: 2024
+      intro_month: 6
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 265
+      gear: 67
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"
