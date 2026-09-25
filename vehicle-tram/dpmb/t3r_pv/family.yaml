@@ -43,8 +43,9 @@ vehicles:
     row: 0
     head: true                 # runs solo ...
     tail: true
-    prev: ["T3R.PV"]           # ... or as a 2-car set
-    next: ["T3R.PV"]
+    # 2-car sets with any Brno T3 variant (e.g. T3G + T3R), as upstream allowed
+    prev: ["T3R.PV", "t3g/T3G", "t3r/T3R", "t3r_ev/T3R.EV"]
+    next: ["T3R.PV", "t3g/T3G", "t3r/T3R", "t3r_ev/T3R.EV"]
     fields:
       cost: 880000
       payload: 110

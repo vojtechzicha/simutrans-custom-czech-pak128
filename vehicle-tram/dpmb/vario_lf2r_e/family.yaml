@@ -65,8 +65,9 @@ vehicles:
     row: 1
     head: false
     tail: true
+    # may be followed by a VarioLFR.E trailer (LF2R.E + LFR.E set)
     prev: ["VarioLF2R.E"]
-    next: []
+    next: ["vario_lfr_e/VarioLFR.E"]
     fields:
       cost: 567000
       payload: 81

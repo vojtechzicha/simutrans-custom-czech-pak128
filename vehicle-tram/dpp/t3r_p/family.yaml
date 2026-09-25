@@ -43,8 +43,9 @@ vehicles:
     row: 0
     head: true                 # runs solo ...
     tail: true
-    prev: ["T3R.P"]            # ... or as a 2-car set
-    next: ["T3R.P"]
+    # 2-car sets with any Prague T3 rebuild of the same livery (e.g. T3R.PLF + T3R.P), as DPP runs them
+    prev: ["T3R.P", "t3r_plf/T3R.PLF", "t3r_pv/T3R.PV", "t3m2_dvc/T3M.2-DVC"]
+    next: ["T3R.P", "t3r_plf/T3R.PLF", "t3r_pv/T3R.PV", "t3m2_dvc/T3M.2-DVC"]
     fields:
       cost: 840000
       payload: 91

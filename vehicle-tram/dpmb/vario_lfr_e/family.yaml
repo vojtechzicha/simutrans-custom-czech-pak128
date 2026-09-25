@@ -37,7 +37,7 @@ vehicles:
     row: 0
     head: true                 # runs solo ...
     tail: true
-    prev: ["VarioLFR.E"]       # ... or as a 2-car set
+    prev: ["VarioLFR.E", "vario_lf2r_e/VarioLF2R.E_2"]
     next: ["VarioLFR.E"]
     fields:
       cost: 714000
