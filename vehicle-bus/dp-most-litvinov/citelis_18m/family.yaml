@@ -1,0 +1,84 @@
+agency: DPMostLitvinov
+type: "Citelis_18M"
+copyright: Lubak91
+
+# Sprites are placed in the tile to the native pak128.cs lane position
+# (lateral only; one common shift per direction for both sections so the
+# joint stays aligned), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DPmML"
+  agency_cs: "DPmML"
+  family_en: "Irisbus Citelis 18M"
+  family_cs: "Irisbus Citelis 18M"
+
+# Irisbus Citelis 18M, 1 unit (#98, 6U1 7219; built 2010, ex-DP Chomutov–
+# Jirkov, in Most since 8/2022). Cursor 8 213 kW in the rear (pusher)
+# section, ~150 passengers, 17.3 t, 4 doors. Two-section fixed consist:
+# front section A + powered rear section B, both required. Sprite: built on
+# Lubak91's DPmML Urbanway 18M sections (body, doors, section lengths and
+# joint kept), with Citelis-style ends in the DPmML Citelis 12M colours
+# (yellow front with white line and red bumper, yellow roof cap, yellow rear
+# with red bumper), a silver-grey bellows block and a roof A/C unit.
+
+vehicles:
+  - id: "Citelis_18M-A"
+    display_id: "Citelis 18M"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["Citelis_18M-B"]
+    fields:
+      cost: 500000
+      payload: 85
+      speed: 80
+      weight: 10
+      runningcost: 20
+      fixed_cost: 102
+      intro_year: 2022
+      intro_month: 8
+      retire_year: 2050
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+
+  - id: "Citelis_18M-B"
+    display_id: "Citelis 18M"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["Citelis_18M-A"]
+    next: []
+    fields:
+      cost: 480000
+      payload: 65
+      speed: 80
+      weight: 7
+      runningcost: 14
+      fixed_cost: 72
+      intro_year: 2022
+      intro_month: 8
+      retire_year: 2050
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 213
+      gear: 67
+      smoke: Diesel_small
+
+liveries:
+  - color: mostzlutocervena
+    name_en: "Most, yellow-red"
+    name_cs: "Most, žluto-červená"

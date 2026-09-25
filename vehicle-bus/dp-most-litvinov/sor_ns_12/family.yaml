@@ -1,0 +1,56 @@
+agency: DPMostLitvinov
+type: "SOR_NS_12"
+copyright: VTPsim
+
+# Sprites carry their own tile placement (normalised to the native pak128.cs
+# 12 m bus lane position), so no extra makeobj offset.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DPmML"
+  agency_cs: "DPmML"
+  family_en: "SOR NS 12"
+  family_cs: "SOR NS 12"
+
+# SOR NS 12 (diesel), 20 units: 54–58 (2019), 59, 70–72 (2020), 73–76 (2021),
+# 79–81 (2022), 48, 49, 53, 82 (2023). Repainted from VTPsim's SOR NS 12
+# electric (pak128_czr FrydekMistek) in the DPmML white-yellow-red scheme:
+# white roof with two A/C pods, black window band, white belt, yellow lower
+# sides with a dark bottom trim; black front mask outlined in yellow with a red
+# apron between the headlights; yellow upper rear, white middle, red bumper.
+# Data: 12 m, ~95 passengers, Tector 7 210 kW, 80 km/h, ~11 t (type values).
+
+vehicles:
+  - id: "SOR_NS_12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 700000
+      payload: 95
+      speed: 80
+      weight: 11
+      runningcost: 22
+      fixed_cost: 140
+      intro_year: 2019
+      intro_month: 1
+      waytype: road
+      freight: Passagiere
+      engine_type: diesel
+      power: 210
+      gear: 53
+      smoke: Diesel_small
+      length: 8
+      retire_year: 2050
+      retire_month: 1
+
+liveries:
+  - color: mostzlutocervena
+    name_en: "Most, yellow-red"
+    name_cs: "Most, žluto-červená"

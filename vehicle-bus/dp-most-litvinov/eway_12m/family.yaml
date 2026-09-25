@@ -1,0 +1,57 @@
+agency: DPMostLitvinov
+type: "E_Way_12M"
+copyright: Lubak91
+
+# Sprites carry their own tile placement (normalised to the native pak128.cs
+# 12 m bus lane position), so no extra makeobj offset.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DPmML"
+  agency_cs: "DPmML"
+  family_en: "Iveco E-Way 12M"
+  family_cs: "Iveco E-Way 12M"
+
+# Iveco E-Way 12M (Heuliez GX 337 body), 2 units: 101 (since 1/2024) and 102
+# (since 12/2024), both ex-Iveco demonstrators, still in the demonstrator
+# scheme: white body, black window band, blue swooshes, "100% ELECTRIC".
+# Sprite: Lubak91's Urbanway 12M body (same 12 m length, 2-2-2 doors) reworked
+# as an E-Way: black front visor over the roof edge, black mask down to a blue
+# arc, dark headlamp clusters, long roof battery fairing, lower glazing dip
+# between the axles with the blue swoosh under it.
+# Data: 12.05 m, Siemens 160 kW, 376 kWh, ~30 + 60 passengers, ~13 t, 80 km/h.
+
+vehicles:
+  - id: "E_Way_12M"
+    display_id: "E-Way 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 1000000
+      payload: 90
+      speed: 80
+      weight: 13
+      runningcost: 20
+      fixed_cost: 150
+      intro_year: 2022
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      engine_type: battery
+      power: 160
+      gear: 53
+      length: 8
+
+liveries:
+  - color: ivecopredvadeci
+    name_en: "Iveco demonstrator"
+    name_cs: "Iveco předváděcí"

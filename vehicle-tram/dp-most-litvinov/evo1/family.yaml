@@ -1,0 +1,53 @@
+agency: DPMostLitvinov
+type: "EVO1"
+copyright: TommPa9
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] sank them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DPmML"
+  agency_cs: "DPmML"
+  family_en: "Pragoimex EVO1"
+  family_cs: "Pragoimex EVO1"
+
+# Scaffolded by scripts/import_tram_fleets.py — see TRAM_BACKLOG.md.
+# Pragoimex EVO1 #316: the 2015 prototype (tested in Prague), in Most since 2016;
+# unidirectional, runs solo. Sprite: the redrawn EVO1 body (TommPa9's Olomouc EVO1
+# template) in the standard DPmML yellow-red as worn on the EVO1: red roof and upper
+# body down to the window line (no yellow frieze), black window band, yellow belt,
+# red skirt, yellow doors, black front mask with yellow corners and a red apron.
+
+vehicles:
+  - id: "EVO1"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 18600
+      payload: 110
+      speed: 70
+      weight: 20
+      runningcost: 14
+      fixed_cost: 58
+      intro_year: 2015
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 12
+      engine_type: electric
+      power: 260
+
+liveries:
+  - color: mostzlutocervena
+    name_en: "Most, yellow-red"
+    name_cs: "Most, žluto-červená"

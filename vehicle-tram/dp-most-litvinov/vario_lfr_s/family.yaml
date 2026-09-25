@@ -1,0 +1,53 @@
+agency: DPMostLitvinov
+type: "VarioLFR_S"
+copyright: TommPa9
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] sank them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DPmML"
+  agency_cs: "DPmML"
+  family_en: "Pragoimex VarioLFR.S"
+  family_cs: "Pragoimex VarioLFR.S"
+
+# Pragoimex VarioLFR.S — DPmML's in-house rebuilds of T3 cars on a new Vario
+# shell with the original T3 bogies (253 in 2016, 266 in 2018; 29+62 places).
+# DPmML never ran a plain Vario LF (this family replaces the former `vario_lf`).
+# Modelled as a single self-couplable tram car (solo or a pair). Sprite: the
+# pak128_czr Most Vario LF sheet (TommPa9) with the DPmML dark roof, roof A/C
+# unit and dossier reds/yellows, as on the Vario LF plus.
+
+vehicles:
+  - id: "VarioLFR.S"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: true
+    tail: true
+    prev: ["VarioLFR.S"]
+    next: ["VarioLFR.S"]
+    fields:
+      cost: 1200000
+      payload: 91
+      speed: 65
+      weight: 21
+      runningcost: 22
+      fixed_cost: 100
+      intro_year: 2016
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 12
+      engine_type: electric
+      power: 160
+
+liveries:
+  - color: mostzlutocervena
+    name_en: "Most, yellow-red"
+    name_cs: "Most, žluto-červená"

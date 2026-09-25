@@ -1,5 +1,5 @@
 agency: DPMostLitvinov
-type: "T3"
+type: "T3M_3"
 copyright: Lubak91
 
 # The source sprites carry the upstream lane placement (their dats use no
@@ -11,38 +11,36 @@ windows_lit_when_loaded: true
 display:
   agency_en: "DPmML"
   agency_cs: "DPmML"
-  family_en: "Tatra T3"
-  family_cs: "Tatra T3"
+  family_en: "Tatra T3M.3"
+  family_cs: "Tatra T3M.3"
 
-# Tatra T3 — classic Czechoslovak high-floor tram, in Most service 1961–2011.
-# Source PNG uses non-canonical column order (S,E,SE,SW,N,W,NW,NE); the build
-# input PNG here is remapped to the canonical w,nw,n,ne,e,se,s,sw layout so the
-# emitted .dat can use the standard row.col indexing.
-#
-# Constraint structure: a T3 can run solo or be coupled with another T3 (a
-# common two-car set). prev/next reference the vehicle itself.
+# Scaffolded by scripts/import_tram_fleets.py — see TRAM_BACKLOG.md.
+# PLACEHOLDER ART: the existing Most T3 sprite (same body, correct paint).
+# T3M.3 (TV14 modernisation of 1982–87 T3SU/T3SUCS, nos. 204–313) is the high-floor
+# backbone: 25 operational cars, solo or as two-car sets (intercity line 4).
+# Only detail differences from the classic T3 (dash, doors).
 
 vehicles:
-  - id: "T3"
+  - id: "T3M.3"
     role_en: "tram car"
     role_cs: "tramvajový vůz"
     row: 0
     head: true
     tail: true
-    prev: ["T3"]
-    next: ["T3"]
+    prev: ["T3M.3"]
+    next: ["T3M.3"]
     fields:
       cost: 840000
-      payload: 110
+      payload: 112
       speed: 65
-      weight: 16
+      weight: 17
       runningcost: 24
       fixed_cost: 100
-      intro_year: 1961
+      intro_year: 1997
       intro_month: 1
-      retire_year: 2011
+      retire_year: 2035
       retire_month: 1
-      waytype: tram_track
+      waytype: schiene_tram
       freight: Passagiere
       length: 11
       engine_type: electric
@@ -53,4 +51,3 @@ liveries:
   - color: mostzlutocervena
     name_en: "Most, yellow-red"
     name_cs: "Most, žluto-červená"
-    source: pak128_czr/vehicles-tram/Most/Tatra_T3.png (columns remapped from S/E/SE/SW/N/W/NW/NE to canonical w/nw/n/ne/e/se/s/sw)

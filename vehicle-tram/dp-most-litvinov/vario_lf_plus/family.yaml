@@ -1,5 +1,5 @@
 agency: DPMostLitvinov
-type: "Vario_LF"
+type: "Vario_LF_plus"
 copyright: TommPa9
 
 # The source sprites carry the upstream lane placement (their dats use no
@@ -11,46 +11,42 @@ windows_lit_when_loaded: true
 display:
   agency_en: "DPmML"
   agency_cs: "DPmML"
-  family_en: "Pragoimex Vario LF"
-  family_cs: "Pragoimex Vario LF"
+  family_en: "Pragoimex Vario LF plus"
+  family_cs: "Pragoimex Vario LF plus"
 
-# Pragoimex Vario LF — partially low-floor modernisation of the Tatra T3 body.
-# Source dat referenced a Vario_LF2b partner that was never defined in the
-# upstream files — dropped here; this is modelled as a single self-couplable
-# tram car (one Vario_LF or a Vario_LF + Vario_LF pair).
-#
-# Source PNG is 1152×128 with the standard 8 directional tiles in cols 0–7;
-# col 8 is the upstream stacked-extras column and is dropped.
+# Scaffolded by scripts/import_tram_fleets.py — see TRAM_BACKLOG.md.
+# Pragoimex VarioLF plus, 2 cars (314, 315), 2012–14, line 2; unidirectional, solo.
+# Sprite: the Most Vario sheet (same body) touched up: anthracite roof with black
+# equipment covers and yellow roof caps, white A/C pod above the cab, red doors,
+# DPmML signal red / yellow. Capacity 33 seats + 73 standing (5/m², like the EVO1).
 
 vehicles:
-  - id: "Vario_LF"
-    display_id: "Vario LF"
+  - id: "VarioLFplus"
     role_en: "tram car"
     role_cs: "tramvajový vůz"
     row: 0
     head: true
     tail: true
-    prev: ["Vario_LF"]
-    next: ["Vario_LF"]
+    prev: []
+    next: []
     fields:
       cost: 18600
-      payload: 116
+      payload: 106
       speed: 65
       weight: 21
       runningcost: 14
       fixed_cost: 58
-      intro_year: 2005
+      intro_year: 2012
       intro_month: 1
-      retire_year: 2050
+      retire_year: 2060
       retire_month: 1
       waytype: schiene_tram
       freight: Passagiere
       length: 12
       engine_type: electric
-      power: 360
+      power: 320
 
 liveries:
   - color: mostzlutocervena
     name_en: "Most, yellow-red"
     name_cs: "Most, žluto-červená"
-    source: pak128_czr/vehicles-tram/Most/Vario_LF.png (cols 0–7; col 8 dropped)

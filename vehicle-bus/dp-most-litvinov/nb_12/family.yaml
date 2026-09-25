@@ -1,5 +1,5 @@
 agency: DPMostLitvinov
-type: "NBG_12"
+type: "NB_12"
 copyright: VTPsim
 
 # The source sprites carry the upstream lane placement (their dats use no
@@ -11,17 +11,21 @@ windows_lit_when_loaded: true
 display:
   agency_en: "DPmML"
   agency_cs: "DPmML"
-  family_en: "SOR NBG 12"
-  family_cs: "SOR NBG 12"
+  family_en: "SOR NB 12"
+  family_cs: "SOR NB 12"
 
-# SOR NBG 12 — 12-metre rigid city bus from SOR Libchavy, CNG variant.
-# Source PNG uses cols 1–8 (col 0 stacked extras dropped). Source dat
-# lacked an explicit `length`; set to 9 to match the Citelis 12M (same
-# vehicle category).
+# SOR NB 12 City — 12-metre rigid diesel city bus from SOR Libchavy, 51 units
+# (45 new-built 2012–2017 + 6 ex-DP Praha); replaces the former `nbg_12`
+# family (Most never ran the CNG NBG 12).
+# Source PNG uses cols 1–8 (col 0 stacked extras dropped); the roof fairing of
+# the upstream sheet was replaced with the plain NB 12 roof (from VTPsim's
+# Praha SOR_NB_12, same geometry) plus a small white A/C unit behind the
+# front, matching the SOR NB 18. Placement and glass unchanged. The source dat
+# had no `length` (engine default 8, which the sprite is drawn for).
 
 vehicles:
-  - id: "NBG_12"
-    display_id: "NBG 12"
+  - id: "NB_12"
+    display_id: "NB 12"
     role_en: "bus"
     role_cs: "autobus"
     row: 0
@@ -42,13 +46,13 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 9
+      length: 8
       engine_type: diesel
       power: 213
       gear: 54
+      smoke: Diesel_small
 
 liveries:
   - color: mostzlutocervena
     name_en: "Most, yellow-red"
     name_cs: "Most, žluto-červená"
-    source: pak128_czr/vehicles-bus/Most/SOR_NBG_12.png (cols 1–8 → 0–7; col 0 dropped)
