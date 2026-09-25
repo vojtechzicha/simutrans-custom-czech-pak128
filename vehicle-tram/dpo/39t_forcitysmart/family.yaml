@@ -13,35 +13,40 @@ display:
   family_en: "Škoda 39T ForCity Smart"
   family_cs: "Škoda 39T ForCity Smart"
 
-# Sprite placeholder: borrows Stadler Tango NF2 art until 39T sprites exist.
-# Real-world specs: 31 m, 7-section bidirectional 100% low-floor tram,
-# 285 passengers (75 seated), 4×120 kW = 480 kW, 70 km/h.
-# DPO took delivery of 38 cars 2021–2024; all currently in service.
+# Škoda 39T ForCity Smart Ostrava (Artic-based), 38 cars delivered 2021–2024,
+# all in service. Real car: 26.5 m, 100 % low floor, unidirectional (4 double
+# doors on the right), 60 seated + 140 standing, 4 × 100 kW, 80 km/h, 36.8 t.
+# Modelled as the two visible bodies: an 18 m cab section (12 carunits) and a
+# 9 m rear section (6 carunits). Sprite drawn from scratch from photos of cars
+# 1753/1755 (box model rendered in the pak128 projection): DPO turquoise, tall
+# black glass band, white sill line sweeping down under the black cab mask,
+# white-framed black doors, silver bellows; placed on the footprint of the
+# upstream DPO trams.
 
 vehicles:
   - id: "39T"
-    role_en: "front section"
-    role_cs: "přední díl"
+    role_en: "cab section"
+    role_cs: "čelní díl"
     row: 0
     tail: false
     prev: []
     next: ["39T_2"]
     fields:
       cost: 45000
-      payload: 150
-      speed: 70
+      payload: 140
+      speed: 80
       weight: 25
       runningcost: 26
       fixed_cost: 105
       intro_year: 2021
-      intro_month: 8
+      intro_month: 10
       retire_year: 2080
       retire_month: 1
       waytype: schiene_tram
       freight: Passagiere
-      length: 10
+      length: 12
       engine_type: electric
-      power: 240
+      power: 200
 
   - id: "39T_2"
     role_en: "rear section"
@@ -52,20 +57,20 @@ vehicles:
     next: []
     fields:
       cost: 45000
-      payload: 135
-      speed: 70
-      weight: 25
+      payload: 60
+      speed: 80
+      weight: 12
       runningcost: 24
       fixed_cost: 95
       intro_year: 2021
-      intro_month: 8
+      intro_month: 10
       retire_year: 2080
       retire_month: 1
       waytype: schiene_tram
       freight: Passagiere
-      length: 10
+      length: 6
       engine_type: electric
-      power: 240
+      power: 200
 
 liveries:
   - color: dpotyrkysova
