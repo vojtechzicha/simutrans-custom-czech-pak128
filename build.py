@@ -95,6 +95,35 @@ def pak_basename_for(agency: str, mode: str) -> str:
     return f"VZ-{agency}-{mode}"
 
 
+# Simutrans special colours that light up at night on windows (image_t::rgbtab
+# 16, 17, 27, 28), mapped to a visually identical plain colour: by day the two
+# render the same, at night only the special one glows.
+WINDOW_LIGHTS_TO_UNLIT = {
+    (0x57, 0x65, 0x6F): (0x57, 0x65, 0x6E),
+    (0x7F, 0x9B, 0xF1): (0x7F, 0x9B, 0xF0),
+    (0xC1, 0xB1, 0xD1): (0xC1, 0xB1, 0xD0),
+    (0x4D, 0x4D, 0x4D): (0x4D, 0x4D, 0x4E),
+}
+UNLIT_SUFFIX = "-unlit"
+
+
+def write_unlit_png(src: Path, dst: Path) -> None:
+    """Copy src to dst with every lit-window special colour replaced by its plain
+    twin. Needs Pillow (only for families that use windows_lit_when_loaded)."""
+    from PIL import Image
+
+    img = Image.open(src)
+    img = img.convert("RGBA" if "A" in img.getbands() else "RGB")
+    step = len(img.getbands())
+    lookup = {bytes(k): bytes(v) for k, v in WINDOW_LIGHTS_TO_UNLIT.items()}
+    data = bytearray(img.tobytes())
+    for i in range(0, len(data), step):
+        new = lookup.get(bytes(data[i:i + 3]))
+        if new:
+            data[i:i + 3] = new
+    Image.frombytes(img.mode, img.size, bytes(data)).save(dst)
+
+
 def emit_dat(family: dict, livery: dict) -> str:
     bn = basename_for(family, livery)
     copyright_line = f"{family['copyright']}, vojtechzicha"
@@ -122,9 +151,18 @@ def emit_dat(family: dict, livery: dict) -> str:
                 lines.append(f"{k}={val}")
         lines.append("")
         reverse = v.get("reverse", False)
+        # windows_lit_when_loaded: the sheet as drawn (glass on the lit-at-night
+        # special colours) becomes the freight image, shown while anyone is aboard;
+        # the empty image is a derived copy whose glass never lights up.
+        lit_when_loaded = family.get("windows_lit_when_loaded", False)
+        empty_bn = f"{bn}{UNLIT_SUFFIX}" if lit_when_loaded else bn
         for col, d in enumerate(DIRECTIONS):
             src_col = (col + 4) % 8 if reverse else col
-            lines.append(f"emptyimage[{d}]={bn}.{v['row']}.{src_col},{x_off},{y_off}")
+            lines.append(f"emptyimage[{d}]={empty_bn}.{v['row']}.{src_col},{x_off},{y_off}")
+        if lit_when_loaded:
+            for col, d in enumerate(DIRECTIONS):
+                src_col = (col + 4) % 8 if reverse else col
+                lines.append(f"freightimage[{d}]={bn}.{v['row']}.{src_col},{x_off},{y_off}")
         lines.append("")
         can_head = v.get("head", True)
         can_tail = v.get("tail", True)
@@ -222,6 +260,8 @@ def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, in
                 fail += 1
                 continue
             shutil.copy2(png_src, out_dir / f"{bn}.png")
+            if family.get("windows_lit_when_loaded", False):
+                write_unlit_png(png_src, out_dir / f"{bn}{UNLIT_SUFFIX}.png")
             (out_dir / f"{bn}.dat").write_text(emit_dat(family, livery), encoding="utf-8")
             for lang in TAB_LANGS:
                 tab_lines[lang].extend(emit_tab_entries(family, livery, lang, mode))

@@ -22,7 +22,7 @@ On every run the build also **auto-prunes** stale artifacts in `dist/`: any `dis
 
 After a successful build, if `PAK_TARGET_DIR` is set in `.env` (or the process environment) and points to an existing directory, `build.py` syncs both layers into it: `dist/VZ-*.pak` → `PAK_TARGET_DIR/`, and `dist/text/<lang>.VZ-*.tab` → `PAK_TARGET_DIR/text/`. Tabs MUST live in the pak's `text/` subfolder and use a dot-separated language prefix (`cz.VZ-…tab`, not `cz_VZ-…tab`) — Simutrans's `translator::load_files_from_folder` only scans `text/*.tab` and only matches the dot form. Any VZ artifact in the target without a counterpart in `dist/` is an orphan and the user is prompted before it's deleted (`-y` auto-confirms); legacy tab filenames at the pak root from older build.py versions (`<lang>_VZ-*.tab`, `VZ-*.<lang>.tab`) are also swept up. If `PAK_TARGET_DIR` is unset, missing, or `--no-install` is passed, the install step is skipped.
 
-`makeobj` is located via the `MAKEOBJ_PATH` environment variable; if unset, the build runs `makeobj` from `PATH`. Requires `pyyaml` (`pip install pyyaml`) and Python 3.7+.
+`makeobj` is located via the `MAKEOBJ_PATH` environment variable; if unset, the build runs `makeobj` from `PATH`. Requires `pyyaml` and `Pillow` (`pip install pyyaml pillow`) and Python 3.7+.
 
 **Do not hand-edit `.dat` or `.tab` files.** Edit the relevant `family.yaml` or the per-livery PNG instead.
 
@@ -71,6 +71,9 @@ copyright: Sim                # original upstream credit; build appends ", vojte
 #                             # (default [0, 4], suited to the rail sources); road families
 #                             # whose sprites are already placed at the native pak128.cs
 #                             # lane position use [0, 0]
+# windows_lit_when_loaded: true  # the sheet as drawn becomes the loaded (freight) image and
+#                             # the build derives an empty image whose window glass never
+#                             # lights up; see "Night-lit windows" below
 
 display:
   agency_en: "ČD"
@@ -134,11 +137,20 @@ Every object's `copyright=` line carries the **original upstream credit first**,
 
 - One PNG per livery, located at `<family>/sprites/<color>.png`. Pre-composited at the final size — the build copies it verbatim.
 - Tile size is 128×128 (pak128). Width is `8 × 128 = 1024 px`; height is `vehicles × 128 px`.
-- **One set of images per vehicle** — `emptyimage` only, no `freightimage`.
+- **One set of images per vehicle** in the source PNG. The build may derive a second set from it (see "Night-lit windows"); never draw a separate loaded/empty sheet.
 - Rows in the PNG correspond to vehicles in `family.yaml`, in declaration order. The DAT references tiles via `<basename>.<row>.<col>`.
 - Column ordering is the Simutrans 8-direction convention: `0=w, 1=nw, 2=n, 3=ne, 4=e, 5=se, 6=s, 7=sw`.
 - Drop any source columns/rows that are not referenced — upstream files often include a 9th column of stacked extras intended for other pak sizes.
 - Background transparent color is RGB `(231, 255, 255)`; preserve it when compositing or recoloring.
+- Some exact RGB values are Simutrans **special colours** (`image_t::rgbtab`): makeobj stores them as player colours, lamps or night-lit windows instead of plain pixels. Avoid them unless intended; notably plain `0x6B6B6B` / `0x9B9B9B` become non-darkening greys (use `0x6B6B6C` etc.). `tools/pak_extract.py` writes extracted specials as their exact rgbtab colour so they round-trip.
+
+### Night-lit windows
+
+Convention: a vehicle's windows light up at night **only while passengers are aboard**.
+
+- Draw all window glass in the lit-at-night specials: `0x4D4D4D` (special 28, dark grey by day, warm yellow at night) for glass, `0x57656F` (special 16) for lighter glass/reflections. Headlights `0xFFFF53` and tail lights `0xFF211D` are always lit and unaffected.
+- Set `windows_lit_when_loaded: true` in `family.yaml` (every family does). The build then copies the sheet as the loaded image (`freightimage`, shown whenever at least one passenger is aboard) and writes a derived `<basename>-unlit.png` for `emptyimage`, where each lit-window special is swapped for a plain colour one step away (`0x4D4D4D` → `0x4D4D4E`, …). The two look identical by day; at night only a loaded vehicle's windows glow.
+- Needs Pillow at build time.
 
 ## Multi-vehicle consists
 

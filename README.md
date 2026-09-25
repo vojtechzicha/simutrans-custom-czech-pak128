@@ -50,7 +50,9 @@ Additional vehicle families are in progress and live on the
 ## Requirements
 
 - Python 3.7+
-- [`pyyaml`](https://pypi.org/project/PyYAML/) (`pip install pyyaml`)
+- [`pyyaml`](https://pypi.org/project/PyYAML/) and [`Pillow`](https://pypi.org/project/pillow/)
+  (`pip install pyyaml pillow`); Pillow derives the unlit empty-vehicle images
+  (see "Night-lit windows" in [`CLAUDE.md`](CLAUDE.md))
 - `makeobj` from a matching Simutrans build, on `PATH` or pointed to by
   `MAKEOBJ_PATH` (see [Configuration](#configuration))
 
