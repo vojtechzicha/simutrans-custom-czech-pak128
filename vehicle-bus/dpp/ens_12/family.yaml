@@ -25,6 +25,10 @@ display:
 # no roof batteries).
 # Sprite: original 8-direction render of the NS 12 body (no upstream pixels;
 # sized and lane-placed like the native pak128 12 m buses, e.g. CZR SOR NB 12).
+# Roof: Škoda single-arm 2-pole charging pantograph (charges under a short
+# trolley-wire section fed from the tram network) centred on the rear edge of
+# the black front cap, drawn folded as in service: base frame, lower arm
+# forward to the knee, upper arm back to the 2-shoe collector head.
 
 vehicles:
   - id: "ENS_12"
