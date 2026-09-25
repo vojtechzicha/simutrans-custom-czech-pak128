@@ -1,0 +1,117 @@
+agency: DPBrno
+type: "45T"
+image_offset: [0, 0]       # sprites carry their own placement (upstream convention)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Škoda 45T ForCity Smart"
+  family_cs: "Škoda 45T ForCity Smart"
+
+# Škoda 45T ForCity Smart 34, DPMB's bidirectional low-floor tram: 40 cars
+# (1760-1799) delivered 12/2022 to 1.7.2026. 31.0 m, 2.5 m wide, 3 sections,
+# 100% low floor, 4 bogies all motored, identical cabs at both ends, 5 doors on
+# each side (narrow single door behind each cab, double doors elsewhere).
+# 70 km/h, 48.04 t empty, 233 passengers (DPMB total; Wikipedia 64 seated +
+# 135 standing at 4/m2). Power: Wikipedia 8 x 70 kW = 560 kW (used here);
+# DPMB's fleet page says 6 x 70 kW - conflicting sources.
+# Livery (DPMB 2020s "Drak" scheme, from the DPMB side-view drawing): white
+# body; red roof-edge band that curves down to floor level at both ends of every
+# section (each section framed in red at the articulations, a white notch at the
+# top rear of the cab sections); black window band; black-framed glass doors;
+# red skirt and red bogie fairings; both fronts: black raked windscreen, red top
+# cap, white band, red lower valance; light grey roof with dark equipment
+# covers; yellow single-arm pantograph (leading section raised, trailing lowered).
+# Sprites: redrawn from scratch as a 3D model rendered to the pak128.cs
+# projection (replaces the upstream CZR-Brno-Skoda_45T placeholder, which is
+# the Prague 15T with a repainted front). Sections 8 + 7 + 8 units like the
+# upstream 15T (bodies 9.9 / 9.4 / 9.9 m); each cab section carries the full
+# grey bellows at its articulation end. Every section's front sits at the same
+# per-direction point (engine front anchoring), placed like the native
+# pak128.cs trams, so the joints close in all 8 directions. The rear cab
+# section has its own row (tail lights, lowered pantograph) instead of
+# reverse: true.
+# Economy: per-convoy totals of the upstream CZR-Brno-Skoda_45T / 15T (cost,
+# running and fixed cost); power on the leading section like upstream.
+
+vehicles:
+  - id: "45T"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["45T_2"]
+    fields:
+      cost: 450000
+      payload: 76
+      speed: 70
+      weight: 17
+      runningcost: 22
+      fixed_cost: 115
+      intro_year: 2022
+      intro_month: 12
+      retire_year: 2060
+      retire_month: 12
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 560
+
+  - id: "45T_2"
+    display_id: "45T"
+    role_en: "middle section"
+    role_cs: "střední díl"
+    row: 1
+    head: false
+    tail: false
+    prev: ["45T"]
+    next: ["45T_3"]
+    fields:
+      cost: 450000
+      payload: 81
+      speed: 70
+      weight: 14
+      runningcost: 16
+      fixed_cost: 77
+      intro_year: 2022
+      intro_month: 12
+      retire_year: 2060
+      retire_month: 12
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 7
+
+  - id: "45T_3"
+    display_id: "45T"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 2
+    head: false
+    tail: true
+    prev: ["45T_2"]
+    next: []
+    fields:
+      cost: 450000
+      payload: 76
+      speed: 70
+      weight: 17
+      runningcost: 22
+      fixed_cost: 115
+      intro_year: 2022
+      intro_month: 12
+      retire_year: 2060
+      retire_month: 12
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+
+liveries:
+  - color: dpmbbilocervena
+    name_en: "DPMB white-red"
+    name_cs: "DPMB bílo-červená"
