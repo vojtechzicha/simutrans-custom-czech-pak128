@@ -135,10 +135,27 @@ def write_unlit_png(src: Path, dst: Path) -> None:
     Image.frombytes(img.mode, img.size, bytes(data)).save(dst)
 
 
+def in_livery(vehicle: dict, livery: dict) -> bool:
+    """A vehicle's optional `liveries:` list names the liveries it exists in
+    (e.g. a trailer never painted in a railcar's regional scheme); default all."""
+    only = vehicle.get("liveries")
+    return only is None or livery["color"] in only
+
+
+def check_vehicle_liveries(family: dict) -> None:
+    colors = {lv["color"] for lv in family["liveries"]}
+    for v in family["vehicles"]:
+        unknown = set(v.get("liveries") or []) - colors
+        if unknown:
+            raise ValueError(f"vehicle {v['id']}: unknown liveries {sorted(unknown)}")
+
+
 def emit_dat(family: dict, livery: dict) -> str:
     bn = basename_for(family, livery)
     copyright_line = f"{family['copyright']}, vojtechzicha"
-    vehicles = family["vehicles"]
+    check_vehicle_liveries(family)
+    by_id = {v["id"]: v for v in family["vehicles"]}
+    vehicles = [v for v in family["vehicles"] if in_livery(v, livery)]
     blocks = []
 
     other_ids = {v["id"]: [p["id"] for p in vehicles if p["id"] != v["id"]] for v in vehicles}
@@ -181,12 +198,16 @@ def emit_dat(family: dict, livery: dict) -> str:
         next_partners = v.get("next", other_ids[v["id"]])
         # couple_liveries: a partner id resolves to that vehicle in EVERY livery
         # of the family (so cars of different paint can couple), not just this one.
-        partner_bns = ([basename_for(family, lv) for lv in family["liveries"]]
-                       if v.get("couple_liveries", False) else [bn])
+        # Liveries a partner does not exist in (its `liveries:` list) are skipped.
+        def partner_bns(pid: str) -> list[str]:
+            pv = by_id.get(pid, {})
+            if v.get("couple_liveries", False):
+                return [basename_for(family, lv) for lv in family["liveries"] if in_livery(pv, lv)]
+            return [bn] if in_livery(pv, livery) else []
         prev_entries = (["none"] if can_head else []) + [
-            f"{b}-{slug(pid)}" for pid in prev_partners for b in partner_bns]
+            f"{b}-{slug(pid)}" for pid in prev_partners for b in partner_bns(pid)]
         next_entries = (["none"] if can_tail else []) + [
-            f"{b}-{slug(pid)}" for pid in next_partners for b in partner_bns]
+            f"{b}-{slug(pid)}" for pid in next_partners for b in partner_bns(pid)]
         for idx, entry in enumerate(prev_entries):
             lines.append(f"Constraint[Prev][{idx}]={entry}")
         for idx, entry in enumerate(next_entries):
@@ -224,6 +245,8 @@ def emit_tab_entries(family: dict, livery: dict, lang: str, mode: str) -> list[s
 
     out: list[str] = []
     for v in family["vehicles"]:
+        if not in_livery(v, livery):
+            continue
         obj_name = f"{bn}-{slug(v['id'])}"
         if use_class:
             disp_id = v.get("display_id", v["id"])

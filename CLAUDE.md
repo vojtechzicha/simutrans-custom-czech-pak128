@@ -97,6 +97,10 @@ vehicles:
     # couple_liveries: false  # if true, each prev/next partner id resolves to that vehicle in EVERY
     #                         # livery of the family, so cars of different paint can couple into one
     #                         # consist (e.g. a tram that runs solo or as a mixed-livery 2-car set)
+    # liveries: [color, …]    # only build this vehicle in the listed liveries (default: all), e.g. a
+    #                         # trailer that never wore a railcar's regional scheme (810 family's 010).
+    #                         # Partner constraints skip liveries the partner doesn't exist in, and
+    #                         # the sheets of the other liveries don't need its row
     fields:                   # core simutrans vehicle fields, emitted in order
       cost: 979000
       payload: 97
