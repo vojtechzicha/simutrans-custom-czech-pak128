@@ -60,6 +60,7 @@ PLAT_H = 3.0                # platform height, screen px (pak128.cs asphalt: 4)
 BAND = (0.365, 0.635)       # crossing band along the track, as on pak128.cs's
                             # Asfaltove_nastupiste_se_sluzebnim_prejezdem, so the two line up
 DIP = 0.1                   # ramp length down into the crossing
+RAMP_W = 0.06               # crossing_end: path ramp up onto the platform's back edge
 END_GAP = 0.04              # a free platform end stops this far from the tile edge
 END_RAMP = 0.12
 TRACK_ZONE = 0.14           # crossing panels cover the track this far from the axis
@@ -234,9 +235,12 @@ BANDS = {"beton": band_concrete, "pryz": band_rubber, "drevo": band_wood}
 # --- scene -------------------------------------------------------------------------
 
 class Scene:
-    """One tile: optional half-island platform, ballast fill, crossing band."""
+    """One tile: optional narrow platform and crossing band. With band_end the
+    crossing stops at the platform (last track of a station): the path covers
+    only the platform side and ramps up onto the platform, which keeps its
+    full height, and the track itself is not crossed."""
 
-    def __init__(self, layout, style=None, band=None, platform=True, parts="all"):
+    def __init__(self, layout, style=None, band=None, platform=True, parts="all", band_end=False):
         self.orient = layout & 1
         self.end_a1 = bool(layout & 2)
         self.end_a0 = bool(layout & 4)
@@ -245,6 +249,7 @@ class Scene:
         self.band = BANDS[band] if band else None
         self.platform = platform and style is not None
         self.parts = parts      # "all" | "ground" | "platform"
+        self.band_end = band_end and self.platform and self.band is not None
 
     def ac(self, u, v):
         return (v, u) if self.orient == 0 else (u, v)
@@ -257,10 +262,13 @@ class Scene:
         cr = self.crel(c)
         return (cr >= 0) & (cr < PLAT_W)
 
-    def in_band(self, a):
+    def in_band(self, a, c):
         if self.band is None:
             return np.zeros(np.shape(a), bool)
-        return (a >= BAND[0]) & (a <= BAND[1])
+        inside = (a >= BAND[0]) & (a <= BAND[1])
+        if self.band_end:
+            inside &= self.crel(c) >= 0
+        return inside
 
     def profile(self, a):
         """Platform height factor along the track; negative = no platform."""
@@ -269,7 +277,7 @@ class Scene:
             p = np.where(a < END_GAP, -1.0, np.minimum(p, ramp(a, END_GAP, END_GAP + END_RAMP)))
         if self.end_a1:
             p = np.where(a > 1 - END_GAP, -1.0, np.minimum(p, ramp(1 - a, END_GAP, END_GAP + END_RAMP)))
-        if self.band is not None:
+        if self.band is not None and not self.band_end:
             b0, b1 = BAND
             d = np.where(a < b0, ramp(b0 - a, 0, DIP), np.where(a > b1, ramp(a - b1, 0, DIP), 0.0))
             # past the band on a free end there is no platform left
@@ -283,13 +291,18 @@ class Scene:
     def height(self, a, c):
         h = np.full(np.shape(a), NEG)
         if self.parts in ("all", "ground"):
-            h = np.where(self.in_band(a), 0.0, h)
+            h = np.where(self.in_band(a, c), 0.0, h)
         if self.platform and self.parts in ("all", "platform"):
             p = self.profile(a)
             # where the platform has dipped to the ground the crossing band
             # (ground layer) takes over
             ph = np.where(p <= 1e-3, NEG, PLAT_H * p)
             h = np.where(self.in_plat_c(c), np.maximum(h, ph), h)
+            if self.band_end:
+                # the path climbs onto the platform over its back edge
+                k = (self.crel(c) - PLAT_W) / RAMP_W
+                rh = np.where((k >= 0) & (k < 1) & self.in_band(a, c), ph * (1 - k), NEG)
+                h = np.maximum(h, rh)
         return h
 
 
@@ -350,8 +363,8 @@ def shade(scene, snow, seed):
     a, c = scene.ac(hu, hv)
     n1, n2, n3 = pixel_noise(seed), pixel_noise(seed + 1), pixel_noise(seed + 2)
 
-    band = scene.in_band(a) & (hz <= 0.05)
     plat = hit & scene.in_plat_c(c) & (hz > 0.05) if scene.platform else np.zeros_like(hit)
+    band = scene.in_band(a, c) & ~plat
     cls = np.where(hit, M_FILL, M_NONE)
     cls = np.where(hit & band, M_BAND, cls)
     cls = np.where(plat & (wall == 0), M_TOP, cls)
@@ -412,22 +425,22 @@ def to_image(out, mask):
     return Image.fromarray(img, "RGB")
 
 
-def render_layer(layout, style, band, platform, parts, snow):
-    sc = Scene(layout, style, band, platform, parts)
+def render_layer(layout, style, band, platform, parts, snow, band_end=False):
+    sc = Scene(layout, style, band, platform, parts, band_end)
     out, mask, band_px = shade(sc, snow, seed=17 + layout)
     if band is not None:
         out = draw_rails(out, band_px, sc.orient)
     return to_image(out, mask), bool(mask.any())
 
 
-def render_tile(layout, style, band, platform, snow):
+def render_tile(layout, style, band, platform, snow, band_end=False):
     """(back, front) images for one layout; front is None when empty."""
     near = bool(layout & 8) and platform and style is not None
     if near:
-        back, _ = render_layer(layout, style, band, platform, "ground", snow)
-        front, _ = render_layer(layout, style, band, platform, "platform", snow)
+        back, _ = render_layer(layout, style, band, platform, "ground", snow, band_end)
+        front, _ = render_layer(layout, style, band, platform, "platform", snow, band_end)
         return back, front
-    back, _ = render_layer(layout, style, band, platform, "all", snow)
+    back, _ = render_layer(layout, style, band, platform, "all", snow, band_end)
     return back, None
 
 
@@ -463,10 +476,10 @@ def over(dst, dmask, img):
     return dst, dmask | m
 
 
-def tile_closeup(style, band, platform):
+def tile_closeup(style, band, platform, band_end=False):
     """One N-S track tile with the platform on its near side (layout 8),
     cropped around the track and platform."""
-    back, front = render_tile(8, style, band, platform, snow=False)
+    back, front = render_tile(8, style, band, platform, snow=False, band_end=band_end)
     t, m = track_image(0)
     t, m = over(t, m, back)
     if front is not None:
@@ -521,10 +534,11 @@ def build_sheet(gen):
     style = gen.get("style")
     band = gen.get("crossing")
     platform = gen.get("platform", True)
+    band_end = gen.get("crossing_end", False)
     sheet = Image.new("RGB", (TILE * 8, TILE * SHEET_ROWS), KEY)
     for season in (0, 1):
         for layout in range(16):
-            back, front = render_tile(layout, style, band, platform, snow=season == 1)
+            back, front = render_tile(layout, style, band, platform, snow=season == 1, band_end=band_end)
             r, c = sheet_cell("back", season, layout)
             sheet.paste(back, (c * TILE, r * TILE))
             if front is not None:
@@ -532,9 +546,9 @@ def build_sheet(gen):
                 sheet.paste(front, (c * TILE, r * TILE))
     # build cursor: the plain far-side tile (layout 0); the icon shows the
     # near side so the platform sits in front of its track
-    cur, _ = render_tile(0, style, band, platform, snow=False)
+    cur, _ = render_tile(0, style, band, platform, snow=False, band_end=band_end)
     sheet.paste(cur, (0, 8 * TILE))
-    sheet.paste(draw_icon(tile_closeup(style, band, platform)), (TILE, 8 * TILE))
+    sheet.paste(draw_icon(tile_closeup(style, band, platform, band_end)), (TILE, 8 * TILE))
     return sheet
 
 
