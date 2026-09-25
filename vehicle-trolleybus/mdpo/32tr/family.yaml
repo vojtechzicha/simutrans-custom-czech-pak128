@@ -1,0 +1,47 @@
+agency: DPOpava
+type: "32Tr"
+copyright: P4T SK1LL3R
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MDPO"
+  agency_cs: "MDPO"
+  family_en: "Škoda 32Tr SOR"
+  family_cs: "Škoda 32Tr SOR"
+
+# Škoda 32Tr on the SOR NS 12 body, MDPO 314-328 (2018-2020).
+
+vehicles:
+  - id: "32Tr"
+    role_en: "trolleybus"
+    role_cs: "trolejbus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 950000
+      speed: 65
+      power: 160
+      weight: 12
+      runningcost: 26
+      fixed_cost: 140
+      intro_year: 2018
+      engine_type: electric
+      intro_month: 1
+      retire_year: 2050
+      waytype: road
+      payload: 95
+      freight: Passagiere
+      retire_month: 1
+
+liveries:
+  - color: mdpobilocervena
+    name_en: "MDPO white-red"
+    name_cs: "MDPO bílo-červená"

@@ -1,0 +1,54 @@
+agency: DPOpava
+type: "Citelis_12M"
+copyright: TommPa9
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MDPO"
+  agency_cs: "MDPO"
+  family_en: "Irisbus Citelis 12M"
+  family_cs: "Irisbus Citelis 12M"
+
+# Irisbus Citelis 12M, MDPO 148-161 (2011-2012), 12 in service (2026).
+# Diesel Iveco Cursor 8 EEV ~213 kW, ~30 seated / ~70 standing, ~11 t.
+# Sprite: TommPa9's all-white Praha Citelis 12M (the real Citelis body; the
+# upstream CZR-Opava object was a copy of the base-pak Irisbus Citybus),
+# painted in the MDPO white-red scheme: white roof, black window band, narrow
+# white waist, red lower body from the wheel-arch tops to the sill, red front
+# apron and rear bumper.
+
+vehicles:
+  - id: "Citelis_12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      power: 213
+      gear: 55
+      smoke: Diesel_small
+      engine_type: diesel
+      waytype: road
+      freight: Passagiere
+      payload: 100
+      speed: 80
+      cost: 650000
+      weight: 11
+      length: 8
+      runningcost: 24
+      fixed_cost: 123
+      intro_year: 2011
+      retire_year: 2050
+      retire_month: 1
+
+liveries:
+  - color: mdpobilocervena
+    name_en: "MDPO white-red"
+    name_cs: "MDPO bílo-červená"

@@ -1,0 +1,54 @@
+agency: DPOpava
+type: "36Tr"
+copyright: TommPa9
+
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MDPO"
+  agency_cs: "MDPO"
+  family_en: "Škoda 36Tr T'CITY"
+  family_cs: "Škoda 36Tr T'CITY"
+
+# Škoda 36Tr T'CITY on the Temsa Avenue Electron body, MDPO 329-331 (2023),
+# pure trolleybus without traction battery. 12.02 m, 3 doors (2-2-2), 32+2
+# seats + 51 standing = 85, ~160 kW, 65 km/h. MDPO scheme: white roof with a
+# black cap over the cab, red cant-rail band, black glazing, white waist, red
+# skirt rising in a wave over each wheel arch, red front apron. Sprite: the
+# body re-rendered on the geometry of TommPa9's Opava 26Tr (same placement,
+# wheels positions and trolley poles).
+
+vehicles:
+  - id: "36Tr"
+    role_en: "trolleybus"
+    role_cs: "trolejbus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 950000
+      speed: 65
+      power: 160
+      weight: 13
+      length: 8
+      runningcost: 26
+      fixed_cost: 140
+      intro_year: 2023
+      intro_month: 1
+      engine_type: electric
+      retire_year: 2050
+      retire_month: 1
+      waytype: road
+      payload: 85
+      freight: Passagiere
+
+liveries:
+  - color: mdpobilocervena
+    name_en: "MDPO white-red"
+    name_cs: "MDPO bílo-červená"

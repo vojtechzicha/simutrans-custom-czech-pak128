@@ -1,0 +1,50 @@
+agency: DPOpava
+type: "Urbanway_10_5M"
+copyright: Lubak91
+
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MDPO"
+  agency_cs: "MDPO"
+  family_en: "Iveco Urbanway 10,5M CNG"
+  family_cs: "Iveco Urbanway 10,5M CNG"
+
+# Iveco Urbanway 10,5M CNG, MDPO 162-167 (2015).
+# Sprite: Lubak91's Opava Urbanway 10,5M CNG, repainted to the full MDPO
+# white-red scheme (red lower body from the wheel-arch tops to the sill, red
+# front apron and rear bumper, narrow white waist; displays amber).
+
+vehicles:
+  - id: "Urbanway_10_5M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      power: 213
+      gear: 55
+      waytype: road
+      freight: Passagiere
+      payload: 80
+      speed: 80
+      cost: 648664
+      weight: 11
+      length: 7
+      runningcost: 24
+      fixed_cost: 123
+      intro_year: 2015
+      retire_year: 2050
+      retire_month: 1
+
+liveries:
+  - color: mdpobilocervena
+    name_en: "MDPO white-red"
+    name_cs: "MDPO bílo-červená"

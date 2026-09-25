@@ -1,0 +1,48 @@
+agency: DPOpava
+type: "26Tr"
+copyright: TommPa9
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MDPO"
+  agency_cs: "MDPO"
+  family_en: "Škoda 26Tr Solaris"
+  family_cs: "Škoda 26Tr Solaris"
+
+# Škoda 26Tr on the Solaris Urbino III body, MDPO 303-313 (2010-2015).
+
+vehicles:
+  - id: "26Tr"
+    role_en: "trolleybus"
+    role_cs: "trolejbus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 833387
+      payload: 95
+      speed: 65
+      weight: 12
+      runningcost: 16
+      fixed_cost: 72
+      intro_year: 2010
+      intro_month: 1
+      waytype: road
+      freight: Passagiere
+      engine_type: electric
+      power: 160
+      gear: 58
+      retire_year: 2050
+      retire_month: 1
+
+liveries:
+  - color: mdpobilocervena
+    name_en: "MDPO white-red"
+    name_cs: "MDPO bílo-červená"

@@ -1,0 +1,58 @@
+agency: DPOpava
+type: "SOR_NSG_12"
+copyright: VTPsim
+
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MDPO"
+  agency_cs: "MDPO"
+  family_en: "SOR NSG 12"
+  family_cs: "SOR NSG 12"
+
+# SOR NSG 12 (CNG), MDPO 177-181 (2021, in service 1-2/2022). 12 m, 3 doors,
+# ~95 total, FPT Cursor 8 CNG 213 kW, 80 km/h, 11.5-12 t.
+# Sprite: VTPsim's SOR NS 12 body (pak128_czr Frýdek-Místek NSG 12), repainted
+# in the MDPO white-red scheme: white roof with a large white CNG fairing and
+# an A/C unit, red band along the roof edge sweeping down the A-pillar, black
+# glazing, narrow white band, straight red skirt; black front mask, white
+# strip, red apron. Lane placement normalised.
+
+# Body edits on every view: window band deepened from 5 to 7 rows (real NS 12
+# glazing), door leaves in lighter glass, amber front/side/rear displays.
+
+vehicles:
+  - id: "SOR_NSG_12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 800000
+      payload: 95
+      speed: 80
+      weight: 12
+      runningcost: 24
+      fixed_cost: 135
+      intro_year: 2021
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 213
+      gear: 53
+
+liveries:
+  - color: mdpobilocervena
+    name_en: "MDPO white-red"
+    name_cs: "MDPO bílo-červená"
