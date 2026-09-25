@@ -38,7 +38,7 @@ vehicles:
     prev: []
     next: ["KT8D5N_2"]
     fields:
-      cost: 38600
+      cost: 602000
       payload: 86
       speed: 65
       weight: 14
@@ -64,7 +64,7 @@ vehicles:
     prev: ["KT8D5N"]
     next: ["KT8D5N_3"]
     fields:
-      cost: 38600
+      cost: 378000
       payload: 54
       speed: 65
       weight: 10
@@ -90,7 +90,7 @@ vehicles:
     prev: ["KT8D5N_2"]
     next: []
     fields:
-      cost: 38600
+      cost: 602000
       payload: 86
       speed: 65
       weight: 14

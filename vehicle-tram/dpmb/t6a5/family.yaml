@@ -42,7 +42,7 @@ vehicles:
     prev: []
     next: ["T6A5b"]            # ... or leads a 2-car set
     fields:
-      cost: 88600
+      cost: 819000
       payload: 117
       speed: 65
       weight: 20
@@ -68,7 +68,7 @@ vehicles:
     prev: ["T6A5"]
     next: []
     fields:
-      cost: 88600
+      cost: 819000
       payload: 117
       speed: 65
       weight: 20

@@ -42,7 +42,7 @@ vehicles:
     prev: []
     next: ["VarioLF2R.E_2"]
     fields:
-      cost: 38600
+      cost: 574000
       payload: 82
       speed: 65
       weight: 15
@@ -68,7 +68,7 @@ vehicles:
     prev: ["VarioLF2R.E"]
     next: []
     fields:
-      cost: 38600
+      cost: 567000
       payload: 81
       speed: 65
       weight: 15

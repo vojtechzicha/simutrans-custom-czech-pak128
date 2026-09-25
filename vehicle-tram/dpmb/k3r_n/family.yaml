@@ -47,7 +47,7 @@ vehicles:
     prev: []
     next: ["K3R-N_2"]
     fields:
-      cost: 38600
+      cost: 532000
       payload: 76
       speed: 65
       weight: 14
@@ -73,7 +73,7 @@ vehicles:
     prev: ["K3R-N"]
     next: ["K3R-N_3"]
     fields:
-      cost: 38600
+      cost: 392000
       payload: 56
       speed: 65
       weight: 8
@@ -97,7 +97,7 @@ vehicles:
     prev: ["K3R-N_2"]
     next: []
     fields:
-      cost: 38600
+      cost: 532000
       payload: 76
       speed: 65
       weight: 14

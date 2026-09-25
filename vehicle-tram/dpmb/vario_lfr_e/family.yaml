@@ -40,12 +40,12 @@ vehicles:
     prev: ["VarioLFR.E"]       # ... or as a 2-car set
     next: ["VarioLFR.E"]
     fields:
-      cost: 18600
+      cost: 714000
       payload: 102
       speed: 65
       weight: 21
-      runningcost: 14
-      fixed_cost: 58
+      runningcost: 28
+      fixed_cost: 100
       intro_year: 2006
       intro_month: 12
       retire_year: 2045

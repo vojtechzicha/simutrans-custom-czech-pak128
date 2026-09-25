@@ -60,7 +60,7 @@ vehicles:
     prev: []
     next: ["KT8D5.RN2P_2"]
     fields:
-      cost: 38600
+      cost: 616000
       payload: 88
       speed: 65
       weight: 16
@@ -86,7 +86,7 @@ vehicles:
     prev: ["KT8D5.RN2P"]
     next: ["KT8D5.RN2P_3"]
     fields:
-      cost: 38600
+      cost: 378000
       payload: 54
       speed: 65
       weight: 11
@@ -112,7 +112,7 @@ vehicles:
     prev: ["KT8D5.RN2P_2"]
     next: []
     fields:
-      cost: 38600
+      cost: 616000
       payload: 88
       speed: 65
       weight: 16

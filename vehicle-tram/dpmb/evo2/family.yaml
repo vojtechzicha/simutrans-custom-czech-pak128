@@ -47,7 +47,7 @@ vehicles:
     prev: []
     next: ["EVO2b"]
     fields:
-      cost: 56300
+      cost: 672000
       payload: 96
       speed: 70
       weight: 18
@@ -73,7 +73,7 @@ vehicles:
     prev: ["EVO2"]
     next: []
     fields:
-      cost: 43700
+      cost: 525000
       payload: 75
       speed: 70
       weight: 14
