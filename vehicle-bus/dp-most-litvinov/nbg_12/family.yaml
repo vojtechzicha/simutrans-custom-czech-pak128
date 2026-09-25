@@ -2,6 +2,9 @@ agency: DPMostLitvinov
 type: "NBG_12"
 copyright: VTPsim
 
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] sank them 4 px.
+image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
 
