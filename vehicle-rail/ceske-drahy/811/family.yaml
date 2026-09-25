@@ -23,6 +23,10 @@ vehicles:
     role_en: "railcar"
     role_cs: "motorový vůz"
     row: 0
+    head: true
+    tail: true
+    prev: ["012"]
+    next: ["012"]
     fields:
       cost: 1092600
       payload: 85
@@ -44,8 +48,38 @@ vehicles:
     extended:
       axles: 2
 
-# Sprite: the Sim pak128.CS 810 body repainted from photos (811 476, 811 444,
-# 811 173), plus the roof A/C unit.
+  # BDtax 782 (ex 012): the 810-family trailer with a bike/luggage bay, same body
+  # as the 010. The ones rebuilt with the 811s for the Moravskoslezský kraj wear
+  # the same Najbrt 2 + MSK scheme and run coupled to them (e.g. 29 064, 2025).
+  # 13.97 m, 52 seats, 15 t, 80 km/h.
+  - id: "012"
+    role_en: "trailer"
+    role_cs: "přípojný vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["811", "012"]
+    next: ["811", "012"]
+    fields:
+      cost: 820000
+      payload: 92
+      speed: 80
+      weight: 15
+      runningcost: 6
+      fixed_cost: 31
+      intro_year: 2020
+      intro_month: 8
+      retire_year: 2030
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 7
+    extended:
+      axles: 2
+
+# Sprites: the Sim pak128.CS 810 body repainted from photos (811 476, 811 444,
+# 811 173), plus the roof A/C unit; row 1 the Sim Btax (010) body in the same
+# scheme for the 012.
 liveries:
   - color: najbrt2
     name_en: "Najbrt 2, Moravskoslezský kraj"

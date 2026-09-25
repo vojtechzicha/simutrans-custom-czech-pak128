@@ -29,8 +29,8 @@ vehicles:
       fixed_cost: 102
       intro_year: 1996
       intro_month: 4
-      retire_year: 2026             # by 2025/26 all were reserves at Louny
-      retire_month: 1
+      retire_year: 2026             # a few reserves at Louny / Kralupy, still seen in 2026
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 7
@@ -59,3 +59,9 @@ liveries:
     name_cs: "červeno-krémová"
     # ČD 1998 scheme: red body incl. window band and doors, cream band below the
     # windows and across the fronts (e.g. 809 080, 809 179 in 2009)
+  - color: cervenozluta
+    name_en: "red-yellow"
+    name_cs: "červeno-žlutá"
+    # ČSD "unifik 88": red body with a golden-yellow band below the windows that
+    # crosses the doors and runs round the fronts; only 809 281 (repainted 2006,
+    # still in service 2025/26)
