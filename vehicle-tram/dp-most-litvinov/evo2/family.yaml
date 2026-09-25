@@ -2,8 +2,8 @@ agency: DPMostLitvinov
 type: "EVO2"
 copyright: TommPa9
 
-# The source sprites carry the upstream lane placement (their dats use no
-# offset), so no extra shift; the default [0, 4] sank them 4 px.
+# The sprites carry their own track placement (same convention as the upstream
+# tram art, whose dats use no offset), so no extra shift; [0, 4] would sink them.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -11,13 +11,29 @@ windows_lit_when_loaded: true
 display:
   agency_en: "DPmML"
   agency_cs: "DPmML"
-  family_en: "Inekon EVO 2"
-  family_cs: "Inekon EVO 2"
+  family_en: "Pragoimex EVO2"
+  family_cs: "Pragoimex EVO2"
 
-# Inekon EVO 2 — two-section articulated low-floor tram. Source PNG (3 rows × 9 cols
-# in upstream pak128_czr) provides rows 0–1 as the two sections; col 8 holds track
-# decoration extras and is dropped. Source dates (1986/2018) tagged a Tatra T6A5 by
-# mistake — corrected here to real Inekon EVO 2 era.
+# Pragoimex EVO2 (Krnov; earlier mislabelled "Inekon EVO 2") —
+# two-section, six-axle, 100% low-floor unidirectional tram, 3 bogies (two under
+# the front section, one under the rear), 21.65-23.4 m, 2.56 m wide. DPmML runs
+# 11 cars (320-330); the first EVO2 carried passengers on 3 Feb 2020 and six
+# more (tender won by Pragoimex) were delivered January-May 2026.
+# Stats: 6 x 65 kW (two motored bogies under the front section, one under the
+# rear), ~137 passengers, ~28 t empty (the Brno EVO2 figures scaled to Most's
+# cars; DPmML publishes no per-car data). Doors on the right side only (single door behind
+# the cab + double door on the front section, two double doors on the rear).
+# Livery (Most yellow-red): red cantrail band along the roof edge, yellow strip
+# above the black-framed window band, yellow lower panel, red skirt; black front
+# mask (cap with the LED destination display, wrap-round windscreen, panel
+# below it) over a yellow lamp band and a red bumper, red corners on the cap;
+# dark grey single-arm pantograph, grey roof equipment.
+# Sprite: the real EVO2 body drawn from scratch as a 3D model ray-marched to
+# the pak128 projection, shared with the DPMB EVO2 (vehicle-tram/dpmb/evo2) and
+# painted in the Most livery. It replaces the upstream pak128_czr Most/EVO2.png
+# placeholder, which was the Vario LF2 drawing repainted. Sections are 9 + 7
+# length units (the real front section is the longer one) instead of the
+# upstream 8 + 8; object names and constraints are unchanged.
 #
 # Constraint structure: EVO2 (head section) and EVO2b (rear section) must couple
 # together, but the pair can also be coupled to additional pairs — EVO2+EVO2b
@@ -35,20 +51,20 @@ vehicles:
     next: ["EVO2b"]
     fields:
       cost: 38600
-      payload: 66
+      payload: 72
       speed: 65
-      weight: 14
+      weight: 16
       runningcost: 22
       fixed_cost: 91
-      intro_year: 2007
-      intro_month: 1
+      intro_year: 2020
+      intro_month: 2
       retire_year: 2050
       retire_month: 1
       waytype: schiene_tram
       freight: Passagiere
-      length: 8
+      length: 9
       engine_type: electric
-      power: 180
+      power: 260
 
   - id: "EVO2b"
     display_id: "EVO2"
@@ -61,23 +77,23 @@ vehicles:
     next: ["EVO2"]
     fields:
       cost: 38600
-      payload: 66
+      payload: 65
       speed: 65
-      weight: 14
+      weight: 12
       runningcost: 20
       fixed_cost: 58
-      intro_year: 2007
-      intro_month: 1
+      intro_year: 2020
+      intro_month: 2
       retire_year: 2050
       retire_month: 1
       waytype: schiene_tram
       freight: Passagiere
-      length: 8
+      length: 7
       engine_type: electric
-      power: 180
+      power: 130
 
 liveries:
   - color: mostzlutocervena
     name_en: "Most, yellow-red"
     name_cs: "Most, žluto-červená"
-    source: pak128_czr/vehicles-tram/Most/EVO2.png (rows 0–1, cols 0–7; row 2 and col 8 dropped)
+    source: new EVO2 body drawn from scratch (shared with vehicle-tram/dpmb/evo2), Most livery
