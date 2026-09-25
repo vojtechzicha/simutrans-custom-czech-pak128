@@ -11,6 +11,13 @@ display:
   family_en: "RegioNova Trio"
   family_cs: "RegioNova Trio"
 
+# Three-car set: 814.2 motor car + 014 partly low-floor middle car + 814.2 motor
+# car, Pars nova 2007-10 (26 sets). Unit 42.41 m, 135 seats + 151 standing,
+# 62.3 t, 2 x 242 kW, 80 km/h. Took over Praha - Kladno - Rakovník from the 854
+# in May 2026. The only buildable consist is front + middle + rear; the rear
+# motor car is the front one turned round (row 2: direction columns shifted by
+# 4, moved one carunit forward, lamps swapped), so its tail lamps face backwards.
+
 vehicles:
   - id: "814.2-front"
     display_id: "814.2"
@@ -23,9 +30,9 @@ vehicles:
     next: ["014"]
     fields:
       cost: 1317400
-      payload: 92
+      payload: 95                   # 48 seats + standing
       speed: 80
-      weight: 23
+      weight: 22
       runningcost: 29
       fixed_cost: 148
       intro_year: 2007
@@ -52,9 +59,9 @@ vehicles:
     next: ["814.2-rear"]
     fields:
       cost: 908600
-      payload: 102
+      payload: 96                   # ~39 seats + standing in the low-floor centre
       speed: 80
-      weight: 16
+      weight: 18
       runningcost: 3
       fixed_cost: 15
       intro_year: 2007
@@ -71,17 +78,16 @@ vehicles:
     display_id: "814.2"
     role_en: "rear motor car"
     role_cs: "zadní motorový vůz"
-    row: 0
-    reverse: true
+    row: 2
     head: false
     tail: true
     prev: ["014"]
     next: []
     fields:
       cost: 1317800
-      payload: 92
+      payload: 95
       speed: 80
-      weight: 23
+      weight: 22
       runningcost: 29
       fixed_cost: 148
       intro_year: 2007
@@ -98,16 +104,23 @@ vehicles:
     extended:
       axles: 2
 
+# Sprites: every livery on the same Sim pak128.CS drawings (rail-psg mail/814:
+# cd814p = 814 with its cab ahead, cd014s = 014), painted zone by zone with the
+# scratch work/p2 painter (fam_814.py). The trio only ever wore these three
+# schemes (research/dmu/814/liveries_814.md).
 liveries:
+  # original Konting yellow-green (~13-14 sets left in 2026)
   - color: zlutozelena
     name_en: "yellow-green"
     name_cs: "žluto-zelená"
-    source: original upstream žluto-zelená livery
+    source: the upstream Sim yellow-green pixels (glass made night-lit, cab windscreens dark)
+  # 9 sets in the corporate scheme
   - color: najbrt2
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"
-    source: pak128_czr/vehicles-rail-dmu/CD/814-2a_Blue.png + 814-2b_Blue.png (Najbrt 2 — direct match)
+    source: painted on the Sim bodies (sapphire roof, white roof-edge strip, sky window band, sapphire stripe, bottom band and doors; white windscreen surround, sky mask)
+  # PID pyjama on at least 3 sets for the Posázavský pacifik (814.247/248 + 014.024 …)
   - color: pidsedocervena
     name_en: "PID grey-red"
     name_cs: "PID šedo-červená"
-    source: hand-painted PID šedo-červená livery
+    source: painted on the Sim bodies from photos of 814 248 (2024), 814 246 (2025) and 814 233 (2026)
