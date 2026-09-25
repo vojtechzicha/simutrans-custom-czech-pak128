@@ -67,6 +67,10 @@ Transport modes: `vehicle-rail/`, `vehicle-bus/`, `vehicle-tram/`, `vehicle-wate
 agency: CeskeDrahy            # PascalCase, goes into basename verbatim
 type: "814.0"                 # used as basename Type token; dots → underscores when emitted
 copyright: Sim                # original upstream credit; build appends ", vojtechzicha"
+# image_offset: [0, 4]        # optional x,y pixel offset makeobj applies to every image
+#                             # (default [0, 4], suited to the rail sources); road families
+#                             # whose sprites are already placed at the native pak128.cs
+#                             # lane position use [0, 0]
 
 display:
   agency_en: "ČD"

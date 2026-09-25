@@ -102,6 +102,9 @@ def emit_dat(family: dict, livery: dict) -> str:
     blocks = []
 
     other_ids = {v["id"]: [p["id"] for p in vehicles if p["id"] != v["id"]] for v in vehicles}
+    # Pixel offset makeobj applies to every image. The historical [0, 4] suits the
+    # rail sources; road sprites drawn to the pak128.cs lane convention need [0, 0].
+    x_off, y_off = family.get("image_offset", [0, 4])
 
     for v in vehicles:
         obj_name = f"{bn}-{slug(v['id'])}"
@@ -121,7 +124,7 @@ def emit_dat(family: dict, livery: dict) -> str:
         reverse = v.get("reverse", False)
         for col, d in enumerate(DIRECTIONS):
             src_col = (col + 4) % 8 if reverse else col
-            lines.append(f"emptyimage[{d}]={bn}.{v['row']}.{src_col},0,4")
+            lines.append(f"emptyimage[{d}]={bn}.{v['row']}.{src_col},{x_off},{y_off}")
         lines.append("")
         can_head = v.get("head", True)
         can_tail = v.get("tail", True)
