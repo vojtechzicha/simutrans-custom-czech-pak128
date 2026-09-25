@@ -1,0 +1,72 @@
+agency: DPPraha
+type: "T3R.P"
+# The sprites keep the upstream pak128_czr T3 placement (their dats use no
+# offset), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Tatra T3R.P"
+  family_cs: "Tatra T3R.P"
+
+# Tatra T3R.P: the Prague T3 (and T3M / T3SU / T3SUCS) modernised with TV
+# Progress IGBT traction, the backbone of the DPP fleet. 15.1 m over couplers
+# (14.0 m body), 2.5 m wide, 17.3 t, 4 x 40 kW, 65 km/h, 22 seated + 69
+# standing = 91 (DPP). Bodies 1962-1989, modernised 1999/2000-2014; 268 active
+# in Sep 2026 (nos. 8214-8579 with many gaps), being run down as the 52T and
+# the new T3R.PLF arrive. Runs solo or in 2-car sets (same livery here).
+#
+# Liveries: red-cream (254 cars): cream roof ends, window pillars and skirt,
+# red belt and red nose with round headlamps, black bumper, orange LED line /
+# destination display at the top of the windscreen and a side LED display;
+# current cars carry the white driver's-cab air conditioner (red base) on the
+# front roof dome (photos of 8511, 8539, 8572). Wine-silver (8571, 8573-8575,
+# which run with the wine-silver T3R.PLF): burgundy lower body, silver roof,
+# window band, pillars and skirt; unlike the PLF no silver "fan" stripes on the
+# sides and no silver "V" on the front: a plain burgundy nose with the round
+# headlamps, dark bumper and silver skirt below (photos of 8571, 8573-8575).
+#
+# Sprite: Lubak91's shaded T3R.P drawing (pak128_czr Praha Tatra_T3.png, the
+# art of the native CZR-Praha-Tatra_T3RP), shapes and placement unchanged,
+# painted exactly like the VZ T3R.PLF (same generator, same colours): diamond
+# pantograph ochre-yellow, glass on the lit-window specials, amber LED
+# displays, cab A/C box. Economy as upstream CZR-Praha-Tatra_T3RP.
+
+vehicles:
+  - id: "T3R.P"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: true                 # runs solo ...
+    tail: true
+    prev: ["T3R.P"]            # ... or as a 2-car set
+    next: ["T3R.P"]
+    fields:
+      cost: 840000
+      payload: 91
+      speed: 65
+      weight: 17
+      runningcost: 24
+      fixed_cost: 100
+      intro_year: 2000
+      intro_month: 1
+      retire_year: 2035
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 11
+      engine_type: electric
+      power: 160
+      gear: 130
+
+liveries:
+  - color: dppcervenokremova
+    name_en: "DPP red-cream"
+    name_cs: "DPP červeno-krémová"
+  - color: dppvinovostribrna
+    name_en: "DPP wine-silver"
+    name_cs: "DPP vínovo-stříbrná"

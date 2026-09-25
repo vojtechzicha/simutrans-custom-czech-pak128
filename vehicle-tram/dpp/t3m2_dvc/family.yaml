@@ -1,0 +1,64 @@
+agency: DPPraha
+type: "T3M.2-DVC"
+# The sprites keep the upstream pak128_czr T3 placement (their dats use no
+# offset), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Tatra T3M.2-DVC"
+  family_cs: "Tatra T3M.2-DVC"
+
+# Tatra T3M.2-DVC: 18 new T3SUCS-type bodies bought by DPP in 1996 and fitted
+# with the thyristor TV1 equipment of worn-out T3M cars ("DVC" = dveře volí
+# cestující, passenger-operated doors). 15.1 m over couplers, 2.5 m wide,
+# 16.96 t, 4 x 40 kW, 65 km/h, 20 seated + 85 standing = 105 (DPP). 8 left in
+# Sep 2026 (8015, 8051, 8074, 8077, 8080, 8083, 8088, 8089), all at
+# Hloubětín and all in 2-car sets; being withdrawn quickly (gone by ~2027).
+#
+# Livery: DPP red-cream like the T3R.P (cream roof ends, pillars and skirt, red
+# belt and nose, black bumper). Differences from the T3R.P (photos of 8063,
+# 8083): the old illuminated line-number box (blue plate) on the front dome
+# instead of the LED panel, paper destination board low in the windscreen, no
+# side LED display, no cab air-conditioner, and the grey brake-resistor box of
+# the T3M on the rear part of the roof.
+#
+# Sprite: the VZ T3R.P sheet (Lubak91's shaded T3 drawing, as the native
+# CZR-Praha-Tatra_T3M.2 reused it) with those details redrawn. Economy as
+# upstream CZR-Praha-Tatra_T3M.2.
+
+vehicles:
+  - id: "T3M.2-DVC"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: true                 # runs solo ...
+    tail: true
+    prev: ["T3M.2-DVC"]        # ... or as a 2-car set
+    next: ["T3M.2-DVC"]
+    fields:
+      cost: 840000
+      payload: 105
+      speed: 65
+      weight: 17
+      runningcost: 24
+      fixed_cost: 100
+      intro_year: 1996
+      intro_month: 1
+      retire_year: 2027
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 11
+      engine_type: electric
+      power: 160
+      gear: 130
+
+liveries:
+  - color: dppcervenokremova
+    name_en: "DPP red-cream"
+    name_cs: "DPP červeno-krémová"

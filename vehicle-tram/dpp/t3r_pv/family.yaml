@@ -1,0 +1,66 @@
+agency: DPPraha
+type: "T3R.PV"
+# The sprites keep the upstream pak128_czr T3 placement (their dats use no
+# offset), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Pragoimex T3R.PV"
+  family_cs: "Pragoimex T3R.PV"
+
+# Pragoimex T3R.PV: a new high-floor VarCB3 body (Pragoimex / KOS Krnov) with
+# the classic Kardaus T3 masks and TV Progress traction, registered as a
+# rebuilt T3. 14.0 m body (15.1 m over couplers), 2.5 m wide, 16.0 t,
+# 4 x 47 kW, 65 km/h; DPP counts it within the T3R.P (22 seated + 69 standing
+# = 91). Prague: 35 built 2003-2007 (8151-8185); 20 left in Sep 2026, being
+# scrapped (7 in 2025, 4 in 2026). Runs solo or in 2-car sets.
+#
+# Livery: DPP red-cream (17 of the 20; 1 wine-silver, 2 adverts): cream roof
+# ends, window pillars and skirt, red belt, red nose with round headlamps,
+# black bumper, orange LED displays. Unlike the current T3R.P no cab
+# air-conditioner box on the front dome (photos of 8155 in 2021, 8178, 8181).
+#
+# Sprite: Lubak91's shaded T3R.P drawing (pak128_czr Praha Tatra_T3.png - the
+# same body outline as TommPa9's flat Pragoimex_T3RP sheet of the native
+# CZR-Praha-Pragoimex_T3R.PV, whose cream is drawn near-white), painted exactly
+# like the VZ T3R.P / T3R.PLF and the DPMB T3R.PV: diamond pantograph
+# ochre-yellow, glass on the lit-window specials, amber LED displays. Length 11
+# like the T3R.P it runs with (upstream PV used 12 for the same 15.1 m).
+# Economy as the DPMB T3R.PV (CZR T3R x 4 x 47 kW); early retirement.
+
+vehicles:
+  - id: "T3R.PV"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: true                 # runs solo ...
+    tail: true
+    prev: ["T3R.PV"]           # ... or as a 2-car set
+    next: ["T3R.PV"]
+    fields:
+      cost: 880000
+      payload: 91
+      speed: 65
+      weight: 16
+      runningcost: 24
+      fixed_cost: 100
+      intro_year: 2003
+      intro_month: 1
+      retire_year: 2028
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 11
+      engine_type: electric
+      power: 188
+      gear: 130
+
+liveries:
+  - color: dppcervenokremova
+    name_en: "DPP red-cream"
+    name_cs: "DPP červeno-krémová"

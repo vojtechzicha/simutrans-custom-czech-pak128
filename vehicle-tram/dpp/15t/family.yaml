@@ -1,0 +1,120 @@
+agency: DPPraha
+type: "15T"
+# The sprites keep the upstream pak128_czr placement (the source dat uses no
+# offset), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Škoda 15T ForCity Alfa"
+  family_cs: "Škoda 15T ForCity Alfa"
+
+# Škoda 15T ForCity Alfa, 1st generation (subtypes 15T0, 15T1, 15T2, 15T3,
+# 15T3B): 3-section, single-ended, 100 % low-floor tram on four pivoting
+# bogies (two Jacobs bogies under the joints). 31.4 m x 2.46 m x 3.45 m,
+# 43.8 t, 16 x 46.6 kW synchronous wheel motors, 60 seated + 139 standing =
+# 199, 60 km/h in Prague service (DPP). DPP nos. 9201-9325 (9256 missing),
+# 124 active in Sep 2026; first car in regular service 5 Feb 2011 (9212, line
+# 18). 70 cars carry full-body adverts; the rest wear the delivery scheme.
+#
+# Livery "stříbrno-červená" (photo of 9300): black upper body and window band,
+# silver/white roof-edge line, silver band below the windows interrupted by
+# the doors, red skirt; each double door is dark glass down to the skirt with
+# a red line where the leaves meet; black windscreen in a red outline, silver
+# headlight band and red lower front; grey bellows at the joints.
+#
+# Sprite: TommPa9's pak128_czr Skoda_15T sheet (the art of the native
+# CZR-Praha-Skoda_15T), shapes and placement unchanged: the medium-grey band
+# repainted true silver, source glass moved to the lit-window specials, the red
+# lit front/rear destination displays turned into amber LED displays.
+# Lengths 8 + 7 + 8 as upstream (the joints close in all 8 directions).
+# Economy as upstream CZR-Praha-Skoda_15T; capacity and weight are the DPP
+# figures split over the sections by length.
+
+vehicles:
+  - id: "15T"
+    display_id: "15T"
+    role_en: "front section"
+    role_cs: "přední článek"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["15T_2"]
+    fields:
+      cost: 450000
+      payload: 69
+      speed: 60
+      weight: 15
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2011
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 746
+
+  - id: "15T_2"
+    display_id: "15T"
+    role_en: "middle section"
+    role_cs: "střední článek"
+    row: 1
+    head: false
+    tail: false
+    prev: ["15T"]
+    next: ["15T_3"]
+    fields:
+      cost: 450000
+      payload: 61
+      speed: 60
+      weight: 14
+      runningcost: 15
+      fixed_cost: 77
+      intro_year: 2011
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 7
+      engine_type: electric
+      power: 0
+
+  - id: "15T_3"
+    display_id: "15T"
+    role_en: "rear section"
+    role_cs: "zadní článek"
+    row: 2
+    head: false
+    tail: true
+    prev: ["15T_2"]
+    next: []
+    fields:
+      cost: 450000
+      payload: 69
+      speed: 60
+      weight: 15
+      runningcost: 20
+      fixed_cost: 102
+      intro_year: 2011
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 0
+
+liveries:
+  - color: dppstribrnocervena
+    name_en: "DPP silver-red"
+    name_cs: "DPP stříbrno-červená"
