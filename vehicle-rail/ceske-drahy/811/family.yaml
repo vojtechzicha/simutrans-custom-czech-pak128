@@ -11,9 +11,12 @@ display:
   family_en: "RegioMouse"
   family_cs: "RegioMouse"
 
-# Single railcar — modernized class 810 with new angular cab (RegioMouse).
-# Source: pak128cs rail-psg mail/810/811.dat (CD_811-1). Treated as standalone here
-# (the upstream class with Btax trailers is out of scope).
+# Class 811 (2020): 14 class 810s rebuilt by DPOV in 2020-21 for the Moravskoslezský
+# kraj (air-conditioning, Tedom 242 kW engine limited to 152 kW for traction,
+# 45 seats), marketed by ČD as "RegioMouse". Body and cab are the 810's; the
+# visible change is the flat A/C unit centred on the roof. Still in service in 2026
+# around Suchdol nad Odrou. (Not the 1997 prototype 811, nor the Slovak 811
+# "mandarinka" with its new cab.) Standing capacity is unpublished; 40 as on the 810.
 
 vehicles:
   - id: "811"
@@ -22,27 +25,30 @@ vehicles:
     row: 0
     fields:
       cost: 1092600
-      payload: 73
+      payload: 85
       speed: 80
-      weight: 20
+      weight: 21
       runningcost: 16
       fixed_cost: 82
-      intro_year: 1997
-      intro_month: 2
+      intro_year: 2020
+      intro_month: 8
       retire_year: 2030
       retire_month: 1
       waytype: track
       freight: Passagiere
       length: 7
       engine_type: diesel
-      power: 155
+      power: 152
       smoke: Diesel_black
       gear: 108
     extended:
       axles: 2
 
+# Sprite: the Sim pak128.CS 810 body repainted from photos (811 476, 811 444,
+# 811 173), plus the roof A/C unit.
 liveries:
   - color: najbrt2
-    name_en: "Najbrt 2"
-    name_cs: "Najbrt 2"
-    source: pak128cs/rail-psg mail/810/811_predni.png (ČD red — recolor to Najbrt 2 blue with red doors)
+    name_en: "Najbrt 2, Moravskoslezský kraj"
+    name_cs: "Najbrt 2, Moravskoslezský kraj"
+    # the only scheme the class wore: Najbrt 2 (sapphire roof, visor, A/C unit and
+    # underframe, sky-blue window band, sapphire doors) with Moravskoslezský kraj logos

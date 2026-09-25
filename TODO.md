@@ -46,7 +46,7 @@ which only exists in the liveries real 010s wore (Najbrt 1, Najbrt 2, red-cream)
 
 ## 811 RegioMouse
 
-- [ ] `811/sprites/najbrt2.png` — placeholder is red ČD 811 cab. Recolor to **Najbrt 2**.
+- [x] `811/sprites/najbrt2.png` — the 2020 class 811 (14 cars for the Moravskoslezský kraj): 810 body in **Najbrt 2** + MSK logos, with the roof A/C unit. (The old note's "new angular cab" is the Slovak ZSSK 811; the 1997 ČD prototype 811 was red-cream only and is not in the set.)
 
 ## 840 RegioSpider
 
