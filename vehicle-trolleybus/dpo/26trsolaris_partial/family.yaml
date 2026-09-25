@@ -32,7 +32,7 @@ vehicles:
       weight: 16
       runningcost: 19
       fixed_cost: 85
-      intro_year: 2010
+      intro_year: 2018
       intro_month: 1
       retire_year: 2045
       retire_month: 1

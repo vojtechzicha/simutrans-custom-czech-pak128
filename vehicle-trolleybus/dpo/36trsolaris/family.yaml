@@ -1,7 +1,8 @@
 agency: DPOstrava
 type: "36TrSolaris"
-# Sprites were extracted from the compiled upstream pak with their tile
-# placement baked in, so no extra shift (the default [0, 4] sank them 4 px).
+# The sprite sits on the footprint of the other DPO trolleybus sheets (it
+# carries its own placement), so no extra shift (the default [0, 4] would sink
+# it 4 px).
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -10,13 +11,18 @@ copyright: TommPa9
 display:
   agency_en: "DPO"
   agency_cs: "DPO"
-  family_en: "Škoda 36Tr Solaris"
-  family_cs: "Škoda 36Tr Solaris"
+  family_en: "Škoda 36Tr"
+  family_cs: "Škoda 36Tr"
 
-# Škoda 36Tr Solaris — in-motion-charging (IMC) variant of the 26Tr, with
-# onboard traction battery so the trolleybus can detach from the catenary and
-# run for a limited range on battery alone. Sprites are reused from 26Tr (same
-# Solaris Trollino 12 body). DPO Ostrava began receiving 36Tr units in 2020.
+# Škoda 36Tr with the Temsa body (not Solaris): 18 cars 3741-3758 delivered
+# 2023, all with traction batteries for off-wire running. The object ids keep
+# the historical "36TrSolaris" token so existing saves still load.
+# Sprite drawn from scratch from photos of 3742/3746/3748/3758 (box model in
+# the pak128 projection, native 12 m bus proportions): tall black glazing band,
+# light grey line under it, three double doors on the right, full-length roof
+# fairing with the white "ooo" mark, black front "smile" band with the lamps.
+# Trolley poles transplanted pixel-for-pixel from the DPO 26Tr sheet, with the
+# body placed on the same footprint so they stay on the wires.
 #
 # engine_type=battery models the off-wire capability; in pak128.cs this means
 # the vehicle can operate on roads without overhead lines.

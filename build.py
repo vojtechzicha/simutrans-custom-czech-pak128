@@ -152,7 +152,11 @@ def check_vehicle_liveries(family: dict) -> None:
 
 def emit_dat(family: dict, livery: dict) -> str:
     bn = basename_for(family, livery)
-    copyright_line = f"{family['copyright']}, vojtechzicha"
+    # Upstream credit first, vojtechzicha last and only once (families whose
+    # art is drawn here from scratch may name just vojtechzicha).
+    credits = [c.strip() for c in str(family["copyright"]).split(",")]
+    credits = [c for c in credits if c and c.lower() != "vojtechzicha"]
+    copyright_line = ", ".join(credits + ["vojtechzicha"])
     check_vehicle_liveries(family)
     by_id = {v["id"]: v for v in family["vehicles"]}
     vehicles = [v for v in family["vehicles"] if in_livery(v, livery)]

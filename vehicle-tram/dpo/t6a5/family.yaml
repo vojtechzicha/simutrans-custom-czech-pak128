@@ -36,8 +36,8 @@ vehicles:
       fixed_cost: 108
       intro_year: 1991
       intro_month: 1
-      retire_year: 2030
-      retire_month: 1
+      retire_year: 2023
+      retire_month: 7
       waytype: schiene_tram
       freight: Passagiere
       length: 12
@@ -61,8 +61,8 @@ vehicles:
       fixed_cost: 108
       intro_year: 1991
       intro_month: 1
-      retire_year: 2030
-      retire_month: 1
+      retire_year: 2023
+      retire_month: 7
       waytype: schiene_tram
       freight: Passagiere
       length: 12

@@ -1,11 +1,11 @@
 agency: DPOstrava
 type: "RoseroFirst"
-# Sprites were extracted from the compiled upstream pak with their tile
-# placement baked in, so no extra shift (the default [0, 4] sank them 4 px).
+# Sprite carries its own tile placement (native bus footprint), so no extra
+# shift (the default [0, 4] would sink it 4 px).
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 
 display:
   agency_en: "DPO"
@@ -13,9 +13,14 @@ display:
   family_en: "Rošero First CNG"
   family_cs: "Rošero First CNG"
 
-# Sprite placeholder: borrows Iveco-Dekstra LE 37 art until Rošero sprites exist.
-# Real-world: Iveco Daily-based CNG midibus, ~8 m, ~30 passengers, ~110 kW.
-# DPO took delivery of ~5 units 2018–2021; all currently in service.
+# Rošero-P First FCLLI / FCLLI CNG: Iveco Daily based low-entry midibus,
+# ~7.7 m, ~30 passengers, ~110 kW. DPO took delivery of 5 units 2018–2021,
+# all in service.
+# Sprite drawn from scratch from photos of 5303/7311 (box model in the pak128
+# projection, native short-bus proportions): turquoise all over, Iveco Daily
+# bonnet with black grille and swept headlights, big windscreen with display,
+# dark side windows, two doors on the right (behind each axle), turquoise CNG
+# roof pod, small wheels with turquoise hub caps.
 
 vehicles:
   - id: "RoseroFirst"

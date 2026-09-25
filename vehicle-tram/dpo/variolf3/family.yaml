@@ -34,7 +34,7 @@ vehicles:
       weight: 14
       runningcost: 22
       fixed_cost: 91
-      intro_year: 2017
+      intro_year: 2006
       intro_month: 1
       retire_year: 2050
       retire_month: 1
@@ -60,7 +60,7 @@ vehicles:
       weight: 10
       runningcost: 15
       fixed_cost: 62
-      intro_year: 2017
+      intro_year: 2006
       intro_month: 1
       retire_year: 2050
       retire_month: 1
@@ -85,7 +85,7 @@ vehicles:
       weight: 14
       runningcost: 20
       fixed_cost: 58
-      intro_year: 2017
+      intro_year: 2006
       intro_month: 1
       retire_year: 2050
       retire_month: 1
