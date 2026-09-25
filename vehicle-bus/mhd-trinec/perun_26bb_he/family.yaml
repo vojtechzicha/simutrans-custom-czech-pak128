@@ -1,0 +1,49 @@
+agency: MHDTrinec
+type: "Perun_26BB_HE"
+copyright: VTPsim
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Třinec"
+  agency_cs: "MHD Třinec"
+  family_en: "Škoda Perun 26BB HE"
+  family_cs: "Škoda Perun 26BB HE"
+
+# Škoda Perun 26BB HE battery bus (Solaris Urbino III body), 10 units (2016).
+
+vehicles:
+  - id: "Perun_26BB_HE"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 1000000
+      payload: 85
+      speed: 80
+      weight: 12
+      runningcost: 20
+      fixed_cost: 150
+      intro_year: 2016
+      intro_month: 9
+      waytype: road
+      freight: Passagiere
+      engine_type: battery
+      power: 160
+      gear: 54
+      length: 8
+      retire_year: 2050
+      retire_month: 1
+
+liveries:
+  - color: trinecbilozelena
+    name_en: "Třinec city, white-green"
+    name_cs: "Třinec city, bílo-zelená"

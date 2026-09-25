@@ -1,0 +1,53 @@
+agency: MHDKrnov
+type: "SOR_BN_9.5"
+copyright: VTPsim
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Krnov"
+  agency_cs: "MHD Krnov"
+  family_en: "SOR BN 9.5"
+  family_cs: "SOR BN 9,5"
+
+# SOR BN 9,5 low-entry midibus, 9.6 m, 3 doors (1-2-1). Two 2013-built cars
+# (81-1005, 81-1006, ex-MHD Nitra) run Krnov MHD for Transdev Morava since
+# 1/2023. Iveco Tector 185 kW, 23-28 seated + 48 standing, 7.6 t.
+# Sprite: VTPsim's SOR BN 9,5 (via the DPMP sheet), repainted in the Krnov
+# city scheme: white with a black belt line, golden-yellow + blue chevron
+# pairs and the navy "krnov" wordmark; white roof A/C units.
+
+vehicles:
+  - id: "SOR_BN_9.5"
+    display_id: "BN 9,5"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 455000
+      payload: 74
+      speed: 80
+      weight: 8
+      runningcost: 22
+      fixed_cost: 120
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 185
+      gear: 53
+      smoke: Diesel_small
+
+liveries:
+  - color: krnovbila
+    name_en: "Krnov, white with chevrons"
+    name_cs: "Krnov, bílá se šipkami"

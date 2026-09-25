@@ -1,0 +1,57 @@
+agency: MHDTrinec
+type: "SOR_NS_12"
+copyright: VTPsim
+
+# Sprites carry their own tile placement (normalised to the native pak128.cs
+# 12 m bus lane position), so no extra makeobj offset.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Třinec"
+  agency_cs: "MHD Třinec"
+  family_en: "SOR NS 12"
+  family_cs: "SOR NS 12"
+
+# SOR NS 12 (diesel), 19 units on MHD Třinec: Arriva 71-1101…1112 and the
+# Transdev subcontract 71-1151…1157, delivered 12/2021–11/2024. Repainted from
+# VTPsim's SOR NS 12 electric (pak128_czr FrydekMistek) in the "Třinec city"
+# white/lime scheme: lime A/C pod instead of the battery roof, black front mask
+# with lime A-pillars and line under the windscreen, lime skirt and wheel
+# arches, lime upper rear and bumper.
+# Data: 12 m, ~100 passengers (estimate from GVW), FPT Tector 7 210 kW,
+# 80 km/h, ~11.5 t empty.
+
+vehicles:
+  - id: "SOR_NS_12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 700000
+      payload: 100
+      speed: 80
+      weight: 12
+      runningcost: 22
+      fixed_cost: 140
+      intro_year: 2021
+      intro_month: 12
+      waytype: road
+      freight: Passagiere
+      engine_type: diesel
+      power: 210
+      gear: 53
+      smoke: Diesel_small
+      length: 8
+      retire_year: 2050
+      retire_month: 1
+
+liveries:
+  - color: trinecbilozelena
+    name_en: "Třinec city, white-green"
+    name_cs: "Třinec city, bílo-zelená"

@@ -1,0 +1,56 @@
+agency: MHDTrinec
+type: "Urbanway_12M"
+copyright: Lubak91
+
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Třinec"
+  agency_cs: "MHD Třinec"
+  family_en: "Iveco Urbanway 12M"
+  family_cs: "Iveco Urbanway 12M"
+
+# Iveco Urbanway 12M diesel, 1 unit on MHD Třinec (Arriva 71-1201, 1TD 1303;
+# ex-demonstrator built 2016, in Třinec since 2022). Tector 7 Euro 6 210 kW,
+# 3 double doors, ~100 passengers, ~11.5 t. Sprite: Lubak91's Brno Urbanway
+# 12M (plain diesel roof), repainted to the "Třinec city" white/lime scheme:
+# lime roof-edge line, lime sill with lime wheel-arch outlines, lime front
+# roof cap and bumper corners, lime rear pillars.
+
+vehicles:
+  - id: "Urbanway_12M"
+    display_id: "Urbanway 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 780000
+      payload: 100
+      speed: 80
+      weight: 12
+      runningcost: 24
+      fixed_cost: 135
+      intro_year: 2022
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 210
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: trinecbilozelena
+    name_en: "Třinec city, white-green"
+    name_cs: "Třinec city, bílo-zelená"

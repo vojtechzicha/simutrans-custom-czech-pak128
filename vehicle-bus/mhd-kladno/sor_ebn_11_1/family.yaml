@@ -1,0 +1,48 @@
+agency: MHDKladno
+type: "SOR_EBN_11_1"
+copyright: Lubak91
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Kladno"
+  agency_cs: "MHD Kladno"
+  family_en: "SOR EBN 11,1"
+  family_cs: "SOR EBN 11,1"
+
+# SOR EBN 11,1 battery bus, 2 units on Kladno MHD.
+
+vehicles:
+  - id: "SOR_EBN_11_1"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      engine_type: battery
+      power: 120
+      gear: 57
+      waytype: road
+      freight: Passagiere
+      payload: 85
+      speed: 80
+      cost: 900000
+      weight: 12
+      length: 8
+      runningcost: 20
+      fixed_cost: 150
+      intro_year: 2016
+      retire_year: 2050
+      retire_month: 1
+
+liveries:
+  - color: kladnobilocervena
+    name_en: "Kladno, white-red"
+    name_cs: "Kladno, bílo-červená"

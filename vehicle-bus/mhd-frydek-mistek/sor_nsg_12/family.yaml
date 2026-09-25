@@ -1,0 +1,49 @@
+agency: MHDFrydekMistek
+type: "SOR_NSG_12"
+copyright: VTPsim
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD F-M"
+  agency_cs: "MHD F-M"
+  family_en: "SOR NSG 12"
+  family_cs: "SOR NSG 12"
+
+# SOR NSG 12 (CNG), 700-714 (2020) and 721-722 (2023), Frýdek-Místek city wrap.
+
+vehicles:
+  - id: "SOR_NSG_12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 800000
+      payload: 95
+      speed: 80
+      weight: 12
+      runningcost: 24
+      fixed_cost: 135
+      intro_year: 2020
+      intro_month: 1
+      waytype: road
+      freight: Passagiere
+      engine_type: diesel
+      power: 213
+      gear: 53
+      length: 8
+      retire_year: 2050
+      retire_month: 1
+
+liveries:
+  - color: frydekmistekpolep
+    name_en: "Frýdek-Místek city wrap"
+    name_cs: "polep města Frýdek-Místek"

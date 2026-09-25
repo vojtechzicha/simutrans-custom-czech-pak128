@@ -1,0 +1,73 @@
+agency: MHDTabor
+type: "Urbanway_18M_CNG"
+copyright: Lubak91
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Tábor"
+  agency_cs: "MHD Tábor"
+  family_en: "Iveco Urbanway 18M CNG"
+  family_cs: "Iveco Urbanway 18M CNG"
+
+# Iveco Urbanway 18M CNG articulated, 6 units on Tábor MHD. Front section
+# unpowered, engine in the rear section.
+
+vehicles:
+  - id: "Urbanway_18M_CNG-A"
+    display_id: "Urbanway 18M CNG"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["Urbanway_18M_CNG-B"]
+    fields:
+      engine_type: diesel
+      waytype: road
+      freight: Passagiere
+      payload: 90
+      speed: 80
+      cost: 500000
+      weight: 10
+      length: 7
+      runningcost: 20
+      fixed_cost: 102
+      intro_year: 2015
+      retire_year: 2050
+      retire_month: 1
+
+  - id: "Urbanway_18M_CNG-B"
+    display_id: "Urbanway 18M CNG"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["Urbanway_18M_CNG-A"]
+    next: []
+    fields:
+      power: 243
+      gear: 67
+      waytype: road
+      freight: Passagiere
+      payload: 60
+      speed: 80
+      cost: 477785
+      weight: 8
+      length: 5
+      runningcost: 14
+      fixed_cost: 72
+      intro_year: 2015
+      retire_year: 2050
+      retire_month: 1
+
+liveries:
+  - color: comettbila
+    name_en: "COMETT white"
+    name_cs: "COMETT bílá"

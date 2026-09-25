@@ -1,0 +1,53 @@
+agency: MHDFrydekMistek
+type: "SOR_BNG_12"
+copyright: VTPsim
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD F-M"
+  agency_cs: "MHD F-M"
+  family_en: "SOR BNG 12"
+  family_cs: "SOR BNG 12"
+
+# SOR BNG 12 (CNG) low-entry bus with the raised rear floor, 11.79 m, 3 doors,
+# 607-609 (2015) on Frýdek-Místek MHD (Transdev Slezsko). Iveco Cursor 8 CNG
+# 213 kW, ~30 seated / ~95 total, ~9.5-10 t.
+# Sprite: VTPsim's ODIS SOR BNG 12 (CZ-vehicle-bus.pak), repainted in the
+# 3CSAD white-green scheme: white body and CNG pod, black window band, black
+# belt line, deep grass-green skirt rising at the rear, green front apron and
+# rear bumper, green logo marks; glazed doors down to the floor;
+# lane-normalised.
+
+vehicles:
+  - id: "SOR_BNG_12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 600000
+      payload: 95
+      speed: 80
+      weight: 10
+      runningcost: 24
+      fixed_cost: 130
+      intro_year: 2015
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 213
+      gear: 53
+
+liveries:
+  - color: 3csadbilozelena
+    name_en: "3ČSAD white-green"
+    name_cs: "3ČSAD bílo-zelená"

@@ -1,0 +1,53 @@
+agency: MHDKladno
+type: "Citywide_LF_12M_CNG"
+copyright: Lubak91
+
+# Sprites carry their own tile placement (body footprint matched to the native
+# pak128.cs 12 m bus median), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Kladno"
+  agency_cs: "MHD Kladno"
+  family_en: "Scania Citywide LF 12M CNG"
+  family_cs: "Scania Citywide LF 12M CNG"
+
+# Scania Citywide LF 12M CNG, 12 units (03-14, in service 9/2020) on Kladno MHD
+# (ARRIVA CITY, ex-ČSAD MHD Kladno). "Městská doprava Kladno" scheme: white roof,
+# black window band, thin white belt, bold red lower band, white skirt.
+# 28 (+2 folding) seats, 80 passengers, Scania OC09 CNG 206 kW.
+# Sprite: the F-M Citywide LF 12M CNG body (Lubak91), repainted.
+
+vehicles:
+  - id: "Citywide_LF_12M_CNG"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      power: 206
+      gear: 55
+      waytype: road
+      freight: Passagiere
+      payload: 80
+      speed: 80
+      cost: 800000
+      weight: 12
+      length: 8
+      runningcost: 24
+      fixed_cost: 135
+      intro_year: 2020
+      intro_month: 9
+      retire_year: 2050
+      retire_month: 1
+      engine_type: diesel
+
+liveries:
+  - color: kladnobilocervena
+    name_en: "Kladno, white-red"
+    name_cs: "Kladno, bílo-červená"

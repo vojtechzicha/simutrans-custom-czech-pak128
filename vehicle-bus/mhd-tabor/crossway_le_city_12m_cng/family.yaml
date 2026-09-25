@@ -1,0 +1,47 @@
+agency: MHDTabor
+type: "Crossway_LE_City_12M_CNG"
+copyright: Lubak91
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Tábor"
+  agency_cs: "MHD Tábor"
+  family_en: "Iveco Crossway LE City 12M CNG"
+  family_cs: "Iveco Crossway LE City 12M CNG"
+
+# Iveco Crossway LE City 12M CNG, 1 unit on Tábor MHD.
+
+vehicles:
+  - id: "Crossway_LE_City_12M_CNG"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      power: 213
+      gear: 56
+      waytype: road
+      freight: Passagiere
+      payload: 95
+      speed: 80
+      cost: 800000
+      weight: 12
+      length: 8
+      runningcost: 24
+      fixed_cost: 135
+      intro_year: 2016
+      retire_year: 2050
+      retire_month: 1
+
+liveries:
+  - color: comettbila
+    name_en: "COMETT white"
+    name_cs: "COMETT bílá"

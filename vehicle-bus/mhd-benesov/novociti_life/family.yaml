@@ -1,0 +1,53 @@
+agency: MHDBenesov
+type: "NovoCiti_Life"
+copyright: VTPsim
+
+# Sprites carry their own tile placement (body footprint matched to the native
+# pak128.cs 12 m bus median), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Benešov"
+  agency_cs: "MHD Benešov"
+  family_en: "Isuzu NovoCiti Life"
+  family_cs: "Isuzu NovoCiti Life"
+
+# Isuzu NovoCiti Life, 7.9 m Class I midibus, 5 units (81-85) on Benešov MHD
+# (ČSAD Benešov), in service from 2/2023. City scheme: yellow body, black
+# glasshouse, big navy vertical side panel, rear split blue/yellow, white roof.
+# 21 seats + 39 standing = 60, FPT NEF 4 137 kW.
+# Sprite: the DPMP NovoCiti Life body (VTPsim Urbino 8 derived), repainted.
+
+vehicles:
+  - id: "NovoCiti_Life"
+    display_id: "NovoCiti Life"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 450000
+      payload: 60
+      speed: 90
+      weight: 7
+      runningcost: 18
+      fixed_cost: 100
+      intro_year: 2023
+      intro_month: 2
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 137
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: benesovzlutomodra
+    name_en: "Benešov, yellow-blue"
+    name_cs: "Benešov, žluto-modrá"

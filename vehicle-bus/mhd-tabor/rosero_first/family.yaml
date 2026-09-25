@@ -1,0 +1,53 @@
+agency: MHDTabor
+type: "Rosero_First_CNG"
+copyright: VTPsim
+
+# Sprites carry their own tile placement (body footprint matched to the native
+# pak128.cs 12 m bus median), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Tábor"
+  agency_cs: "MHD Tábor"
+  family_en: "Rošero First CNG"
+  family_cs: "Rošero First CNG"
+
+# Rošero-P First FCLEI / FCLLI CNG (Iveco Daily 70C chassis), 8.0 m midibus,
+# 3 units on Tábor MHD (COMETT PLUS): FCLLI #38 (in service 1/2015), FCLEI #80
+# (2017) and #62 (2024). About 30 passengers, Iveco F1C CNG ~100 kW.
+# COMETT white. Sprite: the VTPsim Dekstra LE 37 art (DPO Rošero placeholder),
+# shortened to the real length, drawn with the FCLEI door layout (2-1) and a
+# roof A/C unit, repainted.
+
+vehicles:
+  - id: "Rosero_First_CNG"
+    display_id: "Rošero First CNG"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 245000
+      payload: 30
+      speed: 90
+      weight: 5
+      runningcost: 18
+      fixed_cost: 85
+      intro_year: 2015
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 100
+      gear: 55
+
+liveries:
+  - color: comettbila
+    name_en: "COMETT white"
+    name_cs: "COMETT bílá"

@@ -1,0 +1,73 @@
+agency: MHDTabor
+type: "Urbino_18_III_CNG"
+copyright: TommPa9
+
+image_offset: [0, 0]            # sprites carry their own tile placement
+windows_lit_when_loaded: true   # empty image = unlit glass, loaded image = lit glass
+
+display:
+  agency_en: "MHD Tábor"
+  agency_cs: "MHD Tábor"
+  family_en: "Solaris Urbino 18 III CNG"
+  family_cs: "Solaris Urbino 18 III CNG"
+
+# Solaris Urbino 18 III CNG (doors 2-2-2-2), Tábor #63 (2016) - the last one in
+# MHD service (#84 and #22 stood down 5/2025 and 1/2026), being phased out.
+# Sprite: TommPa9's Urbino 18 III sections (the DPMO sheet) recoloured COMETT
+# white with CNG tank fairings on the roof of both sections next to the joint.
+# Pusher: the engine sits in the rear section, the front section is unpowered.
+
+vehicles:
+  - id: "Urbino_18_III_CNG-A"
+    display_id: "Urbino 18 III CNG"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["Urbino_18_III_CNG-B"]
+    fields:
+      cost: 500000
+      payload: 91
+      speed: 80
+      weight: 10
+      runningcost: 20
+      fixed_cost: 96
+      intro_year: 2011
+      intro_month: 1
+      retire_year: 2027
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+
+  - id: "Urbino_18_III_CNG-B"
+    display_id: "Urbino 18 III CNG"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["Urbino_18_III_CNG-A"]
+    next: []
+    fields:
+      cost: 432603
+      payload: 59
+      speed: 80
+      weight: 7
+      runningcost: 16
+      fixed_cost: 77
+      intro_year: 2011
+      intro_month: 1
+      retire_year: 2027
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      engine_type: diesel
+      power: 235
+      gear: 62
+
+liveries:
+  - color: comettbila
+    name_en: "COMETT white"
+    name_cs: "COMETT bílá"

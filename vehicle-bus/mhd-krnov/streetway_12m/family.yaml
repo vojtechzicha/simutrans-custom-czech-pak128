@@ -1,0 +1,55 @@
+agency: MHDKrnov
+type: "Streetway_12M"
+copyright: Lubak91
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Krnov"
+  agency_cs: "MHD Krnov"
+  family_en: "Iveco Streetway 12M"
+  family_cs: "Iveco Streetway 12M"
+
+# Iveco Streetway 12M, 3 cars (81-1002 - 81-1004, delivered 12/2022) on Krnov
+# MHD for Transdev Morava since 1/2023. Cursor 9 Euro VI 228 kW, 29 seated +
+# ~50 standing, ~11.5 t. Sprite: the Streetway body of the DPMP set (Lubak91's
+# Urbanway 12M with the Streetway front), painted in the Krnov city scheme:
+# white body and roof (white A/C pod, black rear roof unit), black window band,
+# golden-yellow + blue chevron pairs on the lower body and the side windows,
+# navy "krnov" wordmark behind the front axle and on the rear, black
+# windscreen over a white lower front.
+
+vehicles:
+  - id: "Streetway_12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      power: 228
+      gear: 55
+      smoke: Diesel_small
+      engine_type: diesel
+      waytype: road
+      freight: Passagiere
+      payload: 80
+      speed: 80
+      cost: 700000
+      weight: 12
+      length: 8
+      runningcost: 25
+      fixed_cost: 130
+      intro_year: 2022
+      retire_year: 2050
+      retire_month: 1
+
+liveries:
+  - color: krnovbila
+    name_en: "Krnov, white with chevrons"
+    name_cs: "Krnov, bílá se šipkami"

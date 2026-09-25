@@ -1,0 +1,52 @@
+agency: MHDKolin
+type: "NovoCiti_Life"
+copyright: VTPsim
+
+# Sprites carry their own tile placement (body footprint matched to the native
+# pak128.cs 12 m bus median), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Kolín"
+  agency_cs: "MHD Kolín"
+  family_en: "Isuzu NovoCiti Life"
+  family_cs: "Isuzu NovoCiti Life"
+
+# Isuzu NovoCiti Life, 7.9 m Class I midibus, 2 units (5SC 0874, 5SC 0918;
+# 2019 production, in service 2/2020) on Kolín MHD (OAD Kolín). Plain white
+# with a black glazing band. 21 seats + 39 standing = 60, FPT NEF 4 137 kW.
+# Sprite: the DPMP NovoCiti Life body (VTPsim Urbino 8 derived), same white/black look.
+
+vehicles:
+  - id: "NovoCiti_Life"
+    display_id: "NovoCiti Life"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 450000
+      payload: 60
+      speed: 90
+      weight: 7
+      runningcost: 18
+      fixed_cost: 100
+      intro_year: 2020
+      intro_month: 2
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 137
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: bila
+    name_en: "white"
+    name_cs: "bílá"

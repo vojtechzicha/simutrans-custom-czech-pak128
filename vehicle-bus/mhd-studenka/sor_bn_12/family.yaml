@@ -1,0 +1,55 @@
+agency: MHDStudenka
+type: "SOR_BN_12"
+copyright: VTPsim
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Studénka"
+  agency_cs: "MHD Studénka"
+  family_en: "SOR BN 12"
+  family_cs: "SOR BN 12"
+
+# SOR BN 12 low-entry bus with the raised rear floor ("hump"), 11.79 m, 3 doors
+# (1-0-2-2). One 2013-built ex-demonstrator, 62-9904, on Studénka MHD
+# (Transdev Morava) since 12/2021. Iveco Tector 194 kW, ~30 seated + ~65
+# standing, ~8.8 t.
+# Sprite: VTPsim's SOR BN 12 (the diesel body without a CNG pod, via the
+# pak128_czr Praha object; identical to the body of VTPsim's ODIS SOR BNG 12),
+# repainted in Transdev white with the black belt line, the red Transdev
+# running figure between the front axle and the middle door, white roof A/C
+# units, glazed doors down to the floor; lane-normalised.
+
+vehicles:
+  - id: "SOR_BN_12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 539104
+      payload: 95
+      speed: 80
+      weight: 9
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 194
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: transdevbila
+    name_en: "Transdev white"
+    name_cs: "Transdev bílá"

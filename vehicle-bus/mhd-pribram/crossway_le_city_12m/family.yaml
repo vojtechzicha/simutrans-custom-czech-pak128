@@ -1,0 +1,48 @@
+agency: MHDPribram
+type: "Crossway_LE_City_12M"
+copyright: Lubak91
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Příbram"
+  agency_cs: "MHD Příbram"
+  family_en: "Iveco Crossway LE City 12M"
+  family_cs: "Iveco Crossway LE City 12M"
+
+# Iveco Crossway LE City 12M, 1 unit on Příbram MHD (Arriva).
+
+vehicles:
+  - id: "Crossway_LE_City_12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      power: 213
+      gear: 56
+      smoke: Diesel_small
+      waytype: road
+      freight: Passagiere
+      payload: 95
+      speed: 80
+      cost: 800000
+      weight: 12
+      length: 8
+      runningcost: 24
+      fixed_cost: 135
+      intro_year: 2017
+      retire_year: 2050
+      retire_month: 1
+
+liveries:
+  - color: pribramcervena
+    name_en: "Příbram, red"
+    name_cs: "Příbram, červená"

@@ -1,0 +1,54 @@
+agency: MHDNovyJicin
+type: "SOR_EBN_9.5"
+copyright: Lubak91
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Nový Jičín"
+  agency_cs: "MHD Nový Jičín"
+  family_en: "SOR EBN 9.5"
+  family_cs: "SOR EBN 9,5"
+
+# SOR EBN 9,5 battery bus, 9.79 m, 2 doors (1-2), 3 units (01-03) on Nový
+# Jičín MHD (Arriva) since 10-12/2017. 20-29 seated + 43 standing, TAM
+# 120 kW, 9.05-9.65 t, ~150 km per charge.
+# Sprite: Lubak91's Kladno SOR EBN 11,1 (pak128_czr) cut by one window bay to
+# the two-door 9,5 m body, repainted in dark red metallic (roof and pods too)
+# with a black window band carrying white lettering on the rear quarter,
+# black "smile" front mask with a silver strip, large black rear panel with a
+# silver frame; lane-normalised.
+
+vehicles:
+  - id: "SOR_EBN_9.5"
+    display_id: "EBN 9,5"
+    role_en: "electric bus"
+    role_cs: "elektrobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 375000
+      payload: 69
+      speed: 80
+      weight: 9
+      runningcost: 15
+      fixed_cost: 78
+      intro_year: 2017
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: battery
+      power: 120
+      gear: 57
+
+liveries:
+  - color: cervenametaliza
+    name_en: "metallic red"
+    name_cs: "červená metalíza"

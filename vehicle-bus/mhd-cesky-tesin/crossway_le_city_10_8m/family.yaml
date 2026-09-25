@@ -1,0 +1,57 @@
+agency: MHDCeskyTesin
+type: "Crossway_LE_City_10_8M"
+copyright: Lubak91
+
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Český Těšín"
+  agency_cs: "MHD Český Těšín"
+  family_en: "Iveco Crossway LE City 10,8M"
+  family_cs: "Iveco Crossway LE City 10,8M"
+
+# Iveco Crossway LE City 10,8M, 1 unit on MHD Český Těšín (1TC 7145,
+# ex-demonstrator built 2015, in Český Těšín since 12/2016). Tector 7 Euro 6
+# 210 kW, 3 doors, ~80 passengers (estimate), ~10 t. Sprite: Lubak91's Brno
+# Crossway LE City 12M shortened by one window bay between the axles in all
+# 8 directions. Paint follows the 2024 photos of this bus: white roof, black
+# window band, thin yellow/grey dash strip under the windows, white lower body
+# (the yellow roof + dashed skirt of the town scheme is on the Scanias only).
+
+vehicles:
+  - id: "Crossway_LE_City_10_8M"
+    display_id: "Crossway LE City 10,8M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 720000
+      payload: 80
+      speed: 80
+      weight: 10
+      runningcost: 22
+      fixed_cost: 120
+      intro_year: 2016
+      intro_month: 12
+      retire_year: 2050
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 210
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: ceskytesinbilozluta
+    name_en: "Český Těšín, white-yellow"
+    name_cs: "Český Těšín, bílo-žlutá"

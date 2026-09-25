@@ -1,0 +1,60 @@
+agency: MHDKrnov
+type: "SOR_NS_12"
+copyright: VTPsim
+
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Krnov"
+  agency_cs: "MHD Krnov"
+  family_en: "SOR NS 12"
+  family_cs: "SOR NS 12"
+
+# SOR NS 12 (diesel), 81-1001 (2022, in service 1/2023, Transdev Morava).
+# 12 m, 3 doors, 33 + 68 = 101, FPT Tector 7 210 kW, 80 km/h, 10.5-11 t.
+# Sprite: VTPsim's SOR NS 12 body (pak128_czr Frýdek-Místek NS 12 / NSG 12)
+# without the battery/CNG pods (roof A/C unit only), repainted in the Krnov
+# city scheme: white body, black window band, golden-yellow + blue chevron
+# pairs on the lower body and the windows, navy "krnov" wordmark behind the
+# front axle; SOR black "smile" front mask with silver strip. Lane placement
+# normalised.
+
+# Body edits on every view: window band deepened from 5 to 7 rows (real NS 12
+# glazing), door leaves in lighter glass, amber front/side/rear displays.
+
+vehicles:
+  - id: "SOR_NS_12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 720000
+      payload: 101
+      speed: 80
+      weight: 11
+      runningcost: 24
+      fixed_cost: 125
+      intro_year: 2022
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 210
+      gear: 53
+      smoke: Diesel_small
+
+liveries:
+  - color: krnovbila
+    name_en: "Krnov, white with chevrons"
+    name_cs: "Krnov, bílá se šipkami"

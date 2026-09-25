@@ -1,0 +1,89 @@
+agency: MHDKladno
+type: "SOR_NBG_18"
+copyright: VTPsim
+
+# Sprites carry their own tile placement (VTPsim's NB 18 sits on the native
+# pak128.cs lane; the articulated normaliser applied no shift), so no extra
+# makeobj offset.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Kladno"
+  agency_cs: "MHD Kladno"
+  family_en: "SOR NBG 18"
+  family_cs: "SOR NBG 18"
+
+# SOR NBG 18 (CNG), 5 units on Kladno MHD: 44-47 (2018, this livery) and 50
+# (ex-demonstrator 2014, plain white - not modelled). Two-section fixed
+# consist: front section A + powered rear section B (pusher, Iveco Cursor 8
+# CNG 213 kW); both halves required. Doors 2-0-2-2-0 (front door, one before
+# the joint, one behind it).
+# Repainted from VTPsim's CZR-Praha-SOR_NB_18[1]/[2] in the "Městská doprava
+# Kladno" scheme: white roof with an A/C unit behind the front, a raised CNG
+# tank fairing over the rear half of the front section and an A/C unit on the
+# rear section; black window band and sill, bold red lower band, white skirt;
+# white front with black band under the windscreen and red corners; white rear
+# with red bumper; silver bellows; amber destination displays; doors 2 and 5
+# of the base turned into window bays.
+# CNG: engine_type diesel (upstream convention), no smoke.
+# Data: 18.75 m, ~150 passengers split 90/60, 213 kW, 80 km/h, ~17 t.
+
+vehicles:
+  - id: "SOR_NBG_18-A"
+    display_id: "SOR NBG 18"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["SOR_NBG_18-B"]
+    fields:
+      cost: 540000
+      payload: 90
+      speed: 80
+      weight: 9
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+
+  - id: "SOR_NBG_18-B"
+    display_id: "SOR NBG 18"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["SOR_NBG_18-A"]
+    next: []
+    fields:
+      cost: 390000
+      payload: 60
+      speed: 80
+      weight: 8
+      runningcost: 11
+      fixed_cost: 56
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 213
+      gear: 62
+
+liveries:
+  - color: kladnobilocervena
+    name_en: "Kladno, white-red"
+    name_cs: "Kladno, bílo-červená"

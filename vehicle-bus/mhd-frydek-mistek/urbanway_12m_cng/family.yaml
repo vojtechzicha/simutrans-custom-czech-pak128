@@ -1,0 +1,50 @@
+agency: MHDFrydekMistek
+type: "Urbanway_12M_CNG"
+copyright: Lubak91
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD F-M"
+  agency_cs: "MHD F-M"
+  family_en: "Iveco Urbanway 12M CNG"
+  family_cs: "Iveco Urbanway 12M CNG"
+
+# Iveco Urbanway 12M CNG, 620, 625-627, 640, 641 (2015-2021), 3ČSAD white-green.
+# Sheet: Lubak91's Iveco Urbanway 12M body (Brno) with the Opava CNG roof
+# fairing, repainted in 3ČSAD white-green. (The upstream CZR-FrydekMistek
+# "Urbanway12M_CNG" sprite is actually a Crossway LE City body and is not used.)
+
+vehicles:
+  - id: "Urbanway_12M_CNG"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      power: 213
+      gear: 56
+      waytype: road
+      freight: Passagiere
+      payload: 95
+      speed: 80
+      cost: 800000
+      weight: 12
+      length: 8
+      runningcost: 24
+      fixed_cost: 135
+      intro_year: 2015
+      retire_year: 2050
+      retire_month: 1
+
+liveries:
+  - color: 3csadbilozelena
+    name_en: "3ČSAD white-green"
+    name_cs: "3ČSAD bílo-zelená"

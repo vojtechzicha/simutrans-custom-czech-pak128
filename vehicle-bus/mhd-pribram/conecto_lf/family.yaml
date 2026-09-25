@@ -1,0 +1,50 @@
+agency: MHDPribram
+type: "Conecto_LF"
+copyright: VTPsim
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Příbram"
+  agency_cs: "MHD Příbram"
+  family_en: "Mercedes-Benz Conecto LF"
+  family_cs: "Mercedes-Benz Conecto LF"
+
+# Mercedes-Benz Conecto LF II, 18 units on Příbram MHD (Arriva).
+
+vehicles:
+  - id: "Conecto_LF"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 800000
+      payload: 95
+      speed: 80
+      weight: 11
+      runningcost: 24
+      fixed_cost: 135
+      intro_year: 2014
+      intro_month: 1
+      waytype: road
+      freight: Passagiere
+      engine_type: diesel
+      power: 220
+      smoke: Diesel_small
+      gear: 55
+      length: 8
+      retire_year: 2050
+      retire_month: 1
+
+liveries:
+  - color: pribramcervena
+    name_en: "Příbram, red"
+    name_cs: "Příbram, červená"

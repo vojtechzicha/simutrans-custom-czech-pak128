@@ -1,0 +1,52 @@
+agency: MHDTabor
+type: "Dekstra_LF_38_CNG"
+copyright: VTPsim
+
+# Sprites carry their own tile placement (body footprint matched to the native
+# pak128.cs 12 m bus median), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Tábor"
+  agency_cs: "MHD Tábor"
+  family_en: "Dekstra LF 38 CNG"
+  family_cs: "Dekstra LF 38 CNG"
+
+# Dekstra LF 38 CNG (Iveco Daily 70C chassis), 7.7-7.9 m low-floor midibus,
+# 2 units on Tábor MHD (COMETT PLUS): #32 (in service 1/2019) and #85 (12/2019).
+# Doors 2-2, 12-14 seats + 24-26 standing (40), Iveco F1C CNG 100 kW.
+# COMETT white. Sprite: the VTPsim Dekstra LE 37 art (DPO), shortened to the
+# real length, front door moved behind the front axle, repainted.
+
+vehicles:
+  - id: "Dekstra_LF_38_CNG"
+    display_id: "Dekstra LF 38 CNG"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 300000
+      payload: 40
+      speed: 80
+      weight: 5
+      runningcost: 18
+      fixed_cost: 85
+      intro_year: 2019
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 100
+      gear: 55
+
+liveries:
+  - color: comettbila
+    name_en: "COMETT white"
+    name_cs: "COMETT bílá"

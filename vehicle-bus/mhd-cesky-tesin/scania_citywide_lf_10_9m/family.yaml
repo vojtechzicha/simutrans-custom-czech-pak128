@@ -1,0 +1,50 @@
+agency: MHDCeskyTesin
+type: "Citywide_LF_10_9M"
+copyright: VTPsim
+
+# The source sprites carry the upstream lane placement (their dats use no
+# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Český Těšín"
+  agency_cs: "MHD Český Těšín"
+  family_en: "Scania Citywide LF 10,9M"
+  family_cs: "Scania Citywide LF 10,9M"
+
+# Scania Citywide LF 10,9M, 4 units (2018) on Český Těšín MHD (Arriva).
+
+vehicles:
+  - id: "Citywide_LF_10_9M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 750000
+      payload: 85
+      speed: 80
+      weight: 11
+      runningcost: 22
+      fixed_cost: 125
+      intro_year: 2018
+      intro_month: 12
+      retire_year: 2050
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      engine_type: diesel
+      power: 206
+      smoke: Diesel
+      gear: 55
+      length: 7
+
+liveries:
+  - color: ceskytesinbilozluta
+    name_en: "Český Těšín, white-yellow"
+    name_cs: "Český Těšín, bílo-žlutá"

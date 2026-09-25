@@ -1,0 +1,53 @@
+agency: MHDPrerov
+type: "SOR_EBN_11.1"
+copyright: Lubak91
+# Sprites are placed in the tile to the native pak128.cs lane position (body
+# footprint matched to the median of native 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MHD Přerov"
+  agency_cs: "MHD Přerov"
+  family_en: "SOR EBN 11.1"
+  family_cs: "SOR EBN 11,1"
+
+# SOR EBN 11,1 battery bus, 11.1 m, 2 units (01 built 2016, 02 built 2017,
+# ex-SOR demonstrators) on Přerov MHD since 5/2022. TAM 1052 120 kW, 172 kWh,
+# 28 seated + 54 standing, 9.7-10.5 t.
+# Sprite: Lubak91's Kladno SOR EBN 11,1 (pak128_czr), repainted in Arriva blue
+# (blue roof and battery pods, black window band, white swoosh over the front
+# wheel arch, black "smile" front mask with a silver strip, black rear window
+# with a silver frame) and lane-normalised.
+
+vehicles:
+  - id: "SOR_EBN_11.1"
+    display_id: "EBN 11,1"
+    role_en: "electric bus"
+    role_cs: "elektrobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 390905
+      payload: 82
+      speed: 80
+      weight: 10
+      runningcost: 16
+      fixed_cost: 82
+      intro_year: 2016
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: battery
+      power: 120
+      gear: 57
+
+liveries:
+  - color: arrivamodra
+    name_en: "Arriva blue"
+    name_cs: "Arriva modrá"
