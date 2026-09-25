@@ -1,0 +1,202 @@
+agency: LeoExpress
+type: "480"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Leo Express"
+  agency_cs: "Leo Express"
+  family_en: "Stadler FLIRT"
+  family_cs: "Stadler FLIRT"
+
+# Stadler FLIRT, CZ class 480.001-005 (Leo Express, delivered 2012, first LE
+# service Nov 2012; Praha-Ostrava-Krakow/Warszawa, Presov/Kosice). 5-car EMU,
+# Bo'2'2'2'2'Bo': powered bogies under both cab ends, Jakobs bogies at the 4
+# joints. 3 kV DC, 2,000 kW continuous (2,600 peak), 160 km/h in service,
+# 150 t tare, 2,880 mm wide, 4,150 mm high, 90.178 m over couplers.
+# 237 seats: Premium 6 + Business 19 (car 1) + Economy 212 (cars 2-5).
+# One single-leaf plug door per side in cars 1, 2, 4 and 5; car 3 has none.
+# Pantographs on cars 2 and 4 at the ends next to the cab cars; drawn raised on
+# car 2 (as in service photos), lowered on car 4. Dual-voltage conversion began
+# in July 2026 (480.002); its outside changes are unpublished, so not drawn.
+#
+# Car lengths (coordinator): 10, 8, 8, 8, 10 carunits = end cars 21.08 m
+# coupler -> Jakobs centre, middle cars 16.0 m Jakobs -> Jakobs. The whole unit
+# is modelled on one axis and each car row is rendered with its front on the
+# Simutrans anchor (car k's front at 0, 10, 18, 26, 34 cu), so the joints meet
+# in all 8 views (checked with tools/consist_preview.py).
+# Side layout from the Stadler datasheet drawing FREx0711e (63.72 px/m),
+# corrected by the G3 broadside photo: both cab cars have 5 windows behind the
+# door; car 2 has a blank (catering) panel on one side.
+#
+# Liveries (all real; sources: cs.wikipedia "Elektricka jednotka 480",
+# zdopravy.cz Oct 2023 "novy polep", Wikimedia Commons photos):
+#   cernozlata    G1, 2012-2019: gloss black, champagne-gold cantrail band with a
+#                 white pinstripe sweeping down on the cab cars to the front, gold
+#                 cab hood + roof fairing back to the door, white headlight ring,
+#                 yellow skirt, white LEO EXPRESS.
+#   cerna         G2, 2019-2023: all black, thin orange door outlines, big orange
+#                 outline "leo" on car 3, small white logo behind the cabs.
+#   cernooranzova G3, Oct 2023-now: black, orange U-hood around the windscreen,
+#                 orange door leaves, white headlight ring, yellow-orange skirt,
+#                 large white "leo express" behind the cabs, network map on car 3,
+#                 ticket slogans on cars 2 and 4.
+#
+# Sprites: 1024x640 per livery, one row per car in the order below, drawn from
+# scratch with the pak128.cs-calibrated box renderer:
+#   tools/railrender/flirt.py  (regenerate: python tools/railrender/leo.py 480)
+# Passenger and door glass use the lit-at-night specials; windscreens and cab
+# windows are plain colours. Headlights on car A, tail lights on car B.
+# Only the complete unit is buildable: A (head) - 2 - 3 - 4 - B (tail).
+# Costs scaled from pak128.cs natives (railjet coach, OBB 1216, DB 642).
+
+vehicles:
+  - id: "480-A"
+    display_id: "480"
+    role_en: "cab car A (Premium/Business)"
+    role_cs: "čelní vůz A (Premium/Business)"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["480-2"]
+    fields:
+      cost: 3400000
+      payload: 25
+      speed: 160
+      weight: 34
+      runningcost: 75
+      fixed_cost: 800
+      intro_year: 2012
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: electric
+      power: 1000
+      gear: 130
+    extended:
+      axles: 3
+
+  - id: "480-2"
+    display_id: "480"
+    role_en: "middle car 2"
+    role_cs: "vložený vůz 2"
+    row: 1
+    head: false
+    tail: false
+    prev: ["480-A"]
+    next: ["480-3"]
+    fields:
+      cost: 2200000
+      payload: 48
+      speed: 160
+      weight: 27
+      runningcost: 35
+      fixed_cost: 260
+      intro_year: 2012
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "480-3"
+    display_id: "480"
+    role_en: "middle car 3"
+    role_cs: "vložený vůz 3"
+    row: 2
+    head: false
+    tail: false
+    prev: ["480-2"]
+    next: ["480-4"]
+    fields:
+      cost: 2200000
+      payload: 64
+      speed: 160
+      weight: 28
+      runningcost: 35
+      fixed_cost: 260
+      intro_year: 2012
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "480-4"
+    display_id: "480"
+    role_en: "middle car 4"
+    role_cs: "vložený vůz 4"
+    row: 3
+    head: false
+    tail: false
+    prev: ["480-3"]
+    next: ["480-B"]
+    fields:
+      cost: 2200000
+      payload: 52
+      speed: 160
+      weight: 27
+      runningcost: 35
+      fixed_cost: 260
+      intro_year: 2012
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "480-B"
+    display_id: "480"
+    role_en: "cab car B (Economy)"
+    role_cs: "čelní vůz B (Economy)"
+    row: 4
+    head: false
+    tail: true
+    prev: ["480-4"]
+    next: []
+    fields:
+      cost: 3400000
+      payload: 48
+      speed: 160
+      weight: 34
+      runningcost: 75
+      fixed_cost: 800
+      intro_year: 2012
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: electric
+      power: 1000
+      gear: 130
+    extended:
+      axles: 3
+
+liveries:
+  - color: cernozlata
+    name_en: "black-gold"
+    name_cs: "černo-zlatá"
+  - color: cerna
+    name_en: "black"
+    name_cs: "černá"
+  - color: cernooranzova
+    name_en: "black-orange"
+    name_cs: "černo-oranžová"

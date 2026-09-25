@@ -1,0 +1,103 @@
+agency: LeoExpress
+type: "846"
+copyright: vojtechzicha      # original art, drawn from scratch
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Leo Express"
+  agency_cs: "Leo Express"
+  family_en: "Alstom Coradia LINT 41"
+  family_cs: "Alstom Coradia LINT 41"
+
+# Alstom Coradia LINT 41, CZ class 846 of Leo Express Tenders: 4 two-car units
+# 846.280/780, 282/782, 284/784, 286/786 (ex-HEX / Transdev Sachsen-Anhalt,
+# built 2005), Pardubický kraj lines 024 Ústí n.O.-Letohrad-Lichkov-Štíty /
+# Mor. Karlov and 025 Dolní Lipka-Hanušovice from 15 Dec 2019; the contract ends
+# with the Dec 2029 timetable (line 024/025 then goes to ČD battery EMUs).
+# 2 cars on B'2'B' bogies: one MTU 6H1800R85L of 390 kW per car, 120 km/h,
+# 41.81 m over couplers (20.9 m per car to the Jakobs centre), 2.75 m wide,
+# 4.34 m high, tare 68 t, 120 seats (LE; atlasvozu 126).
+# Livery (2019-, unchanged): white body; anthracite roof shoulder, whole cab
+# front, cab-side swoosh and lower band; orange door leaves, anti-climber and a
+# huge "leo" behind the door on the car's left side (car 846.2xx left side,
+# car 846.7xx right side); white "leo express" on the front.
+# Sources: SP research/multiple_units.md section 2 (atlasvozu.cz, zdopravy.cz,
+# seznam-autobusu.cz, railcolornews), photos letohrad_2023 (846.284),
+# usti_2022 + lint41_le_2024 (846.286), kraliky_2026 (846.284, Aug 2026).
+#
+# Sprites are rendered from a 3D box model, not painted: the shared LINT script
+# tools/railrender/lint.py (`sheet("lint41", "bilooranzova", out)`; regenerate
+# with `python tools/railrender/leo.py 846`), which uses the pak128 raycaster
+# tools/railrender/render.py + railkit.py calibrated on native pak128.cs rail art. Car lengths 10 + 10 (pak128.cs rail scale ~2.09 m per carunit);
+# row 0 = car A (846.2xx, leading cab, headlights), row 1 = car B (846.7xx,
+# trailing cab, tail lights). Each car is anchored at its own front, so the
+# Jakobs bogie and the bellows meet at the joint in every direction (checked
+# with tools/consist_preview.py). Only the complete unit is buildable.
+
+vehicles:
+  - id: "846-A"
+    display_id: "846"
+    role_en: "front motor car"
+    role_cs: "přední motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["846-B"]
+    fields:
+      cost: 2150000
+      payload: 60
+      speed: 120
+      weight: 34
+      runningcost: 85
+      fixed_cost: 560
+      intro_year: 2019
+      intro_month: 12
+      retire_year: 2029
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 390
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 3
+
+  - id: "846-B"
+    display_id: "846"
+    role_en: "rear motor car"
+    role_cs: "zadní motorový vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["846-A"]
+    next: []
+    fields:
+      cost: 2150000
+      payload: 60
+      speed: 120
+      weight: 34
+      runningcost: 85
+      fixed_cost: 560
+      intro_year: 2019
+      intro_month: 12
+      retire_year: 2029
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 390
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 3
+
+liveries:
+  - color: bilooranzova
+    name_en: "Leo Express white-orange"
+    name_cs: "Leo Express bílo-oranžová"

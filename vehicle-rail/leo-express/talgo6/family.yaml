@@ -1,0 +1,241 @@
+agency: LeoExpress
+type: "Talgo6"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Leo Express"
+  agency_cs: "Leo Express"
+  family_en: "Talgo VI"
+  family_cs: "Talgo VI"
+
+# Talgo VI ("Talgo S6") articulated coach sets, ex-Renfe (built in the 1990s,
+# UIC 64 71 06-xx), hauled by a locomotive (in LE service a Vectron 7193 226).
+# Three sets came to Leo Express (6B16 at Velim on 12 Aug 2025, two more from
+# Spain on 1 Mar 2026). Livery design released 10 Feb 2026; in service from
+# 30 Apr 2026 (Praha-Bratislava, Praha-Presov), withdrawn by 2 Jul after door /
+# air-conditioning / suspension faults, back on Bohumin-Praha 14-31 Jul and
+# again from 7 Sep 2026 (one set). Sources: vagonWEB compositions and side
+# drawings (CZ LE T6-00..12), zdopravy.cz, railvolution.net,
+# zeleznicni-magazin.cz, Wikimedia Commons "Talgo VI of Leo Express".
+#
+# Fixed set, identical in every set seen (TG6 at the locomotive end):
+#   TG6 generator | TA6 Business 26 | TA6h Business 14+2 PMR | TC6 bistro |
+#   7x TB6 Economy 36 | TB6R Economy 36 (network map) | TB6Z tail 20
+# = 13 vehicles, about 348 seats. The real TB6 are TB6a/TB6b pairs that look
+# the same, so one TB6 repeats. The TC6 bistro gets 6 bar places so its
+# windows light at night with the rest of the set (0 seats in the real count).
+# Dimensions: intermediate cars 13.14 m, TG6 ~12.2 m, TB6Z ~12.5 m, 2.942 m
+# wide, only 3.365 m high (a normal coach is 4.05 m), floor 0.68-0.76 m.
+# Single Rodal axles with independent wheels: one wheelset between each pair
+# of cars plus one near each outer end (14 in all); passive tilt. Lettered
+# masses TB6 14.1 t, TG6 19.6 t. The TG6's diesel gensets supply hotel power
+# for the whole train (not traction).
+#
+# Livery (photos Petrzalka / Praha hl.n., official render): white body, light
+# grey roof with a grey shoulder band, narrow black-grey skirt band, black
+# bellows between every car; one full-height orange door per seating car
+# (TA6/TB6 at the rear end, TB6Z at its inner end; TC6 and TB6R have none);
+# large dark windows (6 smaller ones under an orange network map on the TB6R,
+# "BISTRO" in orange on the TC6). TG6: no passenger windows, louvred grilles,
+# huge "leo express" logo with orange dots + slash, green "Sun-fueled
+# Innovation" pill at its inner end. TG6 outer end and TB6Z rear end: thick
+# orange frame round a white face with a grey gangway door, two windows,
+# "le.cz", a green panel, orange lower bodywork and black buffers; the TB6Z
+# shows red tail lights.
+#
+# Every car is length 6 (all 13 cars in one straight u axis, ~2.1 m per
+# carunit; the drawing positions are scaled per car). Each joint's bellows
+# and single-axle running gear are drawn with the car behind the joint.
+# Sprites: 1024x768, one row per car type (TA6h shares the TA6 row), rendered
+# from a box model by tools/railrender/talgo.py on top of the pak128.cs-
+# calibrated railkit renderer (regenerate: python tools/railrender/leo.py
+# talgo6), original art.
+#
+# Coupling: the TG6 couples behind any locomotive (prev: any) and only a TA6
+# may follow; then TA6 -> TA6h -> TC6 -> TB6 (repeatable) -> TB6R -> TB6Z,
+# which ends the train.
+
+vehicles:
+  - id: "TG6"
+    role_en: "generator car"
+    role_cs: "generátorový vůz"
+    row: 0
+    head: false
+    tail: false
+    prev: any
+    next: ["TA6"]
+    fields:
+      cost: 1500000
+      payload: 0
+      speed: 200
+      weight: 20
+      runningcost: 30
+      fixed_cost: 200
+      intro_year: 2026
+      intro_month: 4
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 6
+    extended:
+      axles: 2
+
+  - id: "TA6"
+    role_en: "1st class car (Business)"
+    role_cs: "vůz 1. třídy (Business)"
+    row: 1
+    head: false
+    tail: false
+    prev: ["TG6"]
+    next: ["TA6h"]
+    fields:
+      cost: 1250000
+      payload: 26
+      speed: 200
+      weight: 15
+      runningcost: 18
+      fixed_cost: 150
+      intro_year: 2026
+      intro_month: 4
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 6
+    extended:
+      axles: 1
+
+  - id: "TA6h"
+    role_en: "1st class accessible car (Business)"
+    role_cs: "vůz 1. třídy pro vozíčkáře (Business)"
+    row: 1
+    head: false
+    tail: false
+    prev: ["TA6"]
+    next: ["TC6"]
+    fields:
+      cost: 1250000
+      payload: 16
+      speed: 200
+      weight: 15
+      runningcost: 16
+      fixed_cost: 150
+      intro_year: 2026
+      intro_month: 4
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 6
+    extended:
+      axles: 1
+
+  - id: "TC6"
+    role_en: "bistro car"
+    role_cs: "bistro vůz"
+    row: 2
+    head: false
+    tail: false
+    prev: ["TA6h"]
+    next: ["TB6"]
+    fields:
+      cost: 1250000
+      payload: 6
+      speed: 200
+      weight: 15
+      runningcost: 18
+      fixed_cost: 150
+      intro_year: 2026
+      intro_month: 4
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 6
+    extended:
+      axles: 1
+
+  - id: "TB6"
+    role_en: "2nd class car (Economy)"
+    role_cs: "vůz 2. třídy (Economy)"
+    row: 3
+    head: false
+    tail: false
+    prev: ["TC6", "TB6"]
+    # TB6R first so the depot's auto-completion ends the set
+    next: ["TB6R", "TB6"]
+    fields:
+      cost: 1170000
+      payload: 36
+      speed: 200
+      weight: 14
+      runningcost: 18
+      fixed_cost: 145
+      intro_year: 2026
+      intro_month: 4
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 6
+    extended:
+      axles: 1
+
+  - id: "TB6R"
+    role_en: "2nd class car with network map (Economy)"
+    role_cs: "vůz 2. třídy s mapou sítě (Economy)"
+    row: 4
+    head: false
+    tail: false
+    prev: ["TB6"]
+    next: ["TB6Z"]
+    fields:
+      cost: 1170000
+      payload: 36
+      speed: 200
+      weight: 14
+      runningcost: 18
+      fixed_cost: 145
+      intro_year: 2026
+      intro_month: 4
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 6
+    extended:
+      axles: 1
+
+  - id: "TB6Z"
+    role_en: "2nd class end car (Economy)"
+    role_cs: "koncový vůz 2. třídy (Economy)"
+    row: 5
+    head: false
+    tail: true
+    prev: ["TB6R"]
+    next: []
+    fields:
+      cost: 1150000
+      payload: 20
+      speed: 200
+      weight: 15
+      runningcost: 16
+      fixed_cost: 140
+      intro_year: 2026
+      intro_month: 4
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 6
+    extended:
+      axles: 2
+
+liveries:
+  - color: bilooranzova
+    name_en: "Leo Express white-orange"
+    name_cs: "Leo Express bílo-oranžová"

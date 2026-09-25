@@ -1,0 +1,55 @@
+agency: LeoExpress
+type: "Bvcmz"
+copyright: vojtechzicha      # original art, drawn from scratch
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Leo Express"
+  agency_cs: "Leo Express"
+  family_en: "RDC"
+  family_cs: "RDC"
+
+# Couchette car Bvcmz 248.5 (built 1999-2000 at AW Halberstadt), hired by Leo
+# Express from RDC Deutschland / BTE for the Frankfurt (M)-Praha-Bohumín-
+# Przemyśl service (LE 232/235) since 25 June 2026; 61 80 50-91 011 and 047
+# seen. 26.40 m, 2.825 m wide, 4.05 m high, 200 km/h, 47 t, 10 six-berth
+# compartments (60 berths; LE sells it as "Economy Sleeper", 32 places).
+#
+# Livery: left in bright RDC blue with a light-grey roof, white-framed door
+# recesses at both ends and white "RDC Zugkraft, die verbindet." lettering -
+# no LE branding. 11 equal windows plus a frosted WC window at each end
+# (vagonWEB drawing, photos Commons 50-91 011 and LE 232 at Naumburg).
+#
+# Sprites are rendered from a box model (tools/railrender/ric.py; regenerate
+# with `python tools/railrender/leo.py bvcmz`), original art. Couples with any locomotive or coach.
+
+vehicles:
+  - id: "Bvcmz248.5"
+    display_id: "Bvcmz 248.5"
+    role_en: "hired couchette car"
+    role_cs: "pronajatý lehátkový vůz"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2400000
+      payload: 60
+      speed: 200
+      weight: 47
+      runningcost: 26
+      fixed_cost: 290
+      intro_year: 2026
+      intro_month: 6
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: rdcmodra
+    name_en: "RDC blue"
+    name_cs: "RDC modrá"

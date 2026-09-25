@@ -1,0 +1,102 @@
+agency: LeoExpress
+type: "648"
+copyright: vojtechzicha      # original art, drawn from scratch
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Leo Express Slovensko"
+  agency_cs: "Leo Express Slovensko"
+  family_en: "Alstom Coradia LINT 41"
+  family_cs: "Alstom Coradia LINT 41"
+
+# Alstom Coradia LINT 41 of Leo Express Slovensko: 21 two-car units leased from
+# Alpha Trains (via Renfe Alquiler), built 2008-10 for BRB (Bayerische
+# Regiobahn, Augsburg network). German EVNs "95 80 0 648 2xx-x D-LESK", car
+# numbers 648 2xx / 7xx - there is no Slovak class number. Bratislava-Dunajská
+# Streda-Komárno from 10 Dec 2023; 10-year contract to Dec 2032.
+# Same body as the CZ class 846: 2 cars on B'2'B' bogies, 390 kW per car,
+# 120 km/h, 41.81 m, 2.75 m wide, 4.34 m high, tare 68 t, 140 seats.
+# Livery: BRB colours kept (no repaint announced, unchanged in 2025 photos)
+# with LE decals: blue upper band + roof shoulder, thin white line above the
+# windows, silver-beige window band, blue lower skirt, yellow doors, blue cab
+# swoosh with a yellow cap on the cab roof, silver panel under the windscreen
+# carrying the headlights and the "leo express" logo.
+# Sources: SP research/multiple_units.md section 3 (zeleznicni-magazin.cz,
+# zdopravy.cz, seznam-autobusu.cz), photos lint41_sk/bratislava_trains_2024
+# (near-broadside, both cars), bratislava_hln, bratislava_hlst_6 (front).
+#
+# Sprites rendered from a 3D box model by the shared LINT script
+# tools/railrender/lint.py (`sheet("lint41", "modrostribrnazluta", out)`, pak128
+# raycaster tools/railrender/render.py + railkit.py; regenerate with
+# `python tools/railrender/leo.py 648`); geometry identical to the 846.
+# Car lengths 10 + 10; row 0 = car A (648 2xx, leading cab, headlights),
+# row 1 = car B (648 7xx, trailing cab, tail lights). Only the complete unit is
+# buildable.
+
+vehicles:
+  - id: "648-A"
+    display_id: "648"
+    role_en: "front motor car"
+    role_cs: "přední motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["648-B"]
+    fields:
+      cost: 2150000
+      payload: 70
+      speed: 120
+      weight: 34
+      runningcost: 85
+      fixed_cost: 560
+      intro_year: 2023
+      intro_month: 12
+      retire_year: 2032
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 390
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 3
+
+  - id: "648-B"
+    display_id: "648"
+    role_en: "rear motor car"
+    role_cs: "zadní motorový vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["648-A"]
+    next: []
+    fields:
+      cost: 2150000
+      payload: 70
+      speed: 120
+      weight: 34
+      runningcost: 85
+      fixed_cost: 560
+      intro_year: 2023
+      intro_month: 12
+      retire_year: 2032
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 390
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 3
+
+liveries:
+  - color: modrostribrnazluta
+    name_en: "BRB blue-silver-yellow"
+    name_cs: "BRB modro-stříbrno-žlutá"

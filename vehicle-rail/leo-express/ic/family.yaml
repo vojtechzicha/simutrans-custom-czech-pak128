@@ -1,0 +1,111 @@
+agency: LeoExpress
+type: "IC"
+copyright: vojtechzicha      # original art, drawn from scratch
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Leo Express"
+  agency_cs: "Leo Express"
+  family_en: "ex-DB IC"
+  family_cs: "ex-DB IC"
+
+# Ex-Deutsche Bahn InterCity coaches (UIC-Z/Eurofima cars rebuilt in DB's "IC
+# mod" programme 2015-16), bought by Renfe Alquiler in January 2025 and leased
+# to Leo Express for 15 years (59 cars planned). In LE service from 1 June 2026
+# (Praha-Prešov, Praha-Bratislava, Bohumín-Praha, Frankfurt-Przemyśl, Praha-
+# München from Dec 2026). 26.40 m over buffers (26.10 m body), 2.825 m wide,
+# 4.05 m high, 200 km/h, air-conditioned.
+#
+# Livery (photos win over the press text): not a full repaint. The cars keep
+# DB light grey with the red stripe removed (a faint grey ghost band remains),
+# get single-leaf ORANGE doors at both ends, a dark-grey "leo express" logo with
+# orange dots/slash next to one door, and "powered by renfe".
+# Window layouts from the vagonWEB side drawings (10 px = 1 m):
+# - Avmmz 106.5: 1st class compartments, 54 seats ("Business"), 9 large windows.
+# - Bpmmz 284.5: 2nd class open, 80 seats ("Economy"), 9 wide + 2 narrow windows.
+# - Bpmmbz 285.3: 2nd class accessible, 69 + 2 wheelchair places, the
+#   wheelchair end has two large windows.
+#
+# Sprites are rendered from a box model (tools/railrender/ric.py on top of the
+# pak128.cs-calibrated railkit renderer; regenerate with
+# `python tools/railrender/leo.py ic`), original art. Coaches couple with any
+# locomotive or coach (prev/next: any), like native pak128.cs coaches.
+
+vehicles:
+  - id: "Avmmz106.5"
+    display_id: "Avmmz 106.5"
+    role_en: "1st class coach (Business)"
+    role_cs: "vůz 1. třídy (Business)"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2450000
+      payload: 54
+      speed: 200
+      weight: 45
+      runningcost: 18
+      fixed_cost: 265
+      intro_year: 2026
+      intro_month: 6
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bpmmz284.5"
+    display_id: "Bpmmz 284.5"
+    role_en: "2nd class open coach (Economy)"
+    role_cs: "velkoprostorový vůz 2. třídy (Economy)"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 2250000
+      payload: 80
+      speed: 200
+      weight: 44
+      runningcost: 30
+      fixed_cost: 280
+      intro_year: 2026
+      intro_month: 6
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bpmmbz285.3"
+    display_id: "Bpmmbz 285.3"
+    role_en: "2nd class accessible coach (Economy)"
+    role_cs: "vůz 2. třídy pro vozíčkáře (Economy)"
+    row: 2
+    prev: any
+    next: any
+    fields:
+      cost: 2300000
+      payload: 71
+      speed: 200
+      weight: 45
+      runningcost: 28
+      fixed_cost: 280
+      intro_year: 2026
+      intro_month: 6
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: sedooranzova
+    name_en: "grey-orange"
+    name_cs: "šedo-oranžová"

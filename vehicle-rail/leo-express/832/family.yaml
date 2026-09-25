@@ -1,0 +1,68 @@
+agency: LeoExpress
+type: "832"
+copyright: vojtechzicha      # original art, drawn from scratch
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Leo Express"
+  agency_cs: "Leo Express"
+  family_en: "Alstom Coradia LINT 27"
+  family_cs: "Alstom Coradia LINT 27"
+
+# Alstom Coradia LINT 27, CZ class 832: 832.127 of Leo Express Tenders (ex-HEX /
+# Transdev Sachsen-Anhalt, built 2005), the spare unit for the Pardubický kraj
+# lines 024/025 from Dec 2019 to the end of the contract in Dec 2029.
+# Single car on B'2' bogies, 27.26 m over couplers, 2.75 m wide, one MTU
+# 6H1800R80 of 315 kW, 120 km/h, tare 43 t, 68 seats (68-70). Two double plug
+# doors per side, symmetric (about 8.7-10.2 m and 17.0-18.6 m from the nose).
+# Livery: the LE LINT 41 scheme (white, anthracite roof shoulder, cab fronts,
+# cab-side swooshes and lower band; orange doors and anti-climbers; huge orange
+# "leo" between the doors on both sides, "o" next to the front door on the right
+# side as in the photo).
+# Sources: SP research/multiple_units.md section 2, photo
+# lint27_cz/usti_lint27_2022.jpg (832.127), geometry cross-checked on the Arriva
+# LINT 27 near-broadside lint_arriva_zlin/lint27_arriva_salaska.jpg.
+#
+# Sprite rendered from a 3D box model by the shared LINT script
+# tools/railrender/lint.py (`sheet("lint27", "bilooranzova", out)`, pak128
+# raycaster tools/railrender/render.py + railkit.py; regenerate with
+# `python tools/railrender/leo.py 832`). Length 13 (~2.1 m per carunit);
+# row 0 shows cabs at both ends: headlights at the front end, tail lights at the
+# rear end of the same sprite (no bidirectional support in this Simutrans).
+
+vehicles:
+  - id: "832"
+    role_en: "motor car"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 2700000
+      payload: 68
+      speed: 120
+      weight: 43
+      runningcost: 75
+      fixed_cost: 700
+      intro_year: 2019
+      intro_month: 12
+      retire_year: 2029
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: diesel
+      power: 315
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 4
+
+liveries:
+  - color: bilooranzova
+    name_en: "Leo Express white-orange"
+    name_cs: "Leo Express bílo-oranžová"

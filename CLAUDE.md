@@ -92,6 +92,8 @@ vehicles:
     # tail: true              # whether Constraint[Next] gets `none` (default true)
     # prev: ["partner_id", …] # explicit Constraint[Prev] partners (default: all OTHER vehicles in family)
     # next: ["partner_id", …] # explicit Constraint[Next] partners (default: all OTHER vehicles in family)
+    # prev: any / next: any   # no constraint on that side at all: couples with anything, like native
+    #                         # locomotives and coaches (loco-hauled stock, the front of a Talgo set)
     # reverse: false          # if true, share another row's sprites but rotate direction labels 180°
     #                         # (col index shifts by +4 mod 8 — used for the rear motor of a trio)
     # couple_liveries: false  # if true, each prev/next partner id resolves to that vehicle in EVERY
@@ -155,6 +157,14 @@ Convention: a vehicle's windows light up at night **only while passengers are ab
 - Draw all window glass in the lit-at-night specials: `0x4D4D4D` (special 28, dark grey by day, warm yellow at night) for glass, `0x57656F` (special 16) for lighter glass/reflections. Headlights `0xFFFF53` and tail lights `0xFF211D` are always lit and unaffected.
 - Set `windows_lit_when_loaded: true` in `family.yaml` (every family does). The build then copies the sheet as the loaded image (`freightimage`, shown whenever at least one passenger is aboard) and writes a derived `<basename>-unlit.png` for `emptyimage`, where each lit-window special is swapped for a plain colour one step away (`0x4D4D4D` → `0x4D4D4E`, …). The two look identical by day; at night only a loaded vehicle's windows glow.
 - Needs Pillow at build time.
+
+### Rendered rail sprites (`tools/railrender/`)
+
+The Leo Express families (`vehicle-rail/leo-express/`) are original art rendered from box models, not painted: `render.py` is an orthographic box raycaster in the pak128 projection, and `railkit.py` calibrates it to native pak128.cs rail art. That calibration covers the front anchor per view (source-sheet pixels before the default rail `image_offset` [0, 4]), body half-width 0.92 carunit, side wall height 10 model px, the ne/sw views drawn 18 % taller, and per-face shading. It fits CD_Bmz241 in all 8 views to within 1 px. Scale is 26.4 m = 13 carunits.
+
+The model scripts are `vectron.py`, `ric.py` (ex-DB IC coaches and the RDC couchette), `flirt.py`, `lint.py` (LINT 41/27 with the livery as a colour table) and `talgo.py`. Regenerate the sheets with `python tools/railrender/leo.py [family …] [--preview DIR]`; change a model and regenerate rather than editing the PNGs.
+
+Articulated units are modelled on one u axis and each car's tile keeps only its own pixels. Lettering must read left to right as seen: on the +v side screen-left is the vehicle's rear, on the -v side its front. Locomotives are drawn about 2–3 px taller than coaches, like the natives (ČD 363, 380, ÖBB 1216).
 
 ## Multi-vehicle consists
 
@@ -220,6 +230,12 @@ vehicles:
 PNG layout: row 0 = motor sprites, row 1 = middle sprites. Total 1024×256.
 
 With these constraints, the only buildable consist is `front + middle + rear`.
+
+`reverse: true` is only exact for `length: 8` sections: a 180°-rotated sprite keeps its body offset, which is wrong for any other length (see "Section placement"). Units whose end cars are not 8 carunits long (e.g. the Leo Express FLIRT 480, LINT 41) draw the rear cab car as its own row instead.
+
+### Loco-hauled stock
+
+Locomotives and coaches that run in mixed trains set `prev: any` and `next: any`, so no `Constraint` lines are emitted and they couple with any locomotive or coach, VZ or native (e.g. `vehicle-rail/leo-express/193` Vectron, `ic` ex-DB coaches). Fixed articulated sets hauled by a locomotive (Talgo) use `prev: any` only on the car that faces the locomotive. Locomotives carry no passengers, so their families set `windows_lit_when_loaded: false` and draw the cab glass in plain colours.
 
 ## Stations (`station.yaml`)
 
