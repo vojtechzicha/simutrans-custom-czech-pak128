@@ -11,9 +11,16 @@ display:
   family_en: "RegioSpider"
   family_cs: "RegioSpider"
 
-# Single Stadler Regio-Shuttle RS1 railcar (DE class 650, CZ class 840).
-# Sprites extracted from pak128.cs vehicle.motorak.840_841.pak (object CD_840)
-# via tools/pak_extract.py.
+# Single Stadler Regio-Shuttle RS1 railcar, ČD class 840: 16 built by Stadler
+# Pankow in 2011–12 for Liberecký kraj (the steep-gradient version for Tanvald –
+# Harrachov), 15 left after the 840.011 fire in 2021. Najbrt 1 since delivery;
+# from June 2026 they are being repainted into the Liberecký kraj / IDOL
+# red-white scheme (840.005 first). 25.5 m, 2 × 265 kW, 120 km/h, 43 t tare.
+#
+# Body: pak128.CS CD_840 (Lubak91) from vehicle.motorak.840_841.pak, extracted
+# with tools/pak_extract.py and repainted zone by zone (every view, lit glass,
+# plain amber destination displays). The old sheet had the n/s, ne/sw and
+# nw/se views swapped; this one matches the upstream placement.
 
 vehicles:
   - id: "840"
@@ -23,19 +30,19 @@ vehicles:
     fields:
       cost: 3191200
       payload: 113
-      speed: 115
-      weight: 58
+      speed: 120
+      weight: 43
       runningcost: 71
       fixed_cost: 1148
-      intro_year: 2003
-      intro_month: 1
+      intro_year: 2011
+      intro_month: 6
       retire_year: 2040
       retire_month: 1
       waytype: track
       freight: Passagiere
       length: 12
       engine_type: diesel
-      power: 550
+      power: 530
       smoke: Diesel_small
       gear: 135
     extended:
@@ -45,4 +52,8 @@ liveries:
   - color: najbrt1
     name_en: "Najbrt 1"
     name_cs: "Najbrt 1"
-    source: extracted from pak128.cs vehicle.motorak.840_841.pak object CD_840 (ČD livery — body shown as silver/grey placeholder for player-color pixels; recolor to Najbrt 1 as desired)
+    source: CD_840 body repainted in ČD Najbrt 1 (light grey roof, azure band and pillars, sapphire stripe, light grey lower body, darker blue doors; blue front mask, sapphire band under the lamps, yellow skirt edge)
+  - color: libereckykraj
+    name_en: "Liberecký kraj"
+    name_cs: "Liberecký kraj"
+    source: CD_840 body repainted in the Liberecký kraj / IDOL base layout (white body and roof, red doors, red bottom band sweeping up into red cab fronts, thin red windscreen frame, red IDOL rings behind the cabs); the eight per-car wrap variants are not modelled

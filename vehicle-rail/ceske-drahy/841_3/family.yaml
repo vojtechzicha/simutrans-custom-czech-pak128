@@ -1,0 +1,53 @@
+agency: CeskeDrahy
+type: "841.3"
+copyright: Lubak91
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "RegioSpider"
+  family_cs: "RegioSpider"
+
+# ČD class 841.3: second-hand 1997–98 RS1 railcars from BSB / SWEG / OSB with
+# factory automatic couplers, modernised at DPOV Přerov / Veselí. The PID ones
+# (841.303–311, 313–317) run from Tábor and Nymburk since 2025–26 under the
+# Středočeský kraj "Motorová revoluce" contract. The Liberecký kraj 841.3s only
+# enter service in December 2026 and are not included yet.
+# 2 × 257 kW, 120 km/h, about 43 t tare, same 25.5 m shell as the 840.
+#
+# Body: pak128.CS CD_840 (Lubak91), same PID sheet as the 841.2.
+
+vehicles:
+  - id: "841.3"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    fields:
+      cost: 3290000
+      payload: 113
+      speed: 120
+      weight: 43
+      runningcost: 71
+      fixed_cost: 1148
+      intro_year: 2025
+      intro_month: 4
+      retire_year: 2040             # cars built 1996-2000
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+      engine_type: diesel
+      power: 514
+      smoke: Diesel_small
+      gear: 135
+    extended:
+      axles: 4
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"
+    source: CD_840 body in PID grey (black window band, red blocks behind each cab, red panel right of centre on the fronts, yellow skirt edge)

@@ -11,9 +11,19 @@ display:
   family_en: "RegioSpider"
   family_cs: "RegioSpider"
 
-# Single Stadler Regio-Shuttle RS1 railcar — class 841.2 (regional operator series).
-# Sprites are the 841 template (extracted from pak128.cs vehicle.motorak.840_841.pak
-# object CD_841 via tools/pak_extract.py); recolor each livery PNG manually.
+# ČD class 841.2: second-hand ADtranz / Stadler RS1 railcars (built 1996–2000)
+# bought from HzL/SWEG, DB Regio, KVG and NEB and modernised at ŽOS Zvolen or
+# DPOV; the first 22 ex-HzL cars entered service in June 2021. Depots Louny
+# (Ústecký kraj), Česká Třebová (Pardubický kraj) and Havlíčkův Brod.
+# 2 × 257 kW (MAN), 120 km/h, about 43 t tare, same 25.5 m shell as the 840.
+#
+# Liveries (research, Sep 2026): DÚK green / light grey on 841.201–209, 212,
+# 217, 237, 238; Pardubický kraj on 841.210–222 (11); HzL cream-red, the
+# Hohenzollerische Landesbahn scheme the ex-HzL cars ran in until their
+# repaint (last ones 2024, kept as a real historical scheme); PID on 841.224
+# only; Najbrt 2 on 841.223; plain light grey on 841.225–227.
+#
+# Body: pak128.CS CD_840 (Lubak91), repainted per livery; see the 840 family.
 
 vehicles:
   - id: "841.2"
@@ -24,18 +34,18 @@ vehicles:
       cost: 3290000
       payload: 113
       speed: 120
-      weight: 58
+      weight: 43
       runningcost: 71
       fixed_cost: 1148
-      intro_year: 2014
-      intro_month: 1
-      retire_year: 2050
+      intro_year: 2021
+      intro_month: 6
+      retire_year: 2040             # cars built 1996-2000
       retire_month: 1
       waytype: track
       freight: Passagiere
       length: 12
       engine_type: diesel
-      power: 550
+      power: 514
       smoke: Diesel_small
       gear: 135
     extended:
@@ -45,16 +55,24 @@ liveries:
   - color: dukzelenobila
     name_en: "DÚK green-white"
     name_cs: "DÚK zeleno-bílá"
-    source: 841 template copy (ČD silver — recolor to DÚK zeleno-bílá)
+    source: CD_840 body in the Doprava Ústeckého kraje scheme (yellow-green body, light grey slanted panels round the doors, light grey bottom band and roof, light grey front mask with green corners)
   - color: hzlkremovacervena
-    name_en: "HZL cream-red"
-    name_cs: "HZL krémovo-červená"
-    source: 841 template copy (ČD silver — recolor to HZL krémovo-červená)
+    name_en: "HzL cream-red"
+    name_cs: "HzL krémovo-červená"
+    source: CD_840 body in the Hohenzollerische Landesbahn scheme (cream body, raspberry-red slanted panels round the doors and red doors, red bottom band, red lower front)
   - color: pardubickykraj
     name_en: "Pardubický kraj"
     name_cs: "Pardubický kraj"
-    source: 841 template copy (ČD silver — recolor to Pardubický kraj white+red+yellow)
+    source: CD_840 body in the Pardubický kraj RS1 scheme (navy roof and cab cap with white A/C boxes, red cantrail pinstripe, white body, yellow doors in navy frames, navy bottom line and lower front, yellow skirt edge)
   - color: pidsedocervena
     name_en: "PID grey-red"
     name_cs: "PID šedo-červená"
-    source: 841 template copy (ČD silver — recolor to PID šedo-červená)
+    source: CD_840 body in PID grey (black window band, red blocks behind each cab, red panel right of centre on the fronts, yellow skirt edge) - on 841.224
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+    source: CD_840 body in ČD Najbrt 2 (sapphire roof and cab cap, light cantrail line, otherwise as Najbrt 1) - on 841.223
+  - color: svetlesheda
+    name_en: "light grey"
+    name_cs: "světle šedá"
+    source: CD_840 body in plain light grey (dark lower front, yellow skirt edge) - on 841.225–227
