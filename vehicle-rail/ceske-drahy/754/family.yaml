@@ -29,11 +29,6 @@
 # Sprites: original art, rendered from a box model (tools/railrender/
 # cd_loco_brejlovec.py); regenerate with `python tools/railrender/
 # cd_loco_brejlovec.py 754`. Length 8 like the native CD_754.
-#
-# The *_klasik liveries are the pak128.cs / CZR objects ported 1:1 (art extracted from
-# the compiled pak, shifted to source coordinates; each livery keeps the upstream
-# credit and figures as its own `fields:` override), so savegames that ran them
-# keep working after the upstream paks were uninstalled.
 
 agency: CeskeDrahy
 type: "754"
@@ -87,37 +82,3 @@ liveries:
   - color: modrokremova
     name_en: "blue-cream"
     name_cs: "modro-krémová"
-  - color: modrozluta_klasik
-    name_en: "blue-yellow, classic art"
-    name_cs: "modro-žlutá, klasická kresba"
-    copyright: "TommPa9"   # ported 1:1 from CD_754_Brejlovec
-    fields:
-      cost: 2842500
-      runningcost: 307
-      fixed_cost: 1965
-      speed: 100
-      weight: 75
-      power: 1460
-      gear: 130
-      length: 8
-      intro_year: 1993
-      intro_month: 1
-      retire_year: 2035
-      retire_month: 1
-  - color: modra_klasik
-    name_en: "blue, classic art"
-    name_cs: "modrá, klasická kresba"
-    copyright: "TommPa9"   # ported 1:1 from CD_754_Brejlovec_(balkan)
-    fields:
-      cost: 2842500
-      runningcost: 307
-      fixed_cost: 1965
-      speed: 100
-      weight: 75
-      power: 1460
-      gear: 130
-      length: 8
-      intro_year: 2009
-      intro_month: 10
-      retire_year: 2999
-      retire_month: 1

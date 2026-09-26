@@ -19,15 +19,15 @@ A single pak file per agency and transport mode — for example, every shipped
 | --- | --- |
 | ČD řada 111 ("Tyristorka", shunting electric) | Najbrt 2, Najbrt 1.2 |
 | ČD řada 113 ("Žehlička", Tábor–Bechyně) | oranžovo-krémová, zeleno-krémová |
-| ČD řada 151 ("Krysa", pak128.cs art) | modrá |
-| ČD řada 162 ("Peršing") | Najbrt 2, Najbrt 1.2; also zeleno-krémová and modrá (pak128.cs art) |
-| ČD řada 163 ("Peršing") | Najbrt 2, zeleno-žlutá; also zeleno-žlutá and modrá (pak128.cs art) |
-| ČD řada 193 (Siemens Vectron MS) | ČD Vectron, ČD Vectron RS Lease; also bílá and modrá (CZR art) |
+| ČD řada 151 ("Krysa") | Najbrt 1.2 |
+| ČD řada 162 ("Peršing") | Najbrt 2, Najbrt 1.2, zeleno-krémová |
+| ČD řada 163 ("Peršing") | Najbrt 2, Najbrt 1.2, zeleno-žlutá |
+| ČD řada 193 (Siemens Vectron MS) | ČD Vectron, ČD Vectron RS Lease |
 | ČD řada 210 ("Jezevec") | Najbrt 2, modro-krémová, červeno-žlutá |
-| ČD řada 242 ("Plecháč", pak128.cs art) | červeno-krémová |
-| ČD řada 362 ("Eso", incl. the 362.2 rebuilds) | Najbrt 2, Najbrt 1.2; also modro-krémová and modrá (pak128.cs art) |
-| ČD řada 371 ("Bastard") | Najbrt 2; also červeno-žlutá and modrá (pak128.cs art) |
-| ČD řada 380 (Škoda 109E) | ČD 109E, Najbrt 2; also ČD 109E and bílo-modrá (pak128.cs art) |
+| ČD řada 242 ("Plecháč") | červeno-krémová |
+| ČD řada 362 ("Eso", incl. the 362.2 rebuilds) | Najbrt 2, Najbrt 1.2, modro-krémová |
+| ČD řada 371 ("Bastard") | Najbrt 2, Najbrt 1.2, červeno-žlutá |
+| ČD řada 380 (Škoda 109E) | ČD 109E, Najbrt 2 |
 | ČD řada 384 (Siemens Vectron MS 230) | ČD 230 km/h |
 | ČD řada 440 (RegioPanter, 3 kV; renumbered 640.1 in 2021–22) | Najbrt 1.2, Najbrt 2 |
 | ČD řada 471 (CityElefant) + 071 + 971 | CityElefant bílo-modro-červená, PID šedo-červená, Najbrt 1, Najbrt 2 |
@@ -43,9 +43,9 @@ A single pak file per agency and transport mode — for example, every shipped
 | ČD řada 704 (ČKD T 238.0 shunter) | červeno-krémová, Najbrt 2, Najbrt 1.2 |
 | ČD řada 714 ("Velká krava") | červeno-modrá, Najbrt 2, Najbrt 1.2 |
 | ČD řada 743.2 (CZ LOKO EffiShunter 1000M) | Najbrt 2 |
-| ČD řada 750 ("Brejlovec", pak128.cs art) | zeleno-šedá, modrá |
+| ČD řada 750 ("Brejlovec") | zeleno-šedá, Najbrt 1.2 |
 | ČD řada 750.7 ("Brejlovec", CZ LOKO rebuild) | Najbrt 2, Najbrt 1.2 |
-| ČD řada 754 ("Brejlovec") | Najbrt 2, Najbrt 1.2, Najbrt 1, červeno-žlutá, modro-krémová; also modro-žlutá and modrá (pak128.cs art) |
+| ČD řada 754 ("Brejlovec") | Najbrt 2, Najbrt 1.2, Najbrt 1, červeno-žlutá, modro-krémová |
 | ČD řada 794 (CZ LOKO shunter) | Najbrt 2 |
 | ČD řada 799 ("Adéla" depot shunter) | oranžovo-modrá, Najbrt 2 |
 | ČD řada 809 ("Šukafon") | Najbrt 1, Najbrt 2, červeno-krémová, červeno-žlutá |
@@ -63,7 +63,7 @@ A single pak file per agency and transport mode — for example, every shipped
 | ČD řada 847 (PESA RegioFox) | Najbrt 2, PID šedo-červená, Plzeňský kraj, Pardubický kraj |
 | ČD řada 848 (Stadler GTW 2/6) | Najbrt 2 with Olomoucký kraj decals |
 | ČD řada 854 ("Hydra") | Najbrt 2, červeno-krémová |
-| ČD řada 1216 (Siemens Taurus, CZR / pak128.cs art; railjet pair runs cab-first) | Najbrt 2, railjet |
+| ČD řada 1216 (Siemens Taurus; the railjet pair runs cab-first) | Najbrt 2, railjet |
 | ČD coaches built for ČD, UIC-Z: Ampz 143, Ampz 146, Bmz 241, Bmz 245, WRmz 815, WLABmz 826 | Najbrt 2 |
 | ČD ex-ÖBB coaches: Bmz 226 / 232 / 234 / 235 / 229 / 224, Bdmz 223, Bdmpz 227, Bhmpz 228, ABmz 346, Amz 138, WRmz 817, Bcmz 834 | Najbrt 2; Bmz 232 also ÖBB šedo-červená |
 | ČD rebuilt Bautzen coaches: Bbdgmee 236, Bdmpee 233, ARmpee 829 / 832, WLABmee 823 | Najbrt 2 |

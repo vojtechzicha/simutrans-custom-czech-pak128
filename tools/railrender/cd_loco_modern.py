@@ -458,12 +458,11 @@ def e109_row(liv):
 
 
 # ================================================================== jobs
+# Only the 384 is rendered. The 193 (CZR Lubak91 art) and 380 (TommPa9 art) ship
+# the upstream sheets, which look better than these models; vectron_row("vectron"),
+# ("vectronrsl") and e109_row() are kept for reference, not written.
 JOBS = {
-    "193": [("vectron", lambda: [vectron_row("vectron")], ["193 ELL"]),
-            ("vectronrsl", lambda: [vectron_row("vectronrsl")], ["193 RSL"])],
     "384": [("cd384", lambda: [vectron_row("cd384")], ["384"])],
-    "380": [("cd109e", lambda: [e109_row("cd109e")], ["380"]),
-            ("najbrt2", lambda: [e109_row("najbrt2")], ["380 N2"])],
 }
 
 

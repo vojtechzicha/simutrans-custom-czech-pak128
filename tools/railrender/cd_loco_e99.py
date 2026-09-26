@@ -253,10 +253,13 @@ def row(liv, unit):
     return [R.vehicle_tile(parts, lines, d, 0.0, {"V"}) for d in DIRS]
 
 
+# Only Najbrt 2 is rendered: the other liveries of these families (162/362 Najbrt
+# 1.2, 163 green-yellow, ...) ship the better-looking TommPa9 pak128.cs art, so
+# regenerating must not overwrite those sheets.
 JOBS = {
-    "162": ["najbrt2", "najbrt1_2"],
-    "163": ["najbrt2", "zelenozluta"],
-    "362": ["najbrt2", "najbrt1_2"],
+    "162": ["najbrt2"],
+    "163": ["najbrt2"],
+    "362": ["najbrt2"],
     "371": ["najbrt2"],
 }
 

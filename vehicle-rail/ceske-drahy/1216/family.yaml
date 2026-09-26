@@ -3,13 +3,13 @@
 # the railjet pair keeps its native coupling: 1216-front must lead, 1216-rear must
 # trail (the same sheet, row 1 is the reversed-cab drawing).
 #
-# Every livery here is a pak128.cs / CZR object ported 1:1 (art extracted from the
-# compiled pak, shifted to source coordinates; upstream credit and figures kept per
-# livery), so savegames that ran them keep working after the upstream paks went.
+# Sprites: Lubak91's CZR / pak128.cs drawings (CZR_CD_1216 = najbrt2, CD_railjet_1216 + _reverse = railjet),
+# extracted from the compiled pak and shifted to source coordinates; static sheets.
+# Figures as in the upstream pak.
 
 agency: CeskeDrahy
 type: "1216"
-copyright: TommPa9      # per-livery credits below
+copyright: lubak91      # upstream art (pak128.cs / CZR)
 windows_lit_when_loaded: false
 
 display:
@@ -23,7 +23,7 @@ vehicles:
     role_en: "electric locomotive"
     role_cs: "elektrická lokomotiva"
     row: 0
-    liveries: [najbrt2_klasik]
+    liveries: [najbrt2]
     prev: any
     next: any
     fields:
@@ -49,7 +49,7 @@ vehicles:
     role_en: "electric locomotive"
     role_cs: "elektrická lokomotiva"
     row: 0
-    liveries: [railjet_klasik]
+    liveries: [railjet]
     head: true
     prev: []
     next: any
@@ -76,7 +76,7 @@ vehicles:
     role_en: "electric locomotive"
     role_cs: "elektrická lokomotiva"
     row: 1
-    liveries: [railjet_klasik]
+    liveries: [railjet]
     tail: true
     prev: any
     next: []
@@ -100,37 +100,9 @@ vehicles:
       axles: 4
 
 liveries:
-  - color: najbrt2_klasik
-    name_en: "Najbrt 2, classic art"
-    name_cs: "Najbrt 2, klasická kresba"
-    copyright: "lubak91, VojtechZicha"   # ported 1:1 from CZR_CD_1216
-    fields:
-      cost: 15148400
-      runningcost: 289
-      fixed_cost: 0
-      speed: 230
-      weight: 87
-      power: 6400
-      gear: 130
-      length: 10
-      intro_year: 2008
-      intro_month: 12
-      retire_year: 2048
-      retire_month: 1
-  - color: railjet_klasik
-    name_en: "railjet, classic art"
-    name_cs: "railjet, klasická kresba"
-    copyright: "VojtechZicha, lubak91"   # ported 1:1 from CD_railjet_1216
-    fields:
-      cost: 15148400
-      runningcost: 289
-      fixed_cost: 0
-      speed: 230
-      weight: 87
-      power: 6400
-      gear: 130
-      length: 10
-      intro_year: 2008
-      intro_month: 12
-      retire_year: 2048
-      retire_month: 1
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+  - color: railjet
+    name_en: "railjet"
+    name_cs: "railjet"

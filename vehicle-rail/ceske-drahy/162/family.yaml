@@ -18,14 +18,12 @@
 #             a dark blue wedge behind each cab and light blue between, dark grey
 #             sill, light grey roof.
 #
-# Sprites: original art, rendered from a box model (tools/railrender/cd_loco_e99.py
-# on the rj_locos.E99 16.8 m Škoda 99E body, fitted to the native CD 363); regenerate
-# with `python tools/railrender/cd_loco_e99.py 162`. Length 8 like the native CD 363.
-#
-# The *_klasik liveries are the pak128.cs / CZR objects ported 1:1 (art extracted from
-# the compiled pak, shifted to source coordinates; each livery keeps the upstream
-# credit and figures as its own `fields:` override), so savegames that ran them
-# keep working after the upstream paks were uninstalled.
+# Sprites: najbrt2 is original art rendered from a box model
+# (tools/railrender/cd_loco_e99.py on the rj_locos.E99 body; regenerate with
+# `python tools/railrender/cd_loco_e99.py 162`). najbrt1_2 and zelenokremova are
+# TommPa9's pak128.cs drawings (CD_162_Rychly_Pershing_(balkan) / CD_162_Rychly_Pershing),
+# extracted from the compiled pak and shifted to source coordinates; they looked
+# better than the render, so they replace it and are static sheets. Length 8.
 
 agency: CeskeDrahy
 type: "162"
@@ -69,37 +67,8 @@ liveries:
   - color: najbrt1_2
     name_en: "Najbrt 1.2"
     name_cs: "Najbrt 1.2"
-  - color: zelenokremova_klasik
-    name_en: "green-cream, classic art"
-    name_cs: "zeleno-krémová, klasická kresba"
-    copyright: "TommPa9"   # ported 1:1 from CD_162_Rychly_Pershing
-    fields:
-      cost: 4251300
-      runningcost: 264
-      fixed_cost: 2365
-      speed: 140
-      weight: 87
-      power: 3480
-      gear: 155
-      length: 8
-      intro_year: 1991
-      intro_month: 1
-      retire_year: 2031
-      retire_month: 1
-  - color: modra_klasik
-    name_en: "blue, classic art"
-    name_cs: "modrá, klasická kresba"
-    copyright: "TommPa9"   # ported 1:1 from CD_162_Rychly_Pershing_(balkan)
-    fields:
-      cost: 4251300
-      runningcost: 264
-      fixed_cost: 2365
-      speed: 140
-      weight: 87
-      power: 3480
-      gear: 155
-      length: 8
-      intro_year: 2009
-      intro_month: 9
-      retire_year: 2999
-      retire_month: 1
+    copyright: "TommPa9"   # pak128.cs art
+  - color: zelenokremova
+    name_en: "green-cream"
+    name_cs: "zeleno-krémová"
+    copyright: "TommPa9"   # pak128.cs art
