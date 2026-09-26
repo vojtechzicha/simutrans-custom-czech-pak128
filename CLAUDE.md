@@ -171,11 +171,15 @@ The Leo Express families (`vehicle-rail/leo-express/`) are original art rendered
 
 The model scripts are `vectron.py`, `ric.py` (ex-DB IC coaches and the RDC couchette), `flirt.py`, `lint.py` (LINT 41/27 with the livery as a colour table) and `talgo.py`. Regenerate the sheets with `python tools/railrender/leo.py [family …] [--preview DIR]`; change a model and regenerate rather than editing the PNGs.
 
+The RegioJet families (`vehicle-rail/regiojet/`) use the same renderer; `python tools/railrender/regiojet.py [family …] [--preview DIR]` regenerates them. `rjcoach.py` draws every coach type from its vagonWEB side drawing (10 px = 1 m): one window/door list per body (in metres from the front buffer), the roof profile (flat Eurofima, ex-DB with the thin yellow line, Astra, round UIC-X with sloping ends) and small lettering. At 70 px per coach the window rhythm, door type and roof colour are what keeps the types apart, so keep those exact. Vehicle ids are the RJ car codes (A000, Bp200, …). The other scripts are `rj_locos.py`, `rj_pesa.py`, `rj_665.py`, `rj_628.py` (Arriva's `db628.py` geometry), `rj_shunters.py` and `rj_regiopanter.py`. The last one repaints frozen copies of the TommPa9 ČD 650/640 sheets in `tools/railrender/src/`, because its zone detection is tuned to that exact art.
+
 Articulated units are modelled on one u axis and each car's tile keeps only its own pixels. Lettering must read left to right as seen: on the +v side screen-left is the vehicle's rear, on the -v side its front. Locomotives are drawn about 2–3 px taller than coaches, like the natives (ČD 363, 380, ÖBB 1216).
 
 ### Rendered bus sprites (`tools/busrender/`)
 
 The DPMHK Hradec Králové families (`vehicle-bus/dpmhk/`, `vehicle-trolleybus/dpmhk/`) are rendered, not painted: `render.py` is the orthographic box raycaster in the pak128 road projection (1.5 px/m across, 4 px/m up; the same one the Prague/Brno SOR NS renders used) and `dpmhk.py` holds one parametric body model (SOR NS, SOR NB, Iveco Urbanway, SOR EBN), the DPMHK liveries as texture rules, trolley poles aimed at the pak128.cs wire of the own lane, and the per-view lane origins (a bare 12 m box on the median footprint of native 12 m buses). Single vehicles are drawn at real length; articulated sections at 4/3 m per carunit with the (4 − L/2) shift, joints at the real positions. Livery bands are whole multiples of 0.25 m, i.e. whole pixel rows in every view. Regenerate with `python tools/busrender/dpmhk.py [family …] [--preview DIR]`; change the model and regenerate rather than editing the PNGs.
+
+The RegioJet coach buses (`vehicle-bus/regiojet/`) come from `tools/busrender/rj_buses.py`. It uses its own vectorised copy of the DP Ostrava bus raycaster (`rj_vrender.py`), with the models in `rj_busmodels.py` and lane placement in `rj_lane.py`. The long coaches are drawn about 1.08 × their real length, like the native Citywide 15 and the upstream Irizar. The per-view shift is measured on a plain box of the model's footprint and then applied to the model, so a longer body extends along the lane and never sideways.
 
 ## Multi-vehicle consists
 
