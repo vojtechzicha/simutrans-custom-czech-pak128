@@ -18,7 +18,7 @@ display:
 # red-white scheme (840.005 first). 25.5 m, 2 × 265 kW, 120 km/h, 43 t tare.
 #
 # Body: pak128.CS CD_840 (Lubak91) from vehicle.motorak.840_841.pak, extracted
-# with tools/pak_extract.py and repainted zone by zone (every view, lit glass,
+# with tools/pak_extract.py and repainted zone by zone by tools/railpaint/cd_rs1.py (every view, lit glass,
 # plain amber destination displays). The old sheet had the n/s, ne/sw and
 # nw/se views swapped; this one matches the upstream placement.
 

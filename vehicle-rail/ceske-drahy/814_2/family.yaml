@@ -105,9 +105,9 @@ vehicles:
       axles: 2
 
 # Sprites: every livery on the same Sim pak128.CS drawings (rail-psg mail/814:
-# cd814p = 814 with its cab ahead, cd014s = 014), painted zone by zone with the
-# scratch work/p2 painter (fam_814.py). The trio only ever wore these three
-# schemes (research/dmu/814/liveries_814.md).
+# cd814p = 814 with its cab ahead, cd014s = 014), painted zone by zone by
+# tools/railpaint/cd_814.py (regenerate with `python tools/railpaint/cd_814.py`).
+# The trio only ever wore these three schemes.
 liveries:
   # original Konting yellow-green (~13-14 sets left in 2026)
   - color: zlutozelena

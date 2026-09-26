@@ -119,7 +119,7 @@ liveries:
   - color: najbrt1
     name_en: "Najbrt 1"
     name_cs: "Najbrt 1"
-    source: painted on the pak128cs 842_balkan body (work/p2 zone painter, ČD Najbrt palette; umbra roof)
+    source: painted on the pak128cs 842_balkan body (tools/railpaint/cd_84x_85x.py, ČD Najbrt palette; umbra roof)
   - color: najbrt2
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"

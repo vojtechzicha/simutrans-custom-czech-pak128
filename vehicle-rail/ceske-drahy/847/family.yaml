@@ -89,25 +89,25 @@ liveries:
     # and hood, light cantrail line (yellow over the 1st class), sky-blue window
     # band, sapphire stripe, light grey lower band, sapphire doors and skirts;
     # front: black windscreen band, sky-blue ČD panel, black grille band
-    source: pak128_czr CZR-CD-847 drawing repainted with the p2 zone painter (zones from the upstream blue, teal 844 and PID sheets)
+    source: pak128_czr CZR-CD-847 drawing repainted by tools/railpaint/cd_pesa.py (zones from the upstream blue, teal 844 and PID sheets)
   - color: pidsedocervena
     name_en: "PID grey-red"
     name_cs: "PID šedo-červená"
     # 38 units (Rakovník, Praha-Libeň): PID grey (RAL 7038), black window band
     # and doors, a red block between cab and door, one red front stripe right of
     # centre, dark grey roof equipment, yellow 1st-class stripe
-    source: pak128_czr CZR-CD-847 drawing repainted with the p2 zone painter (red block positions from the upstream CZR-CD-847_PID sheet)
+    source: pak128_czr CZR-CD-847 drawing repainted by tools/railpaint/cd_pesa.py (red block positions from the upstream CZR-CD-847_PID sheet)
   - color: plzenskykraj
     name_en: "Plzeňský kraj"
     name_cs: "Plzeňský kraj"
     # 847.067–076 (Plzeň): white roof and hood, aluminium roof equipment, IDPK
     # blue body with green / white / yellow swooshes, yellow doors, grey skirt,
     # blue lower front
-    source: pak128_czr CZR-CD-847 drawing repainted with the p2 zone painter
+    source: pak128_czr CZR-CD-847 drawing repainted by tools/railpaint/cd_pesa.py
   - color: pardubickykraj
     name_en: "Pardubický kraj"
     name_cs: "Pardubický kraj"
     # 847.011–017 (Havlíčkův Brod): navy roof and hood, thin red cantrail
     # stripe, white body, navy stripe and bottom band, yellow doors; front keeps
     # the sky-blue ČD panel
-    source: pak128_czr CZR-CD-847 drawing repainted with the p2 zone painter
+    source: pak128_czr CZR-CD-847 drawing repainted by tools/railpaint/cd_pesa.py

@@ -23,7 +23,7 @@ display:
 # repaint (last ones 2024, kept as a real historical scheme); PID on 841.224
 # only; Najbrt 2 on 841.223; plain light grey on 841.225–227.
 #
-# Body: pak128.CS CD_840 (Lubak91), repainted per livery; see the 840 family.
+# Body: pak128.CS CD_840 (Lubak91), repainted per livery by tools/railpaint/cd_rs1.py; see the 840 family.
 
 vehicles:
   - id: "841.2"

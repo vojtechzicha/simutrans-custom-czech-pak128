@@ -17,7 +17,8 @@ display:
 # kraj, Bohumín); the EMU 400 order replaces them from about 2030.
 #
 # Sprites: the pak128.CS 471 drawing by TommPa9 (CD_471_Esus_I/II/III, one
-# silhouette in three liveries) repainted with a zone map per livery: rows
+# silhouette in three liveries) repainted by tools/railpaint/cd_471.py with a
+# zone map per livery: rows
 # (upper deck, between the decks / end-section windows, lower deck, skirt) and
 # car segments (end sections, doors, double-deck middle); thin grey pantograph.
 # Liveries in service in 2026 (research: atlasvozu.cz per-car lists, photos):

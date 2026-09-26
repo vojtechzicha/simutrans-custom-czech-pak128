@@ -179,11 +179,25 @@ Articulated units are modelled on one u axis and each car's tile keeps only its 
 
 ### Painted rail sprites (`tools/railpaint/`)
 
-The ČD RegioPanter-bodied families (440, 640, 640.1, 640.2, 650, 650.2, 690.2, the JMK Moravia 530 / 550) and the InterPanter (660.0, 660.1) are not rendered: they are zone-map repaints of TommPa9's upstream drawings, so they keep the native pak128.cs look and shading. `body.py` builds a per-pixel zone map of one sprite row from row rules in the pure views (ne/sw sides, nw/se ends), and `warp.py` carries it into the diagonal views (each is a sheared copy of a pure view). Every pixel gets a zone, a row offset k and a position u along the car. `paint.py` then recolours zone by zone, multiplying by each pixel's shade factor so the original lighting survives. `palette.py` holds the shared colours: Najbrt, PID, IDPK, the battery-unit scheme and JMK.
+Every ČD diesel and electric unit family (`vehicle-rail/ceske-drahy/`) is painted, not rendered: its sheets are zone-map repaints of upstream pak128.CS / pak128_czr drawings (TommPa9, Sim and others), so they keep the native pak128.cs look and shading. `body.py` builds a per-pixel zone map of one sprite row from row rules in the pure views (ne/sw sides, nw/se ends), and `warp.py` carries it into the diagonal views (each is a sheared copy of a pure view). Every pixel gets a zone, a row offset k and a position u along the car. `paint.py` then recolours zone by zone, multiplying by each pixel's shade factor so the original lighting survives. `palette.py` holds the shared colours: Najbrt, PID, ČD red-cream, IDPK, the battery-unit scheme and JMK.
 
 `panter.py` is the shared RegioPanter body: cars `A` (pantograph cab, cab at the front), `M` (middle) and `B` (cab at the rear), plus `P` in `cd_panter.py` (a B car with A's pantograph, via `panto_xfer.py`). A livery is a dict of zone → colour or callable(ctx). The zone names and the `paint_car` / `sheet` / `geo` API are documented at the top of `panter.py`. To add a scheme on the same silhouette, write one more dict (see the ČD ones in `cd_panter.py`) and add its family to `FAMILIES`. `interpanter.py` recolours the InterPanter class by class; it has only one livery. `cd_panter_yaml.py` generates the Panter `family.yaml` files so they stay uniform.
 
-Regenerate with `python tools/railpaint/cd_emu.py [family …] [--preview DIR] [--yaml]`; change the painters and regenerate rather than editing the PNGs. The upstream bases are frozen in `tools/railpaint/src/` in **source coordinates**. Sprites extracted from compiled paks with `tools/pak_extract.py` sit **4 px lower**, because makeobj already applied the rail `image_offset` [0, 4]. Shift such a base up 4 px before painting on it, or the vehicle will ride 4 px low. All ČD rail sheets have their wheels at y = 93 in the ne/sw views.
+One module paints each group of families:
+
+| Module | Families |
+| --- | --- |
+| `cd_sukafon.py` (on the older `zonemap.py` framework) | 809, 810 + 010, 811 + 012 |
+| `cd_rs1.py` | 840, 841, 841.2, 841.3 |
+| `cd_84x_85x.py` | 842 + 054 / 954, 843 + 043 / 943, 854 |
+| `cd_pesa.py` | 844, 847 |
+| `cd_642_848.py` | 642 Desiro, 848 GTW |
+| `cd_814.py` | 814.0 + 914, 814.2 trio |
+| `cd_471.py` | 471 CityElefant |
+| `cd_680.py` | 680 Pendolino |
+| `cd_panter.py`, `interpanter.py` (driver `cd_emu.py`) | 440, 640, 640.1, 640.2, 650, 650.2, 690.2, 530, 550, 660.0, 660.1 |
+
+Regenerate everything with `python tools/railpaint/cd.py [family …] [--preview DIR]`, or one group with its module (`python tools/railpaint/cd_814.py [--preview DIR]`, `cd_emu.py [family …] [--yaml]` for the Panters). `cd.py` runs each painter in its own process, because `paint.py` caches shading per body name. A clean run leaves `git status` unchanged. Change the painters and regenerate rather than editing the PNGs. The upstream bases are frozen in `tools/railpaint/src/` in **source coordinates**. Sprites extracted from compiled paks with `tools/pak_extract.py` usually sit **4 px lower**, because makeobj already applied the rail `image_offset` [0, 4]. Check the wheel line against the rule below, and shift such a base up 4 px before painting on it, or the vehicle will ride 4 px low. All ČD rail sheets have their wheels at y = 93 in the ne/sw views.
 
 ### Rendered bus sprites (`tools/busrender/`)
 

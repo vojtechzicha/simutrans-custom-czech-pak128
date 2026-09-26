@@ -94,18 +94,18 @@ liveries:
     # delivery livery since 2012 (~21 units): sapphire roof and hood, light
     # cantrail line (yellow over the 1st class), sky-blue window band, sapphire
     # stripe, light grey lower band, sapphire doors and skirts, sky face panel
-    source: pak128_czr CZR-CD-847 drawing repainted with the p2 zone painter (zones from the upstream blue, teal 844 and PID sheets)
+    source: pak128_czr CZR-CD-847 drawing repainted by tools/railpaint/cd_pesa.py (zones from the upstream blue, teal 844 and PID sheets)
   - color: pardubickykraj
     name_en: "Pardubický kraj"
     name_cs: "Pardubický kraj"
     # 844.030 "Evik" and 844.031 "Helenka": navy roof and hood, thin red
     # cantrail stripe, white body, navy stripe and bottom band, yellow doors,
     # white face panel with the navy ČD logo
-    source: pak128_czr CZR-CD-847 drawing repainted with the p2 zone painter
+    source: pak128_czr CZR-CD-847 drawing repainted by tools/railpaint/cd_pesa.py
   - color: plzenskykraj
     name_en: "Plzeňský kraj"
     name_cs: "Plzeňský kraj"
     # 7 units revitalised in 2026 (first 844.012, Mar 2026): white roof and hood,
     # IDPK blue body, white arc over the windows, green and yellow bands
     # descending toward the cab, yellow doors, grey skirt, blue face panel
-    source: pak128_czr CZR-CD-847 drawing repainted with the p2 zone painter
+    source: pak128_czr CZR-CD-847 drawing repainted by tools/railpaint/cd_pesa.py

@@ -42,7 +42,7 @@ vehicles:
       axles: 2
 
 # Sprites: the Sim pak128.CS 810 body repainted from photos (same art as the 810
-# railcar in each livery).
+# railcar in each livery; tools/railpaint/cd_sukafon.py).
 liveries:
   - color: najbrt1
     name_en: "Najbrt 1"

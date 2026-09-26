@@ -79,7 +79,7 @@ vehicles:
 
 # Sprites: the Sim pak128.CS 810 body repainted from photos (811 476, 811 444,
 # 811 173), plus the roof A/C unit; row 1 the Sim Btax (010) body in the same
-# scheme for the 012.
+# scheme for the 012 (tools/railpaint/cd_sukafon.py).
 liveries:
   - color: najbrt2
     name_en: "Najbrt 2, Moravskoslezský kraj"

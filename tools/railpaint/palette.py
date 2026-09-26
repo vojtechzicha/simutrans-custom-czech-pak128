@@ -10,6 +10,9 @@ LGREY = (206, 211, 209)        # RAL 7035
 UMBRA = (104, 106, 100)        # RAL 7022 roof (weathered)
 N2_STRIPE = (214, 220, 224)    # light stripe under the Najbrt 2 roof edge
 YELLOW = (242, 194, 0)         # 1st-class stripe, plough (RAL 1003)
+UF_GREY = (64, 66, 62)         # underframe / skirts
+BLACK = (28, 28, 30)
+WHITE = (236, 238, 238)
 
 # PID grey-red (ROPID 2025 vehicle rules: RAL 7038 grey, RAL 3020 red, RAL 9005
 # black doors / window bands, RAL 7022 roof gear, RAL 1003 yellow)
@@ -56,3 +59,12 @@ JMK_YELLOW = (226, 178, 54)
 def dk(c, f):
     """Darker / lighter version of a colour (albedo scale)."""
     return tuple(max(0, min(255, int(round(v * f)))) for v in c)
+
+# ČD 1990s red-cream
+RC_RED = (178, 30, 40)
+RC_CREAM = (234, 222, 184)
+RC_ROOF = (168, 168, 163)
+
+# marks
+PLATE_RED = (200, 34, 44)
+TEXT_GREY = (80, 84, 90)
