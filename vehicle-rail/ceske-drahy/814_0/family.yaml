@@ -25,9 +25,10 @@ display:
 # Rows 1 and 3 are rows 2 and 0 turned round (the Sim drawings of a rear car
 # are the front car with the direction columns shifted by 4, moved one carunit
 # forward and with the lamps swapped, so the lit headlights stay at the leading
-# end). Constraints reject single cars and cross-mixed orientations. Liveries
-# couple freely: mixed sets are normal (e.g. a Kraj Vysočina 814 with a
-# Pardubický kraj 914, the only way the Vysočina scheme ever ran).
+# end). Constraints reject single cars and cross-mixed orientations. The two
+# cars of one set wear the same livery; whole sets run in multiple, in either
+# orientation and any livery (the lead car of a set takes the rear car of the
+# set ahead, the rear car the lead car of the set behind).
 
 vehicles:
   - id: "914"
@@ -36,9 +37,9 @@ vehicles:
     row: 0
     head: true
     tail: false
-    prev: []
+    prev: ["814.0", "914-reverse"]
     next: ["814.0"]
-    couple_liveries: true
+    couple_liveries: prev     # the rear car of a set ahead may wear any livery
     fields:
       cost: 979000
       payload: 89                   # 36 seats + standing in the low-floor centre
@@ -63,8 +64,8 @@ vehicles:
     head: false
     tail: true
     prev: ["914"]
-    next: []
-    couple_liveries: true
+    next: ["914", "814.0-reverse"]
+    couple_liveries: next     # the lead car of a set behind may wear any livery
     fields:
       cost: 1317800
       payload: 100                  # 48 seats + standing
@@ -93,9 +94,9 @@ vehicles:
     row: 2
     head: true
     tail: false
-    prev: []
+    prev: ["814.0", "914-reverse"]
     next: ["914-reverse"]
-    couple_liveries: true
+    couple_liveries: prev
     fields:
       cost: 1317800
       payload: 100
@@ -125,8 +126,8 @@ vehicles:
     head: false
     tail: true
     prev: ["814.0-reverse"]
-    next: []
-    couple_liveries: true
+    next: ["914", "814.0-reverse"]
+    couple_liveries: next
     fields:
       cost: 979000
       payload: 89
