@@ -75,7 +75,7 @@ vehicles:
     head: false
     tail: false
     prev: ["Bmpz885"]
-    next: ["BRmpz882"]
+    next: ["BRmpz882", "Ampz881"]
     fields:
       cost: 2600000
       payload: 122
@@ -122,7 +122,7 @@ vehicles:
     row: 4
     head: false
     tail: true
-    prev: ["BRmpz882"]
+    prev: ["Bbmpz884", "BRmpz882"]
     next: ["Afmpz880"]
     fields:
       cost: 2900000

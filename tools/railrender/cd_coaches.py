@@ -210,7 +210,7 @@ CJ = [
     ("Ampz881", "Ampz 881", "Ao", 139, 1, False),
     ("Afmpz880", "Afmpz 880", "ABcab", 97, 5, False),
 ]
-CJ_NEXT = {"Bdmpz883": ["Bmpz885"], "Bmpz885": ["Bmpz885", "Bbmpz884"], "Bbmpz884": ["BRmpz882"],
+CJ_NEXT = {"Bdmpz883": ["Bmpz885"], "Bmpz885": ["Bmpz885", "Bbmpz884"], "Bbmpz884": ["BRmpz882", "Ampz881"],   # sets without the restaurant car still couple
            "BRmpz882": ["Ampz881"], "Ampz881": ["Afmpz880"], "Afmpz880": []}
 
 
