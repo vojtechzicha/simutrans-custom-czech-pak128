@@ -43,6 +43,14 @@ A single pak file per agency and transport mode — for example, every shipped
 | ČD řada 847 (PESA RegioFox) | Najbrt 2, PID šedo-červená, Plzeňský kraj, Pardubický kraj |
 | ČD řada 848 (Stadler GTW 2/6) | Najbrt 2 with Olomoucký kraj decals |
 | ČD řada 854 ("Hydra") | Najbrt 2, červeno-krémová |
+| ČD coaches built for ČD, UIC-Z: Ampz 143, Ampz 146, Bmz 241, Bmz 245, WRmz 815, WLABmz 826 | Najbrt 2 |
+| ČD ex-ÖBB coaches: Bmz 226 / 232 / 234 / 235 / 229 / 224, Bdmz 223, Bdmpz 227, Bhmpz 228, ABmz 346, Amz 138, WRmz 817, Bcmz 834 | Najbrt 2; Bmz 232 also ÖBB šedo-červená |
+| ČD rebuilt Bautzen coaches: Bbdgmee 236, Bdmpee 233, ARmpee 829 / 832, WLABmee 823 | Najbrt 2 |
+| ČD "honecker" coaches: Bdmtee 281, 275, 267 | Najbrt 2 |
+| ČD UIC-Y coaches: Aee 140, Apee 139, Bee 238, Bpee 237; Aee 145, AB 349, Bee 272 / 273, Bd 264, BDs 449 | Najbrt 2; BDs 449 also Najbrt BD 2 / BD 1 |
+| ČD Studénka coaches: Bdpee 231, ABpee 347, Bdtee 276, Bdt 279 / 280, "sysel" driving trailers Bfhpvee 295 / ABfhpvee 395 | Najbrt 2, Najbrt 1 |
+| ČD double-deck coaches: Görlitz Bdmteeo 294 / 296, Škoda 13Ev set (ABfbdmteeo 396 + Bdmteeo 297 / 298) | Najbrt 2 |
+| ČD ComfortJet, 9-car set incl. Afmpz 880 driving trailer and BRmpz 882 (CZR art) | ComfortJet |
 | DPmML SOR NB 12, NS 12, NB 18 and NS 18 (bus) | Most žluto-červená |
 | DPmML Irisbus Citelis 12M and Citelis 18M (bus) | Most žluto-červená |
 | DPmML Iveco Urbanway 18M (bus) | Most žluto-červená |
