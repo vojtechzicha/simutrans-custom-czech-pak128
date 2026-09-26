@@ -16,14 +16,14 @@
 #              trapezoids along the hood, dark grey frame and lower front, blue
 #              windscreen frame (750.701-704, 707, 709-711; ≈8)
 #
-# Sprites: original art, rendered from a box model in the 2026-09-26 render style
-# (tools/railrender/style.py; the Brejlovec body with the rebuilt fronts in
-# tools/railrender/cd_loco_brejlovec.py); regenerate with
-# `python tools/railrender/cd_loco_brejlovec.py 750_7`. Length 8.
+# Sprites: TommPa9's pak128.cs Brejlovec repainted by tools/railpaint/cd_brejlovec.py,
+# with the rebuilt 750.7 fronts: the goggle pair's centre pillar filled in, so each
+# cab has one wide windscreen in a white frame. Regenerate with
+# `python tools/railpaint/cd_brejlovec.py 750_7`. Length 8.
 
 agency: CeskeDrahy
 type: "750.7"
-copyright: vojtechzicha      # original art, drawn from scratch
+copyright: TommPa9      # his pak128.cs Brejlovec, repainted
 windows_lit_when_loaded: false
 
 display:

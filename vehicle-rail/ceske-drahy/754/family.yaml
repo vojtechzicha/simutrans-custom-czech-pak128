@@ -26,14 +26,15 @@
 # Left out: the heritage "brejlovec" repaints (blue-white with the flash,
 # green-white, red with flash, black-white) and the ČSD all-red ones.
 #
-# Sprites: original art, rendered from a box model in the 2026-09-26 render style
-# (tools/railrender/style.py; model in tools/railrender/cd_loco_brejlovec.py);
-# regenerate with `python tools/railrender/cd_loco_brejlovec.py 754`. Length 8 like
-# the native CD_754.
+# Sprites: TommPa9's pak128.cs Brejlovec (the T 478 / 75x body all eleven of his
+# Brejlovec liveries share), repainted into each livery by the zone painter
+# tools/railpaint/cd_brejlovec.py; his shape, shading, goggles, windows and lamps are
+# kept, the Najbrt schemes add the white "brýle" frames round the windscreens.
+# Regenerate with `python tools/railpaint/cd_brejlovec.py 754`. Length 8.
 
 agency: CeskeDrahy
 type: "754"
-copyright: vojtechzicha      # original art, drawn from scratch
+copyright: TommPa9      # his pak128.cs Brejlovec, repainted
 windows_lit_when_loaded: false
 
 display:
