@@ -1,0 +1,113 @@
+agency: OBB
+type: "Wiesel"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "ÖBB"
+  agency_cs: "ÖBB"
+  family_en: "Wiesel double-deck"
+  family_cs: "Wiesel patrový"
+
+# ÖBB double-deck push-pull stock, Bombardier Görlitz "Wiesel" (ÖBB
+# Doppelstockwagen, built 1997-2003; Cityjet refurbishment from 2019):
+# Bmpz-dl 26-33 coach (114 seats) and Bbfmpz 86-33 cab car (86 + 8 seats).
+# On Czech track: REX1 Wr. Neustadt - Wien - Hohenau - Břeclav, hourly, formed
+# 1116 + 4 double-deck coaches + 86-33 with the cab car facing Břeclav; REX41
+# Wien FJB - Gmünd - České Velenice (weekdays 1116 + 3 coaches + 86-33).
+# 26.8 m (coach) / 27.1 m (cab car) over buffers, 2.78 m wide, 4.63 m high,
+# 140 km/h; low-floor lower deck between the two double doors, single-level end
+# sections over the bogies with intermediate windows.
+#
+# Liveries (both in service on REX1 / REX41 in 2026):
+#   cityshuttle  the original scheme the research called "classic red/grey":
+#                photos and drawings show it is the CityShuttle scheme - silver-
+#                grey car, red field over the left half of each side AS SEEN
+#                ending in a steep "/" diagonal (11.7 m at the sill, 15.3 m at
+#                the roof edge), white "CityShuttle" script on the red, WIESEL
+#                weasel logo on the grey (red ÖBB on the cab car's right side),
+#                light grey doors; cab front red with a dark grey windscreen
+#                band and a grey roof dome. Photos: "I09 436 Bf Břeclav, 86-33
+#                210" (in CZ), "2017-09-14 (101) ÖBB 86-33 and ÖBB 26-33 at
+#                Bahnhof Neulengbach", "Wiesel.jpg" (26-33 070 Bmpz-dl); vagonWEB
+#                Bmpz-dl-a, Bbfmpz-a/b. The research text ("lower deck band and
+#                skirt red") was wrong; the photos win.
+#   cityjet      refurbished Cityjet scheme: white upper body with the upper deck
+#                windows in a continuous black band, red lower body with a lighter
+#                orange band, lower deck windows in a dark grey band, anthracite
+#                doors with a light centre seal and yellow step, grey "cityjet"
+#                script; cab front black from the dome to the windscreen bottom
+#                framed by a red outline, white band with a red ÖBB, red lower
+#                front. Photos: "Dvoupatrový Cityjet ÖBB na nádraží Břeclav"
+#                (in CZ, Feb 2024), "20251026 Bf Marchegg ÖBB 86-33 000", "86-33
+#                112-2 in Wien Hauptbahnhof, 2019"; vagonWEB Bmpz-dl-cj-a/b,
+#                Bbfmpz-cj-a/b.
+#
+# Sprites: rendered from a box model, original art:
+#   tools/railrender/obb_dosto.py  (regenerate: python tools/railrender/obb_dosto.py)
+# Positions from the vagonWEB side drawings (10 px = 1 m). Both cars length 13
+# (pak128.cs coach convention). The body is 12.35 model px high (4.63 m), 1.5 px
+# above the single-deck coaches, like the ČD 471 double-deck art. Row 0 = 86-33
+# cab car (headlights at its front), row 1 = 26-33 coach. Both couple with
+# anything (prev/next: any): the cab car leads, a locomotive (native OBB_1016
+# stands in for the 1116) pushes at the other end.
+
+vehicles:
+  - id: "86-33"
+    display_id: "Bbfmpz 86-33"
+    role_en: "double-deck cab car"
+    role_cs: "patrový řídicí vůz"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 3600000
+      payload: 94
+      speed: 140
+      weight: 52
+      runningcost: 34
+      fixed_cost: 430
+      intro_year: 1997
+      intro_month: 9
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "26-33"
+    display_id: "Bmpz-dl 26-33"
+    role_en: "double-deck coach"
+    role_cs: "patrový vůz"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 2900000
+      payload: 114
+      speed: 140
+      weight: 49
+      runningcost: 30
+      fixed_cost: 380
+      intro_year: 1997
+      intro_month: 9
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: cityshuttle
+    name_en: "CityShuttle"
+    name_cs: "CityShuttle"
+  - color: cityjet
+    name_en: "Cityjet"
+    name_cs: "Cityjet"

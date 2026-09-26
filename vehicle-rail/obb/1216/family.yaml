@@ -1,0 +1,71 @@
+agency: OBB
+type: "1216"
+copyright: lubak91/TommPa9   # pak128.CS obb_1216 drawing, repainted
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ÖBB"
+  agency_cs: "ÖBB"
+  family_en: "Siemens ES64U4 Taurus"
+  family_cs: "Siemens ES64U4 Taurus"
+
+# ÖBB class 1216 (Siemens ES64U4 "Taurus 3"), the four-system batch 1216 226-250
+# cleared for AT/CZ/SK/HU/DE. On Czech track in 2026 about 8-10 locos a day:
+# RJ/RJX "Vindobona" Praha - Brno - Břeclav - Wien - Graz/Villach hauling ČD
+# ComfortJet sets, RJ 244/250/251 Wien - Praha - Dresden, and the Nightjet
+# NJ 456/457 Graz - Wien - Praha - Berlin throughout. 19.58 m over buffers,
+# 3.02 m wide, Bo'Bo', 87 t, 6.4 MW (6.0 MW on 3 kV), 230 km/h. Drawn at
+# length 10 like every pak128.cs 19 m loco (native 1216, 1116, ES64U2, Leo 193).
+#
+# Liveries (photos 1216 229 Praha hl.n. 1 Sep 2025, 1216 230 Břeclav line Aug
+# 2025, 1216 227 Praha hl.n. Aug 2025, 1216 228 Dresden, 1216 234 Břeclav):
+# - railjet (229-231, 233-237, 249, 250): carmine body, slate-grey lower field
+#   whose top edge rises from just behind the front cab door towards the rear
+#   cab (taller at the train end, both photos), a thin bright-red line on that
+#   edge, black windscreen band wrapping round the cab side windows, big grey
+#   "railjet" lettering on the upper side.
+# - obbcervena (226-228, 238-240): ÖBB red, dark-grey solebar band, white "ÖBB"
+#   wordmark in the rear half of each side and on the lower front.
+#
+# Sheets are the pak128.CS obb_1216 drawing (lubak91/TommPa9) repainted through
+# a fitted box-model coordinate map: glass made plain, lamps set to the
+# headlight/tail specials, the old decals removed, new livery zones and
+# lettering stamped, and the diagonal/end views raised 3 px to sit on the
+# rails like the pak128.cs coaches. The painter is a one-off script, not in
+# the repo (the same script paints the obb/1116 and pkp-intercity/eu44
+# sheets).
+
+vehicles:
+  - id: "1216"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 6600000
+      payload: 0
+      speed: 230
+      weight: 87
+      runningcost: 206
+      fixed_cost: 3030
+      intro_year: 2008
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      engine_type: electric
+      power: 6400
+      gear: 160
+      length: 10
+    extended:
+      axles: 4
+
+liveries:
+  - color: railjet
+    name_en: "railjet"
+    name_cs: "railjet"
+  - color: obbcervena
+    name_en: "ÖBB red"
+    name_cs: "ÖBB červená"

@@ -143,7 +143,32 @@ Also on `main`, still being refined (see [`TODO.md`](TODO.md)):
   - Frýdek-Místek, Třinec, Český Těšín, Nový Jičín, Studénka, Krnov, Hranice
     and Přerov (contracted MHD, town or operator schemes).
   - Kladno, DPMLB Mladá Boleslav, Kolín, Příbram, Benešov and Tábor.
-- **Die Länderbahn CZ** — 654 Pesa LINK II.
+- **Other operators on Czech track** — every passenger train that runs in the
+  Czech Republic in the 2025/2026 timetable and is not ČD, Arriva, RegioJet, Leo
+  Express or GW Train Regio, in its real 2026 liveries (one pak per operator, e.g.
+  `VZ-KZC-rail.pak`, `VZ-OBB-rail.pak`). Foreign operators only with the vehicles
+  that really cross the border.
+  - Czech: **KŽC** (813.2 + 913.2 in PID colours, 810 / 809 / 830 / 831 / 851
+    railcars, 749 / 751 locomotives, ČSD green Y coaches, Bmx / Amx, Bix / RBix),
+    **AŽD Praha** (818 RegioSprinter "Švestková dráha", 810 + 010),
+    **Die Länderbahn CZ** (654 RegioSprinter in vogtlandbahn colours),
+    **Railway Capital** (810, 811 + 011), **Gepard Express** (810) and
+    **MBM rail** (M 131.1 "Hurvínek", Blm, 708).
+  - German and Austrian: **Die Länderbahn** (trilex Desiro 642, vogtlandbahn and
+    oberpfalzbahn Regio-Shuttle RS1, the alex ER 20 and the Bavorský expres
+    coaches), **agilis** (RS1), **DB Regio** (642 in DB red and VVO colours, 612
+    RegioSwinger) and **ÖBB** (1216 railjet / red, 1116, Wiesel double-deck and
+    CityShuttle push-pull sets, 4746 Cityjet, IC and Nightjet coaches).
+  - Slovak, Polish and Hungarian: **ZSSK** (813 + 913, 361.1, day and sleeping
+    coaches), **MÁV** (IC and night coaches), **PKP Intercity** (EU44, EP09, EU07,
+    leased Vectrons, day and night coaches), **Koleje Dolnośląskie** (Impuls 45WE
+    and 31WE to Lichkov), **Koleje Śląskie** (Impuls 2 31WEbc, Elf 2 22WEd and
+    21WEa to Bohumín) and **European Sleeper** (LINEAS Traxx 186 and its coaches).
+  - Narrow-gauge trains (Gepard Express at Jindřichův Hradec, Osoblaha) are left
+    out: pak128.cs has no narrow-gauge track.
+  - New models are rendered with `tools/railrender/` (see `tools/railrender/ops.py`
+    for the list of model scripts); the 810-family, RS1, 830 / 851 and Taurus
+    sheets are repaints of pak128.CS art.
 - **Supermarkets** (city industries, `VZ-Supermarkets-city.pak`) — 14 Czech
   chains as consumer industries in three size classes: 1×1 stores (Žabka, Tesco
   Expres, Albert, COOP), 1×2 supermarkets (Lidl, Penny, Billa, Norma, Tesco) and

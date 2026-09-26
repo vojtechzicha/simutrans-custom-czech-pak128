@@ -1,0 +1,121 @@
+agency: KolejeSlaskie
+type: "21WEa"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Koleje Śląskie"
+  agency_cs: "Koleje Śląskie"
+  family_en: "Pesa Elf 2"
+  family_cs: "Pesa Elf 2"
+
+# Pesa Elf 2 21WEa(g) of Koleje Śląskie (KŚ): 5 three-section EMUs, first in
+# service Sept 2017; the original five units approved for Czech track and
+# regular stand-ins on line S71 Katowice - Chałupki - Bohumín (21WEa-001 seen in
+# 2026). Bo'2'2'Bo' on Jakobs bogies, 3 kV DC, 1,600 kW, 160 km/h, ~59 m,
+# 2,880 mm wide, 4,280 mm high, 154 seats + 114 standing. Doors 1-2-1 per side
+# (vagonweb side drawing 21WEa-a); both pantographs on the middle section.
+#
+# Livery (KŚ): see 22wed/family.yaml. Photos 21WEa-002 Katowice, 21WEa-003
+# (research/ops/photos/ks), 21WEa-002B (Commons).
+#
+# Sprites: tools/railrender/elf2.py (python tools/railrender/elf2.py 21wea).
+# Lengths 10, 8, 10 carunits (end sections 22 m, middle section 16.3 m),
+# sections start at 0, 10, 18 cu. Sections A-C-B (fronts 21WEa-002B / -003B,
+# middle 21WEa-001C); headlights on A, tail lights on B. Units couple in multiple, also with the
+# 4-section 22WEd (Commons photo "Coupled 22WEd-010 with 21WEa-003").
+
+vehicles:
+  - id: "21WEa-A"
+    display_id: "21WEa"
+    role_en: "cab car A"
+    role_cs: "čelní vůz A"
+    row: 0
+    head: true
+    tail: false
+    prev: ["21WEa-B", "22wed/22WEd-B"]
+    next: ["21WEa-C"]
+    couple_liveries: prev     # the rear car of a unit ahead may wear any livery
+    fields:
+      cost: 3200000
+      payload: 40
+      speed: 160
+      weight: 38
+      runningcost: 75
+      fixed_cost: 800
+      intro_year: 2017
+      intro_month: 9
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: electric
+      power: 800
+      gear: 130
+    extended:
+      axles: 3
+
+  - id: "21WEa-C"
+    display_id: "21WEa"
+    role_en: "middle car C"
+    role_cs: "vložený vůz C"
+    row: 1
+    head: false
+    tail: false
+    prev: ["21WEa-A"]
+    next: ["21WEa-B"]
+    fields:
+      cost: 2100000
+      payload: 74
+      speed: 160
+      weight: 31
+      runningcost: 35
+      fixed_cost: 260
+      intro_year: 2017
+      intro_month: 9
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "21WEa-B"
+    display_id: "21WEa"
+    role_en: "cab car B"
+    role_cs: "čelní vůz B"
+    row: 2
+    head: false
+    tail: true
+    prev: ["21WEa-C"]
+    next: ["21WEa-A", "22wed/22WEd-A"]
+    couple_liveries: next     # the lead car of a unit behind may wear any livery
+    fields:
+      cost: 3200000
+      payload: 40
+      speed: 160
+      weight: 38
+      runningcost: 75
+      fixed_cost: 800
+      intro_year: 2017
+      intro_month: 9
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: electric
+      power: 800
+      gear: 130
+    extended:
+      axles: 3
+
+liveries:
+  - color: bilomodra
+    name_en: "white-blue"
+    name_cs: "bílo-modrá"

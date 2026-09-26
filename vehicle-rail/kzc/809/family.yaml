@@ -1,0 +1,58 @@
+agency: KZC
+type: "809"
+copyright: Sim
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "KŽC"
+  agency_cs: "KŽC"
+  family_en: '"Šukafon"'
+  family_cs: '"Šukafon"'
+
+# KŽC Doprava 809.232 (built 1978 as M 152.0232, converted by ČD for
+# driver-only operation), bought from ČD in 2023 and repaired in 2024 for the
+# PID S43 Neratovice - Kralupy trains (not confirmed on them in 2026). Single
+# 810-body railcar, 13.97 m, 155 kW, 80 km/h, 20 t, 55 seats + 40 standing;
+# runs solo.
+#
+# Livery: still ČD Najbrt 1 (KŽC drawing kzc.cz/image/809.232-2.png): umbra-grey
+# roof, sky-blue window band, sapphire sill stripe and doors, light-grey lower
+# body; the drawing shows no ČD (or KŽC) logos, only the red number plate
+# mid-side. No photo of it in KŽC service was found.
+#
+# Sprite: the ČD 809/810 Najbrt 1 art (Sim pak128.CS 810 body, zone-map
+# repaint) without the ČD logos; made with the ČD 810 zone-map painter
+# (one-off painter script, not in the repo).
+
+vehicles:
+  - id: "809"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    fields:
+      cost: 1057800
+      payload: 95
+      speed: 80
+      weight: 20
+      runningcost: 20
+      fixed_cost: 102
+      intro_year: 2024
+      intro_month: 6
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 155
+      smoke: Diesel_black
+      gear: 105
+    extended:
+      axles: 2
+
+liveries:
+  - color: najbrt1
+    name_en: "Najbrt 1"
+    name_cs: "Najbrt 1"

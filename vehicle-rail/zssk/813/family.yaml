@@ -1,0 +1,110 @@
+agency: ZSSK
+type: "813"
+copyright: Sim
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "ZSSK"
+  agency_cs: "ZSSK"
+  family_en: '"Bageta"'
+  family_cs: '"Bageta"'
+
+# ZSSK class 813.0 + 913 "Bageta": two-car DMU rebuilt by ŽOS Zvolen from ČSD
+# 810 railcars and 011 trailers (prototype 2006, series 2007-2010, 44 units).
+# Motor car 813 (cab, MAN D2876 LUE 621 257 kW, Voith DIWA, 1A) + driving
+# trailer 913 (cab, 2 axles), permanently coupled with a Scharfenberg coupler
+# and a Hübner gangway. 28.82 m over buffers for the pair (~14.4 m per car),
+# 3.07 m wide, 90 km/h, 39 t empty, 30 + 48 seats + 5 folding, 120 standing.
+# On Czech track: Os 3240-3249 Púchov - Lúky pod Makytou - Horní Lideč and
+# Os 5460-5463 Trenčianska Teplá - Horné Srnie - Vlárský průsmyk (Trenčín
+# depot pool; 813 004, 025, 027, 028, 037 seen there in 2026). ZSSK is
+# refurbishing 33 units at ŽOS Zvolen from 2026, the other 11 are withdrawn
+# gradually.
+#
+# Livery (the only one confirmed on photos): the ZSSK regional red / white /
+# grey scheme - red from the gutter to just below the windows with the windows
+# in the red field, white band, grey sill band, light-grey roof with the white
+# cooler box over each cab; cab front with a red frame round the two big
+# windscreens, white lower front with twin round lamps each side, number and
+# the orange ZSSK logo, grey buffer beam with a yellow/black warning stripe.
+# Photos: 813 037-3 Trenčín 2026, 813 042-3 Kúty, 813 026-6 Košice 2026,
+# 913 042-8 Holíč, 913 014 Trenčianska Teplá, 813/913 001 Poltár (Commons).
+# The all-red "b2" scheme of 813 030 / 040 (vagonweb drawing, ZSSK's 2025
+# refurbishment rendering) is left out: no photo of a real unit in it found.
+#
+# Sprites: the Sim pak128.CS 810 body (the same art as ceske-drahy/810),
+# repainted by a one-off painter script (not in the repo; the same script
+# paints the kzc/813_2 sheet): silhouette, roof shading and underframe of the
+# Sim 810 are kept; the side band is repainted from the vagonweb 813-a
+# side diagram (813: cab door, 6 windows, inner-end door, blank end; 913: 7
+# windows and one door behind its cab) and both end faces are redrawn (new cab
+# fronts from the photos, black Hübner bellows on the inner ends).
+# Row 0 = 813 (cab ahead, headlights), row 1 = 913 (cab at the rear, tail
+# lights). Lengths 7 + 7 like the ČD 810 / 010.
+#
+# Coupling: the 813 leads its unit and the 913 trails; a unit's 913 may be
+# followed by the next unit's 813, so units run in multiple.
+
+vehicles:
+  - id: "813"
+    role_en: "motor car"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: ["913"]
+    next: ["913"]
+    couple_liveries: prev
+    fields:
+      cost: 1353400
+      payload: 30
+      speed: 90
+      weight: 22
+      runningcost: 30
+      fixed_cost: 150
+      intro_year: 2007
+      intro_month: 4
+      retire_year: 2040
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 257
+      smoke: Diesel
+      gear: 105
+    extended:
+      axles: 2
+
+  - id: "913"
+    role_en: "driving trailer"
+    role_cs: "řídicí vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["813"]
+    next: ["813"]
+    couple_liveries: next
+    fields:
+      cost: 993600
+      payload: 53                   # 48 seats + 5 folding
+      speed: 90
+      weight: 17
+      runningcost: 4
+      fixed_cost: 18
+      intro_year: 2007
+      intro_month: 4
+      retire_year: 2040
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+    extended:
+      axles: 2
+
+liveries:
+  - color: cervenobilasiva
+    name_en: "red-white-grey"
+    name_cs: "červeno-bílo-šedá"

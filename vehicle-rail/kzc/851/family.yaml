@@ -1,0 +1,68 @@
+agency: KZC
+type: "851"
+copyright: Sim
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "KŽC"
+  agency_cs: "KŽC"
+  family_en: '"Krokodýl"'
+  family_cs: '"Krokodýl"'
+
+# KŽC Doprava's 851.008 (ČSD M 286.1008, Vagónka Studénka 1968, ex ŽSR Zvolen,
+# with KŽC since 2006, general repair 2015-2018). Single railcar B'2' with a
+# hydrodynamic transmission, engine room behind one cab; 588 kW, 110 km/h,
+# 24.79 m, 50.5 t, 48 seats + 60 standing. 2026: PID T1 "Pražský motoráček"
+# (alternating with the 830/831s), T8 reserve; runs alone or with the Bmx
+# 050 029 coach (native CSD_Balm-d is that coach class), so it couples with
+# anything.
+#
+# Livery: ČSD "polomáčený" - cream window band and upper cab fronts, red body
+# below with a thin cream line near the bottom edge, a thin red line under the
+# roof edge (also round the roof headlight pod), light warm-grey roof since the
+# 2015-18 repair (KŽC drawing M286.1008; photos "851 008 v Roztokách u
+# Křivoklátu" and "06.07.19 Kouřim M286.1008", Commons; older photos show a
+# dark grey roof).
+#
+# Sheet: repainted by a one-off painter script (not in the repo) from the Sim
+# pak128.CS rail-psg mail/850_851/851_CSD.png (CSD_M286_1): the two overlapping
+# half-vehicles composited into one (length 12 as upstream), all passenger /
+# vestibule / luggage glass -> lit specials, windscreens, cab windows and the
+# engine-room window plain, the 0xE3E3FF lamps -> headlight special at the
+# leading end, the anti-aliased roof-edge and lower lines made one clear pixel
+# (red / cream), roof lightened. The engine end leads, as in the native.
+
+vehicles:
+  - id: "851"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2947600
+      payload: 48
+      speed: 110
+      weight: 51
+      runningcost: 123
+      fixed_cost: 866
+      intro_year: 2018
+      intro_month: 6
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+      engine_type: diesel
+      power: 588
+      smoke: Diesel
+      gear: 105
+    extended:
+      axles: 4
+
+liveries:
+  - color: polomaceny
+    name_en: "ČSD cream-red"
+    name_cs: "ČSD krémovo-červená"

@@ -1,0 +1,206 @@
+agency: MAV
+type: "IC"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MÁV"
+  agency_cs: "MÁV"
+  family_en: "IC"
+  family_cs: "IC"
+
+# MÁV (ex-MÁV-START, keeper mark H-START) 26.4 m UIC-Z1 / IC+ day coaches on
+# Czech track in 2026 (vagonWEB 2026 compositions + Jan-Sep 2026 reports):
+# - EC 130/131 "Báthory" Budapest - Bratislava - Břeclav - Přerov - Ostrava -
+#   Bohumín (- Warszawa), daily, about 190 km in CZ, hauled by the PKP IC
+#   leased Vectrons (ELL 193 428, GMP 1293 206, Cargounit): Amz 19-91 + Bmz
+#   21-91 (x2, one runs on to Kraków with IC 204/205) + Bpmz 20-91.4 IC+ (from
+#   15 Feb 2026; before that Bpmz 20-71) + Bbdpmz 84-91 IC+ + WRRmz 88-71.
+#   Cars seen Sep 2026: Bmz 108-6, 102-9, 106-0, 302-5, 307-4; Bpmz 412-3,
+#   113-7, 115-2; Bbdpmz 403-5, 404-3; WRRmz 001-7, 004-1, 006-6; Amz 300-3.
+# - EN 476/477 "Metropol" Budapest - Břeclav: 2x Bmz 21-91 (2191.0 GOŠA).
+# - The Amz 19-91.3 also runs Břeclav - Praha - Děčín with NJ 456/457 (see
+#   ../nocni).
+# Vehicles (drawings vagonWEB START/*.gif, 10 px = 1 m):
+# - Amz 61 55 19-91 (1991.1 CAF 1994 / 1991.3 DWA 1997-98, rebuilt 2018-21):
+#   1st class, 9 compartments, 54 seats, 200 km/h.
+# - Bmz 61 55 21-91 (2191.0 GOŠA 1989 / .1 CAF 1994 / .3 DWA 1997-98,
+#   rebuilt 2002-21): 11 compartments, 66 seats, 200 km/h. One vehicle for all
+#   three series: identical window layout at 1x.
+# - Bpmz 61 55 20-91.1 (CAF 1994, rebuilt 2017-18; also stands for the DWA
+#   Bpmz 20-71 of the timetable until 14 Feb 2026): open, 80 seats.
+# - Bpmz 61 55 20-91.4 IC+ (MÁV Szolnok 2019): open, 80 seats, flush windows
+#   in a lower band (1.9-2.7 m, drawn 2 rows like the real 0.8 m band).
+# - Bbdpmz 61 55 84-91.4 IC+ (Szolnok 2018-19): 47 + 3 seats, 8 bicycles,
+#   wheelchair place, second door inboard, blue end zone with two windows
+#   and the big white bicycle pictogram.
+# - WRRmz 61 55 88-71 (DWA 1995, rebuilt 2020-21): bistro-restaurant, 30 +
+#   21 places, 160 km/h, one entrance, kitchen windows in a blue end zone, the
+#   knife-and-fork pictogram at the other end.
+# Not shipped: WRmz 88-91 (one stand-in in EC 131 in Sep 2026).
+#
+# Livery "MÁV IC" (2016+, the only livery these cars wear; photos: Bpmz
+# 20-91 412-3 Budapest-Déli 2019, Bbdpmz 406-8 Kőbánya-Kispest 2019 and 418-3
+# Ljubljana 2025, Bmz 21-91 001-3 2026, Bmz 104-5 vagonWEB 2023, Bpmz 20-71
+# 008-3 2022): gentian-blue end zones, end walls and roof ends, turquoise
+# (lagoon blue) doors, greyish-white body, a blackish-blue window band, the
+# upper swoosh (blue line + turquoise band) and the lower one (turquoise over
+# blue) that turn up into wedges near the ends; every diagonal leans the same
+# way on both sides as seen (drawings Bmz-2191-3-m-a/b, photos). Gold/navy
+# MÁV-START logo on the white lower wedge, white class plates by the doors.
+#
+# Sprites are rendered from a box model: tools/railrender/mav_pkp_coaches.py
+# on tools/railrender/coachkit.py; regenerate with
+# `python tools/railrender/mav_pkp_coaches.py mavic`. Length 13 = 26.4 m.
+# Coaches couple with any locomotive or coach (prev/next: any).
+
+vehicles:
+  - id: "Amz19-91"
+    display_id: "Amz 19-91"
+    role_en: "1st class compartment coach"
+    role_cs: "oddílový vůz 1. třídy"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2450000
+      payload: 54
+      speed: 200
+      weight: 46
+      runningcost: 30
+      fixed_cost: 290
+      intro_year: 2018
+      intro_month: 6
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmz21-91"
+    display_id: "Bmz 21-91"
+    role_en: "2nd class compartment coach"
+    role_cs: "oddílový vůz 2. třídy"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 2250000
+      payload: 66
+      speed: 200
+      weight: 48
+      runningcost: 28
+      fixed_cost: 275
+      intro_year: 2017
+      intro_month: 6
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bpmz20-91"
+    display_id: "Bpmz 20-91"
+    role_en: "2nd class open coach"
+    role_cs: "velkoprostorový vůz 2. třídy"
+    row: 2
+    prev: any
+    next: any
+    fields:
+      cost: 2300000
+      payload: 80
+      speed: 200
+      weight: 46
+      runningcost: 30
+      fixed_cost: 280
+      intro_year: 2017
+      intro_month: 6
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bpmz20-91-ICp"
+    display_id: "Bpmz 20-91 IC+"
+    role_en: "2nd class open coach"
+    role_cs: "velkoprostorový vůz 2. třídy"
+    row: 3
+    prev: any
+    next: any
+    fields:
+      cost: 2600000
+      payload: 80
+      speed: 200
+      weight: 47
+      runningcost: 30
+      fixed_cost: 290
+      intro_year: 2019
+      intro_month: 6
+      retire_year: 2055
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bbdpmz84-91"
+    display_id: "Bbdpmz 84-91 IC+"
+    role_en: "2nd class coach with bicycle and wheelchair space"
+    role_cs: "vůz 2. třídy s místy pro jízdní kola a vozíčkáře"
+    row: 4
+    prev: any
+    next: any
+    fields:
+      cost: 2600000
+      payload: 50
+      speed: 200
+      weight: 48
+      runningcost: 30
+      fixed_cost: 290
+      intro_year: 2019
+      intro_month: 1
+      retire_year: 2055
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "WRRmz88-71"
+    display_id: "WRRmz 88-71"
+    role_en: "bistro-restaurant car"
+    role_cs: "bistro-jídelní vůz"
+    row: 5
+    prev: any
+    next: any
+    fields:
+      cost: 2600000
+      payload: 51
+      speed: 160
+      weight: 52
+      runningcost: 34
+      fixed_cost: 320
+      intro_year: 2020
+      intro_month: 12
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: mavic
+    name_en: "MÁV IC"
+    name_cs: "MÁV IC"

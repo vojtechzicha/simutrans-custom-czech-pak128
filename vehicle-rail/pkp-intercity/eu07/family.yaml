@@ -1,0 +1,62 @@
+agency: PKPIntercity
+type: "EU07"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "PKP Intercity"
+  agency_cs: "PKP Intercity"
+  family_en: "Pafawag 4E"
+  family_cs: "Pafawag 4E"
+
+# PKP Intercity EU07 (Pafawag / HCP 4E, 483 built 1965-1994), 3 kV DC only.
+# On Czech track in 2026 only the seasonal TLK 402/403 "Wydmy" Łeba / Gdynia -
+# Chałupki - Bohumín, 27 Jun - 30 Aug 2026 (5 140 106, 119, 123, 195 seen).
+# 15.915 m over buffers, Bo'Bo', 80 t, 2 000 kW, 125 km/h. Drawn at length 8
+# like every 16 m pak128.cs loco. intro = the transfer of the class to PKP
+# Intercity (2008).
+#
+# Livery intercity = the current PKP Intercity loco scheme (vagonWEB drawing
+# EU07-IC2; photos EU07-092 Kraków 2023, EU07-302 / EU07-360 Poznań 2021):
+# silver-grey body with small windows and louvre grilles, a thin royal-blue
+# line along the top of the side, a flat royal-blue front with three windows,
+# a silver bar under them and the IC logo, round lamps, blue lower half of the
+# cab sides, a royal-blue lower band breaking up in halftone dots round a
+# silver gap left of centre as seen (orange "iC" + blue outlined "C", "PKP
+# INTERCITY"), red-brown diamond pantographs. The heritage liveries do not
+# work to Bohumín.
+#
+# Sprites are rendered from a box model (tools/railrender/pkp_locos.py).
+# Regenerate with `python tools/railrender/pkp_locos.py eu07`.
+
+vehicles:
+  - id: "EU07"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2900000
+      payload: 0
+      speed: 125
+      weight: 80
+      runningcost: 220
+      fixed_cost: 1500
+      intro_year: 2008
+      intro_month: 1
+      retire_year: 2035
+      retire_month: 1
+      waytype: track
+      engine_type: electric
+      power: 2000
+      gear: 150
+      length: 8
+    extended:
+      axles: 4
+
+liveries:
+  - color: intercity
+    name_en: "PKP Intercity"
+    name_cs: "PKP Intercity"

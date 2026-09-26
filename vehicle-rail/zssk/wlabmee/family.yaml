@@ -1,0 +1,60 @@
+agency: ZSSK
+type: "WLABmee"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "ZSSK"
+  agency_cs: "ZSSK"
+  family_en: "Görlitz"
+  family_cs: "Görlitz"
+
+# ZSSK WLABmee 62 56 71-90 001-010: sleeping car built by Waggonbau Görlitz
+# 1994-95 for RŽD (ŽSR took 10 in 1997), 26.4 m, 200 km/h, 11 three-berth
+# compartments, 33 berths, doors at both ends. On Czech track in 2026:
+# 1-2 cars (003, 004 reported) in EN 442/443 "Slovakia" Praha - Ostrava -
+# Bohumín (- Žilina - Košice - Humenné), extra cars on peak days.
+#
+# Livery (ZSSK red / white / grey, photo WLABmee 71-90 005-2, Commons, and the
+# vagonWEB drawings WLABmee-a/-b): red from the roof down to just under the
+# windows, white middle band, light grey sill band, grey roof with two
+# equipment boxes, red doors with a grey foot, orange ZSSK logo near the left
+# end of each side. Side a (the corridor side of the photo) has 14 windows,
+# the last a WC; side b 7 windows. The small white "LÔŽKOVÝ VOZEŇ" lettering
+# above the first windows is too small to show at 1x and is left out.
+#
+# Sprites are rendered from a box model: tools/railrender/zssk_coaches.py on
+# tools/railrender/coachkit.py; regenerate with
+# `python tools/railrender/zssk_coaches.py wlabmee`. Length 13 = 26.4 m.
+# Couples with any locomotive or coach (prev/next: any).
+
+vehicles:
+  - id: "WLABmee71-90"
+    display_id: "WLABmee 71-90"
+    role_en: "sleeping car"
+    role_cs: "lůžkový vůz"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2800000
+      payload: 33
+      speed: 200
+      weight: 55
+      runningcost: 36
+      fixed_cost: 340
+      intro_year: 1997
+      intro_month: 6
+      retire_year: 2035
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: cervenobilasiva
+    name_en: "red-white-grey"
+    name_cs: "červeno-bílo-šedá"

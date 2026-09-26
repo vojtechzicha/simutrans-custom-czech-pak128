@@ -1,0 +1,63 @@
+agency: PKPIntercity
+type: "EP09"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "PKP Intercity"
+  agency_cs: "PKP Intercity"
+  family_en: "Pafawag 104E"
+  family_cs: "Pafawag 104E"
+
+# PKP Intercity EP09 (Pafawag 104E, 47 built 1986-1997, 45 left), 3 kV DC
+# only. On Czech track in 2026 only the border legs Chałupki / Zebrzydowice -
+# Bohumín: IC 416/417 Carpatia, EC Silesia, IC Polonia, Sobieski (EP09 005,
+# 007, 008, 009, 013, 023, 029, 032, 033, 046 seen). 16.74 m over buffers,
+# 2.974 m wide, 4.30 m high, Bo'Bo', 83.5 t, 2 920 kW, 160 km/h. Drawn at
+# length 8 like every 16-17 m pak128.cs loco. intro = the transfer of the
+# class to PKP Intercity (2008).
+#
+# Livery intercity = the current PKP Intercity loco scheme (vagonWEB drawing
+# EP09-IC2; photos EP09-008/017/027/047 Kraków Główny 2024, EP09-013 Poznań
+# 2025): silver-grey body with small louvre grilles high on the side, a thin
+# royal-blue line along the top of the side, royal-blue front face and front
+# corners, blue lower half of the cab sides, a royal-blue lower band that
+# breaks up in halftone dots round a silver gap left of centre as seen (the
+# same from either side) carrying the orange "iC" + blue outlined "C" and
+# "PKP INTERCITY", white door handrails, red-brown single-arm pantographs.
+#
+# Sprites are rendered from a box model (tools/railrender/pkp_locos.py on the
+# pak128.cs-calibrated railkit renderer). Regenerate with
+# `python tools/railrender/pkp_locos.py ep09`.
+
+vehicles:
+  - id: "EP09"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 4000000
+      payload: 0
+      speed: 160
+      weight: 84
+      runningcost: 240
+      fixed_cost: 2300
+      intro_year: 2008
+      intro_month: 1
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      engine_type: electric
+      power: 2920
+      gear: 160
+      length: 8
+    extended:
+      axles: 4
+
+liveries:
+  - color: intercity
+    name_en: "PKP Intercity"
+    name_cs: "PKP Intercity"

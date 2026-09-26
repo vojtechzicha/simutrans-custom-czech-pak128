@@ -1,0 +1,100 @@
+agency: KZC
+type: "830"
+copyright: Sim
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "KŽC"
+  agency_cs: "KŽC"
+  family_en: '"Kredenc"'
+  family_cs: '"Kredenc"'
+
+# KŽC Doprava's ČSD M 262.0 / M 262.1 "kredenc" railcars (Vagónka Studénka 1959,
+# 2'Bo' diesel-electric, cabs at both ends, a luggage compartment behind one
+# cab). In timetabled service 2026 on PID T1 "Pražský motoráček" (alternating
+# with 851.008), T8 "Posázavský motoráček" (+ Bix trailers) and DÚK T5
+# "Podřipský motoráček": 830.209 (M 262.0209, with KŽC since 2020, running
+# again from 2022/23) and 831.183 / 831.212 (M 262.1183 / .1212, rebuilt 1989,
+# with KŽC since about 2010 / 2012). 21.2 m, 90 km/h, 56 seats + 5 bikes.
+# 830.168/.180/.056/.124 are in works or stored and are not modelled.
+#
+# Livery: ČSD "polomáčený" - cream upper body incl. the upper cab fronts, red
+# below the waist, light grey roof. The two 831s carry yellow warning bands on
+# the fronts at waist level, wrapping round onto the cab sides (kzc.cz vehicle
+# page of 831.212: "polomáčený nátěr se žlutými výstražnými pruhy na čelech ...
+# jako na 831.183"; photo "831 183 Litomerice horny nadrazy", Commons; KŽC
+# drawings M262.1183 / M262.1212). 830.209 lost its stripes in the 2001-02
+# repaint (kzc.cz vehicle page, KŽC drawing M262.0209). So the stripes belong to
+# the class row, not to a livery: row 0 = 830 plain, row 1 = 831 with stripes.
+#
+# Sheet: repainted by a one-off painter script (not in the repo) from the Sim
+# pak128.CS rail-psg mail/830/M262-1.png (CSD_M262_1, plain roof like all three
+# KŽC cars; M262.png draws 830.056's roof exhaust box). The pak's two
+# overlapping half-vehicles (passenger + luggage, dithered halves in the s view)
+# are composited into one; all side glass -> lit specials, windscreens and cab
+# side windows plain, roof headlight of the leading cab lit (three-lamp ČSD
+# pattern), yellow bands added on the 831 row. Length 10 as upstream.
+# The railcars run solo, in multiple (830.209 + Bix + Bixovna + 831.183 on the
+# Mochov trip) or with loco-hauled trailers, so they couple with anything.
+
+vehicles:
+  - id: "830"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 1812200
+      payload: 56
+      speed: 90
+      weight: 43
+      runningcost: 57
+      fixed_cost: 328
+      intro_year: 2022
+      intro_month: 6
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 301
+      smoke: Diesel
+      gear: 127
+    extended:
+      axles: 4
+
+  - id: "831"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 1761800
+      payload: 56
+      speed: 90
+      weight: 47
+      runningcost: 55
+      fixed_cost: 317
+      intro_year: 2012
+      intro_month: 6
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 309
+      smoke: Diesel
+      gear: 129
+    extended:
+      axles: 4
+
+liveries:
+  - color: polomaceny
+    name_en: "ČSD cream-red"
+    name_cs: "ČSD krémovo-červená"

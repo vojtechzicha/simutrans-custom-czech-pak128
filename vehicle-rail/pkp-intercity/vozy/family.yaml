@@ -1,0 +1,206 @@
+agency: PKPIntercity
+type: "IC"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "PKP Intercity"
+  agency_cs: "PKP Intercity"
+  family_en: "IC"
+  family_cs: "IC"
+
+# PKP Intercity 26.4 m UIC-Z day coaches on Czech track in 2026 (vagonWEB
+# 2026 compositions + Jan-Sep 2026 reports):
+# - IC 100-107 Moravia / Polonia / Sobieski and IC 202-205 Danubius / Prater
+#   Wien - Břeclav - Přerov - Ostrava - Bohumín (- Katowice / Warszawa /
+#   Kraków), about five 7-car sets a day, hauled in CZ by ČD 384 / RAILL 193:
+#   A 9 (e)mnouz + WRmnouz + B 10 bmnouz + B 9 mnopuvz + 2-3x B 11 mnouz.
+# - EN 406/407 Chopin: B 11 mnouz seats (see ../nocni for the sleepers).
+# - Baltic Express IC 260-265 / 460-461 Praha - Pardubice - Lichkov: one
+#   A 9 mnouz (139A / Z2A / 156A) through to Gdynia.
+# Vehicles (one per body family; the sub-types differ by less than a pixel):
+# - A 9 emnouz / A 9 mnouz (HCP Z2 156A / 139A, FPS Z2A): 1st class, 9
+#   compartments, 54 seats (drawings A9emnouz-156A-m-v2-a, A9mnouz-Z2AMg).
+# - B 11 mnouz (HCP Z2 144A / 170A / 171A / 136A, FPS XB / Z2B): 11
+#   compartments, 66 seats (drawings B11mnouz-171A-m-a, -144A-FPS-m-a).
+# - B 10 bmnouz (FPS Z1B-20 / XBN, 156A): 10 compartments + wheelchair place
+#   (drawing B10bmnouz-Z1B-FPS-a).
+# - B 9 mnopuvz (Pesa 154A-10 / 154Aa-10, HCP 159A): open, 72 seats, bicycle
+#   places (drawing B9mnopuvz-154A-Pesa-a).
+# - WRmnouz (61 51 88-70 190 / 194, 406A): restaurant car, black band, red
+#   line (drawing WRmnouz-m-a/b, photo 194-5 Warszawa Centralna Dec 2024).
+# - WRmnouz a (61 51 88-70 182 / 183, in the corridor sets Aug-Sep 2026): the
+#   older restaurant-car scheme: pale blue-grey body with separate windows,
+#   red band under the roof, white belt, blue stripe (drawing WRmnouz-a,
+#   photos 182-0 Wien Hbf Dec 2019 and 190-3 in EC 100 at Wien 2018).
+# All 160 km/h here (some FPS rebuilds are cleared for 200). Not shipped: the
+# 24.5 m coaches of the summer TLK Wydmy (reach Bohumín station only), the
+# SKPL ARkimmbz stand-in bistro, the one-day Krecik retro train.
+#
+# Livery "PKP Intercity" (current 2026 look; photos B 11 mnouz 171A 185-3
+# Koper Aug 2026, B 9 mnopuvz 154A-10 and A 9 mnouz Z2A vagonWEB Apr/May
+# 2026, B 10 bmnouz XBN Wien May 2026, B 9 mnopuvz 159A Warszawa Aug 2025):
+# light grey body, the class line at the cant rail (green 2nd, yellow 1st,
+# red restaurant), a black window band with rounded windows, royal-blue door
+# leaves, big blue class numerals by the doors, a white belt under the band,
+# the ultramarine stripe interrupted by the orange "iC" logo and "PKP
+# INTERCITY" near the left end (as seen), light grey below, grey end walls.
+# The earlier look with framed windows on grey and grey doors (photos 144A
+# 2012, 170A 2015, Trako 2017, Z2A Praha 2022, and the research dossier) is no
+# longer on the 2025/26 photos, so it is not shipped.
+#
+# Sprites are rendered from a box model: tools/railrender/mav_pkp_coaches.py
+# on tools/railrender/coachkit.py; regenerate with
+# `python tools/railrender/mav_pkp_coaches.py pkpvozy`. Length 13 = 26.4 m.
+# Coaches couple with any locomotive or coach (prev/next: any).
+
+vehicles:
+  - id: "A9emnouz"
+    display_id: "A 9 emnouz"
+    role_en: "1st class compartment coach"
+    role_cs: "oddílový vůz 1. třídy"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2400000
+      payload: 54
+      speed: 160
+      weight: 46
+      runningcost: 30
+      fixed_cost: 290
+      intro_year: 2014
+      intro_month: 12
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "B11mnouz"
+    display_id: "B 11 mnouz"
+    role_en: "2nd class compartment coach"
+    role_cs: "oddílový vůz 2. třídy"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 2200000
+      payload: 66
+      speed: 160
+      weight: 48
+      runningcost: 28
+      fixed_cost: 275
+      intro_year: 2014
+      intro_month: 12
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "B10bmnouz"
+    display_id: "B 10 bmnouz"
+    role_en: "2nd class compartment coach with wheelchair space"
+    role_cs: "oddílový vůz 2. třídy s místem pro vozíčkáře"
+    row: 2
+    prev: any
+    next: any
+    fields:
+      cost: 2250000
+      payload: 58
+      speed: 160
+      weight: 48
+      runningcost: 28
+      fixed_cost: 275
+      intro_year: 2014
+      intro_month: 12
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "B9mnopuvz"
+    display_id: "B 9 mnopuvz"
+    role_en: "2nd class open coach with bicycle space"
+    role_cs: "velkoprostorový vůz 2. třídy s místy pro jízdní kola"
+    row: 3
+    prev: any
+    next: any
+    fields:
+      cost: 2300000
+      payload: 72
+      speed: 160
+      weight: 47
+      runningcost: 30
+      fixed_cost: 280
+      intro_year: 2014
+      intro_month: 12
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "WRmnouz"
+    display_id: "WRmnouz"
+    role_en: "restaurant car"
+    role_cs: "jídelní vůz"
+    row: 4
+    prev: any
+    next: any
+    fields:
+      cost: 2600000
+      payload: 42
+      speed: 160
+      weight: 52
+      runningcost: 34
+      fixed_cost: 320
+      intro_year: 2014
+      intro_month: 12
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "WRmnouz-a"
+    display_id: "WRmnouz"
+    role_en: "restaurant car (older livery)"
+    role_cs: "jídelní vůz (starší nátěr)"
+    row: 5
+    prev: any
+    next: any
+    fields:
+      cost: 2600000
+      payload: 42
+      speed: 160
+      weight: 52
+      runningcost: 34
+      fixed_cost: 320
+      intro_year: 2010
+      intro_month: 1
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: intercity
+    name_en: "PKP Intercity"
+    name_cs: "PKP Intercity"

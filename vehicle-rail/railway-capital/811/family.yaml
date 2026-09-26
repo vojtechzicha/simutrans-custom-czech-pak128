@@ -1,0 +1,108 @@
+agency: RailwayCapital
+type: "811"
+copyright: Sim
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Railway Capital"
+  agency_cs: "Railway Capital"
+  family_en: '"Mandarinka"'
+  family_cs: '"Mandarinka"'
+
+# Railway Capital (RCAS) class 811, ex ZSSK (ŽOS Zvolen rebuilds of 810s and
+# Baafx 011 trailers, 1996-2000: new cab ends, LIAZ ML 640 S 237.5 kW with
+# electric transmission, both axles powered): 6 bought from KPT rail in 2019,
+# in service from 2021; 811.013, 020, 021 photographed. DÚK T8 Moldavská
+# horská dráha, Most - Moldava v Krušných horách, usually 811 + bike trailer
+# (ex-ZSSK 011 / Btax) + 811. 13.97 m, 80 km/h, 24 t, 53 seats + 41 standing.
+# Trailer: 15 t, 62 seats. The railcar couples with another 811 or a trailer
+# on either end, the trailer cannot lead; liveries mix freely in one train.
+#
+# Liveries (photos research/ops/photos/railway-capital + Commons Category:SK
+# Class 811 of Railway Capital):
+#   oranzova  ŽSR "mandarinka" (811.020, 811.021 since 2024; Moldava 2025,
+#             Litvínov): orange body, white band at lamp level on the cab-end
+#             panels that steps one row down behind the doors and dips into a
+#             V between the paired headlamps on the fronts, light-grey lower
+#             skirt and buffer beam with yellow/black warning stripes, light
+#             roof, yellow R/C logo under the windscreen. The orange bike
+#             trailer (Moldava 2025-07 obr06) with the yellow R/C and a bike
+#             pictogram.
+#   blonski   ZSSK "Blonski" (811.013, Moldava): crimson upper body incl. the
+#             window band and the cab front round the windscreen, off-white
+#             lower body with the lamps, grey skirt; the red-white trailer of
+#             the 811.020 set (Litvínov). No R/C logo.
+# The red-white-blue tricolour 811.021 wore in 2020-24 is not current.
+#
+# Sprites: the Sim pak128.CS 810 / Btax 780 bodies (same silhouettes as the
+# upstream 811_ZSR / 811_blonski / 011 sheets, which are recolours of them),
+# repainted zone by zone; the 811 fronts get paired headlamps (tail lamp +
+# unlit lamp at the rear end), with the ČD 810 zone-map painter (one-off
+# painter script, not in the repo). Row 0 = 811, row 1 = trailer. Length 7.
+
+vehicles:
+  - id: "811"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: true
+    prev: ["811", "011"]
+    next: ["811", "011"]
+    couple_liveries: true
+    fields:
+      cost: 1209000
+      payload: 94
+      speed: 80
+      weight: 24
+      runningcost: 32
+      fixed_cost: 164
+      intro_year: 2021
+      intro_month: 6
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 238
+      smoke: Diesel_black
+      gear: 130
+    extended:
+      axles: 2
+
+  - id: "011"
+    role_en: "trailer"
+    role_cs: "přípojný vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["811", "011"]
+    next: ["811", "011"]
+    couple_liveries: true
+    fields:
+      cost: 819800
+      payload: 104
+      speed: 80
+      weight: 15
+      runningcost: 10
+      fixed_cost: 51
+      intro_year: 2021
+      intro_month: 6
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+    extended:
+      axles: 2
+
+liveries:
+  - color: oranzova
+    name_en: "orange"
+    name_cs: "oranžová"
+  - color: blonski
+    name_en: "Blonski"
+    name_cs: "Blonski"

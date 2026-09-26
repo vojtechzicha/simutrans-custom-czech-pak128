@@ -1,0 +1,113 @@
+agency: PKPIntercity
+type: "5370"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "PKP Intercity"
+  agency_cs: "PKP Intercity"
+  family_en: "Siemens Vectron MS"
+  family_cs: "Siemens Vectron MS"
+
+# Siemens Vectron MS locomotives that lessors hire to PKP Intercity and that
+# haul its trains across Czech track in 2026 (vagonWEB compositions Sep 2026):
+# - Cargounit / Industrial Division 91 51 5 370 07x/09x (Siemens 6193 xxx,
+#   "ID 193 Baltic"): Baltic Express IC 260-265 / 460-461 Praha hl.n. - Kolin -
+#   Pardubice - Usti n.O. - Lichkov (- Wroclaw - Gdynia), also EC 130/131 and
+#   IC 216 / 306 / 307 to Bohumin.
+# - ELL 91 80 6193 428: EC 130/131 "Bathory" Budapest - Breclav - Prerov -
+#   Ostrava - Bohumin - Warszawa (vagonWEB 22 and 25 Sep 2026).
+# - GMP (Green Mobility Partners) 91 81 1293 206, leased since Sep 2025: EC
+#   130/131 (15, 21, 24 Sep 2026) and the Baltic Express.
+# All three are the standard Vectron MS body: 18.98 m over buffers, 3.01 m
+# wide, 4.25 m high, Bo'Bo', 6.4 MW, 200 km/h ("200 PL" on 5370 075), 90 t
+# (193 428 side marking), bogie centres 9.50 m. Drawn at length 10 like the
+# Leo Express 193 and pak128.cs's 19 m locomotives (1216, 1116, ES64U2).
+#
+# Liveries (photos: Commons 5370 073 Bohumin Mar 2026, 5370 076 "Jacek"
+# Wroclaw Jan 2025, 5370 075 Warszawa Wschodnia Apr 2026 side-on, Pardubice;
+# 193 428 Warszawa Zachodnia Feb 2026 both views; 1293 206 Kotomierz Sep 2025
+# on IC 265 Baltic Express):
+# - balticexpress: Cargounit "Baltic Express" wrap - sky-blue cab ends and cab
+#   roofs, white sides with a pale watercolour sea, big dark-blue italic
+#   "BALTIC EXPRESS" and the slogan "MORZE AZ DO CZECH", red-orange PKP IC
+#   logo behind the cab door, vertical red "CARGOUNIT" at the blue/white edge,
+#   anthracite lower band and machine-room roof, black lower front.
+# - kierunekeuropa: 193 428 in PKP IC blue (vagonWEB diagram "2024"; still ELL
+#   white in May 2024, Graz photo)
+#   with the "Kierunek EUROPA!" graphic - IC logo, white "EUROPA!" in gold EU
+#   stars, light-blue halftone map of Europe, stacked white city names; grey
+#   lower band and lower front.
+# - gmpbila: 1293 206 plain silver-white, anthracite lower band and roof.
+# Not shipped: 5 370 072 (6193 274, Cargounit teal landscape wrap, also seen on
+# IC 260/263), 5 370 095 "Adriatic Express" (once on IC 460) and 5 370 052 /
+# 053 / 194 (no photo of their 2026 livery).
+#
+# Sprites are rendered from a box model: tools/railrender/ops_vectron.py wraps
+# the Leo Express Vectron (tools/railrender/vectron.py) and repaints it.
+# Regenerate with `python tools/railrender/ops_vectron.py`. Each livery holds
+# one vehicle (its real class number), all on sprite row 0.
+
+vehicles:
+  - id: "5370"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    liveries: [balticexpress]
+    prev: any
+    next: any
+    fields: &vectron
+      cost: 6800000
+      payload: 0
+      speed: 200
+      weight: 90
+      runningcost: 210
+      fixed_cost: 3100
+      intro_year: 2024
+      intro_month: 12
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      engine_type: electric
+      power: 6400
+      gear: 160
+      length: 10
+    extended:
+      axles: 4
+
+  - id: "193"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    liveries: [kierunekeuropa]
+    prev: any
+    next: any
+    fields: *vectron
+    extended:
+      axles: 4
+
+  - id: "1293"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    liveries: [gmpbila]
+    prev: any
+    next: any
+    fields:
+      <<: *vectron
+      intro_year: 2025
+      intro_month: 9
+    extended:
+      axles: 4
+
+liveries:
+  - color: balticexpress
+    name_en: "Baltic Express"
+    name_cs: "Baltic Express"
+  - color: kierunekeuropa
+    name_en: "Kierunek EUROPA!"
+    name_cs: "Kierunek EUROPA!"
+  - color: gmpbila
+    name_en: "GMP white"
+    name_cs: "GMP bílá"

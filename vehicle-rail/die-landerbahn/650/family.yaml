@@ -1,0 +1,93 @@
+agency: DieLanderbahn
+type: "650"
+copyright: Lubak91
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Die Länderbahn"
+  agency_cs: "Die Länderbahn"
+  family_en: "Stadler Regio-Shuttle RS1"
+  family_cs: "Stadler Regio-Shuttle RS1"
+
+# Stadler (ex-ADtranz) Regio-Shuttle RS1, DB class 650, of Die Länderbahn (DLB,
+# Netinera). Single low-floor railcar with a cab at each end, B'B' (all four
+# axles driven), 2 × 257 kW MAN, 120 km/h, 25.5 m over couplers, 2.90 m wide,
+# about 43 t, 56 + 24 tip-up seats (vagonWEB "56+24"). Central automatic
+# coupler in a recess, no side buffers (photos below), unlike the ČD 840/841.
+# On Czech track in 2026:
+#   vogtlandbahn   ~17 cars (VT 5x/7x/15x, 650 56x, incl. ex-ODEG/PEG; 8 new in
+#                  2012): RB2 Zwickau - Plauen - Bad Brambach - Vojtanov -
+#                  Františkovy Lázně - Cheb, RB1/RB5 Klingenthal - Kraslice.
+#   oberpfalzbahn  650 665-673 (VT 32-40), in service since summer 2001:
+#                  RB 27 Schwandorf - Cham - Furth im Wald - Česká Kubice -
+#                  Domažlice.
+# The one-off EgroNet advertising wrap of VT 72 is not modelled.
+#
+# Liveries (research ops/de_at_operators.md A2/A3; photos win):
+#   vogtlandbahn   off-white body and light roof; teal-green band at the foot of
+#                  the side wall over a dark grey skirt; yellow-orange doors in a
+#                  green portal that runs from the cant rail down to the band
+#                  (I19_875 Bf Eger 2 × 650 VB, Falkenstein 2024); white front,
+#                  dark coupler recess between white lamp panels, dark grey
+#                  valance, the green band only reaching round the cab corners
+#                  (the research said it crosses the front: Weischlitz 650 154
+#                  and Falkenstein show white lamp panels there); green ≡ +
+#                  black "vogtlandbahn" high on the middle section.
+#   oberpfalzbahn  golden yellow body, green band at the foot of the side and the
+#                  whole lower front below the coupler recess green, dark blue
+#                  doors, black windscreen, blue ≡ "oberpfalzbahn" lettering
+#                  (650DB 650 666 B W, 650 665 A W, RS1 close-up 650 665 B).
+#
+# Sheets: the ČD 840 body, pak128.CS CD_840 by Lubak91 (vehicle.motorak.840_841
+# row 1), zone-map repainted with the ČD p2 zone painter (one-off painter
+# script, not in the repo; the same script paints the agilis/650 sheet).
+# German changes to the body: automatic coupler recess instead of buffers, no
+# yellow ČD buffer-beam edge, upper headlight of the German three-light code
+# lit, the two roof A/C pods lengthened from 3.3 to about 5.5 m (each runs from
+# its door along the whole next section, 650 666 B broadside and VT 51 at Eger;
+# the ČD 840's end halfway, 840 011 Frýdlant), windscreen and driver's side
+# windows plain dark glass, door leaves in the door colour with a glass centre
+# line. One row, length 12 like the ČD 840.
+
+vehicles:
+  - id: "650"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: true
+    prev: ["650"]                 # runs solo or coupled in multiple
+    next: ["650"]
+    couple_liveries: true         # vogtlandbahn and oberpfalzbahn cars couple
+    fields:
+      cost: 3191200
+      payload: 80
+      speed: 120
+      weight: 43
+      runningcost: 71
+      fixed_cost: 1148
+      intro_year: 2001
+      intro_month: 6
+      retire_year: 2040             # cars built 1999-2003 (8 in 2012)
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+      engine_type: diesel
+      power: 514
+      smoke: Diesel_small
+      gear: 135
+    extended:
+      axles: 4
+
+liveries:
+  - color: vogtlandbahn
+    name_en: "vogtlandbahn"
+    name_cs: "vogtlandbahn"
+    source: CD_840 body in vogtlandbahn white with the teal-green sill band and door portals, yellow doors, dark grey skirt, white front with the coupler recess
+  - color: oberpfalzbahn
+    name_en: "oberpfalzbahn"
+    name_cs: "oberpfalzbahn"
+    source: CD_840 body in oberpfalzbahn golden yellow with the green sill band and green lower front, dark blue doors

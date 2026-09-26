@@ -1,0 +1,113 @@
+agency: DieLanderbahn
+type: "642"
+copyright: vojtechzicha      # original art, rendered from a box model
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Die Länderbahn"
+  agency_cs: "Die Länderbahn"
+  family_en: "Siemens Desiro Classic"
+  family_cs: "Siemens Desiro Classic"
+
+# Siemens Desiro Classic (DB class 642, D-DLB 95 80 0642 3xx/8xx) of Die
+# Länderbahn GmbH, brand trilex. Pool of about 36 units (26 own ex-Vogtlandbahn,
+# 10 ex-MRB/Städtebahn Sachsen leased from Alpha Trains), Ostsachsennetz II
+# contract Dec 2019 - Dec 2031. On Czech track since Dec 2010: L7 Liberec -
+# Hrádek n. N. - Zittau - Varnsdorf - Seifhennersdorf, RE2/TLX Dresden - Zittau -
+# Liberec, L24, T9 Liberec - Zittau - Mikulášovice, and with the same units the
+# Die Länderbahn CZ lines L2 Liberec - Česká Lípa - Děčín and L4 Mladá Boleslav -
+# Česká Lípa - Rumburk (Dec 2021/2022 - Dec 2031). Numbers seen in CZ: 642 301,
+# 315, 316, 324, 339, 343, 345, 801, 812, 815.
+# 2 articulated cars on a Jakobs bogie, B'(2)B', a cab at each outer end; one MTU
+# 6R183 of 275 kW with a mechanical gearbox per car, 120 km/h; 41.7 m over
+# couplers, 2.83 m wide, 60 % low floor (575 mm), about 68 t, about 110 + 11
+# folding seats (vagonweb "110+11").
+# Livery `trilex` (all units since the 2020-23 redesign; the old green trilex
+# scheme and the ex-MRB purple are gone, research czech_operators.md / de_at A1):
+# white body; orange cantrail band that sweeps down in a "C" in front of the cab
+# side window to the lower orange band along the sill; white between the window
+# band and the orange; anthracite cab hood over the black windscreen, lamp glass
+# and lower nose, orange front corners; orange door leaves with black glass; grey
+# window frames; one grey pinstripe row (the real two 13 cm lines share one pixel
+# row) from the cab to short of the door with the "≡ trilex" logo above it;
+# orange "≡" between the headlights; light grey roof. Photos: 642 343 at Machnín
+# 11 Sep 2023 (broadside, both cars), 642 812 + 815 at Zittau (fronts, cab side,
+# pinstripes, logo), 642 316 at Liberec (front), Varnsdorf and Hrádek n. N. 2026.
+#
+# Sprites are rendered from the Desiro box model of tools/railrender/desiro.py
+# (geometry from the Siemens VT 642 datasheet, shared with vehicle-rail/arriva/642)
+# with the trilex paint of tools/railrender/ops_desiro.py; regenerate with
+# `python tools/railrender/ops_desiro.py dlb`. Car lengths 10 + 10 (20.85 m each
+# to the Jakobs centre); row 0 = car A (leading cab, headlights), row 1 = car B
+# (trailing cab, tail lights). Units couple in multiple (A-B-A-B...), also with
+# units of other liveries of this family.
+
+vehicles:
+  - id: "642A"
+    display_id: "642"
+    role_en: "half-set A"
+    role_cs: "polovůz A"
+    row: 0
+    head: true
+    tail: false
+    prev: ["642B"]
+    next: ["642B"]
+    couple_liveries: prev     # the rear car of a unit ahead may wear any livery
+    fields:
+      cost: 2020200
+      payload: 60
+      speed: 120
+      weight: 34
+      runningcost: 70
+      fixed_cost: 538
+      intro_year: 2010
+      intro_month: 12
+      retire_year: 2031
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 275
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 3
+
+  - id: "642B"
+    display_id: "642"
+    role_en: "half-set B"
+    role_cs: "polovůz B"
+    row: 1
+    head: false
+    tail: true
+    prev: ["642A"]
+    next: ["642A"]
+    couple_liveries: next     # the lead car of a unit behind may wear any livery
+    fields:
+      cost: 1970200
+      payload: 61
+      speed: 120
+      weight: 34
+      runningcost: 65
+      fixed_cost: 499
+      intro_year: 2010
+      intro_month: 12
+      retire_year: 2031
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 275
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 3
+
+liveries:
+  - color: trilex
+    name_en: "trilex"
+    name_cs: "trilex"

@@ -1,0 +1,77 @@
+agency: Agilis
+type: "650"
+copyright: Lubak91
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "agilis"
+  agency_cs: "agilis"
+  family_en: "Stadler Regio-Shuttle RS1"
+  family_cs: "Stadler Regio-Shuttle RS1"
+
+# Stadler Regio-Shuttle RS1, DB class 650.7 (650 701-738), of agilis: 38 built
+# 2010-12 for the Dieselnetz Oberfranken (service from June 2011 / Dec 2012),
+# the same late RS1 generation as the ČD 840/841: 2 × 265 kW Iveco, 120 km/h,
+# 25.5 m, about 43 t, UIC screw coupler with side buffers (photos below).
+# On Czech track in 2026: RB 95/96 Hof - Selb-Plößberg - Aš - Cheb -
+# Marktredwitz and the Os 172xx locals Cheb - Františkovy Lázně - Aš - Aš město
+# (vagonWEB 2026); 650 702 photographed at Aš.
+#
+# Livery agilis (research ops/de_at_operators.md B; photos 03.07.19 Hof Hbf
+# 650735, Aš vlak na nádraží 650 702, Hochstadt-Marktzeuln 650 716,
+# Burgkunstadt 650 706): silver-grey body and roof; the cab section from the
+# front to just behind the driver's side window in dark anthracite, with the
+# lime "pixel flight" dots; lime doors and a lime band low on the side wall
+# (the research said the whole lower half is dark: Hof and Hochstadt show it
+# silver above the lime band, only the cab section is dark); dark front with a
+# lime frame round the black windscreen and a lime panel carrying the
+# headlights, dark lower front with the buffers; grey "agilis" high on the
+# middle section.
+#
+# Sheet: the ČD 840 body, pak128.CS CD_840 by Lubak91 (vehicle.motorak.840_841
+# row 1), zone-map repainted with the ČD p2 zone painter (one-off painter
+# script, not in the repo; the same script paints the die-landerbahn/650
+# sheets). Roof A/C pods lengthened
+# to about 5.5 m (door to the far end of the next section, 650 716 Hochstadt;
+# the ČD 840's end halfway), upper headlight of the German three-light code
+# lit, windscreen and driver's side windows plain dark glass, no yellow ČD
+# buffer-beam edge, door leaves in the door colour with a glass centre line.
+# One row, length 12 like the ČD 840.
+
+vehicles:
+  - id: "650"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: true
+    prev: ["650"]                 # runs solo or coupled in multiple
+    next: ["650"]
+    fields:
+      cost: 3290000
+      payload: 71
+      speed: 120
+      weight: 43
+      runningcost: 71
+      fixed_cost: 1148
+      intro_year: 2011
+      intro_month: 6
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+      engine_type: diesel
+      power: 530
+      smoke: Diesel_small
+      gear: 135
+    extended:
+      axles: 4
+
+liveries:
+  - color: agilis
+    name_en: "agilis"
+    name_cs: "agilis"
+    source: CD_840 body in agilis silver-grey with dark anthracite cab sections, lime doors, lime sill band, lime windscreen frame and headlight panel

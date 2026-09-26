@@ -1,0 +1,191 @@
+agency: KolejeDolnoslaskie
+type: "45WE"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Koleje Dolnośląskie"
+  agency_cs: "Koleje Dolnośląskie"
+  family_en: "Newag Impuls"
+  family_cs: "Newag Impuls"
+
+# Newag Impuls 45WE of Koleje Dolnośląskie (KD): 11 five-section EMUs
+# 45WE-019...029 (UIC 94 51 2 140 8xx), delivered 2017, factory-fitted with Czech
+# safety equipment and radio. Regular on KD lines D3 Wrocław - Kłodzko -
+# Międzylesie - Lichkov and D9 Rawicz - Lichkov (Os 6280-6287, about 4 pairs a
+# day since 10 Dec 2017); the Czech leg is the ~2 km from the border to Lichkov
+# (3 kV DC). Bo'2'2'2'2'Bo': powered bogies under both cab sections, Jakobs
+# bogies at the 4 joints. 3 kV DC, 4 x 500 kW, 160 km/h, 90.4 m, 2,895 mm wide,
+# 4,170 mm high (pantograph down), 159-170 t, 249 seats. One double door per
+# side in sections A, B, D, E and two in C (vagonweb side drawing 45WE-a,
+# photo 45WE-022B Zgorzelec). Pantographs on B and D next to the joints with the
+# cab sections, drawn lowered on B and raised on D (vagonweb drawing).
+#
+# Livery (KD, all units): white body, bright yellow lower body under a black
+# wave line that rises round the doors and the joints and dips mid-section,
+# black-framed windows, black double doors with the white "2", white nose with
+# a black glazing mask, "KD" logo with the red swoosh on the front, red coupler
+# cover, grey roof and light grey bellows covers. Side logos (photos 2020-2025
+# win over the 2017 photos, which show "KD" on both sides): "KD" + red swoosh
+# behind the cab on the right-hand side, the Lower Silesian eagle crest +
+# "DOLNY ŚLĄSK" on the left-hand side. Photos: 45WE-019A Lichkov 2018,
+# 45WE-021A / 027A / 028A 2017, 45WE-020E Wrocław 2024, 45WE Sędzisław 2023
+# (research/ops/photos/kd + Wikimedia Commons "45WE").
+#
+# Sprites: rendered from a box model with the pak128 raycaster,
+# tools/railrender/impuls.py (regenerate: python tools/railrender/impuls.py 45we).
+# Section lengths 10, 8, 8, 8, 10 carunits (end sections 21.5 m nose -> Jakobs
+# centre, middle sections 16 m; 44 cu = 90.4 m like the FLIRT 480): the whole
+# unit is one model and every row is rendered with its front on the Simutrans
+# anchor (sections start at 0, 10, 18, 26, 34 cu), so the joints meet in all
+# 8 views (checked with tools/consist_preview.py). Door, window and roof
+# positions from the vagonweb drawing (10 px = 1 m), 5 windows behind the
+# logo per the photos. Headlights on A, tail lights on E. Units couple in
+# multiple (A-...-E-A-...-E). Costs follow the Leo Express FLIRT 480.
+
+vehicles:
+  - id: "45WE-A"
+    display_id: "45WE"
+    role_en: "cab car A"
+    role_cs: "čelní vůz A"
+    row: 0
+    head: true
+    tail: false
+    prev: ["45WE-E"]
+    next: ["45WE-B"]
+    couple_liveries: prev     # the rear car of a unit ahead may wear any livery
+    fields:
+      cost: 3200000
+      payload: 40
+      speed: 160
+      weight: 37
+      runningcost: 75
+      fixed_cost: 800
+      intro_year: 2017
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: electric
+      power: 1000
+      gear: 130
+    extended:
+      axles: 3
+
+  - id: "45WE-B"
+    display_id: "45WE"
+    role_en: "middle car B"
+    role_cs: "vložený vůz B"
+    row: 1
+    head: false
+    tail: false
+    prev: ["45WE-A"]
+    next: ["45WE-C"]
+    fields:
+      cost: 2100000
+      payload: 54
+      speed: 160
+      weight: 29
+      runningcost: 35
+      fixed_cost: 260
+      intro_year: 2017
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "45WE-C"
+    display_id: "45WE"
+    role_en: "middle car C"
+    role_cs: "vložený vůz C"
+    row: 2
+    head: false
+    tail: false
+    prev: ["45WE-B"]
+    next: ["45WE-D"]
+    fields:
+      cost: 2100000
+      payload: 60
+      speed: 160
+      weight: 30
+      runningcost: 35
+      fixed_cost: 260
+      intro_year: 2017
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "45WE-D"
+    display_id: "45WE"
+    role_en: "middle car D"
+    role_cs: "vložený vůz D"
+    row: 3
+    head: false
+    tail: false
+    prev: ["45WE-C"]
+    next: ["45WE-E"]
+    fields:
+      cost: 2100000
+      payload: 54
+      speed: 160
+      weight: 29
+      runningcost: 35
+      fixed_cost: 260
+      intro_year: 2017
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "45WE-E"
+    display_id: "45WE"
+    role_en: "cab car E"
+    role_cs: "čelní vůz E"
+    row: 4
+    head: false
+    tail: true
+    prev: ["45WE-D"]
+    next: ["45WE-A"]
+    couple_liveries: next     # the lead car of a unit behind may wear any livery
+    fields:
+      cost: 3200000
+      payload: 41
+      speed: 160
+      weight: 37
+      runningcost: 75
+      fixed_cost: 800
+      intro_year: 2017
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: electric
+      power: 1000
+      gear: 130
+    extended:
+      axles: 3
+
+liveries:
+  - color: bilozluta
+    name_en: "white-yellow"
+    name_cs: "bílo-žlutá"

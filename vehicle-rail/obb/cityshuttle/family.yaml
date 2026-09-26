@@ -1,0 +1,98 @@
+agency: OBB
+type: "Schlieren"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "ÖBB"
+  agency_cs: "ÖBB"
+  family_en: "CityShuttle"
+  family_cs: "CityShuttle"
+
+# ÖBB CityShuttle push-pull stock ("Schlieren" type single-deck cars, SGP /
+# Jenbacher, rebuilt for ÖBB regional push-pull service in the 1990s): Bmpz-s
+# 80-73 cab car (44 + 21 seats, bike area) and Bmpz-l 21-73 coaches (80 seats).
+# On Czech track: S3 / R / SB 3800-3807 Linz - Summerau - Horní Dvořiště -
+# Kaplice - České Budějovice (line 196, 25 kV), 4 pairs a day, formed 1116 + 2 x
+# 21-73 + 80-73 with the cab car at the České Budějovice end; also Wien - Břeclav
+# replacement workings (1116 + 5 x Bmpz-l, Apr 2026). 26.40 m over buffers,
+# 2.825 m wide, 140 km/h, single-leaf plug doors near both ends of every car.
+#
+# Livery CityShuttle (photos: "ÖBB 1116, jižní zastávka, České Budějovice (01)"
+# full broadside in CZ, "České Budějovice station 2024 2", "ÖBB 80-73
+# Cityshuttle Steuerwagen im Bahnhof Feldbach"; vagonWEB drawings
+# Bmpz-l-2173-0-2019-a/b, Bmpz-s-8073-2019-a/b): silver-grey car with a red field
+# from the roof edge to the sill over the left ~half of each side AS SEEN, ending
+# in a steep "/" diagonal (12.2 m at the sill, 14.5 m at the roof edge); white
+# ÖBB and "CityShuttle" script on the red; light grey door leaves on red and grey
+# alike; grey roof. The pattern is point-symmetric, so the cab car shows red at
+# its cab end on the left-hand side and at the far end on the right-hand side.
+# Cab front: red, dark grey windscreen band with two panes, big round lamp on
+# the roof edge, round headlights and tail lamps low, white ÖBB. The research
+# text described the red as "rising along a long diagonal"; the photos and the
+# drawings show the steep diagonal drawn here.
+#
+# Sprites: rendered from a box model, original art:
+#   tools/railrender/obb_cityshuttle.py  (regenerate: python tools/railrender/obb_cityshuttle.py)
+# Window/door positions from the vagonWEB drawings (10 px = 1 m). Length 13 for
+# both cars (26.4 m, the pak128.cs coach convention). Row 0 = 80-73 cab car
+# (headlights at its front), row 1 = 21-73 coach. Both couple with anything
+# (prev/next: any), so the cab car leads a train pushed by a locomotive (native
+# OBB_1016 stands in for the 1116) and the coaches run with any stock.
+
+vehicles:
+  - id: "80-73"
+    display_id: "Bmpz-s 80-73"
+    role_en: "cab car"
+    role_cs: "řídicí vůz"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2900000
+      payload: 65
+      speed: 140
+      weight: 42
+      runningcost: 30
+      fixed_cost: 380
+      intro_year: 1996
+      intro_month: 5
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "21-73"
+    display_id: "Bmpz-l 21-73"
+    role_en: "2nd class coach"
+    role_cs: "vůz 2. třídy"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 2100000
+      payload: 80
+      speed: 140
+      weight: 40
+      runningcost: 26
+      fixed_cost: 330
+      intro_year: 1996
+      intro_month: 5
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: cityshuttle
+    name_en: "CityShuttle"
+    name_cs: "CityShuttle"

@@ -1,0 +1,68 @@
+agency: PKPIntercity
+type: "EU44"
+copyright: lubak91/TommPa9   # pak128.CS obb_1216 drawing (same ES64U4 body), repainted
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "PKP Intercity"
+  agency_cs: "PKP Intercity"
+  family_en: "Siemens ES64U4 Husarz"
+  family_cs: "Siemens ES64U4 Husarz"
+
+# PKP Intercity EU44 "Husarz" (Siemens ES64U4, EU44-001...010, UIC 5 370 0xx),
+# in service since 2010. In 2026 seven of them (002, 003, 004, 006, 007, 008,
+# 010) work the border legs Chałupki / Zebrzydowice - Petrovice u K. -
+# Dětmarovice - Bohumín: EC Silesia, IC Polonia, Sobieski, Porta Moravica,
+# Olza, Danubius. 19.58 m over buffers, Bo'Bo', 86-87 t, 6.4 MW, 230 km/h.
+# Drawn at length 10 like the ÖBB 1216 (same body).
+#
+# Liveries (photos EU44-010 Kraków Główny, EU44-003 Berlin Hbf 2024, EU44-002
+# at Dětmarovice 24 Jul 2026 = in CZ):
+# - intercity (the plain early IC scheme, still on EU44-002 in 2026): silver
+#   body, royal-blue cab ends (front corners, cab roof, cab side down to the
+#   lamps behind the windscreen, sweeping up to the cab door), thin orange line
+#   along the top of the side, dark-grey skirt, big orange "iC" + blue outlined
+#   "C" logo left of centre as seen from either side, "PKP INTERCITY" in blue.
+# - intercitypruh (the current scheme): the same plus a blue band across the
+#   middle of the side, solid at the cab doors and fading out in halftone dots
+#   towards the logo.
+# The one-off advertising wraps (Olympic team, Euro 2012) are left out.
+#
+# Sheets: the pak128.CS obb_1216 drawing repainted through the fitted
+# box-model coordinate map (the one-off obb/1216 painter script, not in the
+# repo), glass plain, lamp specials, diagonal/end views raised 3 px.
+
+vehicles:
+  - id: "EU44"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 6600000
+      payload: 0
+      speed: 230
+      weight: 87
+      runningcost: 206
+      fixed_cost: 3030
+      intro_year: 2010
+      intro_month: 10
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      engine_type: electric
+      power: 6400
+      gear: 160
+      length: 10
+    extended:
+      axles: 4
+
+liveries:
+  - color: intercity
+    name_en: "PKP Intercity"
+    name_cs: "PKP Intercity"
+  - color: intercitypruh
+    name_en: "PKP Intercity with blue band"
+    name_cs: "PKP Intercity s modrým pruhem"

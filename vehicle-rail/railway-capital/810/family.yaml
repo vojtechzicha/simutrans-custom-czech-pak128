@@ -1,0 +1,70 @@
+agency: RailwayCapital
+type: "810"
+copyright: Sim
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Railway Capital"
+  agency_cs: "Railway Capital"
+  family_en: '"Šukafon"'
+  family_cs: '"Šukafon"'
+
+# Railway Capital (RCAS) class 810 (ex ČSD M 152.0) single railcars, ex
+# Slovakia: 810.391, 526, 536, 611, 623 (810.405 went to Gepard Express in
+# 2025). Weekend lines 2026: DÚK T6 Doupovská dráha (Kadaň - Podbořany), 243
+# Jemnická dráha (Moravské Budějovice - Jemnice), 222 Vlašimka. First RCAS
+# service: 810.623 reopening Opava - Jakartovice in July 2014.
+# 13.97 m, 2 axles (1'A'), LIAZ ML 634 155 kW, 80 km/h, 20 t, 55 seats + 40
+# standing. Couples with another 810 on either end.
+#
+# Livery: ČSD "polomáčený" (cream window band and upper body up to the gutter,
+# cream cap round the windscreen, red below the waist) with a white "R/C"
+# logo on the red front and on the sides behind the door; red bumper with a
+# yellow lower edge. Photos: 810.611 Jemnice 2022, 810.623 Hvozdnický expres
+# (front 3/4), 810.405 Opava / Svobodné Heřmanice (Commons Category:CZ Class
+# 810 of Railway Capital); the T6 car on the Želina viaduct.
+# RCAS also owns Btax 780 146, 315, 636 and Bdtax 785 533 trailers, but no
+# photo of them in RCAS service (or of their paint) was found, and every
+# photographed 2022-2025 RCAS 810 train ran solo, so no trailer is shipped.
+#
+# Sprite: the Sim pak128.CS 810 body (rail-psg mail/810) repainted zone by
+# zone with the ČD 810 zone-map painter (one-off painter script, not in the
+# repo). Length 7 like the ČD 810 family.
+
+vehicles:
+  - id: "810"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: true
+    prev: ["810"]
+    next: ["810"]
+    couple_liveries: true
+    fields:
+      cost: 1022400
+      payload: 95
+      speed: 80
+      weight: 20
+      runningcost: 23
+      fixed_cost: 118
+      intro_year: 2014
+      intro_month: 7
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 155
+      smoke: Diesel_black
+      gear: 105
+    extended:
+      axles: 2
+
+liveries:
+  - color: polomacenyrc
+    name_en: "ČSD cream-red, R/C logo"
+    name_cs: "ČSD krémovo-červená s logem R/C"

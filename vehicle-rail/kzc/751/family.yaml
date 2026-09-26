@@ -1,0 +1,60 @@
+agency: KZC
+type: "751"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "KŽC"
+  agency_cs: "KŽC"
+  family_en: '"Zamračená"'
+  family_cs: '"Zamračená"'
+
+# ČKD T 478.1 "zamračená / bardotka", ČD class 751 (steam-heating version,
+# never rebuilt to 749). KŽC Doprava has run 751.033 (T 478.1033, 1967,
+# ex ŽS Cargo, KŽC since 2022) on its weekend rychlíky: T7 Rakovnický with
+# the Bmx set, T10 Lužickohorský (autumn 2025) and the six-car R 1268 of
+# July 2026 (kzc.cz news 1071/1077/1083/1118/1122).
+# 16.50 m over buffers, 3.074 m wide, 4.103 m high, Bo'Bo' diesel-electric,
+# 1 103 kW, 100 km/h, 74 t.
+#
+# Livery (photos: Jedlová autumn 2025 news 1077, Rakovník July 2026 news 1122,
+# Barča tunnel Commons): the red-orange scheme it was bought in - red-orange
+# body, a broad yellow band across both noses and along the lower side, red
+# frame band and pilot with black/yellow chevrons, light grey roof.
+#
+# Same body and model as the 749 family (tools/railrender/kzc_t478.py;
+# regenerate with `python tools/railrender/ops.py kzc/751`); rendered at
+# length 8, original art.
+
+vehicles:
+  - id: "751"
+    role_en: "diesel locomotive"
+    role_cs: "motorová lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2810000
+      payload: 0
+      speed: 100
+      weight: 74
+      runningcost: 279
+      fixed_cost: 1786
+      intro_year: 2022
+      intro_month: 4
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      engine_type: diesel
+      power: 1103
+      gear: 130
+      smoke: Diesel_black
+      length: 8
+    extended:
+      axles: 4
+
+liveries:
+  - color: cervenozluta
+    name_en: "red-yellow"
+    name_cs: "červeno-žlutá"

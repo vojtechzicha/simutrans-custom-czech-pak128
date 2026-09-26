@@ -1,0 +1,122 @@
+agency: KZC
+type: "810"
+copyright: Sim
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "KŽC"
+  agency_cs: "KŽC"
+  family_en: '"Šukafon"'
+  family_cs: '"Šukafon"'
+
+# KŽC Doprava class 810 (ex ČSD M 152.0, Vagónka Studénka 1975-82) single
+# railcars and their Baafx (class 010) trailers. All carry the historic number
+# M 152.0xxx on the fronts:
+#   810.060 "Šenovka" (base unit of DÚK T1 Kamenický motoráček),
+#   810.381, 810.517, 810.535, 810.656 (ex ŽSR; PID S43, S34 reserve, T8,
+#   DÚK T5 / T11 until Nov 2026),
+#   Baafx 420 (010 552) and 509 (010 072), with KŽC since 2015 (S34 reserve,
+#   T8, summer T11 sets 810+010+810).
+# In Prague since 2013 (earliest photo 31 Dec 2013, M 152.0535 at Masarykovo).
+# 810: 13.97 m, 2 axles (1'A'), LIAZ ML 634 155 kW, hydromechanical, 80 km/h,
+# 20 t, 55 seats + 40 standing. 010: same body, unpowered, 15 t, 62 seats.
+# Runs solo, 810+010, 810+810 (S34 morning peak), 810+010+810: the railcar
+# couples with another railcar or a trailer on either end, the trailer cannot
+# lead; mixed liveries in one train are normal.
+#
+# Liveries: all wear the ČSD "polomáčený" scheme (cream window band and upper
+# body incl. the upper cab front round the windscreen, red below the waist),
+# NOT the ČD 1998 "červeno-krémová" of the ČD family. Photos (research/ops/
+# photos/kzc + Commons Category:CZ Class 810 of KŽC Doprava) and the KŽC side
+# drawings (kzc.cz/image/M152.0xxx.png) show three variants that differ at 1x:
+#   polomaceny           381 (Hracholusky 2024), 517 (Vrbka 2024), 535
+#                        (Vysočany, Česká Kamenice): red down over the skirts,
+#                        fairings and front bumper, dark olive-grey roof cap
+#                        over the windscreen. The Baafx trailers (drawings
+#                        Baafx_420/509: red to the bottom, yellow ČSD lettering).
+#   polomacenysedy       060 "Šenovka" (Kamenický Šenov Sep 2025): grey side
+#                        skirts, fairings and buffer beam, cream roof cap.
+#   polomacenyzlutypruh  656 (Telnice 2022, Commons "M152 0656"): cream cap,
+#                        yellow band at lamp level across the fronts and the
+#                        cab-end side panels.
+# The orange warning stripe the KŽC drawing shows on 535 is not on any photo
+# of it (Vysočany, Ještěd tunnel, Česká Kamenice), so 535 is `polomaceny`.
+# Every variant: yellow lower edge of the buffer beam, gold KŽC winged emblem
+# centred on the fronts, gold M 152 number at lower left.
+#
+# Sprites: the Sim pak128.CS 810 / Btax 780 bodies (rail-psg mail/810),
+# repainted zone by zone with the ČD zone-map painter (one-off painter
+# script, not in the repo).
+# Row 0 = 810, row 1 = 010 (only in the `polomaceny` sheet). Length 7 like
+# the ČD 810 family.
+
+vehicles:
+  - id: "810"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: true
+    prev: ["810", "010"]
+    next: ["810", "010"]
+    couple_liveries: true
+    fields:
+      cost: 1022400
+      payload: 95
+      speed: 80
+      weight: 20
+      runningcost: 23
+      fixed_cost: 118
+      intro_year: 2013
+      intro_month: 12
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 155
+      smoke: Diesel_black
+      gear: 105
+    extended:
+      axles: 2
+
+  - id: "010"
+    role_en: "trailer"
+    role_cs: "přípojný vůz"
+    row: 1
+    liveries: [polomaceny]
+    head: false
+    tail: true
+    prev: ["810", "010"]
+    next: ["810", "010"]
+    couple_liveries: true
+    fields:
+      cost: 805400
+      payload: 104
+      speed: 80
+      weight: 15
+      runningcost: 6
+      fixed_cost: 31
+      intro_year: 2015
+      intro_month: 3
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+    extended:
+      axles: 2
+
+liveries:
+  - color: polomaceny
+    name_en: "ČSD cream-red"
+    name_cs: "ČSD krémovo-červená"
+  - color: polomacenysedy
+    name_en: "ČSD cream-red, grey skirts"
+    name_cs: "ČSD krémovo-červená, šedé kryty"
+  - color: polomacenyzlutypruh
+    name_en: "ČSD cream-red, yellow stripe"
+    name_cs: "ČSD krémovo-červená se žlutým pruhem"

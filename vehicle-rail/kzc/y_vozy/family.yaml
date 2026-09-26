@@ -1,0 +1,132 @@
+agency: KZC
+type: "Y"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "KŽC"
+  agency_cs: "KŽC"
+  family_en: "Bautzen Y"
+  family_cs: "Bautzen Y"
+
+# UIC-Y compartment coaches built by VEB Waggonbau Bautzen for ČSD (1965-85),
+# bought by KŽC Doprava from ČD in 2014-15 and repainted in the historic ČSD
+# dark green. They run the PID/DÚK weekend rychlíky T3 Kokořínský and T10
+# Lužickohorský behind the T 478 locomotives (2 cars + RychBar, 120 seats):
+#   B 272-6, B 273-4, B 322-9 (B256 type, 10 compartments, 80 seats),
+#   BDs 334-0 (5 compartments + luggage room for bicycles, 40 seats),
+#   RBDs "RychBar" (a BDs with a bar compartment, 2024),
+#   A 092-0 (1st class, 9 compartments, 54 seats, original 1982 interior).
+# 24.50 m over buffers, 2.825 m wide, 4.05 m high, 140 km/h design speed.
+#
+# Livery (photos: Mšeno Aug 2025 Commons B 322 / BDs 334, kzc.cz vehicle pages
+# A 092 / BDs 334): ČSD dark green body, light grey roof, black solebar with
+# yellow lettering, aluminium window frames, yellow step edges; the A has a
+# yellow line under the roof edge, the RychBar a red one over the bar half and
+# yellow "RychBar" script.
+#
+# Sprites are rendered from a box model with window / door positions from the
+# KŽC side drawings (kzc.cz/image/B_272-6.png, BDs_328-2, RBDs_422-2,
+# A_092-0), drawn on the footprint of the pak128.CS coaches (length 12 like
+# CD_B249, the ČD Y coach). Rendered by tools/railrender/kzc_yvoz.py;
+# regenerate with `python tools/railrender/ops.py kzc/y_vozy`.
+# Rows: 0 B, 1 BDs, 2 RBDs, 3 A.
+
+vehicles:
+  - id: "B"
+    role_en: "2nd class compartment coach"
+    role_cs: "oddílový vůz 2. třídy"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 1978000
+      payload: 80
+      speed: 140
+      weight: 39
+      runningcost: 19
+      fixed_cost: 170
+      intro_year: 2015
+      intro_month: 4
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "BDs"
+    role_en: "2nd class coach with luggage room"
+    role_cs: "vůz 2. třídy se zavazadlovým oddílem"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 1950000
+      payload: 40
+      speed: 140
+      weight: 39
+      runningcost: 19
+      fixed_cost: 165
+      intro_year: 2015
+      intro_month: 4
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "RBDs"
+    role_en: "bar coach \"RychBar\""
+    role_cs: "barový vůz „RychBar“"
+    row: 2
+    prev: any
+    next: any
+    fields:
+      cost: 2100000
+      payload: 32
+      speed: 140
+      weight: 40
+      runningcost: 22
+      fixed_cost: 185
+      intro_year: 2024
+      intro_month: 4
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "A"
+    role_en: "1st class compartment coach"
+    role_cs: "oddílový vůz 1. třídy"
+    row: 3
+    prev: any
+    next: any
+    fields:
+      cost: 2150000
+      payload: 54
+      speed: 140
+      weight: 40
+      runningcost: 20
+      fixed_cost: 180
+      intro_year: 2015
+      intro_month: 6
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+liveries:
+  - color: csdzelena
+    name_en: "ČSD green"
+    name_cs: "ČSD zelená"
