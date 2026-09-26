@@ -1,0 +1,66 @@
+# ČD class 380: Škoda 109E (200 km/h, 6.4 MW, 25 kV AC / 15 kV AC / 3 kV DC),
+# 20 built 2008-2011 for ČD, in service from 2011 on Praha - Ostrava,
+# Praha - Brno - Wien/Budapest and the Jižní expres to Linz. No ETCS will be
+# fitted: 18 left in 2026, most stored at Jihlava and offered for sale, one
+# still on the Jižní expres in Sep 2026; all gone by Dec 2026. 18.0 m over
+# buffers, 2.94 m wide, Bo'Bo', 87 t, 4 pantographs.
+# Sources: cs.wikipedia "Lokomotiva 380", zdopravy.cz 9 Jul and 9 Sep 2026, ČD
+# press release 14 Apr 2026, Commons "Category:CZ Class 380" (380.003, 008, 009,
+# 014 in the delivery scheme; 380.013 in Najbrt 2, České Budějovice 28 Jun 2026).
+#
+# Liveries:
+#   cd109e   as delivered: silver cab fronts and silver louvre band between
+#            the cabs, light-blue cab tops, roof-edge band and lower band,
+#            red ČD logos on the fronts and mid-side.
+#   najbrt2  ČD Najbrt 2 (380.013 and other repaints): light-blue body and
+#            louvres, white stripe at headlight level, sapphire lower body and
+#            cab roof, yellow ploughs.
+# The Euro 2012 wrap, the 2018 tricolour and the Kometa Expres advert are not shipped.
+#
+# Sprites: original art, rendered from a box model (tools/railrender/
+# cd_loco_modern.py, class E109); regenerate with
+# `python tools/railrender/cd_loco_modern.py 380`. Length 9 (the native CD_380
+# is drawn about 8.5 carunits long).
+
+agency: CeskeDrahy
+type: "380"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "Škoda 109E"
+  family_cs: "Škoda 109E"
+
+vehicles:
+  - id: "380"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 7000000
+      payload: 0
+      speed: 200
+      weight: 87
+      runningcost: 240
+      fixed_cost: 3300
+      intro_year: 2011
+      intro_month: 6
+      waytype: track
+      engine_type: electric
+      power: 6400
+      gear: 160
+      length: 9
+    extended:
+      axles: 4
+
+liveries:
+  - color: cd109e
+    name_en: "ČD 109E"
+    name_cs: "ČD 109E"
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"

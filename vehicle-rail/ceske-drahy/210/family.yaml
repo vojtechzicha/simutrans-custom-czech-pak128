@@ -1,0 +1,67 @@
+# ČD class 210: Škoda 51E, ČSD S 458.0, built 1972-1983 (74 units), 25 kV 50 Hz
+# centre-cab electric shunter. About 8-9 serviceable at ČD (Tábor, Plzeň), in
+# reserve since the South Bohemian Os work went to RegioPanters in 2025.
+# Real loco: 14.4 m over buffers, Bo'Bo', 72 t, 880 kW, 80 km/h, thyristor pulse
+# control; hoods either side of a tower cab, AC roof gear and the pantograph on
+# the cab roof.
+# Sources: cs.wikipedia "Lokomotiva 210"; atlasvozu.cz 210; photos Commons
+# "CZ Class 210 of ČD" (Vyšší Brod 2024, Loučovice, Plzeň 2011, 210.023 Tišnov,
+# Brno-Jehnice 2008).
+#
+# Liveries: najbrt2 (about 6 units) - light blue with a white stripe at the lamp
+# line, dark-blue frame, white ČD logo; modrokremova (210.021, 045) - ČD 1990s
+# dark blue with a cream stripe, cream V on the hood ends and a cream cab top;
+# cervenozluta (210.059) - the same layout in red with yellow.
+#
+# Sprites: original art, rendered from a box model with the pak128.cs-calibrated
+# renderer, tools/railrender/cd_loco_centrecab.py (regenerate: python
+# tools/railrender/cd_loco_centrecab.py 210). Length 7 (14.4 m at 26.4 m = 13 cu).
+
+agency: CeskeDrahy
+type: "210"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: '"Jezevec"'
+  family_cs: '"Jezevec"'
+
+vehicles:
+  - id: "210"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 1500000
+      payload: 0
+      speed: 80
+      weight: 72
+      runningcost: 72
+      fixed_cost: 820
+      intro_year: 1972
+      intro_month: 9
+      waytype: track
+      engine_type: electric
+      power: 880
+      gear: 180
+      length: 7
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+  - color: modrokremova
+    name_en: "blue-cream"
+    name_cs: "modro-krémová"
+  - color: cervenozluta
+    name_en: "red-yellow"
+    name_cs: "červeno-žlutá"

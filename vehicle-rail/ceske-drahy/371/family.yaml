@@ -1,0 +1,58 @@
+# ČD class 371 "Bastard": Škoda 76E (ČSD ES 499.2 / 372) rebuilt for 160 km/h,
+# 3 kV DC / 15 kV 16.7 Hz, 3 080 kW, 160 km/h, 84 t, Bo'Bo', 16.8 m over buffers.
+# Built for the Praha - Děčín - Dresden - Berlin line; the 160 km/h rebuilds date from
+# 1996. Only 371.003 and 371.015 remain in 2026 (one Děčín - Praha round trip and the
+# weekend "Letní kometa" to Dresden), ending Dec 2026 when ETCS becomes mandatory.
+# Sources: research loco_census.md (zdopravy.cz "Poslední dva bastardi", Deník),
+# Commons "CZ Class 371 of ČD in Najbrt livery" (371 001, 003, 004, 015).
+#
+# Body: the Škoda 16.8 m family, but with five small square windows high on both
+# sides instead of portholes and the louvre band; two raised resistor blocks.
+#
+# Livery:
+#   najbrt2   light blue upper body, white band over the lamps, dark blue sill and
+#             buffer beam, grey roof, white ČD logos.
+#
+# Sprites: original art, rendered from a box model (tools/railrender/cd_loco_e99.py
+# on the rj_locos.E99 16.8 m Škoda 99E body, fitted to the native CD 363); regenerate
+# with `python tools/railrender/cd_loco_e99.py 371`. Length 8 like the native CD 363.
+
+agency: CeskeDrahy
+type: "371"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: '"Bastard"'
+  family_cs: '"Bastard"'
+
+vehicles:
+  - id: "371"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 3400000
+      payload: 0
+      speed: 160
+      weight: 84
+      runningcost: 155
+      fixed_cost: 2000
+      intro_year: 1996
+      intro_month: 5
+      waytype: track
+      engine_type: electric
+      power: 3080
+      gear: 140
+      length: 8
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"

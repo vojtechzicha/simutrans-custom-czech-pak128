@@ -1,0 +1,59 @@
+# ČD class 384: Siemens Vectron MS for 230 km/h (6.4 MW, AC + 3 kV DC), 50
+# units leased from RS Lease, first three handed over Aug 2025, first service
+# 24 Sep 2025 (R18 Slovácký expres), the 50th in Aug 2026. Up to 43 a day on
+# R18, Praha - České Budějovice, ComfortJet sets and EC to Hamburg, Budapest and
+# Graz; replaces the 380 on the Jižní expres from Dec 2026. 18.98 m over
+# buffers, Bo'Bo', 90 t; split snowplough (the visible difference to the 193).
+# Sources: cs.wikipedia "Lokomotiva 384", ČD press release (50th Vectron,
+# Aug 2026), acri.cz 28 Aug 2026, Commons "Category:CZ Class 384" (384.011-016
+# at Bad Schandau Aug/Sep 2026, 384.032 Wien, 384 Bělotín).
+#
+# Livery cd384 (all 50): white body, navy band along the roof edge sweeping
+# down the cab edge to the nose, navy speed lines tapering forward over the
+# rear half of each side, a big outlined ČD mark near cab 2, navy ČD logo and
+# "České dráhy" behind the cab door; fronts white round the windscreen with a
+# navy cap, navy lower front with white grille stripes; grey underframe.
+#
+# Sprites: original art, rendered from a box model (vectron.py geometry, ČD
+# paint in tools/railrender/cd_loco_modern.py); regenerate with
+# `python tools/railrender/cd_loco_modern.py 384`. Length 10 like the 193.
+
+agency: CeskeDrahy
+type: "384"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "Siemens Vectron MS 230"
+  family_cs: "Siemens Vectron MS 230"
+
+vehicles:
+  - id: "384"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 7600000
+      payload: 0
+      speed: 230
+      weight: 90
+      runningcost: 230
+      fixed_cost: 3400
+      intro_year: 2025
+      intro_month: 9
+      waytype: track
+      engine_type: electric
+      power: 6400
+      gear: 150
+      length: 10
+    extended:
+      axles: 4
+
+liveries:
+  - color: cd384
+    name_en: "ČD 230 km/h"
+    name_cs: "ČD 230 km/h"

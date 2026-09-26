@@ -1,0 +1,68 @@
+# ČD class 362 "Eso": Škoda 69E (ČSD ES 499.1), dual-system 3 kV DC / 25 kV 50 Hz,
+# 3 480 kW, 140 km/h, 87 t, Bo'Bo', 16.8 m over buffers. The 362.0 originals plus
+# 362.1 rebuilt from every ČD 363 (ČD has no 363 left) and the new 362.2 rebuilt from
+# 162 at ČMŽO Přerov from 2025 (same body; not drawn separately). About 83 in
+# regular service in 2026 (Plzeň, Brno-Maloměřice, Děčín, Česká Třebová, Praha) on
+# R trains and push-pull Os/Sp (362 WTB); the only old-type electric class ČD keeps
+# after ETCS.
+# Sources: research loco_census.md (atlasvozu.cz 362, alanbutschek.cz ob_362_2526,
+# cs.wikipedia Lokomotiva 362), Commons "CZ Class 362 of ČD in Najbrt livery"
+# (362 039, 062, 092, 109, 131).
+#
+# Body as 162 plus the AC main switch box on the roof.
+#
+# Liveries:
+#   najbrt2   (about 68) light blue upper body, white band over the lamps, dark blue
+#             sill and buffer beam, grey roof, white ČD logos.
+#   najbrt1_2 (about 9: 030, 042, 055, 062, 080, 087, 109, 111, 131) light grey cab
+#             ends and fronts with a light blue window band, a dark blue wedge
+#             behind each cab and light blue between, dark grey sill, light roof.
+# Not shipped (one-offs): 362.001 orange 1980 scheme, 362.078 ČSD retro, 362.165
+# blue-cream, advertising on 081 and 110.
+#
+# Sprites: original art, rendered from a box model (tools/railrender/cd_loco_e99.py
+# on the rj_locos.E99 16.8 m Škoda 99E body, fitted to the native CD 363); regenerate
+# with `python tools/railrender/cd_loco_e99.py 362`. Length 8 like the native CD 363.
+
+agency: CeskeDrahy
+type: "362"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: '"Eso"'
+  family_cs: '"Eso"'
+
+vehicles:
+  - id: "362"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 3500000
+      payload: 0
+      speed: 140
+      weight: 87
+      runningcost: 155
+      fixed_cost: 2000
+      intro_year: 1990
+      intro_month: 3
+      waytype: track
+      engine_type: electric
+      power: 3480
+      gear: 150
+      length: 8
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+  - color: najbrt1_2
+    name_en: "Najbrt 1.2"
+    name_cs: "Najbrt 1.2"

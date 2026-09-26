@@ -1,0 +1,65 @@
+# ČD class 111: Škoda 78E, ČSD E 458.1, built 1981-1982 (35 units), 3 kV DC
+# centre-cab electric shunter. About 10 still serviceable at ČD in 2026 (Praha-
+# Vršovice 7, Bohumín 2), for shunting and stock moves at the big stations.
+# Real loco: 14.4 m over buffers, Bo'Bo', 70.4 t, 872 kW continuous, 80 km/h,
+# thyristor pulse control; hood units with a tower cab in the middle, walkways
+# round both hoods, one pantograph on the cab roof.
+# Sources: cs.wikipedia "Lokomotiva 111"; atlasvozu.cz 111 (liveries per unit);
+# photos Commons "CZ Class 111 of ČD in Najbrt livery" (111.006, 111.019,
+# 111.021, 2019-2024).
+#
+# Liveries: najbrt2 (about 9 units) - light blue hoods and cab with a white
+# stripe at the lamp line, dark-blue frame with the white ČD logo, yellow
+# ploughs, white handrails. najbrt1_2 (111.010, 019) - light grey body with a
+# dark-blue-over-light-blue trapezoid on each hood side, dark frame. Not
+# shipped: 111.011 ČSD historical green, 111.001 red-cream (museum).
+#
+# Sprites: original art, rendered from a box model with the pak128.cs-calibrated
+# renderer, tools/railrender/cd_loco_centrecab.py (regenerate: python
+# tools/railrender/cd_loco_centrecab.py 111). Length 7 (14.4 m at 26.4 m = 13 cu).
+
+agency: CeskeDrahy
+type: "111"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: '"Tyristorka"'
+  family_cs: '"Tyristorka"'
+
+vehicles:
+  - id: "111"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 1500000
+      payload: 0
+      speed: 80
+      weight: 70
+      runningcost: 70
+      fixed_cost: 820
+      intro_year: 1981
+      intro_month: 6
+      waytype: track
+      engine_type: electric
+      power: 872
+      gear: 180
+      length: 7
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+  - color: najbrt1_2
+    name_en: "Najbrt 1.2"
+    name_cs: "Najbrt 1.2"

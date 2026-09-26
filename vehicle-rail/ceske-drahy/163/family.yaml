@@ -1,0 +1,63 @@
+# ČD class 163 "Peršing": Škoda 71E (E 499.3), 3 kV DC, 3 480 kW, 120 km/h, 85 t,
+# Bo'Bo', 16.8 m over buffers. Built 1984-1992 for ČSD. At ČD passenger unrostered
+# since Dec 2024 (replaced by RegioPanters) and kept as reserves: about 13 left at
+# Bohumín, Česká Třebová and Děčín. (ČD Cargo's 163s are a separate company, out of
+# scope; ČD has no 363 left, all became 362.)
+# Sources: research loco_census.md (dopravacek.eu 10 Aug 2024, atlasvozu.cz 163),
+# Commons "CZ Class 163 of ČD" / "... in Najbrt livery" (163 004, 043, 062, 068, 080).
+#
+# Body as 162 (portholes on side A, louvre band on side B, raised resistor blocks),
+# without the cab air-conditioning box.
+#
+# Liveries:
+#   najbrt2      (most) light blue upper body, white band over the lamps, dark blue
+#                sill and buffer beam, grey roof, white ČD logos.
+#   zelenozluta  ČD green with the yellow band over the lamps on the sides and fronts,
+#                yellow windscreen frames, black ČD logo (163 004, 068, 062).
+#
+# Sprites: original art, rendered from a box model (tools/railrender/cd_loco_e99.py
+# on the rj_locos.E99 16.8 m Škoda 99E body, fitted to the native CD 363); regenerate
+# with `python tools/railrender/cd_loco_e99.py 163`. Length 8 like the native CD 363.
+
+agency: CeskeDrahy
+type: "163"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: '"Peršing"'
+  family_cs: '"Peršing"'
+
+vehicles:
+  - id: "163"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2900000
+      payload: 0
+      speed: 120
+      weight: 85
+      runningcost: 140
+      fixed_cost: 1800
+      intro_year: 1984
+      intro_month: 10
+      waytype: track
+      engine_type: electric
+      power: 3480
+      gear: 160
+      length: 8
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+  - color: zelenozluta
+    name_en: "green-yellow"
+    name_cs: "zeleno-žlutá"

@@ -1,0 +1,69 @@
+# ČD class 193: Siemens Vectron MS (200 km/h, 6.4 MW, 15 kV AC / 25 kV AC /
+# 3 kV DC), 61 units in 2026: 10 leased from ELL since Dec 2017 (193.289-298),
+# 50 from RS Lease (delivered 2021-2024, some bought since) and 193.902. EC/IC/R
+# Praha - Berlin - Hamburg, Wien/Graz, Budapest, Ostrava - Warszawa/Košice,
+# ComfortJet and Railjet push-pull sets. 18.98 m over buffers, 3.01 m wide,
+# Bo'Bo', 90 t, 4 pantographs.
+# Sources: ČD press releases (6 May and 8 Oct 2024), atlasvozu.cz 193, Commons
+# categories "Siemens Vectron MS of ELL Austria in České dráhy service" and
+# "... of Rolling Stock Lease in České dráhy service" (193.289/291/294/296,
+# 193.024/975/983/984, 2024-2025 photos).
+#
+# Liveries:
+#   vectron     the ELL units: blue cab ends and roof edge, white upper band with
+#               the "We connect people and places" slogan and the ČD logo, light
+#               blue lower half with the Praha - Dresden - Berlin - Hamburg
+#               skyline; fronts blue with a light-blue V and white grille stripes.
+#   vectronrsl  the RS Lease units: silver body, light-blue band along the roof
+#               edge, blue cab tops sweeping into a light-blue curve down the cab
+#               edge, ČD logo + "České dráhy" mid-side; fronts blue over a
+#               light-blue panel with a V, white stripes on the grey lower corners.
+# Single-unit advertising wraps and 193.569 in RS Lease white are not shipped.
+#
+# Sprites: original art, rendered from a box model (vectron.py geometry, ČD
+# paint in tools/railrender/cd_loco_modern.py); regenerate with
+# `python tools/railrender/cd_loco_modern.py 193`. Length 10 like the native
+# 1216 / ES64U2 and the CZR 193.
+
+agency: CeskeDrahy
+type: "193"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "Siemens Vectron MS"
+  family_cs: "Siemens Vectron MS"
+
+vehicles:
+  - id: "193"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 6800000
+      payload: 0
+      speed: 200
+      weight: 90
+      runningcost: 210
+      fixed_cost: 3100
+      intro_year: 2017
+      intro_month: 12
+      waytype: track
+      engine_type: electric
+      power: 6400
+      gear: 160
+      length: 10
+    extended:
+      axles: 4
+
+liveries:
+  - color: vectron
+    name_en: "ČD Vectron"
+    name_cs: "ČD Vectron"
+  - color: vectronrsl
+    name_en: "ČD Vectron, RS Lease"
+    name_cs: "ČD Vectron, RS Lease"

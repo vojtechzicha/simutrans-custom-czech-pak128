@@ -1,0 +1,66 @@
+# ČD class 113: Škoda, ČSD E 426.0, built 1973 (6 units) for the 1.5 kV DC
+# Tábor - Bechyně line ("Bechyňka"). 113.001-003 still work every train on it
+# in 2026, with Btn 753 coaches.
+# Real loco: 14.4 m over buffers, Bo'Bo', 64 t, 800 kW, 80 km/h (motors built
+# series-connected; three were rewired series-parallel at rebuild); hood unit
+# with a central tower cab, sloped hood ends with the headlights.
+# Sources: cs.wikipedia "Lokomotiva 113"; zdopravy.cz (Bechyňka, Feb 2026);
+# photos Commons "CZ Class 113" (113.001 2019, 113.002 on the Bechyně bridge,
+# 113.003 at Tábor and Bechyně).
+#
+# Liveries (all three carry heritage paint; the user accepted them for this
+# class): oranzovokremova - 113.001 factory orange with a cream upper cab and
+# cab roof, black frame, since its 2019 overhaul as E 426.0001; zelenokremova -
+# 113.002 and, since its 2023 rebuild, 113.003: green with a cream stripe round
+# hoods and cab, cream V on the hood ends, cream upper cab. The orange warning
+# stripes 113.002 has on its hood ends are left out (113.003 does not have them).
+#
+# Sprites: original art, rendered from a box model with the pak128.cs-calibrated
+# renderer, tools/railrender/cd_loco_centrecab.py (regenerate: python
+# tools/railrender/cd_loco_centrecab.py 113). Length 7 (14.4 m at 26.4 m = 13 cu).
+
+agency: CeskeDrahy
+type: "113"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: '"Žehlička"'
+  family_cs: '"Žehlička"'
+
+vehicles:
+  - id: "113"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 1350000
+      payload: 0
+      speed: 80
+      weight: 64
+      runningcost: 66
+      fixed_cost: 760
+      intro_year: 1973
+      intro_month: 6
+      waytype: track
+      engine_type: electric
+      power: 800
+      gear: 180
+      length: 7
+    extended:
+      axles: 4
+
+liveries:
+  - color: oranzovokremova
+    name_en: "orange-cream"
+    name_cs: "oranžovo-krémová"
+  - color: zelenokremova
+    name_en: "green-cream"
+    name_cs: "zeleno-krémová"
