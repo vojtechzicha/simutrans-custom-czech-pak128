@@ -9,23 +9,22 @@
 # 014 in the delivery scheme; 380.013 in Najbrt 2, České Budějovice 28 Jun 2026).
 #
 # Liveries:
-#   cd109e   as delivered (photos 380 003 / 008 / 009): ČD blue (a saturated mid
-#            blue) lower band along the whole side, blue cab caps above the
-#            window line and blue cantrail between the cabs, a horizontally
-#            ribbed silver panel with the red ČD mark on a lighter square, a
-#            silver face band on the cabs and fronts, blue windscreen surround.
-#   najbrt2  ČD Najbrt 2 (380.013, České Budějovice 2026): light-blue body and
-#            ribbed panel, a white cantrail line and a white stripe at headlight
-#            level, sapphire below it and around the windscreen, yellow ploughs.
+#   cd109e   as delivered: silver cab fronts and silver louvre band between
+#            the cabs, light-blue cab tops, roof-edge band and lower band,
+#            red ČD logos on the fronts and mid-side.
+#   najbrt2  ČD Najbrt 2 (380.013 and other repaints): light-blue body and
+#            louvres, white stripe at headlight level, sapphire lower body and
+#            cab roof, yellow ploughs.
 # The Euro 2012 wrap, the 2018 tricolour and the Kometa Expres advert are not shipped.
 #
-# Sprites: original art, rendered from a box model (tools/railrender/cd_loco_modern.py,
-# class E109; the rounded 109E nose) in the 2026-09-26 render style (tools/railrender/
-# style.py); regenerate with `python tools/railrender/cd_loco_modern.py 380`. Length 9.
+# Sprites: TommPa9's pak128.cs drawings (CD_380_Messerschmitt = cd109e,
+# CD_380_Messerschmitt_(balkan) = najbrt2), extracted from the compiled pak and
+# shifted to source coordinates; static sheets (they looked better than the
+# box-model render in tools/railrender/cd_loco_modern.py, no longer written). Length 9.
 
 agency: CeskeDrahy
 type: "380"
-copyright: vojtechzicha      # original art, drawn from scratch
+copyright: TommPa9      # upstream art (pak128.cs / CZR)
 windows_lit_when_loaded: false
 
 display:
