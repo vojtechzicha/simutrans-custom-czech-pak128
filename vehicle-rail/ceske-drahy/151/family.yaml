@@ -1,0 +1,62 @@
+# ČD class 151 (Škoda 65E, ex ČSD E 499.2 rebuilt for 160 km/h), "Krysa". Withdrawn
+# from regular service 7 Mar 2025; kept because savegames still run it.
+#
+# Every livery here is a pak128.cs / CZR object ported 1:1 (art extracted from the
+# compiled pak, shifted to source coordinates; upstream credit and figures kept per
+# livery), so savegames that ran them keep working after the upstream paks went.
+
+agency: CeskeDrahy
+type: "151"
+copyright: TommPa9      # per-livery credits below
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: '"Krysa"'
+  family_cs: '"Krysa"'
+
+vehicles:
+  - id: "151"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 4533600
+      payload: 0
+      runningcost: 253
+      fixed_cost: 2591
+      speed: 160
+      weight: 82
+      power: 4000
+      gear: 160
+      length: 8
+      intro_year: 2009
+      intro_month: 10
+      retire_year: 2999
+      retire_month: 1
+      waytype: track
+      engine_type: electric
+    extended:
+      axles: 4
+
+liveries:
+  - color: modra_klasik
+    name_en: "blue, classic art"
+    name_cs: "modrá, klasická kresba"
+    copyright: "TommPa9"   # ported 1:1 from CD_151_Krysa_(balkan)
+    fields:
+      cost: 4533600
+      runningcost: 253
+      fixed_cost: 2591
+      speed: 160
+      weight: 82
+      power: 4000
+      gear: 160
+      length: 8
+      intro_year: 2009
+      intro_month: 10
+      retire_year: 2999
+      retire_month: 1

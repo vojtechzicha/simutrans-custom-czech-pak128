@@ -1,0 +1,81 @@
+# ČD class 750 (ČKD T 478.1, rebuilt with electric train heating), "Brejlovec".
+# Unmodernised 750s have left ČD passenger service (the 750.7 rebuilds are family
+# 750_7); kept because savegames still run it.
+#
+# Every livery here is a pak128.cs / CZR object ported 1:1 (art extracted from the
+# compiled pak, shifted to source coordinates; upstream credit and figures kept per
+# livery), so savegames that ran them keep working after the upstream paks went.
+
+agency: CeskeDrahy
+type: "750"
+copyright: TommPa9      # per-livery credits below
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: '"Brejlovec"'
+  family_cs: '"Brejlovec"'
+
+vehicles:
+  - id: "750"
+    role_en: "diesel locomotive"
+    role_cs: "motorová lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2815200
+      payload: 0
+      runningcost: 297
+      fixed_cost: 1901
+      speed: 100
+      weight: 74
+      power: 1325
+      gear: 130
+      length: 8
+      intro_year: 1993
+      intro_month: 1
+      retire_year: 2034
+      retire_month: 1
+      waytype: track
+      engine_type: diesel
+      smoke: Diesel
+    extended:
+      axles: 4
+
+liveries:
+  - color: zelenosediva_klasik
+    name_en: "green-grey, classic art"
+    name_cs: "zeleno-šedá, klasická kresba"
+    copyright: "TommPa9"   # ported 1:1 from CD_750_Brejlovec
+    fields:
+      cost: 2815200
+      runningcost: 297
+      fixed_cost: 1901
+      speed: 100
+      weight: 74
+      power: 1325
+      gear: 130
+      length: 8
+      intro_year: 1993
+      intro_month: 1
+      retire_year: 2034
+      retire_month: 1
+  - color: modra_klasik
+    name_en: "blue, classic art"
+    name_cs: "modrá, klasická kresba"
+    copyright: "TommPa9"   # ported 1:1 from CD_750_Brejlovec_(balkan)
+    fields:
+      cost: 2815200
+      runningcost: 297
+      fixed_cost: 1901
+      speed: 100
+      weight: 74
+      power: 1325
+      gear: 130
+      length: 8
+      intro_year: 2009
+      intro_month: 11
+      retire_year: 2999
+      retire_month: 1

@@ -16,6 +16,11 @@
 # Sprites: original art, rendered from a box model (tools/railrender/cd_loco_e99.py
 # on the rj_locos.E99 16.8 m Škoda 99E body, fitted to the native CD 363); regenerate
 # with `python tools/railrender/cd_loco_e99.py 371`. Length 8 like the native CD 363.
+#
+# The *_klasik liveries are the pak128.cs / CZR objects ported 1:1 (art extracted from
+# the compiled pak, shifted to source coordinates; each livery keeps the upstream
+# credit and figures as its own `fields:` override), so savegames that ran them
+# keep working after the upstream paks were uninstalled.
 
 agency: CeskeDrahy
 type: "371"
@@ -56,3 +61,37 @@ liveries:
   - color: najbrt2
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"
+  - color: cervenozluta_klasik
+    name_en: "red-yellow, classic art"
+    name_cs: "červeno-žlutá, klasická kresba"
+    copyright: "TommPa9"   # ported 1:1 from CD_371_Bastard
+    fields:
+      cost: 4773300
+      runningcost: 216
+      fixed_cost: 2212
+      speed: 160
+      weight: 84
+      power: 3080
+      gear: 115
+      length: 8
+      intro_year: 1994
+      intro_month: 1
+      retire_year: 2009
+      retire_month: 1
+  - color: modra_klasik
+    name_en: "blue, classic art"
+    name_cs: "modrá, klasická kresba"
+    copyright: "TommPa9"   # ported 1:1 from CD_371_Bastard_(balkan)
+    fields:
+      cost: 4773300
+      runningcost: 216
+      fixed_cost: 2212
+      speed: 160
+      weight: 84
+      power: 3080
+      gear: 115
+      length: 8
+      intro_year: 2009
+      intro_month: 1
+      retire_year: 2999
+      retire_month: 1

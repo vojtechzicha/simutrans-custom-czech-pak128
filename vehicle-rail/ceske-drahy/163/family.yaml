@@ -18,6 +18,11 @@
 # Sprites: original art, rendered from a box model (tools/railrender/cd_loco_e99.py
 # on the rj_locos.E99 16.8 m Škoda 99E body, fitted to the native CD 363); regenerate
 # with `python tools/railrender/cd_loco_e99.py 163`. Length 8 like the native CD 363.
+#
+# The *_klasik liveries are the pak128.cs / CZR objects ported 1:1 (art extracted from
+# the compiled pak, shifted to source coordinates; each livery keeps the upstream
+# credit and figures as its own `fields:` override), so savegames that ran them
+# keep working after the upstream paks were uninstalled.
 
 agency: CeskeDrahy
 type: "163"
@@ -61,3 +66,37 @@ liveries:
   - color: zelenozluta
     name_en: "green-yellow"
     name_cs: "zeleno-žlutá"
+  - color: zelenozluta_klasik
+    name_en: "green-yellow, classic art"
+    name_cs: "zeleno-žlutá, klasická kresba"
+    copyright: "TommPa9"   # ported 1:1 from CD_163_Pershing
+    fields:
+      cost: 3727500
+      runningcost: 299
+      fixed_cost: 2296
+      speed: 120
+      weight: 87
+      power: 3480
+      gear: 155
+      length: 8
+      intro_year: 1993
+      intro_month: 1
+      retire_year: 2033
+      retire_month: 1
+  - color: modra_klasik
+    name_en: "blue, classic art"
+    name_cs: "modrá, klasická kresba"
+    copyright: "TommPa9"   # ported 1:1 from CD_163_Pershing_(balkan)
+    fields:
+      cost: 3727500
+      runningcost: 299
+      fixed_cost: 2296
+      speed: 120
+      weight: 87
+      power: 3480
+      gear: 155
+      length: 8
+      intro_year: 2008
+      intro_month: 11
+      retire_year: 2999
+      retire_month: 1

@@ -24,6 +24,11 @@
 # paint in tools/railrender/cd_loco_modern.py); regenerate with
 # `python tools/railrender/cd_loco_modern.py 193`. Length 10 like the native
 # 1216 / ES64U2 and the CZR 193.
+#
+# The *_klasik liveries are the pak128.cs / CZR objects ported 1:1 (art extracted from
+# the compiled pak, shifted to source coordinates; each livery keeps the upstream
+# credit and figures as its own `fields:` override), so savegames that ran them
+# keep working after the upstream paks were uninstalled.
 
 agency: CeskeDrahy
 type: "193"
@@ -67,3 +72,37 @@ liveries:
   - color: vectronrsl
     name_en: "ČD Vectron, RS Lease"
     name_cs: "ČD Vectron, RS Lease"
+  - color: bila_klasik
+    name_en: "white, classic art"
+    name_cs: "bílá, klasická kresba"
+    copyright: "Lubak91, VojtechZicha"   # ported 1:1 from CZR_CD_193_bila
+    fields:
+      cost: 5989900
+      runningcost: 210
+      fixed_cost: 1882
+      speed: 200
+      weight: 87
+      power: 6400
+      gear: 182
+      length: 10
+      intro_year: 2012
+      intro_month: 1
+      retire_year: 2999
+      retire_month: 1
+  - color: modra_klasik
+    name_en: "blue, classic art"
+    name_cs: "modrá, klasická kresba"
+    copyright: "Lubak91, VojtechZicha"   # ported 1:1 from CZR_CD_193_modra
+    fields:
+      cost: 5989900
+      runningcost: 210
+      fixed_cost: 1882
+      speed: 200
+      weight: 87
+      power: 6400
+      gear: 182
+      length: 10
+      intro_year: 2012
+      intro_month: 1
+      retire_year: 2999
+      retire_month: 1

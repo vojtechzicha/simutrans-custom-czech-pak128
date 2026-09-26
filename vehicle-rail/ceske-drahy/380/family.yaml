@@ -21,6 +21,11 @@
 # cd_loco_modern.py, class E109); regenerate with
 # `python tools/railrender/cd_loco_modern.py 380`. Length 9 (the native CD_380
 # is drawn about 8.5 carunits long).
+#
+# The *_klasik liveries are the pak128.cs / CZR objects ported 1:1 (art extracted from
+# the compiled pak, shifted to source coordinates; each livery keeps the upstream
+# credit and figures as its own `fields:` override), so savegames that ran them
+# keep working after the upstream paks were uninstalled.
 
 agency: CeskeDrahy
 type: "380"
@@ -64,3 +69,37 @@ liveries:
   - color: najbrt2
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"
+  - color: cd109e_klasik
+    name_en: "ČD 109E, classic art"
+    name_cs: "ČD 109E, klasická kresba"
+    copyright: "TommPa9"   # ported 1:1 from CD_380_Messerschmitt
+    fields:
+      cost: 5882400
+      runningcost: 318
+      fixed_cost: 4070
+      speed: 200
+      weight: 88
+      power: 6400
+      gear: 160
+      length: 9
+      intro_year: 2008
+      intro_month: 9
+      retire_year: 2999
+      retire_month: 1
+  - color: bilomodra_klasik
+    name_en: "white-blue, classic art"
+    name_cs: "bílo-modrá, klasická kresba"
+    copyright: "TommPa9"   # ported 1:1 from CD_380_Messerschmitt_(balkan)
+    fields:
+      cost: 5882400
+      runningcost: 318
+      fixed_cost: 4070
+      speed: 200
+      weight: 88
+      power: 6400
+      gear: 160
+      length: 9
+      intro_year: 2011
+      intro_month: 1
+      retire_year: 2999
+      retire_month: 1

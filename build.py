@@ -157,7 +157,8 @@ def emit_dat(family: dict, livery: dict, siblings: dict | None = None) -> str:
     bn = basename_for(family, livery)
     # Upstream credit first, vojtechzicha last and only once (families whose
     # art is drawn here from scratch may name just vojtechzicha).
-    credits = [c.strip() for c in str(family["copyright"]).split(",")]
+    # A livery with its own upstream art (a 1:1 port) may carry its own credit.
+    credits = [c.strip() for c in str(livery.get("copyright", family["copyright"])).split(",")]
     credits = [c for c in credits if c and c.lower() != "vojtechzicha"]
     copyright_line = ", ".join(credits + ["vojtechzicha"])
     check_vehicle_liveries(family)
@@ -177,7 +178,9 @@ def emit_dat(family: dict, livery: dict, siblings: dict | None = None) -> str:
             f"name={obj_name}",
             f"copyright={copyright_line}",
         ]
-        for k, val in v["fields"].items():
+        # A livery may override vehicle fields (e.g. an upstream object ported 1:1
+        # into a family keeps its own cost, dates and length).
+        for k, val in {**v["fields"], **livery.get("fields", {})}.items():
             lines.append(f"{k}={val}")
         if v.get("extended"):
             lines.append("")

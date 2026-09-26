@@ -1,0 +1,136 @@
+# ČD class 1216 (Siemens Taurus ES64U4). ČD's six were withdrawn in summer 2026 and
+# offered for sale; kept because savegames still run them. The CZR loco runs free;
+# the railjet pair keeps its native coupling: 1216-front must lead, 1216-rear must
+# trail (the same sheet, row 1 is the reversed-cab drawing).
+#
+# Every livery here is a pak128.cs / CZR object ported 1:1 (art extracted from the
+# compiled pak, shifted to source coordinates; upstream credit and figures kept per
+# livery), so savegames that ran them keep working after the upstream paks went.
+
+agency: CeskeDrahy
+type: "1216"
+copyright: TommPa9      # per-livery credits below
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "Siemens Taurus"
+  family_cs: "Siemens Taurus"
+
+vehicles:
+  - id: "1216"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    liveries: [najbrt2_klasik]
+    prev: any
+    next: any
+    fields:
+      cost: 15148400
+      payload: 0
+      runningcost: 289
+      fixed_cost: 0
+      speed: 230
+      weight: 87
+      power: 6400
+      gear: 130
+      length: 10
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 1
+      waytype: track
+      engine_type: electric
+    extended:
+      axles: 4
+  - id: "1216-front"
+    display_id: "1216"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    liveries: [railjet_klasik]
+    head: true
+    prev: []
+    next: any
+    fields:
+      cost: 15148400
+      payload: 0
+      runningcost: 289
+      fixed_cost: 0
+      speed: 230
+      weight: 87
+      power: 6400
+      gear: 130
+      length: 10
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 1
+      waytype: track
+      engine_type: electric
+    extended:
+      axles: 4
+  - id: "1216-rear"
+    display_id: "1216"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 1
+    liveries: [railjet_klasik]
+    tail: true
+    prev: any
+    next: []
+    fields:
+      cost: 15148400
+      payload: 0
+      runningcost: 289
+      fixed_cost: 0
+      speed: 230
+      weight: 87
+      power: 6400
+      gear: 130
+      length: 10
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 1
+      waytype: track
+      engine_type: electric
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt2_klasik
+    name_en: "Najbrt 2, classic art"
+    name_cs: "Najbrt 2, klasická kresba"
+    copyright: "lubak91, VojtechZicha"   # ported 1:1 from CZR_CD_1216
+    fields:
+      cost: 15148400
+      runningcost: 289
+      fixed_cost: 0
+      speed: 230
+      weight: 87
+      power: 6400
+      gear: 130
+      length: 10
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 1
+  - color: railjet_klasik
+    name_en: "railjet, classic art"
+    name_cs: "railjet, klasická kresba"
+    copyright: "VojtechZicha, lubak91"   # ported 1:1 from CD_railjet_1216
+    fields:
+      cost: 15148400
+      runningcost: 289
+      fixed_cost: 0
+      speed: 230
+      weight: 87
+      power: 6400
+      gear: 130
+      length: 10
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 1
