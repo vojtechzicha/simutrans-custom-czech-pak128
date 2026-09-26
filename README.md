@@ -86,6 +86,12 @@ A single pak file per agency and transport mode — for example, every shipped
 
 Also on `main`, still being refined (see [`TODO.md`](TODO.md)):
 
+- **Rail signals (`VZ-Signals-rail.pak`)** — Czech D1 signals in three styles (AŽD 70, SSSR,
+  SSSR dwarf), each with block, shunt, presignal, choose, long, platform (P) and station boundary
+  (LT) objects told apart by the real D1 plate colours, plus the D3 lichoběžníková tabulka and
+  platform signal, built from the pak128.cs art (`tools/gen_signals.py`). P and LT need the
+  simutrans-122.0 fork (PR #4), so the pak is built with the fork's makeobj and held out of the
+  install step until that exe ships.
 - **DP Ostrava (DPO)** — full city fleet across all three urban modes (introduces
   the `vehicle-trolleybus/` mode): 11 bus families, 12 tram families, 9 trolleybus
   families. Verified against the 2025–2026 active roster; real-world retirement

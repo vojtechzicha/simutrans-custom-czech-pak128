@@ -1,0 +1,64 @@
+# pak128.cs infrastructure.rail_signals.pak -> VZ-Signals-rail.pak, same function flag.
+# Mechanic_* are not mapped: they stay installed in legacy/rail-signals-mechanic.
+old_name	new_name	rule
+EndOfChooseSignals	VZ-Signals-EndOfChooseSignals	1:1 port
+RailGate	VZ-Signals-RailGate	1:1 port
+OneWaySignals	VZ-Signals-OneWaySignals	1:1 port
+Minimum100	VZ-Signals-Minimum100	1:1 port
+Minimum130	VZ-Signals-Minimum130	1:1 port
+Minimum160	VZ-Signals-Minimum160	1:1 port
+Minimum190	VZ-Signals-Minimum190	1:1 port
+AZD65_PreSignal_3aspect	VZ-Signals-D1-New-PreSignal	presignal -> New PreSignal
+AZD65_PreSignal_Repeater	VZ-Signals-D1-New-PreSignal	presignal -> New PreSignal
+AZD65_PreSignal_Lastblock	VZ-Signals-D1-New-PreSignal	presignal -> New PreSignal
+AZD65_LongSignal_Siding	VZ-Signals-D1-New-Long	longblock+signal -> New Long
+AZD65_Signal_Shunting	VZ-Signals-D1-New-Shunt	signal -> New Shunt
+AZD65_PreSignal_Station	VZ-Signals-D1-New-PreSignal	presignal -> New PreSignal
+SSSR_3aspect_absolute	VZ-Signals-D1-Old-Block	signal -> Old Block
+SSSR_3aspect_permissive	VZ-Signals-D1-Old-Block	signal -> Old Block
+SSSR_3aspect_choose	VZ-Signals-D1-Old-Choose	choose+signal -> Old Choose
+SSSR_PreSignal_3aspect	VZ-Signals-D1-Old-PreSignal	presignal -> Old PreSignal
+SSSR_PreSignal_Lastblock	VZ-Signals-D1-Old-PreSignal	presignal -> Old PreSignal
+SSSR_Signal_Shunting	VZ-Signals-D1-Old-Shunt	signal -> Old Shunt
+SSSR_PreSignal_Station	VZ-Signals-D1-Old-PreSignal	presignal -> Old PreSignal
+AZD70_3aspect_absolute	VZ-Signals-D1-New-Block	signal -> New Block
+AZD70_3aspect_permissive	VZ-Signals-D1-New-Block	signal -> New Block
+AZD70_3aspect_long	VZ-Signals-D1-New-Long	longblock+signal -> New Long
+AZD70_3aspect_choose	VZ-Signals-D1-New-Choose	choose+signal -> New Choose
+AZD70_4aspect_absolute	VZ-Signals-D1-New-Block	signal -> New Block
+AZD70_4aspect_permissive	VZ-Signals-D1-New-Block	signal -> New Block
+AZD70_4aspect_long	VZ-Signals-D1-New-Long	longblock+signal -> New Long
+AZD70_4aspect_choose	VZ-Signals-D1-New-Choose	choose+signal -> New Choose
+AZD70_Signal	VZ-Signals-D1-New-Block	signal -> New Block
+AZD70_PreSignal	VZ-Signals-D1-New-PreSignal	presignal -> New PreSignal
+AZD70_LongSignal	VZ-Signals-D1-New-Long	longblock+signal -> New Long
+AZD70_ChooseSignal	VZ-Signals-D1-New-Choose	choose+signal -> New Choose
+AZD70_OneWaySignal	VZ-Signals-AZD70_OneWaySignal	1:1 port
+AZD70_EndOfChooseSignal	VZ-Signals-AZD70_EndOfChooseSignal	1:1 port
+AZD65_3aspect_absolute	VZ-Signals-D1-New-Block	signal -> New Block
+AZD65_3aspect_permissive	VZ-Signals-D1-New-Block	signal -> New Block
+AZD65_3aspect_choose	VZ-Signals-D1-New-Choose	choose+signal -> New Choose
+AZD65_4aspect_absolute	VZ-Signals-D1-New-Block	signal -> New Block
+AZD65_4aspect_permissive	VZ-Signals-D1-New-Block	signal -> New Block
+AZD65_4aspect_choose	VZ-Signals-D1-New-Choose	choose+signal -> New Choose
+AZD65_Signal	VZ-Signals-D1-New-Block	signal -> New Block
+AZD65_PreSignal	VZ-Signals-D1-New-PreSignal	presignal -> New PreSignal
+AZD65_LongSignal	VZ-Signals-D1-New-Long	longblock+signal -> New Long
+AZD65_ChooseSignal	VZ-Signals-D1-New-Choose	choose+signal -> New Choose
+SSSR_Signal	VZ-Signals-D1-Old-Block	signal -> Old Block
+SSSR_PreSignal	VZ-Signals-D1-Old-PreSignal	presignal -> Old PreSignal
+SSSR_LongSignal	VZ-Signals-D1-Old-Long	longblock+signal -> Old Long
+SSSR_ChooseSignal	VZ-Signals-D1-Old-Choose	choose+signal -> Old Choose
+AZD70_PreSignal_3aspect	VZ-Signals-D1-New-PreSignal	presignal -> New PreSignal
+AZD70_PreSignal_Repeater	VZ-Signals-D1-New-PreSignal	presignal -> New PreSignal
+AZD70_PreSignal_Lastblock	VZ-Signals-D1-New-PreSignal	presignal -> New PreSignal
+AZD70_LongSignal_Siding	VZ-Signals-D1-New-Long	longblock+signal -> New Long
+AZD70_Signal_Shunting	VZ-Signals-D1-New-Shunt	signal -> New Shunt
+AZD70_PreSignal_Shunting	VZ-Signals-D1-New-PreSignal	presignal -> New PreSignal
+AZD70_PreSignal_Station	VZ-Signals-D1-New-PreSignal	presignal -> New PreSignal
+SSSR_OneWaySignal_Dwarf	VZ-Signals-SSSR_OneWaySignal_Dwarf	1:1 port
+SSSR_EndOfChooseSignal_Dwarf	VZ-Signals-SSSR_EndOfChooseSignal_Dwarf	1:1 port
+SSSR_LongSignal_Dwarf	VZ-Signals-D1-Dwarf-Long	longblock+signal -> Dwarf Long
+SSSR_Signal_Shunting_Dwarf	VZ-Signals-D1-Dwarf-Shunt	signal -> Dwarf Shunt
+SSSR_PreSignal_Shunting_Dwarf	VZ-Signals-D1-Dwarf-PreSignal	presignal -> Dwarf PreSignal
+SSSR_PreSignal_Station_Dwarf	VZ-Signals-D1-Dwarf-PreSignal	presignal -> Dwarf PreSignal

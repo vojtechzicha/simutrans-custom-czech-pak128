@@ -1,0 +1,1158 @@
+- name: EndOfChooseSignals
+  copyright: Vladki
+  flags:
+  - end_of_choose
+  min_speed: 0
+  cost: 500
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1825
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 4
+- name: RailGate
+  copyright: Vladki
+  flags:
+  - private
+  min_speed: 0
+  cost: 5000
+  offset_left: 0
+  waytype: track
+  intro:
+  - 1825
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 4
+- name: OneWaySignals
+  copyright: Vladki
+  flags:
+  - one_way
+  min_speed: 0
+  cost: 500
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1825
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 4
+- name: Minimum100
+  copyright: Vladki
+  flags: []
+  min_speed: 100
+  cost: 500
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1920
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 4
+- name: Minimum130
+  copyright: Vladki
+  flags: []
+  min_speed: 130
+  cost: 500
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1945
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 4
+- name: Minimum160
+  copyright: Vladki
+  flags: []
+  min_speed: 160
+  cost: 500
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 4
+- name: Minimum190
+  copyright: Vladki
+  flags: []
+  min_speed: 190
+  cost: 500
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1995
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 4
+- name: Mechanic_CSD_Signal_white
+  copyright: Lubak91
+  flags:
+  - signal
+  min_speed: 0
+  cost: 2000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1870
+  - 1
+  retire:
+  - 1939
+  - 11
+  images: 8
+- name: Mechanic_CSD_Signal_green
+  copyright: Lubak91
+  flags:
+  - signal
+  min_speed: 0
+  cost: 2000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1939
+  - 11
+  retire:
+  - 1970
+  - 1
+  images: 8
+- name: Mechanic_CSD_PreSignal_green
+  copyright: Lubak91
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1870
+  - 1
+  retire:
+  - 1939
+  - 11
+  images: 12
+- name: Mechanic_CSD_PreSignal_yellow
+  copyright: Lubak91
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1939
+  - 11
+  retire:
+  - 1954
+  - 6
+  images: 12
+- name: Mechanic_DR_PreSignal_yellow
+  copyright: Lubak91
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1970
+  - 1
+  images: 12
+- name: Mechanic_CSD_LongSignal_white_3arm
+  copyright: Lubak91
+  flags:
+  - signal
+  - longblock
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1870
+  - 1
+  retire:
+  - 1939
+  - 11
+  images: 8
+- name: Mechanic_CSD_LongSignal_green_3arm
+  copyright: Lubak91
+  flags:
+  - signal
+  - longblock
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1939
+  - 11
+  retire:
+  - 1954
+  - 6
+  images: 8
+- name: Mechanic_CSD_LongSignal_green
+  copyright: Lubak91
+  flags:
+  - signal
+  - longblock
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1970
+  - 1
+  images: 8
+- name: Mechanic_CSD_ChooseSignal_white
+  copyright: Lubak91
+  flags:
+  - choose
+  - signal
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1870
+  - 1
+  retire:
+  - 1939
+  - 11
+  images: 12
+- name: Mechanic_CSD_ChooseSignal_green
+  copyright: Lubak91
+  flags:
+  - choose
+  - signal
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1939
+  - 11
+  retire:
+  - 1954
+  - 6
+  images: 12
+- name: Mechanic_CSD_ChooseSignal_yellow
+  copyright: Lubak91
+  flags:
+  - choose
+  - signal
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1970
+  - 1
+  images: 16
+- name: AZD65_PreSignal_3aspect
+  copyright: Lubak91, Vladki
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1962
+  - 9
+  retire:
+  - 1970
+  - 1
+  images: 12
+- name: AZD65_PreSignal_Repeater
+  copyright: Lubak91, Vladki
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1962
+  - 9
+  retire:
+  - 1970
+  - 1
+  images: 12
+- name: AZD65_PreSignal_Lastblock
+  copyright: Lubak91, Vladki
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1962
+  - 9
+  retire:
+  - 1970
+  - 1
+  images: 12
+- name: AZD65_LongSignal_Siding
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  - longblock
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1962
+  - 9
+  retire:
+  - 1970
+  - 1
+  images: 8
+- name: AZD65_Signal_Shunting
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  min_speed: 0
+  cost: 2000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1962
+  - 9
+  retire:
+  - 1970
+  - 1
+  images: 12
+- name: AZD65_PreSignal_Station
+  copyright: Lubak91, Vladki
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1962
+  - 9
+  retire:
+  - 1970
+  - 1
+  images: 12
+- name: SSSR_3aspect_absolute
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  min_speed: 0
+  cost: 3000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1962
+  - 9
+  images: 12
+- name: SSSR_3aspect_permissive
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  min_speed: 0
+  cost: 3000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1962
+  - 9
+  images: 12
+- name: SSSR_3aspect_choose
+  copyright: Lubak91, Vladki
+  flags:
+  - choose
+  - signal
+  min_speed: 0
+  cost: 5000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1962
+  - 9
+  images: 20
+- name: SSSR_PreSignal_3aspect
+  copyright: Lubak91, Vladki
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1962
+  - 9
+  images: 12
+- name: SSSR_PreSignal_Lastblock
+  copyright: Lubak91, Vladki
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1962
+  - 9
+  images: 12
+- name: SSSR_Signal_Shunting
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  min_speed: 0
+  cost: 2000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1962
+  - 9
+  images: 12
+- name: SSSR_PreSignal_Station
+  copyright: Lubak91, Vladki
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1962
+  - 9
+  images: 12
+- name: AZD70_3aspect_absolute
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  min_speed: 0
+  cost: 3000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 12
+- name: AZD70_3aspect_permissive
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  min_speed: 0
+  cost: 3000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 12
+- name: AZD70_3aspect_long
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  - longblock
+  min_speed: 0
+  cost: 3000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 12
+- name: AZD70_3aspect_choose
+  copyright: Lubak91, Vladki
+  flags:
+  - choose
+  - signal
+  min_speed: 0
+  cost: 5000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 20
+- name: AZD70_4aspect_absolute
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 1998
+  - 1
+  images: 16
+- name: AZD70_4aspect_permissive
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 1998
+  - 1
+  images: 16
+- name: AZD70_4aspect_long
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  - longblock
+  min_speed: 0
+  cost: 3000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 16
+- name: AZD70_4aspect_choose
+  copyright: Lubak91, Vladki
+  flags:
+  - choose
+  - signal
+  min_speed: 0
+  cost: 6000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 1998
+  - 1
+  images: 24
+- name: AZD70_Signal
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  min_speed: 0
+  cost: 2000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 8
+- name: AZD70_PreSignal
+  copyright: Lubak91, Vladki
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 12
+- name: AZD70_LongSignal
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  - longblock
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 8
+- name: AZD70_ChooseSignal
+  copyright: Lubak91, Vladki
+  flags:
+  - choose
+  - signal
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 12
+- name: AZD70_OneWaySignal
+  copyright: Lubak91, Vladki
+  flags:
+  - one_way
+  min_speed: 0
+  cost: 500
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 4
+- name: AZD70_EndOfChooseSignal
+  copyright: Lubak91, Vladki
+  flags:
+  - end_of_choose
+  min_speed: 0
+  cost: 500
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 4
+- name: AZD65_3aspect_absolute
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  min_speed: 0
+  cost: 3000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1962
+  - 9
+  retire:
+  - 1970
+  - 1
+  images: 12
+- name: AZD65_3aspect_permissive
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  min_speed: 0
+  cost: 3000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1962
+  - 9
+  retire:
+  - 1970
+  - 1
+  images: 12
+- name: AZD65_3aspect_choose
+  copyright: Lubak91, Vladki
+  flags:
+  - choose
+  - signal
+  min_speed: 0
+  cost: 5000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1962
+  - 9
+  retire:
+  - 1970
+  - 1
+  images: 20
+- name: AZD65_4aspect_absolute
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1962
+  - 9
+  retire:
+  - 1970
+  - 1
+  images: 16
+- name: AZD65_4aspect_permissive
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1962
+  - 9
+  retire:
+  - 1970
+  - 1
+  images: 16
+- name: AZD65_4aspect_choose
+  copyright: Lubak91, Vladki
+  flags:
+  - choose
+  - signal
+  min_speed: 0
+  cost: 6000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1962
+  - 9
+  retire:
+  - 1970
+  - 1
+  images: 24
+- name: AZD65_Signal
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  min_speed: 0
+  cost: 2000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1962
+  - 9
+  retire:
+  - 1970
+  - 1
+  images: 8
+- name: AZD65_PreSignal
+  copyright: Lubak91, Vladki
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1962
+  - 9
+  retire:
+  - 1970
+  - 1
+  images: 12
+- name: AZD65_LongSignal
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  - longblock
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1962
+  - 9
+  retire:
+  - 1970
+  - 1
+  images: 8
+- name: AZD65_ChooseSignal
+  copyright: Lubak91, Vladki
+  flags:
+  - choose
+  - signal
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1962
+  - 9
+  retire:
+  - 1970
+  - 1
+  images: 12
+- name: SSSR_Signal
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  min_speed: 0
+  cost: 2000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1962
+  - 9
+  images: 8
+- name: SSSR_PreSignal
+  copyright: Lubak91, Vladki
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1962
+  - 9
+  images: 12
+- name: SSSR_LongSignal
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  - longblock
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1962
+  - 9
+  images: 8
+- name: SSSR_ChooseSignal
+  copyright: Lubak91, Vladki
+  flags:
+  - choose
+  - signal
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1962
+  - 9
+  images: 12
+- name: AZD70_PreSignal_3aspect
+  copyright: Lubak91, Vladki
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 12
+- name: AZD70_PreSignal_Repeater
+  copyright: Lubak91, Vladki
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 12
+- name: AZD70_PreSignal_Lastblock
+  copyright: Lubak91, Vladki
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 12
+- name: AZD70_LongSignal_Siding
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  - longblock
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 8
+- name: AZD70_Signal_Shunting
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  min_speed: 0
+  cost: 2000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 12
+- name: AZD70_PreSignal_Shunting
+  copyright: Lubak91, Vladki
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 12
+- name: AZD70_PreSignal_Station
+  copyright: Lubak91, Vladki
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1970
+  - 1
+  retire:
+  - 2999
+  - 1
+  images: 12
+- name: Mechanic_CSD_Signal_Shunting
+  copyright: Lubak91
+  flags:
+  - signal
+  min_speed: 0
+  cost: 2000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1870
+  - 1
+  retire:
+  - 1970
+  - 1
+  images: 12
+- name: Mechanic_CSD_PreSignal_yellow_3aspect
+  copyright: Lubak91
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1939
+  - 11
+  retire:
+  - 1954
+  - 6
+  images: 12
+- name: Mechanic_DR_PreSignal_yellow_3aspect
+  copyright: Lubak91
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1970
+  - 1
+  images: 12
+- name: Mechanic_DR_PreSignal_Station
+  copyright: Lubak91
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1939
+  - 11
+  retire:
+  - 1970
+  - 1
+  images: 12
+- name: SSSR_OneWaySignal_Dwarf
+  copyright: Lubak91, Vladki
+  flags:
+  - one_way
+  min_speed: 0
+  cost: 500
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1970
+  - 1
+  images: 4
+- name: SSSR_EndOfChooseSignal_Dwarf
+  copyright: Lubak91, Vladki
+  flags:
+  - end_of_choose
+  min_speed: 0
+  cost: 500
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1970
+  - 1
+  images: 4
+- name: SSSR_LongSignal_Dwarf
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  - longblock
+  min_speed: 0
+  cost: 4000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1970
+  - 1
+  images: 8
+- name: SSSR_Signal_Shunting_Dwarf
+  copyright: Lubak91, Vladki
+  flags:
+  - signal
+  min_speed: 0
+  cost: 2000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1970
+  - 1
+  images: 12
+- name: SSSR_PreSignal_Shunting_Dwarf
+  copyright: Lubak91, Vladki
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1970
+  - 1
+  images: 12
+- name: SSSR_PreSignal_Station_Dwarf
+  copyright: Lubak91, Vladki
+  flags:
+  - presignal
+  min_speed: 0
+  cost: 1000
+  offset_left: 10
+  waytype: track
+  intro:
+  - 1954
+  - 6
+  retire:
+  - 1970
+  - 1
+  images: 12

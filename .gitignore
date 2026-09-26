@@ -2,6 +2,7 @@
 build/
 dist/
 *.pak
+!legacy/**/*.pak
 
 # Reference material (third-party paks; not redistributed)
 inspiration/

@@ -1,0 +1,443 @@
+# VZ rail signals (dist/VZ-Signals-rail.pak), see CLAUDE.md "Signals".
+# makeobj: fork builds it with MAKEOBJ_FORK_PATH (the simutrans-122.0 fork's
+# makeobj, which knows is_platformsignal / station_boundary; the stock one drops
+# them). Without MAKEOBJ_FORK_PATH the build skips this pak and keeps the
+# installed copy.
+# Sheets are generated: python tools/gen_signals.py signal-rail/signals
+group: Signals
+makeobj: fork
+objects:
+- id: D1-New-Block
+  sprite: d1-new-block
+  generate:
+    style: new
+    function: block
+  copyright: Lubak91, Vladki
+  fields:
+    is_signal: 1
+    cost: 3000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 AŽD 70 block signal
+  name_cs: D1 AŽD 70 oddílové návěstidlo
+- id: D1-New-Shunt
+  sprite: d1-new-shunt
+  generate:
+    style: new
+    function: shunt
+  copyright: Lubak91, Vladki
+  fields:
+    is_signal: 1
+    cost: 2000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 AŽD 70 shunting signal
+  name_cs: D1 AŽD 70 seřaďovací návěstidlo
+- id: D1-New-PreSignal
+  sprite: d1-new-pre
+  generate:
+    style: new
+    function: pre
+  copyright: Lubak91, Vladki
+  fields:
+    is_presignal: 1
+    cost: 1000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 AŽD 70 presignal
+  name_cs: D1 AŽD 70 předvěst
+- id: D1-New-Choose
+  sprite: d1-new-choose
+  generate:
+    style: new
+    function: choose
+  copyright: Lubak91, Vladki
+  fields:
+    is_signal: 1
+    free_route: 1
+    cost: 5000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 AŽD 70 choose signal
+  name_cs: D1 AŽD 70 vjezdové návěstidlo s volbou koleje
+- id: D1-New-Long
+  sprite: d1-new-long
+  generate:
+    style: new
+    function: long
+  copyright: Lubak91, Vladki
+  fields:
+    is_longblocksignal: 1
+    cost: 4000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 AŽD 70 long-block signal
+  name_cs: D1 AŽD 70 návěstidlo dlouhého oddílu
+- id: D1-New-P
+  sprite: d1-new-p
+  generate:
+    style: new
+    function: P
+  copyright: Lubak91, Vladki
+  fields:
+    is_signal: 1
+    is_platformsignal: 1
+    cost: 2000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 AŽD 70 platform exit signal (P)
+  name_cs: D1 AŽD 70 odjezdové návěstidlo nástupní koleje (P)
+- id: D1-New-LT
+  sprite: d1-new-lt
+  generate:
+    style: new
+    function: LT
+  copyright: Lubak91, Vladki
+  fields:
+    station_boundary: 1
+    cost: 500
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 AŽD 70 station boundary (LT)
+  name_cs: D1 AŽD 70 hranice dopravny (LT)
+- id: D1-Old-Block
+  sprite: d1-old-block
+  generate:
+    style: old
+    function: block
+  copyright: Lubak91, Vladki
+  fields:
+    is_signal: 1
+    cost: 3000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 SSSR block signal
+  name_cs: D1 SSSR oddílové návěstidlo
+- id: D1-Old-Shunt
+  sprite: d1-old-shunt
+  generate:
+    style: old
+    function: shunt
+  copyright: Lubak91, Vladki
+  fields:
+    is_signal: 1
+    cost: 2000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 SSSR shunting signal
+  name_cs: D1 SSSR seřaďovací návěstidlo
+- id: D1-Old-PreSignal
+  sprite: d1-old-pre
+  generate:
+    style: old
+    function: pre
+  copyright: Lubak91, Vladki
+  fields:
+    is_presignal: 1
+    cost: 1000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 SSSR presignal
+  name_cs: D1 SSSR předvěst
+- id: D1-Old-Choose
+  sprite: d1-old-choose
+  generate:
+    style: old
+    function: choose
+  copyright: Lubak91, Vladki
+  fields:
+    is_signal: 1
+    free_route: 1
+    cost: 5000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 SSSR choose signal
+  name_cs: D1 SSSR vjezdové návěstidlo s volbou koleje
+- id: D1-Old-Long
+  sprite: d1-old-long
+  generate:
+    style: old
+    function: long
+  copyright: Lubak91, Vladki
+  fields:
+    is_longblocksignal: 1
+    cost: 4000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 SSSR long-block signal
+  name_cs: D1 SSSR návěstidlo dlouhého oddílu
+- id: D1-Old-P
+  sprite: d1-old-p
+  generate:
+    style: old
+    function: P
+  copyright: Lubak91, Vladki
+  fields:
+    is_signal: 1
+    is_platformsignal: 1
+    cost: 2000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 SSSR platform exit signal (P)
+  name_cs: D1 SSSR odjezdové návěstidlo nástupní koleje (P)
+- id: D1-Old-LT
+  sprite: d1-old-lt
+  generate:
+    style: old
+    function: LT
+  copyright: Lubak91, Vladki
+  fields:
+    station_boundary: 1
+    cost: 500
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 SSSR station boundary (LT)
+  name_cs: D1 SSSR hranice dopravny (LT)
+- id: D1-Dwarf-Block
+  sprite: d1-dwarf-block
+  generate:
+    style: dwarf
+    function: block
+  copyright: Lubak91, Vladki
+  fields:
+    is_signal: 1
+    cost: 4000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 dwarf block signal
+  name_cs: D1 trpasličí oddílové návěstidlo
+- id: D1-Dwarf-Shunt
+  sprite: d1-dwarf-shunt
+  generate:
+    style: dwarf
+    function: shunt
+  copyright: Lubak91, Vladki
+  fields:
+    is_signal: 1
+    cost: 2000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 dwarf shunting signal
+  name_cs: D1 trpasličí seřaďovací návěstidlo
+- id: D1-Dwarf-PreSignal
+  sprite: d1-dwarf-pre
+  generate:
+    style: dwarf
+    function: pre
+  copyright: Lubak91, Vladki
+  fields:
+    is_presignal: 1
+    cost: 1000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 dwarf presignal
+  name_cs: D1 trpasličí předvěst
+- id: D1-Dwarf-Choose
+  sprite: d1-dwarf-choose
+  generate:
+    style: dwarf
+    function: choose
+  copyright: Lubak91, Vladki
+  fields:
+    is_signal: 1
+    free_route: 1
+    cost: 4000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 dwarf choose signal
+  name_cs: D1 trpasličí vjezdové návěstidlo s volbou koleje
+- id: D1-Dwarf-Long
+  sprite: d1-dwarf-long
+  generate:
+    style: dwarf
+    function: long
+  copyright: Lubak91, Vladki
+  fields:
+    is_longblocksignal: 1
+    cost: 4000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 dwarf long-block signal
+  name_cs: D1 trpasličí návěstidlo dlouhého oddílu
+- id: D1-Dwarf-P
+  sprite: d1-dwarf-p
+  generate:
+    style: dwarf
+    function: P
+  copyright: Lubak91, Vladki
+  fields:
+    is_signal: 1
+    is_platformsignal: 1
+    cost: 2000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 dwarf platform exit signal (P)
+  name_cs: D1 trpasličí odjezdové návěstidlo nástupní koleje (P)
+- id: D1-Dwarf-LT
+  sprite: d1-dwarf-lt
+  generate:
+    style: dwarf
+    function: LT
+  copyright: Lubak91, Vladki
+  fields:
+    station_boundary: 1
+    cost: 500
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 dwarf station boundary (LT)
+  name_cs: D1 trpasličí hranice dopravny (LT)
+- id: D3-P
+  sprite: d3-p
+  generate:
+    d3: P
+  fields:
+    is_signal: 1
+    is_platformsignal: 1
+    cost: 1000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D3 platform exit signal (P, Místo zastavení)
+  name_cs: D3 odjezdové místo nástupní koleje (P, Místo zastavení)
+- id: D3-LT
+  sprite: d3-lt
+  generate:
+    d3: LT
+  fields:
+    station_boundary: 1
+    cost: 300
+    offset_left: 10
+    intro_year: 1900
+  name_en: D3 station boundary (LT, lichoběžníková tabulka)
+  name_cs: D3 lichoběžníková tabulka (LT, hranice dopravny)
+- id: AZD70_OneWaySignal
+  sprite: AZD70_OneWaySignal
+  generate:
+    port: AZD70_OneWaySignal
+  copyright: Lubak91, Vladki
+  fields:
+    single_way: 1
+    cost: 500
+    offset_left: 10
+    intro_year: 1970
+  name_en: AŽD 70 one-way signal
+  name_cs: AŽD 70 jednosměrné návěstidlo
+- id: SSSR_OneWaySignal_Dwarf
+  sprite: SSSR_OneWaySignal_Dwarf
+  generate:
+    port: SSSR_OneWaySignal_Dwarf
+  copyright: Lubak91, Vladki
+  fields:
+    single_way: 1
+    cost: 500
+    offset_left: 10
+    intro_year: 1954
+  name_en: dwarf one-way signal
+  name_cs: trpasličí jednosměrné návěstidlo
+- id: OneWaySignals
+  sprite: OneWaySignals
+  generate:
+    port: OneWaySignals
+  copyright: Vladki
+  fields:
+    single_way: 1
+    cost: 500
+    offset_left: 10
+    intro_year: 1825
+  name_en: one-way sign
+  name_cs: jednosměrná značka
+- id: AZD70_EndOfChooseSignal
+  sprite: AZD70_EndOfChooseSignal
+  generate:
+    port: AZD70_EndOfChooseSignal
+  copyright: Lubak91, Vladki
+  fields:
+    end_of_choose: 1
+    cost: 500
+    offset_left: 10
+    intro_year: 1970
+  name_en: AŽD 70 end of choose
+  name_cs: AŽD 70 konec volby koleje
+- id: SSSR_EndOfChooseSignal_Dwarf
+  sprite: SSSR_EndOfChooseSignal_Dwarf
+  generate:
+    port: SSSR_EndOfChooseSignal_Dwarf
+  copyright: Lubak91, Vladki
+  fields:
+    end_of_choose: 1
+    cost: 500
+    offset_left: 10
+    intro_year: 1954
+  name_en: dwarf end of choose
+  name_cs: trpasličí konec volby koleje
+- id: EndOfChooseSignals
+  sprite: EndOfChooseSignals
+  generate:
+    port: EndOfChooseSignals
+  copyright: Vladki
+  fields:
+    end_of_choose: 1
+    cost: 500
+    offset_left: 10
+    intro_year: 1825
+  name_en: end of choose sign
+  name_cs: značka konec volby koleje
+- id: Minimum100
+  sprite: Minimum100
+  generate:
+    port: Minimum100
+  copyright: Vladki
+  fields:
+    min_speed: 100
+    cost: 500
+    offset_left: 10
+    intro_year: 1920
+  name_en: minimum speed 100 km/h
+  name_cs: minimální rychlost 100 km/h
+- id: Minimum130
+  sprite: Minimum130
+  generate:
+    port: Minimum130
+  copyright: Vladki
+  fields:
+    min_speed: 130
+    cost: 500
+    offset_left: 10
+    intro_year: 1945
+  name_en: minimum speed 130 km/h
+  name_cs: minimální rychlost 130 km/h
+- id: Minimum160
+  sprite: Minimum160
+  generate:
+    port: Minimum160
+  copyright: Vladki
+  fields:
+    min_speed: 160
+    cost: 500
+    offset_left: 10
+    intro_year: 1970
+  name_en: minimum speed 160 km/h
+  name_cs: minimální rychlost 160 km/h
+- id: Minimum190
+  sprite: Minimum190
+  generate:
+    port: Minimum190
+  copyright: Vladki
+  fields:
+    min_speed: 190
+    cost: 500
+    offset_left: 10
+    intro_year: 1995
+  name_en: minimum speed 190 km/h
+  name_cs: minimální rychlost 190 km/h
+- id: RailGate
+  sprite: RailGate
+  generate:
+    port: RailGate
+  copyright: Vladki
+  fields:
+    is_private: 1
+    cost: 5000
+    offset_left: 0
+    intro_year: 1825
+  name_en: rail gate
+  name_cs: železniční závora

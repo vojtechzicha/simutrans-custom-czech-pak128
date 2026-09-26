@@ -4,9 +4,13 @@
 Walks every ``vehicle-*/.../family.yaml`` under the project root, groups them by
 (agency, mode), and emits one ``.pak`` per group into ``dist/`` — e.g.
 ``dist/VZ-CeskeDrahy-rail.pak`` contains every family and livery for ČD's rail
-fleet. Station sets (``station-*/.../station.yaml``) and industry sets
-(``industry-*/.../industry.yaml``) are grouped the same way by their ``group``
-field, e.g. ``dist/VZ-Stations-rail.pak``, ``dist/VZ-Supermarkets-city.pak``.
+fleet. Station sets (``station-*/.../station.yaml``), industry sets
+(``industry-*/.../industry.yaml``) and signal sets (``signal-*/.../signal.yaml``)
+are grouped the same way by their ``group`` field, e.g.
+``dist/VZ-Stations-rail.pak``, ``dist/VZ-Supermarkets-city.pak``.
+A set with ``install: false`` builds into ``dist/hold/`` instead, which the
+install step never reads; a set with ``makeobj: fork`` is compiled with
+``MAKEOBJ_FORK_PATH`` (the fork's makeobj, which knows keys the stock one drops).
 Per-livery DAT / PNG files live side-by-side inside one shared build directory
 so a single ``makeobj`` invocation bundles them.
 
@@ -85,7 +89,9 @@ def basename_for(family: dict, livery: dict) -> str:
     return f"VZ-{family['agency']}-{slug(family['type'])}-{livery['color']}"
 
 
-SOURCE_ROOTS = {"family.yaml": "vehicle-", "station.yaml": "station-", "industry.yaml": "industry-"}
+SOURCE_ROOTS = {"family.yaml": "vehicle-", "station.yaml": "station-", "industry.yaml": "industry-",
+                "signal.yaml": "signal-"}
+SET_YAMLS = ("station.yaml", "industry.yaml", "signal.yaml")
 
 
 def mode_for(source_yaml: Path) -> str:
@@ -377,6 +383,74 @@ def stage_station_set(station_yaml: Path, mode: str, out_dir: Path,
     return ok, fail
 
 
+# Signal sets (signal-<mode>/.../signal.yaml): roadsign objects on the sheet
+# layout of tools/sign_extract.py / gen_signals.py: 4 columns (images N, S, W,
+# E) by one row per state, Image[4 * row + col], plus a last row with the
+# cursor (col 0) and the 32x32 toolbar icon (col 1).
+def emit_signal_dat(spec: dict, obj: dict, mode: str, state_rows: int) -> str:
+    bn = station_basename(spec, obj)
+    credit = obj.get("copyright", spec.get("copyright"))
+    lines = [
+        "obj=roadsign",
+        f"name={bn}",
+        f"copyright={credit + ', ' if credit else ''}vojtechzicha",
+        f"waytype={MODE_WAYTYPES[mode]}",
+    ]
+    lines += [f"{k}={v}" for k, v in obj.get("fields", {}).items()]
+    for i in range(4 * state_rows):
+        lines.append(f"Image[{i}]={bn}.{i // 4}.{i % 4}")
+    lines.append(f"cursor={bn}.{state_rows}.0")
+    lines.append(f"icon=> {bn}.{state_rows}.1")
+    return "\n".join(lines) + "\n"
+
+
+def stage_signal_set(signal_yaml: Path, mode: str, out_dir: Path,
+                     tab_lines: dict[str, list[str]]) -> tuple[int, int]:
+    """Write the .dat/.png of every object of one signal.yaml into out_dir."""
+    from PIL import Image
+
+    spec = yaml.safe_load(signal_yaml.read_text(encoding="utf-8"))
+    ok = fail = 0
+    for obj in spec["objects"]:
+        bn = station_basename(spec, obj)
+        png_src = signal_yaml.parent / "sprites" / f"{obj['sprite']}.png"
+        if not png_src.exists():
+            print(f"  [skip] {bn}: missing sprite {png_src}", file=sys.stderr)
+            fail += 1
+            continue
+        state_rows = Image.open(png_src).height // 128 - 1
+        shutil.copy2(png_src, out_dir / f"{bn}.png")
+        (out_dir / f"{bn}.dat").write_text(emit_signal_dat(spec, obj, mode, state_rows), encoding="utf-8")
+        for lang in TAB_LANGS:
+            tab_lines[lang].extend(emit_station_tab_entries(spec, obj, lang))
+        ok += 1
+    return ok, fail
+
+
+# Paks this run could not build (fork makeobj missing); the install step must
+# not treat their installed copies as orphans.
+SKIPPED_PAKS: set[str] = set()
+
+
+def makeobj_for(family_yamls: list[Path]) -> str | None:
+    """The makeobj for a group: MAKEOBJ_FORK_PATH for sets with ``makeobj: fork``
+    (None if unset), else MAKEOBJ_PATH or makeobj on PATH."""
+    if set_option(family_yamls, "makeobj", "stock") == "fork":
+        return os.environ.get("MAKEOBJ_FORK_PATH") or None
+    return os.environ.get("MAKEOBJ_PATH", "makeobj")
+
+
+def set_option(family_yamls: list[Path], key: str, default):
+    """A set-level option (e.g. install, makeobj) of the group's signal/station
+    yaml files; the first one that sets it wins."""
+    for fy in sorted(family_yamls):
+        if fy.name in SET_YAMLS:
+            data = yaml.safe_load(fy.read_text(encoding="utf-8"))
+            if key in data:
+                return data[key]
+    return default
+
+
 # Industry sets (industry-<location>/.../industry.yaml): city consumer
 # factories drawn by tools/gen_shops.py. Every object has four layouts and two
 # seasons on one sheet: row = season * 4 + layout, column = tile y * w + x of
@@ -472,6 +546,7 @@ def stage_industry_set(industry_yaml: Path, out_dir: Path,
 # so we keep full diacritics in both en and cz.
 TAB_LANGS = ("en", "cz")
 TAB_DIRNAME = "text"
+HOLD_DIRNAME = "hold"  # dist/hold/: built but never installed (install: false)
 UTF8_BOM = b"\xef\xbb\xbf"
 
 
@@ -480,11 +555,20 @@ def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, in
     station.yaml / industry.yaml) files. Returns (succeeded, failed)
     liveries/objects."""
     pak_bn = pak_basename_for(agency, mode)
+    if makeobj_for(family_yamls) is None:
+        # Not a failure: this machine just can't build it. Stock makeobj would
+        # silently drop the fork-only keys, so skip, and keep the installed copy.
+        print(f"  [skip] {pak_bn}: needs the fork's makeobj (set MAKEOBJ_FORK_PATH); "
+              "an installed copy is kept", file=sys.stderr)
+        SKIPPED_PAKS.add(pak_bn)
+        return 0, 0
     out_dir = BUILD / pak_bn
     if out_dir.exists():
         shutil.rmtree(out_dir)
     out_dir.mkdir(parents=True)
-    DIST.mkdir(exist_ok=True)
+    held = not set_option(family_yamls, "install", True)
+    dist = DIST / HOLD_DIRNAME if held else DIST
+    dist.mkdir(parents=True, exist_ok=True)
 
     tab_lines: dict[str, list[str]] = {lang: [] for lang in TAB_LANGS}
 
@@ -494,9 +578,11 @@ def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, in
 
     ok = fail = 0
     for fy in sorted(family_yamls):
-        if fy.name in ("station.yaml", "industry.yaml"):
+        if fy.name in SET_YAMLS:
             if fy.name == "station.yaml":
                 s_ok, s_fail = stage_station_set(fy, mode, out_dir, tab_lines)
+            elif fy.name == "signal.yaml":
+                s_ok, s_fail = stage_signal_set(fy, mode, out_dir, tab_lines)
             else:
                 s_ok, s_fail = stage_industry_set(fy, out_dir, tab_lines)
             ok += s_ok
@@ -523,14 +609,14 @@ def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, in
         print(f"  [skip] {pak_bn}: no liveries built", file=sys.stderr)
         return ok, fail
 
-    tab_out = DIST / TAB_DIRNAME
+    tab_out = dist / TAB_DIRNAME
     tab_out.mkdir(exist_ok=True)
     for lang in TAB_LANGS:
         body = "\n".join(tab_lines[lang]) + "\n"
         (tab_out / f"{lang}.{pak_bn}.tab").write_bytes(UTF8_BOM + body.encode("utf-8"))
 
-    pak = DIST / f"{pak_bn}.pak"
-    makeobj = os.environ.get("MAKEOBJ_PATH", "makeobj")
+    pak = dist / f"{pak_bn}.pak"
+    makeobj = makeobj_for(family_yamls)
     try:
         # makeobj on Windows silently writes an empty pak when given absolute,
         # backslash, or trailing-slashless input dir paths. So: forward slashes,
@@ -558,7 +644,7 @@ def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, in
             print(result.stderr, file=sys.stderr)
         return 0, ok + fail
 
-    print(f"  [ok]   {pak_bn} -> {pak.relative_to(ROOT)} ({ok} liveries)")
+    print(f"  [ok]   {pak_bn} -> {pak.relative_to(ROOT)} ({ok} liveries){' (held: not installed)' if held else ''}")
     return ok, fail
 
 
@@ -607,7 +693,7 @@ def select_target_groups(target: Path | None, all_groups: dict[tuple[str, str], 
         if selected:
             return selected
 
-    print(f"no family.yaml, station.yaml or industry.yaml found at or under {target}", file=sys.stderr)
+    print(f"no family.yaml, station.yaml, industry.yaml or signal.yaml found at or under {target}", file=sys.stderr)
     return {}
 
 
@@ -682,11 +768,15 @@ def install_paks(target_dir: Path, assume_yes: bool) -> int:
     dist_tabs = _collect_tabs(DIST / TAB_DIRNAME)
     target_text = target_dir / TAB_DIRNAME
 
+    kept_paks = {f"{bn}.pak" for bn in SKIPPED_PAKS}
+    kept_tabs = {f"{lang}.{bn}.tab" for bn in SKIPPED_PAKS for lang in TAB_LANGS}
     pak_orphans = [
-        p for n, p in sorted(_collect_paks(target_dir).items()) if n not in dist_paks
+        p for n, p in sorted(_collect_paks(target_dir).items())
+        if n not in dist_paks and n not in kept_paks
     ]
     tab_orphans = [
-        p for n, p in sorted(_collect_tabs(target_text).items()) if n not in dist_tabs
+        p for n, p in sorted(_collect_tabs(target_text).items())
+        if n not in dist_tabs and n not in kept_tabs
     ]
     # Legacy tabs at the pak root from old build.py versions are always orphans.
     legacy_orphans: list[Path] = []
