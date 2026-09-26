@@ -873,6 +873,11 @@ def main() -> int:
         return 1
 
     all_groups = group_by_agency_mode(families)
+    # Paks this machine can't build (fork makeobj missing) are never orphans,
+    # whether or not this run's target includes them.
+    for (agency, mode), fys in all_groups.items():
+        if makeobj_for(fys) is None:
+            SKIPPED_PAKS.add(pak_basename_for(agency, mode))
     prune_stale_artifacts(planned_pak_names(all_groups), planned_tab_names(all_groups))
 
     target_groups = select_target_groups(args.target, all_groups)
