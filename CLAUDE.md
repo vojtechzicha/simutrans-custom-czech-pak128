@@ -171,6 +171,8 @@ The Leo Express families (`vehicle-rail/leo-express/`) are original art rendered
 
 The model scripts are `vectron.py`, `ric.py` (ex-DB IC coaches and the RDC couchette), `flirt.py`, `lint.py` (LINT 41/27 with the livery as a colour table) and `talgo.py`. Regenerate the sheets with `python tools/railrender/leo.py [family …] [--preview DIR]`; change a model and regenerate rather than editing the PNGs.
 
+The small and foreign operator families (KŽC, AŽD, Die Länderbahn, DB Regio, ÖBB, ZSSK, MÁV, PKP Intercity, Koleje Dolnośląskie / Śląskie, European Sleeper, …) have one model script each; `ops.py` lists them and regenerates the ones without a main of their own. `coachkit.py` is the shared builder for loco-hauled coaches: length, windows and doors in metres off the vagonWEB side drawings (both sides), bogies, roof type, and the livery as a colour table with horizontal bands, 1-px lines and marks; `ops_coaches.py`, `es_coaches.py`, `zssk_coaches.py` and `mav_pkp_coaches.py` drive it. To give an existing model another operator's livery, write a wrapper (`ops_desiro.py`, `ops_vectron.py`, `ops_regiosprinter.py`, `arriva_lint.py`) instead of editing the shared model, so the other families' sheets stay byte-identical.
+
 Articulated units are modelled on one u axis and each car's tile keeps only its own pixels. Lettering must read left to right as seen: on the +v side screen-left is the vehicle's rear, on the -v side its front. Locomotives are drawn about 2–3 px taller than coaches, like the natives (ČD 363, 380, ÖBB 1216).
 
 ### Rendered bus sprites (`tools/busrender/`)
