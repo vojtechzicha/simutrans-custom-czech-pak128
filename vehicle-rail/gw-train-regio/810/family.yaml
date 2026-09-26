@@ -1,0 +1,98 @@
+agency: GWTrainRegio
+type: "810"
+copyright: Sim
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "GWTR"
+  agency_cs: "GWTR"
+  family_en: '"Šukafon"'
+  family_cs: '"Šukafon"'
+
+# GW Train Regio class 810 railcars (ex ČSD M 152.0, Vagónka Studénka
+# 1981-84) and class 816, four 810s rebuilt for GWTR at DPOV Veselí nad
+# Moravou in 2018 (TEDOM engine, 47 seats with headrests, roof air
+# conditioning). In 2026: 810 492, 536, 543, 623 (orange) and 810 602 "Jarek"
+# (yellow) as reserves and on Milotice n. O. - Vrbno p. P., Sokolov - Kraslice
+# and Trutnov; 816 001, 002 on Milotice - Vrbno, 816 003, 004 in Šumava.
+# 13.97 m, 20 t, 155 kW, 80 km/h. Single railcars that also run 2-3 coupled,
+# 810s and 816s mixed; GWTR has no 010 trailers.
+#
+# Sprites: zone-map repaints of the ČD 810 sheet (Sim's pak128.CS art), the
+# 816 with its roof AC box; written by tools/railrender/gwtr_m152.py
+# (regenerate with `python tools/railrender/gwtr.py 810`). Row 0 = 810,
+# row 1 = 816.
+#
+# Liveries:
+#   oranzovozelena  GWTR orange with dark-green cab ends and lime stripes
+#                   (810 492, 536, 543, 623; all four 816s).
+#   zlutocerna      the earlier GW yellow with black details, 810 602 only
+#                   (since 2012).
+
+vehicles:
+  - id: "810"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    prev: ["810", "816"]
+    next: ["810", "816"]
+    couple_liveries: true
+    fields:
+      cost: 1022400
+      payload: 95
+      speed: 80
+      weight: 20
+      runningcost: 23
+      fixed_cost: 118
+      intro_year: 2012
+      intro_month: 6
+      retire_year: 2028
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 155
+      smoke: Diesel_black
+      gear: 105
+    extended:
+      axles: 2
+
+  - id: "816"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 1
+    liveries: [oranzovozelena]
+    prev: ["810", "816"]
+    next: ["810", "816"]
+    couple_liveries: true
+    fields:
+      cost: 1480000
+      payload: 80
+      speed: 80
+      weight: 20
+      runningcost: 21
+      fixed_cost: 125
+      intro_year: 2018
+      intro_month: 6
+      retire_year: 2034
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 155
+      smoke: Diesel_small
+      gear: 105
+    extended:
+      axles: 2
+
+liveries:
+  - color: oranzovozelena
+    name_en: "orange-green"
+    name_cs: "oranžovo-zelená"
+  - color: zlutocerna
+    name_en: "yellow-black"
+    name_cs: "žluto-černá"

@@ -1,0 +1,142 @@
+agency: GWTrainRegio
+type: "845"
+copyright: vojtechzicha
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "GWTR"
+  agency_cs: "GWTR"
+  family_en: "ex-DB 628.2"
+  family_cs: "ex-DB 628.2"
+
+# GW Train Regio class 845 + 945 ("mrkev"): the ex-DB class 628.2 + 928.2
+# two-car DMU (Düwag / Waggon Union / LHB / MBB, 1986-89). 845.4/945.4 are
+# GWTR's own imports from DB Regio (2016-19) for the state line R25 Plzeň -
+# Most; 845.0/945.0 came from RegioJet in 2022-23. Twelve units in 2026:
+# R25 5 × 845.4 + 945.4 (orange), Ústecko (U52 Žatec - Ústí n. L., T8 to
+# Moldava) 845 404 + 945 404 and the twin-motor pairs 845 407 + 409 and
+# 408 + 410 (DÚK), Šumava 845/945 002 and 003 plus the twin-motor pairs
+# 845 411 + 413 and 412 + 414 (orange). No GWTR 628 runs solo.
+#
+# Real car 22.7 m over buffers (45.4 m per unit); 845 = motor car
+# (Daimler-Benz OM 444 A, 410 kW, 120 km/h), 40 t; 945 = unpowered driving
+# trailer, 28 t, with the small 1st-class section on R25. Same body and model
+# as the Arriva 845 (see vehicle-rail/arriva/845).
+#
+# Sprites: drawn from scratch with the pak128 box raycaster in
+# tools/railrender/db628.py (regenerate with
+# `python tools/railrender/gwtr.py 845`). Row 0 = 845 motor car (cab at its
+# front, headlights), row 1 = 945 driving trailer (cab at its rear, tail
+# lights), row 2 = an 845 motor car turned round as the rear car of a
+# twin-motor pair. Each car is 11 carunits long; the joint closes at 11 + 11.
+#
+# Liveries (research: gwtr.cz, zdopravy.cz, seznam-autobusu.cz fleet register):
+#   oranzovozelena     GWTR orange with dark-green cab ends and lime stripes,
+#                      9 units (R25 + Šumava). GWTR keeps it on the 628s; the
+#                      South Bohemian IDESKA scheme is not applied to them.
+#   dukzelenooranzova  the inverse scheme for the Doprava Ústeckého kraje
+#                      contract (Dec 2022-): bright-green body, orange cab
+#                      ends and inner-end patches with dark-green swooshes,
+#                      two white AC units per car, 3 units.
+#
+# Coupling: the 845 always leads its unit; the 945 or the turned motor car
+# trails. Units of either livery couple in multiple (couple_liveries
+# prev/next) while the two cars of one unit match.
+
+vehicles:
+  - id: "845"
+    role_en: "motor car"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: ["945", "845-rear"]
+    next: ["945", "845-rear"]
+    couple_liveries: prev
+    fields:
+      cost: 2450000
+      payload: 80
+      speed: 120
+      weight: 40
+      runningcost: 88
+      fixed_cost: 560
+      intro_year: 2016
+      intro_month: 12
+      retire_year: 2033
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 11
+      engine_type: diesel
+      power: 410
+      smoke: Diesel
+      gear: 120
+    extended:
+      axles: 4
+
+  - id: "945"
+    role_en: "driving trailer"
+    role_cs: "řídicí vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["845"]
+    next: ["845"]
+    couple_liveries: next
+    fields:
+      cost: 1150000
+      payload: 74
+      speed: 120
+      weight: 28
+      runningcost: 12
+      fixed_cost: 130
+      intro_year: 2016
+      intro_month: 12
+      retire_year: 2033
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 11
+    extended:
+      axles: 4
+
+  - id: "845-rear"
+    display_id: "845"
+    role_en: "rear motor car"
+    role_cs: "zadní motorový vůz"
+    row: 2
+    head: false
+    tail: true
+    prev: ["845"]
+    next: ["845"]
+    couple_liveries: next
+    fields:
+      cost: 2450000
+      payload: 80
+      speed: 120
+      weight: 40
+      runningcost: 88
+      fixed_cost: 560
+      intro_year: 2016
+      intro_month: 12
+      retire_year: 2033
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 11
+      engine_type: diesel
+      power: 410
+      smoke: Diesel
+      gear: 120
+    extended:
+      axles: 4
+
+liveries:
+  - color: oranzovozelena
+    name_en: "orange-green"
+    name_cs: "oranžovo-zelená"
+  - color: dukzelenooranzova
+    name_en: "DÚK green-orange"
+    name_cs: "DÚK zeleno-oranžová"

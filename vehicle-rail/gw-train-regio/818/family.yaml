@@ -1,0 +1,93 @@
+agency: GWTrainRegio
+type: "818"
+copyright: vojtechzicha
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "GWTR"
+  agency_cs: "GWTR"
+  family_en: "RegioSprinter"
+  family_cs: "RegioSprinter"
+
+# GW Train Regio class 818: Siemens-Duewag RegioSprinter (DB class 654),
+# a low-floor railcar of three short articulated sections (9.64 + 4.10 +
+# 9.64 m) on four single axles (A'2'A'), cabs at both ends. 24.8 m over
+# buffers, 2.97 m wide, 2 × 198 kW MAN, 120 km/h, 65 seats
+# after the GWTR refurbishment (AC, WC, Wi-Fi). Eleven cars in 2026:
+#   818.0  818 002, 006, 009, 012, 013, 016, 017 - ex-Rurtalbahn (1995),
+#          Šumava (České Budějovice - Černý Kříž, Číčenice - Nové Údolí,
+#          Strakonice - Volary) since Dec 2017; screw coupling and side buffers.
+#   818.2  818 245-248 - ex-Vogtlandbahn (1997), Karlovarsko (Sokolov -
+#          Kraslice, Karlovy Vary - Mariánské Lázně); centre coupler, no side
+#          buffers, turquoise bumper skirt. The two kinds can't couple.
+# Cars of one kind often run in pairs.
+#
+# Sprites: drawn from scratch with the pak128 box raycaster in
+# tools/railrender/regiosprinter.py (regenerate with
+# `python tools/railrender/gwtr.py 818`). Row 0 = 818.0, row 1 = 818.2.
+#
+# Livery: oranzovozelena, GWTR orange with dark-green cab ends and a lime
+# crescent, on all eleven cars. GWTR keeps it on the RegioSprinters; the South
+# Bohemian IDESKA scheme is not applied to them.
+
+vehicles:
+  - id: "818.0"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    prev: ["818.0"]
+    next: ["818.0"]
+    fields:
+      cost: 2150000
+      payload: 95
+      speed: 120
+      weight: 32
+      runningcost: 58
+      fixed_cost: 640
+      intro_year: 2017
+      intro_month: 12
+      retire_year: 2032
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 12
+      engine_type: diesel
+      power: 396
+      smoke: Diesel_small
+      gear: 120
+    extended:
+      axles: 4
+
+  - id: "818.2"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 1
+    prev: ["818.2"]
+    next: ["818.2"]
+    fields:
+      cost: 2150000
+      payload: 95
+      speed: 120
+      weight: 32
+      runningcost: 58
+      fixed_cost: 640
+      intro_year: 2017
+      intro_month: 12
+      retire_year: 2032
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 12
+      engine_type: diesel
+      power: 396
+      smoke: Diesel_small
+      gear: 120
+    extended:
+      axles: 4
+
+liveries:
+  - color: oranzovozelena
+    name_en: "orange-green"
+    name_cs: "oranžovo-zelená"

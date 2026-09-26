@@ -1,0 +1,144 @@
+agency: GWTrainRegio
+type: "814.5"
+copyright: Sim
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "GWTR"
+  agency_cs: "GWTR"
+  family_en: "RegioNova"
+  family_cs: "RegioNova"
+
+# GW Train Regio 814 501 + 914 501: a RegioNova two-car DMU rebuilt by Pars
+# nova in 2007 from M 152.0 85840 and Btax780 85631 for Železnice Desná,
+# bought by GWTR in 2017 and in GWTR orange since March 2018. Šumava until
+# Dec 2025, since 1 Jan 2026 on the cross-border line Trutnov - Královec -
+# Lubawka - Sędzisław. 28.44 m, 39.6 t, 242 kW, 80 km/h, 84 seats; the 914
+# has the low-floor centre section.
+#
+# Each car has its cab at the outer end, so a sprite is only right in one
+# convoy position; both orientations are modelled like the ČD 814.0 family:
+#   [914.5 + 814.5]                   cab car leads (rows 0 + 1)
+#   [814.5-reverse + 914.5-reverse]   motor car leads (rows 2 + 3)
+#
+# Sprites: zone-map repaint of the ČD 814.0 sheets (Sim's pak128.CS art),
+# written by tools/railrender/gwtr_m152.py (regenerate with
+# `python tools/railrender/gwtr.py 814_5`).
+
+vehicles:
+  - id: "914.5"
+    role_en: "front cab car"
+    role_cs: "přední řídicí vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["814.5"]
+    fields:
+      cost: 979000
+      payload: 89
+      speed: 80
+      weight: 18
+      runningcost: 3
+      fixed_cost: 15
+      intro_year: 2018
+      intro_month: 3
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+    extended:
+      axles: 2
+
+  - id: "814.5"
+    role_en: "rear motor car"
+    role_cs: "zadní motorový vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["914.5"]
+    next: []
+    fields:
+      cost: 1317800
+      payload: 100
+      speed: 80
+      weight: 22
+      runningcost: 29
+      fixed_cost: 148
+      intro_year: 2018
+      intro_month: 3
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 242
+      smoke: Diesel
+      gear: 105
+    extended:
+      axles: 2
+
+  - id: "814.5-reverse"
+    display_id: "814.5"
+    role_en: "front motor car"
+    role_cs: "přední motorový vůz"
+    row: 2
+    head: true
+    tail: false
+    prev: []
+    next: ["914.5-reverse"]
+    fields:
+      cost: 1317800
+      payload: 100
+      speed: 80
+      weight: 22
+      runningcost: 29
+      fixed_cost: 148
+      intro_year: 2018
+      intro_month: 3
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 242
+      smoke: Diesel
+      gear: 105
+    extended:
+      axles: 2
+
+  - id: "914.5-reverse"
+    display_id: "914.5"
+    role_en: "rear cab car"
+    role_cs: "zadní řídicí vůz"
+    row: 3
+    head: false
+    tail: true
+    prev: ["814.5-reverse"]
+    next: []
+    fields:
+      cost: 979000
+      payload: 89
+      speed: 80
+      weight: 18
+      runningcost: 3
+      fixed_cost: 15
+      intro_year: 2018
+      intro_month: 3
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+    extended:
+      axles: 2
+
+liveries:
+  - color: oranzovozelena
+    name_en: "orange-green"
+    name_cs: "oranžovo-zelená"

@@ -26,6 +26,16 @@ v = lateral cu (+v = right-hand side in the travel direction), z = model px
 (the 945 is the 845 turned 180 degrees).
 
 Regenerate with `python tools/railrender/arriva.py 845`.
+
+GW Train Regio runs the same 628.2 units (`GWTR_LIVERIES`, `rows_gwtr`,
+regenerate with `python tools/railrender/gwtr.py 845`): the same body with the
+GWTR "mrkev" scheme or its DUK inverse, and a third row, a motor car turned
+round as the rear car of a twin-motor pair (845 407+409 ...). Both schemes
+share one stencil, measured on photos rectified into the car side plane
+(gwtr.cz official side of an R25 unit; 845 404+945 404 broadside): a swoosh
+band from the nose along the lower cab side, rising behind the cab door over
+the vestibule window to the roofline, and a quarter-ellipse patch with an
+outer band at each inner (gangway) end.
 """
 import os
 import sys
@@ -39,6 +49,7 @@ from railkit import Paint, Part
 from render import DIRS
 
 LIVERIES = ["arrivamodra", "tyrkysovokremova", "dbcervena"]
+GWTR_LIVERIES = ["oranzovozelena", "dukzelenooranzova"]
 
 PX = 0.375                          # metres per model px (z)
 L_CAR = 22.7                        # metres over buffers per car
@@ -136,7 +147,133 @@ def livery(name):
             lowfront=red, logo=(0xF4, 0xF4, 0xF4), letters=Paint(0xF2F4F5),
             beam=Paint(0x303336), skirt=Paint(0x4C5054), skirtedge=Paint(0x4C5054),
             ac=False, lowband=grey)
+    if name == "oranzovozelena":
+        # GWTR "mrkev" (R25 + Sumava): orange body; dark-green cab end over the
+        # front, the roof dome and the cab side back past the vestibule window,
+        # bounded by the lime swoosh; green patch + lime arc at the inner ends;
+        # front: lime stripe at headlight level, orange buffer beam; big white
+        # GW TRAIN low mid-car; light-grey roof
+        orange, green, lime = Paint(GW_ORANGE), Paint(GW_GREEN), Paint(GW_LIME)
+        return dict(
+            name=name, scheme="gw", body=orange, cab=green, swoosh=lime,
+            patch=green, patchband=lime, inner=INNER_GWTR,
+            door=orange, innerdoor=orange, roof=Paint(GW_ROOF), roofcab=green,
+            mask=green, masktop=green,
+            front=[(1.25, orange), (1.70, lime)], logo_z=(1.72, 1.96), logo_v=0.30,
+            lamp_z=(1.36, 1.66), lamp_v=(0.38, 0.68),
+            logo=R.rgb(GW_WHITE), letters=Paint(GW_WHITE),
+            marks=[("gwtrain", (8.4, 14.2), (1.05, 1.88))],
+            beam=orange, skirt=Paint(0x3A3D40), skirtedge=Paint(0x303336),
+            bellows=Paint(0xD2501C, top=0x8A4A2E), acunits=None)
+    if name == "dukzelenooranzova":
+        # DUK-GWTR (Ustecko), the inverse: bright-green body; orange cab end
+        # (front above the headlights, roof dome, cab side above the swoosh);
+        # dark-green swoosh and front band carrying the white GW TRAIN logo;
+        # lime buffer beam; orange patch + dark-green arc at the inner ends;
+        # small white DUK logo + GW TRAIN low on the side; 2 white roof AC units
+        green, dark = Paint(DUK_GREEN), Paint(DUK_DARK)
+        orange, lime = Paint(DUK_ORANGE), Paint(DUK_LIME)
+        return dict(
+            name=name, scheme="gw", body=green, cab=orange, swoosh=dark,
+            patch=orange, patchband=dark, inner=INNER_DUK,
+            door=green, innerdoor=green, roof=Paint(GW_ROOF), roofcab=orange,
+            mask=orange, masktop=orange,
+            front=[(1.30, lime), (1.98, dark)], logo_z=(1.72, 1.96), logo_v=0.30,
+            lamp_z=(1.36, 1.66), lamp_v=(0.38, 0.68),
+            logo=R.rgb(GW_WHITE), letters=Paint(GW_WHITE),
+            marks=[("duk", (8.3, 10.2), (1.28, 1.86)), ("word", (10.6, 13.3), (1.40, 1.72))],
+            beam=lime, skirt=Paint(0x3A3D40), skirtedge=Paint(0x303336),
+            bellows=Paint(0x58B23E, top=0x3E6E36),
+            acunits={True: [(5.4, 7.2), (13.4, 15.2)], False: [(11.4, 13.2), (17.2, 19.0)]})
     raise ValueError(name)
+
+
+# ------------------------------------------------------------------ GWTR schemes
+# shared GWTR palette (all GWTR types use exactly these)
+GW_ORANGE, GW_GREEN, GW_LIME = 0xE8641E, 0x116B48, 0x52C040
+GW_WHITE, GW_ROOF = 0xF2F4F5, 0xC3C7CA
+DUK_GREEN, DUK_DARK, DUK_ORANGE, DUK_LIME = 0x4CB840, 0x1E7A3C, 0xF06020, 0x5DBB3F
+GW_AC = Paint(0xE2E6E8, top=0xEDEFF0)
+GW_AC_GRILLE = Paint(0x8E959A)
+
+# cab-end swoosh (car-local m -> height in m): the cab colour lies above HI, the
+# band between LO and HI, the body below LO. Measured on the rectified photos:
+# along the cab side the band runs 1.33-1.79 m at the nose, 1.55-1.99 m at the
+# cab door; behind the door it rises over the vestibule window and meets the
+# roofline at 4.8 m (upper edge) and 6.3 m (lower edge). 99 = no cab / band.
+SW_HI = ([0.0, 0.47, 1.90, 2.82, 3.30, 3.69, 4.20, 4.75, 4.82, 4.83],
+         [1.78, 1.80, 1.99, 2.38, 2.63, 2.84, 3.15, 3.66, 3.72, 99.0])
+SW_LO = ([0.0, 0.47, 1.90, 2.82, 3.29, 3.91, 4.94, 5.45, 5.83, 6.19, 6.33, 6.34],
+         [1.30, 1.31, 1.50, 1.69, 1.86, 2.01, 2.69, 2.98, 3.30, 3.60, 3.72, 99.0])
+# inner-end patch + outer band: superellipses |d/a|^p + |h/b|^p < 1 round the
+# top corner of the inner end (d = m before BODY_END, h = m below the side top)
+INNER_GWTR = ((4.15, 2.28, 1.7), (5.6, 2.6, 1.45))
+INNER_DUK = ((4.10, 1.80, 1.7), (5.4, 2.35, 1.45))
+
+# bold caps "GW TRAIN", 5 rows (top first); '#' = white
+_GLYPHS = {
+    "G": [".###", "#...", "#.##", "#..#", ".###"],
+    "W": ["#...#", "#...#", "#.#.#", "##.##", "#...#"],
+    "T": ["###", ".#.", ".#.", ".#.", ".#."],
+    "R": ["###.", "#..#", "###.", "#.#.", "#..#"],
+    "A": [".##.", "#..#", "####", "#..#", "#..#"],
+    "I": ["#", "#", "#", "#", "#"],
+    "N": ["#..#", "##.#", "#.##", "#..#", "#..#"],
+}
+
+
+def _word_bitmap(text):
+    cols = []
+    for i, ch in enumerate(text):
+        if ch == " ":
+            cols += [[0] * 5]
+            continue
+        g = _GLYPHS[ch]
+        for c in range(len(g[0])):
+            cols.append([1 if g[r][c] == "#" else 0 for r in range(5)])
+        if i + 1 < len(text):
+            cols.append([0] * 5)
+    return np.array(cols, float).T          # 5 x n
+
+
+GWTRAIN = _word_bitmap("GW TRAIN")
+
+
+def bitmap_hit(bm, x, zz, fx, fz, thr=0.30):
+    """Point-sampled white/no decision for a bitmap word at x, zz in 0..1
+    (zz up), from the bitmap coverage over a pixel-sized footprint fx x fz
+    (fractions of the word) so the 1x sprite keeps the letter rhythm."""
+    rows, cols = bm.shape
+    x0, x1 = (x - fx / 2) * cols, (x + fx / 2) * cols
+    y0, y1 = (1 - zz - fz / 2) * rows, (1 - zz + fz / 2) * rows
+    c0, c1 = max(0, int(np.floor(x0))), min(cols, int(np.ceil(x1)))
+    r0, r1 = max(0, int(np.floor(y0))), min(rows, int(np.ceil(y1)))
+    if c0 >= c1 or r0 >= r1:
+        return False
+    tot = cov = 0.0
+    for r in range(r0, r1):
+        wy = min(y1, r + 1) - max(y0, r)
+        for c in range(c0, c1):
+            w = wy * (min(x1, c + 1) - max(x0, c))
+            tot += w
+            cov += w * bm[r, c]
+    return tot > 0 and cov / tot >= thr
+
+
+def swoosh_zone(m, zm, inner):
+    """GWTR/DUK stencil: "cab", "swoosh", "patch", "patchband" or None (body)."""
+    if zm >= np.interp(m, *SW_HI):
+        return "cab"
+    if zm >= np.interp(m, *SW_LO):
+        return "swoosh"
+    (a1, b1, p1), (a2, b2, p2) = inner
+    d = max(0.0, BODY_END - m)
+    h = max(0.0, 3.72 - zm)
+    if (d / a1) ** p1 + (h / b1) ** p1 < 1:
+        return "patch"
+    if (d / a2) ** p2 + (h / b2) ** p2 < 1:
+        return "patchband"
+    return None
 
 
 # ------------------------------------------------------------------ cab nose profile
@@ -195,6 +332,9 @@ class Car:
         """Livery paint of the plain side wall (no openings)."""
         C = self.C
         zm = z * PX
+        if C.get("scheme") == "gw":
+            k = swoosh_zone(m, min(zm, 3.71), C["inner"])
+            return C[k] if k else C["body"]
         t = (zm - 0.78) / (3.72 - 0.78)
         nm = C["name"]
         if nm == "arrivamodra":
@@ -227,6 +367,8 @@ class Car:
 
     def side(self, m, z, cs):
         C = self.C
+        if C.get("scheme") == "gw":
+            return self.gw_side(m, z, cs)
         if z >= ZS - 0.02:
             return C["roofside"]
         # doors (cab door both sides, inner door on the car's own left)
@@ -261,9 +403,79 @@ class Car:
                 return C["letters"]
         return self.zone(m, z, cs)
 
+    def gw_side(self, m, z, cs):
+        """Side wall of the GWTR / DUK schemes: body-coloured doors with an
+        upper and a lower window, individual black-framed windows, lettering."""
+        C = self.C
+        if z >= ZS - 0.02:
+            return self.zone(m, ZS - 0.05, cs)          # roof shoulder
+        doors = [(CABDOOR, C["door"])]
+        if cs == "L":
+            doors.append((INNERDOOR, C["innerdoor"]))
+        for ((a, b), leaf) in doors:
+            if a <= m <= b and z <= Z_DT:
+                if a + 0.18 <= m <= b - 0.18:
+                    if Z_DW0 <= z <= Z_DW1:
+                        return R.GLASS_HI if z > Z_DW1 - 0.5 else R.GLASS
+                    if zp(1.05) <= z <= zp(1.62):
+                        return R.GLASS                  # small lower door window
+                return leaf
+        if CABWIN[0] <= m <= CABWIN[1] and zp(2.05) <= z <= zp(3.05):
+            return WS_HI if z > zp(2.85) else WS
+        wins = [VESTWIN] + WINDOWS + ([TOILETWIN] if cs == "R" else [])
+        if Z_G0 <= z <= Z_G1:
+            for (a, b) in wins:
+                if a <= m <= b:
+                    return R.GLASS_HI if z > Z_G1 - 0.55 else R.GLASS
+        for (kind, (wa, wb), (z0, z1)) in C["marks"]:
+            if wa <= m <= wb and zp(z0) <= z <= zp(z1):
+                x = (m - wa) / (wb - wa)
+                if cs == "R":
+                    x = 1 - x          # reads left to right on either side
+                zz = (z - zp(z0)) / (zp(z1) - zp(z0))
+                if kind == "gwtrain":
+                    # footprint ~ one sprite pixel: 0.45 m along, 0.34 m up
+                    if bitmap_hit(GWTRAIN, x, zz, 0.45 / (wb - wa), 0.34 / (z1 - z0)):
+                        return C["letters"]
+                elif kind == "word":
+                    if zz > 0.30 and (x < 0.36 or x > 0.42):
+                        return C["letters"]
+                elif kind == "duk":
+                    # DUK emblem (a small square) + three lines of text
+                    if x < 0.22:
+                        if zz > 0.25:
+                            return C["letters"]
+                    elif x > 0.30 and int(zz * 3.0) != 1:
+                        return C["letters"]
+        return self.zone(m, z, cs)
+
+    def gw_front(self, m, vl, z):
+        C = self.C
+        av = abs(vl)
+        hw = front_halfwidth(z)
+        if av < hw - 0.10 and Z_WS0 <= z <= Z_WS1:
+            return WS_HI if z > zp(3.12) else WS
+        (l0, l1), (lv0, lv1) = C["lamp_z"], C["lamp_v"]
+        if zp(l0) <= z <= zp(l1) and lv0 <= av <= lv1:
+            if self.lamp is R.HEAD:
+                return R.HEAD
+            if self.lamp is R.TAIL:
+                return R.TAIL if av > (lv0 + lv1) / 2 else (0x5A, 0x5E, 0x62)
+        if self.lamp is R.HEAD and av < 0.085 and zp(1.98) <= z <= zp(2.14):
+            return R.HEAD                                  # upper headlight
+        if zp(C["logo_z"][0]) <= z <= zp(C["logo_z"][1]) and av < C["logo_v"]:
+            return C["logo"]
+        zm = z * PX
+        for (ztop, paint) in C["front"]:
+            if zm < ztop:
+                return paint
+        return C["mask"]
+
     def front(self, m, vl, z):
         """Cab front (vl = lateral in the car's own frame)."""
         C = self.C
+        if C.get("scheme") == "gw":
+            return self.gw_front(m, vl, z)
         av = abs(vl)
         hw = front_halfwidth(z)
         if z < Z_MASK0:
@@ -284,8 +496,35 @@ class Car:
             return R.HEAD                                  # upper headlight
         return C["mask"]
 
+    def gw_mat(self, f, u, v, z, d):
+        C = self.C
+        m = self.m_of(u)
+        vl = v * self.dirn
+        if f == "+z":
+            if m < M_CAB and z < ZR - 0.05:
+                if z >= ZS - 0.05:
+                    return C["masktop"]                 # roof dome in the cab colour
+                return self.front(m, vl, z)
+            if z < ZS - 0.05:
+                return self.zone(m, z, "R")
+            if z < ZS + 0.05:
+                return self.zone(m, ZS - 0.05, "R")     # shoulder ledge
+            return C["roofcab"] if m < CABDOOR[1] + 0.1 else C["roof"]
+        if f in ("+v", "-v"):
+            return self.side(m, z, self.own_side(f))
+        facing_cab = (f == "-u") == (self.dirn == 1)
+        if m < M_CAB and facing_cab:
+            if z >= ZS - 0.02:
+                return C["masktop"]
+            return self.front(m, vl, z)
+        if m < M_CAB:
+            return self.front(m, vl, z)
+        return self.zone(m, min(z, ZS - 0.05), "R")     # inner end wall
+
     def mat(self, f, u, v, z, d):
         C = self.C
+        if C.get("scheme") == "gw":
+            return self.gw_mat(f, u, v, z, d)
         m = self.m_of(u)
         vl = v * self.dirn
         if f == "+z":
@@ -359,7 +598,12 @@ class Car:
 
     def roof_parts(self):
         P = []
-        if self.C["ac"]:
+        for (a, b) in (self.C.get("acunits") or {}).get(self.motor, []):
+            # DUK: two small white roof AC units per car, dark grille on the sides
+            P.append(self.box(a, b, -0.46, 0.46, ZR - 0.05, ZR + 0.85,
+                              lambda f, u, v, z, d: GW_AC_GRILLE if (f in ("+v", "-v") and ZR + 0.2 < z < ZR + 0.7)
+                              else GW_AC))
+        if self.C.get("ac"):
             # cab AC box above the cab + saloon AC box (845.1xx photos 2026)
             P.append(self.box(1.35, 2.95, -0.60, 0.60, ZR - 0.35, ZR + 0.72,
                               lambda f, u, v, z, d: AC_GRILLE if (f in ("-u", "+u") and z > ZR + 0.1) else AC))
@@ -385,21 +629,35 @@ class Car:
         return P
 
 
-def unit(liv):
-    """Parts, lines and the cars as (owner, u_front) of one 845 + 945 unit."""
+def unit(liv, rear_motor=False):
+    """Parts, lines and the cars as (owner, u_front) of one 845 + 945 unit, or
+    with rear_motor of a twin-motor pair: a second 845 turned round in the 945's
+    place (cab at the unit rear, tail lights, roof exhaust + underfloor engine)."""
     A = Car(liv, "A", 0.0, +1, True, R.HEAD)
-    B = Car(liv, "B", 2 * L_CAR, -1, False, R.TAIL)
+    B = Car(liv, "B", 2 * L_CAR, -1, rear_motor, R.TAIL)
     parts = []
     for c in (A, B):
         parts += c.parts() + c.roof_parts() + c.under_parts()
     # wide bellows gangway at the joint (drawn by the 845)
+    bel = A.C.get("bellows")
     parts.append(Part(BODY_END / M - 0.02, (2 * L_CAR - BODY_END) / M + 0.02,
                       -W + 0.10, W - 0.10, Z_BOT + 0.35, ZS - 0.15,
-                      lambda f, u, v, z, d: BELLOWS if f != "+z" else Paint(0x3A3C40), "A"))
+                      (lambda f, u, v, z, d: bel) if bel is not None else
+                      (lambda f, u, v, z, d: BELLOWS if f != "+z" else Paint(0x3A3C40)), "A"))
     return parts, [], [("A", 0.0), ("B", 11.0)]
 
 
 def rows_for(liv):
     parts, lines, cars = unit(liv)
     return [[R.vehicle_tile(parts, lines, d, uf, {own}) for d in DIRS] for (own, uf) in cars]
+
+
+def rows_gwtr(liv):
+    """GW Train Regio rows: 0 = 845 (cab front, headlights), 1 = 945 (cab
+    rear, tail lights), 2 = 845 turned round as the rear car of a twin-motor
+    pair; rows 1 and 2 sit in the same place behind row 0 (11 + 11 cu)."""
+    rows = rows_for(liv)
+    parts, lines, cars = unit(liv, rear_motor=True)
+    rows.append([R.vehicle_tile(parts, lines, d, cars[1][1], {cars[1][0]}) for d in DIRS])
+    return rows
 

@@ -1,0 +1,75 @@
+agency: GWTrainRegio
+type: "841.2"
+copyright: Lubak91
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "GWTR"
+  agency_cs: "GWTR"
+  family_en: "Regio-Shuttle RS1"
+  family_cs: "Regio-Shuttle RS1"
+
+# GW Train Regio class 841.2: second-hand ADtranz / Stadler Regio-Shuttle RS1
+# railcars (DB class 650, built 1998-2005), ex-Bodensee-Oberschwaben-Bahn
+# (841 263-269) and ex-trans regio / NEB / Transdev / Erfurter Bahn
+# (841 270-279), adapted at ČMŽO-E Hranice and delivered 2021-25. 16 cars in
+# 2026: Pošumaví (P11 Strakonice - Klatovy, P23 Klatovy - Domažlice, Dec
+# 2023 - Dec 2033) 8 cars, Šumava 8 cars. 25.5 m, 2 × 257-265 kW, 120 km/h,
+# about 40 t, 71 seats, AC. Two cars run in multiple on busy trains.
+#
+# Sprites: zone-map repaint of the ČD 841.2 sheets (pak128.CS CD_840 body by
+# Lubak91), so both operators' RS1 share one silhouette; the sheets are
+# written by tools/railrender/gwtr_rs1.py (regenerate with
+# `python tools/railrender/gwtr.py 841_2`).
+#
+# Liveries in service in 2026:
+#   plzenskykraj    Plzeňský kraj (IDPK) blue-white-yellow with the regional
+#                   swoosh, the 8 Pošumaví cars.
+#   ideska          IDESKA (Jihočeský kraj) dark green with bright-green
+#                   stripes, since Dec 2025 (841 277, 272, 279); all 8
+#                   Šumava cars are to follow within two years.
+#   oranzovozelena  GWTR orange with green cab ends (841 271, 273, 275, 276).
+# Left out: the TRD silver of 841 278 (in the works since April 2026, due for
+# IDESKA).
+
+vehicles:
+  - id: "841.2"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    prev: ["841.2"]
+    next: ["841.2"]
+    couple_liveries: true
+    fields:
+      cost: 3290000
+      payload: 113
+      speed: 120
+      weight: 40
+      runningcost: 71
+      fixed_cost: 1148
+      intro_year: 2021
+      intro_month: 12
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+      engine_type: diesel
+      power: 514
+      smoke: Diesel_small
+      gear: 135
+    extended:
+      axles: 4
+
+liveries:
+  - color: plzenskykraj
+    name_en: "Plzeňský kraj"
+    name_cs: "Plzeňský kraj"
+  - color: ideska
+    name_en: "IDESKA"
+    name_cs: "IDESKA"
+  - color: oranzovozelena
+    name_en: "orange-green"
+    name_cs: "oranžovo-zelená"
