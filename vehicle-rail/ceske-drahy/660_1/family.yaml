@@ -11,34 +11,45 @@ display:
   family_en: "InterPanter"
   family_cs: "InterPanter"
 
-# 5-car Škoda 7Ev InterPanter EMU (660.1 + 662.1 + 064.1 + 662.2 + 661.1).
-# No exact DAT source; figures derived from the 660.0 / 640 RegioPanter family.
+# Škoda 10Ev InterPanter, 5-car 660.1 + 662.1 + 064.1 + 662.2 + 661.1: 10 units
+# at Brno since June 2015 (same work as the 660.0), 3 kV DC + 25 kV AC,
+# 160 km/h. The 064.1 middle car has no traction; the other four cars have one
+# powered bogie each (2 x 340 kW, 2720 kW per unit); 350 seats, 42 of them
+# 1st class in the 662s and the 661 (the 660 is 2nd class only). One door per
+# car side. Units couple in multiple: a 661.1 takes the 660.1 of the next unit,
+# in any livery.
+#
+# Sprites: the native pak128.CS InterPanter by TommPa9 (CD_660 / 662 / 064 /
+# 661), repainted in Najbrt 2 like the 660.0 (scratchpad work/p2/fam_660.py);
+# the two 662s share one drawing, the 064 is the 662 without the 1st-class
+# stripe.
 
 vehicles:
   - id: "660.1"
-    role_en: "front motor car"
+    role_en: "motor car"
     role_cs: "motorový vůz"
     row: 0
     head: true
     tail: false
-    prev: []
+    prev: ["661.1"]
     next: ["662.1"]
+    couple_liveries: prev     # the rear car of a unit ahead may wear any livery
     fields:
       cost: 20000000
-      payload: 100
+      payload: 66
       speed: 160
-      weight: 53
+      weight: 54
       runningcost: 60
       fixed_cost: 640
-      intro_year: 2018
-      intro_month: 1
-      retire_year: 2085
+      intro_year: 2015
+      intro_month: 6
+      retire_year: 2055
       retire_month: 1
       waytype: track
       freight: Passagiere
       length: 13
       engine_type: Electric
-      power: 1000
+      power: 680
       gear: 180
     extended:
       axles: 4
@@ -46,27 +57,27 @@ vehicles:
   - id: "662.1"
     role_en: "middle motor car"
     role_cs: "vložený motorový vůz"
-    row: 2
+    row: 1
     head: false
     tail: false
     prev: ["660.1"]
     next: ["064.1"]
     fields:
       cost: 19000000
-      payload: 136
+      payload: 80
       speed: 160
-      weight: 54
-      runningcost: 22
-      fixed_cost: 240
-      intro_year: 2018
-      intro_month: 1
-      retire_year: 2085
+      weight: 53
+      runningcost: 50
+      fixed_cost: 420
+      intro_year: 2015
+      intro_month: 6
+      retire_year: 2055
       retire_month: 1
       waytype: track
       freight: Passagiere
       length: 13
       engine_type: Electric
-      power: 1000
+      power: 680
     extended:
       axles: 4
 
@@ -80,14 +91,14 @@ vehicles:
     next: ["662.2"]
     fields:
       cost: 12000000
-      payload: 150
+      payload: 94
       speed: 160
-      weight: 36
-      runningcost: 8
-      fixed_cost: 90
-      intro_year: 2018
-      intro_month: 1
-      retire_year: 2085
+      weight: 45
+      runningcost: 20
+      fixed_cost: 150
+      intro_year: 2015
+      intro_month: 6
+      retire_year: 2055
       retire_month: 1
       waytype: track
       freight: Passagiere
@@ -98,52 +109,55 @@ vehicles:
   - id: "662.2"
     role_en: "middle motor car"
     role_cs: "vložený motorový vůz"
-    row: 2
+    row: 3
     head: false
     tail: false
     prev: ["064.1"]
     next: ["661.1"]
     fields:
       cost: 19000000
-      payload: 136
+      payload: 80
       speed: 160
-      weight: 54
-      runningcost: 22
-      fixed_cost: 240
-      intro_year: 2018
-      intro_month: 1
-      retire_year: 2085
+      weight: 53
+      runningcost: 50
+      fixed_cost: 420
+      intro_year: 2015
+      intro_month: 6
+      retire_year: 2055
       retire_month: 1
       waytype: track
       freight: Passagiere
       length: 13
       engine_type: Electric
-      power: 1000
+      power: 680
     extended:
       axles: 4
 
   - id: "661.1"
-    role_en: "rear cab car"
-    role_cs: "řídicí vůz"
-    row: 1
+    role_en: "cab motor car"
+    role_cs: "řídicí motorový vůz"
+    row: 4
     head: false
     tail: true
     prev: ["662.2"]
-    next: []
+    next: ["660.1"]
+    couple_liveries: next     # the lead car of a unit behind may wear any livery
     fields:
       cost: 19000000
-      payload: 100
+      payload: 66
       speed: 160
-      weight: 53
-      runningcost: 40
+      weight: 54
+      runningcost: 50
       fixed_cost: 420
-      intro_year: 2018
-      intro_month: 1
-      retire_year: 2085
+      intro_year: 2015
+      intro_month: 6
+      retire_year: 2055
       retire_month: 1
       waytype: track
       freight: Passagiere
       length: 13
+      engine_type: Electric
+      power: 680
     extended:
       axles: 4
 
@@ -151,4 +165,3 @@ liveries:
   - color: najbrt2
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"
-    source: pak128_czr/vehicles-rail-emu/CD/640.png (ČD Najbrt 2 — direct color match)

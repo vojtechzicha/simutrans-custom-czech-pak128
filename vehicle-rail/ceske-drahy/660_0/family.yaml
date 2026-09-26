@@ -11,35 +11,45 @@ display:
   family_en: "InterPanter"
   family_cs: "InterPanter"
 
-# 3-car Škoda 7Ev InterPanter EMU (660.0 + 662.0 + 661.0). No exact DAT source;
-# figures derived from the pak128_czr 640.dat (same RegioPanter family bodyshell)
-# with adjustments for the InterPanter sub-series (long-distance interior, higher cost).
+# Škoda 10Ev InterPanter, 3-car 660.0 + 662.0 + 661.0: 4 units at Brno since
+# June 2015 (R13 Brno - Břeclav - Olomouc, R Brno - Česká Třebová - Praha, Sp to
+# Hodonín / Staré Město u UH), 3 kV DC + 25 kV AC, 160 km/h. Every car has one
+# powered bogie (2 x 340 kW, 2040 kW per unit); 200 seats, 25 of them 1st class
+# in the 662 and 661 (the 660 is 2nd class only). One door per car side.
+# Units couple in multiple: a 661 takes the 660 of the next unit, in any livery.
+#
+# Sprites: the native pak128.CS InterPanter by TommPa9 (CD_660 / 662 / 661),
+# repainted in Najbrt 2 (the only livery all 14 InterPanters have worn) with
+# the shared ČD palette: sky-blue body, sapphire waist line, doors, valance and
+# roof equipment, light-grey stripe, cant rail and cab hood, yellow 1st-class
+# stripe and anti-climber (scratchpad work/p2/fam_660.py).
 
 vehicles:
   - id: "660.0"
-    role_en: "front motor car"
+    role_en: "motor car"
     role_cs: "motorový vůz"
     row: 0
     head: true
     tail: false
-    prev: []
+    prev: ["661.0"]
     next: ["662.0"]
+    couple_liveries: prev     # the rear car of a unit ahead may wear any livery
     fields:
       cost: 20000000
-      payload: 100
+      payload: 66
       speed: 160
-      weight: 53
+      weight: 54
       runningcost: 60
       fixed_cost: 640
       intro_year: 2015
-      intro_month: 1
-      retire_year: 2085
+      intro_month: 6
+      retire_year: 2055
       retire_month: 1
       waytype: track
       freight: Passagiere
       length: 13
       engine_type: Electric
-      power: 1000
+      power: 680
       gear: 180
     extended:
       axles: 4
@@ -47,52 +57,55 @@ vehicles:
   - id: "662.0"
     role_en: "middle motor car"
     role_cs: "vložený motorový vůz"
-    row: 2
+    row: 1
     head: false
     tail: false
     prev: ["660.0"]
     next: ["661.0"]
     fields:
       cost: 19000000
-      payload: 136
+      payload: 80
       speed: 160
-      weight: 54
-      runningcost: 22
-      fixed_cost: 240
+      weight: 53
+      runningcost: 50
+      fixed_cost: 420
       intro_year: 2015
-      intro_month: 1
-      retire_year: 2085
+      intro_month: 6
+      retire_year: 2055
       retire_month: 1
       waytype: track
       freight: Passagiere
       length: 13
       engine_type: Electric
-      power: 1000
+      power: 680
     extended:
       axles: 4
 
   - id: "661.0"
-    role_en: "rear cab car"
-    role_cs: "řídicí vůz"
-    row: 1
+    role_en: "cab motor car"
+    role_cs: "řídicí motorový vůz"
+    row: 2
     head: false
     tail: true
     prev: ["662.0"]
-    next: []
+    next: ["660.0"]
+    couple_liveries: next     # the lead car of a unit behind may wear any livery
     fields:
       cost: 19000000
-      payload: 100
+      payload: 74
       speed: 160
-      weight: 53
-      runningcost: 40
+      weight: 54
+      runningcost: 50
       fixed_cost: 420
       intro_year: 2015
-      intro_month: 1
-      retire_year: 2085
+      intro_month: 6
+      retire_year: 2055
       retire_month: 1
       waytype: track
       freight: Passagiere
       length: 13
+      engine_type: Electric
+      power: 680
     extended:
       axles: 4
 
@@ -100,4 +113,3 @@ liveries:
   - color: najbrt2
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"
-    source: pak128_czr/vehicles-rail-emu/CD/640.png (ČD Najbrt 2 — direct color match, may need fine-tune for InterPanter front)
