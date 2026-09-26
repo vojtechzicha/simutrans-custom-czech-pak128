@@ -257,9 +257,12 @@ class Taurus(Classic):
 # grey frame; the cab top and screen surround sapphire, swept back along the side.
 TAURUS_CD = {"body": CL.LOCO_SKY, "band": CL.LOCO_SKY, "low": CL.WHITE, "low_rows": 2,
              "cab": CL.SAPPHIRE, "nose": CL.WHITE, "frame": (70, 74, 78)}
-# ČD railjet scheme: dark navy body, the sky band, white lower band.
-TAURUS_CD_RJ = {"body": (30, 44, 92), "band": CL.LOCO_SKY, "low": CL.WHITE, "low_rows": 2,
-                "cab": (22, 30, 60), "nose": CL.WHITE, "frame": (70, 74, 78)}
+# ČD railjet scheme (CD_railjet_1216, Lubak91): bright royal-blue body, a thin navy
+# line over the white lower band, navy cab. Base colours chosen so the polished
+# sheet matches the old one's brightness (ne side 0x2163DE / 0x192152 / white);
+# style.polish pushes saturated blues much darker, hence the lighter bases.
+TAURUS_CD_RJ = {"body": (90, 138, 240), "band": (58, 74, 148), "low": (255, 255, 255), "low_rows": 2,
+                "cab": (58, 74, 148), "nose": (255, 255, 255), "frame": (70, 74, 78)}
 
 
 def taurus_row(table, reverse=False):

@@ -297,6 +297,21 @@ def vectron_row(liv):
 
 
 # ================================================================== Škoda 109E
+# ČD 109E colours (photos 380 003/008/009/014, 2019-2025): a mid silver body;
+# the ČD blue of the cab caps, cantrail and sill is a saturated mid blue, much
+# deeper than the Najbrt sky. The TommPa9 sheet read as a 380 through exactly
+# these: one clean silver slab, saturated blue caps curving down the cab ends,
+# a blue line top and bottom, a bold red ČD mark and a dark underframe.
+B109 = Paint((34, 96, 192), top=(46, 108, 202))
+SIL109 = Paint((178, 182, 186), top=(190, 194, 198))
+SIL109_LV = Paint((164, 168, 172))
+SIL109_LT = Paint((200, 204, 207))
+RED109 = Paint((214, 30, 36))
+SKY109_LV = Paint(tuple(int(c * 0.92) for c in CL.LOCO_SKY))
+CD_BIG_H = ["rrr.rr", "r...rr", "rrr.rr"]
+CD_BIG_D = ["rr.rr", "r..rr", "rr.rr"]
+
+
 class E109:
     """Škoda 109E (ČD 380): 18.0 m over buffers, 2.94 m wide, Bo'Bo', drawn
     at length 9. Straight sides, a nose that leans back from the buffer beam
@@ -308,15 +323,16 @@ class E109:
     ZS = 11.4         # side top (roof edge) - locos 2-3 px taller than coaches
     ZR = 12.2         # roof cap top
     UB = 0.28         # buffer depth
-    UCAB = 1.85       # cab section on the side (door behind it)
+    ZWIN = 7.9        # cab window line (windscreen bottom)
+    P = {}            # tuning knobs (see VARIANTS in the scratch driver)
 
     def __init__(self, liv):
         self.liv = liv
-        self.ZG = self.ZB + 1.3          # top of the lower band (headlight panel base)
-        if liv == "najbrt2":
-            self.logo = Glyphs(4.05, self.ZG, (5, 4), mark("b", False, "H"), mark("b", False, "D"), LOGO_COLS)
-        else:
-            self.logo = None
+        n2 = liv == "najbrt2"
+        cols = {"r": SAPPH if n2 else RED109}
+        self.logo = Glyphs(3.95, self.ZLOW, (4, 3), CD_BIG_H, CD_BIG_D, cols)
+        # lighter square panel behind the mark (109E only), one pixel of margin
+        self.panel = None if n2 else Glyphs(3.95 - 0.18, self.ZLOW, (3, 2), ["l" * 8] * 5, ["l" * 7] * 5, {"l": SIL109_LT})
 
     def nose_u(self, z):
         if z < 4.0:
@@ -326,90 +342,77 @@ class E109:
         t = min(1.0, (z - 7.9) / (self.ZS - 7.9))
         return 0.56 + t * 0.78
 
-    # zones (model z): najbrt2 sapphire < Z1 <= white < Z2 <= sky
-    Z1, Z2 = 5.5, 6.3
+    ZLOW = 4.6        # top of the lower blue (109E) / sapphire (N2) band
+    ZCANT = 10.5      # bottom of the blue (109E) / white (N2) cantrail band
+    UCAB = 1.95       # end of the cab section on the side (door)
 
     def side(self, f, u, v, z, d):
         L = self.L
         cu = min(u, L - u)
-        k = vc(d)
-        near = u < L / 2
-        # cab door right behind the cab + cab side window
-        da, db = _uu(L, near, 1.92, 2.30)
-        if da - 0.1 <= u <= db + 0.1 and z > self.ZB + 0.6:
-            if on_col(d, u, v, z, da, v) or on_col(d, u, v, z, db, v):
-                return BLACK
-            if da <= u <= db and 8.4 <= z <= 10.4 and in_cols(d, u, v, z, *_uu(L, near, 2.0, 2.22)):
-                return WS
-        if 1.35 <= cu <= 1.72 and 8.6 <= z <= 10.4:
-            return WS
-        if self.liv == "najbrt2":
-            if z < self.Z1:
-                return SAPPH
-            if z < self.Z2:
-                return WHITE
-            p = self.logo.at(f, u, v, z, d, L)
+        n2 = self.liv == "najbrt2"
+        cap = SAPPH if n2 else B109
+        low = SAPPH if n2 else B109
+        body, rib = (SKY, SKY109_LV) if n2 else (SIL109, SIL109_LV)
+        cab = cu < self.UCAB
+        if cab and 1.30 <= cu <= 1.70 and 8.5 <= z <= 10.4:
+            return WS                                   # cab side window
+        if cab and (self.UCAB - 0.12 <= cu) and z >= self.ZLOW:
+            return GUTTER                               # door edge
+        if z < self.ZLOW:
+            return low
+        if n2 and prow(d, z, self.ZLOW) == 0:
+            return WHITE                                # white stripe, one pixel row
+        if cab:
+            # 109E: the blue cab cap from the window line up; N2 keeps the cab
+            # side sky (only the windscreen surround and roof are sapphire)
+            return cap if (z >= self.ZWIN - 0.3 and not n2) else body
+        # between the cabs: ribbed panel, cantrail band on top, ČD mark panel
+        if z >= self.ZCANT:
+            return WHITE if (n2 and prow(d, z, self.ZCANT) == 0) else cap
+        p = self.logo.at(f, u, v, z, d, L)
+        if p is not None:
+            return p
+        if self.panel is not None:
+            p = self.panel.at(f, u, v, z, d, L)
             if p is not None:
                 return p
-            r = prow(d, z, self.Z2)
-            if cu > 2.5 and 1 <= r and z < self.ZS - 0.9 and r % 2 == 0:
-                return Paint(tuple(int(c * 0.88) for c in CL.LOCO_SKY))      # louvres
-            return SKY
-        # cd109e: light-blue lower band, silver louvre band between the cabs,
-        # light-blue cab tops and roof-edge band, red ČD logo mid-side
-        if z < self.ZG:
-            return SKY
-        if cu < self.UCAB + 0.5:
-            return SKY if z >= 8.0 else SILVER
-        if z >= self.ZS - 1.1:
-            return SKY
-        s = u if f == "-v" else L - u
-        if 4.25 <= s <= 4.75 and 6.2 <= z <= 8.8:
-            if on_col(d, u, v, z, 4.5, v) and 7.0 <= z <= 8.0:
-                return WHITE
-            return RED
-        r = prow(d, z, self.ZG)
-        return SILVER_DK if r % 2 == 1 else SILVER
+        r = prow(d, z, self.ZLOW)
+        return rib if r % 2 == 1 else body
 
     def front(self, f, u, v, z, d):
         av = abs(v)
         rear = f == "+u"
         W = self.W
         n2 = self.liv == "najbrt2"
-        if z >= 7.9:
-            if av < W - 0.18 and z < self.ZS - 0.5:
-                return WS_HI if z > self.ZS - 1.4 and v > 0.1 else WS
-            return SAPPH if (n2 and z >= self.ZS - 0.5) else SKY
-        # headlights in the white stripe / silver panel
+        cap = SAPPH if n2 else B109
+        face = SKY if n2 else SIL109
+        if z >= self.ZWIN - 0.3:
+            if av < W - 0.22 and self.ZWIN + 0.3 <= z < self.ZS - 0.95:
+                return WS_HI if z > self.ZS - 1.3 and v > 0.1 else WS
+            return cap
         sg = 1 if v > 0 else -1
-        zl = (self.Z1 + self.Z2) / 2 if n2 else self.ZG + 0.9
-        if 0.48 <= av <= 0.74 and abs(z - zl) < 0.5 and in_vcols(d, u, v, z, 0.50 * sg, 0.72 * sg):
+        zl = self.ZLOW + 0.9
+        if 0.46 <= av <= 0.74 and abs(z - zl) < 0.4 and in_vcols(d, u, v, z, 0.48 * sg, 0.72 * sg):
             return R.TAIL if rear else R.HEAD
-        if n2:
-            if z < self.Z1:
-                return SAPPH
-            if z < self.Z2:
-                return WHITE
-            if av < 0.14 and 6.8 <= z <= 7.4:
-                return WHITE           # small white ČD logo on the front
-            return SKY
-        if z < self.ZG:
-            return SKY
-        if av < 0.14 and 6.6 <= z <= 7.3:
-            return RED                 # red ČD logo on the silver panel
-        return SILVER
+        if z < self.ZLOW:
+            return SAPPH if n2 else B109
+        if n2 and prow(d, z, self.ZLOW) == 0:
+            return WHITE
+        if av < 0.16 and 6.2 <= z <= 7.0:
+            return WHITE if n2 else RED109              # ČD logo on the nose
+        return face
 
     def build(self):
         L, W, ZB, ZS, ZR = self.L, self.W, self.ZB, self.ZS, self.ZR
         own = "V"
         n2 = self.liv == "najbrt2"
-        cap = SAPPH if n2 else SKY
+        cap = SAPPH if n2 else B109
 
         def body(f, u, v, z, d):
             if f == "+z" and z < ZS - 0.05:
                 return self.front("-u" if u < L / 2 else "+u", u, v, z, d)
             if f == "+z":
-                return cap if min(u, L - u) < 1.5 else ROOF
+                return cap if min(u, L - u) < 1.6 else ROOF
             if f in ("+v", "-v"):
                 return self.side(f, u, v, z, d)
             return self.front(f, u, v, z, d)
@@ -425,31 +428,25 @@ class E109:
             parts.append(Part(L - uw, L - uf, -W + taper, W - taper, z0, z1, body, own))
 
         def roof(f, u, v, z, d):
-            cu = min(u, L - u)
-            if cu < 1.9:
+            if min(u, L - u) < 1.7:
                 return cap
             return ROOF if f == "+z" else GUTTER
         parts.append(Part(uw + 0.05, L - uw - 0.05, -W + 0.18, W - 0.18, ZS, ZR, roof, own))
-        # roof gear (main switch, resistor covers) between the pantographs
-        parts.append(Part(3.3, 5.7, -0.48, 0.48, ZR, ZR + 0.6, lambda *a: ROOF_DK, own))
-        # bogies (wheelbase 3.0 m), transformer / tank between them
+        parts.append(Part(3.4, 5.6, -0.46, 0.46, ZR, ZR + 0.5, lambda *a: ROOF_DK, own))
         for bc in (2.3, L - 2.3):
             parts += bogie(bc, 1.0, 0.78, W, ZB, own)
         parts.append(Part(3.6, L - 3.6, -W + 0.22, W - 0.22, 0.9, ZB, lambda *a: FRAME, own))
-        # buffer beams, buffers, ploughs
-        beam = SAPPH if n2 else SKY
         for (a, b) in ((self.UB, 0.40), (L - 0.40, L - self.UB)):
-            parts.append(Part(a, b, -W + 0.08, W - 0.08, 1.6, ZB + 0.3, lambda *x: beam, own))
+            parts.append(Part(a, b, -W + 0.08, W - 0.08, 1.6, ZB + 0.3, lambda *x: FRAME, own))
         for (a, b) in ((0.0, self.UB), (L - self.UB, L)):
             for vcn in (-0.62, 0.62):
                 parts.append(Part(a, b, vcn - 0.12, vcn + 0.12, 2.2, 2.8, lambda *x: BUF, own))
-        pl = PLOUGH if n2 else Paint(0xB4B8BB)
+        pl = PLOUGH if n2 else Paint(0xA8ACAF)
         for (a, b) in ((0.14, 0.40), (L - 0.40, L - 0.14)):
             parts.append(Part(a, b, -0.80, 0.80, 0.4, 1.6, lambda *x: pl, own))
-        # four pantographs in two pairs; the one at the cab 2 end raised
         for (a, b) in ((1.9, 2.9), (L - 2.9, L - 1.9)):
-            parts.append(Part(a, b, -0.40, 0.40, ZR, ZR + 0.40, lambda *x: Paint(0x5E6266), own))
-        lines = R.pantograph(L - 2.5, ZR + 0.40, own, fold=-1, reach=0.9, height=5.4,
+            parts.append(Part(a, b, -0.40, 0.40, ZR, ZR + 0.30, lambda *x: Paint(0x5E6266), own))
+        lines = R.pantograph(L - 2.5, ZR + 0.30, own, fold=-1, reach=0.9, height=5.0,
                              col=(0x70, 0x74, 0x78), head=(0x2A, 0x2A, 0x2C), half_head=0.62, thick=False)
         return parts, panto_style(lines)
 

@@ -65,8 +65,39 @@ def vectron_rows(liv):
             m.__name__ = "body_mat"
             p.mat = m
     K.roof_restyle(parts, V.ZS, V.ZR)
+    if liv in LIGHTER:
+        _lighten(parts, LIGHTER[liv])
     lines = K.restyle_lines(lines)
     return [[R.vehicle_tile(parts, lines, d, 0.0, {"V"}) for d in DIRS]]
+
+
+# style.polish deepens mid tones and the outline + gutter darken the top, which made
+# the silver Railpool Vectron read far darker than the old sheet (user review
+# 2026-09-26). These base colours bring the polished side back to the old sheet's
+# brightness (ne side 0x919698, band 0x1A7BBA). Keys are vectron.livery() bases.
+LIGHTER = {"railpool": {
+    (0xA9, 0xAE, 0xB1): ((0xBA, 0xBF, 0xC2), (0xB0, 0xB5, 0xB8)),   # body, roof cap, cab roof
+    (0xA3, 0xA8, 0xAB): ((0xB4, 0xB9, 0xBC), None),                  # doors
+    (0x8E, 0x93, 0x96): ((0xA0, 0xA5, 0xA8), None),                  # lower skirt
+    (0x1E, 0x8F, 0xD8): ((0x58, 0xB1, 0xEF), None),                  # light-blue band
+    (0x4A, 0x50, 0x54): ((0x55, 0x5B, 0x5F), (0x62, 0x68, 0x6C)),    # roof equipment
+    (0x3A, 0x3F, 0x43): ((0x44, 0x4A, 0x4F), (0x50, 0x56, 0x5B)),    # roof equipment, dark
+}}
+
+
+def _lighten(parts, remap):
+    from railkit import Paint
+    table = {k: Paint(b, top=t) if t else Paint(b) for k, (b, t) in remap.items()}
+    for p in parts:
+        m0 = p.mat
+
+        def m(f, u, v, z, d, m0=m0):
+            x = m0(f, u, v, z, d)
+            if isinstance(x, Paint):
+                return table.get(tuple(x.base), x)
+            return x
+        m.__name__ = getattr(m0, "__name__", "mat")
+        p.mat = m
 
 
 def main():

@@ -14,10 +14,16 @@ Families (vehicle-rail/ceske-drahy/<family>/sprites/<livery>.png):
   750    unmodernised ČKD T 478.3 (753 rebuilt with electric train heating),
          the 754 carbody with the goggle cab: zelenosediva, najbrt1_2
 
-Render style (2026-09-26, tools/railrender/style.py): the Brejlovec really is
-rounded (roof in two steps, raked goggle cab), so it keeps its rounded body, but
-the roof/body junction is a dark gutter line (never a light rim), there is no
-side lettering, and every sheet goes through style.polish(**style.POLISH).
+Render style (2026-09-26, tools/railrender/style.py), adapted after the user
+found the first restyle "unrecognizable": the Brejlovec keeps its rounded body
+(roof in two steps, raked goggle cab) and a dark ledge where roof meets wall, no
+side lettering. What makes it read at 1x, from the photos (754 at České
+Velenice, 754.062, 750.707): on Najbrt 2 the white line along the top of the
+side under the dark roof, the sky side with big portholes and the louvre panel,
+the white stripe and a sapphire lower body; on Najbrt 1 / 1.2 the light grey cab
+blocks, domes included, against the blue hood; white-framed cab windows. The
+post-process is softened (POLISH below): full-strength outlines and face edges
+turned the sky body into one dark slab.
 
 Scale: 16.66 m over buffers drawn at length 8 like the native CD_754 (2.08 m per
 carunit), bodies 2-3 px taller than coaches like the natives. Geometry and the
@@ -62,7 +68,6 @@ N12_ROOF = ST.ROOF           # N1.2 roof: the agreed mid-dark grey (photos: grey
 GUTTER = Paint(ST.GUTTER)     # dark line where the roof meets the body
 ZG_GREEN = (0, 78, 78)        # ČSD / ČD 750 dark teal green (as TommPa9's sheet)
 ZG_GREY = (165, 167, 168)     # its light grey lower band
-ZG_ROOF = (0, 52, 52)
 N12_SILL = (58, 61, 64)       # as the E99 N1.2 sill
 
 
@@ -110,7 +115,7 @@ def livery(name):
                    grille=(pnt(lighten(LOCO_SKY, 0.62)), pnt(lighten(LOCO_SKY, 0.80))))
     if name == "zelenosediva":
         green, grey = pnt(ZG_GREEN), pnt(ZG_GREY)
-        return Liv(name=name, roof=pnt(ZG_ROOF, top=(10, 64, 64)), sill=pnt(FRAME_GREY),
+        return Liv(name=name, roof=pnt(ZG_GREEN, top=lighten(ZG_GREEN, 1.25)), sill=pnt(FRAME_GREY),
                    upper=green, lower=grey, band=grey, frame=grey, beam=pnt(FRAME_GREY),
                    lamp=grey, logo_side=None, logo_front=None, n1=False,
                    grille=(pnt(lighten(ZG_GREEN, 0.55)), pnt(lighten(ZG_GREEN, 0.8))))
@@ -152,10 +157,15 @@ class Brejlovec:
     def zone_side(self, r, k):
         """body zone of pixel row r above ZY in view class k."""
         if self.liv == "najbrt2":
-            lo = 0                                 # sapphire row 0 (+ the solebar)
-            if r <= lo:
+            # photos (754 at České Velenice, 754.062, 750.714): sapphire lower
+            # body (with the solebar), a white stripe, the sky side, and a white
+            # line along the top of the side under the dark roof
+            top = 6 if k == "H" else 5
+            if r == top:
+                return "band"
+            if r <= 0:
                 return "lower"
-            return "band" if r == lo + 1 else "upper"
+            return "band" if r == 1 else "upper"
         if self.liv == "cervenozluta":
             ya, yb = (1, 3) if k == "H" else (1, 2)
             return "band" if ya <= r <= yb else "upper"
@@ -163,14 +173,15 @@ class Brejlovec:
             ya, yb = (1, 3) if k == "H" else (1, 2)
             return "band" if ya <= r <= yb else "upper"
         if self.liv == "zelenosediva":
-            return "lower" if r <= (2 if k == "H" else 1) else "upper"
+            # as TommPa9's sheet: the light grey lower band is deep, ~40 % of the side
+            return "lower" if r <= (3 if k == "H" else 2) else "upper"
         return "upper"
 
     def n1_side(self, f, u, z, r, k):
         """Najbrt 1 / 1.2 trapezoids: grey at the cab-1 end, then a sky wedge
         and a sapphire wedge rising toward cab 2 (boundaries lean back)."""
         L = self.L
-        if u < 1.46 or u > L - 1.46:            # both cab sections light grey
+        if u < self.CAB or u > L - self.CAB:    # both cab sections light grey
             return self.C.upper
         t = (u - 1.46) / (L - 2.92)             # 0 at cab 1 .. 1 at cab 2
         top = 6 if k == "H" else 5
@@ -178,13 +189,22 @@ class Brejlovec:
             return pnt(C.SAPPHIRE)
         return pnt(LOCO_SKY)
 
+    CAB = 1.46                                   # cab block length from each end
+
+    def roof_at(self, u):
+        """roof paint: on N1 / N1.2 the whole cab block, dome included, is the
+        light body grey (photos 750.707, 754.075), the hood roof darker."""
+        Cl = self.C
+        if Cl.n1 and (u < self.CAB or u > self.L - self.CAB):
+            return pnt(C.LGREY if Cl.name == "najbrt1_2" else C.N1_WHITE,
+                       top=lighten(C.LGREY if Cl.name == "najbrt1_2" else C.N1_WHITE, 1.04))
+        return Cl.roof
+
     # --------------------------------------------------------- paint
     def side(self, f, u, v, z, d):
         Cl, L = self.C, self.L
-        if self.ZS1 <= z < self.ZS1 + 0.45:
-            return GUTTER
         if z >= self.ZS1:
-            return Cl.roof
+            return self.roof_at(u)
         if z < self.ZY:
             return Cl.sill
         near = u < L / 2
@@ -192,14 +212,19 @@ class Brejlovec:
         r = prow(d, z, self.ZY)
         top = 5 if k == "D" else 6
         s = L - u if f == "+v" else u            # as seen, left end = 0
-        # cab: side window, door with window (both ends)
-        if r >= 4 and in_cols(d, u, v, z, *_uu(L, near, 0.46, 0.86)):
-            return WS_HI if r == top else WS
+        # cab: a big side window (white-framed on Najbrt 2, as on 754.062) and
+        # the door with its window; door edges are a darker body line, not black
+        # (black full-height lines read as posts at 1x)
+        wa, wb = _uu(L, near, 0.30, 0.86)
+        if 3 <= r <= top - 1 and in_cols(d, u, v, z, wa, wb):
+            return WS_HI if r == top - 1 else WS
+        if self.liv == "najbrt2" and r == 2 and in_cols(d, u, v, z, wa - 0.06, wb + 0.06):
+            return Cl.band                       # white window sill (frame)
         da, db = _uu(L, near, 0.98, 1.40)
         if da - 0.1 <= u <= db + 0.1:
-            if on_col(d, u, v, z, da, v) or on_col(d, u, v, z, db, v):
-                return P_BLACK if not Cl.n1 else pnt(FRAME_GREY)
-            if da <= u <= db and r >= 4 and in_cols(d, u, v, z, *_uu(L, near, 1.06, 1.32)):
+            if r >= 2 and (on_col(d, u, v, z, da, v) or on_col(d, u, v, z, db, v)):
+                return pnt(FRAME_GREY) if Cl.n1 else pnt(lighten(C.SAPPHIRE, 0.8))
+            if da <= u <= db and 3 <= r <= top - 1 and in_cols(d, u, v, z, *_uu(L, near, 1.06, 1.32)):
                 return WS
         # hood: louvre block next to cab 2 (physical u), portholes
         ga, gb = self.GRILLE
@@ -208,10 +233,11 @@ class Brejlovec:
             if on_col(d, u, v, z, (ga + gb) / 2, v):
                 return Cl.grille[0]
             return Cl.grille[x % 2]
-        pr = (4,) if k == "D" else (5,)
+        # portholes: big round windows high on the hood, 2 rows tall
+        pr = (top - 2, top - 1) if k == "H" else (top - 1,)
         if r in pr:
             for pc in self.PORTHOLES:
-                if in_cols(d, u, v, z, pc - 0.12, pc + 0.12):
+                if in_cols(d, u, v, z, pc - 0.13, pc + 0.13):
                     return WS
         if self.logo is not None and not Cl.n1:
             p = self.logo.at(f, u, v, z, d, L)
@@ -263,7 +289,7 @@ class Brejlovec:
         if self.liv in ("cervenozluta", "modrokremova"):
             return Cl.band if r in (1, 2) else Cl.upper
         if self.liv == "zelenosediva":
-            return Cl.band if r in (1, 2) else Cl.upper
+            return Cl.band if r <= 3 else Cl.upper
         return Cl.upper
 
     def front_roof(self, f, u, v, z, d):
@@ -276,12 +302,12 @@ class Brejlovec:
                 return WS
         if not self.g754 and z < self.ZR1 and f in ("-u", "+u") and abs(v) <= 0.80:
             return Cl.frame                    # 750.7: the broad windscreen frame
-        return Cl.roof
+        return self.roof_at(u)
 
     def body_mat(self):
         def mat(f, u, v, z, d):
             if f == "+z":
-                return GUTTER if z < self.ZS1 + 0.05 else self.C.roof
+                return GUTTER if z < self.ZS1 + 0.05 else self.roof_at(u)
             if f in ("+v", "-v"):
                 return self.side(f, u, v, z, d)
             return self.front(f, u, v, z, d)
@@ -309,7 +335,7 @@ class Brejlovec:
         rc = 0.50 if self.g754 else 0.40
         parts.append(Part(rc, L - rc, -W + 0.18, W - 0.18, self.ZS1, self.ZR1, body, own))
         parts.append(Part(rc + 0.34, L - rc - 0.34, -W + 0.44, W - 0.44, self.ZR1, self.ZR,
-                          lambda *a: Cl.roof, own))
+                          lambda f, u, v, z, d: self.roof_at(u), own))
 
         # raised louvred cooler on the hood roof, exhaust + fan boxes
         def cooler(f, u, v, z, d):
@@ -353,6 +379,10 @@ def row(liv, variant):
     return [R.vehicle_tile(parts, lines, d, 0.0, {"V"}) for d in DIRS]
 
 
+# softened post-process for this class: full-strength outlines and saturation
+# turned the rounded sky-blue body into one dark slab (user: "unrecognizable")
+POLISH = dict(outline=0.3, edges=0.0, punch=0.2)
+
 JOBS = {
     "754": [(liv, "754") for liv in ("najbrt2", "najbrt1_2", "najbrt1", "cervenozluta", "modrokremova")],
     "750_7": [(liv, "750.7") for liv in ("najbrt2", "najbrt1_2")],
@@ -376,7 +406,7 @@ def main():
             os.makedirs(os.path.dirname(out), exist_ok=True)
             R.save_rows(rows, out)
             im = Image.open(out); im.load()
-            im = ST.polish(im.convert("RGB"), **ST.POLISH)
+            im = ST.polish(im.convert("RGB"), **POLISH)
             im.save(out)
             rows_all += rows
             labels.append(liv)
