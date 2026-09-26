@@ -1,0 +1,79 @@
+agency: KZC
+type: "749"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "KŽC"
+  agency_cs: "KŽC"
+  family_en: '"Zamračená"'
+  family_cs: '"Zamračená"'
+
+# ČKD T 478.1 / T 478.2 "zamračená / bardotka", rebuilt with electric train
+# heating as ČD class 749 (1992-96). KŽC Doprava runs three on its PID/DÚK
+# weekend rychlíky (T3 Kokořínský, T7 Rakovnický, T10 Lužickohorský, T8
+# Posázavský with Bix coaches, the Kralovický rychlík):
+#   749.006 (T 478.1006, 1966, KŽC since 2016), 749.253 (T 478.1215, 1971,
+#   since 2015), 749.259 (T 478.2065, 1970, since 2013).
+# 16.50 m over buffers, 3.074 m wide, 4.103 m high, Bo'Bo' diesel-electric,
+# K 6 S 310 DR engine, 1 103 kW, 100 km/h, 75 t, bogie pivots 9.0 m
+# (spz.logout.cz 751_data, cs.wiki Lokomotiva 749/751).
+#
+# Liveries, one per locomotive (photos: kzc.cz vehicle pages and news
+# 1075/1091/1094/1115/1120/1123/1126 of 2025-26, Commons Mšeno Aug 2025):
+# - vinovosediva: 749.006 "ruděnka", repainted autumn 2025 in the dark wine
+#   red of the 1960s pre-series; light grey roof, frame band, underframe and
+#   bogies, yellow star on the nose, wine-red pilot with a white edge.
+# - cervenosediva: 749.253, red with a light grey roof, dark slate-grey frame
+#   band and underframe, a yellow band along the bottom of both cab noses
+#   (front and cab sides as far as the cab door), red/white pilot chevrons.
+#   The older Commons photo without the yellow band is out of date.
+# - modrobila: 749.259, blue roof and upper body, light grey nose and a light
+#   band along the lower side with a thin blue stripe under it, black frame
+#   band and underframe, red pilot.
+#
+# Sprites are rendered from a box model of the T 478 body (heights and door /
+# window / grille positions from the KŽC side drawings kzc.cz/image/T478.*.png),
+# drawn at length 8 on the footprint of the pak128.CS T 478 (TommPa9), about
+# 2 px taller than coaches like the native locomotives. Rendered by
+# tools/railrender/kzc_t478.py (shared with the 751 family); regenerate with
+# `python tools/railrender/ops.py kzc/749`.
+
+vehicles:
+  - id: "749"
+    role_en: "diesel locomotive"
+    role_cs: "motorová lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2848000
+      payload: 0
+      speed: 100
+      weight: 75
+      runningcost: 282
+      fixed_cost: 1805
+      intro_year: 2013
+      intro_month: 4
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      engine_type: diesel
+      power: 1103
+      gear: 130
+      smoke: Diesel_black
+      length: 8
+    extended:
+      axles: 4
+
+liveries:
+  - color: vinovosediva
+    name_en: "wine red-grey"
+    name_cs: "vínovo-šedá"
+  - color: cervenosediva
+    name_en: "red-grey"
+    name_cs: "červeno-šedá"
+  - color: modrobila
+    name_en: "blue-white"
+    name_cs: "modro-bílá"

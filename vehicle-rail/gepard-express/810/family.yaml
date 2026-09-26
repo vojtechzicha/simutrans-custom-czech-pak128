@@ -1,0 +1,66 @@
+agency: GepardExpress
+type: "810"
+copyright: Sim
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Gepard Express"
+  agency_cs: "Gepard Express"
+  family_en: '"Šukafon"'
+  family_cs: '"Šukafon"'
+
+# Gepard Express 810.405 (M 152.0405, ex Slovakia, ex Railway Capital), on the
+# Hvozdnický expres Opava východ - Svobodné Heřmanice (KJŘ 314) since 24 May
+# 2025; weekends May - September 2026. 13.97 m, 2 axles (1'A'), LIAZ ML 634
+# 155 kW, 80 km/h, 20 t, 55 seats + 40 standing. The coaches behind it on
+# the 2025 photos are heritage 4-axle cars, not 010s, so the railcar is
+# shipped alone; it couples with another 810 on either end.
+#
+# Livery: ČSD "polomáčený" as at RCAS (cream window band, upper body and cap
+# round the windscreen, cherry-red lower body and bumper, dark grey roof) with
+# "gepard" in white over "express" in yellow on the fronts below the lamps and
+# small on the sides behind the door; "M 152 0405" in white. Photos:
+# research/ops/photos/gepard-express/ge_hvozdnicky_2025.jpg (Opava 2025) and
+# Commons "Gepard Express v 1. den provozu ve stanici Svobodné Heřmanice".
+#
+# Sprite: the Sim pak128.CS 810 body (rail-psg mail/810) repainted zone by
+# zone with the ČD 810 zone-map painter (one-off painter script, not in the
+# repo). Length 7 like the ČD 810 family.
+
+vehicles:
+  - id: "810"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: true
+    prev: ["810"]
+    next: ["810"]
+    couple_liveries: true
+    fields:
+      cost: 1022400
+      payload: 95
+      speed: 80
+      weight: 20
+      runningcost: 23
+      fixed_cost: 118
+      intro_year: 2025
+      intro_month: 5
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 155
+      smoke: Diesel_black
+      gear: 105
+    extended:
+      axles: 2
+
+liveries:
+  - color: polomacenygepard
+    name_en: "ČSD cream-red, gepard express logo"
+    name_cs: "ČSD krémovo-červená s logem gepard express"

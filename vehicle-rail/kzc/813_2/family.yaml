@@ -1,0 +1,111 @@
+agency: KZC
+type: "813.2"
+copyright: Sim
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "KŽC"
+  agency_cs: "KŽC"
+  family_en: '"Mravenec"'
+  family_cs: '"Mravenec"'
+
+# KŽC Doprava class 813.2 + 913.2 "Mravenec": two-car DMU rebuilt by ŽOS Zvolen
+# in 2018 from 810 railcars and 011 trailers, on the lines of the ZSSK 813.1
+# "Mravec": 813 201-1 + 913 201-0 "Klárka" (ex 810.543 + 011.406) and
+# 813 202-9 + 913 202-8 "Kristýnka" (ex 810.499 + 011.896). Motor car 813.2
+# (cab, TEDOM TD 310 RH TA 26 310 kW, Voith 4-speed, 1A) + driving trailer
+# 913.2 (cab, 2 axles, low-floor centre with a double sliding door), new
+# laminated cab fronts, permanently coupled. 28.82 m over couplers for the pair
+# (~14.4 m per car), 90 km/h, 42 t in service, 65 seats + 102 standing, AC.
+# Both sets run PID line S34 Praha Masarykovo n. - Vysočany - Satalice -
+# Čakovice (hourly, Mon-Fri) since 2019; 813.202 back with ETCS from Jan 2026.
+# The S34 contract ends Dec 2027; the tender winner has to buy both sets and
+# keep them on S34 to 2038.
+#
+# Livery (both sets identical): PID blue / white / red - bright blue roof and
+# blue mask over the upper cab front wrapping onto the cab sides, continuous
+# black window band, white body with the PID / Esko S / KŽC logos, red lower
+# body and skirts; single big windscreen, white cheeks round the round lamps,
+# red lower front with a grey buffer beam. Doors black with white frames.
+# Photos: 813.201 Praha Masarykovo 2019, 913.201 "Klárka" Satalice (full side,
+# file named 913 202), 913.201 Praha-Vysočany (head-on); KŽC drawing
+# kzc.cz/image/813.201-1+913.201-0.png (layout). The installed natives
+# KZC_813 / KZC_913 are half-recoloured GWTR sprites and were not used.
+#
+# Sprites: the Sim pak128.CS 810 body (the same art as ceske-drahy/810),
+# repainted by a one-off painter script (not in the repo; the same script
+# paints the zssk/813 sheet): silhouette, roof shading and underframe of the
+# Sim 810 are kept, the side band is repainted from the KŽC drawing
+# (813.2: cab door, 6 windows, inner-end door; 913.2: two windows, the lowered
+# low-floor section with the double door between lowered windows, two windows
+# and the cab side window) and both end faces are redrawn (new laminated cab
+# fronts from the photos, black bellows on the inner ends). Row 0 = 813.2 (cab
+# ahead, headlights), row 1 = 913.2 (cab at the rear, tail lights).
+# Lengths 7 + 7 like the ČD 810 / 010.
+#
+# Coupling: the 813.2 leads its unit and the 913.2 trails; a unit's 913.2 may
+# be followed by the next unit's 813.2 (both sets together in the peak).
+
+vehicles:
+  - id: "813.2"
+    role_en: "motor car"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: ["913.2"]
+    next: ["913.2"]
+    couple_liveries: prev
+    fields:
+      cost: 1500000
+      payload: 36                   # seat split of the 65 estimated from the layout
+      speed: 90
+      weight: 24
+      runningcost: 32
+      fixed_cost: 160
+      intro_year: 2019
+      intro_month: 2
+      retire_year: 2038
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 310
+      smoke: Diesel
+      gear: 105
+    extended:
+      axles: 2
+
+  - id: "913.2"
+    role_en: "driving trailer"
+    role_cs: "řídicí vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["813.2"]
+    next: ["813.2"]
+    couple_liveries: next
+    fields:
+      cost: 1080000
+      payload: 29
+      speed: 90
+      weight: 18
+      runningcost: 4
+      fixed_cost: 20
+      intro_year: 2019
+      intro_month: 2
+      retire_year: 2038
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+    extended:
+      axles: 2
+
+liveries:
+  - color: pidmodrobilacervena
+    name_en: "PID blue-white-red"
+    name_cs: "PID modro-bílo-červená"

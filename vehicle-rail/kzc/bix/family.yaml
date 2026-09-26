@@ -1,0 +1,85 @@
+agency: KZC
+type: "Bix"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "KŽC"
+  agency_cs: "KŽC"
+  family_en: "Studénka lightweight"
+  family_cs: "Studénka lehké stavby"
+
+# Lightweight 4-axle trailers ČSD Balm 05 -> Bix 020 (Vagónka Tatra Studénka
+# 1958-69, 710 built), 18.5 m over buffers, 90 km/h, 68 seats (vagony.cz).
+# KŽC Doprava runs Bix 020 208-2, 372-9 (1962, KŽC since 2006), 557-5 and the
+# bar car RBix 020 687-7 "Bixovna" (1969, rebuilt 2010 and 2019-20, 44 seats,
+# 23 t) on the Kralovický rychlík (T 478 + 3 Bix incl. the Bixovna, 176
+# seats), T8 Posázavský motoráček and as reinforcements (six-car R 1268,
+# July 2026).
+#
+# Livery (kzc.cz photos of Bix 372 / 557 and RBix 687, Commons Rudná): ČSD
+# cream upper body up to the grey roof, red lower body, rounded ends, doors with
+# yellow step edges; the Bixovna has a red line under the roof edge and yellow
+# "BAROVÝ VŮZ" lettering. The KŽC side drawing of the plain Bix has no red line,
+# matching the photos.
+#
+# No pak128.CS / installed art of a Bix exists: the sprites are rendered from a
+# box model in the railrender conventions of ric.py (railkit anchors), window
+# and door positions from the KŽC side drawings (kzc.cz/image/Bix_020.208-2.png,
+# RBix_020.687-7.png), colours matched to the pak128.CS Balm-d (Bmx family) it
+# runs with. Rendered by tools/railrender/kzc_bix.py; regenerate with
+# `python tools/railrender/ops.py kzc/bix`.
+# Length 9 (18.5 m at 2.06 m per carunit). Rows: 0 Bix, 1 RBix.
+
+vehicles:
+  - id: "Bix"
+    role_en: "2nd class coach"
+    role_cs: "vůz 2. třídy"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 1150000
+      payload: 66
+      speed: 90
+      weight: 21
+      runningcost: 13
+      fixed_cost: 95
+      intro_year: 2006
+      intro_month: 6
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 9
+    extended:
+      axles: 4
+
+  - id: "RBix"
+    role_en: "bar coach \"Bixovna\""
+    role_cs: "barový vůz „Bixovna“"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 1350000
+      payload: 44
+      speed: 90
+      weight: 23
+      runningcost: 16
+      fixed_cost: 115
+      intro_year: 2010
+      intro_month: 6
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 9
+    extended:
+      axles: 4
+
+liveries:
+  - color: polomaceny
+    name_en: "ČSD cream-red"
+    name_cs: "ČSD krémovo-červená"

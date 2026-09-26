@@ -1,0 +1,82 @@
+agency: KZC
+type: "Bmx"
+copyright: Sim               # pak128.CS Balm-d art (850_851/Balm-d.png)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "KŽC"
+  agency_cs: "KŽC"
+  family_en: "Studénka Balm"
+  family_cs: "Studénka Balm"
+
+# Lightweight 4-axle trailers ČSD Balm (Vagónka Tatra Studénka 1966-68,
+# built for the M 286 "krokodýl" railcars; later ČD Bmx 765 / ŽSR 050),
+# 24.72 m over buffers, 120 km/h, 32 t. KŽC Doprava owns two, restored in
+# the ČSD cream-red scheme of their first years:
+#   Bmx 050 029-8 (1966, ex ŽSR, with KŽC since 2007),
+#   Amx 050 037-1 (1968, ex ČD, KŽC since 2016, same car lettered 1st class
+#   with a refurbished interior).
+# They form the T7 Rakovnický rychlík behind 751.033 (176 seats for the pair,
+# kzc.cz), deputise on T3 / T10 and run with the Bix in six-car R 1268.
+#
+# Livery (kzc.cz Bmx 029 / Amx 037 photos, Commons Olomouc 2019): cream window
+# band with a thin red line under the grey roof, red lower body with a thin
+# cream line near the bottom, black bogies.
+#
+# Sprites: port of the pak128.CS Balm-d sheet (Sim), the same class in the same
+# livery; the lit-window glass is kept, the always-lit tail lamps on the end
+# faces become plain dark red (one-off port script, not in the repo).
+# Both cars share row 0 (they differ only in the class digit).
+
+vehicles:
+  - id: "Bmx"
+    role_en: "2nd class coach"
+    role_cs: "vůz 2. třídy"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 1587000
+      payload: 88
+      speed: 120
+      weight: 32
+      runningcost: 18
+      fixed_cost: 138
+      intro_year: 2007
+      intro_month: 5
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "Amx"
+    role_en: "1st class coach"
+    role_cs: "vůz 1. třídy"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 1650000
+      payload: 88
+      speed: 120
+      weight: 32
+      runningcost: 18
+      fixed_cost: 145
+      intro_year: 2017
+      intro_month: 4
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+liveries:
+  - color: polomaceny
+    name_en: "ČSD cream-red"
+    name_cs: "ČSD krémovo-červená"

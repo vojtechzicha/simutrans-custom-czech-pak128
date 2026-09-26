@@ -1,0 +1,67 @@
+agency: MBMRail
+type: "708"
+copyright: vojtechzicha      # original art, rendered from a box model
+# a locomotive carries no passengers: plain cab glass, no lit windows
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "MBM rail"
+  agency_cs: "MBM rail"
+  family_en: '"Malé lego"'
+  family_cs: '"Malé lego"'
+
+# ČKD class 708 diesel-electric shunter (prototypes 1995, 12 series 1997):
+# Bo, LIAZ M 1.2 C 300 kW, 80 km/h, 34 t, 9.45 m over buffers. Hood unit: a
+# long hood with the radiator end leading, a tall cab and a short hood on a
+# massive frame with walkways and railings. 708.014-6 (ex ČEPRO 708.501) of
+# the Slezský železniční spolek hauls the Blm coach on Bruntál - Malá Morávka
+# (ODIS S18, MBM rail licence, weekends 14 Jun - 20 Sep 2026); the T 334.0 of
+# earlier seasons is retired from the duty (zdopravy.cz, Aug 2026).
+#
+# Livery (zdopravy.cz Aug 2026 photo 55377072758 of 708.014-6 + Blm): orange-red
+# cab, cab roof and hood ends, blue hood side panels and hood tops, light grey
+# frame and walkways, black/yellow striped buffer beams, blue number plate. The
+# June 2026 timetable leaflet of the Slezský železniční spolek shows a blue /
+# yellow 708 in a stock picture; the dated photo wins.
+#
+# Sheet: rendered by tools/railrender/mbm_708.py; regenerate with
+# `python tools/railrender/ops.py mbm-rail/708`. Not the recolour the brief
+# suggested: the pak128.CS CD_708 base (TommPa9) is a flat pure-RGB sketch
+# with a near-centred cab and near-equal hoods; the model has the real long
+# hood / cab / short hood split (photo
+# "Lokomotiva 708.006-2, Svitavská pobřežní dráha 01", Commons, near side
+# view), with the same footprint and front-anchored placement as CD_708 (bboxes
+# match within 1 px in all 8 views). Length 5 (1.89 m/cu, like the natives'
+# 19 m locos at 10).
+
+vehicles:
+  - id: "708"
+    role_en: "diesel locomotive"
+    role_cs: "motorová lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 1414500
+      payload: 0
+      speed: 80
+      weight: 34
+      runningcost: 213
+      fixed_cost: 1091
+      intro_year: 2026              # first season on Bruntál - Malá Morávka
+      intro_month: 6
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      engine_type: diesel
+      power: 300
+      smoke: Diesel_black
+      gear: 130
+      length: 5
+    extended:
+      axles: 2
+
+liveries:
+  - color: oranzovomodra
+    name_en: "orange-blue"
+    name_cs: "oranžovo-modrá"

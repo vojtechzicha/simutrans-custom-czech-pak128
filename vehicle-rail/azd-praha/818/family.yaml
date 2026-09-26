@@ -1,0 +1,82 @@
+agency: AZDPraha
+type: "818"
+copyright: vojtechzicha      # original art, rendered from a box model
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "AŽD"
+  agency_cs: "AŽD"
+  family_en: "Siemens-Duewag RegioSprinter"
+  family_cs: "Siemens-Duewag RegioSprinter"
+
+# Siemens-Duewag RegioSprinter of AŽD Praha, CZ class 818 (re-registered from
+# German 654 in 2023). All are series 1 (1995, ex Rurtalbahn, via GW Train
+# Regio): 818 007 "Terezka", 008 "Míša", 010 "Janička" (since Dec 2019),
+# 004 and 014 (Oct 2022), 003 and 015 (overhauled Dec 2024); 818 005 "Radka"
+# was written off after a level-crossing collision in Jan 2024. They run the
+# Ústecký kraj line U10 "Švestková dráha" Litoměřice – Lovosice – Libochovice
+# – Most and the tourist line T4 "Oparenský expres" Lovosice – Oparno –
+# Chotiměř, contract to Dec 2029; AŽD is buying 4 BEMUs (delivery 2030–32).
+# Unit: three articulated sections A + 2 + A, as the DLB 654 family, but
+# series 1 has side buffers, a screw coupling and hook under a black buffer
+# beam: 24.8 m over buffers, 2.97 m wide, 3.35 m high. 2 × MAN D2865 LUH05 at
+# 198 kW, hydromechanical, 100 km/h in CZ (120 design), 36 t (AŽD site),
+# 65 seats + 100 standing, AC, Wi-Fi (modernised by CZ LOKO / GWTR).
+# Sources: azdvlaky.cz / svestkovadraha.cz, baureihe654.de (Technische Daten,
+# [CZ] AŽD Praha), cs.wikipedia RegioSprinter, zdopravy.cz.
+#
+# Livery `svestkovadraha` (DÚK – Švestková dráha, every unit): grass-green body
+# and roof, lemon-yellow band from the window tops over the cantrail on all
+# three sections, turning down both front corners as broad A-pillar bands to
+# the buffer beam; a big navy disc behind each cab with the white
+# "Švestková dráha" script and a navy plum leaf; glazed door leaves with a navy
+# lower panel carrying the white DÚK and AŽD logos; green roof equipment boxes
+# between the doors, a small grey box on each cab roof, black exhaust stacks.
+# Photos: azd_rs_3 (818 010 Třebívlice), azd_rs_4 (818 008 broadside),
+# azd_rs_6 (654 008 other side), azd_rs_1 (654 007 front), azd_rs_2 (roof),
+# azd_rs_5 (two units at Lovosice).
+#
+# Sprites are rendered from the shared RegioSprinter box model
+# (tools/railrender/regiosprinter.py, the GWTR 818 geometry, ex-Rurtalbahn
+# buffer front) with this livery added by tools/railrender/ops_regiosprinter.py;
+# regenerate with `python tools/railrender/ops_regiosprinter.py 818`.
+# Roof housings in green where the model has its AC boxes, plus a light-grey
+# box on each cab roof. One Simutrans vehicle, length 12 (24.8 m over
+# buffers), cabs at both ends; units couple in multiple.
+
+vehicles:
+  - id: "818"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    prev: ["818"]
+    next: ["818"]
+    couple_liveries: true
+    fields:
+      cost: 2150000
+      payload: 65
+      speed: 100
+      weight: 36
+      runningcost: 58
+      fixed_cost: 640
+      intro_year: 2019
+      intro_month: 12
+      retire_year: 2032
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 12
+      engine_type: diesel
+      power: 396
+      smoke: Diesel_small
+      gear: 120
+    extended:
+      axles: 4
+
+liveries:
+  - color: svestkovadraha
+    name_en: "Švestková dráha"
+    name_cs: "Švestková dráha"
+    source: rendered by tools/railrender/ops_regiosprinter.py on the shared regiosprinter.py model (DÚK Švestková dráha green / lemon yellow with navy discs, buffer front)

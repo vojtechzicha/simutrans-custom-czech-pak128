@@ -1,0 +1,73 @@
+agency: MBMRail
+type: "M131.1"
+copyright: vojtechzicha      # original art, rendered from a box model
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MBM rail"
+  agency_cs: "MBM rail"
+  family_en: '"Hurvínek"'
+  family_cs: '"Hurvínek"'
+
+# Tatra M 131.1 "Hurvínek" (class 801) two-axle railcar, Tatra Kopřivnice
+# 1948-56: A1, Tatra T 301 air-cooled diesel 113.9 kW with a mechanical gearbox,
+# 60 km/h, 12.10 m over buffers, 3.0 m wide, 3.56 m high, 16.6 t, 48 seats +
+# 21 standing. Octagonal body: the end vestibules (driver + entrance) taper in
+# plan to a flat front with a centre gangway door between two windscreens;
+# roof headlight on each end, long raised roof cover.
+# 2026: DÚK T3 "Zubrnický motoráček" Ústí nad Labem-Střekov - Velké Březno -
+# Zubrnice (Sat/Sun/holidays 28 Mar - 1 Nov 2026), run by the Zubrnická
+# museální železnice on MBM rail's licence with M 131.109 and M 131.1280; also
+# 2 Saturdays of the Český ráj tourist train. Runs solo; as a railcar of the
+# time it can pull a trailer (Clm/Blm, see the blm family), so it couples with
+# anything.
+#
+# Livery: wine red body (#8C1B22, photos 2022/2025), one white line at the
+# window sills running round the car and across the fronts (interrupted by the
+# doors), light grey roof and roof cover, black underframe, yellow step edges
+# (photos zub_M1311280_2022, zub_Zubrnice_2025_01, zub_Hurvinek; KŽC drawing
+# M131.1302 for the layout).
+#
+# Sheet: rendered by tools/railrender/mbm_hurvinek.py (shared with the blm
+# family) on the tools/railrender box raycaster; regenerate with
+# `python tools/railrender/ops.py mbm-rail/m131_1`. Window, door and wheel
+# positions in metres from the M131.1302 side drawing, both sides the
+# 180-degree turn of each other, the white line one full pixel. No pak128.CS or
+# installed art of the M 131.1 exists. Length 6 (12.1 m at 2.02 m/cu), drawn
+# from the front anchor.
+
+vehicles:
+  - id: "M131.1"
+    display_id: "M 131.1"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 690000
+      payload: 48
+      speed: 60
+      weight: 17
+      runningcost: 16
+      fixed_cost: 90
+      intro_year: 2010
+      intro_month: 4
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 114
+      smoke: Diesel_black
+      gear: 100
+    extended:
+      axles: 2
+
+liveries:
+  - color: vinova
+    name_en: "wine red"
+    name_cs: "vínová"

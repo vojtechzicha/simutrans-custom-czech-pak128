@@ -1,0 +1,97 @@
+agency: AZDPraha
+type: "810"
+copyright: Sim
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "AŽD"
+  agency_cs: "AŽD"
+  family_en: '"Šukafon"'
+  family_cs: '"Šukafon"'
+
+# AŽD Praha class 810 (ex ČSD M 152.0) railcars, 3 units (810.141 "Dunaj",
+# 810.435, ...) and 2 class 010 (Btax 780) trailers "v barvách AŽD Praha"
+# (svestkovadraha.cz/historie). Reserve for the RegioSprinters on U10
+# Švestková dráha (Litoměřice - Lovosice - Most) and specials (T4 in 2017,
+# "Podřipská střela" 2023). 810: 13.97 m, 2 axles (1'A'), LIAZ ML 634 155 kW,
+# 80 km/h, 20 t, 55 seats + 40 standing; 010: 15 t, 62 seats. The railcar
+# couples with another 810 or a trailer on either end; the trailer cannot
+# lead.
+#
+# Livery "AŽD blue-yellow": yellow window band (above, between and just below
+# the windows, round the cab side windows and the windscreen), ultramarine
+# lower body and doors, grey roof; three yellow bars beside the lamps and the
+# yellow AŽD roundel on the fronts, yellow/black warning stripes on the buffer
+# beam; white "AŽD • BEZPEČNĚ K CÍLI" on the sides. Photos: 810.435 Lovosice
+# 2019, 810.141 Bříza / Chlumčany 2023, Dětenice (Commons Category:CZ Class
+# 810 of AŽD Praha). The photos show the whole window band yellow, not the
+# thin yellow lines the research text describes. No photo of the 010s was
+# found; they are painted like the railcar.
+#
+# Sprites: the Sim pak128.CS 810 / Btax 780 bodies (rail-psg mail/810),
+# repainted zone by zone with the ČD 810 zone-map painter (one-off painter
+# script, not in the repo). Row 0 = 810, row 1 = 010. Length 7.
+
+vehicles:
+  - id: "810"
+    role_en: "railcar"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: true
+    prev: ["810", "010"]
+    next: ["810", "010"]
+    couple_liveries: true
+    fields:
+      cost: 1022400
+      payload: 95
+      speed: 80
+      weight: 20
+      runningcost: 23
+      fixed_cost: 118
+      intro_year: 2017
+      intro_month: 4
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 155
+      smoke: Diesel_black
+      gear: 105
+    extended:
+      axles: 2
+
+  - id: "010"
+    role_en: "trailer"
+    role_cs: "přípojný vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["810", "010"]
+    next: ["810", "010"]
+    couple_liveries: true
+    fields:
+      cost: 805400
+      payload: 104
+      speed: 80
+      weight: 15
+      runningcost: 6
+      fixed_cost: 31
+      intro_year: 2017
+      intro_month: 4
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 7
+    extended:
+      axles: 2
+
+liveries:
+  - color: modrozluta
+    name_en: "blue-yellow"
+    name_cs: "modro-žlutá"

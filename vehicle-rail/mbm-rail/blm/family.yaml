@@ -1,0 +1,65 @@
+agency: MBMRail
+type: "Blm"
+copyright: vojtechzicha      # original art, rendered from a box model
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MBM rail"
+  agency_cs: "MBM rail"
+  family_en: "Studénka 1948"
+  family_cs: "Studénka 1948"
+
+# Blm 5-2243, a two-axle local coach of the Clm (later Blm) series built by
+# Vagónka Tatra Studénka in 1948-50 as the trailer of the M 131.1 railcars:
+# wooden body sheathed in steel, octagonal plan (the end vestibules taper,
+# the doors sit in the tapered walls), 12.20 m over buffers, body 11.25 m,
+# 3.0 m wide, 3.28 m high, wheelbase 6.5 m, 10.8 t, 53 seats, coal stove
+# (roof chimney). 2026: the only coach of the Slezský železniční spolek train
+# Bruntál - Malá Morávka (ODIS S18, MBM rail licence, weekends 14 Jun - 20 Sep
+# 2026), hauled by 708.014 (see the 708 family). zdopravy.cz 2026: "708.014-6
+# with a Blm coach ... a historic Blm car from 1948"; the car's lettering
+# "Blm 5-2243" is legible on the Aug 2026 photo and on the vlaky.net article
+# "Přípojné vozy řada Clm 1948-1950" (side + plan drawing, dimensions).
+#
+# NOTE: pak128.CS "CSD_Blm" is a different, 1973 car (the Btax 780 trailer of
+# the 810), so no upstream art matches; this one is drawn new.
+#
+# Livery: dark red body (#9A2029) incl. doors and ends, grey arched roof with
+# the stove chimney, black underframe, yellow ČSD lettering (too small for
+# 128 px). Photos: zdopravy 2026 (55377072758, 1473608_Moravek), vlaky.net.
+#
+# Sheet: rendered by tools/railrender/mbm_hurvinek.py (shared with the m131_1
+# family; regenerate with `python tools/railrender/ops.py mbm-rail/blm`): six
+# windows, doors at both ends on both sides (point-symmetric car), panel
+# joints on the lower body, chimney. Length 6 (12.2 m).
+
+vehicles:
+  - id: "Blm"
+    role_en: "2nd class coach"
+    role_cs: "vůz 2. třídy"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 380000
+      payload: 53
+      speed: 60
+      weight: 11
+      runningcost: 4
+      fixed_cost: 30
+      intro_year: 2018              # ran with the T 334.0 in earlier seasons
+      intro_month: 6
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 6
+    extended:
+      axles: 2
+
+liveries:
+  - color: tmavocervena
+    name_en: "dark red"
+    name_cs: "tmavě červená"
