@@ -1,0 +1,132 @@
+agency: DPPraha
+type: "M1"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "metro"
+  family_cs: "metro"
+
+# Prague metro M1 (line C): ČKD Dopravní systémy / Siemens Kolejová vozidla with
+# Adtranz bogies and motors, series M1A-M1D built 1998-2011, 53 five-car sets
+# (41xx). Fixed consist M1.1 + M1.2 + M1.3 + M1.2 + M1.1, cabs in the M1.1 cars.
+# Every car is powered, 4 x 141.5 kW = 566 kW per car (cs.wikipedia; en.wikipedia
+# gives other totals); 750 V DC third rail, 80 km/h in service. M1.1 19,521 mm /
+# 27.9 t / 40 + 242 = 282 places; M1.2 and M1.3 19,206 mm / 25.9 and 25.6 t /
+# 48 + 252 = 300 places. 2.71 m wide, 3.67 m high, four 1.6 m doors per side.
+#
+# Livery "stříbrno-červená": metallic silver body and roof, a dark window band
+# broken only by the doors, dark grey door pillars, one red-orange stripe under
+# the windows along the whole train, a red band and chevron behind each cab;
+# raked silver nose with a large windscreen and the red "M" logo (photos:
+# Commons "Metro M1 on test track", Háje and Kačerov depot shots).
+#
+# Sprites: drawn from scratch with the box renderer, render style V2 (continuous
+# window band) picked by the user 2026-09-26: tools/railrender/dpp_metro.py
+# (regenerate with `python tools/railrender/dpp_metro.py m1`). Cars drawn as
+# length 9 at coach width. Rows: 0 lead M1.1 (cab leading, headlights), 1 M1.2,
+# 2 M1.3, 3 rear M1.1 (cab at the tail, tail lights). The M1.2 comes twice (-2
+# and -4, one row) so the only buildable consist is the real five-car set.
+# Price ~7,000 per place, as the 81-71M. Electric: the line needs electrification.
+
+vehicles:
+  - id: "M1.1-front"
+    display_id: "M1"
+    role_en: "M1.1 cab car (front)"
+    role_cs: "čelní vůz M1.1 (přední)"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["M1.2-2"]
+    fields: &cab
+      cost: 2000000
+      payload: 282
+      speed: 80
+      weight: 28
+      power: 566
+      runningcost: 60
+      fixed_cost: 220
+      intro_year: 2000
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 9
+      engine_type: electric
+    extended:
+      axles: 4
+
+  - id: "M1.2-2"
+    display_id: "M1"
+    role_en: "M1.2 intermediate car"
+    role_cs: "vložený vůz M1.2"
+    row: 1
+    head: false
+    tail: false
+    prev: ["M1.1-front"]
+    next: ["M1.3"]
+    fields: &mid
+      cost: 2100000
+      payload: 300
+      speed: 80
+      weight: 26
+      power: 566
+      runningcost: 60
+      fixed_cost: 230
+      intro_year: 2000
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 9
+      engine_type: electric
+    extended:
+      axles: 4
+
+  - id: "M1.3"
+    display_id: "M1"
+    role_en: "M1.3 intermediate car"
+    role_cs: "vložený vůz M1.3"
+    row: 2
+    head: false
+    tail: false
+    prev: ["M1.2-2"]
+    next: ["M1.2-4"]
+    fields: *mid
+    extended:
+      axles: 4
+
+  - id: "M1.2-4"
+    display_id: "M1"
+    role_en: "M1.2 intermediate car"
+    role_cs: "vložený vůz M1.2"
+    row: 1
+    head: false
+    tail: false
+    prev: ["M1.3"]
+    next: ["M1.1-rear"]
+    fields: *mid
+    extended:
+      axles: 4
+
+  - id: "M1.1-rear"
+    display_id: "M1"
+    role_en: "M1.1 cab car (rear)"
+    role_cs: "čelní vůz M1.1 (zadní)"
+    row: 3
+    head: false
+    tail: true
+    prev: ["M1.2-4"]
+    next: []
+    fields: *cab
+    extended:
+      axles: 4
+
+liveries:
+  - color: stribrnocervena
+    name_en: "silver-red"
+    name_cs: "stříbrno-červená"

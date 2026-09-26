@@ -1,0 +1,134 @@
+agency: DPPraha
+type: "81-71M"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "metro"
+  family_cs: "metro"
+
+# Prague metro 81-71M (lines A and B): Mytishchi 81-71 cars (in Prague from
+# 1976) modernised by Škoda Plzeň 1996-2011, 93 five-car sets. Fixed consist
+# 2Mt + 4Mt + 3Mt + 4Mt + 2Mt; only the 2Mt end cars have cabs. Every car is
+# powered, Bo'Bo', 4 x 110 kW = 440 kW per car; 750 V DC third rail, 80 km/h in
+# service. 2Mt 19,398 mm / 32 t / 38 + 216 = 254 places; 3Mt and 4Mt 19,210 mm /
+# 31 t / 48 + 218 = 266 places (cs.wikipedia "Souprava metra 81-71M"). 2.71 m wide,
+# 3.66 m high. Four double sliding doors per side per car.
+#
+# Livery "šedo-červená": silver-grey ribbed body, white lower band carrying a red
+# stripe, red cantrail band, red door leaves with two tall windows; grey Škoda
+# front mask with a large black windscreen and the red "M" logo (photos:
+# Commons "Zličín obratiště 81-71M", "2Mt (81-71M) ve stanici Rajská zahrada").
+#
+# Sprites: drawn from scratch with the box renderer, render style V1 (ribbed)
+# picked by the user 2026-09-26: tools/railrender/dpp_metro.py (regenerate with
+# `python tools/railrender/dpp_metro.py 81_71m`). Cars drawn as length 9
+# (TommPa9's native Metro_8171M length) at coach width. Rows: 0 lead 2Mt (cab
+# leading, headlights), 1 4Mt, 2 3Mt, 3 rear 2Mt (cab at the tail, tail lights).
+# The rear 2Mt is its own row rather than `reverse`, as length 9 is not 8.
+# The 4Mt comes twice (-2 and -4, one row) so the only buildable consist is the
+# real five-car set.
+# Price ~7,000 per place, the scale of the Prague trams and of the native metro.
+# Electric like the native pak128.cs metro: the line needs electrification.
+
+vehicles:
+  - id: "2Mt-front"
+    display_id: "81-71M"
+    role_en: "2Mt cab car (front)"
+    role_cs: "čelní vůz 2Mt (přední)"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["4Mt-2"]
+    fields: &cab
+      cost: 1800000
+      payload: 254
+      speed: 80
+      weight: 32
+      power: 440
+      runningcost: 60
+      fixed_cost: 200
+      intro_year: 1996
+      intro_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 9
+      engine_type: electric
+    extended:
+      axles: 4
+
+  - id: "4Mt-2"
+    display_id: "81-71M"
+    role_en: "4Mt intermediate car"
+    role_cs: "vložený vůz 4Mt"
+    row: 1
+    head: false
+    tail: false
+    prev: ["2Mt-front"]
+    next: ["3Mt"]
+    fields: &mid
+      cost: 1860000
+      payload: 266
+      speed: 80
+      weight: 31
+      power: 440
+      runningcost: 60
+      fixed_cost: 205
+      intro_year: 1996
+      intro_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 9
+      engine_type: electric
+    extended:
+      axles: 4
+
+  - id: "3Mt"
+    display_id: "81-71M"
+    role_en: "3Mt intermediate car"
+    role_cs: "vložený vůz 3Mt"
+    row: 2
+    head: false
+    tail: false
+    prev: ["4Mt-2"]
+    next: ["4Mt-4"]
+    fields: *mid
+    extended:
+      axles: 4
+
+  - id: "4Mt-4"
+    display_id: "81-71M"
+    role_en: "4Mt intermediate car"
+    role_cs: "vložený vůz 4Mt"
+    row: 1
+    head: false
+    tail: false
+    prev: ["3Mt"]
+    next: ["2Mt-rear"]
+    fields: *mid
+    extended:
+      axles: 4
+
+  - id: "2Mt-rear"
+    display_id: "81-71M"
+    role_en: "2Mt cab car (rear)"
+    role_cs: "čelní vůz 2Mt (zadní)"
+    row: 3
+    head: false
+    tail: true
+    prev: ["4Mt-4"]
+    next: []
+    fields: *cab
+    extended:
+      axles: 4
+
+liveries:
+  - color: sedocervena
+    name_en: "grey-red"
+    name_cs: "šedo-červená"
