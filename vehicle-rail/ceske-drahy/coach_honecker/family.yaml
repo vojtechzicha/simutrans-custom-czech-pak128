@@ -1,0 +1,97 @@
+# "Honecker" UIC-X 26.4 m open coaches (Bautzen 1989-90), doors at 1/4 and 3/4 of
+# the length: Bdmtee 281 (two bike areas), 275 (one rebuilt into a service
+# compartment) and the refurbished 263 / 265-268 with fixed windows (as 267).
+# Original art drawn from scratch: box models from the vagonWEB scale side drawings,
+# rendered by tools/railrender/cdcoach.py (regenerate with
+# `python tools/railrender/cd_coaches.py coach_honecker`). Najbrt 2: RAL 7035 lower body,
+# RAL 5003 line and doors, RAL 5015 window band, light line, RAL 5003 roof; the yellow
+# RAL 1003 line marks the 1st-class part only.
+
+agency: CeskeDrahy
+type: "Honecker"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "honecker"
+  family_cs: "honecker"
+
+vehicles:
+  - id: "Bdmtee281"
+    display_id: "Bdmtee 281"
+    role_en: "2nd class coach with bicycle space"
+    role_cs: "vůz 2. třídy s prostorem pro kola"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 1500000
+      payload: 96
+      speed: 160
+      weight: 40
+      runningcost: 32
+      fixed_cost: 167
+      intro_year: 1989
+      intro_month: 6
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bdmtee275"
+    display_id: "Bdmtee 275"
+    role_en: "2nd class open coach"
+    role_cs: "velkoprostorový vůz 2. třídy"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 1500000
+      payload: 96
+      speed: 160
+      weight: 40
+      runningcost: 32
+      fixed_cost: 167
+      intro_year: 1990
+      intro_month: 6
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bdmtee267"
+    display_id: "Bdmtee 267"
+    role_en: "2nd class open coach"
+    role_cs: "velkoprostorový vůz 2. třídy"
+    row: 2
+    prev: any
+    next: any
+    fields:
+      cost: 1500000
+      payload: 78
+      speed: 160
+      weight: 41
+      runningcost: 28
+      fixed_cost: 167
+      intro_year: 2008
+      intro_month: 6
+      retire_year: 2040
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"

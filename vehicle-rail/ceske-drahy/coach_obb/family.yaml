@@ -1,0 +1,327 @@
+# Ex-ÖBB Eurofima / Z1 UIC-Z 26.4 m coaches bought by ČD 2014-2019, many rebuilt
+# by Pars nova / DPOV. The bodies are the same; the window frames tell them apart
+# (vagonWEB variants: white -br, black -cr, blue -mr), plus roof equipment and
+# pictograms. Four Bmz 232 still wear the ÖBB grey-red (livery obb).
+# Original art drawn from scratch: box models from the vagonWEB scale side drawings,
+# rendered by tools/railrender/cdcoach.py (regenerate with
+# `python tools/railrender/cd_coaches.py coach_obb`). Najbrt 2: RAL 7035 lower body,
+# RAL 5003 line and doors, RAL 5015 window band, light line, RAL 5003 roof; the yellow
+# RAL 1003 line marks the 1st-class part only.
+
+agency: CeskeDrahy
+type: "exOBB"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "ex-ÖBB"
+  family_cs: "ex-ÖBB"
+
+vehicles:
+  - id: "Bmz226"
+    display_id: "Bmz 226"
+    role_en: "2nd class compartment coach"
+    role_cs: "oddílový vůz 2. třídy"
+    row: 0
+    prev: any
+    next: any
+    liveries: [najbrt2]
+    fields:
+      cost: 2300000
+      payload: 66
+      speed: 200
+      weight: 46
+      runningcost: 26
+      fixed_cost: 256
+      intro_year: 2016
+      intro_month: 3
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmz232"
+    display_id: "Bmz 232"
+    role_en: "2nd class compartment coach"
+    role_cs: "oddílový vůz 2. třídy"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 2300000
+      payload: 66
+      speed: 200
+      weight: 46
+      runningcost: 26
+      fixed_cost: 256
+      intro_year: 2014
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmz234"
+    display_id: "Bmz 234"
+    role_en: "2nd class compartment coach"
+    role_cs: "oddílový vůz 2. třídy"
+    row: 2
+    prev: any
+    next: any
+    liveries: [najbrt2]
+    fields:
+      cost: 1500000
+      payload: 66
+      speed: 160
+      weight: 45
+      runningcost: 24
+      fixed_cost: 167
+      intro_year: 2017
+      intro_month: 3
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmz235"
+    display_id: "Bmz 235"
+    role_en: "2nd class compartment coach"
+    role_cs: "oddílový vůz 2. třídy"
+    row: 3
+    prev: any
+    next: any
+    liveries: [najbrt2]
+    fields:
+      cost: 2300000
+      payload: 66
+      speed: 200
+      weight: 46
+      runningcost: 26
+      fixed_cost: 256
+      intro_year: 2015
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmz229"
+    display_id: "Bmz 229"
+    role_en: "2nd class coach with children's compartment"
+    role_cs: "vůz 2. třídy s dětským oddílem"
+    row: 4
+    prev: any
+    next: any
+    liveries: [najbrt2]
+    fields:
+      cost: 2300000
+      payload: 60
+      speed: 200
+      weight: 46
+      runningcost: 25
+      fixed_cost: 256
+      intro_year: 2016
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmz224"
+    display_id: "Bmz 224"
+    role_en: "2nd class compartment coach"
+    role_cs: "oddílový vůz 2. třídy"
+    row: 5
+    prev: any
+    next: any
+    liveries: [najbrt2]
+    fields:
+      cost: 2300000
+      payload: 60
+      speed: 200
+      weight: 46
+      runningcost: 25
+      fixed_cost: 256
+      intro_year: 2019
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bdmz223"
+    display_id: "Bdmz 223"
+    role_en: "2nd class coach with bicycle space"
+    role_cs: "vůz 2. třídy s prostorem pro kola"
+    row: 6
+    prev: any
+    next: any
+    liveries: [najbrt2]
+    fields:
+      cost: 2300000
+      payload: 60
+      speed: 200
+      weight: 46
+      runningcost: 25
+      fixed_cost: 256
+      intro_year: 2019
+      intro_month: 9
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bdmpz227"
+    display_id: "Bdmpz 227"
+    role_en: "2nd class coach with bicycle space"
+    role_cs: "vůz 2. třídy s prostorem pro kola"
+    row: 7
+    prev: any
+    next: any
+    liveries: [najbrt2]
+    fields:
+      cost: 2300000
+      payload: 72
+      speed: 200
+      weight: 46
+      runningcost: 28
+      fixed_cost: 256
+      intro_year: 2016
+      intro_month: 3
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bhmpz228"
+    display_id: "Bhmpz 228"
+    role_en: "2nd class coach for wheelchairs and bicycles"
+    role_cs: "vůz 2. třídy pro vozíčkáře a kola"
+    row: 8
+    prev: any
+    next: any
+    liveries: [najbrt2]
+    fields:
+      cost: 2300000
+      payload: 58
+      speed: 200
+      weight: 47
+      runningcost: 24
+      fixed_cost: 256
+      intro_year: 2016
+      intro_month: 3
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "ABmz346"
+    display_id: "ABmz 346"
+    role_en: "1st/2nd class compartment coach"
+    role_cs: "oddílový vůz 1./2. třídy"
+    row: 9
+    prev: any
+    next: any
+    liveries: [najbrt2]
+    fields:
+      cost: 2300000
+      payload: 60
+      speed: 200
+      weight: 46
+      runningcost: 25
+      fixed_cost: 256
+      intro_year: 2016
+      intro_month: 9
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Amz138"
+    display_id: "Amz 138"
+    role_en: "1st class compartment coach"
+    role_cs: "oddílový vůz 1. třídy"
+    row: 10
+    prev: any
+    next: any
+    liveries: [najbrt2]
+    fields:
+      cost: 2760000
+      payload: 46
+      speed: 200
+      weight: 46
+      runningcost: 22
+      fixed_cost: 307
+      intro_year: 2018
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "WRmz817"
+    display_id: "WRmz 817"
+    role_en: "restaurant car"
+    role_cs: "restaurační vůz"
+    row: 11
+    prev: any
+    next: any
+    liveries: [najbrt2]
+    fields:
+      cost: 2760000
+      payload: 40
+      speed: 200
+      weight: 52
+      runningcost: 20
+      fixed_cost: 307
+      intro_year: 2015
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bcmz834"
+    display_id: "Bcmz 834"
+    role_en: "couchette car"
+    role_cs: "lehátkový vůz"
+    row: 12
+    prev: any
+    next: any
+    liveries: [najbrt2]
+    fields:
+      cost: 1500000
+      payload: 60
+      speed: 160
+      weight: 47
+      runningcost: 23
+      fixed_cost: 167
+      intro_year: 2016
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+  - color: obb
+    name_en: "ÖBB grey-red"
+    name_cs: "ÖBB šedo-červená"

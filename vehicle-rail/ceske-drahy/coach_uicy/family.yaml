@@ -1,0 +1,112 @@
+# UIC-Y 24.5 m coaches with Hungarian (RÁBA Győr) bodies, rebuilt with AC by DVJ
+# Dunakeszi / MOVO / ŽOS Trnava: R10, R11, R16, R17.
+# Original art drawn from scratch: box models from the vagonWEB scale side drawings,
+# rendered by tools/railrender/cdcoach.py (regenerate with
+# `python tools/railrender/cd_coaches.py coach_uicy`). Najbrt 2: RAL 7035 lower body,
+# RAL 5003 line and doors, RAL 5015 window band, light line, RAL 5003 roof; the yellow
+# RAL 1003 line marks the 1st-class part only.
+
+agency: CeskeDrahy
+type: "UICY"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "UIC-Y"
+  family_cs: "UIC-Y"
+
+vehicles:
+  - id: "Aee140"
+    display_id: "Aee 140"
+    role_en: "1st class compartment coach"
+    role_cs: "oddílový vůz 1. třídy"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 1800000
+      payload: 54
+      speed: 160
+      weight: 41
+      runningcost: 22
+      fixed_cost: 200
+      intro_year: 2000
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "Apee139"
+    display_id: "Apee 139"
+    role_en: "1st class open coach"
+    role_cs: "velkoprostorový vůz 1. třídy"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 1800000
+      payload: 60
+      speed: 160
+      weight: 41
+      runningcost: 23
+      fixed_cost: 200
+      intro_year: 2002
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "Bee238"
+    display_id: "Bee 238"
+    role_en: "2nd class compartment coach"
+    role_cs: "oddílový vůz 2. třídy"
+    row: 2
+    prev: any
+    next: any
+    fields:
+      cost: 1500000
+      payload: 60
+      speed: 160
+      weight: 41
+      runningcost: 23
+      fixed_cost: 167
+      intro_year: 2001
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "Bpee237"
+    display_id: "Bpee 237"
+    role_en: "2nd class open coach"
+    role_cs: "velkoprostorový vůz 2. třídy"
+    row: 3
+    prev: any
+    next: any
+    fields:
+      cost: 1500000
+      payload: 78
+      speed: 160
+      weight: 41
+      runningcost: 28
+      fixed_cost: 167
+      intro_year: 2001
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"

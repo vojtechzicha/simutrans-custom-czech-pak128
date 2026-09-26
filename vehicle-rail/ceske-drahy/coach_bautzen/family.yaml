@@ -1,0 +1,135 @@
+# Ex-DR Bautzen UIC-Z/X 26.4 m coaches rebuilt with AC (ŽOS, MOVO, Pars nova, DPOV):
+# the Bbdgmee 236 bike / wheelchair car of almost every Ex and R train, the open
+# Bdmpee 233, the 1st class + bistro ARmpee 829 / 832 and the WLABmee 823 sleeper.
+# Original art drawn from scratch: box models from the vagonWEB scale side drawings,
+# rendered by tools/railrender/cdcoach.py (regenerate with
+# `python tools/railrender/cd_coaches.py coach_bautzen`). Najbrt 2: RAL 7035 lower body,
+# RAL 5003 line and doors, RAL 5015 window band, light line, RAL 5003 roof; the yellow
+# RAL 1003 line marks the 1st-class part only.
+
+agency: CeskeDrahy
+type: "Bautzen"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "Bautzen"
+  family_cs: "Bautzen"
+
+vehicles:
+  - id: "Bbdgmee236"
+    display_id: "Bbdgmee 236"
+    role_en: "2nd class coach for wheelchairs and bicycles"
+    role_cs: "vůz 2. třídy pro vozíčkáře a kola"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 1500000
+      payload: 41
+      speed: 160
+      weight: 46
+      runningcost: 18
+      fixed_cost: 167
+      intro_year: 2012
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bdmpee233"
+    display_id: "Bdmpee 233"
+    role_en: "2nd class open coach"
+    role_cs: "velkoprostorový vůz 2. třídy"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 1500000
+      payload: 80
+      speed: 160
+      weight: 44
+      runningcost: 28
+      fixed_cost: 167
+      intro_year: 2013
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "ARmpee829"
+    display_id: "ARmpee 829"
+    role_en: "1st class coach with bistro"
+    role_cs: "vůz 1. třídy s bistrem"
+    row: 2
+    prev: any
+    next: any
+    fields:
+      cost: 1800000
+      payload: 36
+      speed: 160
+      weight: 47
+      runningcost: 17
+      fixed_cost: 200
+      intro_year: 2018
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "ARmpee832"
+    display_id: "ARmpee 832"
+    role_en: "1st class coach with bistro"
+    role_cs: "vůz 1. třídy s bistrem"
+    row: 3
+    prev: any
+    next: any
+    fields:
+      cost: 1800000
+      payload: 36
+      speed: 160
+      weight: 47
+      runningcost: 17
+      fixed_cost: 200
+      intro_year: 2009
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "WLABmee823"
+    display_id: "WLABmee 823"
+    role_en: "sleeping car"
+    role_cs: "lůžkový vůz"
+    row: 4
+    prev: any
+    next: any
+    fields:
+      cost: 1800000
+      payload: 30
+      speed: 160
+      weight: 55
+      runningcost: 16
+      fixed_cost: 200
+      intro_year: 2000
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"

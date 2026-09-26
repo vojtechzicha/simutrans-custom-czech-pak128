@@ -1,0 +1,245 @@
+# Vagónka Studénka UIC-Y 24.5 m coaches: the Bdpee 231 panorama-window saloon
+# (ex Bp 282), ABpee 347, Bdtee 276, the Bdt 279 / 280 and the "sysel" driving
+# trailers Bfhpvee 295 / ABfhpvee 395. A driving trailer comes twice: -front
+# with the cab leading (the locomotive pushes at the rear) and -rear with the cab
+# at the tail of a hauled train; the cab end takes nothing beyond it.
+# Original art drawn from scratch: box models from the vagonWEB scale side drawings,
+# rendered by tools/railrender/cdcoach.py (regenerate with
+# `python tools/railrender/cd_coaches.py coach_studenka`). Najbrt 2: RAL 7035 lower body,
+# RAL 5003 line and doors, RAL 5015 window band, light line, RAL 5003 roof; the yellow
+# RAL 1003 line marks the 1st-class part only.
+
+agency: CeskeDrahy
+type: "Studenka"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "Studénka"
+  family_cs: "Studénka"
+
+vehicles:
+  - id: "Bdpee231"
+    display_id: "Bdpee 231"
+    role_en: "2nd class coach with bicycle space"
+    role_cs: "vůz 2. třídy s prostorem pro kola"
+    row: 0
+    prev: any
+    next: any
+    liveries: [najbrt2]
+    fields:
+      cost: 1500000
+      payload: 72
+      speed: 160
+      weight: 40
+      runningcost: 26
+      fixed_cost: 167
+      intro_year: 2015
+      intro_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "ABpee347"
+    display_id: "ABpee 347"
+    role_en: "1st/2nd class open coach"
+    role_cs: "velkoprostorový vůz 1./2. třídy"
+    row: 1
+    prev: any
+    next: any
+    liveries: [najbrt2]
+    fields:
+      cost: 950000
+      payload: 70
+      speed: 140
+      weight: 40
+      runningcost: 24
+      fixed_cost: 106
+      intro_year: 2006
+      intro_month: 6
+      retire_year: 2040
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "Bdtee276"
+    display_id: "Bdtee 276"
+    role_en: "2nd class coach with bicycle space"
+    role_cs: "vůz 2. třídy s prostorem pro kola"
+    row: 2
+    prev: any
+    next: any
+    liveries: [najbrt2]
+    fields:
+      cost: 950000
+      payload: 84
+      speed: 140
+      weight: 38
+      runningcost: 28
+      fixed_cost: 106
+      intro_year: 2004
+      intro_month: 6
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "Bdt279"
+    display_id: "Bdt 279"
+    role_en: "2nd class coach with bicycle space"
+    role_cs: "vůz 2. třídy s prostorem pro kola"
+    row: 3
+    prev: any
+    next: any
+    fields:
+      cost: 950000
+      payload: 88
+      speed: 120
+      weight: 37
+      runningcost: 28
+      fixed_cost: 106
+      intro_year: 1992
+      intro_month: 6
+      retire_year: 2030
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "Bdt280"
+    display_id: "Bdt 280"
+    role_en: "2nd class open coach"
+    role_cs: "velkoprostorový vůz 2. třídy"
+    row: 4
+    prev: any
+    next: any
+    fields:
+      cost: 950000
+      payload: 88
+      speed: 120
+      weight: 37
+      runningcost: 28
+      fixed_cost: 106
+      intro_year: 1992
+      intro_month: 6
+      retire_year: 2030
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "Bfhpvee295-front"
+    display_id: "Bfhpvee 295"
+    role_en: "2nd class driving trailer"
+    role_cs: "řídicí vůz 2. třídy"
+    row: 5
+    head: true
+    prev: []
+    next: any
+    fields:
+      cost: 1425000
+      payload: 58
+      speed: 140
+      weight: 42
+      runningcost: 22
+      fixed_cost: 158
+      intro_year: 2007
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "Bfhpvee295-rear"
+    display_id: "Bfhpvee 295"
+    role_en: "2nd class driving trailer"
+    role_cs: "řídicí vůz 2. třídy"
+    row: 6
+    tail: true
+    prev: any
+    next: []
+    fields:
+      cost: 1425000
+      payload: 58
+      speed: 140
+      weight: 42
+      runningcost: 22
+      fixed_cost: 158
+      intro_year: 2007
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "ABfhpvee395-front"
+    display_id: "ABfhpvee 395"
+    role_en: "1st/2nd class driving trailer"
+    role_cs: "řídicí vůz 1./2. třídy"
+    row: 7
+    head: true
+    prev: []
+    next: any
+    liveries: [najbrt1]
+    fields:
+      cost: 1425000
+      payload: 50
+      speed: 140
+      weight: 42
+      runningcost: 20
+      fixed_cost: 158
+      intro_year: 2007
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "ABfhpvee395-rear"
+    display_id: "ABfhpvee 395"
+    role_en: "1st/2nd class driving trailer"
+    role_cs: "řídicí vůz 1./2. třídy"
+    row: 8
+    tail: true
+    prev: any
+    next: []
+    liveries: [najbrt1]
+    fields:
+      cost: 1425000
+      payload: 50
+      speed: 140
+      weight: 42
+      runningcost: 20
+      fixed_cost: 158
+      intro_year: 2007
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+  - color: najbrt1
+    name_en: "Najbrt 1"
+    name_cs: "Najbrt 1"

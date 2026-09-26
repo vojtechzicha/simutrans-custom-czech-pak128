@@ -1,0 +1,72 @@
+# Görlitz DDm double-deck coaches (26.8 m, 100 km/h): Bdmteeo 294 (bike area) and
+# 296, Prague and České Budějovice regional sets.
+# Original art drawn from scratch: box models from the vagonWEB scale side drawings,
+# rendered by tools/railrender/cdcoach.py (regenerate with
+# `python tools/railrender/cd_coaches.py coach_patrove`). Najbrt 2: RAL 7035 lower body,
+# RAL 5003 line and doors, RAL 5015 window band, light line, RAL 5003 roof; the yellow
+# RAL 1003 line marks the 1st-class part only.
+
+agency: CeskeDrahy
+type: "Patrove"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "double-deck"
+  family_cs: "patrový"
+
+vehicles:
+  - id: "Bdmteeo294"
+    display_id: "Bdmteeo 294"
+    role_en: "double-deck coach"
+    role_cs: "patrový vůz"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 950000
+      payload: 126
+      speed: 100
+      weight: 50
+      runningcost: 36
+      fixed_cost: 106
+      intro_year: 1995
+      intro_month: 6
+      retire_year: 2030
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bdmteeo296"
+    display_id: "Bdmteeo 296"
+    role_en: "double-deck coach"
+    role_cs: "patrový vůz"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 950000
+      payload: 128
+      speed: 100
+      weight: 50
+      runningcost: 37
+      fixed_cost: 106
+      intro_year: 1995
+      intro_month: 6
+      retire_year: 2030
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
