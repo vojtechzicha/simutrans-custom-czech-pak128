@@ -16,9 +16,12 @@ display:
 # intermediate trailers (now Bdtn 756/757) and the 954 control cars (now
 # Bfbrdtn 794 / ABfbrdtn 795), both ex-854 "Hydra" stock. Sets: 842 solo,
 # 842 + 954, 842 + 054 (+ 054) + 954, and 842 + 054 (+ 054) without a control
-# car (e.g. Os Český Těšín - Frýdek-Místek, 842 + Bdtn 757). Mixed liveries in one set are normal
+# car (e.g. Os Český Těšín - Frýdek-Místek, 842 + Bdtn 757), and the other
+# way round with the control car leading: 954-front + (054 +) 842 (e.g.
+# ABfbrdtn 795 + 842). Mixed liveries in one set are normal
 # (red-cream trailers behind a Najbrt railcar), so any livery couples with any.
-# The 954 is drawn with its cab at the rear: it ends a set, the 842 leads.
+# The 954 is drawn with its cab at the rear and ends a set; 954-front is the
+# same car turned round (cab ahead) and leads one.
 # Sources: pak128cs rail-psg mail/842_843/842_balkan.png (842 body), pak128.cs
 # vehicle.motorak.853_854.pak (954) and vehicle.motorak.854_uni.pak (054).
 
@@ -32,7 +35,7 @@ vehicles:
     liveries: [najbrt1, najbrt2]
     head: true
     tail: true
-    prev: []
+    prev: ["054", "954-front"]
     next: ["054", "954"]
     couple_liveries: true
     fields:
@@ -66,8 +69,8 @@ vehicles:
     liveries: [najbrt2, cervenokremova]
     head: false
     tail: true                # may end a set: 842 + Bdtn runs without a control car
-    prev: ["842", "054"]
-    next: ["054", "954"]
+    prev: ["842", "054", "954-front"]
+    next: ["054", "954", "842"]
     couple_liveries: true
     fields:
       cost: 1350000
@@ -98,6 +101,35 @@ vehicles:
     tail: true
     prev: ["842", "054"]
     next: []
+    couple_liveries: true
+    fields:
+      cost: 1600000
+      payload: 63
+      speed: 120
+      weight: 41
+      runningcost: 11
+      fixed_cost: 90
+      intro_year: 2006
+      intro_month: 6
+      retire_year: 2034
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  # the 954 turned round: cab ahead, leads a set (sheet row 3)
+  - id: "954-front"
+    display_id: "954"
+    role_en: "front control car Bfbrdtn 794 / ABfbrdtn 795"
+    role_cs: "přední řídicí vůz Bfbrdtn 794 / ABfbrdtn 795"
+    row: 3
+    liveries: [najbrt2, cervenokremova]
+    head: true
+    tail: false
+    prev: []
+    next: ["054", "842"]
     couple_liveries: true
     fields:
       cost: 1600000

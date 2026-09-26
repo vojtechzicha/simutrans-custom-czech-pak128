@@ -4,13 +4,14 @@ repaints of Sim's pak128.CS drawings.
 
 Families and liveries (sheet rows in family order; a car a livery never had
 leaves its row blank):
-  842  rows 842, 054, 954 - najbrt1 (842), najbrt2 (all three),
-                            cervenokremova (054, 954)
+  842  rows 842, 054, 954, 954-front - najbrt1 (842), najbrt2 (all four),
+                            cervenokremova (054, 954, 954-front)
   843  rows 843, 043, 943 - najbrt1, najbrt2 (all three),
                             cervenokremova (843, 043)
   854  row 854            - najbrt2, cervenokremova
 054 = Bdtn 756/757 intermediate trailer, 954 = Bfbrdtn 794 / ABfbrdtn 795
 control car (both drawn with the 854 set), 043 = Btn 753, 943 = Bftn 791.
+954-front is the 954 turned round to lead a set (cab ahead), see turn_round().
 
 Frozen bases (src/84x_85x/, source coordinates, one 128-px row per ref; the
 first ref of a body gives its FIX pixels, the others help the zone map):
@@ -354,15 +355,45 @@ def render_85x(veh, liv):
     return add_marks(b, a, side=s, end=e)
 
 
+# ------------------------------------------------------------ turning a car round
+# screen pixels per carunit of travel, per direction column (w nw n ne e se s sw)
+PX_PER_CU = [(-4, -2), (0, -2.83), (4, -2), (5.66, 0), (4, 2), (0, 2.83), (-4, 2), (-5.66, 0)]
+T = (231, 255, 255)
+
+
+def turn_round(a, length):
+    """A sheet row -> the same car facing the other way: direction columns
+    shifted by 4, head / tail lamps swapped, and the body moved so it sits
+    (4 - length/2) carunits along travel again (turning flips that offset, so
+    the move is 8 - length carunits forward)."""
+    out = np.zeros_like(a); out[:] = T
+    cu = 8 - length
+    for c in range(8):
+        src = a[:, ((c + 4) % 8) * 128:((c + 4) % 8 + 1) * 128]
+        dx, dy = (int(round(v * cu)) for v in PX_PER_CU[c])
+        ys, xs = np.where(~np.all(src == T, axis=-1))
+        ny, nx = ys + dy, xs + dx
+        ok = (ny >= 0) & (ny < 128) & (nx >= 0) & (nx < 128)
+        assert ok.all(), f"turn_round pushes pixels out of tile {c}"
+        out[:, c * 128:(c + 1) * 128][ny, nx] = src[ys, xs]
+    v = (out[..., 0].astype(int) << 16) | (out[..., 1].astype(int) << 8) | out[..., 2]
+    out[v == 0xFFFF53] = (0xFF, 0x21, 0x1D)
+    out[v == 0xFF211D] = (0xFF, 0xFF, 0x53)
+    return out
+
+
 def render(veh, liv):
+    if veh == "954-front":
+        return turn_round(render("954", liv), 12)
     return render_85x(veh, liv) if veh in ("854", "954", "054") else render_84x(veh, liv)
 
 
 # ------------------------------------------------------------ families
 FAMILIES = {
     # family dir: (sheet rows, {livery: cars that exist in it})
-    "842": (["842", "054", "954"], {"najbrt1": ["842"], "najbrt2": ["842", "054", "954"],
-                                     "cervenokremova": ["054", "954"]}),
+    "842": (["842", "054", "954", "954-front"],
+            {"najbrt1": ["842"], "najbrt2": ["842", "054", "954", "954-front"],
+             "cervenokremova": ["054", "954", "954-front"]}),
     "843": (["843", "043", "943"], {"najbrt1": ["843", "043", "943"], "najbrt2": ["843", "043", "943"],
                                      "cervenokremova": ["843", "043"]}),
     "854": (["854"], {"najbrt2": ["854"], "cervenokremova": ["854"]}),
