@@ -15,7 +15,8 @@ display:
 # 2009-13) and the push-pull cars it runs with at Brno in 2026: the 054.2
 # intermediate trailers (now Bdtn 756/757) and the 954 control cars (now
 # Bfbrdtn 794 / ABfbrdtn 795), both ex-854 "Hydra" stock. Sets: 842 solo,
-# 842 + 954, 842 + 054 (+ 054) + 954. Mixed liveries in one set are normal
+# 842 + 954, 842 + 054 (+ 054) + 954, and 842 + 054 (+ 054) without a control
+# car (e.g. Os Český Těšín - Frýdek-Místek, 842 + Bdtn 757). Mixed liveries in one set are normal
 # (red-cream trailers behind a Najbrt railcar), so any livery couples with any.
 # The 954 is drawn with its cab at the rear: it ends a set, the 842 leads.
 # Sources: pak128cs rail-psg mail/842_843/842_balkan.png (842 body), pak128.cs
@@ -64,7 +65,7 @@ vehicles:
     row: 1
     liveries: [najbrt2, cervenokremova]
     head: false
-    tail: false
+    tail: true                # may end a set: 842 + Bdtn runs without a control car
     prev: ["842", "054"]
     next: ["054", "954"]
     couple_liveries: true
