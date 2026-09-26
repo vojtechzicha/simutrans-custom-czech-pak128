@@ -22,7 +22,7 @@ display:
 # repainted in Najbrt 2 (the only livery all 14 InterPanters have worn) with
 # the shared ČD palette: sky-blue body, sapphire waist line, doors, valance and
 # roof equipment, light-grey stripe, cant rail and cab hood, yellow 1st-class
-# stripe and anti-climber (scratchpad work/p2/fam_660.py).
+# stripe and anti-climber (tools/railpaint/interpanter.py).
 
 vehicles:
   - id: "660.0"

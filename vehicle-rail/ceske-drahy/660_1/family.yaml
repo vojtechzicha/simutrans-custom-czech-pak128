@@ -20,7 +20,7 @@ display:
 # in any livery.
 #
 # Sprites: the native pak128.CS InterPanter by TommPa9 (CD_660 / 662 / 064 /
-# 661), repainted in Najbrt 2 like the 660.0 (scratchpad work/p2/fam_660.py);
+# 661), repainted in Najbrt 2 like the 660.0 (tools/railpaint/interpanter.py);
 # the two 662s share one drawing, the 064 is the 662 without the 1st-class
 # stripe.
 
