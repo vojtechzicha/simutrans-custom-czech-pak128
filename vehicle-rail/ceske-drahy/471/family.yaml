@@ -11,8 +11,22 @@ display:
   family_en: "CityElefant"
   family_cs: "CityElefant"
 
-# 3-car double-decker EMU (471 motor + 071 trailer + 971 cab trailer).
-# Source DAT: pak128cs rail-psg mail/471_671/cd_471_esus.dat (CD_471_Esus_I. variant).
+# Škoda 1Ev double-deck EMU: 471 motor car (pantograph, cab) + 071 trailer +
+# 971 cab trailer, 26.4 m each (13 carunits), 310 seats + 333 standing,
+# 2000 kW, 140 km/h, 3 kV DC. 82 units in service in 2026 (Praha / Středočeský
+# kraj, Bohumín); the EMU 400 order replaces them from about 2030.
+#
+# Sprites: the pak128.CS 471 drawing by TommPa9 (CD_471_Esus_I/II/III, one
+# silhouette in three liveries) repainted with a zone map per livery: rows
+# (upper deck, between the decks / end-section windows, lower deck, skirt) and
+# car segments (end sections, doors, double-deck middle); thin grey pantograph.
+# Liveries in service in 2026 (research: atlasvozu.cz per-car lists, photos):
+# the 2006 CityElefant white / light blue / red scheme with the cab swoosh, PID
+# grey-red (painted 471 060, film wraps since 2023), Najbrt 1 (028–030,
+# 061–075) and Najbrt 2 (076–083). The original "ledovec" scheme ended in 2024.
+#
+# Units run in pairs on the busy PID lines: a 971 couples to the 471 of the next
+# unit in any livery, while the cars inside one unit match.
 
 vehicles:
   - id: "471"
@@ -21,18 +35,19 @@ vehicles:
     row: 0
     head: true
     tail: false
-    prev: []
+    prev: ["971"]
     next: ["071"]
+    couple_liveries: prev     # the rear car of a unit ahead may wear any livery
     fields:
       cost: 18384000
-      payload: 214
+      payload: 129
       speed: 140
-      weight: 55
+      weight: 60
       runningcost: 60
       fixed_cost: 538
-      intro_year: 1997
+      intro_year: 2000
       intro_month: 1
-      retire_year: 2050
+      retire_year: 2032
       retire_month: 1
       waytype: track
       freight: Passagiere
@@ -53,14 +68,14 @@ vehicles:
     next: ["971"]
     fields:
       cost: 18384000
-      payload: 214
+      payload: 269
       speed: 140
-      weight: 55
+      weight: 47
       runningcost: 22
       fixed_cost: 197
-      intro_year: 1997
+      intro_year: 2000
       intro_month: 1
-      retire_year: 2050
+      retire_year: 2032
       retire_month: 1
       waytype: track
       freight: Passagiere
@@ -75,17 +90,18 @@ vehicles:
     head: false
     tail: true
     prev: ["071"]
-    next: []
+    next: ["471"]
+    couple_liveries: next     # the lead car of a unit behind may wear any livery
     fields:
       cost: 18384000
-      payload: 215
+      payload: 245
       speed: 140
-      weight: 55
+      weight: 48
       runningcost: 40
       fixed_cost: 358
-      intro_year: 1997
+      intro_year: 2000
       intro_month: 1
-      retire_year: 2050
+      retire_year: 2032
       retire_month: 1
       waytype: track
       freight: Passagiere
@@ -95,18 +111,14 @@ vehicles:
 
 liveries:
   - color: cityelefantcervena
-    name_en: "CityElefant red"
-    name_cs: "CityElefant červená"
-    source: pak128cs/rail-psg mail/471_671/cd_471a.png (CityElefant white+blue+red — direct match)
+    name_en: "CityElefant white-blue-red"
+    name_cs: "CityElefant bílo-modro-červená"
   - color: pidsedocervena
     name_en: "PID grey-red"
     name_cs: "PID šedo-červená"
-    source: pak128cs/rail-psg mail/471_671/cd_471a.png (CityElefant red — recolor to PID grey+red)
   - color: najbrt1
     name_en: "Najbrt 1"
     name_cs: "Najbrt 1"
-    source: pak128cs/rail-psg mail/471_671/cd_471a.png (CityElefant red — recolor to Najbrt 1 blue+white)
   - color: najbrt2
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"
-    source: pak128cs/rail-psg mail/471_671/cd_471a.png (CityElefant red — recolor to Najbrt 2 blue with red doors)
