@@ -11,18 +11,24 @@ display:
   family_en: "RegioPanter"
   family_cs: "RegioPanter"
 
-# 3-car Škoda RegioPanter EMU (640.1 + 642.1 + 641.1) — later batch of 640 family.
-# No exact DAT source; values match the 640 base with intro year shifted.
+# Class 640.1: the 12 former 440s after their dual-system conversion (2021–22),
+# 3-car 640.1 + 642.1 + 641.1, since 2025 mostly in Pardubický kraj. They kept
+# their paint: Najbrt 1.2 on 10 units, Najbrt 2 on 640.110 / 112.
+# Every car has one powered bogie (2 x 340 kW); units of any livery couple end
+# to end. Sources: TommPa9's RegioPanter drawing (pak128cs rail-psg
+# mail/440_640_650, the same body as the pak128_czr sheets), repainted per livery.
+# Sprite rows: row 0 = 640.1, row 1 = 642.1, row 2 = 641.1.
 
 vehicles:
   - id: "640.1"
-    role_en: "front motor"
+    role_en: "front motor car"
     role_cs: "přední motorový vůz"
     row: 0
     head: true
     tail: false
-    prev: []
+    prev: ["641.1"]
     next: ["642.1"]
+    couple_liveries: prev
     fields:
       cost: 18384000
       payload: 110
@@ -30,10 +36,10 @@ vehicles:
       weight: 53
       runningcost: 60
       fixed_cost: 614
-      intro_year: 2017
-      intro_month: 1
-      retire_year: 2085
-      retire_month: 1
+      intro_year: 2021
+      intro_month: 7
+      retire_year: 2050
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 13
@@ -44,9 +50,9 @@ vehicles:
       axles: 4
 
   - id: "642.1"
-    role_en: "middle car"
-    role_cs: "vložený vůz"
-    row: 2
+    role_en: "middle motor car"
+    role_cs: "vložený motorový vůz"
+    row: 1
     head: false
     tail: false
     prev: ["640.1"]
@@ -56,44 +62,47 @@ vehicles:
       payload: 136
       speed: 160
       weight: 54
-      runningcost: 22
-      fixed_cost: 225
-      intro_year: 2017
-      intro_month: 1
-      retire_year: 2085
-      retire_month: 1
+      runningcost: 45
+      fixed_cost: 420
+      intro_year: 2021
+      intro_month: 7
+      retire_year: 2050
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 13
       engine_type: Electric
       power: 680
+      gear: 180
     extended:
       axles: 4
 
   - id: "641.1"
-    role_en: "rear cab car"
-    role_cs: "řídicí vůz"
-    row: 1
+    role_en: "rear motor car"
+    role_cs: "zadní motorový vůz"
+    row: 2
     head: false
     tail: true
     prev: ["642.1"]
-    next: []
+    next: ["640.1"]
+    couple_liveries: next
     fields:
       cost: 18384000
       payload: 110
       speed: 160
       weight: 53
-      runningcost: 40
-      fixed_cost: 410
-      intro_year: 2017
-      intro_month: 1
-      retire_year: 2085
-      retire_month: 1
+      runningcost: 50
+      fixed_cost: 520
+      intro_year: 2021
+      intro_month: 7
+      retire_year: 2050
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 13
       engine_type: Electric
       power: 680
+      gear: 180
     extended:
       axles: 4
 
@@ -101,8 +110,6 @@ liveries:
   - color: najbrt1_2
     name_en: "Najbrt 1.2"
     name_cs: "Najbrt 1.2"
-    source: pak128_czr/vehicles-rail-emu/CD/640.png (ČD blue+yellow — close match for Najbrt 1.2)
   - color: najbrt2
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"
-    source: pak128_czr/vehicles-rail-emu/CD/640.png (ČD blue+yellow — direct match for Najbrt 2)

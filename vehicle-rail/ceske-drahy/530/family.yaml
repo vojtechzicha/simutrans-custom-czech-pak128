@@ -1,5 +1,5 @@
 agency: CeskeDrahy
-type: "640"
+type: "530"
 copyright: TommPa9
 
 # Windows light up at night only while passengers are aboard.
@@ -8,37 +8,40 @@ windows_lit_when_loaded: true
 display:
   agency_en: "ČD"
   agency_cs: "ČD"
-  family_en: "RegioPanter"
-  family_cs: "RegioPanter"
+  family_en: "Moravia"
+  family_cs: "Moravia"
 
-# Škoda 7Ev RegioPanter, 3-car 640 + 642 + 641, 3 kV DC + 25 kV AC, 8 units
-# (Olomoucký kraj 2013, Jihomoravský kraj 2014). Najbrt 1.2 on 640.001–003 as
-# delivered, Najbrt 2 on 640.004–008.
+# Škoda 18Ev "Moravia", 4-car 530 + 533 + 532 + 531, 25 kV 50 Hz only, 31 units
+# (2023) owned by Jihomoravský kraj and run by ČD under the IDS JMK contract
+# (Dec 2024 – Dec 2034) on S2, S3, S9 and S51 around Brno. Second-generation
+# RegioPanter body, 2nd class only (333 seats). JMK scheme: magenta roof band,
+# cab corners and doors, white and black body, black blocks over the bogies.
+# Pantographs on the two end cars (531 seen raised, 530 lowered).
 # Every car has one powered bogie (2 x 340 kW); units of any livery couple end
 # to end. Sources: TommPa9's RegioPanter drawing (pak128cs rail-psg
 # mail/440_640_650, the same body as the pak128_czr sheets), repainted per livery.
-# Sprite rows: row 0 = 640, row 1 = 642, row 2 = 641.
+# Sprite rows: row 0 = 530, row 1 = 533, row 2 = 532, row 3 = 531.
 
 vehicles:
-  - id: "640"
+  - id: "530"
     role_en: "front motor car"
     role_cs: "přední motorový vůz"
     row: 0
     head: true
     tail: false
-    prev: ["641"]
-    next: ["642"]
+    prev: ["531"]
+    next: ["533"]
     couple_liveries: prev
     fields:
       cost: 18384000
-      payload: 110
+      payload: 93
       speed: 160
       weight: 53
       runningcost: 60
       fixed_cost: 614
-      intro_year: 2013
-      intro_month: 6
-      retire_year: 2050
+      intro_year: 2023
+      intro_month: 1
+      retire_year: 2060
       retire_month: 12
       waytype: track
       freight: Passagiere
@@ -49,24 +52,24 @@ vehicles:
     extended:
       axles: 4
 
-  - id: "642"
+  - id: "533"
     role_en: "middle motor car"
     role_cs: "vložený motorový vůz"
     row: 1
     head: false
     tail: false
-    prev: ["640"]
-    next: ["641"]
+    prev: ["530"]
+    next: ["532"]
     fields:
       cost: 18384000
-      payload: 136
+      payload: 127
       speed: 160
       weight: 54
       runningcost: 45
       fixed_cost: 420
-      intro_year: 2013
-      intro_month: 6
-      retire_year: 2050
+      intro_year: 2023
+      intro_month: 1
+      retire_year: 2060
       retire_month: 12
       waytype: track
       freight: Passagiere
@@ -77,25 +80,53 @@ vehicles:
     extended:
       axles: 4
 
-  - id: "641"
-    role_en: "rear motor car"
-    role_cs: "zadní motorový vůz"
+  - id: "532"
+    role_en: "middle motor car"
+    role_cs: "vložený motorový vůz"
     row: 2
     head: false
+    tail: false
+    prev: ["533"]
+    next: ["531"]
+    fields:
+      cost: 18384000
+      payload: 118
+      speed: 160
+      weight: 54
+      runningcost: 45
+      fixed_cost: 420
+      intro_year: 2023
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: Electric
+      power: 680
+      gear: 180
+    extended:
+      axles: 4
+
+  - id: "531"
+    role_en: "rear motor car"
+    role_cs: "zadní motorový vůz"
+    row: 3
+    head: false
     tail: true
-    prev: ["642"]
-    next: ["640"]
+    prev: ["532"]
+    next: ["530"]
     couple_liveries: next
     fields:
       cost: 18384000
-      payload: 110
+      payload: 111
       speed: 160
       weight: 53
       runningcost: 50
       fixed_cost: 520
-      intro_year: 2013
-      intro_month: 6
-      retire_year: 2050
+      intro_year: 2023
+      intro_month: 1
+      retire_year: 2060
       retire_month: 12
       waytype: track
       freight: Passagiere
@@ -107,9 +138,6 @@ vehicles:
       axles: 4
 
 liveries:
-  - color: najbrt1_2
-    name_en: "Najbrt 1.2"
-    name_cs: "Najbrt 1.2"
-  - color: najbrt2
-    name_en: "Najbrt 2"
-    name_cs: "Najbrt 2"
+  - color: jihomoravskykraj
+    name_en: "Jihomoravský kraj"
+    name_cs: "Jihomoravský kraj"

@@ -1,5 +1,5 @@
 agency: CeskeDrahy
-type: "640"
+type: "550"
 copyright: TommPa9
 
 # Windows light up at night only while passengers are aboard.
@@ -8,37 +8,38 @@ windows_lit_when_loaded: true
 display:
   agency_en: "ČD"
   agency_cs: "ČD"
-  family_en: "RegioPanter"
-  family_cs: "RegioPanter"
+  family_en: "Moravia"
+  family_cs: "Moravia"
 
-# Škoda 7Ev RegioPanter, 3-car 640 + 642 + 641, 3 kV DC + 25 kV AC, 8 units
-# (Olomoucký kraj 2013, Jihomoravský kraj 2014). Najbrt 1.2 on 640.001–003 as
-# delivered, Najbrt 2 on 640.004–008.
+# Škoda 19Ev "Moravia", 2-car 550 + 551, 25 kV 50 Hz only, 6 units (from Sep
+# 2022) owned by Jihomoravský kraj and run by ČD under the IDS JMK contract
+# (Dec 2024 – Dec 2034). Second-generation RegioPanter body, 2nd class only
+# (146 seats), same JMK scheme as the 530. Pantograph on the 550.
 # Every car has one powered bogie (2 x 340 kW); units of any livery couple end
 # to end. Sources: TommPa9's RegioPanter drawing (pak128cs rail-psg
 # mail/440_640_650, the same body as the pak128_czr sheets), repainted per livery.
-# Sprite rows: row 0 = 640, row 1 = 642, row 2 = 641.
+# Sprite rows: row 0 = 550, row 1 = 551.
 
 vehicles:
-  - id: "640"
+  - id: "550"
     role_en: "front motor car"
     role_cs: "přední motorový vůz"
     row: 0
     head: true
     tail: false
-    prev: ["641"]
-    next: ["642"]
+    prev: ["551"]
+    next: ["551"]
     couple_liveries: prev
     fields:
       cost: 18384000
-      payload: 110
+      payload: 92
       speed: 160
       weight: 53
       runningcost: 60
       fixed_cost: 614
-      intro_year: 2013
-      intro_month: 6
-      retire_year: 2050
+      intro_year: 2022
+      intro_month: 9
+      retire_year: 2060
       retire_month: 12
       waytype: track
       freight: Passagiere
@@ -49,42 +50,14 @@ vehicles:
     extended:
       axles: 4
 
-  - id: "642"
-    role_en: "middle motor car"
-    role_cs: "vložený motorový vůz"
-    row: 1
-    head: false
-    tail: false
-    prev: ["640"]
-    next: ["641"]
-    fields:
-      cost: 18384000
-      payload: 136
-      speed: 160
-      weight: 54
-      runningcost: 45
-      fixed_cost: 420
-      intro_year: 2013
-      intro_month: 6
-      retire_year: 2050
-      retire_month: 12
-      waytype: track
-      freight: Passagiere
-      length: 13
-      engine_type: Electric
-      power: 680
-      gear: 180
-    extended:
-      axles: 4
-
-  - id: "641"
+  - id: "551"
     role_en: "rear motor car"
     role_cs: "zadní motorový vůz"
-    row: 2
+    row: 1
     head: false
     tail: true
-    prev: ["642"]
-    next: ["640"]
+    prev: ["550"]
+    next: ["550"]
     couple_liveries: next
     fields:
       cost: 18384000
@@ -93,9 +66,9 @@ vehicles:
       weight: 53
       runningcost: 50
       fixed_cost: 520
-      intro_year: 2013
-      intro_month: 6
-      retire_year: 2050
+      intro_year: 2022
+      intro_month: 9
+      retire_year: 2060
       retire_month: 12
       waytype: track
       freight: Passagiere
@@ -107,9 +80,6 @@ vehicles:
       axles: 4
 
 liveries:
-  - color: najbrt1_2
-    name_en: "Najbrt 1.2"
-    name_cs: "Najbrt 1.2"
-  - color: najbrt2
-    name_en: "Najbrt 2"
-    name_cs: "Najbrt 2"
+  - color: jihomoravskykraj
+    name_en: "Jihomoravský kraj"
+    name_cs: "Jihomoravský kraj"

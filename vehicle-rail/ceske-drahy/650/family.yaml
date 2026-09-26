@@ -11,18 +11,24 @@ display:
   family_en: "RegioPanter"
   family_cs: "RegioPanter"
 
-# 2-car Škoda RegioPanter EMU (650 + 651). Source DAT:
-# pak128_czr vehicles-rail-emu/CD/650_P2.dat (CZR-CD-650_P2 + 651_P2).
+# Škoda 7Ev RegioPanter, 2-car 650 + 651, dual-system. 17 built; the 9 Plzeň
+# units went to Arriva in Dec 2023 (vehicle-rail/arriva/650), ČD keeps
+# 650.001–008: Najbrt 1.2 on 001–004, Najbrt 2 on 005–008.
+# Every car has one powered bogie (2 x 340 kW); units of any livery couple end
+# to end. Sources: TommPa9's RegioPanter drawing (pak128cs rail-psg
+# mail/440_640_650, the same body as the pak128_czr sheets), repainted per livery.
+# Sprite rows: row 0 = 650, row 1 = 651.
 
 vehicles:
   - id: "650"
-    role_en: "motor cab car"
-    role_cs: "motorový vůz"
+    role_en: "front motor car"
+    role_cs: "přední motorový vůz"
     row: 0
     head: true
     tail: false
-    prev: []
+    prev: ["651"]
     next: ["651"]
+    couple_liveries: prev
     fields:
       cost: 18384000
       payload: 110
@@ -30,10 +36,10 @@ vehicles:
       weight: 53
       runningcost: 60
       fixed_cost: 614
-      intro_year: 2013
-      intro_month: 1
-      retire_year: 2083
-      retire_month: 1
+      intro_year: 2012
+      intro_month: 12
+      retire_year: 2050
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 13
@@ -44,29 +50,31 @@ vehicles:
       axles: 4
 
   - id: "651"
-    role_en: "cab trailer"
-    role_cs: "řídicí vůz"
+    role_en: "rear motor car"
+    role_cs: "zadní motorový vůz"
     row: 1
     head: false
     tail: true
     prev: ["650"]
-    next: []
+    next: ["650"]
+    couple_liveries: next
     fields:
       cost: 18384000
       payload: 110
       speed: 160
       weight: 53
-      runningcost: 40
-      fixed_cost: 410
-      intro_year: 2013
-      intro_month: 1
-      retire_year: 2083
-      retire_month: 1
+      runningcost: 50
+      fixed_cost: 520
+      intro_year: 2012
+      intro_month: 12
+      retire_year: 2050
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 13
       engine_type: Electric
       power: 680
+      gear: 180
     extended:
       axles: 4
 
@@ -74,8 +82,6 @@ liveries:
   - color: najbrt1_2
     name_en: "Najbrt 1.2"
     name_cs: "Najbrt 1.2"
-    source: pak128_czr/vehicles-rail-emu/CD/650_P2.png (ČD blue+yellow — close match; touch up waistband for Najbrt 1.2)
   - color: najbrt2
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"
-    source: pak128_czr/vehicles-rail-emu/CD/650_P2.png (ČD blue+yellow — recolor doors to bright red for Najbrt 2)

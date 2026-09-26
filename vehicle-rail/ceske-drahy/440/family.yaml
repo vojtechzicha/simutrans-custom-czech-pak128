@@ -11,19 +11,26 @@ display:
   family_en: "RegioPanter"
   family_cs: "RegioPanter"
 
-# 3-car Škoda RegioPanter EMU 25kV AC (440 + 442 + 441). Source DAT:
-# pak128cs rail-psg mail/440_640_650/cd_440_Regiopanther.dat.
-# Sprite layout: row 0 = 440 front cab, row 1 = 441 rear cab, row 2 = 442 middle.
+# Škoda 7Ev RegioPanter, 3-car 440 + 442 + 441, 3 kV DC only, 12 units built
+# 2012–13 for Ústecký, Pardubický and Královéhradecký kraj. Historical: all 12
+# were converted to dual-system class 640.1 in 2021–22 (see 640_1), so the class
+# ends in 2022. Najbrt 1.2 on 440.001–009 / 011, Najbrt 2 on 440.010 / 012.
+# Same drawing and sheets as 640.1.
+# Every car has one powered bogie (2 x 340 kW); units of any livery couple end
+# to end. Sources: TommPa9's RegioPanter drawing (pak128cs rail-psg
+# mail/440_640_650, the same body as the pak128_czr sheets), repainted per livery.
+# Sprite rows: row 0 = 440, row 1 = 442, row 2 = 441.
 
 vehicles:
   - id: "440"
-    role_en: "front motor"
+    role_en: "front motor car"
     role_cs: "přední motorový vůz"
     row: 0
     head: true
     tail: false
-    prev: []
+    prev: ["441"]
     next: ["442"]
+    couple_liveries: prev
     fields:
       cost: 18384000
       payload: 110
@@ -31,10 +38,10 @@ vehicles:
       weight: 53
       runningcost: 60
       fixed_cost: 614
-      intro_year: 2013
-      intro_month: 1
-      retire_year: 2083
-      retire_month: 1
+      intro_year: 2012
+      intro_month: 12
+      retire_year: 2022
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 13
@@ -45,9 +52,9 @@ vehicles:
       axles: 4
 
   - id: "442"
-    role_en: "middle car"
-    role_cs: "vložený vůz"
-    row: 2
+    role_en: "middle motor car"
+    role_cs: "vložený motorový vůz"
+    row: 1
     head: false
     tail: false
     prev: ["440"]
@@ -57,44 +64,47 @@ vehicles:
       payload: 136
       speed: 160
       weight: 54
-      runningcost: 22
-      fixed_cost: 225
-      intro_year: 2013
-      intro_month: 1
-      retire_year: 2083
-      retire_month: 1
+      runningcost: 45
+      fixed_cost: 420
+      intro_year: 2012
+      intro_month: 12
+      retire_year: 2022
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 13
       engine_type: Electric
       power: 680
+      gear: 180
     extended:
       axles: 4
 
   - id: "441"
-    role_en: "rear cab car"
-    role_cs: "řídicí vůz"
-    row: 1
+    role_en: "rear motor car"
+    role_cs: "zadní motorový vůz"
+    row: 2
     head: false
     tail: true
     prev: ["442"]
-    next: []
+    next: ["440"]
+    couple_liveries: next
     fields:
       cost: 18384000
       payload: 110
       speed: 160
       weight: 53
-      runningcost: 40
-      fixed_cost: 410
-      intro_year: 2013
-      intro_month: 1
-      retire_year: 2083
-      retire_month: 1
+      runningcost: 50
+      fixed_cost: 520
+      intro_year: 2012
+      intro_month: 12
+      retire_year: 2022
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 13
       engine_type: Electric
       power: 680
+      gear: 180
     extended:
       axles: 4
 
@@ -102,8 +112,6 @@ liveries:
   - color: najbrt1_2
     name_en: "Najbrt 1.2"
     name_cs: "Najbrt 1.2"
-    source: pak128cs/rail-psg mail/440_640_650/cd_440_panther.png (ČD blue+yellow — close match for Najbrt 1.2)
   - color: najbrt2
     name_en: "Najbrt 2"
     name_cs: "Najbrt 2"
-    source: pak128cs/rail-psg mail/440_640_650/cd_440_panther.png (ČD blue+yellow — touch up doors for Najbrt 2)

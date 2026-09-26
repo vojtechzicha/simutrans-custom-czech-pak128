@@ -1,6 +1,6 @@
 agency: CeskeDrahy
 type: "690.2"
-copyright: TommPa9, VojtechZicha
+copyright: TommPa9
 
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -11,18 +11,29 @@ display:
   family_en: "RegioPanter"
   family_cs: "RegioPanter"
 
-# 2-car battery-electric Škoda RegioPanter EMU (690.2 + 691.2). Source DAT:
-# pak128_czr vehicles-rail-emu/CD/690.dat. Note engine_type=Battery for battery operation.
+# Škoda 15Ev3 battery RegioPanter, 2-car 690.2 + 691.2: the last 4 units of the
+# 650.2 framework (690.247–250), fitted with traction batteries (>= 80 km off the
+# wire at up to 120 km/h, 160 km/h under 3 kV / 25 kV). In service since
+# 15 Dec 2024 on S8 Ostrava – Studénka – Veřovice (Moravskoslezský kraj). Their
+# own ČD green-blue-white scheme: green cab halves, a loop-chain band, navy
+# inner halves, Najbrt 2 lower body. The 15 new-generation 690.0 (3 doors per
+# side) are not in passenger service yet (due by March 2027) and are not
+# modelled. engine_type Battery: runs with or without catenary.
+# Every car has one powered bogie (2 x 340 kW); units of any livery couple end
+# to end. Sources: TommPa9's RegioPanter drawing (pak128cs rail-psg
+# mail/440_640_650, the same body as the pak128_czr sheets), repainted per livery.
+# Sprite rows: row 0 = 690.2, row 1 = 691.2.
 
 vehicles:
   - id: "690.2"
-    role_en: "motor cab car"
-    role_cs: "motorový vůz"
+    role_en: "front motor car"
+    role_cs: "přední motorový vůz"
     row: 0
     head: true
     tail: false
-    prev: []
+    prev: ["691.2"]
     next: ["691.2"]
+    couple_liveries: prev
     fields:
       cost: 18384000
       payload: 110
@@ -31,9 +42,9 @@ vehicles:
       runningcost: 60
       fixed_cost: 614
       intro_year: 2024
-      intro_month: 1
-      retire_year: 2085
-      retire_month: 1
+      intro_month: 12
+      retire_year: 2060
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 13
@@ -44,29 +55,31 @@ vehicles:
       axles: 4
 
   - id: "691.2"
-    role_en: "cab trailer"
-    role_cs: "řídicí vůz"
+    role_en: "rear motor car"
+    role_cs: "zadní motorový vůz"
     row: 1
     head: false
     tail: true
     prev: ["690.2"]
-    next: []
+    next: ["690.2"]
+    couple_liveries: next
     fields:
       cost: 18384000
       payload: 110
       speed: 160
       weight: 53
-      runningcost: 40
-      fixed_cost: 410
+      runningcost: 50
+      fixed_cost: 520
       intro_year: 2024
-      intro_month: 1
-      retire_year: 2085
-      retire_month: 1
+      intro_month: 12
+      retire_year: 2060
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 13
       engine_type: Battery
       power: 680
+      gear: 180
     extended:
       axles: 4
 
@@ -74,4 +87,3 @@ liveries:
   - color: cdzelenomodrobila
     name_en: "ČD green-blue-white"
     name_cs: "ČD zeleno-modro-bílá"
-    source: pak128_czr/vehicles-rail-emu/CD/690.png (ČD green+blue battery livery — direct match)
