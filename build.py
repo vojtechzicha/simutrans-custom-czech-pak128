@@ -387,6 +387,15 @@ def stage_station_set(station_yaml: Path, mode: str, out_dir: Path,
 # layout of tools/sign_extract.py / gen_signals.py: 4 columns (images N, S, W,
 # E) by one row per state, Image[4 * row + col], plus a last row with the
 # cursor (col 0) and the 32x32 toolbar icon (col 1).
+#
+# The sheets are drawn like signals: column = the travel direction the object
+# applies to. The engine picks a signal's image by that direction, but a plain
+# roadsign's image by its stored ribi, which is the opposite one. So a station
+# boundary (LT, a roadsign) swaps N/S and W/E, or it would apply to the trains
+# leaving the station while it looks as if it faces the entering ones.
+ROADSIGN_COLS = [1, 0, 3, 2]
+
+
 def emit_signal_dat(spec: dict, obj: dict, mode: str, state_rows: int) -> str:
     bn = station_basename(spec, obj)
     credit = obj.get("copyright", spec.get("copyright"))
@@ -397,8 +406,10 @@ def emit_signal_dat(spec: dict, obj: dict, mode: str, state_rows: int) -> str:
         f"waytype={MODE_WAYTYPES[mode]}",
     ]
     lines += [f"{k}={v}" for k, v in obj.get("fields", {}).items()]
+    roadsign = "station_boundary" in obj.get("fields", {})
     for i in range(4 * state_rows):
-        lines.append(f"Image[{i}]={bn}.{i // 4}.{i % 4}")
+        col = ROADSIGN_COLS[i % 4] if roadsign else i % 4
+        lines.append(f"Image[{i}]={bn}.{i // 4}.{col}")
     lines.append(f"cursor={bn}.{state_rows}.0")
     lines.append(f"icon=> {bn}.{state_rows}.1")
     return "\n".join(lines) + "\n"
