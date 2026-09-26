@@ -1,13 +1,13 @@
 # ČD class 242 (Škoda 73E, ex ČSD S 499.02), "Plecháč". Practically withdrawn in
 # 2025-26; kept because savegames still run it.
 #
-# Sprites: original art, rendered from a box model in the 2026-09-26 render style
-# (tools/railrender/style.py); regenerate with
-# `python tools/railrender/cd_loco_classic.py 242`. Figures as in the upstream pak.
+# Sprites: TommPa9's pak128.cs drawing (CD_242_Plechac),
+# extracted from the compiled pak and shifted to source coordinates; static sheets.
+# Figures as in the upstream pak.
 
 agency: CeskeDrahy
 type: "242"
-copyright: vojtechzicha      # original art, drawn from scratch
+copyright: TommPa9      # upstream art (pak128.cs / CZR)
 windows_lit_when_loaded: false
 
 display:

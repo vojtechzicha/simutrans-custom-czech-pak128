@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""ČD 151, 242 and 1216: box models in the 2026-09-26 render style (style.py).
+"""ČD 1216 Taurus (and the Taurus body the ÖBB / PKP generator taurus.py paints),
+box model in the 2026-09-26 render style (style.py).
 
-    python tools/railrender/cd_loco_classic.py [151|242|1216 ...] [--preview DIR]
+    python tools/railrender/cd_loco_classic.py [1216] [--preview DIR]
 
-These three families shipped TommPa9 / Lubak91 pak128.cs art only; the models
-here replace it. One parametric body with rounded ends (all three classes have
-them: the Škoda 65E "Banán" fibreglass-look cabs, the pressed-steel "Plecháč"
-cabs and the Taurus nose):
+The 151 and 242 keep TommPa9's hand-drawn pak128.cs sheets (the user preferred
+them to a render). One parametric body with rounded ends (the Taurus nose):
 
   - lower nose vertical, windscreen raked back from the headlights up, nose
     slabs chamfered at the corners so the cab reads round, not boxy;
@@ -191,61 +190,6 @@ class Classic:
         return parts, lines
 
 
-# ------------------------------------------------------------------ 151
-class C151(Classic):
-    """Škoda 65E (ČD 151, 16.74 m): long raked fibreglass-look cab, two big
-    louvre panels high in mid-body, grey N1.2 cab ends with the sapphire and
-    sky trapezoids (as on the 362 N1.2, 151 006 / 015 photos)."""
-    UWT = 0.80
-    ZW = 6.4
-
-    def side_detail(self, f, u, v, z, d, r, top, cu):
-        s = self.L - u if f == "+v" else u
-        if r in (top - 1, top) and (2.2 <= s <= 3.6 or 4.4 <= s <= 5.8):
-            return self.louvre(d, u, v, z)
-        return None
-
-    def sill(self):
-        return SILL_GREY
-
-    def beam(self):
-        return SILL_GREY
-
-    def zone(self, f, u, v, z, d, r, cu, front):
-        if front:
-            return pc(CL.LOCO_SKY) if r >= 3 else pc(CL.LGREY)
-        t = max(0.0, min(1.0, (z - self.ZY) / (self.ZS - self.ZY)))
-        if cu < 0.95 + 0.20 * t:
-            return pc(CL.LGREY)
-        if cu < 1.50 + 0.20 * t:
-            return pc(CL.SAPPHIRE)
-        return pc(CL.LOCO_SKY)
-
-
-# ------------------------------------------------------------------ 242
-class C242(Classic):
-    """Škoda 73E (ČD 242, 16.44 m): pressed-steel rounded cabs; along the upper
-    side a row of small windows over the long dark louvre band. ČSD red-cream
-    ("polomáčený"): red up to just above the headlights, cream above, grey roof."""
-    UWT = 0.70
-    ZW = 6.8
-    RC = 0.20
-    ROOFBOX = ((2.6, 5.4, 0.55, 0.7),)
-
-    def side_detail(self, f, u, v, z, d, r, top, cu):
-        s = self.L - u if f == "+v" else u
-        if r == top and 1.7 <= s <= 6.3:
-            k = (s - 1.7) / 0.46
-            if (k % 1.0) < 0.55:
-                return WS
-        if r == top - 1 and 1.7 <= s <= 6.3:
-            return self.louvre(d, u, v, z)
-        return None
-
-    def zone(self, f, u, v, z, d, r, cu, front):
-        return pc(CL.RC_RED) if r <= 1 else pc(CL.RC_CREAM)
-
-
 # ------------------------------------------------------------------ Taurus
 class Taurus(Classic):
     """Siemens Taurus ES64U2/U4 (19.28 m), drawn at length 10 like the native
@@ -324,11 +268,8 @@ def taurus_row(table, reverse=False):
     return [R.vehicle_tile(parts, lines, d, 0.0, {"V"}) for d in DIRS]
 
 
-MODELS = {"151": C151, "242": C242}
 TAURUS_LIV = {"najbrt2": TAURUS_CD, "railjet": TAURUS_CD_RJ}
 JOBS = {
-    "151": [("najbrt1_2", [False])],
-    "242": [("cervenokremova", [False])],
     "1216": [("najbrt2", [False]), ("railjet", [False, True])],
 }
 
@@ -336,11 +277,7 @@ JOBS = {
 def rows_for(fam, liv, revs):
     rows = []
     for rev in revs:
-        if fam == "1216":
-            rows.append(taurus_row(TAURUS_LIV[liv], rev))
-            continue
-        parts, lines = MODELS[fam](liv, reverse=rev).build()
-        rows.append([R.vehicle_tile(parts, lines, d, 0.0, {"V"}) for d in DIRS])
+        rows.append(taurus_row(TAURUS_LIV[liv], rev))
     return rows
 
 

@@ -1,13 +1,13 @@
 # ČD class 151 (Škoda 65E, ex ČSD E 499.2 rebuilt for 160 km/h), "Krysa". Withdrawn
 # from regular service 7 Mar 2025; kept because savegames still run it.
 #
-# Sprites: original art, rendered from a box model in the 2026-09-26 render style
-# (tools/railrender/style.py); regenerate with
-# `python tools/railrender/cd_loco_classic.py 151`. Figures as in the upstream pak.
+# Sprites: TommPa9's pak128.cs drawing (CD_151_Krysa_(balkan)),
+# extracted from the compiled pak and shifted to source coordinates; static sheets.
+# Figures as in the upstream pak.
 
 agency: CeskeDrahy
 type: "151"
-copyright: vojtechzicha      # original art, drawn from scratch
+copyright: TommPa9      # upstream art (pak128.cs / CZR)
 windows_lit_when_loaded: false
 
 display:
