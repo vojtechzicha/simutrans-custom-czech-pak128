@@ -53,8 +53,8 @@ vehicles:
   # the same Najbrt 2 + MSK scheme and run coupled to them (e.g. 29 064, 2025).
   # 13.97 m, 52 seats, 15 t, 80 km/h.
   - id: "012"
-    role_en: "trailer"
-    role_cs: "přípojný vůz"
+    role_en: "trailer BDtax 782"
+    role_cs: "přípojný vůz BDtax 782"
     row: 1
     head: false
     tail: true
