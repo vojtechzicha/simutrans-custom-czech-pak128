@@ -1,0 +1,66 @@
+agency: DPPraha
+type: "Petrin1985"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "funicular"
+  family_cs: "lanová dráha"
+
+# Petřín funicular, 3rd-generation cars 1 and 2: Vagónka Studénka, frames by
+# Vagónka Česká Lípa reusing parts of the 1932 cars; delivered Feb 1985, in
+# service 15 Jun 1985, new control system 2018. Last ran 13 Sep 2024 (service
+# stopped before heavy rain damaged the line); removed March 2025, one car to
+# the DPP public transport museum, the other to the National Technical Museum.
+# 12,100 x 2,400 mm, 100 places (25 seated). Line: 1,435 mm gauge, 510 m, up to
+# 296 per mille, 4 m/s. Height and mass unpublished: weight is an estimate.
+#
+# Livery "krémovo-zelená": cream body and roof, teal-green window and door frames,
+# skirt and front apron, three-pane windscreen, DPP logo on the apron (photos:
+# Commons "Prague 07-2016 Petrin Funicular", "J21 958 Laurenziberg-Standseilbahn").
+#
+# Sprite: drawn from scratch, tools/railrender/dpp_metro.py (regenerate with
+# `python tools/railrender/dpp_metro.py lanovka_1985`), length 6. The body is
+# drawn level: the engine draws every vehicle level on slopes as well.
+# Power: the cars are hauled by the winch rope; in game the car is a battery
+# vehicle (user's choice 2026-09-26) so the funicular track needs no catenary.
+# Real service dates (user's choice): buyable 1985 to 2024 only.
+
+vehicles:
+  - id: "1985"
+    display_id: "Petřín"
+    role_en: "car (1985)"
+    role_cs: "vůz (1985)"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 700000
+      payload: 100
+      speed: 15
+      weight: 15
+      power: 150
+      runningcost: 20
+      fixed_cost: 80
+      intro_year: 1985
+      intro_month: 6
+      retire_year: 2024
+      retire_month: 9
+      waytype: track
+      freight: Passagiere
+      length: 6
+      engine_type: battery
+    extended:
+      axles: 4
+
+liveries:
+  - color: kremovozelena
+    name_en: "cream-green"
+    name_cs: "krémovo-zelená"

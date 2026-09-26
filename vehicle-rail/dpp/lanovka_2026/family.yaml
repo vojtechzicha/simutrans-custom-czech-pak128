@@ -1,0 +1,63 @@
+agency: DPPraha
+type: "Petrin2026"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "funicular"
+  family_cs: "lanová dráha"
+
+# Petřín funicular, 4th-generation cars 1 and 2: Doppelmayr/Garaventa, designed by
+# Anna Marešová designers (German Design Award 2025), 137.7 m CZK for both. On the
+# track from April 2026, tests from May, trial passenger service from
+# 22 Sep 2026 after the 2025-26 reconstruction of the line (Metrostav DIZ).
+# 12.3 m x 2.45 m, 4 compartments, tip-up seats, pram and wheelchair spaces;
+# 100 places per the DPP release (other sources say 120). Built for future
+# unattended operation. Height and mass unpublished: weight is an estimate.
+#
+# Livery "bílo-černá": white body shell framing gloss-black ends (windscreen and
+# lower panel with the white DPP logo), almost fully glazed sides with slim black
+# mullions, white skirt and sills, dark grey roof with a black equipment box at
+# each end (photos: Commons "Petrin Funicular 2026", "Lanová dráha na Petřín
+# (2026-09-22)").
+#
+# Sprite: drawn from scratch, tools/railrender/dpp_metro.py (regenerate with
+# `python tools/railrender/dpp_metro.py lanovka_2026`), length 6, body drawn
+# level. Battery vehicle in game (user's choice 2026-09-26): no catenary needed.
+
+vehicles:
+  - id: "2026"
+    display_id: "Petřín"
+    role_en: "car (2026)"
+    role_cs: "vůz (2026)"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 900000
+      payload: 100
+      speed: 15
+      weight: 16
+      power: 150
+      runningcost: 20
+      fixed_cost: 100
+      intro_year: 2026
+      intro_month: 9
+      waytype: track
+      freight: Passagiere
+      length: 6
+      engine_type: battery
+    extended:
+      axles: 4
+
+liveries:
+  - color: bilocerna
+    name_en: "white-black"
+    name_cs: "bílo-černá"

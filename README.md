@@ -123,6 +123,9 @@ Also on `main`, still being refined (see [`TODO.md`](TODO.md)):
     LE CITY 14,5M (3 axles).
   - DPP trolleybuses: SOR TNS 12 and TNS 18, Škoda-Solaris 24m, Bozankaya SNG
     12T, Škoda 36Tr.
+  - DPP metro and funicular (`VZ-DPPraha-rail.pak`, drawn from scratch): the
+    five-car 81-71M (lines A, B) and M1 (line C), and the Petřín funicular
+    cars of 1985 (Vagónka Studénka) and 2026 (Doppelmayr/Garaventa).
   - DPMB trams: Škoda 45T and Pragoimex EVO2 (drawn from scratch), 13T, 03T6
     Anitra, Pars nova K3R-N, KT8D5R.N2 and KT8D5N, VarioLFR.E and VarioLF2R.E,
     T6A5, T3G, T3R, T3R.PV and T3R.EV.
