@@ -1,0 +1,64 @@
+# RegioJet class 162: Skoda 99E (FNM variant 99E2), built 1991 as 163.112-120, sold
+# 1995 to Ferrovie Nord Milano as E.630.01-09 (half-pantographs, one air-conditioned
+# cab, roof resistor box lowered by 340 mm), bought by RegioJet 5/2010 and converted
+# by CMZO Prerov to 162.112-120 (140 km/h gearing, right-hand drive). Revenue
+# service from 26 Sep 2011; converted one by one to 362.2 in 2025-26, 162.117 still
+# runs as a 162 (Kosice - Cop). 16.8 m over buffers, 2.94 m wide, Bo'Bo', 3 480 kW,
+# 140 km/h, 85 t, 3 kV DC.
+# Sources: research dossier traction.md 1a / 2.1 (seznam-autobusu.cz,
+# cs.wikipedia), photos 162.114 (2011), 162.118, 162.120 roof, 162.114 front
+# (Commons), vagonWEB side drawings 162-a / 162-b.
+#
+# Livery zluta (RJ yellow from 2011): yellow body and cab fronts, grey roof with the
+# lowered dark louvred resistor box mid-roof and red-brown single-arm pantographs,
+# anthracite sill and bogies, black buffer beam, yellow lower plough. The two long
+# sides differ: side A (+v, cab 1 on the right as seen) has four round portholes in
+# the upper body and the huge "|| REGIOJET" between the doors; side B (-v) has the
+# full-length dark louvre band and a small logo low in the middle. Fronts: two
+# windscreens, twin headlights in a box under them, lamp pairs at the lower corners,
+# small logo on the right. The FNM green/grey that only 162.112 wore until 2012 is
+# not shipped (outside the 2026 scope; it returns on 362.220).
+#
+# Sprites: original art rendered from a box model, tools/railrender/rj_locos.py
+# (class E99); regenerate with `python tools/railrender/regiojet.py 162`. Length 8
+# like the native CD 363 (same body family).
+
+agency: RegioJet
+type: "162"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "Škoda 99E"
+  family_cs: "Škoda 99E"
+
+vehicles:
+  - id: "162"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 3600000
+      payload: 0
+      speed: 140
+      weight: 85
+      runningcost: 150
+      fixed_cost: 1900
+      intro_year: 2011
+      intro_month: 9
+      waytype: track
+      engine_type: electric
+      power: 3480
+      gear: 150
+      length: 8
+    extended:
+      axles: 4
+
+liveries:
+  - color: zluta
+    name_en: "RegioJet yellow"
+    name_cs: "RegioJet žlutá"

@@ -1,0 +1,150 @@
+# RegioJet ex-ÖBB coaches. Original art drawn from scratch: box models from the
+# vagonWEB scale side drawings (10 px = 1 m), rendered by tools/railrender/rjcoach.py
+# (regenerate with `python tools/railrender/regiojet.py obb`), 26.4 m = length 13.
+# Livery: Patrik Kotas 2011, RAL 1028 melon yellow + anthracite window band + silver
+# doors, red/navy "|| REGIOJET" logo. Sources: vagonWEB RJ fleet description (Sep 2026),
+# cs.wikipedia (Vůz Ampz/ABmz/Amz/Bmz RJ), rj.macoslav.cz.
+# Ex-ÖBB Eurofima / Z1 day coaches (SGP / Jenbacher / Fiat 1976-79), bought 2011-2014,
+# upgraded by ÖBB 2001-10. RJ codes: A000 = Ampz 61 81 18-91 (9 compartments, Business
+# + Relax), A100 = Ampz 18-95 (ex-ABmoz body: 6 narrow + 4 wide windows), AB000 = ABmz
+# 30-90 (Standard, same body as A100), Bk000 = Bmz 21-91 / 28-91 (11 compartments,
+# Standard + kids' compartment), Bk100 = Bmz 21-90.0 (ÖBB's own Z1, folding doors,
+# LED display). Several Ampz 18-91 and most Bmz 28-91 are only foil-wrapped and still
+# show the red ÖBB roof (livery zlutacervenastrecha, vagonWEB "-cs-" drawings).
+# RJ car codes are used as vehicle ids (they are painted on every car and used in RJ
+# consist lists); display_id is the UIC type.
+
+agency: RegioJet
+type: "OBB"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "ex-ÖBB"
+  family_cs: "ex-ÖBB"
+
+vehicles:
+  - id: "A000"
+    display_id: "Ampz 18-91"
+    role_en: "Business + Relax coach"
+    role_cs: "vůz Business + Relax"
+    row: 0
+    prev: any
+    next: any
+    liveries: [zluta, zlutacervenastrecha]
+    fields:
+      cost: 2450000
+      payload: 48
+      speed: 200
+      weight: 45
+      runningcost: 20
+      fixed_cost: 280
+      intro_year: 2011
+      intro_month: 9
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "A100"
+    display_id: "Ampz 18-95"
+    role_en: "Business + Relax coach"
+    role_cs: "vůz Business + Relax"
+    row: 1
+    prev: any
+    next: any
+    liveries: [zluta]
+    fields:
+      cost: 2450000
+      payload: 48
+      speed: 200
+      weight: 45
+      runningcost: 20
+      fixed_cost: 280
+      intro_year: 2014
+      intro_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "AB000"
+    display_id: "ABmz 30-90"
+    role_en: "Standard coach"
+    role_cs: "vůz Standard"
+    row: 2
+    prev: any
+    next: any
+    liveries: [zluta]
+    fields:
+      cost: 2300000
+      payload: 42
+      speed: 200
+      weight: 44
+      runningcost: 24
+      fixed_cost: 270
+      intro_year: 2011
+      intro_month: 9
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bk000"
+    display_id: "Bmz 28-91"
+    role_en: "Standard coach with kids' compartment"
+    role_cs: "vůz Standard s dětským oddílem"
+    row: 3
+    prev: any
+    next: any
+    liveries: [zluta, zlutacervenastrecha]
+    fields:
+      cost: 2300000
+      payload: 42
+      speed: 200
+      weight: 42
+      runningcost: 24
+      fixed_cost: 270
+      intro_year: 2012
+      intro_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bk100"
+    display_id: "Bmz 21-90"
+    role_en: "Standard coach with kids' compartment"
+    role_cs: "vůz Standard s dětským oddílem"
+    row: 4
+    prev: any
+    next: any
+    liveries: [zluta]
+    fields:
+      cost: 2300000
+      payload: 42
+      speed: 200
+      weight: 42
+      runningcost: 24
+      fixed_cost: 270
+      intro_year: 2012
+      intro_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: zluta
+    name_en: "RegioJet yellow"
+    name_cs: "RegioJet žlutá"
+  - color: zlutacervenastrecha
+    name_en: "RegioJet yellow, red roof"
+    name_cs: "RegioJet žlutá, červená střecha"

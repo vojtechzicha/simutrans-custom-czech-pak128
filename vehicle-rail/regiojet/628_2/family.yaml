@@ -1,0 +1,108 @@
+agency: RegioJet
+type: "628.2"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "ex-DB"
+  family_cs: "ex-DB"
+
+# RegioJet class 628.2 + 928.2: ex-DB 628.2 / 928.2 two-car DMU (Düwag / LHB,
+# built 1987-88), RegioJet-owned. 9 sets: 628.220, 264, 267, 270, 302, 304, 307,
+# 310, 315. 302/304/307/315 first ran for RegioJet SK (Bratislava - Komárno,
+# 2016/17 - 12/2019, RJ yellow + grey); from 15 Dec 2019 all nine ran for
+# RegioJet ÚK on the Ústecký kraj RegioTakt lines (DÚK U5 / U7 / U13 / U16,
+# occasionally R23). 270 sold 8/2022, 264 + 310 sold 2/2023, 267 + 315
+# withdrawn 12/2023; 220 / 302 / 307 are reserve in Praha from 2025, 304 is
+# operational at Praha-Malešice (3/2025). Still in the fleet in September 2026,
+# so no retirement date (source: seznam-autobusu.cz RegioJet ÚK register,
+# research/traction.md §1b / §2.11).
+#
+# Real car: 22,700 mm over buffers each (45.4 m per unit), 2,850 mm wide,
+# roof ~4.05 m. 628 = motor car (410 kW diesel, hydraulic, 2'B'), 40 t;
+# 928 = unpowered driving trailer, 28 t; 120 km/h. ~122 seats + ~20 tip-up per
+# unit (628: 64 + 8, 928: 58 + 12). Cab at each outer end, single-leaf door
+# behind each cab plus one inner-end door per car on the car's own left side.
+#
+# Livery (the only one these units wear with RegioJet ÚK; the SK yellow ended
+# 12/2019): dukzelenozluta, DÚK green-yellow wrap, from 15 Dec 2019. Yellow-green
+# body (vagonWEB 628-duk-a #69A826, photos #729B50..#8FBD50), continuous
+# black-grey window band, lighter green strip under the light-grey roof, thin
+# anthracite line at the bottom of the side wall, yellow doors; front: dark
+# anthracite mask with a white outline round it, black windscreen, yellow lower
+# band with the red "|| REGIO" + blue "JET" logo between the lamps, the yellow
+# sweeping round the cab corner onto the cab side; white "Doprava Ústeckého
+# kraje" logo on the window band behind the first door, red/blue RegioJet logo
+# mid-car below the windows. Sources: Commons "628 302 Usti" (27 Sep 2021),
+# "REGIOJET 628 307 Uporiny" (12 Sep 2020), vagonWEB drawing 628-duk-a.
+#
+# Sprites: drawn from scratch with the pak128.cs-calibrated box renderer, the
+# geometry of the Arriva 845 (tools/railrender/db628.py, the same ex-DB 628.2)
+# with the RegioJet livery added by tools/railrender/rj_628.py (regenerate:
+# python tools/railrender/rj_628.py). Row 0 = 628 motor car (cab at its front,
+# headlights), row 1 = 928 driving trailer (cab at its rear, tail lights). Each
+# car is 11 carunits long (22.7 m / 11 = 2.06 m per carunit) on one unit axis,
+# so the joint closes at length 11 + 11. Only the complete unit is buildable.
+
+vehicles:
+  - id: "628"
+    display_id: "628.2"
+    role_en: "motor car"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["928"]
+    fields:
+      cost: 2450000
+      payload: 72
+      speed: 120
+      weight: 40
+      runningcost: 88
+      fixed_cost: 560
+      intro_year: 2019
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 11
+      engine_type: diesel
+      power: 410
+      smoke: Diesel
+      gear: 120
+    extended:
+      axles: 4
+
+  - id: "928"
+    display_id: "928.2"
+    role_en: "driving trailer"
+    role_cs: "řídicí vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["628"]
+    next: []
+    fields:
+      cost: 1150000
+      payload: 70
+      speed: 120
+      weight: 28
+      runningcost: 12
+      fixed_cost: 130
+      intro_year: 2019
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 11
+    extended:
+      axles: 4
+
+liveries:
+  - color: dukzelenozluta
+    name_en: "DÚK green-yellow"
+    name_cs: "DÚK zeleno-žlutá"

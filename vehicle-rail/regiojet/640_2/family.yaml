@@ -1,0 +1,134 @@
+agency: RegioJet
+type: "640.2"
+copyright: TommPa9           # repaint of the CD RegioPanter art (pak128_czr 650 / 640)
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "Škoda RegioPanter"
+  family_cs: "Škoda RegioPanter"
+
+# RegioJet class 640.2: Škoda 20Ev RegioPanter, 3-car dual-system EMU (3 kV DC +
+# 25 kV AC), 8 units 640.261-268 ordered 5/2024 for the Ústecký kraj
+# "Elektrická páteř" (U1 Děčín - Ústí - Most - Kadaň, U3 Ústí - Litvínov etc.,
+# contract 12/2026 - 12/2041), owned by RegioJet and run by RegioJet ÚK. The
+# first RegioJet RegioPanters: 640.264 and 265 in service 13 Jun 2026, 263 from
+# 18 Jul 2026, 266 from 8 Sep 2026 (research/traction.md §1b / §2.10).
+# Bo'2' + Bo'2' + 2'Bo' (one powered bogie per car, 2,040 kW), 160 km/h,
+# 228 seats + 14 bicycles, 79.4 m (26.45 m per car); "structurally identical"
+# to ČD's RegioPanters (zeleznicni-magazin.cz 15 Jun 2026).
+#
+# Livery dukzelenozluta (DÚK green-yellow, the only livery): lime-green body,
+# black window band, light-green band at the top of the side, silver-grey
+# doors; cab: black face with an orange-yellow (#F4A30C) outline, silver sweep
+# on the cab corners, yellow skirt, white DÚK logo on the front and under the
+# first side window; an orange-yellow stripe with the red/blue RegioJet logo
+# under the high-floor windows at both ends of the middle car and the inner
+# ends of the cab cars; grey roof. Sources: zdopravy.cz "Obrazem: RegioJet
+# vyjíždí s novými vlaky v Ústeckém kraji" (12 Jun 2026, 11 photos of a 640.2
+# at Ústí n. L.), zeleznicni-magazin.cz "RegioJet nasadil do provozu nové
+# jednotky pro Ústecký kraj" (641.264 on U3 Os 16904, 15 Jun 2026, photo
+# L. Seidenglanz), Commons "Škoda 15 Ev pro Regiojet" (4 Jun 2026, front),
+# vagonWEB drawing 640-2-duk-a (layout; its #00A508 is too dark, photos show
+# lime #63BB3B..#77BC28).
+#
+# Sprites: zone-map repaint of the ČD RegioPanter art (TommPa9, pak128_czr):
+# the cab cars from vehicle-rail/ceske-drahy/650 najbrt2 (the ČD 640's cab
+# cars are the same drawing in another palette), the middle car from
+# vehicle-rail/ceske-drahy/640 najbrt2 row 1, so RegioJet's, ČD's and Arriva's
+# RegioPanters share one silhouette in game. Script
+# tools/railrender/rj_regiopanter.py (regenerate:
+# python tools/railrender/rj_regiopanter.py). Rows: 0 = 640 (front cab car,
+# pantograph, headlights), 1 = 642 (middle car), 2 = 641 (rear cab car, tail
+# lights); car lengths 13 + 13 + 13 like the ČD family.
+# Only the complete unit is buildable.
+
+vehicles:
+  - id: "640"
+    display_id: "640.2"
+    role_en: "front motor cab car"
+    role_cs: "přední motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["642"]
+    fields:
+      cost: 3400000
+      payload: 72
+      speed: 160
+      weight: 53
+      runningcost: 60
+      fixed_cost: 600
+      intro_year: 2026
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: electric
+      power: 680
+      gear: 130
+    extended:
+      axles: 4
+
+  - id: "642"
+    display_id: "642.2"
+    role_en: "middle motor car"
+    role_cs: "vložený motorový vůz"
+    row: 1
+    head: false
+    tail: false
+    prev: ["640"]
+    next: ["641"]
+    fields:
+      cost: 3100000
+      payload: 84
+      speed: 160
+      weight: 54
+      runningcost: 55
+      fixed_cost: 500
+      intro_year: 2026
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: electric
+      power: 680
+      gear: 130
+    extended:
+      axles: 4
+
+  - id: "641"
+    display_id: "641.2"
+    role_en: "rear motor cab car"
+    role_cs: "zadní motorový vůz"
+    row: 2
+    head: false
+    tail: true
+    prev: ["642"]
+    next: []
+    fields:
+      cost: 3400000
+      payload: 72
+      speed: 160
+      weight: 53
+      runningcost: 60
+      fixed_cost: 600
+      intro_year: 2026
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: electric
+      power: 680
+      gear: 130
+    extended:
+      axles: 4
+
+liveries:
+  - color: dukzelenozluta
+    name_en: "DÚK green-yellow"
+    name_cs: "DÚK zeleno-žlutá"

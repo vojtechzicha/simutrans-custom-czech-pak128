@@ -1,0 +1,119 @@
+# RegioJet ex-DB UIC-X coaches. Original art drawn from scratch: box models from the
+# vagonWEB scale side drawings (10 px = 1 m), rendered by tools/railrender/rjcoach.py
+# (regenerate with `python tools/railrender/regiojet.py uicx`), 26.4 m = length 13.
+# Livery: Patrik Kotas 2011, RAL 1028 melon yellow + anthracite window band + silver
+# doors, red/navy "|| REGIOJET" logo. Sources: vagonWEB RJ fleet description (Sep 2026),
+# cs.wikipedia (Vůz Ampz/ABmz/Amz/Bmz RJ), rj.macoslav.cz.
+# Ex-DB UIC-X couchette bodies (Bcm 243 family, 1960s-70s): round light-grey roof with
+# sloping ends, drop-light windows, folding doors. Bc100 = Bcmz 50-91 (modernised
+# "Lůžko" couchette, 3-4 per compartment), Bc300 = Bcmz 50-71 (unmodernised, 160 km/h),
+# Bc200 = Bcmz 59-90 (ex-Bvcmbz 249 wheelchair couchette, one door inboard), B200 = Bmz
+# 29-90 (the same body with seats and the RJ Bistro counter, R8 car 3). Night trains
+# Praha-Košice(-Čop) and Praha-Kraków-Przemyśl.
+# RJ car codes are used as vehicle ids (they are painted on every car and used in RJ
+# consist lists); display_id is the UIC type.
+
+agency: RegioJet
+type: "UICX"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "ex-DB UIC-X"
+  family_cs: "ex-DB UIC-X"
+
+vehicles:
+  - id: "Bc100"
+    display_id: "Bcmz 50-91"
+    role_en: "couchette coach"
+    role_cs: "lehátkový vůz"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2400000
+      payload: 40
+      speed: 200
+      weight: 42
+      runningcost: 26
+      fixed_cost: 300
+      intro_year: 2019
+      intro_month: 10
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bc300"
+    display_id: "Bcmz 50-71"
+    role_en: "couchette coach"
+    role_cs: "lehátkový vůz"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 2400000
+      payload: 40
+      speed: 160
+      weight: 42
+      runningcost: 26
+      fixed_cost: 300
+      intro_year: 2020
+      intro_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bc200"
+    display_id: "Bcmz 59-90"
+    role_en: "accessible couchette coach"
+    role_cs: "lehátkový vůz pro vozíčkáře"
+    row: 2
+    prev: any
+    next: any
+    fields:
+      cost: 2400000
+      payload: 34
+      speed: 200
+      weight: 42
+      runningcost: 26
+      fixed_cost: 300
+      intro_year: 2021
+      intro_month: 5
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "B200"
+    display_id: "Bmz 29-90"
+    role_en: "Low cost coach with RJ Bistro"
+    role_cs: "vůz Low cost s RJ Bistrem"
+    row: 3
+    prev: any
+    next: any
+    fields:
+      cost: 2200000
+      payload: 51
+      speed: 200
+      weight: 42
+      runningcost: 28
+      fixed_cost: 260
+      intro_year: 2019
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: zluta
+    name_en: "RegioJet yellow"
+    name_cs: "RegioJet žlutá"

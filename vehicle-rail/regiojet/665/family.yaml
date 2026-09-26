@@ -1,0 +1,210 @@
+agency: RegioJet
+type: "665"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "CRRC Sirius"
+  family_cs: "CRRC Sirius"
+
+# CZ class 665 "Sirius" (CRRC Zhuzhou, built for Leo Express 2019-21, never in
+# Leo service): three units 665.001-003 leased by RegioJet for 5 years from
+# 9/2024 for R23 Kolín - Mělník - Ústí nad Labem. 665.002 carried passengers on
+# R23 from 2/2024 (test mileage, plain grey); in RegioJet livery 665.001 from
+# 9 Nov 2024, 665.002 11/2024, 665.003 from 10 Apr 2025. Lease runs to ~2029,
+# no end of service announced, so no retirement date. (seznam-autobusu.cz
+# RegioJet register; cs.wikipedia "Elektrická jednotka 665"; zdopravy.cz,
+# zeleznicni-magazin.cz; research/traction.md §1b / §2.9.)
+#
+# Real unit: 6 sections on Jacobs bogies, Bo'2'2'2'2'2'Bo' (powered bogies under
+# both cab sections), 111.2 m over couplers = head sections 22.0 m + four
+# intermediate sections 16.8 m, 2.86 m wide, 4.3 m high, 195 t, 3 kV DC + 25 kV
+# AC, 2,500 kW (4 x 625 kW), 160 km/h, 314 seats (40 business 1+1, the rest
+# 2+2) + 24 half-seats, five single-leaf 1 m doors per side (sections 1, 2, 3,
+# 5 and 6), pointed aerodynamic nose.
+#
+# Livery antracitovozluta (RegioJet sticker livery over the grey CRRC paint,
+# the only livery worn in RegioJet service apart from the plain-grey test
+# runs): anthracite / blue-grey body (#3D4653, highlights #585F6B), darker
+# window band, RJ-yellow stripe along the bottom of the window band over the
+# whole unit, rising at each cab section into a double vertical bar up to the
+# roof edge, a yellow arc from the front bar over the oval cab side window down
+# to the headlight, yellow door leaves, white "|| REGIOJET" and class words
+# (relax / low cost / standard / business) above the windows, black raked
+# windscreen, oval headlights, white "|| REGIOJET" on the nose bulb, orange-red
+# nose skirt. Sources: Commons "RegioJet CRRC 665 001" (FilFee, 26 Nov 2024),
+# "20250806 Regiojet 665002" (Alex Noble), vagonWEB drawings 665-rj-1..6-a.
+#
+# Sprites: drawn from scratch with the pak128.cs-calibrated box renderer,
+# tools/railrender/rj_665.py (regenerate: python tools/railrender/rj_665.py).
+# All positions come from the vagonWEB composite drawing (10 px = 1 m).
+# Car lengths at 26.4 m = 13 cu: head sections 22.0 m -> 11, intermediate
+# 16.8 m -> 8 (11 + 8 + 8 + 8 + 8 + 11 = 54 cu); the unit is modelled on one
+# axis and every section is rendered with its front on the Simutrans anchor,
+# so the five joints (black bellows over a Jacobs bogie) close in all 8 views
+# (tools/consist_preview.py). One row per section in consist order; section 1
+# (relax end, headlights) leads, section 6 (business end, raised pantograph,
+# tail lights) trails. Passenger + door glass = lit specials; windscreen and
+# cab side windows plain. Only the complete unit is buildable.
+# Stats scaled from the Leo Express FLIRT (vehicle-rail/leo-express/480).
+
+vehicles:
+  - id: "665-1"
+    display_id: "665"
+    role_en: "cab section 1 (relax)"
+    role_cs: "čelní článek 1 (relax)"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["665-2"]
+    fields:
+      cost: 3800000
+      payload: 49
+      speed: 160
+      weight: 38
+      runningcost: 85
+      fixed_cost: 850
+      intro_year: 2024
+      intro_month: 11
+      waytype: track
+      freight: Passagiere
+      length: 11
+      engine_type: electric
+      power: 1250
+      gear: 130
+    extended:
+      axles: 3
+
+  - id: "665-2"
+    display_id: "665"
+    role_en: "intermediate section 2"
+    role_cs: "vložený článek 2"
+    row: 1
+    head: false
+    tail: false
+    prev: ["665-1"]
+    next: ["665-3"]
+    fields:
+      cost: 2300000
+      payload: 54
+      speed: 160
+      weight: 30
+      runningcost: 35
+      fixed_cost: 260
+      intro_year: 2024
+      intro_month: 11
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "665-3"
+    display_id: "665"
+    role_en: "intermediate section 3"
+    role_cs: "vložený článek 3"
+    row: 2
+    head: false
+    tail: false
+    prev: ["665-2"]
+    next: ["665-4"]
+    fields:
+      cost: 2300000
+      payload: 54
+      speed: 160
+      weight: 30
+      runningcost: 35
+      fixed_cost: 260
+      intro_year: 2024
+      intro_month: 11
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "665-4"
+    display_id: "665"
+    role_en: "intermediate section 4"
+    role_cs: "vložený článek 4"
+    row: 3
+    head: false
+    tail: false
+    prev: ["665-3"]
+    next: ["665-5"]
+    fields:
+      cost: 2300000
+      payload: 54
+      speed: 160
+      weight: 30
+      runningcost: 35
+      fixed_cost: 260
+      intro_year: 2024
+      intro_month: 11
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "665-5"
+    display_id: "665"
+    role_en: "intermediate section 5"
+    role_cs: "vložený článek 5"
+    row: 4
+    head: false
+    tail: false
+    prev: ["665-4"]
+    next: ["665-6"]
+    fields:
+      cost: 2300000
+      payload: 54
+      speed: 160
+      weight: 30
+      runningcost: 35
+      fixed_cost: 260
+      intro_year: 2024
+      intro_month: 11
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "665-6"
+    display_id: "665"
+    role_en: "cab section 6 (business)"
+    role_cs: "čelní článek 6 (business)"
+    row: 5
+    head: false
+    tail: true
+    prev: ["665-5"]
+    next: []
+    fields:
+      cost: 3800000
+      payload: 49
+      speed: 160
+      weight: 38
+      runningcost: 85
+      fixed_cost: 850
+      intro_year: 2024
+      intro_month: 11
+      waytype: track
+      freight: Passagiere
+      length: 11
+      engine_type: electric
+      power: 1250
+      gear: 130
+    extended:
+      axles: 3
+
+liveries:
+  - color: antracitovozluta
+    name_en: "anthracite-yellow"
+    name_cs: "antracitovo-žlutá"

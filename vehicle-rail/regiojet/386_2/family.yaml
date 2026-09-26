@@ -1,0 +1,59 @@
+# RegioJet class 386.2: Bombardier TRAXX F140 MS2e, 386.201-204 (EVN 91 54 7 386
+# 20x, CZ-RJ). 201 and 202 in service from 4/2018, 203 from 7/2018, 204 from 8/2018,
+# all still active (201 and 203 were hired to CityRail 2025 - 1/2026). Praha - Brno -
+# Wien / Budapest / Bratislava / Kosice, R8. 18.9 m over buffers, 2.977 m wide,
+# ~4.28 m high, Bo'Bo', 5 600 kW, 160 km/h (CZ/SK), 85 t, 1.5 / 3 kV DC, 15 / 25 kV AC.
+# Sources: research dossier traction.md 1a / 2.3 (seznam-autobusu.cz register,
+# cs.wikipedia), photos 386.202 (Commons), vagonWEB side drawings 386-a / 386-b.
+#
+# Livery zluta: RJ yellow body, silver-grey cab roof, A-pillars and the band along
+# the cab edge, black windscreen band, yellow nose with the corner headlight
+# clusters and a small front logo, black buffer beam, yellow snowplough, grey roof
+# with dark shoulder grilles, anthracite sill and bogies; large "|| REGIOJET"
+# (red bars + REGIO, blue JET) on the left half of each side as seen.
+#
+# Sprites: original art rendered from a box model, tools/railrender/rj_locos.py
+# (class Traxx, gen "ms2e"); regenerate with `python tools/railrender/regiojet.py
+# 386_2`. Drawn at length 10 like the native 19 m locos (1216, ES64U2), 2-3 px
+# taller than the coaches like the natives.
+
+agency: RegioJet
+type: "386.2"
+copyright: vojtechzicha      # original art, drawn from scratch
+# Locomotive: no passengers, cab glass in plain colours, never lit.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "Bombardier TRAXX F140 MS2e"
+  family_cs: "Bombardier TRAXX F140 MS2e"
+
+vehicles:
+  - id: "386.2"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 6000000
+      payload: 0
+      speed: 160
+      weight: 85
+      runningcost: 190
+      fixed_cost: 2800
+      intro_year: 2018
+      intro_month: 4
+      waytype: track
+      engine_type: electric
+      power: 5600
+      gear: 160
+      length: 10
+    extended:
+      axles: 4
+
+liveries:
+  - color: zluta
+    name_en: "RegioJet yellow"
+    name_cs: "RegioJet žlutá"

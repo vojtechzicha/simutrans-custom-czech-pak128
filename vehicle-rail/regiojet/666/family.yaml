@@ -1,0 +1,167 @@
+agency: RegioJet
+type: "666"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset for rail: the default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "Pesa InterRegio200"
+  family_cs: "Pesa InterRegio200"
+
+# Pesa InterRegio200, CZ class 666: 11 four-car EMUs (plus 7 three-car class
+# 667, a sibling family) ordered 5/2023 for the 15-year Ministry of Transport
+# contract on R9 Praha - Havlickuv Brod - Brno / Jihlava. First unit at the
+# VUZ Velim test centre 26 Feb 2026, 200 km/h reached in tests (6/2026),
+# passenger service planned from 12/2026. 105 m over couplers, 300 seats
+# (36 first class, 29 folding), 200 km/h, 3 kV DC + 25 kV 50 Hz, ETCS L2,
+# conventional bogies (no Jakobs), one single-leaf door per car side, bar
+# annex. (cs.wikipedia "Elektricka jednotka 666", pl.wikipedia "Pesa
+# InterRegio200", railvolution.net 26 Feb 2026, railwaygazette.com 2 Mar and
+# 11 Jun 2026, rynek-kolejowy.pl 22 Feb 2026.) Power and weights are not
+# published: powered end cars with 2,000 kW each and 55 / 47 t per car are
+# estimates. cs.wikipedia's infobox swaps 666 and 667; 666 = 4 cars.
+#
+# Livery "zluta" (RegioJet yellow, the only one): yellow body (the coach
+# set's 0xFFB612), continuous black window band 1.7-3.0 m with the low-floor
+# windows hanging below it in black frames, a narrow yellow strip up to the
+# cant rail, dark-grey roof with grey equipment covers along the whole roof,
+# silver single-leaf doors with a window, black cab glazing (raked windscreen
+# merging into the cab side window) under a silver edge line, yellow cab roof,
+# black headlight mask with the lamps at the corners, yellow lower nose
+# fairings with black grilles, red/blue "|| REGIOJET" low behind the cabs,
+# white "Business" on the band of car A. Sources (no scale drawing exists
+# yet): railvolution.net photo of 666.001 at Velim (VUZ, 2/2026,
+# research/photos/666-667_Pesa_IR200), the Pesa/RegioJet factory gallery on
+# rynek-kolejowy.pl (22 Feb 2026: front, cab, side lettering, bogie), the
+# railwaygazette.com / kolejowyportal.pl 200 km/h test photos (broadside of
+# car A at speed, full 4-car unit at Velim, 6/2026) and the Pesa renders on
+# spidersweb.pl / obserwatorlogistyczny.pl. Door and window positions are
+# measured on the near-orthographic broadside of car A (door 10.8-12.0 m
+# behind the nose, bogie centres ~5.0 m and ~22.8 m); middle-car doors sit
+# nearer their rear end as in the Velim photo of the whole unit.
+#
+# Car lengths: no per-car figures are published; 2 x end + 2 x middle = 105 m
+# and 2 x end + 1 x middle = 79 m (667) give end cars 26.5 m and middle cars
+# 26.0 m -> 13 cu each at 26.4 m = 13 cu (unit 52 cu).
+#
+# Sprites: 1024x512, rows 0-3 = cars A, 2, 3, B in consist order, drawn from
+# scratch with the pak128.cs-calibrated box renderer:
+# tools/railrender/rj_pesa.py (regenerate: python tools/railrender/regiojet.py
+# 666). The unit is modelled on one axis and each car rendered with its front
+# on the Simutrans anchor, so the joints close in all 8 views
+# (tools/consist_preview.py). Pantograph drawn raised on car 2 at the car-A end.
+# Passenger and door glass use the lit specials; windscreens and cab windows
+# are plain. Headlights on car A, tail lights on car B. Only the complete unit
+# is buildable: A (head) - 2 - 3 - B (tail).
+
+vehicles:
+  - id: "666-A"
+    display_id: "666"
+    role_en: "cab car A (Business)"
+    role_cs: "čelní vůz A (Business)"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["666-2"]
+    fields:
+      cost: 4400000
+      payload: 66
+      speed: 200
+      weight: 55
+      runningcost: 95
+      fixed_cost: 950
+      intro_year: 2026
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: electric
+      power: 2000
+      gear: 150
+    extended:
+      axles: 4
+
+  - id: "666-2"
+    display_id: "666"
+    role_en: "middle car 2"
+    role_cs: "vložený vůz 2"
+    row: 1
+    head: false
+    tail: false
+    prev: ["666-A"]
+    next: ["666-3"]
+    fields:
+      cost: 2800000
+      payload: 84
+      speed: 200
+      weight: 47
+      runningcost: 40
+      fixed_cost: 320
+      intro_year: 2026
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "666-3"
+    display_id: "666"
+    role_en: "middle car 3"
+    role_cs: "vložený vůz 3"
+    row: 2
+    head: false
+    tail: false
+    prev: ["666-2"]
+    next: ["666-B"]
+    fields:
+      cost: 2800000
+      payload: 84
+      speed: 200
+      weight: 47
+      runningcost: 40
+      fixed_cost: 320
+      intro_year: 2026
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "666-B"
+    display_id: "666"
+    role_en: "cab car B"
+    role_cs: "čelní vůz B"
+    row: 3
+    head: false
+    tail: true
+    prev: ["666-3"]
+    next: []
+    fields:
+      cost: 4400000
+      payload: 66
+      speed: 200
+      weight: 55
+      runningcost: 95
+      fixed_cost: 950
+      intro_year: 2026
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: electric
+      power: 2000
+      gear: 150
+    extended:
+      axles: 4
+
+liveries:
+  - color: zluta
+    name_en: "RegioJet yellow"
+    name_cs: "RegioJet žlutá"

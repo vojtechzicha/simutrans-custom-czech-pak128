@@ -1,0 +1,62 @@
+# Siemens Vectron MS (class 193) in the RegioJet yellow wrap, long-term leased
+# from ELL Austria: 193.205, 206, 214, 226, 227. 214 from 11/2014, 205 and 206 from
+# 12/2014, 226 and 227 from 12/2015; returned 227 12/2021, 206 12/2022, 205 1/2023,
+# 214 2/2023 and 226 (the last) on 14 Jul 2024. Bratislava - Kosice 2014-17, Praha -
+# Brno - Bratislava / Wien, Budapest. 18.98 m over buffers, 3.012 m wide, 4.248 m
+# high, Bo'Bo', 6 400 kW, 160 km/h (193.2xx), 90 t, multi-system.
+# Sources: research dossier traction.md 1a / 2.5 (seznam-autobusu.cz), photos
+# 193.206 / 214 / 226 (Commons), vagonWEB drawings 193-a / ELOC_193-a.
+#
+# Livery zluta: full yellow vinyl wrap; silver-grey upper cab front (windscreen
+# surround, nose top, cab roof, band down the cab edge), yellow lower front with
+# the black grille stripes and corner headlights, grey plough, dark grey lower side
+# band, grey roof with side grilles, large "|| REGIOJET" behind the cab door and the
+# black ELL (European Locomotive Leasing) logo low near the other end. 193.227's
+# 2017-21 advert wrap is not drawn.
+#
+# Sprites: original art rendered from vectron.py's box model (the Leo Express
+# Vectron, imported unchanged) with the RJ paint from tools/railrender/rj_locos.py
+# (class VectronRJ); regenerate with `python tools/railrender/regiojet.py 193`.
+# Length 10 like the native 19 m locos.
+
+agency: RegioJet
+type: "193"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "Siemens Vectron MS"
+  family_cs: "Siemens Vectron MS"
+
+vehicles:
+  - id: "193"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 6800000
+      payload: 0
+      speed: 160
+      weight: 90
+      runningcost: 210
+      fixed_cost: 3100
+      intro_year: 2014
+      intro_month: 11
+      retire_year: 2024
+      retire_month: 7
+      waytype: track
+      engine_type: electric
+      power: 6400
+      gear: 160
+      length: 10
+    extended:
+      axles: 4
+
+liveries:
+  - color: zluta
+    name_en: "RegioJet yellow"
+    name_cs: "RegioJet žlutá"

@@ -1,0 +1,95 @@
+# RegioJet ex-SBB coaches. Original art drawn from scratch: box models from the
+# vagonWEB scale side drawings (10 px = 1 m), rendered by tools/railrender/rjcoach.py
+# (regenerate with `python tools/railrender/regiojet.py sbb`), 26.4 m = length 13.
+# Livery: Patrik Kotas 2011, RAL 1028 melon yellow + anthracite window band + silver
+# doors, red/navy "|| REGIOJET" logo. Sources: vagonWEB RJ fleet description (Sep 2026),
+# cs.wikipedia (Vůz Ampz/ABmz/Amz/Bmz RJ), rj.macoslav.cz.
+# Ex-SBB coaches. Am000 = Amz 61 81 19-90 (SBB Eurofima Am 1977, 9 compartments, 1st
+# class = Business on R8 car 1, light skirt, red display boxes), Am900 = Bmz 29-90 (the
+# same Eurofima car via DB), Bp000 = Bmpz 20-73 (SBB Schlieren 1980 open car, R8 cars
+# 4-5, silvery reflective glass, 160 km/h).
+# RJ car codes are used as vehicle ids (they are painted on every car and used in RJ
+# consist lists); display_id is the UIC type.
+
+agency: RegioJet
+type: "SBB"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "ex-SBB"
+  family_cs: "ex-SBB"
+
+vehicles:
+  - id: "Am000"
+    display_id: "Amz 19-90"
+    role_en: "Business (1st class) coach"
+    role_cs: "vůz Business (1. třída)"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2450000
+      payload: 54
+      speed: 200
+      weight: 43
+      runningcost: 20
+      fixed_cost: 280
+      intro_year: 2012
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Am900"
+    display_id: "Bmz 29-90"
+    role_en: "Standard compartment coach"
+    role_cs: "oddílový vůz Standard"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 2300000
+      payload: 54
+      speed: 200
+      weight: 43
+      runningcost: 24
+      fixed_cost: 270
+      intro_year: 2015
+      intro_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bp000"
+    display_id: "Bmpz 20-73"
+    role_en: "Low cost open coach"
+    role_cs: "velkoprostorový vůz Low cost"
+    row: 2
+    prev: any
+    next: any
+    fields:
+      cost: 2200000
+      payload: 72
+      speed: 160
+      weight: 40
+      runningcost: 28
+      fixed_cost: 260
+      intro_year: 2017
+      intro_month: 2
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: zluta
+    name_en: "RegioJet yellow"
+    name_cs: "RegioJet žlutá"

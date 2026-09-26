@@ -1,0 +1,129 @@
+agency: RegioJet
+type: "655"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset for rail: the default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "Pesa Elf.eu"
+  family_cs: "Pesa Elf.eu"
+
+# Pesa Elf.eu 3-car, CZ class 655 + 055 + 955, 7 units 655.001-007 for the
+# Prague PID lines S49 (Roztoky u Prahy - Liben - Hostivar) and S61 (Uvaly -
+# Liben - hl.n. - Vrsovice). Delivered from 3/2025 (003 in 11/2025), revenue
+# service from 1 Apr 2025. Derived from the 2-car 654: 655 = motor car Bo'Bo'
+# (leads here, headlights), 055 = intermediate trailer 2'2' with two double
+# doors per side, 955 = driving trailer 2'2' with the 1st-class section, the
+# pantograph at its inner end and tail lights. 3 kV DC + 25 kV AC, 160 km/h,
+# 231 seats (cs.wikipedia; press releases say 240) split 78 + 75 + 78.
+# Power and weights are not published: 1,600 kW as on the 654 (one motor car),
+# 56 + 45 + 50 t estimated.
+#
+# Livery "pidsedocervena", the PID standard scheme (the only one these units
+# wore): light grey / near-white body, black window band stepping between the
+# high-floor ends (1.9-3.3 m) and the low-floor middle (1.3-2.5 m, low windows
+# hanging below the high band in their own black frames), full-height red
+# (#D9111B) panels next to the door on the inner side of the end cars and
+# between the two doors of the 055, black door leaves in grey frames, a gold
+# 1st-class line above the band of the 955 from the cab to the door, black
+# "|| REGIOJET" low on the grey behind each cab, red "pid" logo on the grey
+# panel at the inner end of the end cars; silver-white cab with the black
+# band running into the black windscreen and a red accent on the driver's
+# left corner of each front. Sources: Commons "655 podbaba1" (Ventura35, CC0,
+# 2 Aug 2025), "20260326 jednotka 655 RJ" (Colaagri, CC BY-SA 4.0) and the
+# vagonWEB drawing 655-pid-a.
+#
+# Car lengths: the vagonWEB drawing (10 px = 1 m) measures 75.5 m over
+# couplers with the gangways at 25.8 m and 49.7 m: end cars 25.8 m -> 13 cu,
+# middle car 23.9 m -> 12 cu (26.4 m = 13 cu). Side layout and roof boxes are
+# read off the same drawing.
+#
+# Sprites: 1024x384, row 0 = 655, row 1 = 055, row 2 = 955, drawn from scratch
+# with the pak128.cs-calibrated box renderer: tools/railrender/rj_pesa.py
+# (regenerate: python tools/railrender/regiojet.py 655). The unit is modelled
+# on one axis and each car rendered with its front on the Simutrans anchor, so
+# the joints close in all 8 views (tools/consist_preview.py). Passenger and
+# door glass use the lit specials; windscreens and cab windows are plain.
+# Only the complete unit is buildable: 655 (head) + 055 + 955 (tail).
+
+vehicles:
+  - id: "655"
+    role_en: "motor car"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["055"]
+    fields:
+      cost: 3600000
+      payload: 78
+      speed: 160
+      weight: 56
+      runningcost: 75
+      fixed_cost: 800
+      intro_year: 2025
+      intro_month: 4
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: electric
+      power: 1600
+      gear: 130
+    extended:
+      axles: 4
+
+  - id: "055"
+    role_en: "intermediate car"
+    role_cs: "vložený vůz"
+    row: 1
+    head: false
+    tail: false
+    prev: ["655"]
+    next: ["955"]
+    fields:
+      cost: 2400000
+      payload: 75
+      speed: 160
+      weight: 45
+      runningcost: 30
+      fixed_cost: 260
+      intro_year: 2025
+      intro_month: 4
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "955"
+    role_en: "driving trailer"
+    role_cs: "řídicí vůz"
+    row: 2
+    head: false
+    tail: true
+    prev: ["055"]
+    next: []
+    fields:
+      cost: 2800000
+      payload: 78
+      speed: 160
+      weight: 50
+      runningcost: 35
+      fixed_cost: 300
+      intro_year: 2025
+      intro_month: 4
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"

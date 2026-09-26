@@ -1,0 +1,70 @@
+agency: RegioJet
+type: "740"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "ČKD T 448.0"
+  family_cs: "ČKD T 448.0"
+
+# RegioJet 740.832 (EVN CZ-RJ 92 54 2 740 832-1), ČKD T 448.0, works no.
+# 13562, built 1984 for Králodvorské cementárny, from 1992 with Vápenka
+# Čertovy schody (VČS), bought by RegioJet in April 2017: empty-stock moves at
+# Praha-Smíchov, from 12/2023 at Praha-Malešice. Still in service in September
+# 2026, so no retirement date (sources: seznam-autobusu.cz vehicle 105875,
+# research/traction.md §1a / §2.6).
+#
+# Real loco: 13,600 mm over buffers, 72 t, Bo'Bo', ČKD K 6 S 230 DR diesel
+# 883 kW with electric transmission, 70 km/h. Hood unit with full-height
+# hoods: short hood 1.5 m, cab 2.1 m, long hood 8.7 m, hoods and cab 3.6 m
+# with a rounded roof to 4.2 m, walkway 1.6 m (vagonWEB side drawing of the
+# 742, the same body).
+#
+# Livery (never repainted by RegioJet): bilozelena, the VČS white/teal green -
+# white lower half and teal-green upper half (photo #3F9F8F .. #4BBFAD, drawn
+# #3FAC94) with a green stripe in the white, a white V chevron on the hood
+# ends and a white chevron panel on the long hood, green cab, grey roof,
+# black frame, grey bogies and fuel tank, yellow handrails and step boards
+# (photos: Commons "740 832 Smichov" and "Lokomotiva 740 832", 2017 / 2021;
+# "20230326 Regiojet 740832", Alex Noble, 2023).
+#
+# Sprites: drawn from scratch with the pak128.cs-calibrated box renderer,
+# tools/railrender/rj_shunters.py (regenerate: python
+# tools/railrender/rj_shunters.py 740). Length 7 (13.6 m at 26.4 m = 13 cu),
+# like the native CD 740 / CSD T 448.0; short hood leading as on the natives,
+# headlights at both ends.
+
+vehicles:
+  - id: "740"
+    role_en: "diesel shunting locomotive"
+    role_cs: "motorová posunovací lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2400000
+      payload: 0
+      speed: 70
+      weight: 72
+      runningcost: 190
+      fixed_cost: 980
+      intro_year: 2017
+      intro_month: 4
+      waytype: track
+      engine_type: diesel
+      power: 883
+      smoke: Diesel
+      gear: 180
+      length: 7
+    extended:
+      axles: 4
+
+liveries:
+  - color: bilozelena
+    name_en: "white-green"
+    name_cs: "bílo-zelená"

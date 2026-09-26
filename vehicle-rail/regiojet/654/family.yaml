@@ -1,0 +1,107 @@
+agency: RegioJet
+type: "654"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset for rail: the default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "Pesa Elf.eu"
+  family_cs: "Pesa Elf.eu"
+
+# Pesa Elf.eu, CZ class 654 + 954 (the first Elf.eu), 7 units 654.001-007 /
+# 954.001-007, run by RegioJet UK in the Ustecky kraj (DUK lines U5, U7, U13,
+# also seen on R23 in 2025-26). Trial service with passengers from 11 Dec 2022,
+# all 7 in service by early 2023. The 954s carried the numbers 655.00x until
+# 12/2022. 2 cars on ordinary bogies, both low-floor (600 mm) between the
+# bogies: 654 = motor car Bo'Bo' (leads here, headlights), 954 = driving
+# trailer 2'2' with the pantograph and the high-voltage gear at its inner end
+# (Commons photos 654-001 and 654-006, vagonWEB 654-duk-a). 3 kV DC + 25 kV
+# 50 Hz, 160 km/h, 154 seats (138 + 16 folding), one double door per car side,
+# up to 53.0 m long, 2.82 m wide, 4.28 m high (pesa.pl product page "654").
+# Power and weights are not published: 1,600 kW = the 4 x 400 kW of the Elf 2
+# two-car EMU the Elf.eu is derived from; 56 + 50 t estimated.
+#
+# Livery (the only one these units wore, a Ustecky kraj requirement):
+# "dukzelenozluta" DUK lime green body (~#90CE40, photos #92CE42-#99D643),
+# black window band 1.3-2.9 m with a yellow accent stripe (#F4B81C) at its
+# bottom over the bogies, carrying the red/blue "|| REGIOJET" logo at the
+# stripe's left end as seen; silver door leaves; cab front = black windscreen
+# field inside a yellow frame (#EDB51B) that runs down round the nose and
+# across under the windscreen with the round headlights, black lamp band and
+# lower front, grey skirt; light-silver cab hood; grey roof with dark and
+# light equipment covers. Sources: Commons "EMU 654-001 RegioJet" (Olo
+# Kolejarz, CC BY 3.0), "Pesa Elf.eu 654 005 Decin 10 23" and "RJ 654 006
+# Usti nad Labem 10 25" (Rainerhaufe, CC0), vagonWEB drawing 654-duk-a.
+#
+# Car lengths: the vagonWEB drawing (10 px = 1 m) measures 51.7 m over
+# couplers with the gangway centre at 25.8 m, i.e. 25.85 m per car -> 13 cu
+# each at 26.4 m = 13 cu (like the RegioPanter 650, 26.45 m = 13 cu). Side
+# layout (windows, door, stripe, bogie centres 5.15 / 22.35 m, roof boxes)
+# is read off the same drawing.
+#
+# Sprites: 1024x256, row 0 = 654, row 1 = 954, drawn from scratch with the
+# pak128.cs-calibrated box renderer: tools/railrender/rj_pesa.py
+# (regenerate: python tools/railrender/regiojet.py 654). Both cars are
+# modelled on one axis and rendered with their fronts on the Simutrans
+# anchor, so the joint closes in all 8 views (tools/consist_preview.py).
+# Passenger and door glass use the lit specials; windscreens and cab windows
+# are plain. Only the complete unit is buildable: 654 (head) + 954 (tail).
+
+vehicles:
+  - id: "654"
+    role_en: "motor car"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["954"]
+    fields:
+      cost: 3600000
+      payload: 77
+      speed: 160
+      weight: 56
+      runningcost: 75
+      fixed_cost: 800
+      intro_year: 2022
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: electric
+      power: 1600
+      gear: 130
+    extended:
+      axles: 4
+
+  - id: "954"
+    role_en: "driving trailer"
+    role_cs: "řídicí vůz"
+    row: 1
+    head: false
+    tail: true
+    prev: ["654"]
+    next: []
+    fields:
+      cost: 2600000
+      payload: 77
+      speed: 160
+      weight: 50
+      runningcost: 35
+      fixed_cost: 300
+      intro_year: 2022
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: dukzelenozluta
+    name_en: "DÚK green-yellow"
+    name_cs: "DÚK zeleno-žlutá"

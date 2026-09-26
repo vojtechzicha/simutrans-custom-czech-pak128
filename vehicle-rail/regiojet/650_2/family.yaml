@@ -1,0 +1,107 @@
+agency: RegioJet
+type: "650.2"
+copyright: TommPa9           # repaint of the CD RegioPanter art (pak128_czr 650)
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "Škoda RegioPanter"
+  family_cs: "Škoda RegioPanter"
+
+# RegioJet class 650.2: Škoda 15Ev RegioPanter, 2-car dual-system EMU (3 kV DC +
+# 25 kV AC), 15 units 650.251-265 ordered 5/2024 for the Ústecký kraj
+# "Elektrická páteř" (U1 Děčín - Ústí - Most - Kadaň etc., contract 12/2026 -
+# 12/2041), owned by RegioJet and run by RegioJet ÚK. 650.251 entered service
+# 24 Jun 2026, 650.252 on 28 Jun 2026, the rest from 8/2026 (research/
+# traction.md §1b / §2.10). Bo'2' + 2'Bo' (one powered bogie per car,
+# 1,360 kW), 160 km/h, 142 seats + 8 bicycles, 52.9 m (26.45 m per car);
+# "structurally identical" to ČD's RegioPanters (zeleznicni-magazin.cz).
+#
+# Livery dukzelenozluta (DÚK green-yellow, the only livery): lime-green body,
+# black window band, light-green band at the top of the side, silver-grey
+# doors; cab: black face with an orange-yellow (#F4A30C) outline, silver sweep
+# on the cab corners, yellow skirt, white DÚK logo on the front and under the
+# first side window; an orange-yellow stripe with the red/blue RegioJet logo
+# under the high-floor windows at the inner ends; grey roof.
+# The only Commons photo (LucaLynx99, 4 Jun 2026) is under-exposed; colours and
+# layout from the RegioJet presentation and first-service photos: zdopravy.cz
+# "Obrazem: RegioJet vyjíždí s novými vlaky v Ústeckém kraji" (12 Jun 2026, 11
+# photos, 640.2 at Ústí n. L.), zeleznicni-magazin.cz "RegioJet nasadil do
+# provozu nové jednotky pro Ústecký kraj" (641.264 on U3, 15 Jun 2026, photo
+# L. Seidenglanz), zdopravy.cz "RegioJet poprvé představí nové vlaky pro
+# Ústecký kraj" (first unit at Škoda, photo RegioJet, 10/2025); vagonWEB drawing
+# 650-2-duk-a for the layout (its #00A508 green is far too dark: photos show
+# lime #63BB3B..#77BC28).
+#
+# Sprites: zone-map repaint of the ČD 650 art (TommPa9, pak128_czr 650_P2 =
+# vehicle-rail/ceske-drahy/650 najbrt2), so RegioJet's, ČD's and Arriva's
+# RegioPanters share one silhouette in game. Script
+# tools/railrender/rj_regiopanter.py (regenerate:
+# python tools/railrender/rj_regiopanter.py): the side band of every view is
+# mapped to car coordinates and repainted per zone, glass stays the lit
+# special. Rows: 0 = 650 (cab + pantograph, headlights), 1 = 651 (cab at the
+# rear, tail lights); car lengths 13 + 13 like the ČD family.
+# Only the complete unit is buildable.
+
+vehicles:
+  - id: "650"
+    display_id: "650.2"
+    role_en: "motor cab car"
+    role_cs: "motorový vůz"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["651"]
+    fields:
+      cost: 3400000
+      payload: 71
+      speed: 160
+      weight: 53
+      runningcost: 60
+      fixed_cost: 600
+      intro_year: 2026
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: electric
+      power: 680
+      gear: 130
+    extended:
+      axles: 4
+
+  - id: "651"
+    display_id: "651.2"
+    role_en: "motor cab car (rear)"
+    role_cs: "motorový vůz (zadní)"
+    row: 1
+    head: false
+    tail: true
+    prev: ["650"]
+    next: []
+    fields:
+      cost: 3400000
+      payload: 71
+      speed: 160
+      weight: 53
+      runningcost: 60
+      fixed_cost: 600
+      intro_year: 2026
+      intro_month: 6
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: electric
+      power: 680
+      gear: 130
+    extended:
+      axles: 4
+
+liveries:
+  - color: dukzelenozluta
+    name_en: "DÚK green-yellow"
+    name_cs: "DÚK zeleno-žlutá"

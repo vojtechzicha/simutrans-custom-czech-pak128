@@ -1,0 +1,93 @@
+# RegioJet TRAXX 3 F160 MS (Bombardier, later Alstom): 18.9 m over buffers,
+# 2.977 m wide, ~4.28 m high, Bo'Bo', ~5 600 kW (5 600-6 000 per source), 160 km/h,
+# 86 t, multi-system. Squarer cab and a larger windscreen than the TRAXX 2 MS2e.
+# - 388.2: 388.201-215 (CZ-RJ, CZ-RJP from 1 Apr 2022, RegioJet Pool leased back to
+#   RJ). 201-202 from 12/2020, 203-208 from 3/2021, 209-215 from 10/2021.
+#   388.205 stored since the Pardubice collision (5 Jun 2024).
+# - 1388: Austrian-registered 1388.216-231 (216-218 A-RJP from 12/2022, 219-224
+#   A-RJAT from 9-11/2024, 225-231 from 6-7/2025). Same body.
+# Sources: research dossier traction.md 1a / 2.4 (seznam-autobusu.cz, cs.wikipedia),
+# photos 388.206, 388.212, 1388.218/219/223/227 (Commons), vagonWEB drawings
+# 388-2-a and 388-2-RJP-a.
+#
+# Liveries:
+# - zluta: RJ yellow, silver-grey cab roof and A-pillars, black windscreen mask with
+#   the central headlight, tall corner headlight clusters, thin red line along the
+#   silver/yellow cab edge and the bottom of the nose (388.212, drawing 388-2-a),
+#   black beam, yellow plough, large "|| REGIOJET" on each side. Only the 388.2.
+# - zlutapool: the same without the red line, the side logo followed by a small
+#   "POOL" (388.2 Pool locos, all 1388; drawing 388-2-RJP-a, photos 8 218-8 227).
+#   The 1388 exists only in this livery (per-vehicle `liveries:`), so zluta.png has
+#   one row and zlutapool.png two (row 0 = 388.2, row 1 = 1388, identical bodies).
+#
+# Sprites: original art rendered from a box model, tools/railrender/rj_locos.py
+# (class Traxx, gen "t3"); regenerate with `python tools/railrender/regiojet.py
+# 388_2`. Length 10 like the native 19 m locos.
+
+agency: RegioJet
+type: "388.2"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "TRAXX 3 F160 MS"
+  family_cs: "TRAXX 3 F160 MS"
+
+vehicles:
+  - id: "388.2"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 6300000
+      payload: 0
+      speed: 160
+      weight: 86
+      runningcost: 190
+      fixed_cost: 2900
+      intro_year: 2020
+      intro_month: 12
+      waytype: track
+      engine_type: electric
+      power: 5600
+      gear: 160
+      length: 10
+    extended:
+      axles: 4
+
+  - id: "1388"
+    display_id: "1388"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 1
+    liveries: [zlutapool]
+    prev: any
+    next: any
+    fields:
+      cost: 6300000
+      payload: 0
+      speed: 160
+      weight: 86
+      runningcost: 190
+      fixed_cost: 2900
+      intro_year: 2022
+      intro_month: 12
+      waytype: track
+      engine_type: electric
+      power: 5600
+      gear: 160
+      length: 10
+    extended:
+      axles: 4
+
+liveries:
+  - color: zluta
+    name_en: "RegioJet yellow"
+    name_cs: "RegioJet žlutá"
+  - color: zlutapool
+    name_en: "RegioJet Pool yellow"
+    name_cs: "RegioJet Pool žlutá"

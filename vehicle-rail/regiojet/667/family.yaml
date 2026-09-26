@@ -1,0 +1,124 @@
+agency: RegioJet
+type: "667"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset for rail: the default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "Pesa InterRegio200"
+  family_cs: "Pesa InterRegio200"
+
+# Pesa InterRegio200, CZ class 667: 7 three-car EMUs, the short sibling of the
+# four-car class 666 (see vehicle-rail/regiojet/666/family.yaml for the full
+# source list), for R9 Praha - Havlickuv Brod - Brno / Jihlava from 12/2026.
+# 79 m over couplers, 200 seats, 200 km/h, 3 kV DC + 25 kV 50 Hz, one
+# single-leaf door per car side, conventional bogies. Same end cars as the
+# 666 (powered, 2,000 kW each and 55 / 47 t per car are estimates; power and
+# weights are not published), one middle car. cs.wikipedia's infobox swaps
+# 666 and 667; 667 = 3 cars.
+#
+# Livery "zluta" (RegioJet yellow, the only one), as on the 666: yellow body
+# (0xFFB612), black band with low windows in black frames below it, grey roof
+# covers, silver doors, black cab glazing with a silver edge, yellow cab roof,
+# black headlight mask, "|| REGIOJET" behind the cabs, "Business" on car A.
+#
+# Car lengths: end cars 26.5 m and middle car 26.0 m (from 105 m / 4 cars and
+# 79 m / 3 cars) -> 13 cu each at 26.4 m = 13 cu (unit 39 cu).
+#
+# Sprites: 1024x384, rows 0-2 = cars A, 2, B in consist order, drawn from
+# scratch with the pak128.cs-calibrated box renderer:
+# tools/railrender/rj_pesa.py (regenerate: python tools/railrender/regiojet.py
+# 667). The unit is modelled on one axis and each car rendered with its front
+# on the Simutrans anchor, so the joints close in all 8 views
+# (tools/consist_preview.py). Pantograph drawn raised on car 2 at the car-A end.
+# Passenger and door glass use the lit specials; windscreens and cab windows
+# are plain. Headlights on car A, tail lights on car B. Only the complete unit
+# is buildable: A (head) - 2 - B (tail).
+
+vehicles:
+  - id: "667-A"
+    display_id: "667"
+    role_en: "cab car A (Business)"
+    role_cs: "čelní vůz A (Business)"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["667-2"]
+    fields:
+      cost: 4400000
+      payload: 62
+      speed: 200
+      weight: 55
+      runningcost: 95
+      fixed_cost: 950
+      intro_year: 2026
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: electric
+      power: 2000
+      gear: 150
+    extended:
+      axles: 4
+
+  - id: "667-2"
+    display_id: "667"
+    role_en: "middle car"
+    role_cs: "vložený vůz"
+    row: 1
+    head: false
+    tail: false
+    prev: ["667-A"]
+    next: ["667-B"]
+    fields:
+      cost: 2800000
+      payload: 76
+      speed: 200
+      weight: 47
+      runningcost: 40
+      fixed_cost: 320
+      intro_year: 2026
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "667-B"
+    display_id: "667"
+    role_en: "cab car B"
+    role_cs: "čelní vůz B"
+    row: 2
+    head: false
+    tail: true
+    prev: ["667-2"]
+    next: []
+    fields:
+      cost: 4400000
+      payload: 62
+      speed: 200
+      weight: 55
+      runningcost: 95
+      fixed_cost: 950
+      intro_year: 2026
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: electric
+      power: 2000
+      gear: 150
+    extended:
+      axles: 4
+
+liveries:
+  - color: zluta
+    name_en: "RegioJet yellow"
+    name_cs: "RegioJet žlutá"

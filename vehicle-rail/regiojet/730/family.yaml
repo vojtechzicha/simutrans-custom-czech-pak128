@@ -1,0 +1,70 @@
+agency: RegioJet
+type: "730"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "ČKD T 457.0"
+  family_cs: "ČKD T 457.0"
+
+# RegioJet Pool 730.625 (EVN CZ-RJP 92 54 2 730 625-1), ČKD T 457.0, works
+# no. 15801, built 1989 for ŽS Brno, 2003-2025 with KDS Kladno / IDS LocoCare,
+# with RegioJet Pool since 3/2025 and leased to RegioJet: stock moves at
+# Praha-Malešice. Still in service in September 2026, so no retirement date
+# (sources: seznam-autobusu.cz vehicle 106551, research/traction.md §1a /
+# §2.6). A second 730 hired from KDS (number unknown) is not drawn.
+#
+# Real loco: 13,980 mm over buffers, 70 t, Bo'Bo', ČKD K 6 S 230 DR diesel
+# 600 kW with electric transmission, 80 km/h. Low short hood (3.15 m, leading),
+# raised "tower" cab (roof 4.22 m) with a purple exhaust housing behind it,
+# long hood (3.45 m) with two radiator boxes at its outer end. Proportions
+# measured on the side-on Commons photo "CZ Class 730 625-1 KDS obr.03" (2021).
+#
+# Livery: fialovozluta, the KDS "Hrochostroj" scheme of 2020 kept by RegioJet
+# Pool - purple (photos #936DAB .. #9977B4, drawn #9C78BC) below a black
+# stripe that runs round the whole loco, yellow (#F2C948) above it and on the
+# hood tops, purple cab roof and exhaust housing, black handrails, yellow
+# lower edges of the buffer beams and steps. Since 2025 the HROCHOSTROJ
+# lettering on the long hood has given way to a yellow panel with the red/blue
+# "|| REGIOJET POOL" logo, and a small logo sits on the short hood end
+# (photo: Commons "RJP 730 625-1 Praha-Malešice", Sächsische IV K, 3/2025).
+#
+# Sprites: drawn from scratch with the pak128.cs-calibrated box renderer,
+# tools/railrender/rj_shunters.py (regenerate: python
+# tools/railrender/rj_shunters.py 730). Length 7 (13.98 m at 26.4 m = 13 cu),
+# like the native CD 731; short hood leading, headlights at both ends.
+
+vehicles:
+  - id: "730"
+    role_en: "diesel shunting locomotive"
+    role_cs: "motorová posunovací lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2100000
+      payload: 0
+      speed: 80
+      weight: 70
+      runningcost: 165
+      fixed_cost: 900
+      intro_year: 2025
+      intro_month: 3
+      waytype: track
+      engine_type: diesel
+      power: 600
+      smoke: Diesel
+      gear: 180
+      length: 7
+    extended:
+      axles: 4
+
+liveries:
+  - color: fialovozluta
+    name_en: "purple-yellow"
+    name_cs: "fialovo-žlutá"

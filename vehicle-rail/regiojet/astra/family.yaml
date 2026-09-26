@@ -1,0 +1,51 @@
+# RegioJet Astra coaches. Original art drawn from scratch: box models from the
+# vagonWEB scale side drawings (10 px = 1 m), rendered by tools/railrender/rjcoach.py
+# (regenerate with `python tools/railrender/regiojet.py astra`), 26.4 m = length 13.
+# Livery: Patrik Kotas 2011, RAL 1028 melon yellow + anthracite window band + silver
+# doors, red/navy "|| REGIOJET" logo. Sources: vagonWEB RJ fleet description (Sep 2026),
+# cs.wikipedia (Vůz Ampz/ABmz/Amz/Bmz RJ), rj.macoslav.cz.
+# Bm000 = Bmpz 61 81 20-90 / 20-70 "Standard Astra", the only new-built RJ coaches (ASTRA
+# Vagoane Călători Arad 2014-15 and 2018-19, 6 ex-Arenaways cars rebuilt), car 2 in
+# almost every IC set: taller window band, windows only in the middle 60 % of the car,
+# light silver-grey roof.
+# RJ car codes are used as vehicle ids (they are painted on every car and used in RJ
+# consist lists); display_id is the UIC type.
+
+agency: RegioJet
+type: "Astra"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "Astra"
+  family_cs: "Astra"
+
+vehicles:
+  - id: "Bm000"
+    display_id: "Bmpz 20-90"
+    role_en: "Standard open coach (Astra)"
+    role_cs: "velkoprostorový vůz Standard (Astra)"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2300000
+      payload: 80
+      speed: 200
+      weight: 45
+      runningcost: 24
+      fixed_cost: 270
+      intro_year: 2014
+      intro_month: 10
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: zluta
+    name_en: "RegioJet yellow"
+    name_cs: "RegioJet žlutá"

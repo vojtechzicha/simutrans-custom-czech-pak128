@@ -1,0 +1,232 @@
+# RegioJet ex-DB coaches. Original art drawn from scratch: box models from the
+# vagonWEB scale side drawings (10 px = 1 m), rendered by tools/railrender/rjcoach.py
+# (regenerate with `python tools/railrender/regiojet.py db`), 26.4 m = length 13.
+# Livery: Patrik Kotas 2011, RAL 1028 melon yellow + anthracite window band + silver
+# doors, red/navy "|| REGIOJET" logo. Sources: vagonWEB RJ fleet description (Sep 2026),
+# cs.wikipedia (Vůz Ampz/ABmz/Amz/Bmz RJ), rj.macoslav.cz.
+# Ex-DB IC day coaches (dark roof down to the thin yellow cantrail line). Am500 = Avmz
+# 19-91 (DB Avümz 111 TEE compartment car, R8 car 2 and the Košice-Čop night portion),
+# Ak100 = Avmmz 19-91 (DB 106.1, Eurofima body, windows with mullions, kitchenette),
+# Bm100 / Ap100 = Bmpz 28-90 (DB Apmz 121/125: 16 narrow windows, folding doors; Low
+# cost, or rebuilt 2024-26 as Relax), Ap200 = Apmmz 18-90 (DB 126.1, wide end windows),
+# Bp200 = Bpmz 20-91 (DB 294.3 open 2nd class, 9 wide + 2x2 small windows), Bp200.9 =
+# the R8 reinforcement car with 18 bike places, Bp100 = Bpmbz 29-91 (wheelchair version,
+# pictogram on the door), Bp500 = Bpmmz 20-91 (DB 284.5, fresh 2026 repaints with a
+# light roof and skirt).
+# RJ car codes are used as vehicle ids (they are painted on every car and used in RJ
+# consist lists); display_id is the UIC type.
+
+agency: RegioJet
+type: "DB"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "ex-DB"
+  family_cs: "ex-DB"
+
+vehicles:
+  - id: "Am500"
+    display_id: "Avmz 19-91"
+    role_en: "Standard compartment coach"
+    role_cs: "oddílový vůz Standard"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2300000
+      payload: 54
+      speed: 200
+      weight: 44
+      runningcost: 24
+      fixed_cost: 270
+      intro_year: 2022
+      intro_month: 7
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Ak100"
+    display_id: "Avmmz 19-91"
+    role_en: "Standard compartment coach"
+    role_cs: "oddílový vůz Standard"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 2300000
+      payload: 42
+      speed: 200
+      weight: 47
+      runningcost: 24
+      fixed_cost: 270
+      intro_year: 2025
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bm100"
+    display_id: "Bmpz 28-90"
+    role_en: "Low cost open coach"
+    role_cs: "velkoprostorový vůz Low cost"
+    row: 2
+    prev: any
+    next: any
+    fields:
+      cost: 2200000
+      payload: 48
+      speed: 200
+      weight: 43
+      runningcost: 28
+      fixed_cost: 260
+      intro_year: 2019
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Ap100"
+    display_id: "Bmpz 28-90"
+    role_en: "Relax open coach"
+    role_cs: "velkoprostorový vůz Relax"
+    row: 3
+    prev: any
+    next: any
+    fields:
+      cost: 2300000
+      payload: 54
+      speed: 200
+      weight: 43
+      runningcost: 24
+      fixed_cost: 270
+      intro_year: 2024
+      intro_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Ap200"
+    display_id: "Apmmz 18-90"
+    role_en: "Relax open coach"
+    role_cs: "velkoprostorový vůz Relax"
+    row: 4
+    prev: any
+    next: any
+    fields:
+      cost: 2300000
+      payload: 54
+      speed: 200
+      weight: 45
+      runningcost: 24
+      fixed_cost: 270
+      intro_year: 2026
+      intro_month: 7
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bp200"
+    display_id: "Bpmz 20-91"
+    role_en: "Low cost open coach"
+    role_cs: "velkoprostorový vůz Low cost"
+    row: 5
+    prev: any
+    next: any
+    fields:
+      cost: 2200000
+      payload: 80
+      speed: 200
+      weight: 42
+      runningcost: 28
+      fixed_cost: 260
+      intro_year: 2021
+      intro_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bp200.9"
+    display_id: "Bpmz 20-91"
+    role_en: "Low cost coach with bike space"
+    role_cs: "vůz Low cost s oddílem pro kola"
+    row: 6
+    prev: any
+    next: any
+    fields:
+      cost: 2200000
+      payload: 54
+      speed: 200
+      weight: 42
+      runningcost: 28
+      fixed_cost: 260
+      intro_year: 2021
+      intro_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bp100"
+    display_id: "Bpmbz 29-91"
+    role_en: "Low cost accessible coach"
+    role_cs: "vůz Low cost pro vozíčkáře"
+    row: 7
+    prev: any
+    next: any
+    fields:
+      cost: 2200000
+      payload: 75
+      speed: 200
+      weight: 42
+      runningcost: 28
+      fixed_cost: 260
+      intro_year: 2021
+      intro_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bp500"
+    display_id: "Bpmmz 20-91"
+    role_en: "Low cost open coach"
+    role_cs: "velkoprostorový vůz Low cost"
+    row: 8
+    prev: any
+    next: any
+    fields:
+      cost: 2200000
+      payload: 80
+      speed: 200
+      weight: 43
+      runningcost: 28
+      fixed_cost: 260
+      intro_year: 2026
+      intro_month: 8
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: zluta
+    name_en: "RegioJet yellow"
+    name_cs: "RegioJet žlutá"

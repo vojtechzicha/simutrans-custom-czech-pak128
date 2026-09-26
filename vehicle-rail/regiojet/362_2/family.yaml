@@ -1,0 +1,158 @@
+# RegioJet class 362.2: the 162 (Skoda 99E ex-FNM) rebuilt dual-system by CMZO
+# Prerov for RegioJet Pool (adds 25 kV 50 Hz, a digital desk and Angelstar Guardia
+# ETCS), for leasing "mainly for freight". Each loco gets its own retro scheme.
+# 16.8 m over buffers, Bo'Bo', 3 480 kW DC / ~3 060 kW AC, 140 km/h, ~86 t,
+# 3 kV DC + 25 kV 50 Hz. All eight were "temporarily out of operation" in 9/2026
+# (ETCS approval pending).
+# Sources: research dossier traction.md 1a / 2.2 (seznam-autobusu.cz, zdopravy.cz,
+# zeleznicni-magazin.cz, railvolution.net), photos in research/photos/362-2_retro.
+#
+# One vehicle entry per loco, each restricted to its own livery (`liveries:`); the
+# rows are fixed indices in declaration order, so each sheet leaves the earlier
+# rows empty (csdmodrozluta 1 row, fnmzelenosediva 2, zluta 3, zlutosediva 4).
+# Only the four schemes confirmed by photos are shipped; 362.214, 215 and 216
+# (unknown schemes) and 362.218 (green, no photo) are not.
+# - 362.212 (ex 162.112), 4/2025, csdmodrozluta: CSD "unifikace 88" blue with a
+#   broad yellow waist band wrapping round the cab fronts, cream roof, roof edge and
+#   louvre band, yellow-framed windscreens, yellow pantographs and ploughs, red
+#   number plate, "|| REGIOJET POOL" on the band.
+# - 362.220 (ex 162.120), 7/2025, fnmzelenosediva: FNM retro "E 630-09 RJ", green
+#   upper / silver-grey lower body split by a dark blue line that drops towards
+#   the lamp row at the cab ends, silver louvre band, dark blue sill, red buffer
+#   beams, yellow/black chevron ploughs, red pantographs, small RJ logo on the front.
+# - 362.213 (ex 162.113), 12/2025, zluta: the "RegioJet 2011" retro, as the 162
+#   but with a black louvre band and dark roof.
+# - 362.219 (ex 162.119), 1/2026, zlutosediva: slightly more lemon yellow, dark grey
+#   upper front round the windscreens, light grey lamp band with the red number
+#   plate, dark grey lower side band, sill and buffer beams, no logos.
+# Side A (+v) carries the portholes, side B (-v) the louvre band, as on the 162.
+#
+# Sprites: original art rendered from a box model, tools/railrender/rj_locos.py
+# (class E99); regenerate with `python tools/railrender/regiojet.py 362_2`.
+# Length 8 like the native CD 363.
+
+agency: RegioJet
+type: "362.2"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "Škoda 99E dual-system"
+  family_cs: "Škoda 99E dvousystémová"
+
+vehicles:
+  - id: "362.212"
+    display_id: "362.2"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    liveries: [csdmodrozluta]
+    prev: any
+    next: any
+    fields:
+      cost: 4600000
+      payload: 0
+      speed: 140
+      weight: 86
+      runningcost: 155
+      fixed_cost: 2200
+      intro_year: 2025
+      intro_month: 4
+      waytype: track
+      engine_type: electric
+      power: 3480
+      gear: 150
+      length: 8
+    extended:
+      axles: 4
+
+  - id: "362.220"
+    display_id: "362.2"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 1
+    liveries: [fnmzelenosediva]
+    prev: any
+    next: any
+    fields:
+      cost: 4600000
+      payload: 0
+      speed: 140
+      weight: 86
+      runningcost: 155
+      fixed_cost: 2200
+      intro_year: 2025
+      intro_month: 7
+      waytype: track
+      engine_type: electric
+      power: 3480
+      gear: 150
+      length: 8
+    extended:
+      axles: 4
+
+  - id: "362.213"
+    display_id: "362.2"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 2
+    liveries: [zluta]
+    prev: any
+    next: any
+    fields:
+      cost: 4600000
+      payload: 0
+      speed: 140
+      weight: 86
+      runningcost: 155
+      fixed_cost: 2200
+      intro_year: 2025
+      intro_month: 12
+      waytype: track
+      engine_type: electric
+      power: 3480
+      gear: 150
+      length: 8
+    extended:
+      axles: 4
+
+  - id: "362.219"
+    display_id: "362.2"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 3
+    liveries: [zlutosediva]
+    prev: any
+    next: any
+    fields:
+      cost: 4600000
+      payload: 0
+      speed: 140
+      weight: 86
+      runningcost: 155
+      fixed_cost: 2200
+      intro_year: 2026
+      intro_month: 1
+      waytype: track
+      engine_type: electric
+      power: 3480
+      gear: 150
+      length: 8
+    extended:
+      axles: 4
+
+liveries:
+  - color: csdmodrozluta
+    name_en: "ČSD blue-yellow"
+    name_cs: "ČSD modro-žlutá"
+  - color: fnmzelenosediva
+    name_en: "FNM green-grey"
+    name_cs: "FNM zeleno-šedivá"
+  - color: zluta
+    name_en: "RegioJet yellow"
+    name_cs: "RegioJet žlutá"
+  - color: zlutosediva
+    name_en: "yellow-grey"
+    name_cs: "žluto-šedivá"

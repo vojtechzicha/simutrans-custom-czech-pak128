@@ -1,0 +1,67 @@
+agency: RegioJet
+type: "703"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "TS Martin T 212.1"
+  family_cs: "TS Martin T 212.1"
+
+# RegioJet 703.602 (EVN CZ-RJ 98 54 4 703 602-3, until 2022 SK-RJ 92 56 1
+# 703 602-3), TS Martin T 212.1, works no. 431-0102, built 1976. With RegioJet
+# since 2013 (month not recorded): depot shunter at Praha-Smíchov, from 12/2023
+# at Praha-Dolní Měcholupy; hired to Dyko Kolín from 2019, overhauled and back
+# 2/2023. Still in service in September 2026, so no retirement date (sources:
+# seznam-autobusu.cz vehicle 105877, research/traction.md §1a / §2.6).
+#
+# Real loco: 7,220 mm over buffers, 24 t, two axles (B), Tatra 930-54 diesel
+# 169 kW with ČKD-SRM hydraulic transmission, 40 km/h. Narrow engine hood in
+# front of a full-width cab at one end (cab entered from the rear platform),
+# deep frame, two lamps at each end plus one on the hood / cab roof.
+#
+# Livery (the only one it has worn with RJ): cervenobila, the T 212.1 scheme -
+# dark red body (photos #802E3A shaded .. #AE606E lit, drawn #A23244) with a
+# thin white waist stripe wrapping round hood and cab, bluish-grey frame with a
+# white "|| REGIOJET" on its side, red/white warning chevrons on the buffer
+# beams (photos: Commons "RegioJet 703 602-3", Sächsische IV K, 2024;
+# "703 602 Smichov", Rainerhaufe, 2017).
+#
+# Sprites: drawn from scratch with the pak128.cs-calibrated box renderer,
+# tools/railrender/rj_shunters.py (regenerate: python
+# tools/railrender/rj_shunters.py 703). Length 4 (7.22 m at 26.4 m = 13 cu);
+# hood leading, cab at the rear, headlights at both ends.
+
+vehicles:
+  - id: "703"
+    role_en: "diesel shunting locomotive"
+    role_cs: "motorová posunovací lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 900000
+      payload: 0
+      speed: 40
+      weight: 24
+      runningcost: 60
+      fixed_cost: 380
+      intro_year: 2013
+      intro_month: 1
+      waytype: track
+      engine_type: diesel
+      power: 169
+      smoke: Diesel
+      gear: 170
+      length: 4
+    extended:
+      axles: 2
+
+liveries:
+  - color: cervenobila
+    name_en: "red-white"
+    name_cs: "červeno-bílá"
