@@ -335,6 +335,9 @@ PID_GREY = (185, 188, 182)      # RAL 7038
 PID_RED = (204, 31, 26)         # RAL 3020
 PID_BLACK = (20, 20, 20)        # RAL 9005
 PID_DGREY = (75, 77, 70)        # RAL 7022
+# the roof plate is RAL 7038 like the body; drawn a step darker so the roof
+# reads apart from the body and from light concrete platforms
+PID_ROOF = tuple(round(v * 0.84) for v in PID_GREY)
 
 
 def u_from_rear(body):
@@ -518,7 +521,7 @@ def spec_for(cls, liv, body, part):
             "E_LOWFRONT": pid_front(PID_GREY), "E_SKIRT": pid_front(PID_GREY), "E_EDGE": YELLOW1,
             "J_TOP": PID_GREY, "J_WALL": navy_only(PID_GREY), "CABGLASS": CAB_GLASS,
         }
-        roof = (PID_GREY, PID_DGREY)
+        roof = (PID_ROOF, PID_DGREY, True)
     else:
         raise KeyError(liv)
     return s, roof
@@ -527,13 +530,29 @@ def spec_for(cls, liv, body, part):
 def paint_roof(body, a, roof):
     """Roof plate in the livery roof colour keeping the upstream shading; the
     darker equipment boxes either follow the plate (eq None) or get their own
-    colour."""
-    plate, eq = roof
+    colour. A light plate with its own equipment colour is painted flat
+    (roof[2] True): the upstream roof texture scaled onto it turns into white
+    glare and dark specks, so the plate is one colour (the edge row a step
+    darker) and the equipment boxes are cleaned into solid blocks."""
+    plate, eq = roof[:2]
+    flat = len(roof) > 2 and roof[2]
     Z = body.Z
     m = (body.lab == Z["ROOF"]) | (body.lab == Z["ROOF_EDGE"])
+    edge = body.lab == Z["ROOF_EDGE"]
     L = lum(body.base.astype(float))
     ref = np.median(L[m & (L > 100)])
     a = a.astype(float)
+    if flat:
+        from scipy import ndimage as nd
+        dark = np.zeros_like(m)
+        for c in range(8):
+            sl = slice(c * 128, (c + 1) * 128)
+            d = nd.binary_closing(m[:, sl] & (L[:, sl] < 95), np.ones((2, 2)))
+            dark[:, sl] = nd.binary_opening(d, np.ones((2, 2))) & m[:, sl] & ~edge[:, sl]
+        a[m] = np.array(plate, float)
+        a[edge] = np.array(plate, float) * 0.88
+        a[dark] = np.array(eq, float)
+        return unspecial(np.rint(np.clip(a, 0, 255)).astype(np.uint8))
     ys, xs = np.where(m)
     for y, x in zip(ys, xs):
         l = L[y, x]
