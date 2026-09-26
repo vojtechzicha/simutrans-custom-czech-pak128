@@ -46,6 +46,7 @@ import rj_locos as RJ  # noqa: E402
 from rj_locos import (E99, EndGlyphs, Glyphs, P_BLACK, P_BUF, P_YEL, WS, WS_HI,  # noqa: E402
                       PANTO_TOP, _uu, bogie, in_cols, in_vcols, on_col, prow, scr, vc)
 import cd_loco_livery as CL  # noqa: E402
+import style as ST  # noqa: E402
 
 
 def pc(c):
@@ -73,10 +74,16 @@ class Liv:
         self.plough = "yellow"
 
 
+STYLE_ROOF = Paint(ST.ROOF, top=ST.ROOF_TOP)                # 2026-09-26 style, all schemes
+GREEN = (44, 110, 62)                                        # ČSD / ČD green (162 018)
+CREAM = CL.BC_CREAM
 LIV = {
-    "najbrt2": Liv("najbrt2", N2_ROOF, pc(CL.SAPPHIRE), pc(CL.SAPPHIRE)),
-    "najbrt1_2": Liv("najbrt1_2", N12_ROOF, N12_SILL, N12_SILL),
-    "zelenozluta": Liv("zelenozluta", GY_ROOF, GY_SILL, P_BLACK),
+    "najbrt2": Liv("najbrt2", STYLE_ROOF, pc(CL.SAPPHIRE), pc(CL.SAPPHIRE)),
+    "najbrt1_2": Liv("najbrt1_2", STYLE_ROOF, N12_SILL, N12_SILL),
+    "zelenozluta": Liv("zelenozluta", STYLE_ROOF, GY_SILL, P_BLACK),
+    "zelenokremova": Liv("zelenokremova", STYLE_ROOF, pc((28, 60, 40)), P_BLACK),
+    "modrokremova": Liv("modrokremova", STYLE_ROOF, pc((22, 44, 88)), P_BLACK),
+    "cervenozluta": Liv("cervenozluta", STYLE_ROOF, pc((70, 72, 74)), P_BLACK),
 }
 
 # side lettering, 2 px high: ČD logo + "České dráhy" (white on N2, sapphire on N1.2)
@@ -85,41 +92,64 @@ SIDE_LOGO = {"H": ["cc.cc.ccc.cc.cc.cc", "cc.cc.c.c.cc.c..cc"],
 FRONT_LOGO = ["ccc"]
 
 
+class _NoGlyph:
+    def at(self, *a, **k):
+        return None
+
+
 class CDE99(E99):
     def __init__(self, liv, unit):
         self.C = C = LIV[liv]
         self.liv, self.unit = liv, unit
         self.bigg = None
         self.smallg = {}
-        lc = {"najbrt2": "w", "najbrt1_2": "s", "zelenozluta": "k"}[liv]
+        lc = {"najbrt2": "w", "najbrt1_2": "s"}.get(liv, "k")
         cols = {"c": LOGO[lc]}
         zy = self.ZY
         # side logo mid-body just above the light band (N2 / GY), in the sky
         # middle panel on N1.2; on side A between the porthole pairs
-        row = {"najbrt2": (2, 2), "najbrt1_2": (1, 1), "zelenozluta": (1, 1)}[liv]
+        row = {"najbrt2": (2, 2)}.get(liv, (1, 1))
         self.logo = {f: Glyphs(3.2, zy, row, SIDE_LOGO["H"], SIDE_LOGO["D"], cols) for f in ("+v", "-v")}
         self.flogo = EndGlyphs(0.0, zy, 2, FRONT_LOGO, cols)
+        # 2026-09-26 style: no 1-px side lettering (it reads as noise)
+        self.logo = {f: _NoGlyph() for f in ("+v", "-v")}
 
     # --------------------------------------------------------- paint
     def zone(self, f, u, v, z, d, r, front):
-        """plain livery colour at pixel row r above ZY."""
+        """plain livery colour at pixel row r above ZY (proportions from photos)."""
         liv, L = self.liv, self.L
         if liv == "najbrt2":
-            return pc(CL.WHITE) if r <= 1 else pc(LOCO_SKY)
+            # one thin white row at headlight level, sky blue above (362 158, 162 039)
+            return pc(CL.WHITE) if r == 0 else pc(LOCO_SKY)
         if liv == "zelenozluta":
-            return pc(CL.GY_YELLOW) if r <= 2 else pc(CL.GY_GREEN)
+            return pc(CL.GY_YELLOW) if r <= 1 else pc((52, 112, 64))
+        if liv == "zelenokremova":
+            # 162 018: dark green body, cream band under the windows, cream screen frame
+            if front and r >= 4:
+                return pc(CREAM)
+            return pc(CREAM) if r in (2, 3) else pc(GREEN)
+        if liv == "modrokremova":
+            # ES 499.1 as delivered: dark blue body, cream band at lamp level
+            return pc(CREAM) if r in (1, 2) else pc((34, 78, 150))
+        if liv == "cervenozluta":
+            # 371 as delivered (1996): red upper body, yellow band, grey lower row
+            if r == 0:
+                return pc((150, 154, 156))
+            return pc(CL.RY_YELLOW) if r in (1, 2) else pc((214, 74, 40))
         # najbrt1_2
         if front:
-            return pc(LOCO_SKY) if r >= 3 else pc(CL.LGREY)
+            return pc(CL.LGREY)          # light grey front, dark windscreens (362 030)
+        # 362 030 / 092: the whole cab section up to the door is light grey, then a
+        # sapphire wedge rises from the solebar behind it, sky blue beyond
         t = max(0.0, min(1.0, (z - self.ZY) / (self.ZS1 - self.ZY)))
         cu = min(u, L - u)
-        if cu < 0.48 + 0.20 * t:
+        if cu < 1.25:
             return pc(CL.LGREY)
-        if cu < 0.98 + 0.18 * t:
+        if cu < 1.25 + 1.1 * (1.0 - t):
             return pc(CL.SAPPHIRE)
         return pc(LOCO_SKY)
 
-    def side(self, f, u, v, z, d):
+    def _side_base(self, f, u, v, z, d):
         C, L = self.C, self.L
         if z >= self.ZS1:
             return C.roof
@@ -149,15 +179,33 @@ class CDE99(E99):
                 for p in self.PORTHOLES:
                     if abs(s - p) < 0.3 and in_cols(d, u, v, z, L - p - 0.11, L - p + 0.11):
                         return WS
-        else:
-            lv = (3, 4) if k == "D" else (4, 5)
-            if lv[0] <= r <= lv[1] and 1.0 <= s <= 7.0:
-                x = math.floor(scr(d, u, v, z)[0])
-                return C.louvre[x % 2]
         p = self.logo[f].at(f, u, v, z, d, L)
         if p is not None:
             return p
         return self.zone(f, u, v, z, d, r, False)
+
+    def side(self, f, u, v, z, d):
+        """2026-09-26 style: the Eso / Persing slab side is ribbed, and a dark
+        louvre band runs high between the doors (not on the 371)."""
+        base = self._side_base(f, u, v, z, d)
+        if not (self.ZY <= z < self.ZS1):
+            return base
+        L = self.L
+        s = L - u if f == "+v" else u
+        r = prow(d, z, self.ZY)
+        top = 5 if vc(d) == "D" else 6
+        lb = 1.45 if self.liv == "najbrt1_2" else 1.25   # N1.2: band starts after the grey cab section
+        if self.unit != "371" and r in (top - 1, top) and lb <= s <= L - lb \
+                and not (f == "+v" and any(abs(s - p) < 0.3 for p in self.PORTHOLES)):
+            x = math.floor(scr(d, u, v, z)[0])
+            return Paint(0x23272B) if x % 2 else Paint(0x33383D)
+        if 1.1 <= s <= L - 1.1 and r % 2 == 1 and r < top - 1 and isinstance(base, Paint):
+            c = base.base
+            return Paint(tuple(int(x * ST.RIB) for x in c))
+        return base
+
+    def uf(self, z):
+        return 0.22                      # vertical front: the Eso is a slab box
 
     def front(self, f, u, v, z, d):
         C, liv = self.C, self.liv
@@ -191,48 +239,49 @@ class CDE99(E99):
 
     # --------------------------------------------------------- model
     def build(self):
+        """2026-09-26 style: a slab box with sharp corners, a vertical front and a
+        flat roof with a hard edge and a dark gutter (the Eso / Persing is not a
+        rounded Laminatka), heavy roof equipment, light pantograph arms with a
+        dark head bar."""
         L, W, C = self.L, self.W, self.C
         own = "V"
         parts, lines = [], []
         body = self.body_mat()
-        cham = 0.14
-        for (z0, z1) in ((self.ZB, 6.4), (6.4, 8.0), (8.0, self.ZC)):
-            uf = self.uf(z0 + 0.01)
-            parts.append(Part(uf, L - uf, -W + cham, W - cham, z0, z1, body, own))
-            parts.append(Part(uf + 0.12, L - uf - 0.12, -W, W, z0, z1, body, own))
+        uf = self.uf(0)
+        zt = self.ZS1 + 0.3                     # side wall top
+        zr = self.ZR - 0.4                      # roof plane
+        parts.append(Part(uf, L - uf, -W, W, self.ZB, zt, body, own))
+        gut = Paint(ST.GUTTER)
+        parts.append(Part(uf + 0.05, L - uf - 0.05, -W + 0.06, W - 0.06, zt, zr,
+                          lambda f, u, v, z, d: C.roof if f == "+z" else gut, own))
 
-        def roof(f, u, v, z, d):
-            return C.roof
-        parts.append(Part(0.52, L - 0.52, -W + 0.22, W - 0.22, self.ZC, 10.6, roof, own))
-        parts.append(Part(0.74, L - 0.74, -W + 0.44, W - 0.44, 10.6, self.ZR, roof, own))
-
-        # two raised louvred resistor blocks mid-roof
         def grille(f, u, v, z, d):
             if f == "+z":
-                return Paint(0x464B50) if (u * 4.0) % 1.0 < 0.5 else Paint(0x70767C)
-            if f in ("+v", "-v"):
-                x = math.floor(scr(d, u, v, z)[0])
-                return Paint(0x3C4146) if x % 2 else Paint(0x5E6368)
-            return Paint(0x464B50)
-        for (a, b) in ((2.75, 3.85), (4.05, 5.15)):
-            parts.append(Part(a, b, -0.66, 0.66, self.ZR, self.ZR + 1.0, grille, own))
-        if self.unit in ("162", "362"):          # cab air-conditioning box over cab 1
-            parts.append(Part(0.90, 1.45, -0.46, 0.46, self.ZR, self.ZR + 0.6,
+                return Paint(0x40454A) if (u * 4.0) % 1.0 < 0.5 else Paint(0x5A6066)
+            x = math.floor(scr(d, u, v, z)[0])
+            return Paint(0x35393E) if x % 2 else Paint(0x50555A)
+        for (a, b) in ((2.6, 3.9), (4.1, 5.4)):          # resistor / cooling blocks
+            parts.append(Part(a, b, -0.78, 0.78, zr, zr + 1.6, grille, own))
+
+        def ins(*a):
+            return Paint(0x9AA0A6, top=0xB0B5BA)
+        for a in (2.2, 5.55):                            # roof insulators
+            parts.append(Part(a, a + 0.25, -0.25, 0.25, zr, zr + 1.0, ins, own))
+        if self.unit in ("162", "362"):                  # cab air-conditioning box, cab 1
+            parts.append(Part(0.60, 1.10, -0.46, 0.46, zr, zr + 0.6,
                               lambda *a: Paint(0x2A2D30, top=0x3A3E42), own))
-        if self.unit == "362":                   # AC main switch / insulators
-            parts.append(Part(2.30, 2.60, -0.20, 0.20, self.ZR, self.ZR + 0.7,
-                              lambda *a: Paint(0x6A6F74, top=0x7A7F84), own))
-        # single-arm pantographs: front lowered, rear raised
-        pcol = C.panto
-        pp = Paint((pcol[0] << 16) | (pcol[1] << 8) | pcol[2])
-        parts.append(Part(1.55, 2.45, -0.40, 0.40, self.ZR, self.ZR + 0.30, lambda *a: pp, own))
-        parts.append(Part(5.9, 6.5, -0.36, 0.36, self.ZR, self.ZR + 0.30, lambda *a: pp, own))
-        zb = self.ZR + 0.30
+        if self.unit == "362":                           # AC main switch
+            parts.append(Part(3.92, 4.08, -0.20, 0.20, zr, zr + 1.2, ins, own))
+        arm = ST.PANTO_ARM
+        pp = Paint((arm[0] << 16) | (arm[1] << 8) | arm[2])
+        parts.append(Part(1.2, 2.1, -0.40, 0.40, zr, zr + 0.3, lambda *a: pp, own))
+        parts.append(Part(5.9, 6.8, -0.40, 0.40, zr, zr + 0.3, lambda *a: pp, own))
+        zb = zr + 0.3
         h = PANTO_TOP - zb
-        ub, uk, uh = 6.25, 6.85, 5.9
-        lines += [((ub, 0.0, zb), (uk, 0.0, zb + h * 0.5), pcol, own, False),
-                  ((uk, 0.0, zb + h * 0.5), (uh, 0.0, PANTO_TOP), pcol, own, False),
-                  ((uh, -0.62, PANTO_TOP), (uh, 0.62, PANTO_TOP), (0x2A, 0x2A, 0x2C), own, True)]
+        ub, uk, uh = 6.3, 6.9, 6.0
+        lines += [((ub, 0.0, zb), (uk, 0.0, zb + h * 0.5), arm, own, False),
+                  ((uk, 0.0, zb + h * 0.5), (uh, 0.0, PANTO_TOP), arm, own, False),
+                  ((uh, -0.62, PANTO_TOP), (uh, 0.62, PANTO_TOP), ST.PANTO_HEAD, own, True)]
         for bc in (2.02, 5.98):
             parts += bogie(bc, 0.98, 0.76, W, self.ZB, own)
         parts.append(Part(3.05, 4.95, -W + 0.22, W - 0.22, 0.8, self.ZB, lambda *a: Paint(0x303336), own))
@@ -253,14 +302,19 @@ def row(liv, unit):
     return [R.vehicle_tile(parts, lines, d, 0.0, {"V"}) for d in DIRS]
 
 
-# Only Najbrt 2 is rendered: the other liveries of these families (162/362 Najbrt
-# 1.2, 163 green-yellow, ...) ship the better-looking TommPa9 pak128.cs art, so
-# regenerating must not overwrite those sheets.
+def polish_sheet(path):
+    """Apply the agreed post-process (style.POLISH) to a written sheet."""
+    from PIL import Image
+    im = Image.open(path)
+    im.load()
+    ST.polish(im, **ST.POLISH).save(path)
+
+
 JOBS = {
-    "162": ["najbrt2"],
-    "163": ["najbrt2"],
-    "362": ["najbrt2"],
-    "371": ["najbrt2"],
+    "162": ["najbrt2", "najbrt1_2", "zelenokremova"],
+    "163": ["najbrt2", "najbrt1_2", "zelenozluta"],
+    "362": ["najbrt2", "najbrt1_2", "modrokremova"],
+    "371": ["najbrt2", "najbrt1_2", "cervenozluta"],
 }
 
 
@@ -278,6 +332,7 @@ def main():
             out = os.path.join(FAM, fam, "sprites", f"{liv}.png")
             os.makedirs(os.path.dirname(out), exist_ok=True)
             R.save_rows(rows, out)
+            polish_sheet(out)
             if prev:
                 R.preview(rows, os.path.join(prev, f"{fam}_{liv}.png"), z=4, labels=[fam])
             print("wrote", os.path.relpath(out, REPO))

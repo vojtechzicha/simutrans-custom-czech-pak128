@@ -44,9 +44,11 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 FAM = os.path.join(REPO, "vehicle-rail", "european-sleeper", "186")
 
 import numpy as np  # noqa: E402
+from PIL import Image  # noqa: E402
 import railkit as R  # noqa: E402
 from railkit import Paint, Part  # noqa: E402
 from render import DIRS  # noqa: E402
+import style as S  # noqa: E402
 
 L = 10.0
 W = 0.92
@@ -108,61 +110,6 @@ def mix(a, b, t):
     a = rgb(a) if isinstance(a, int) else a
     b = rgb(b) if isinstance(b, int) else b
     return tuple(int(round(a[i] + (b[i] - a[i]) * t)) for i in range(3))
-
-
-# ------------------------------------------------------------------ lettering
-FONT = {
-    "L": ["#..", "#..", "#..", "#..", "###"], "I": ["#", "#", "#", "#", "#"],
-    "N": ["#.#", "###", "###", "###", "#.#"], "E": ["###", "#..", "##.", "#..", "###"],
-    "A": [".#.", "#.#", "###", "#.#", "#.#"], "S": [".##", "#..", ".#.", "..#", "##."],
-    "t": [".#.", "###", ".#.", ".#.", ".##"], "r": ["...", "#.#", "##.", "#..", "#.."],
-    "a": ["...", ".##", "#.#", "#.#", ".##"], "i": ["#", ".", "#", "#", "#"],
-    "n": ["...", "##.", "#.#", "#.#", "#.#"], "c": ["...", ".##", "#..", "#..", ".##"],
-    "h": ["#..", "#..", "##.", "#.#", "#.#"], "e": ["...", ".#.", "###", "#..", ".##"],
-    " ": ["."] * 5,
-}
-
-
-class Text:
-    def __init__(self, s, x0, x1, z0, z1, sub=8):
-        cols = []
-        for i, ch in enumerate(s):
-            g = FONT[ch]
-            if i:
-                cols.append([0] * 5)
-            for c in range(len(g[0])):
-                cols.append([1 if g[r][c] == "#" else 0 for r in range(5)])
-        bm = np.array(cols, float).T
-        self.bm = np.kron(bm, np.ones((sub, sub)))
-        self.x0, self.x1, self.z0, self.z1 = x0, x1, z0, z1
-        h, w = self.bm.shape
-        self.sat = np.zeros((h + 1, w + 1))
-        self.sat[1:, 1:] = self.bm.cumsum(0).cumsum(1)
-
-    def cov(self, x, z, dx=0.25, dz=1.0):
-        h, w = self.bm.shape
-        fx = lambda xx: min(max((xx - self.x0) / (self.x1 - self.x0) * w, 0), w)
-        fz = lambda zz: min(max((self.z1 - zz) / (self.z1 - self.z0) * h, 0), h)
-        a0, a1 = int(round(fx(x - dx / 2))), int(round(fx(x + dx / 2)))
-        b0, b1 = int(round(fz(z + dz / 2))), int(round(fz(z - dz / 2)))
-        if a1 <= a0 or b1 <= b0:
-            return 0.0
-        s = self.sat[b1, a1] - self.sat[b0, a1] - self.sat[b1, a0] + self.sat[b0, a0]
-        return s / ((dx / (self.x1 - self.x0) * w) * (dz / (self.z1 - self.z0) * h))
-
-
-_cache = {}
-
-
-def _text(key, s, u0, u1, z0, z1, side):
-    """Text s on the side (side = +1 for +v, -1 for -v) over u0..u1."""
-    k = (key, side)
-    if k not in _cache:
-        if side < 0:
-            _cache[k] = Text(s, u0, u1, z0, z1)
-        else:
-            _cache[k] = Text(s, L - u1, L - u0, z0, z1)
-    return _cache[k]
 
 
 # stripe rows (z) - each exactly 1 px so they stay crisp at 1x
@@ -233,18 +180,7 @@ def side_colour(u, z, side):
             return mix(TEAL, NAVY, t) if (k % 2 == 0 or t < 0.4) else NAVY
     if cab1:
         return NAVY
-    # lettering: LINEAS near cab 1 (upper), train charter near cab 2 (middle)
-    t = _text("lineas", "LINEAS", cu(3.3), cu(4.6), zm(2.58), zm(2.90), side)
-    x = u if side < 0 else L - u
-    cv = t.cov(x, z)
-    if cv > 0.3:
-        return WHITE
-    t = _text("tc", "train charter", cu(13.8), cu(15.8), zm(1.58), zm(1.90), side)
-    cv = t.cov(x, z)
-    if cv > 0.32:
-        return WHITE
-    if cv > 0.15:
-        return mix(NAVY, WHITE, 0.45)
+    # (2026-09-26 style: no 1-px lettering; the LINEAS / train charter words are left out)
     # "DECARBONIZING BORDERLESS PERFORMANCE": teal boxes, white middle word
     if 7.6 <= z < 8.6 and cu(7.2) <= u <= cu(9.0):
         return TEAL                                         # DECARBONIZING
@@ -255,10 +191,6 @@ def side_colour(u, z, side):
     m = mountains(u, z)
     if m is not None:
         return m
-    # a few stars in the upper part
-    for (su, sz) in ((5.0, 9.6), (6.9, 9.8), (7.8, 9.3)):
-        if abs(u - su) < 0.12 and abs(z - sz) < 0.5:
-            return 0xC8D4F0
     return NAVY
 
 
@@ -284,10 +216,6 @@ def front_colour(v, z, rear):
     if not rear:
         if stripe(z):
             return TEAL
-        t = Text("LINEAS", -0.42, 0.42, zm(1.72), zm(1.98)) if "fl" not in _cache else _cache["fl"]
-        _cache["fl"] = t
-        if t.cov(vs, z) > 0.3:
-            return WHITE
         return NAVY
     # cab 2: broad white diagonal rising to the right as seen
     zc = Z_FRONT_LOW + (vs + 0.25) / 0.75 * (Z_WS0 - Z_FRONT_LOW)
@@ -313,7 +241,7 @@ def body_mat(f, u, v, z, d):
                 return Paint(0x30343C) if (k % 1.0) < 0.15 else Paint(GRILLE)
             return Paint(NAVY)
         if z >= Z_GRILLE:
-            return Paint(BLUE2 if (in_cab and rear) else (NAVY if in_cab else 0x3C4049))
+            return Paint(BLUE2 if (in_cab and rear) else (NAVY if in_cab else S.GUTTER))
         col = side_colour(u, z, side)
         return col if isinstance(col, tuple) and col in (R.HEAD, R.TAIL) else Paint(col)
     if f == "+z":
@@ -377,7 +305,7 @@ def build(liv="lineas"):
     for (a, b) in ((1.9, 2.9), (7.1, 8.1)):
         parts.append(Part(a, b, -0.40, 0.40, Z_ROOF, Z_ROOF + 0.40, lambda *a: Paint(0x44484F, top=0x50555D), own))
     lines += R.pantograph(7.45, Z_ROOF + 0.40, own, fold=-1, reach=0.9, height=5.2,
-                          col=(0x70, 0x74, 0x78), head=PANTO_HEAD, half_head=0.62, thick=False)
+                          col=S.PANTO_ARM, head=S.PANTO_HEAD, half_head=0.62, thick=False)
     return parts, lines
 
 
@@ -402,6 +330,7 @@ def main():
         out = os.path.join(FAM, "sprites", f"{liv}.png")
         os.makedirs(os.path.dirname(out), exist_ok=True)
         R.save_rows(rows, out)
+        S.polish(Image.open(out), **S.POLISH).save(out)
         if prev:
             R.preview(rows, os.path.join(prev, f"traxx_{liv}.png"), z=4, labels=[liv])
         print("wrote", os.path.relpath(out, REPO))

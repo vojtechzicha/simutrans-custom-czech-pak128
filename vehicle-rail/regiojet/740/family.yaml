@@ -38,6 +38,9 @@ display:
 # tools/railrender/rj_shunters.py 740). Length 7 (13.6 m at 26.4 m = 13 cu),
 # like the native CD 740 / CSD T 448.0; short hood leading as on the natives,
 # headlights at both ends.
+# Rendered in the 2026-09-26 render style (tools/railrender/style.py, applied in
+# tools/railrender/rj_style.py; regenerate with `python tools/railrender/regiojet.py 740`):
+# polished (outlines, face edges, colour).
 
 vehicles:
   - id: "740"

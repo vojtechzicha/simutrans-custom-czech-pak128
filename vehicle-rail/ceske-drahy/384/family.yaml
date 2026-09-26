@@ -14,9 +14,9 @@
 # "České dráhy" behind the cab door; fronts white round the windscreen with a
 # navy cap, navy lower front with white grille stripes; grey underframe.
 #
-# Sprites: original art, rendered from a box model (vectron.py geometry, ČD
-# paint in tools/railrender/cd_loco_modern.py); regenerate with
-# `python tools/railrender/cd_loco_modern.py 384`. Length 10 like the 193.
+# Sprites: original art, rendered from a box model (vectron.py geometry, ČD paint in
+# tools/railrender/cd_loco_modern.py) in the 2026-09-26 render style (tools/railrender/
+# style.py); regenerate with `python tools/railrender/cd_loco_modern.py 384`. Length 10.
 
 agency: CeskeDrahy
 type: "384"

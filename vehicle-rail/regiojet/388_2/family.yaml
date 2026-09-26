@@ -23,6 +23,9 @@
 # Sprites: original art rendered from a box model, tools/railrender/rj_locos.py
 # (class Traxx, gen "t3"); regenerate with `python tools/railrender/regiojet.py
 # 388_2`. Length 10 like the native 19 m locos.
+# Rendered in the 2026-09-26 render style (tools/railrender/style.py, applied in
+# tools/railrender/rj_style.py; regenerate with `python tools/railrender/regiojet.py 388_2`):
+# dark gutter row where the grey roof shoulder meets the yellow body; light pantograph arms with a dark head bar.
 
 agency: RegioJet
 type: "388.2"

@@ -12,7 +12,9 @@
 # from the bottom sapphire / white / light blue / thin white / sapphire top
 # edge, the same bands round the cab with a light-blue window zone.
 #
-# Sprites: original art, rendered from a box model,
+# Sprites: original art, rendered from a box model in the 2026-09-26 render style
+# (tools/railrender/style.py: dark roof gutters, no 1-px lettering, receding
+# handrails, style.polish),
 # tools/railrender/cd_loco_shunter.py; regenerate with
 # `python tools/railrender/cd_loco_shunter.py 794`. Length 4 like the other
 # two-axle shunters.

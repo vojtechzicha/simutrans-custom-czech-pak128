@@ -16,6 +16,9 @@
 # (class Traxx, gen "ms2e"); regenerate with `python tools/railrender/regiojet.py
 # 386_2`. Drawn at length 10 like the native 19 m locos (1216, ES64U2), 2-3 px
 # taller than the coaches like the natives.
+# Rendered in the 2026-09-26 render style (tools/railrender/style.py, applied in
+# tools/railrender/rj_style.py; regenerate with `python tools/railrender/regiojet.py 386_2`):
+# dark gutter row where the grey roof shoulder meets the yellow body; light pantograph arms with a dark head bar.
 
 agency: RegioJet
 type: "386.2"

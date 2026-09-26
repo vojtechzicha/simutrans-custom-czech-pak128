@@ -11,6 +11,13 @@ Families (vehicle-rail/ceske-drahy/<family>/sprites/<livery>.png):
   750_7  CZ LOKO rebuild of the 753 (2010-2017): same carbody and hood, new
          flat cab front with one wide white-framed windscreen, no goggles:
          najbrt2, najbrt1_2
+  750    unmodernised ČKD T 478.3 (753 rebuilt with electric train heating),
+         the 754 carbody with the goggle cab: zelenosediva, najbrt1_2
+
+Render style (2026-09-26, tools/railrender/style.py): the Brejlovec really is
+rounded (roof in two steps, raked goggle cab), so it keeps its rounded body, but
+the roof/body junction is a dark gutter line (never a light rim), there is no
+side lettering, and every sheet goes through style.polish(**style.POLISH).
 
 Scale: 16.66 m over buffers drawn at length 8 like the native CD_754 (2.08 m per
 carunit), bodies 2-3 px taller than coaches like the natives. Geometry and the
@@ -39,6 +46,8 @@ from railkit import Paint, Part  # noqa: E402
 from render import DIRS  # noqa: E402
 import rj_locos as K  # noqa: E402  (screen-row helpers, Glyphs, bogie)
 import cd_loco_livery as C  # noqa: E402
+import style as ST  # noqa: E402
+from PIL import Image  # noqa: E402
 from rj_locos import prow, in_cols, in_vcols, on_col, vc, scr, _uu, Glyphs, EndGlyphs  # noqa: E402
 
 WS = K.WS
@@ -49,7 +58,11 @@ P_BUF = K.P_BUF
 FRAME_GREY = (62, 66, 70)      # dark grey frame / lower front (N1, N1.2, red-yellow)
 RED_DK = (150, 26, 22)
 LOCO_SKY = C.LOCO_SKY
-N12_ROOF = (170, 175, 178)    # as the E99 N1.2 roof
+N12_ROOF = ST.ROOF           # N1.2 roof: the agreed mid-dark grey (photos: grey roof)
+GUTTER = Paint(ST.GUTTER)     # dark line where the roof meets the body
+ZG_GREEN = (0, 78, 78)        # ČSD / ČD 750 dark teal green (as TommPa9's sheet)
+ZG_GREY = (165, 167, 168)     # its light grey lower band
+ZG_ROOF = (0, 52, 52)
 N12_SILL = (58, 61, 64)       # as the E99 N1.2 sill
 
 
@@ -95,6 +108,12 @@ def livery(name):
                    upper=sky, lower=sky, band=pnt(C.BC_CREAM), frame=sky, beam=pnt(C.BC_BLUE),
                    lamp=sky, logo_side="b", logo_front="b", n1=False,
                    grille=(pnt(lighten(LOCO_SKY, 0.62)), pnt(lighten(LOCO_SKY, 0.80))))
+    if name == "zelenosediva":
+        green, grey = pnt(ZG_GREEN), pnt(ZG_GREY)
+        return Liv(name=name, roof=pnt(ZG_ROOF, top=(10, 64, 64)), sill=pnt(FRAME_GREY),
+                   upper=green, lower=grey, band=grey, frame=grey, beam=pnt(FRAME_GREY),
+                   lamp=grey, logo_side=None, logo_front=None, n1=False,
+                   grille=(pnt(lighten(ZG_GREEN, 0.55)), pnt(lighten(ZG_GREEN, 0.8))))
     raise ValueError(name)
 
 
@@ -124,8 +143,7 @@ class Brejlovec:
         self.liv, self.variant = liv, variant
         self.g754 = variant == "754"
         cols = {"b": pnt(C.SAPPHIRE), "w": pnt(C.WHITE), "c": pnt(C.WHITE)}
-        self.logo = (Glyphs(3.3, self.ZY, (2, 2), LOGO_S["H"], LOGO_S["D"], cols)
-                     if self.C.logo_side else None)
+        self.logo = None          # agreed style: no side lettering (reads as noise)
         fc = pnt(C.WHITE) if self.C.logo_front == "w" else pnt(C.SAPPHIRE)
         self.flogo = (EndGlyphs(0.0, self.ZY, 2, LOGO_F, {"c": fc})
                       if self.C.logo_front else None)
@@ -144,25 +162,27 @@ class Brejlovec:
         if self.liv == "modrokremova":
             ya, yb = (1, 3) if k == "H" else (1, 2)
             return "band" if ya <= r <= yb else "upper"
+        if self.liv == "zelenosediva":
+            return "lower" if r <= (2 if k == "H" else 1) else "upper"
         return "upper"
 
     def n1_side(self, f, u, z, r, k):
         """Najbrt 1 / 1.2 trapezoids: grey at the cab-1 end, then a sky wedge
         and a sapphire wedge rising toward cab 2 (boundaries lean back)."""
         L = self.L
-        s = u                                   # physical position from cab 1
-        h = r / 6.0
-        b1 = 1.62 + 0.9 * h                     # grey -> sky
-        b2 = 2.10 + 1.6 * h                     # sky -> sapphire
-        if s < b1:
+        if u < 1.46 or u > L - 1.46:            # both cab sections light grey
             return self.C.upper
-        if s < b2:
-            return pnt(LOCO_SKY)
-        return pnt(C.SAPPHIRE)
+        t = (u - 1.46) / (L - 2.92)             # 0 at cab 1 .. 1 at cab 2
+        top = 6 if k == "H" else 5
+        if r <= round(t * (top - 1)):           # sapphire trapezoid, rising to cab 2
+            return pnt(C.SAPPHIRE)
+        return pnt(LOCO_SKY)
 
     # --------------------------------------------------------- paint
     def side(self, f, u, v, z, d):
         Cl, L = self.C, self.L
+        if self.ZS1 <= z < self.ZS1 + 0.45:
+            return GUTTER
         if z >= self.ZS1:
             return Cl.roof
         if z < self.ZY:
@@ -242,6 +262,8 @@ class Brejlovec:
             return Cl.band if r == 1 else Cl.upper
         if self.liv in ("cervenozluta", "modrokremova"):
             return Cl.band if r in (1, 2) else Cl.upper
+        if self.liv == "zelenosediva":
+            return Cl.band if r in (1, 2) else Cl.upper
         return Cl.upper
 
     def front_roof(self, f, u, v, z, d):
@@ -259,7 +281,7 @@ class Brejlovec:
     def body_mat(self):
         def mat(f, u, v, z, d):
             if f == "+z":
-                return self.C.roof
+                return GUTTER if z < self.ZS1 + 0.05 else self.C.roof
             if f in ("+v", "-v"):
                 return self.side(f, u, v, z, d)
             return self.front(f, u, v, z, d)
@@ -334,6 +356,7 @@ def row(liv, variant):
 JOBS = {
     "754": [(liv, "754") for liv in ("najbrt2", "najbrt1_2", "najbrt1", "cervenozluta", "modrokremova")],
     "750_7": [(liv, "750.7") for liv in ("najbrt2", "najbrt1_2")],
+    "750": [(liv, "754") for liv in ("zelenosediva", "najbrt1_2")],
 }
 
 
@@ -352,6 +375,9 @@ def main():
             out = os.path.join(FAM, fam, "sprites", f"{liv}.png")
             os.makedirs(os.path.dirname(out), exist_ok=True)
             R.save_rows(rows, out)
+            im = Image.open(out); im.load()
+            im = ST.polish(im.convert("RGB"), **ST.POLISH)
+            im.save(out)
             rows_all += rows
             labels.append(liv)
             print("wrote", os.path.relpath(out, REPO))

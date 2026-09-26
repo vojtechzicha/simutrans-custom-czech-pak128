@@ -20,10 +20,10 @@
 # Not shipped (one-offs): 362.001 orange 1980 scheme, 362.078 ČSD retro, 362.165
 # blue-cream, advertising on 081 and 110.
 #
-# Sprites: najbrt2 is original art rendered from a box model
-# (tools/railrender/cd_loco_e99.py 362). najbrt1_2 and modrokremova are TommPa9's
-# pak128.cs drawings (CD_362_Rychle_Eso_(balkan) / CD_362_Rychle_Eso), extracted from
-# the compiled pak and shifted to source coordinates; static sheets. Length 8.
+# Sprites: every livery rendered in the 2026-09-26 style (tools/railrender/style.py:
+# slab Eso / Persing box, dark roof gutter, ribbed sides, measured livery zones,
+# no side lettering, light pantograph arms with a dark head bar, style.polish);
+# regenerate with `python tools/railrender/cd_loco_e99.py 362`. Length 8.
 
 agency: CeskeDrahy
 type: "362"
@@ -67,8 +67,6 @@ liveries:
   - color: najbrt1_2
     name_en: "Najbrt 1.2"
     name_cs: "Najbrt 1.2"
-    copyright: "TommPa9"   # pak128.cs art
   - color: modrokremova
     name_en: "blue-cream"
     name_cs: "modro-krémová"
-    copyright: "TommPa9"   # pak128.cs art

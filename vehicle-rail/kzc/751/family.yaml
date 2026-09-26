@@ -25,7 +25,7 @@ display:
 #
 # Same body and model as the 749 family (tools/railrender/kzc_t478.py;
 # regenerate with `python tools/railrender/ops.py kzc/751`); rendered at
-# length 8, original art.
+# length 8 in the 2026-09-26 render style (tools/railrender/style.py), original art.
 
 vehicles:
   - id: "751"

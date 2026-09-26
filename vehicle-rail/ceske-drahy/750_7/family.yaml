@@ -16,9 +16,10 @@
 #              trapezoids along the hood, dark grey frame and lower front, blue
 #              windscreen frame (750.701-704, 707, 709-711; ≈8)
 #
-# Sprites: original art, rendered from a box model (tools/railrender/
-# cd_loco_brejlovec.py, the Brejlovec body with the rebuilt fronts); regenerate
-# with `python tools/railrender/cd_loco_brejlovec.py 750_7`. Length 8.
+# Sprites: original art, rendered from a box model in the 2026-09-26 render style
+# (tools/railrender/style.py; the Brejlovec body with the rebuilt fronts in
+# tools/railrender/cd_loco_brejlovec.py); regenerate with
+# `python tools/railrender/cd_loco_brejlovec.py 750_7`. Length 8.
 
 agency: CeskeDrahy
 type: "750.7"

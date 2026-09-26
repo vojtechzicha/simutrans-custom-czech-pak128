@@ -45,6 +45,10 @@ Liveries (cd_loco_livery.py colours):
 
 Headlights at both ends, cab glass plain (never the lit specials).
 
+Render style 2026-09-26 (tools/railrender/style.py): roof slabs have dark GUTTER
+side faces, no 1-px logos or lettering, handrails mid grey with end posts only,
+every sheet post-processed with style.polish(**style.POLISH).
+
     python tools/railrender/cd_loco_shunter.py [704|794|799 ...] [--preview DIR]
 """
 import os
@@ -59,8 +63,9 @@ import railkit as R  # noqa: E402
 from railkit import Paint  # noqa: E402
 import rj_shunters as S  # noqa: E402
 from rj_shunters import box, buffers, axle_wheels, corner_steps, render_row, rail_lines, \
-    posts_between, zm, vm, WS, WS_HI  # noqa: E402
+    zm, vm, WS, WS_HI  # noqa: E402
 import cd_loco_livery as C  # noqa: E402
+import style  # noqa: E402
 
 L = 4.0
 UB = 0.22                   # buffer beam faces
@@ -76,10 +81,19 @@ RC_ROOF = (122, 92, 88)     # 704 red-cream: weathered roof
 DGREY = (58, 60, 63)        # dark grey frame (red-cream 704, 799 orange)
 N12_ROOF = (170, 175, 178)  # N1.2 roof and sill as on the E99 family (362 / 162)
 N12_SILL = (58, 61, 64)
+RAIL = (128, 133, 138)     # handrails: mid grey, so they do not read as white bars
 
 
 def P(c, top=None):
     return Paint(c, top=top if top is not None else c)
+
+
+def gut(mat):
+    """Roof slab: its own colour on top, the dark style.GUTTER on every side face,
+    so roof and body meet at a dark line (never a light rim)."""
+    g = P(style.GUTTER)
+    m = mat if callable(mat) else (lambda *a, _p=mat: _p)
+    return lambda f, u, v, z, d: m(f, u, v, z, d) if f == "+z" else g
 
 
 def dk(c, f):
@@ -176,12 +190,6 @@ def build_704(liv):
                     band_at(K["bands"], z) is not band_at(K["bands"], ZW + 0.1) and \
                     ZW + 2.0 < z < ZHT - 0.7 and liv != "najbrt1_2":
                 return K["louvre"] if liv == "cervenokremova" else band_at(K["bands"], z)
-            if liv == "najbrt2" and u1 <= UH1 + 1e-6 and UH1 - 0.62 < u < UH1 - 0.30 and \
-                    zm(1.75) < z < zm(2.05):
-                return K["logo"]                     # white ČD logo near the cab
-            if liv == "cervenokremova" and u1 <= UH1 + 1e-6 and UH1 - 0.62 < u < UH1 - 0.30 and \
-                    zm(1.55) < z < zm(1.90):
-                return K["logo"]
             return band_at(K["bands"], z)
         return m
 
@@ -200,7 +208,7 @@ def build_704(liv):
     parts.append(box(US0, US1, -WH, WH, ZW, ZHT, hood(US0, US1, "+u")))
     hroof = K["hoodtop"]
     for (a, b) in ((UH0, UH1), (US0, US1)):
-        parts.append(box(a + 0.04, b - 0.02, -WH + 0.12, WH - 0.12, ZHT, ZHT + 0.35, hroof))
+        parts.append(box(a + 0.04, b - 0.02, -WH + 0.12, WH - 0.12, ZHT, ZHT + 0.35, gut(hroof)))
     parts.append(box(UH1 - 0.34, UH1 - 0.20, -0.12, 0.12, ZHT + 0.35, ZHT + 1.6, P((48, 50, 52))))
 
     # cab
@@ -218,16 +226,16 @@ def build_704(liv):
             return WS_HI if z > ZCS - 1.6 else WS
         return base
     parts.append(box(UC0, UC1, -WC, WC, ZW, ZCS, cab))
-    parts.append(box(UC0 - 0.16, UC1 + 0.16, -WC - 0.04, WC + 0.04, ZCS, ZCS + 0.32, K["roof"]))
-    parts.append(box(UC0 - 0.05, UC1 + 0.05, -WC + 0.14, WC - 0.14, ZCS + 0.32, ZCR + 0.2, K["roof"]))
+    parts.append(box(UC0 - 0.16, UC1 + 0.16, -WC - 0.04, WC + 0.04, ZCS, ZCS + 0.32, gut(K["roof"])))
+    parts.append(box(UC0 - 0.05, UC1 + 0.05, -WC + 0.14, WC - 0.14, ZCS + 0.32, ZCR + 0.2, gut(K["roof"])))
     corner_steps(UB, UR, zm(0.25), ZFB, parts, K["frame"], P(CHEV_Y))
 
-    rail = (0xE8, 0xEA, 0xEA) if liv != "cervenokremova" else (0xD8, 0xD8, 0xD4)
+    rail = RAIL   # 2026-09-26 style: handrails recede, only end posts
     zt = ZW + 3.0
     for s, face in ((1, "+v"), (-1, "-v")):
         vv = s * (WF - 0.03)
         side_lines.append((face, rail_lines(UB + 0.05, UH0 + 1.1, vv, ZW, zt, rail,
-                                            posts_between(UB + 0.05, UH0 + 1.1, 0.55))))
+                                            [UB + 0.05, UH0 + 1.1])))
     return parts, side_lines
 
 
@@ -270,7 +278,7 @@ def build_794():
     for a in (um(1.8, span), um(5.9, span)):
         axle_wheels(a, parts, 0.55, 0.80)
     parts.append(box(UH0, UH1, -WH, WH, ZW, ZHT, hood))
-    parts.append(box(UH0 + 0.06, UH1, -WH + 0.10, WH - 0.10, ZHT, ZHT + 0.30, sap))
+    parts.append(box(UH0 + 0.06, UH1, -WH + 0.10, WH - 0.10, ZHT, ZHT + 0.30, gut(sap)))
     parts.append(box(UH1 - 0.62, UH1 - 0.50, -0.10, 0.10, ZHT + 0.30, ZHT + 1.7, P((150, 154, 158))))
 
     def cab(f, u, v, z, d):
@@ -285,21 +293,19 @@ def build_794():
             return WS_HI if z > ZCS - 1.6 else WS
         if f == "+u" and 0.40 < abs(v) < 0.60 and zm(1.95) < z < zm(2.30):
             return R.HEAD
-        if f in ("+v", "-v") and 0.50 < cu < 0.85 and zm(2.10) < z < zm(2.45):
-            return sap                                # ČD logo + lettering
         return band_at(cab_bands, z)
     parts.append(box(UC0, UC1, -WC, WC, ZW, ZCS, cab))
     # flat roof with the sun visor over the front windows
-    parts.append(box(UC0 - 0.34, UC1 + 0.06, -WC - 0.05, WC + 0.05, ZCS, ZCS + 0.30, sap))
-    parts.append(box(UC0 - 0.02, UC1 - 0.02, -WC + 0.20, WC - 0.20, ZCS + 0.30, ZCR + 0.25, sap))
+    parts.append(box(UC0 - 0.34, UC1 + 0.06, -WC - 0.05, WC + 0.05, ZCS, ZCS + 0.30, gut(sap)))
+    parts.append(box(UC0 - 0.02, UC1 - 0.02, -WC + 0.20, WC - 0.20, ZCS + 0.30, ZCR + 0.25, gut(sap)))
     corner_steps(UB, UR, zm(0.28), ZFB, parts, sap, P(CHEV_Y))
 
-    rail = (0xE8, 0xEA, 0xEA)
+    rail = RAIL
     zt = ZW + 3.0
     for s, face in ((1, "+v"), (-1, "-v")):
         vv = s * (WF - 0.03)
         side_lines.append((face, rail_lines(UB + 0.05, UH1 - 0.05, vv, ZW, zt, rail,
-                                            posts_between(UB + 0.05, UH1 - 0.05, 0.62))))
+                                            [UB + 0.05, UH1 - 0.05])))
     return parts, side_lines
 
 
@@ -366,10 +372,10 @@ def build_799(liv):
         return band_at(K["bands"], z)
     parts.append(box(UC0, UC1, -WC, WC, ZW, ZCS, cab))
     # big overhanging roof
-    parts.append(box(UC0 - 0.22, UC1 + 0.22, -WC - 0.10, WC + 0.10, ZCS, ZCS + 0.40, K["roof"]))
+    parts.append(box(UC0 - 0.22, UC1 + 0.22, -WC - 0.10, WC + 0.10, ZCS, ZCS + 0.40, gut(K["roof"])))
     corner_steps(UB, UR, zm(0.22), ZFB, parts, K["frame"], P(CHEV_Y))
 
-    rail = (0xD8, 0xDA, 0xDA)
+    rail = RAIL
     zt = ZHT + 1.2
     for s, face in ((1, "+v"), (-1, "-v")):
         vv = s * (WF - 0.03)
@@ -405,6 +411,8 @@ def main():
             out = os.path.join(FAM, fam, "sprites", f"{liv}.png")
             os.makedirs(os.path.dirname(out), exist_ok=True)
             R.save_rows(rows, out)
+            from PIL import Image
+            style.polish(Image.open(out), **style.POLISH).save(out)
             if prev:
                 R.preview(rows, os.path.join(prev, f"{fam}_{liv}.png"), z=4, labels=labels)
             print("wrote", os.path.relpath(out, REPO))

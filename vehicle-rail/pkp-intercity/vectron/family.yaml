@@ -45,7 +45,9 @@ display:
 # 053 / 194 (no photo of their 2026 livery).
 #
 # Sprites are rendered from a box model: tools/railrender/ops_vectron.py wraps
-# the Leo Express Vectron (tools/railrender/vectron.py) and repaints it.
+# the Leo Express Vectron (tools/railrender/vectron.py) and repaints it,
+# rendered in the 2026-09-26 style (tools/railrender/style.py: dark roof gutter, light
+# pantograph arms with a dark head bar, style.polish).
 # Regenerate with `python tools/railrender/ops_vectron.py`. Each livery holds
 # one vehicle (its real class number), all on sprite row 0.
 

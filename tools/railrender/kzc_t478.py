@@ -31,6 +31,7 @@ import numpy as np
 import railkit as R
 from railkit import Paint, Part, Lit
 from render import DIRS
+import style as S
 
 L = 8.0
 M = 16.5 / L                 # metres per carunit
@@ -271,6 +272,8 @@ def build(liv):
             if (1.30 <= u <= 1.70 or 1.84 <= u <= 2.28) and abs(v) < 0.34:
                 return Paint(0x3A3E40, top=0x3A3E40)
             return C["roof"]
+        if z < Z_ROOF1:
+            return Paint(S.GUTTER)       # 2026-09-26 style: dark gutter where roof meets body
         return C["roof"]
 
     parts.append(Part(U_VIS + 0.02, L - U_VIS - 0.02, -W + 0.12, W - 0.12, Z_WALL, Z_ROOF1, roof_mat, own))

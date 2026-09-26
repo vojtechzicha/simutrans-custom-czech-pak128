@@ -27,7 +27,10 @@ display:
 # INTERCITY"), red-brown diamond pantographs. The heritage liveries do not
 # work to Bohumín.
 #
-# Sprites are rendered from a box model (tools/railrender/pkp_locos.py).
+# Sprites are rendered from a box model (tools/railrender/pkp_locos.py),
+# rendered in the 2026-09-26 style (tools/railrender/style.py: dark roof gutter, light
+# pantograph arms with a dark head bar, style.polish); the halftone fade of the blue band is drawn
+# as a clean edge and the small PKP INTERCITY lettering left out (1-px noise).
 # Regenerate with `python tools/railrender/pkp_locos.py eu07`.
 
 vehicles:

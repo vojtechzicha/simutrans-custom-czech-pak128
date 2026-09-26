@@ -15,8 +15,10 @@
 # shipped: 111.011 ČSD historical green, 111.001 red-cream (museum).
 #
 # Sprites: original art, rendered from a box model with the pak128.cs-calibrated
-# renderer, tools/railrender/cd_loco_centrecab.py (regenerate: python
-# tools/railrender/cd_loco_centrecab.py 111). Length 7 (14.4 m at 26.4 m = 13 cu).
+# renderer in the 2026-09-26 render style (tools/railrender/style.py: dark roof
+# gutters, grouped hood louvres, no 1-px lettering, quiet end rails only, polish
+# pass); regenerate with `python tools/railrender/cd_loco_centrecab.py 111`.
+# Length 7 (14.4 m at 26.4 m = 13 cu).
 
 agency: CeskeDrahy
 type: "111"

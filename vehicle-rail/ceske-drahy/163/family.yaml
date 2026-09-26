@@ -15,10 +15,10 @@
 #   zelenozluta  ČD green with the yellow band over the lamps on the sides and fronts,
 #                yellow windscreen frames, black ČD logo (163 004, 068, 062).
 #
-# Sprites: najbrt2 is original art rendered from a box model
-# (tools/railrender/cd_loco_e99.py 163). zelenozluta and najbrt1_2 are TommPa9's
-# pak128.cs drawings (CD_163_Pershing / CD_163_Pershing_(balkan)), extracted from the
-# compiled pak and shifted to source coordinates; static sheets. Length 8.
+# Sprites: every livery rendered in the 2026-09-26 style (tools/railrender/style.py:
+# slab Eso / Persing box, dark roof gutter, ribbed sides, measured livery zones,
+# no side lettering, light pantograph arms with a dark head bar, style.polish);
+# regenerate with `python tools/railrender/cd_loco_e99.py 163`. Length 8.
 
 agency: CeskeDrahy
 type: "163"
@@ -62,8 +62,6 @@ liveries:
   - color: zelenozluta
     name_en: "green-yellow"
     name_cs: "zeleno-žlutá"
-    copyright: "TommPa9"   # pak128.cs art
   - color: najbrt1_2
     name_en: "Najbrt 1.2"
     name_cs: "Najbrt 1.2"
-    copyright: "TommPa9"   # pak128.cs art

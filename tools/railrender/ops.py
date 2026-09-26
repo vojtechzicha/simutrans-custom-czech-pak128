@@ -38,6 +38,11 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 RAIL = os.path.join(REPO, "vehicle-rail")
 
 import railkit as R  # noqa: E402
+import style as S  # noqa: E402
+
+# locomotives: post-processed with the 2026-09-26 render style (coaches and
+# units of this set keep their sheets as rendered)
+POLISHED = {"kzc/749", "kzc/751", "mbm-rail/708", "zssk/361_1"}
 
 # 749 / 751: family livery -> kzc_t478 model key
 T478 = {"749": [("vinovosediva", "rudenka"), ("cervenosediva", "cervena"), ("modrobila", "modrobila")],
@@ -74,6 +79,9 @@ def main():
             out = os.path.join(RAIL, *fam.split("/"), "sprites", f"{liv}.png")
             os.makedirs(os.path.dirname(out), exist_ok=True)
             R.save_rows(rows, out)
+            if fam in POLISHED:
+                from PIL import Image
+                S.polish(Image.open(out), **S.POLISH).save(out)
             if prev:
                 R.preview(rows, os.path.join(prev, f"{fam.replace('/', '_')}_{liv}.png"), z=4, labels=labels)
             print("wrote", os.path.relpath(out, REPO))

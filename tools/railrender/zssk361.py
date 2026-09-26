@@ -25,11 +25,17 @@ Kolin line Aug 2025 = korporatni):
                in front of it with the big white ZSSK arc logo, the off-white
                lower band only on the left part.
 
+2026-09-26 render style (tools/railrender/style.py): the Peršing is drawn as a
+hard-edged box (vertical front, flat roof slab whose edge is the dark gutter,
+style roof colours), ribbed machine-room panels, light pantographs with a dark
+head bar, and the written sheets go through style.polish().
+
 Regenerate: python zssk361.py [--preview DIR]  (writes the family sheets)
 """
 import os
 import sys
 import numpy as np
+from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 WT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -37,6 +43,7 @@ sys.path.insert(0, os.path.join(WT, "tools", "railrender"))
 import railkit as R                      # noqa: E402
 from railkit import Paint, Part          # noqa: E402
 from render import DIRS                  # noqa: E402
+import style as S                        # noqa: E402
 
 L = 8.0
 LEN_M = 16.8
@@ -68,8 +75,8 @@ RED = Paint(0xB8202A, top=0xC02632)
 WHITE = Paint(0xE6E2DA)
 GREY = Paint(0x8E8A86)
 FRAME = Paint(0x55524F)
-ROOF = Paint(0xB2B0AC, top=0xBDBBB7)
-ROOF_DK = Paint(0x8E8C88, top=0x9A9894)
+ROOF = Paint(S.ROOF, top=S.ROOF_TOP)     # 2026-09-26 style roof
+GUT = Paint(S.GUTTER)
 GRILLE = Paint(0x55585C, top=0x5E6166)
 GRILLE_DK = Paint(0x3C3F43, top=0x44474B)
 YELLOW = Paint(0xE8C21A)
@@ -84,8 +91,8 @@ WS_HI = (0x4F, 0x62, 0x72)
 PORT = (0x22, 0x2A, 0x32)
 PORT_HI = (0x46, 0x56, 0x64)
 FRAMEW = (0xEE, 0xEC, 0xE6)
-PANTO = (0x7A, 0x24, 0x22)
-PANTO_HEAD = (0x2C, 0x2C, 0x2E)
+PANTO = S.PANTO_ARM
+PANTO_HEAD = S.PANTO_HEAD
 LOGO = (0xF2, 0xF0, 0xEA)
 ORANGE = (0xE8, 0x7A, 0x1E)
 PPC = {"ne": 5.66, "sw": 5.66, "w": 4.0, "e": 4.0, "n": 4.0, "s": 4.0, "nw": 2.83, "se": 2.83}
@@ -135,7 +142,10 @@ class Model:
         for pc in PORTS:
             if ((dm - pc) / PORT_R) ** 2 + ((z - PORT_Z) / PORT_RZ) ** 2 <= 1.0:
                 return PORT_HI if z > PORT_Z + 0.35 else PORT
-        return self.paint_side(dm, along, z, d)
+        p = self.paint_side(dm, along, z, d)
+        if dm >= CAB_M and ZG < z < ZS - 0.7 and rib(z, d) and p in (RED, WHITE):
+            return Paint(tuple(int(c * S.RIB) for c in p.base))   # ribbed panels
+        return p
 
     def paint_side(self, dm, along, z, d, door=False):
         cab = dm < CAB_M
@@ -202,49 +212,29 @@ class Model:
 
     # ----------------------------------------------------------- material
     def mat(self, f, u, v, z, d):
-        rear = u > L / 2
-        cu = min(u, L - u)
         if f in ("+v", "-v"):
             return self.side(f, u, v, z, d)
         if f in ("-u", "+u"):
             return self.end_face(u, v, z, d, f == "+u")
-        if z < ZS - 0.05 and cu < UWT + 0.01:
-            return self.end_face(u, v, z, d, rear)
-        return RED
+        return ROOF
 
     def build(self):
         own = "V"
         parts, lines = [], []
         mat = self.mat
-        # main body
-        parts.append(Part(UWT, L - UWT, -W, W, ZB, ZS, mat, own))
-        # front ends: vertical below the windscreen, slight rake above,
-        # rounded vertical corners (inset slabs)
-        for z0 in np.arange(ZB, ZS - 1e-6, 0.4):
-            z1 = min(ZS, z0 + 0.4)
-            zc = (z0 + z1) / 2
-            uf = UN if zc < ZWIN0 - 0.2 else UN + (UWT - UN) * min(1.0, (zc - ZWIN0 + 0.2) / (ZS - ZWIN0 + 0.2))
-            if uf < UWT - 1e-6:
-                parts.append(Part(uf, UWT, -W + 0.08, W - 0.08, z0, z1, mat, own))
-                parts.append(Part(L - UWT, L - uf, -W + 0.08, W - 0.08, z0, z1, mat, own))
-            parts.append(Part(uf + 0.05, UWT + 0.01, -W, W, z0, z1, mat, own))
-            parts.append(Part(L - UWT - 0.01, L - uf - 0.05, -W, W, z0, z1, mat, own))
-        # roof: sloping sides + flat top, grilles on the slopes of the machine
-        # room, rounded cab roofs
+        # main body: a slab box with sharp corners and a vertical front
+        # (2026-09-26 style: the Peršing/Eso is a hard-edged box, not rounded)
+        parts.append(Part(UN, L - UN, -W, W, ZB, ZS, mat, own))
+        # flat roof slab with a hard edge; its side faces are the dark gutter,
+        # the louvre grilles lie along its top edges over the machine room
         def roof_mat(f, u, v, z, d):
-            # dark louvre grilles on the roof slopes of the machine room
+            if f != "+z":
+                return GUT
             m = u * MPC
-            if (5.9 <= m <= 8.2 or 8.6 <= m <= 10.9) and abs(v) > W - 0.70 and z < ZS + 0.6:
-                if f == "+z":
-                    return GRILLE if int(np.floor(u * 8)) % 2 == 0 else GRILLE_DK
-                return GRILLE_DK
-            if f == "+z":
-                return ROOF
-            return ROOF_DK
-        slope = [(0.00, 0.30, 0.00), (0.30, 0.55, 0.14), (0.55, 0.80, 0.30)]
-        for (dz0, dz1, inset) in slope:
-            parts.append(Part(UWT + 0.05 + inset * 0.6, L - UWT - 0.05 - inset * 0.6, -W + inset + 0.05, W - inset - 0.05,
-                              ZS + dz0, ZS + dz1, roof_mat, own))
+            if (5.9 <= m <= 8.2 or 8.6 <= m <= 10.9) and abs(v) > W - 0.55:
+                return GRILLE if int(np.floor(u * 8)) % 2 == 0 else GRILLE_DK
+            return ROOF
+        parts.append(Part(UN + 0.05, L - UN - 0.05, -W + 0.06, W - 0.06, ZS, ZS + 0.8, roof_mat, own))
         # equipment on the roof: box near the rear cab + insulators
         parts.append(Part(L - 2.4 / MPC, L - 1.1 / MPC, -0.40, 0.40, ZS + 0.8, ZS + 1.6,
                           lambda f, u, v, z, d: Paint(0x9C9A96, top=0xA8A6A2), own))
@@ -272,13 +262,13 @@ class Model:
         for (pm, up) in PANTOS:
             uc = pm / MPC
             parts.append(Part(uc - 0.40, uc + 0.40, -0.38, 0.38, zr, zr + 0.3,
-                              lambda *a: Paint(0x5E2420), own))
+                              lambda *a: Paint(0x55595D, top=0x5F6367), own))
             if up:
                 lines += R.pantograph(uc + 0.30, zr + 0.3, own, fold=-1, reach=0.85, height=5.0,
                                       col=PANTO, head=PANTO_HEAD, half_head=0.62, thick=False)
             else:
                 lines += [((uc + 0.35, 0.0, zr + 0.45), (uc - 0.45, 0.0, zr + 0.65), PANTO, own, False),
-                          ((uc - 0.45, -0.55, zr + 0.7), (uc - 0.45, 0.55, zr + 0.7), PANTO_HEAD, own, False)]
+                          ((uc - 0.45, -0.55, zr + 0.7), (uc - 0.45, 0.55, zr + 0.7), PANTO_HEAD, own, True)]
         return parts, lines
 
 
@@ -303,6 +293,7 @@ def main():
         out = os.path.join(WT, "vehicle-rail", "zssk", "361_1", "sprites", liv + ".png")
         os.makedirs(os.path.dirname(out), exist_ok=True)
         R.save_rows(r, out)
+        S.polish(Image.open(out), **S.POLISH).save(out)
         if prev:
             R.preview(r, os.path.join(prev, "361_1_%s.png" % liv), z=4, labels=[liv])
         print("wrote", out)

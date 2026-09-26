@@ -24,10 +24,9 @@ from render import DIRS  # noqa: E402
 
 def jobs():
     """family dir -> list of (livery, rows-callable, preview labels)."""
-    import vectron, ric, flirt, lint, talgo
+    import ric, flirt, lint, talgo
     return {
-        "193": [(liv, (lambda liv=liv: [[R.vehicle_tile(*vectron.build(liv), d, 0.0, {"V"}) for d in DIRS]]), ["193"])
-                for liv in ("bilooranzova", "railpool")],
+        "193": [(liv, (lambda liv=liv: vectron_rows(liv)), ["193"]) for liv in ("bilooranzova", "railpool")],
         "ic": [("sedooranzova", lambda: ric.rows_for("sedooranzova", ric.KINDS), ric.KINDS)],
         "bvcmz": [("rdcmodra", lambda: ric.rows_for("rdcmodra", ["Bvcmz"]), ["Bvcmz"])],
         "480": [(liv, (lambda liv=liv: flirt.render_unit(liv)), flirt.LABELS) for liv in flirt.LIVERIES],
@@ -36,6 +35,38 @@ def jobs():
         "832": [("bilooranzova", lambda: lint.rows_for("lint27", "bilooranzova"), ["832"])],
         "talgo6": [("bilooranzova", talgo.render_rows, [k for k, _ in talgo.ROWS])],
     }
+
+
+STYLED = {"193"}   # locomotives: rendered in the 2026-09-26 style (style.py)
+
+
+def vectron_rows(liv):
+    """The Vectron in the agreed style: the real Vectron MS has no cab side
+    window (vectron.py draws one; painted over here), dark roof gutter instead
+    of a light rim, light pantograph arms with a dark head bar."""
+    import vectron as V
+    import restyle_kit as K
+    C = V.livery(liv)
+    parts, lines = V.build(liv)
+    for p in parts:
+        if getattr(p.mat, "__name__", "") == "body_mat":
+            m0 = p.mat
+
+            def m(f, u, v, z, d, m0=m0):
+                cu = min(u, V.L - u)
+                if f in ("+v", "-v") and 0.60 <= cu <= 1.20 and 7.9 <= z <= 10.7:
+                    if C["orange"] is not None:
+                        if z >= 10.6:
+                            return C["orange"]
+                        if cu < 0.62 + (z - 5.6) * 0.06:
+                            return C["orange"]
+                    return C["body"]
+                return m0(f, u, v, z, d)
+            m.__name__ = "body_mat"
+            p.mat = m
+    K.roof_restyle(parts, V.ZS, V.ZR)
+    lines = K.restyle_lines(lines)
+    return [[R.vehicle_tile(parts, lines, d, 0.0, {"V"}) for d in DIRS]]
 
 
 def main():
@@ -52,7 +83,11 @@ def main():
             rows = make()
             out = os.path.join(FAM, fam, "sprites", f"{liv}.png")
             os.makedirs(os.path.dirname(out), exist_ok=True)
-            R.save_rows(rows, out)
+            if fam in STYLED:
+                import restyle_kit as K
+                K.save_styled(rows, out)
+            else:
+                R.save_rows(rows, out)
             if prev:
                 R.preview(rows, os.path.join(prev, f"{fam}_{liv}.png"), z=4, labels=labels)
             print("wrote", os.path.relpath(out, REPO))

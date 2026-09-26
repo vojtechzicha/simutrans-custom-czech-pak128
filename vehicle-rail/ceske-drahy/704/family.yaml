@@ -17,7 +17,9 @@
 #                   the long hood, dark sill, light grey roof. No photo of a
 #                   704 in N1.2 was found; the layout follows the 362 / 754.
 #
-# Sprites: original art, rendered from a box model,
+# Sprites: original art, rendered from a box model in the 2026-09-26 render style
+# (tools/railrender/style.py: dark roof gutters, no 1-px lettering, receding
+# handrails, style.polish),
 # tools/railrender/cd_loco_shunter.py; regenerate with
 # `python tools/railrender/cd_loco_shunter.py 704`. Length 4 like the native
 # CD_704 and the RegioJet 703.

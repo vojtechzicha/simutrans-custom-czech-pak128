@@ -296,7 +296,12 @@ def build(liv):
 
 
 def rows_for(liv):
+    """In the agreed 2026-09-26 style (style.py): dark roof gutter, light
+    pantograph arms with a dark head bar; main() runs style.polish()."""
+    import restyle_kit as K
     parts, lines = build(liv)
+    K.roof_restyle(parts, V.ZS, V.ZR)
+    lines = K.restyle_lines(lines)
     return [[R.vehicle_tile(parts, lines, d, 0.0, {"V"}) for d in DIRS]]
 
 
@@ -312,7 +317,8 @@ def main():
         rows = rows_for(liv)
         out = os.path.join(FAM, "sprites", f"{liv}.png")
         os.makedirs(os.path.dirname(out), exist_ok=True)
-        R.save_rows(rows, out)
+        import restyle_kit as K
+        K.save_styled(rows, out)
         if prev:
             R.preview(rows, os.path.join(prev, f"vectron_{liv}.png"), z=4, labels=[liv])
         print("wrote", os.path.relpath(out, REPO))

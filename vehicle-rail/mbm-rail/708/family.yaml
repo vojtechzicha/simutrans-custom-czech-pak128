@@ -24,7 +24,9 @@ display:
 # June 2026 timetable leaflet of the Slezský železniční spolek shows a blue /
 # yellow 708 in a stock picture; the dated photo wins.
 #
-# Sheet: rendered by tools/railrender/mbm_708.py; regenerate with
+# Sheet: rendered in the 2026-09-26 render style (tools/railrender/style.py:
+# dark cab-roof gutter, quieter railings, polish post-process) by
+# tools/railrender/mbm_708.py; regenerate with
 # `python tools/railrender/ops.py mbm-rail/708`. Not the recolour the brief
 # suggested: the pak128.CS CD_708 base (TommPa9) is a flat pure-RGB sketch
 # with a near-centred cab and near-equal hoods; the model has the real long

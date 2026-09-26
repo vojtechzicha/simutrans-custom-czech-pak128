@@ -24,6 +24,7 @@ import os
 import sys
 
 import numpy as np
+from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path:
@@ -35,6 +36,7 @@ import railkit as R  # noqa: E402
 from railkit import Paint, Part  # noqa: E402
 from render import DIRS  # noqa: E402
 import cd_loco_livery as CL  # noqa: E402
+import style as ST  # noqa: E402
 from rj_locos import (Glyphs, EndGlyphs, prow, vc, scr, in_cols, in_vcols,  # noqa: E402
                       on_col, bogie, _uu, WS, WS_HI, P_BOGIE)
 
@@ -51,9 +53,9 @@ W384 = Paint((238, 241, 243), top=(226, 229, 232))
 FRAME = Paint(CL.FRAME)
 FRAME_GREY = Paint((74, 78, 82))                        # Vectron grey underframe skirt
 FRAME_DK = Paint((58, 62, 66))
-ROOF = Paint((124, 130, 138), top=(124, 130, 138))       # blue-grey, as the E99 N2 roofs
-ROOF_DK = Paint((84, 90, 94), top=(94, 100, 104))
-LOUVRE = Paint((60, 66, 72))
+ROOF = Paint(ST.ROOF_TOP, top=ST.ROOF_TOP)              # agreed render style (style.py)
+ROOF_DK = Paint(ST.ROOF, top=ST.ROOF_TOP)
+GUTTER = Paint(ST.GUTTER, top=ST.GUTTER)                # dark line where roof meets body
 SILVER = Paint((196, 200, 203), top=(206, 210, 212))    # 109E silver
 SILVER_DK = Paint((160, 165, 169))
 SKY_DK = Paint(tuple(int(c * 0.80) for c in CL.LOCO_SKY))
@@ -101,11 +103,11 @@ class VectronCD:
         self.ZG = V.ZB + 1.0
         L = V.L
         if liv == "cd384":
-            self.logo = Glyphs(2.05, self.ZG, (3, 3), mark("n", True, "H"), mark("n", True, "D"), LOGO_COLS)
+            self.logo = Glyphs(2.05, self.ZG, (3, 3), mark("n", False, "H"), mark("n", False, "D"), LOGO_COLS)
         elif liv == "vectron":
-            self.logo = Glyphs(1.62, self.ZG, (6, 5), mark("v", True, "H"), mark("v", False, "D"), LOGO_COLS)
+            self.logo = Glyphs(1.62, self.ZG, (6, 5), mark("v", False, "H"), mark("v", False, "D"), LOGO_COLS)
         else:
-            self.logo = Glyphs(4.4, self.ZG, (4, 3), mark("v", True, "H"), mark("v", True, "D"), LOGO_COLS)
+            self.logo = Glyphs(4.4, self.ZG, (4, 3), mark("v", False, "H"), mark("v", False, "D"), LOGO_COLS)
         self.L = L
 
     # ---------------------------------------------------------------- sides
@@ -149,17 +151,11 @@ class VectronCD:
             p = self.logo.at(f, u, v, z, d, self.L)
             if p is not None:
                 return p
-            # slogan: a dotted blue line in the white band
-            s = u if f == "-v" else self.L - u
-            if r == white_lo + 1 and 3.4 <= s <= 7.2:
-                c = math.floor(scr(d, u, v, z)[0])
-                if c % 3 != 2:
-                    return SKY
             return WHITE
         # skyline in the light-blue band (the middle of the side)
         if 2.6 <= cu and r >= 1:
-            c = math.floor(scr(d, u, v, z)[0])
-            h = 1 + int(hsh(c // 1) * 2.4 + (0.8 if c % 5 == 0 else 0.0))
+            c = math.floor(scr(d, u, v, z)[0]) // 3
+            h = 1 + int(hsh(c) * 2.4)
             if r <= h:
                 return VEC_SKYLINE
         return SKY
@@ -265,10 +261,7 @@ class VectronCD:
                 return cap
             if f == "+z":
                 return ROOF
-            s = L - u if f == "+v" else u
-            if f in ("+v", "-v") and (2.3 <= s <= 4.4 or 5.6 <= s <= 7.7) and prow(d, z, V.ZS) == 0:
-                return LOUVRE
-            return ROOF_DK
+            return GUTTER
         for p in parts:
             name = getattr(p.mat, "__name__", "")
             if name == "body_mat":
@@ -286,7 +279,16 @@ class VectronCD:
                     parts.append(Part(a, b, v0, v1, 0.4, 1.6, lambda *x: Paint(0x8A9095), "V"))
             else:
                 parts.append(Part(a, b, -0.78, 0.78, 0.4, 1.6, lambda *x: Paint(0x9AA0A5), "V"))
-        return parts, lines
+        return parts, panto_style(lines)
+
+
+def panto_style(lines):
+    """Agreed pantograph style: light arms 1 px, dark grey head bar 2 px."""
+    out = []
+    for (a, b, c, own, thick) in lines:
+        head = a[2] == b[2] and a[1] != b[1]
+        out.append((a, b, ST.PANTO_HEAD, own, True) if head else (a, b, ST.PANTO_ARM, own, False))
+    return out
 
 
 def vectron_row(liv):
@@ -312,7 +314,7 @@ class E109:
         self.liv = liv
         self.ZG = self.ZB + 1.3          # top of the lower band (headlight panel base)
         if liv == "najbrt2":
-            self.logo = Glyphs(4.05, self.ZG, (5, 4), mark("b", True, "H"), mark("b", True, "D"), LOGO_COLS)
+            self.logo = Glyphs(4.05, self.ZG, (5, 4), mark("b", False, "H"), mark("b", False, "D"), LOGO_COLS)
         else:
             self.logo = None
 
@@ -426,7 +428,7 @@ class E109:
             cu = min(u, L - u)
             if cu < 1.9:
                 return cap
-            return ROOF if f == "+z" else ROOF_DK
+            return ROOF if f == "+z" else GUTTER
         parts.append(Part(uw + 0.05, L - uw - 0.05, -W + 0.18, W - 0.18, ZS, ZR, roof, own))
         # roof gear (main switch, resistor covers) between the pantographs
         parts.append(Part(3.3, 5.7, -0.48, 0.48, ZR, ZR + 0.6, lambda *a: ROOF_DK, own))
@@ -449,7 +451,7 @@ class E109:
             parts.append(Part(a, b, -0.40, 0.40, ZR, ZR + 0.40, lambda *x: Paint(0x5E6266), own))
         lines = R.pantograph(L - 2.5, ZR + 0.40, own, fold=-1, reach=0.9, height=5.4,
                              col=(0x70, 0x74, 0x78), head=(0x2A, 0x2A, 0x2C), half_head=0.62, thick=False)
-        return parts, lines
+        return parts, panto_style(lines)
 
 
 def e109_row(liv):
@@ -458,11 +460,12 @@ def e109_row(liv):
 
 
 # ================================================================== jobs
-# Only the 384 is rendered. The 193 (CZR Lubak91 art) and 380 (TommPa9 art) ship
-# the upstream sheets, which look better than these models; vectron_row("vectron"),
-# ("vectronrsl") and e109_row() are kept for reference, not written.
 JOBS = {
+    "193": [("vectron", lambda: [vectron_row("vectron")], ["193 ELL"]),
+            ("vectronrsl", lambda: [vectron_row("vectronrsl")], ["193 RSL"])],
     "384": [("cd384", lambda: [vectron_row("cd384")], ["384"])],
+    "380": [("cd109e", lambda: [e109_row("cd109e")], ["380"]),
+            ("najbrt2", lambda: [e109_row("najbrt2")], ["380 N2"])],
 }
 
 
@@ -480,6 +483,7 @@ def main():
             out = os.path.join(FAM, fam, "sprites", f"{liv}.png")
             os.makedirs(os.path.dirname(out), exist_ok=True)
             R.save_rows(rows, out)
+            ST.polish(Image.open(out), **ST.POLISH).save(out)   # agreed style post-process
             if prev:
                 R.preview(rows, os.path.join(prev, f"{fam}_{liv}.png"), z=4, labels=labels)
             print("wrote", os.path.relpath(out, REPO))

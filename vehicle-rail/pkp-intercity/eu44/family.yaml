@@ -1,6 +1,6 @@
 agency: PKPIntercity
 type: "EU44"
-copyright: lubak91/TommPa9   # pak128.CS obb_1216 drawing (same ES64U4 body), repainted
+copyright: vojtechzicha      # original art, rendered from a box model
 # Locomotive: no passengers, so the cab glass is plain and never lights up.
 windows_lit_when_loaded: false
 
@@ -29,9 +29,11 @@ display:
 #   towards the logo.
 # The one-off advertising wraps (Olympic team, Euro 2012) are left out.
 #
-# Sheets: the pak128.CS obb_1216 drawing repainted through the fitted
-# box-model coordinate map (the one-off obb/1216 painter script, not in the
-# repo), glass plain, lamp specials, diagonal/end views raised 3 px.
+# Sheets: original art, the livery-parametric Taurus body of
+# tools/railrender/cd_loco_classic.py painted by tools/railrender/taurus.py,
+# rendered in the 2026-09-26 style (tools/railrender/style.py: dark roof gutter, light
+# pantograph arms with a dark head bar, style.polish).
+# Regenerate with `python tools/railrender/taurus.py pkp-intercity/eu44`.
 
 vehicles:
   - id: "EU44"

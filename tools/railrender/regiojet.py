@@ -35,7 +35,8 @@ COACHES = {
     "uicx": (["Bc100", "Bc300", "Bc200", "B200"], {"zluta": None}),
 }
 # model scripts of the other families; each exposes JOBS like the coach jobs below
-MODULES = ["rj_locos", "rj_pesa", "rj_665", "rj_regiopanter", "rj_628", "rj_shunters"]
+MODULES = ["rj_locos", "rj_pesa", "rj_665", "rj_regiopanter", "rj_628", "rj_shunters",
+           "rj_style"]   # last: the 2026-09-26 loco style replaces the rj_locos / rj_shunters jobs
 
 
 def _empty_row():

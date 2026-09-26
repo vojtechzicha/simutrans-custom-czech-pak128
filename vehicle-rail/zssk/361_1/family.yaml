@@ -32,7 +32,10 @@ display:
 # The research note "3 portholes per side" is wrong: the photos show two round
 # portholes behind each cab door (four per side).
 #
-# Sprites are rendered from a box model (tools/railrender/zssk361.py on the
+# Sprites are rendered in the 2026-09-26 render style (tools/railrender/style.py:
+# the Peršing as a hard-edged box with a vertical front and a flat roof whose
+# edge is a dark gutter, ribbed machine-room panels, light pantographs with a
+# dark head bar, polish post-process) from a box model (tools/railrender/zssk361.py on the
 # pak128.cs-calibrated railkit renderer; regenerate with
 # `python tools/railrender/ops.py zssk/361_1`): the installed
 # ZSSK_361.1_Pershing is the generic 163 drawing (squat body, no portholes,

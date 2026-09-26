@@ -34,7 +34,9 @@ display:
 # side panels with only the roof shoulder white. 223 072's "Griass di Allgaeu"
 # advert is not drawn.
 #
-# Sprites are rendered from a box model, original art:
+# Sprites are rendered from a box model, original art, in the 2026-09-26 render
+# style (tools/railrender/style.py: dark line under the white roof shoulder and
+# the cab domes, no 1-px "= alex" logos, polish post-process):
 # tools/railrender/er20.py (regenerate with `python tools/railrender/er20.py`).
 
 vehicles:

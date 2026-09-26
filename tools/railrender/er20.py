@@ -46,6 +46,8 @@ import numpy as np  # noqa: E402
 import railkit as R  # noqa: E402
 from railkit import Paint, Part  # noqa: E402
 from render import DIRS  # noqa: E402
+import style as S  # noqa: E402
+from PIL import Image  # noqa: E402
 
 L = 10.0
 W = 0.92
@@ -112,52 +114,6 @@ def mix(a, b, t):
     return tuple(int(round(a[i] + (b[i] - a[i]) * t)) for i in range(3))
 
 
-# ------------------------------------------------------------------ lettering
-# 5-row pixel font, sampled by coverage of the screen pixel footprint (see
-# ops_vectron.py): the logo turns into the right amount of white at 1x.
-FONT = {
-    "a": ["...", ".##", "#.#", "#.#", ".##"], "l": ["#", "#", "#", "#", "#"],
-    "e": ["...", ".#.", "###", "#..", ".##"], "x": ["...", "#.#", ".#.", ".#.", "#.#"],
-    "=": ["...", "##", "..", "##", "##"], " ": ["."] * 5,
-}
-FONT["="] = ["..", "##", "..", "##", ".."]
-
-
-class Text:
-    def __init__(self, s, x0, x1, z0, z1, italic=0.0, sub=8):
-        cols = []
-        for i, ch in enumerate(s):
-            g = FONT[ch]
-            if i:
-                cols.append([0] * 5)
-            for c in range(len(g[0])):
-                cols.append([1 if g[r][c] == "#" else 0 for r in range(5)])
-        bm = np.array(cols, float).T
-        self.bm = np.kron(bm, np.ones((sub, sub)))
-        self.x0, self.x1, self.z0, self.z1, self.it = x0, x1, z0, z1, italic
-        h, w = self.bm.shape
-        self.sat = np.zeros((h + 1, w + 1))
-        self.sat[1:, 1:] = self.bm.cumsum(0).cumsum(1)
-
-    def cov(self, x, z, dx=0.25, dz=1.0):
-        x = x - self.it * (z - self.z0)
-        h, w = self.bm.shape
-        fx = lambda xx: min(max((xx - self.x0) / (self.x1 - self.x0) * w, 0), w)
-        fz = lambda zz: min(max((self.z1 - zz) / (self.z1 - self.z0) * h, 0), h)
-        a0, a1 = int(round(fx(x - dx / 2))), int(round(fx(x + dx / 2)))
-        b0, b1 = int(round(fz(z + dz / 2))), int(round(fz(z - dz / 2)))
-        if a1 <= a0 or b1 <= b0:
-            return 0.0
-        s = self.sat[b1, a1] - self.sat[b0, a1] - self.sat[b1, a0] + self.sat[b0, a0]
-        return s / ((dx / (self.x1 - self.x0) * w) * (dz / (self.z1 - self.z0) * h))
-
-
-# side logo "= alex": centred on the machine room, reading left to right
-SIDE_LOGO = Text("= alex", 4.15, 5.65, zm(2.28), zm(3.12), italic=0.05)
-# front logo under the windscreen (x = lateral cu as seen, -W .. W)
-FRONT_LOGO = Text("= alex", -0.50, 0.50, zm(1.88), zm(2.22))
-
-
 # ------------------------------------------------------------------ shape
 def _ell(t):
     t = min(max(t, 0.0), 1.0)
@@ -196,6 +152,8 @@ def side_colour(u, z, x, cab):
             return WHITE                                    # dome sides
         if c < C_BAND:
             return WHITE                                    # the "C" band
+        if z > Z_CABSIDE - 1.0 and not (DOOR[0] <= c <= DOOR[1]):
+            return S.GUTTER                                 # dark line under the dome (2026-09-26 style)
         if WIN[0] <= c <= WIN[1] and WIN[2] <= z <= WIN[3]:
             return GLASS_HI if z > WIN[3] - 0.8 else GLASS
         if DOOR[0] - 0.10 <= c <= DOOR[1] + 0.10 and zm(1.0) <= z <= DOOR[3] - 0.6:
@@ -207,18 +165,14 @@ def side_colour(u, z, x, cab):
     else:
         if z > Z_SIDE - 0.02:
             return WHITE                                    # roof shoulder
+        if z > Z_SIDE - 1.0:
+            return S.GUTTER                                 # dark line under the shoulder (2026-09-26 style)
     if z < Z_GREY:
         col = GREY
     elif z < Z_YEL:
         col = YELLOW
     else:
-        col = BLUE
-        if not cab:
-            t = SIDE_LOGO.cov(x, z)
-            if t > 0.38:
-                return WHITE
-            if t > 0.18:
-                col = 0x86CBE3
+        col = BLUE                                          # (no 1-px "= alex" logo, 2026-09-26 style)
     if not cab:
         for (a, b) in LOUVRES:
             if a <= u <= b and z >= Z_SILL + 0.3:
@@ -252,11 +206,6 @@ def front_colour(v, z, rear):
         return BLACK                                        # lamp housings
     if av < 0.14 and zm(2.24) <= z <= Z_WS0:
         return R.HEAD if not rear else 0x2A2E33             # top lamp
-    t = FRONT_LOGO.cov(-v, z, dx=0.25)
-    if t > 0.35:
-        return WHITE
-    if t > 0.15:
-        return 0x86CBE3
     return BLUE
 
 
@@ -360,6 +309,7 @@ def main():
         out = os.path.join(FAM, "sprites", f"{liv}.png")
         os.makedirs(os.path.dirname(out), exist_ok=True)
         R.save_rows(rows, out)
+        S.polish(Image.open(out), **S.POLISH).save(out)
         if prev:
             R.preview(rows, os.path.join(prev, f"er20_{liv}.png"), z=4, labels=[liv])
         print("wrote", os.path.relpath(out, REPO))

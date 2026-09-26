@@ -20,14 +20,15 @@
 #               light-blue panel with a V, white stripes on the grey lower corners.
 # Single-unit advertising wraps and 193.569 in RS Lease white are not shipped.
 #
-# Sprites: Lubak91's CZR drawings (CZR-vehicles-rail-loco-CD.pak: CZR_CD_193_modra =
-# vectron, CZR_CD_193_bila = vectronrsl), extracted from the compiled pak and shifted
-# to source coordinates; static sheets (they looked better than the box-model render
-# in tools/railrender/cd_loco_modern.py, which is no longer written). Length 10.
+# Sprites: original art, rendered from a box model (vectron.py geometry, ČD paint in
+# tools/railrender/cd_loco_modern.py) in the 2026-09-26 render style (tools/railrender/
+# style.py: dark roof gutter, no side lettering, light pantograph arms with a dark head
+# bar, polish post-process); regenerate with `python tools/railrender/cd_loco_modern.py
+# 193`. Length 10.
 
 agency: CeskeDrahy
 type: "193"
-copyright: Lubak91      # upstream art (pak128.cs / CZR)
+copyright: vojtechzicha      # original art, drawn from scratch
 windows_lit_when_loaded: false
 
 display:

@@ -23,9 +23,10 @@
 #                 sides over a sapphire trapezoid rising toward the rear, dark
 #                 blue cab top, grey roof, dark sill (714.222 Liberec, 714.023).
 #
-# Sprites: original art, rendered from a box model with the pak128.cs-calibrated
-# renderer, tools/railrender/cd_loco_hood.py (regenerate: python
-# tools/railrender/cd_loco_hood.py 714). Length 7 like the native CD_714.
+# Sprites: original art, rendered from a box model in the 2026-09-26 render style
+# (tools/railrender/style.py: dark roof gutters, calm handrails, no 1-px lettering,
+# style.polish post-process) with tools/railrender/cd_loco_hood.py (regenerate:
+# python tools/railrender/cd_loco_hood.py 714). Length 7 like the native CD_714.
 
 agency: CeskeDrahy
 type: "714"

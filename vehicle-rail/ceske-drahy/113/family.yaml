@@ -16,8 +16,10 @@
 # stripes 113.002 has on its hood ends are left out (113.003 does not have them).
 #
 # Sprites: original art, rendered from a box model with the pak128.cs-calibrated
-# renderer, tools/railrender/cd_loco_centrecab.py (regenerate: python
-# tools/railrender/cd_loco_centrecab.py 113). Length 7 (14.4 m at 26.4 m = 13 cu).
+# renderer in the 2026-09-26 render style (tools/railrender/style.py: dark roof
+# gutters, grouped hood louvres, no 1-px lettering, quiet end rails only, polish
+# pass); regenerate with `python tools/railrender/cd_loco_centrecab.py 113`.
+# Length 7 (14.4 m at 26.4 m = 13 cu).
 
 agency: CeskeDrahy
 type: "113"

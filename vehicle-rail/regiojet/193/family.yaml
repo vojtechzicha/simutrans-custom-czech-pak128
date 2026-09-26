@@ -18,6 +18,9 @@
 # Vectron, imported unchanged) with the RJ paint from tools/railrender/rj_locos.py
 # (class VectronRJ); regenerate with `python tools/railrender/regiojet.py 193`.
 # Length 10 like the native 19 m locos.
+# Rendered in the 2026-09-26 render style (tools/railrender/style.py, applied in
+# tools/railrender/rj_style.py; regenerate with `python tools/railrender/regiojet.py 193`):
+# dark gutter row at the roof edge; light pantograph arms with a dark head bar.
 
 agency: RegioJet
 type: "193"

@@ -19,7 +19,9 @@
 #                  and roof. No photo of a 799 in Najbrt 2 was found; painted
 #                  like the 704 Najbrt 2.
 #
-# Sprites: original art, rendered from a box model,
+# Sprites: original art, rendered from a box model in the 2026-09-26 render style
+# (tools/railrender/style.py: dark roof gutters, no 1-px lettering, receding
+# handrails, style.polish),
 # tools/railrender/cd_loco_shunter.py; regenerate with
 # `python tools/railrender/cd_loco_shunter.py 799`. Length 4 like the RegioJet
 # 703 (7.22 m).

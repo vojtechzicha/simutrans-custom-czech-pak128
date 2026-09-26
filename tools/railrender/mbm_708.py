@@ -23,6 +23,7 @@ import numpy as np          # noqa: E402
 import railkit as R         # noqa: E402
 from railkit import Paint, Part   # noqa: E402
 from render import DIRS, frame    # noqa: E402
+import style as S                 # noqa: E402
 
 PX = 0.375
 LOB = 9.45
@@ -66,7 +67,7 @@ YELLOW = Paint(0xF0C414)
 BLACK = Paint(0x1C1C1E)
 WS = (0x3E4A54)
 WS_HI = (0x5A6874)
-RAIL = (0xD2D4D4)
+RAIL = (0xA4A7A9)                         # railings: light but not white, so they stay quiet
 
 
 def lamp_face(v, z, front):
@@ -161,7 +162,7 @@ def build():
     P(S_CAB0, S_CAB1, -WC, WC, zm(Z_FRAME1), zm(Z_CAB), cab_mat)
     # roof with a slight overhang
     P(S_CAB0 - 0.12, S_CAB1 + 0.10, -WC - 0.05, WC + 0.05, zm(Z_CAB) - 0.4, zm(Z_CAB) + 0.2,
-      lambda f, uu, v, z, d: ORANGE if f == "+z" else Paint(0xC43E26))
+      lambda f, uu, v, z, d: ORANGE if f == "+z" else Paint(S.GUTTER))   # dark roof gutter (2026-09-26 style)
     # exhaust stack at the cab front corner (left side of the loco)
     P(S_CAB0 - 0.28, S_CAB0 - 0.08, -WH + 0.05, -WH + 0.28, zm(Z_HOOD), zm(4.55),
       lambda f, uu, v, z, d: Paint(0x2E2B2A, top=0x141414))

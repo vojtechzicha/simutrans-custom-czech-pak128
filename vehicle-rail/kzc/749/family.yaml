@@ -36,7 +36,9 @@ display:
 # Sprites are rendered from a box model of the T 478 body (heights and door /
 # window / grille positions from the KŽC side drawings kzc.cz/image/T478.*.png),
 # drawn at length 8 on the footprint of the pak128.CS T 478 (TommPa9), about
-# 2 px taller than coaches like the native locomotives. Rendered by
+# 2 px taller than coaches like the native locomotives, in the 2026-09-26 render
+# style (tools/railrender/style.py: dark gutter under the rounded roof, polish
+# post-process). Rendered by
 # tools/railrender/kzc_t478.py (shared with the 751 family); regenerate with
 # `python tools/railrender/ops.py kzc/749`.
 

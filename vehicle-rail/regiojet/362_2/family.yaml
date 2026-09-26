@@ -30,6 +30,10 @@
 # Sprites: original art rendered from a box model, tools/railrender/rj_locos.py
 # (class E99); regenerate with `python tools/railrender/regiojet.py 362_2`.
 # Length 8 like the native CD 363.
+# Rendered in the 2026-09-26 render style (tools/railrender/style.py, applied in
+# tools/railrender/rj_style.py; regenerate with `python tools/railrender/regiojet.py 362_2`):
+# the approved ČD 362 slab box (vertical front, flat roof, dark gutter), ribbed sides; the retro
+# schemes keep their painted pantographs and light roofs; light pantograph arms with a dark head bar.
 
 agency: RegioJet
 type: "362.2"

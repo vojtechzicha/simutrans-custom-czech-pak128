@@ -1,6 +1,6 @@
 agency: OBB
 type: "1116"
-copyright: Lubak91/TommPa9   # pak128.CS obb_1016 drawing (same body), repainted
+copyright: vojtechzicha      # original art, rendered from a box model
 # Locomotive: no passengers, so the cab glass is plain and never lights up.
 windows_lit_when_loaded: false
 
@@ -23,11 +23,12 @@ display:
 # wordmark mid-side and on the lower front. The few railjet / Nightjet / advert
 # wraps are left out.
 #
-# Sheet: the pak128.CS obb_1016 drawing (the 15 kV twin of the 1116, same body
-# with the one-piece side grilles) repainted like the 1216 family: plain glass,
-# lamp specials, the old ÖBB "Pflatsch" decal replaced by the current wordmark,
-# diagonal/end views raised 3 px, with the same one-off painter script as the
-# 1216 (not in the repo).
+# Sheets: original art, the livery-parametric Taurus body of
+# tools/railrender/cd_loco_classic.py painted by tools/railrender/taurus.py,
+# rendered in the 2026-09-26 style (tools/railrender/style.py: dark roof gutter, light
+# pantograph arms with a dark head bar, style.polish).
+# Regenerate with `python tools/railrender/taurus.py obb/1116`.
+# The white "ÖBB" wordmark is left out (1-px lettering).
 
 vehicles:
   - id: "1116"

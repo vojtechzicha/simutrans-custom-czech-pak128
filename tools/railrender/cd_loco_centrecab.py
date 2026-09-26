@@ -13,6 +13,11 @@ and 740 hood units; the natives CD_111 / CD_210 / CD_113 use length 8 with a
 Scale, heights and the depth-tested handrail lines come from rj_shunters.py
 (imported, not edited): 1 model px = 0.375 m, locomotive heights x 1.08.
 
+Render style 2026-09-26 (tools/railrender/style.py): dark GUTTER under the hood
+and cab tops, grouped louvre panels, no solebar lettering, only the end-platform
+handrails (quiet grey), light pantograph arm with a dark head bar, and every
+sheet run through style.polish(**POLISH).
+
 Classes (photos: Commons categories "CZ Class 111 of ČD in Najbrt livery",
 "CZ Class 210 of ČD", "CZ Class 113", 2019-2024):
   111  E 458.1 (Škoda 78E, 1981), 3 kV DC. Flat-topped hoods with vertical
@@ -55,6 +60,7 @@ FAM = os.path.join(REPO, "vehicle-rail", "ceske-drahy")
 import railkit as R  # noqa: E402
 from railkit import Paint  # noqa: E402
 import cd_loco_livery as CL  # noqa: E402
+import style as ST  # noqa: E402
 from rj_shunters import (zm, box, buffers, bogie, corner_steps, rail_lines,  # noqa: E402
                          posts_between, tile, lines_for_view, WS, WS_HI)
 from render import DIRS  # noqa: E402
@@ -63,11 +69,12 @@ from render import DIRS  # noqa: E402
 ORANGE_113 = (232, 104, 44)      # 113.001 factory orange
 GREEN_113 = (58, 128, 76)        # 113.002 / 003 mid green
 FRAME_113G = (74, 70, 64)        # dark brown-grey frame of the green 113s
-# (the N2 cab roof is light blue like the cab on these shunters, photos
-#  111.006 / 111.021, not the blue-grey of the E99 family's main roof)
+# (the N2 cab roof is sapphire, photos 111.006 / 111.021 / 111.002)
 N12_ROOF = (170, 175, 178)       # N1.2 roof
 N12_SILL = (58, 61, 64)          # N1.2 frame / sill
-LOUVRE_K = 0.80                  # louvre panels: body colour x this
+LOUVRE_K = 0.72                  # louvre panels: body colour x this
+GUT = Paint(ST.GUTTER)           # dark roof gutter (render style 2026-09-26)
+ZGUT = 0.45                      # gutter depth below a hood / cab top (model px)
 
 L = 7.0
 MU = L / 14.4                    # cu per metre along the loco
@@ -108,7 +115,7 @@ def livery(liv):
     W = paint(CL.WHITE)
     if liv == "najbrt2":
         return dict(body=paint(CL.LOCO_SKY), stripe=W, frame=paint(CL.SAPPHIRE), cabtop=None,
-                    roof=paint(CL.LOCO_SKY), vee=None, trap=None,
+                    roof=paint(CL.SAPPHIRE), vee=None, trap=None,
                     logo=W, plough=paint(CL.PLOUGH), beam=paint(CL.SAPPHIRE))
     if liv == "najbrt1_2":
         return dict(body=paint(CL.LGREY), stripe=None, frame=paint(N12_SILL), cabtop=None,
@@ -161,7 +168,7 @@ def build(cls, liv):
     # ---- frame: solebar (livery frame colour) with the logo, dark walkway
     def logo_at(u, z, face):
         # small ČD logo + "České dráhy" on the solebar behind the cab, both sides
-        if C["logo"] is None or not (ZFB + 0.45 <= z <= ZW - 0.40):
+        if True:        # render style: no 1-px lettering on the solebar
             return None
         a, b = C1 + 0.35, C1 + 1.45
         if a <= u <= b:
@@ -199,6 +206,8 @@ def build(cls, liv):
                     return Paint(dk(body.topc, 0.78))
                 return body
             outer = (f == "-u" and front) or (f == "+u" and not front)
+            if z >= ZH - ZGUT and (f in ("+v", "-v") or outer):
+                return GUT
             if f in ("-u", "+u") and outer:
                 if abs(v) > 0.18 and abs(v) < 0.46 and ZH - zm(0.55) < z < ZH - zm(0.25):
                     return R.HEAD               # twin headlights under the hood top
@@ -218,7 +227,7 @@ def build(cls, liv):
                 t = (u - min(u_in, u_out)) / span
                 if 0.08 < t < 0.92 and ZW + zm(0.25) < z < ZH - zm(0.20) and not (
                         stripe is not None and ZSTR0 - 0.3 <= z < ZSTR1 + 0.3):
-                    if int(u / 0.16) % 3 == 0:
+                    if (u * 2.2) % 1.0 < 0.62:
                         return LV
             return band(z)
         return m
@@ -281,7 +290,7 @@ def build(cls, liv):
         return cab_zone(z)
     parts.append(box(C0, C1, -WC, WC, ZW, ZCS, cab_mat))
     parts.append(box(C0 - 0.04, C1 + 0.04, -WC - 0.02, WC + 0.02, ZCS, ZCS + 0.35,
-                     lambda f, u, v, z, d: C["roof"] if f == "+z" else (cabtop or body)))
+                     lambda f, u, v, z, d: C["roof"] if f == "+z" else GUT))
     parts.append(box(C0 + 0.10, C1 - 0.10, -WC + 0.20, WC - 0.20, ZCS + 0.35, ZCR,
                      lambda f, u, v, z, d: C["roof"]))
     ztop = ZCR
@@ -294,18 +303,15 @@ def build(cls, liv):
     parts.append(box(C0 + 0.35, C1 - 0.35, -0.36, 0.36, ztop, ztop + 0.30,
                      lambda f, u, v, z, d: Paint(0x4A4E52)))
     pl = R.pantograph((C0 + C1) / 2 - 0.30, ztop + 0.30, "V", fold=+1, reach=0.75, height=4.4,
-                      col=(0x70, 0x74, 0x78), head=(0x2A, 0x2A, 0x2C), half_head=0.55, thick=False)
+                      col=ST.PANTO_ARM, head=ST.PANTO_HEAD, half_head=0.55, thick=False)
     pan = [(a, b, col) for (a, b, col, own, th) in pl]
 
     # ---- steps and handrails
     corner_steps(UB, UR, zm(0.35), ZFB, parts, C["frame"], C["plough"])
-    K = (0xE8, 0xE8, 0xE4) if liv.startswith("najbrt") else (0x2A, 0x2A, 0x2C)
+    # render style: long walkway rails along the hoods read as noise at this
+    # size; keep only the end-platform rails, in a quiet grey
+    K = (0x9A, 0x9E, 0xA2)
     zt = ZW + zm(0.95)
-    for s, face in ((1, "+v"), (-1, "-v")):
-        vv = s * (WF - 0.03)
-        ls = rail_lines(H0 + 0.05, C0 - 0.05, vv, ZW, zt, K, posts_between(H0 + 0.05, C0 - 0.05, 0.9))
-        ls += rail_lines(C1 + 0.05, H1 - 0.05, vv, ZW, zt, K, posts_between(C1 + 0.05, H1 - 0.05, 0.9))
-        side_lines.append((face, ls))
     for face, uu in (("-u", UB + 0.06), ("+u", UR - 0.06)):
         ls = []
         for s in (-1, 1):
@@ -332,6 +338,18 @@ def row(cls, liv):
     return [tile(parts, lines_for_view(side_lines, d) + pan, d) for d in DIRS]
 
 
+def polished(rows):
+    """render style 2026-09-26: outline / face edges / saturation (style.polish)"""
+    import numpy as np
+    from PIL import Image
+    out = []
+    for r in rows:
+        im = Image.fromarray(np.concatenate([np.asarray(t, np.uint8) for t in r], axis=1))
+        a = np.asarray(ST.polish(im, **ST.POLISH))
+        out.append([a[:, i * 128:(i + 1) * 128] for i in range(len(r))])
+    return out
+
+
 def main():
     args = sys.argv[1:]
     prev = None
@@ -342,7 +360,7 @@ def main():
         os.makedirs(prev, exist_ok=True)
     for fam in (args or list(JOBS)):
         for liv in JOBS[fam]:
-            rows = [row(fam, liv)]
+            rows = polished([row(fam, liv)])
             out = os.path.join(FAM, fam, "sprites", f"{liv}.png")
             os.makedirs(os.path.dirname(out), exist_ok=True)
             R.save_rows(rows, out)

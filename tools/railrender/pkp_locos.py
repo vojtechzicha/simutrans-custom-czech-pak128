@@ -20,7 +20,8 @@ Poznan 2025, EU07-092 Krakow 2023, EU07-302 / EU07-360 Poznan 2021):
   - a royal-blue band across the lower half of the side, solid at both ends,
     breaking up in halftone dots round a silver gap left of centre as seen
     (the same from either side) that carries the orange "iC" + blue outlined
-    "C" logo and "PKP INTERCITY" in blue;
+    "C" logo and "PKP INTERCITY" in blue (the lettering is left out: at 1x it
+    is noise; the band ends cleanly where its dots thin out to half);
   - thin silver line under the band, dark-grey frame, black bogies;
   - EU07: silver bar under the front windows, round lamps; EP09: raked
     windscreen. The small IC logo on the fronts is left out: at 1x it would
@@ -76,7 +77,6 @@ LOGO_B = (0x24, 0x36, 0x8C)
 PANTO = (0x8A, 0x2E, 0x26)              # red-brown pantograph frames (photos)
 PANTO_HEAD = (0x2E, 0x2E, 0x30)
 INSUL = (0x6E, 0x3A, 0x30)
-BAYER = [[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]]
 PPC = {"ne": 5.66, "sw": 5.66, "w": 4.0, "e": 4.0, "n": 4.0, "s": 4.0, "nw": 2.83, "se": 2.83}
 
 # ------------------------------------------------------------------ models
@@ -126,13 +126,6 @@ EU07 = dict(
 MODELS = {"ep09": EP09, "eu07": EU07}
 
 
-def dither(d, u, z, dens):
-    k = PPC[d]
-    i = int(np.floor(u * k)) % 4
-    j = int(np.floor(z * R.KZ[d])) % 4
-    return dens > (BAYER[j][i] + 0.5) / 16.0
-
-
 def band_density(M, a):
     """blue density of the lower band at `a` = along / L as seen (0 = left)."""
     b = M["band"]
@@ -150,7 +143,6 @@ IC_MARK = ["o.oo.bb",
            "..o..b.",
            "o.o..b.",
            "o.oo.bb"]
-IC_TEXT = ["b.bb.bbbb"]
 
 
 def glyph_at(bm, a, z, a0, z_top, cu, cz):
@@ -219,10 +211,6 @@ class Loco:
                 return ORANGE
             if ch == "b":
                 return LOGO_B
-            if d in ("ne", "sw"):
-                ch = glyph_at(IC_TEXT, along, z, M["band"]["text"] * L - 0.4, M["ZL"] + 1.5, cu, 0.85)
-                if ch == "b":
-                    return LOGO_B
         return self.body_at(dm, a, z, u, d)
 
     def blue_at(self, dm, z):
@@ -244,8 +232,10 @@ class Loco:
         if M["ZL"] <= z <= M["ZBT"]:
             if dm < M["cab_len"]:
                 return BLUE
-            dens = band_density(M, a)
-            return BLUE if dither(d, u, z, dens) else SILVER
+            # the real band dissolves into halftone dots round the logo gap; at
+            # 1x a dither reads as noise, so the band ends where the dots thin
+            # out to half (2026-09-26 style: no 1-px noise)
+            return BLUE if band_density(M, a) >= 0.5 else SILVER
         return SILVER
 
     # --------------------------------------------------------- ends
@@ -395,8 +385,17 @@ def diamond(uc, zb, own, half=0.62, height=5.0):
 
 
 def sheet(key):
+    """In the agreed 2026-09-26 style (style.py): the lower roof step's sides are
+    the dark gutter, light pantograph arms with a dark head bar; main() runs
+    style.polish()."""
+    import restyle_kit as K
     lo = Loco(MODELS[key])
     parts, lines = lo.build()
+    zs = MODELS[key]["ZS"]
+    for p in parts:
+        if abs(p.b[4] - zs) < 1e-6 and abs(p.b[5] - (zs + 0.45)) < 1e-6:
+            p.mat = K.gutter(p.mat, lambda f, u, v, z, d: True)
+    lines = K.restyle_lines(lines)
     return [[R.vehicle_tile(parts, lines, d, 0.0, {"V"}) for d in DIRS]]
 
 
@@ -412,7 +411,8 @@ def main():
         rows = sheet(key)
         out = os.path.join(FAM, key, "sprites", "intercity.png")
         os.makedirs(os.path.dirname(out), exist_ok=True)
-        R.save_rows(rows, out)
+        import restyle_kit as K
+        K.save_styled(rows, out)
         if prev:
             R.preview(rows, os.path.join(prev, f"{key}_intercity.png"), z=4, labels=[key.upper()])
         print("wrote", os.path.relpath(out, REPO))

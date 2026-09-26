@@ -3,13 +3,14 @@
 # the railjet pair keeps its native coupling: 1216-front must lead, 1216-rear must
 # trail (the same sheet, row 1 is the reversed-cab drawing).
 #
-# Sprites: Lubak91's CZR / pak128.cs drawings (CZR_CD_1216 = najbrt2, CD_railjet_1216 + _reverse = railjet),
-# extracted from the compiled pak and shifted to source coordinates; static sheets.
-# Figures as in the upstream pak.
+# Sprites: original art, rendered from a box model in the 2026-09-26 render style
+# (tools/railrender/style.py); regenerate with
+# `python tools/railrender/cd_loco_classic.py 1216`. The railjet sheet's row 1 is the
+# same Taurus turned round (tail lights at the travel front). Figures as in the upstream pak.
 
 agency: CeskeDrahy
 type: "1216"
-copyright: lubak91      # upstream art (pak128.cs / CZR)
+copyright: vojtechzicha      # original art, drawn from scratch
 windows_lit_when_loaded: false
 
 display:

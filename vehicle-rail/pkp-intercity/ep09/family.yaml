@@ -27,9 +27,11 @@ display:
 # same from either side) carrying the orange "iC" + blue outlined "C" and
 # "PKP INTERCITY", white door handrails, red-brown single-arm pantographs.
 #
-# Sprites are rendered from a box model (tools/railrender/pkp_locos.py on the
-# pak128.cs-calibrated railkit renderer). Regenerate with
-# `python tools/railrender/pkp_locos.py ep09`.
+# Sprites are rendered from a box model (tools/railrender/pkp_locos.py),
+# rendered in the 2026-09-26 style (tools/railrender/style.py: dark roof gutter, light
+# pantograph arms with a dark head bar, style.polish); the halftone fade of the blue band is drawn
+# as a clean edge and the small PKP INTERCITY lettering left out (1-px noise).
+# Regenerate with `python tools/railrender/pkp_locos.py ep09`.
 
 vehicles:
   - id: "EP09"

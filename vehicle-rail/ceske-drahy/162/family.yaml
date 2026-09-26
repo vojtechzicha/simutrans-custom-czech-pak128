@@ -18,12 +18,10 @@
 #             a dark blue wedge behind each cab and light blue between, dark grey
 #             sill, light grey roof.
 #
-# Sprites: najbrt2 is original art rendered from a box model
-# (tools/railrender/cd_loco_e99.py on the rj_locos.E99 body; regenerate with
-# `python tools/railrender/cd_loco_e99.py 162`). najbrt1_2 and zelenokremova are
-# TommPa9's pak128.cs drawings (CD_162_Rychly_Pershing_(balkan) / CD_162_Rychly_Pershing),
-# extracted from the compiled pak and shifted to source coordinates; they looked
-# better than the render, so they replace it and are static sheets. Length 8.
+# Sprites: every livery rendered in the 2026-09-26 style (tools/railrender/style.py:
+# slab Eso / Persing box, dark roof gutter, ribbed sides, measured livery zones,
+# no side lettering, light pantograph arms with a dark head bar, style.polish);
+# regenerate with `python tools/railrender/cd_loco_e99.py 162`. Length 8.
 
 agency: CeskeDrahy
 type: "162"
@@ -67,8 +65,6 @@ liveries:
   - color: najbrt1_2
     name_en: "Najbrt 1.2"
     name_cs: "Najbrt 1.2"
-    copyright: "TommPa9"   # pak128.cs art
   - color: zelenokremova
     name_en: "green-cream"
     name_cs: "zeleno-krémová"
-    copyright: "TommPa9"   # pak128.cs art

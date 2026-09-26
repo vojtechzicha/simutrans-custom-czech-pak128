@@ -26,9 +26,10 @@
 # Left out: the heritage "brejlovec" repaints (blue-white with the flash,
 # green-white, red with flash, black-white) and the ČSD all-red ones.
 #
-# Sprites: original art, rendered from a box model (tools/railrender/
-# cd_loco_brejlovec.py); regenerate with `python tools/railrender/
-# cd_loco_brejlovec.py 754`. Length 8 like the native CD_754.
+# Sprites: original art, rendered from a box model in the 2026-09-26 render style
+# (tools/railrender/style.py; model in tools/railrender/cd_loco_brejlovec.py);
+# regenerate with `python tools/railrender/cd_loco_brejlovec.py 754`. Length 8 like
+# the native CD_754.
 
 agency: CeskeDrahy
 type: "754"

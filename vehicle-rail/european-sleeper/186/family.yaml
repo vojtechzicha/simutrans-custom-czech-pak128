@@ -31,8 +31,10 @@ display:
 # white diagonal across the front; grey roof-edge grilles. The three teal
 # stripes are drawn as two 1 px stripes (three do not fit 2.5 px at 1x).
 #
-# Sprites are rendered from a box model, original art:
-# tools/railrender/traxx.py (regenerate with `python tools/railrender/traxx.py`).
+# Sprites are rendered from a box model, original art, in the 2026-09-26 render
+# style (tools/railrender/style.py: dark roof gutter, no 1-px lettering, light
+# pantograph with a dark head bar, polish post-process): tools/railrender/traxx.py
+# (regenerate with `python tools/railrender/traxx.py`).
 
 vehicles:
   - id: "186"

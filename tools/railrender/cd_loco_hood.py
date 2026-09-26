@@ -41,6 +41,7 @@ FAM = os.path.join(REPO, "vehicle-rail", "ceske-drahy")
 import railkit as R  # noqa: E402
 from railkit import Paint  # noqa: E402
 import cd_loco_livery as C  # noqa: E402
+import style as ST  # noqa: E402
 from rj_shunters import (box, buffers, bogie, corner_steps, rail_lines,  # noqa: E402
                          posts_between, render_row, zm, WS, WS_HI)
 
@@ -65,6 +66,11 @@ N12_ROOF = (170, 175, 178)
 N12_SILL = (58, 61, 64)
 EXHAUST = Paint(0x232426, top=0x1A1B1C)
 LOGO_DK = P(C.SAPPHIRE)
+# 2026-09-26 render style (tools/railrender/style.py): a dark gutter where every
+# roof meets its wall, and calm mid-grey handrails with few posts
+GUTTER = Paint(ST.GUTTER)
+GUT_H = 0.45                    # model px: one screen row
+RAIL = 0x7C8286
 
 # 714 red-blue (1990s): colours read off the 714.006 / 714.217 photos
 RB = dict(red=P(C.RB_RED), blue=Paint(0x2A4A9C), louvre=Paint(0x1E3570),
@@ -75,8 +81,8 @@ def _walk_rails(L, UB, UR, US1, UL0, zt, col, side_lines, ZW, WF):
     """handrails along the walkways beside both hoods and round the ends."""
     for s, face in ((1, "+v"), (-1, "-v")):
         vv = s * (WF - 0.03)
-        ls = rail_lines(UL0 + 0.12, UR - 0.04, vv, ZW, zt, col, posts_between(UL0 + 0.12, UR - 0.04, 1.5))
-        ls += rail_lines(UB + 0.04, US1 - 0.06, vv, ZW, zt, col, posts_between(UB + 0.04, US1 - 0.06, 1.5))
+        ls = rail_lines(UL0 + 0.12, UR - 0.04, vv, ZW, zt, col, posts_between(UL0 + 0.12, UR - 0.04, 3.2))
+        ls += rail_lines(UB + 0.04, US1 - 0.06, vv, ZW, zt, col, posts_between(UB + 0.04, US1 - 0.06, 3.2))
         side_lines.append((face, ls))
     for face, uu in (("-u", UB + 0.04), ("+u", UR - 0.04)):
         ls = []
@@ -169,6 +175,8 @@ def build_714(liv):
                 if liv == "najbrt2":
                     return SKY
                 return LGREY if abs(u - outer_u) < WRAP else SKY
+            if top - GUT_H <= z:
+                return GUTTER
             if f in ("-u", "+u"):
                 outer = (f == "-u" and front) or (f == "+u" and not front)
                 if outer:
@@ -204,7 +212,7 @@ def build_714(liv):
     for (a, b, fr) in ((US0, US1, True), (UL0, UL1, False)):
         mat = hood_mat(a, b, fr, ZHS)
         parts.append(box(a + 0.04, b - 0.04, -WH + 0.10, WH - 0.10, ZHS, ZHT,
-                         lambda f, u, v, z, d, _m=mat: _m("+z", u, v, z, d)))
+                         lambda f, u, v, z, d, _m=mat: _m("+z", u, v, z, d) if f == "+z" else GUTTER))
     # exhaust stack on the short hood next to the cab, above the cab roof
     parts.append(box(US1 - 0.34, US1 - 0.14, -0.13, 0.13, ZHT, ZCR + 0.9, EXHAUST))
 
@@ -214,6 +222,8 @@ def build_714(liv):
     def cab_mat(f, u, v, z, d):
         if f == "+z":
             return roof_p
+        if z >= ZCS - GUT_H:
+            return GUTTER
         win = ZWIN0 <= z <= ZCS - 0.45
         top_band = z > ZCS - 1.0
         if liv != "cervenomodra" and top_band:
@@ -227,8 +237,6 @@ def build_714(liv):
                     return WHITE
                 if z < ZST0:
                     return SAPH
-                if 0.52 < cu < 0.86 and ZST1 + 0.6 <= z < ZST1 + 1.6:
-                    return LOGO_DK                       # ČD logo
             if liv == "najbrt1_2" and z < ZW + 1.4:
                 return SAPH
             return cab_p
@@ -239,13 +247,13 @@ def build_714(liv):
         return cab_p
     parts.append(box(UC0, UC1, -WC, WC, ZW, ZCS, cab_mat))
     parts.append(box(UC0 - 0.05, UC1 + 0.05, -WC - 0.02, WC + 0.02, ZCS, ZCS + 0.4,
-                     lambda f, u, v, z, d: roof_p))
+                     lambda f, u, v, z, d: roof_p if f == "+z" else GUTTER))
     parts.append(box(UC0 + 0.06, UC1 - 0.06, -WC + 0.22, WC - 0.22, ZCS + 0.4, ZCR,
                      lambda f, u, v, z, d: roof_p))
     parts.append(box(UC0 + 0.35, UC0 + 0.45, -0.22, 0.22, ZCR, ZCR + 0.5, EXHAUST))   # horns
 
     corner_steps(UB, UR, zm(0.35), ZFB, parts, frame_p, YEL)
-    _walk_rails(L, UB, UR, US1, UL0, ZW + 2.9, rail, side_lines, ZW, WF)
+    _walk_rails(L, UB, UR, US1, UL0, ZW + 2.9, RAIL, side_lines, ZW, WF)
     return parts, side_lines
 
 
@@ -276,6 +284,8 @@ def build_743_2(liv="najbrt2"):
         def m(f, u, v, z, d):
             if f == "+z":
                 return Paint(C.LOCO_SKY, top=lighter(C.LOCO_SKY, 0.92))
+            if top - GUT_H <= z:
+                return GUTTER
             if f in ("-u", "+u"):
                 outer = (f == "-u" and front) or (f == "+u" and not front)
                 if outer:
@@ -285,8 +295,6 @@ def build_743_2(liv="najbrt2"):
                         return R.HEAD                   # twin lamps at the stripe
                     if abs(v) > WH - 0.22 and ZW + 0.4 < z < ZST0 - 0.2:
                         return Paint(0x8A1E22)
-                    if abs(v) < 0.24 and ZST1 + 0.5 < z < top - 1.6 and front:
-                        return LOGO_DK                  # ČD logo on the nose
                 return band(z)
             b = band(z)
             # long hood: a lighter louvre band high on the side
@@ -308,7 +316,7 @@ def build_743_2(liv="najbrt2"):
     parts.append(box(UL0, UL1, -WH, WH, ZW, ZHS, hood_mat(UL0, UL1, False, ZHS)))
     for (a, b) in ((US0, US1), (UL0, UL1)):
         parts.append(box(a + 0.04, b - 0.04, -WH + 0.12, WH - 0.12, ZHS, ZHT,
-                         lambda f, u, v, z, d: Paint(C.LOCO_SKY, top=lighter(C.LOCO_SKY, 0.92))))
+                         lambda f, u, v, z, d: Paint(C.LOCO_SKY, top=lighter(C.LOCO_SKY, 0.92)) if f == "+z" else GUTTER))
     # exhaust silencer box on the long hood, near its cab end
     parts.append(box(UL0 + 0.35, UL0 + 0.75, -0.24, 0.24, ZHT, ZHT + 0.9, Paint(0x5A6066, top=0x4A5055)))
 
@@ -318,6 +326,8 @@ def build_743_2(liv="najbrt2"):
     def cab_mat(f, u, v, z, d):
         if f == "+z":
             return Paint(C.SAPPHIRE, top=lighter(C.SAPPHIRE, 1.2))
+        if z >= ZCS - GUT_H:
+            return GUTTER
         win = ZWIN0 <= z <= ZCS - 0.4
         if f in ("+v", "-v"):
             cu = (u - UC0) / (UC1 - UC0)
@@ -325,8 +335,6 @@ def build_743_2(liv="najbrt2"):
                 return WS_HI if z > ZCS - 1.3 else WS
             if z > ZCS - 1.0:
                 return CAB_TOP
-            if 0.45 < cu < 0.85 and ZST1 + 0.3 <= z < ZWIN0 - 0.2:
-                return WHITE                             # "České dráhy" lettering
             return band(z)
         if win and abs(v) < WC - 0.08 and abs(v) > 0.05:
             return WS_HI if z > ZCS - 1.3 else WS
@@ -335,11 +343,11 @@ def build_743_2(liv="najbrt2"):
         return band(z)
     parts.append(box(UC0, UC1, -WC, WC, ZW, ZCS, cab_mat))
     parts.append(box(UC0 - 0.06, UC1 + 0.06, -WC - 0.03, WC + 0.03, ZCS, ZCR,
-                     lambda f, u, v, z, d: Paint(C.SAPPHIRE, top=lighter(C.SAPPHIRE, 1.2))))
+                     lambda f, u, v, z, d: Paint(C.SAPPHIRE, top=lighter(C.SAPPHIRE, 1.2)) if f == "+z" else GUTTER))
     parts.append(box(UC0 + 0.30, UC0 + 0.42, -0.20, 0.20, ZCR, ZCR + 0.5, EXHAUST))    # horns
 
     corner_steps(UB, UR, zm(0.35), ZFB, parts, SAPH, YEL)
-    _walk_rails(L, UB, UR, US1, UL0, ZW + 2.9, 0xC9CED1, side_lines, ZW, WF)
+    _walk_rails(L, UB, UR, US1, UL0, ZW + 2.9, RAIL, side_lines, ZW, WF)
     return parts, side_lines
 
 
@@ -365,6 +373,9 @@ def main():
             out = os.path.join(FAM, fam, "sprites", f"{liv}.png")
             os.makedirs(os.path.dirname(out), exist_ok=True)
             R.save_rows(rows, out)
+            from PIL import Image
+            im = Image.open(out); im.load()
+            ST.polish(im, **ST.POLISH).save(out)
             if prev:
                 R.preview(rows, os.path.join(prev, f"{fam}_{liv}.png"), z=4, labels=labels)
             print("wrote", os.path.relpath(out, REPO))

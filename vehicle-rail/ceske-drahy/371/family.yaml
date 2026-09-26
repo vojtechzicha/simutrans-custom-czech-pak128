@@ -13,10 +13,10 @@
 #   najbrt2   light blue upper body, white band over the lamps, dark blue sill and
 #             buffer beam, grey roof, white ČD logos.
 #
-# Sprites: najbrt2 is original art rendered from a box model
-# (tools/railrender/cd_loco_e99.py 371). najbrt1_2 and cervenozluta are TommPa9's
-# pak128.cs drawings (CD_371_Bastard_(balkan) / CD_371_Bastard), extracted from the
-# compiled pak and shifted to source coordinates; static sheets. Length 8.
+# Sprites: every livery rendered in the 2026-09-26 style (tools/railrender/style.py:
+# slab Eso / Persing box, dark roof gutter, ribbed sides, measured livery zones,
+# no side lettering, light pantograph arms with a dark head bar, style.polish);
+# regenerate with `python tools/railrender/cd_loco_e99.py 371`. Length 8.
 
 agency: CeskeDrahy
 type: "371"
@@ -60,8 +60,6 @@ liveries:
   - color: najbrt1_2
     name_en: "Najbrt 1.2"
     name_cs: "Najbrt 1.2"
-    copyright: "TommPa9"   # pak128.cs art
   - color: cervenozluta
     name_en: "red-yellow"
     name_cs: "červeno-žlutá"
-    copyright: "TommPa9"   # pak128.cs art
