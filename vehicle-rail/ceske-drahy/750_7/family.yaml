@@ -1,0 +1,65 @@
+# ČD class 750.7: 19 class 753 "Brejlovec" locos rebuilt by CZ LOKO 2010-2017
+# (750.701-719): Caterpillar 3512C, 1 550 kW, new electric equipment, a new flat
+# cab front with one wide white-framed windscreen, modern light clusters and
+# the roof headlight, no goggle windows; carbody and hood unchanged. 16.66 m,
+# Bo'Bo', 100 km/h, about 72 t. In service 2026 at Brno-Maloměřice, Bohumín,
+# Šumperk and Praha on R/Os (Brno - Uherské Hradiště - Zlín - Luhačovice,
+# Brno - Jihlava, the Ostrava and Šumperk regions).
+# Sources: loco census (atlasvozu.cz 750.7, alanbutschek.cz); Commons photos
+# (Category:CZ Class 750.7 of ČD in Najbrt livery, 750.707, 750.710, 750.713,
+# 750.714).
+#
+# Liveries:
+#   najbrt2    light blue body, light stripe at lamp level, dark blue below it
+#              and on the roof; broad white windscreen frame (≈11)
+#   najbrt1_2  light grey cab ends and fronts, light-blue and dark-blue
+#              trapezoids along the hood, dark grey frame and lower front, blue
+#              windscreen frame (750.701-704, 707, 709-711; ≈8)
+#
+# Sprites: original art, rendered from a box model (tools/railrender/
+# cd_loco_brejlovec.py, the Brejlovec body with the rebuilt fronts); regenerate
+# with `python tools/railrender/cd_loco_brejlovec.py 750_7`. Length 8.
+
+agency: CeskeDrahy
+type: "750.7"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: '"Brejlovec"'
+  family_cs: '"Brejlovec"'
+
+vehicles:
+  - id: "750.7"
+    role_en: "diesel locomotive"
+    role_cs: "motorová lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 3100000
+      payload: 0
+      speed: 100
+      weight: 72
+      runningcost: 175
+      fixed_cost: 1100
+      intro_year: 2010
+      intro_month: 9
+      waytype: track
+      engine_type: diesel
+      power: 1550
+      smoke: Diesel
+      gear: 180
+      length: 8
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+  - color: najbrt1_2
+    name_en: "Najbrt 1.2"
+    name_cs: "Najbrt 1.2"

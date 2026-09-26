@@ -1,0 +1,59 @@
+# ČD class 794: CZ LOKO two-axle diesel-electric shunter for light shunting and
+# line work. Prototype 794.001 (2015, Třinecké železárny, then ČD Brno); ČD
+# ordered 12 in 2017, delivered 794.002-013 from 9/2017 to 2/2019. 7.94 m over
+# buffers, Bo, Caterpillar C13 328 kW with AC/DC transmission, 60 km/h, 28-32 t.
+# Long hood with two red radiator guards on each side next to the cab, raised
+# end cab with a sun visor over the front windows.
+# Sources: cs.wikipedia "Lokomotiva 794"; atlasvozu.cz 794 (10 units, all
+# Najbrt 2); Commons Category:CZ Class 794 of ČD in Najbrt livery
+# ("Lokomotiva 794 010 - 9 obr.02-08", used for the proportions and bands).
+#
+# Livery najbrt2 (all units): sapphire frame, hood roof and cab roof; hood side
+# from the bottom sapphire / white / light blue / thin white / sapphire top
+# edge, the same bands round the cab with a light-blue window zone.
+#
+# Sprites: original art, rendered from a box model,
+# tools/railrender/cd_loco_shunter.py; regenerate with
+# `python tools/railrender/cd_loco_shunter.py 794`. Length 4 like the other
+# two-axle shunters.
+
+agency: CeskeDrahy
+type: "794"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "CZ LOKO"
+  family_cs: "CZ LOKO"
+
+vehicles:
+  - id: "794"
+    role_en: "diesel shunting locomotive"
+    role_cs: "motorová posunovací lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 1500000
+      payload: 0
+      speed: 60
+      weight: 30
+      runningcost: 85
+      fixed_cost: 520
+      intro_year: 2017
+      intro_month: 9
+      waytype: track
+      engine_type: diesel
+      power: 328
+      smoke: Diesel
+      gear: 170
+      length: 4
+    extended:
+      axles: 2
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"

@@ -1,0 +1,84 @@
+# ČD class 754 "Brejlovec" (goggles): ČKD T 478.4, 86 built 1975-1980 (ČD
+# 754.001-086), the passenger version of the 753 with electric train heating
+# (EL. TOPENÍ 3000 V). 16.66 m over buffers, 3.08 m wide, Bo'Bo', 1 460 kW
+# ČKD K 12 V 230 DR, electric transmission, 100 km/h, 74 t. The cab has the
+# split windscreen with the two small "goggle" windows in the roof curve over it
+# and the big roof headlight; the long hood carries a row of portholes, the
+# cooling-air louvre block next to cab 2 and the raised louvred cooler on the
+# roof. In Sept 2026 about 57 are on the books (15-25 active), on R/Os around
+# Brno, Olomouc, Plzeň (Domažlice), Trutnov and the Posázavský pacifik; ČD
+# cancelled both the modernisation and the replacement tender (HN, 17 Sep 2026).
+# Sources: loco census (atlasvozu.cz 754, alanbutschek.cz, cs.wikipedia
+# Lokomotiva 754); Commons photos (Category:CZ Class 754 of ČD in Najbrt livery,
+# 754.013, 754.044, 754.062, 754.068, 754.075).
+#
+# Liveries (the regular schemes still carried in 2026):
+#   najbrt2        light blue body, white stripe at lamp level, dark blue below it
+#                  down to the solebar, dark blue roof; white windscreen frames,
+#                  dark-blue ČD logo mid-hood, white logo on the noses (≈24)
+#   najbrt1_2      light grey cab ends and fronts, a light-blue and a dark-blue
+#                  trapezoid rising along the hood from cab 1 toward cab 2, grey
+#                  roof, dark grey frame and lower front, blue windscreen frames (≈4)
+#   najbrt1        as Najbrt 1.2 on a white body and roof (754.068)
+#   cervenozluta   red with a broad yellow band at nose level round the loco,
+#                  white windscreen frames, dark grey lamp zone (754.044)
+#   modrokremova   light blue with a cream band, dark blue roof and frame (754.013)
+# Left out: the heritage "brejlovec" repaints (blue-white with the flash,
+# green-white, red with flash, black-white) and the ČSD all-red ones.
+#
+# Sprites: original art, rendered from a box model (tools/railrender/
+# cd_loco_brejlovec.py); regenerate with `python tools/railrender/
+# cd_loco_brejlovec.py 754`. Length 8 like the native CD_754.
+
+agency: CeskeDrahy
+type: "754"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: '"Brejlovec"'
+  family_cs: '"Brejlovec"'
+
+vehicles:
+  - id: "754"
+    role_en: "diesel locomotive"
+    role_cs: "motorová lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2600000
+      payload: 0
+      speed: 100
+      weight: 74
+      runningcost: 190
+      fixed_cost: 1000
+      intro_year: 1975
+      intro_month: 6
+      waytype: track
+      engine_type: diesel
+      power: 1460
+      smoke: Diesel
+      gear: 180
+      length: 8
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+  - color: najbrt1_2
+    name_en: "Najbrt 1.2"
+    name_cs: "Najbrt 1.2"
+  - color: najbrt1
+    name_en: "Najbrt 1"
+    name_cs: "Najbrt 1"
+  - color: cervenozluta
+    name_en: "red-yellow"
+    name_cs: "červeno-žlutá"
+  - color: modrokremova
+    name_en: "blue-cream"
+    name_cs: "modro-krémová"

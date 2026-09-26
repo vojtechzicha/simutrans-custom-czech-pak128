@@ -1,0 +1,69 @@
+# ČD class 799 "Adéla" (ADL: akumulátorová a dieselelektrická lokomotiva):
+# depot shunter built by the Jihlava locomotive depot / JLS on frames of the
+# 700, 701 and 702 classes; prototype 799.001 in 1992, series 1994-97, 41 built.
+# 7.24 m over buffers, B, 24 t, 10 km/h. Hybrid: one ČKD TE 022 traction motor
+# fed either by a Zetor Z 5801 37 kW diesel generator or by a 84 V / 250 Ah
+# traction battery (5 km/h). Low hoods either side of a tall central cab with a
+# big overhanging roof. 15 in ČD depots in 2026.
+# Sources: cs.wikipedia "Lokomotiva 799"; atlasvozu.cz 799; Commons
+# Category:CZ Class 799 (Brno-Maloměřice, Ústí n. L., Přerov photos).
+#
+# Engine: shipped as diesel like the native CD_799_Adela. makeobj knows a
+# `battery` engine type, but the real loco is a diesel-electric hybrid that runs
+# on its generator outside the halls.
+#
+# Liveries (census 2026: orange-blue ≈8, Najbrt 2 ≈5):
+#   oranzovomodra  orange hoods and cab, light-blue cab roof, cream lamp panels
+#                  on both hood ends, dark grey frame, yellow-black beams.
+#   najbrt2        light-blue hoods and cab over a white band, sapphire frame
+#                  and roof. No photo of a 799 in Najbrt 2 was found; painted
+#                  like the 704 Najbrt 2.
+#
+# Sprites: original art, rendered from a box model,
+# tools/railrender/cd_loco_shunter.py; regenerate with
+# `python tools/railrender/cd_loco_shunter.py 799`. Length 4 like the RegioJet
+# 703 (7.22 m).
+
+agency: CeskeDrahy
+type: "799"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "Adéla"
+  family_cs: "Adéla"
+
+vehicles:
+  - id: "799"
+    role_en: "hybrid depot shunter"
+    role_cs: "hybridní depová posunovací lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 500000
+      payload: 0
+      speed: 10
+      weight: 24
+      runningcost: 30
+      fixed_cost: 250
+      intro_year: 1994
+      intro_month: 1
+      waytype: track
+      engine_type: diesel
+      power: 37
+      smoke: Diesel
+      gear: 250
+      length: 4
+    extended:
+      axles: 2
+
+liveries:
+  - color: oranzovomodra
+    name_en: "orange-blue"
+    name_cs: "oranžovo-modrá"
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"

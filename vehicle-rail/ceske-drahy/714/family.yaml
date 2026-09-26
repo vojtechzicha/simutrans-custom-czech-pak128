@@ -1,0 +1,77 @@
+# ČD class 714: ČKD T 444.1 hood units rebuilt 1992-2000 with two Caterpillar
+# 3412 E diesels (2 x 300 kW, electric transmission). 14,240 mm over buffers,
+# 64 t, Bo'Bo', 80 km/h. Once Os traction on branch lines (Posázaví, Lužná),
+# now mostly depot and station shunting and reserve: 51 on the books, about 22
+# serviceable in 2026 (atlasvozu.cz 714; research/loco_census.md).
+#
+# Body: low short hood with the black exhaust stack (leading here), raised cab
+# with a rounded roof, long hood; hoods 3.2 m high, cab roof 4.25 m, walkway
+# 1.5 m. Proportions from Commons photos of 714.006, 714.017, 714.204 and
+# 714.217: short hood about 3.3 m, cab 2.4 m, long hood 6.6 m.
+#
+# Liveries (all three are ČD corporate schemes in regular use; the 714.217
+# "Cyklohráček" advertising wrap is a special and not shipped):
+#   cervenomodra  1990s ČD scheme on about 31 locos: red hood ends with a white
+#                 V round the radiator grille, the red wrapping a little onto
+#                 the hood sides, blue louvred hood sides, red cab and roof,
+#                 light grey frame, yellow lower buffer beam edges (Commons
+#                 714.006, 714.024, 714.214, 714.217 Trainpix).
+#   najbrt2       about 10 locos: light blue upper body, a white stripe at lamp
+#                 height round the loco, sapphire lower body and frame,
+#                 sapphire cab top and roof (714.202, Vrané n. Vltavou).
+#   najbrt1_2     about 7 locos: light grey hood ends, light blue hood and cab
+#                 sides over a sapphire trapezoid rising toward the rear, dark
+#                 blue cab top, grey roof, dark sill (714.222 Liberec, 714.023).
+#
+# Sprites: original art, rendered from a box model with the pak128.cs-calibrated
+# renderer, tools/railrender/cd_loco_hood.py (regenerate: python
+# tools/railrender/cd_loco_hood.py 714). Length 7 like the native CD_714.
+
+agency: CeskeDrahy
+type: "714"
+copyright: vojtechzicha      # original art, drawn from scratch
+
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: '"Velká krava"'
+  family_cs: '"Velká krava"'
+
+vehicles:
+  - id: "714"
+    role_en: "diesel locomotive"
+    role_cs: "motorová lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2100000
+      payload: 0
+      speed: 80
+      weight: 64
+      runningcost: 165
+      fixed_cost: 900
+      intro_year: 1992
+      intro_month: 6
+      waytype: track
+      engine_type: diesel
+      power: 600
+      smoke: Diesel
+      gear: 180
+      length: 7
+    extended:
+      axles: 4
+
+liveries:
+  - color: cervenomodra
+    name_en: "red-blue"
+    name_cs: "červeno-modrá"
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+  - color: najbrt1_2
+    name_en: "Najbrt 1.2"
+    name_cs: "Najbrt 1.2"

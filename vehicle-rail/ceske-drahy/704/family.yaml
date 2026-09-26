@@ -1,0 +1,70 @@
+# ČD class 704: ČKD T 238.0 two-axle diesel-electric shunter. Prototypes 1988
+# (T 234.0 / T 237.0), series 1991-94; 7.50 m over buffers, Bo, 250 kW, 60 km/h,
+# 29 t. Long hood, cab off-centre towards one end, short hood behind it, cab roof
+# overhanging both cab ends. About 12 in ČD depot and station shunting in 2026
+# (704.001 is a museum loco and is not shipped).
+# Sources: cs.wikipedia "Lokomotiva 704"; atlasvozu.cz 704; Commons photos
+# "20250804 České dráhy 704014" (N2) and "Tabor (49509029913)" (red-cream,
+# side-on, used for the proportions).
+#
+# Liveries (research census 2026: red-cream ≈7, Najbrt 2 ×4, Najbrt 1.2 ×2):
+#   cervenokremova  ČSD red-cream: red hoods and cab, a cream band round the loco
+#                   at mid-hood height, dark grey frame, weathered roof.
+#   najbrt2         sapphire frame, cab window zone and cab roof; hoods and lower
+#                   cab light blue above a white band at the hood bottom, white
+#                   louvre panels, white ČD logo on the long hood by the cab.
+#   najbrt1_2       light grey body with a sapphire-over-light-blue trapezoid on
+#                   the long hood, dark sill, light grey roof. No photo of a
+#                   704 in N1.2 was found; the layout follows the 362 / 754.
+#
+# Sprites: original art, rendered from a box model,
+# tools/railrender/cd_loco_shunter.py; regenerate with
+# `python tools/railrender/cd_loco_shunter.py 704`. Length 4 like the native
+# CD_704 and the RegioJet 703.
+
+agency: CeskeDrahy
+type: "704"
+copyright: vojtechzicha      # original art, drawn from scratch
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "ČKD T 238.0"
+  family_cs: "ČKD T 238.0"
+
+vehicles:
+  - id: "704"
+    role_en: "diesel shunting locomotive"
+    role_cs: "motorová posunovací lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 1100000
+      payload: 0
+      speed: 60
+      weight: 29
+      runningcost: 75
+      fixed_cost: 450
+      intro_year: 1991
+      intro_month: 1
+      waytype: track
+      engine_type: diesel
+      power: 250
+      smoke: Diesel
+      gear: 170
+      length: 4
+    extended:
+      axles: 2
+
+liveries:
+  - color: cervenokremova
+    name_en: "red-cream"
+    name_cs: "červeno-krémová"
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
+  - color: najbrt1_2
+    name_en: "Najbrt 1.2"
+    name_cs: "Najbrt 1.2"

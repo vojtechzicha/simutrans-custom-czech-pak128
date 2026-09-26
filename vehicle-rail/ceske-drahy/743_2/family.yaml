@@ -1,0 +1,66 @@
+# ČD class 743.2: 14 class 742 "Kocour" hood units (ČKD 1977-1988) rebuilt by
+# CZ LOKO in 2022-2023 as EffiShunter 1000M (type 742.71, registered as 743.2
+# to tell them apart): new 1,000 kW diesel with electric transmission, new
+# square cab with big windows, 100 km/h, Bo'Bo', 13,600 mm over buffers
+# (742 frame), about 72 t. 13 in service in 2026 at Praha-Vršovice, Bohumín,
+# Brno, Hradec Králové, Děčín, Rakovník, Olomouc and České Budějovice: Os on
+# branch lines, loco-hauled Os/Sp and heavy shunting.
+# Sources: czloko.cz (EffiShunter 1000M; "CZ LOKO dokončilo modernizaci
+# čtrnácti lokomotiv řady 742 pro ČD"), zeleznicar.cd.cz "Kocour se proměnil
+# na EffiShunter 1000M", atlasvozu.cz 743.2, research/loco_census.md.
+#
+# Body (Commons Category:CZ Class 743.2: 743.201, 202, 204, 210): short hood
+# about 2.0 m (leading here), tall cab 2.7 m reaching 4.4 m with a dark blue
+# roof, long hood with a louvre band and an exhaust silencer box by the cab,
+# white handrails, yellow lower buffer beam edges.
+#
+# Livery najbrt2 on all 14: light blue upper body, a white stripe at lamp
+# height round the loco, sapphire lower body and frame, sapphire cab top and
+# window surrounds, white "České dráhy" lettering on the cab sides.
+#
+# Sprites: original art, rendered from a box model with the pak128.cs-calibrated
+# renderer, tools/railrender/cd_loco_hood.py (regenerate: python
+# tools/railrender/cd_loco_hood.py 743_2). Length 7 like the native CD_742.
+
+agency: CeskeDrahy
+type: "743.2"
+copyright: vojtechzicha      # original art, drawn from scratch
+
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "EffiShunter 1000M"
+  family_cs: "EffiShunter 1000M"
+
+vehicles:
+  - id: "743.2"
+    role_en: "diesel locomotive"
+    role_cs: "motorová lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 3200000
+      payload: 0
+      speed: 100
+      weight: 72
+      runningcost: 170
+      fixed_cost: 1100
+      intro_year: 2022
+      intro_month: 6
+      waytype: track
+      engine_type: diesel
+      power: 1000
+      smoke: Diesel
+      gear: 170
+      length: 7
+    extended:
+      axles: 4
+
+liveries:
+  - color: najbrt2
+    name_en: "Najbrt 2"
+    name_cs: "Najbrt 2"
