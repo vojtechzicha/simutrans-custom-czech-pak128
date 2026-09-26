@@ -1,0 +1,108 @@
+agency: DBRegio
+type: "612"
+copyright: vojtechzicha      # original art, rendered from a box model
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DB Regio"
+  agency_cs: "DB Regio"
+  family_en: "RegioSwinger"
+  family_cs: "RegioSwinger"
+
+# DB class 612 "RegioSwinger" (Adtranz / Bombardier, built 1998-2003, 192 units):
+# tilting 2-car diesel multiple unit, cars 612 0xx + 612 5xx (D-DB 95 80 0612).
+# DB Regio Bayern, depot Hof, on RE 5280-5293 (RE 33) Nürnberg - Pegnitz -
+# Kirchenlaibach - Marktredwitz - Schirnding - Cheb every 2 h, 1-2 units (often
+# + 1 unit Nürnberg - Marktredwitz), 7 pairs; Czech segment Schirnding border -
+# Cheb (about 8 km). No end date found for the service.
+# 2 cars, 2'B' + B'2', close-coupled with a bellows gangway; one Cummins QSK19-R of
+# 563 kW per car, hydraulic, 160 km/h, 8-degree electric tilt (Neicontrol-E);
+# 51.75 m over couplers (2 x 25.875 m), 2.852 m wide, 4.124 m high, 116 t;
+# 16 first + 130 second class seats (car 612.0 with the first class); floor
+# 1 290 mm with steps, two single-leaf plug doors per car side.
+# Livery `dbcervena` (DB verkehrsrot "Regio"): red body including the roof
+# shoulders, grey roof top with the dark cooling unit behind each cab, a white
+# line along the cantrail, light-grey band along the bottom of the sides and
+# across the lower front, light-grey doors, black-grey front mask round the raked
+# windscreen and over the roof front, red lower front with two oval lamp housings
+# and the DB logo, black coupler recess; yellow side destination display over the
+# first windows on each car's right side; white "REGIO DB" and bike pictogram.
+# (The research's "dark grey roof" is only the roof top: aerial views show red
+# shoulders.) Photos: 612 977 at Cheb Aug 2022 (front + both sides of the joint),
+# the near-broadside 612 at Cheb Aug 2022 (side layout), 612 980 at Burgkunstadt
+# 15 Aug 2024 (side + aerial roof views), 612 553, 078, 144, 602 (Commons).
+#
+# Sprites are rendered from a 3D box model with the pak128 raycaster:
+# tools/railrender/db612.py (render.py + railkit.py); regenerate with
+# `python tools/railrender/db612.py`. Car lengths 13 + 13 (25.9 m each, 1.99 m
+# per carunit); row 0 = car 612 (leading cab, headlights), row 1 = car 612.5
+# (trailing cab, tail lights). Units couple in multiple (A-B-A-B...).
+
+vehicles:
+  - id: "612"
+    role_en: "motor car A"
+    role_cs: "motorový vůz A"
+    row: 0
+    head: true
+    tail: false
+    prev: ["612.5"]
+    next: ["612.5"]
+    couple_liveries: prev     # the rear car of a unit ahead may wear any livery
+    fields:
+      cost: 3050000
+      payload: 70
+      speed: 160
+      weight: 58
+      runningcost: 118
+      fixed_cost: 820
+      intro_year: 1998
+      intro_month: 12
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: diesel
+      power: 563
+      smoke: Diesel
+      gear: 120
+    extended:
+      axles: 4
+
+  - id: "612.5"
+    display_id: "612"
+    role_en: "motor car B"
+    role_cs: "motorový vůz B"
+    row: 1
+    head: false
+    tail: true
+    prev: ["612"]
+    next: ["612"]
+    couple_liveries: next     # the lead car of a unit behind may wear any livery
+    fields:
+      cost: 3050000
+      payload: 76
+      speed: 160
+      weight: 58
+      runningcost: 118
+      fixed_cost: 820
+      intro_year: 1998
+      intro_month: 12
+      retire_year: 2035
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+      engine_type: diesel
+      power: 563
+      smoke: Diesel
+      gear: 120
+    extended:
+      axles: 4
+
+liveries:
+  - color: dbcervena
+    name_en: "DB red"
+    name_cs: "DB červená"

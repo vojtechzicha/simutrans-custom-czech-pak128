@@ -1,0 +1,123 @@
+agency: DBRegio
+type: "642"
+copyright: vojtechzicha      # original art, rendered from a box model
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "DB Regio"
+  agency_cs: "DB Regio"
+  family_en: "Siemens Desiro Classic"
+  family_cs: "Siemens Desiro Classic"
+
+# Siemens Desiro Classic, DB class 642 (D-DB 95 80 0642 0xx/5xx, 1xx/6xx) of DB
+# Regio Südost, depot Dresden. On Czech track since Jul 2014: U28
+# "Nationalparkbahn" Děčín - Bad Schandau - Sebnitz - Dolní Poustevna -
+# Mikulášovice - Rumburk (every 2 h, 1 unit; Bad Schandau - Sebnitz closed
+# 18 Apr - 2 Oct 2026), RB Děčín - Schöna / Bad Schandau, weekend RE Dresden -
+# Děčín - Ústí n. L. - Litoměřice (2 units) and the seasonal "Letní / Vánoční
+# kometa". Units seen in CZ: 642 080/580, 101/601, 178/678, 514, 535, 588.
+# 2 articulated cars on a Jakobs bogie, B'(2)B'; one MTU 6R183 of 275 kW per car,
+# mechanical, 120 km/h; 41.7 m over couplers, 2.83 m wide, 60 % low floor, about
+# 68 t; DB layout 12 first + 98 second + 11 tip-up seats.
+# Liveries (both in service on the Czech lines):
+#   dbcervena  DB verkehrsrot: red body, light-grey lower band, dark window band
+#              wrapping round the cab side window, silver-grey hood and roof, light
+#              grey doors, black front with the red DB logo box between the
+#              headlights, white DB / line stickers behind the cab. Photos: 642 080
+#              at Dolní Žleb 27 Aug 2023 and Děčín 2023, 642 535 at Mikulášovice
+#              Jun 2024, 642 588 at Praha-Holešovice.
+#   vvo        VVO design of the 21 units refurbished for the VVO Dieselnetz
+#              (Dresden - Kamenz / Königsbrück, Müglitztal, Pirna - Sebnitz;
+#              2021-22), which share the U28 pool: the same red with a white line
+#              above the window band, a white band at lamp height from the front
+#              corners back to the door, the white lower band, big white "VVO" on
+#              each car's right side and a DB logo in the band on its left side.
+#              Photos: 642 514 at Šluknov 29 Sep 2024 (U28), 642 678 at Schöna
+#              5 Feb 2026 (U28 to Děčín), the RE to Litoměřice at Ústí n. L.-Střekov
+#              5 Apr 2026, 642 089 at Dresden-Neustadt Aug 2026, Tillig model 04885
+#              side view (layout of the bands and lettering).
+#   The research note "DB verkehrsrot only" missed the VVO scheme: both 2026
+#   photos on the Czech-border lines show it.
+# Sources: research de_at_operators.md C2, vagonweb.cz DB 2026, VVO blog "Das
+# Dieselnetz wird rot" (2021), Siemens datasheet VT 642.
+#
+# Sprites are rendered from the Desiro box model of tools/railrender/desiro.py
+# (shared with vehicle-rail/arriva/642) with the DB Regio paint of
+# tools/railrender/ops_desiro.py; regenerate with
+# `python tools/railrender/ops_desiro.py db`. Car lengths 10 + 10 (20.85 m each
+# to the Jakobs centre); row 0 = car A (leading cab, headlights), row 1 = car B
+# (trailing cab, tail lights). Units couple in multiple (A-B-A-B...), in any
+# livery mix.
+
+vehicles:
+  - id: "642A"
+    display_id: "642"
+    role_en: "half-set A"
+    role_cs: "polovůz A"
+    row: 0
+    head: true
+    tail: false
+    prev: ["642B"]
+    next: ["642B"]
+    couple_liveries: prev     # the rear car of a unit ahead may wear any livery
+    fields:
+      cost: 2020200
+      payload: 60
+      speed: 120
+      weight: 34
+      runningcost: 70
+      fixed_cost: 538
+      intro_year: 2014
+      intro_month: 7
+      retire_year: 2045
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 275
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 3
+
+  - id: "642B"
+    display_id: "642"
+    role_en: "half-set B"
+    role_cs: "polovůz B"
+    row: 1
+    head: false
+    tail: true
+    prev: ["642A"]
+    next: ["642A"]
+    couple_liveries: next     # the lead car of a unit behind may wear any livery
+    fields:
+      cost: 1970200
+      payload: 61
+      speed: 120
+      weight: 34
+      runningcost: 65
+      fixed_cost: 499
+      intro_year: 2014
+      intro_month: 7
+      retire_year: 2045
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 275
+      smoke: Diesel_small
+      gear: 130
+    extended:
+      axles: 3
+
+liveries:
+  - color: dbcervena
+    name_en: "DB red"
+    name_cs: "DB červená"
+  - color: vvo
+    name_en: "DB red VVO"
+    name_cs: "DB červená VVO"

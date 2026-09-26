@@ -1,0 +1,70 @@
+agency: DieLanderbahn
+type: "223"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "Die Länderbahn"
+  agency_cs: "Die Länderbahn"
+  family_en: "Siemens ER 20 Hercules"
+  family_cs: "Siemens ER 20 Hercules"
+
+# Siemens ER 20 "Hercules" (Eurorunner), DB class 223, Die Laenderbahn (DLB,
+# Netinera) 223 061 - 072, ex-Vogtlandbahn / Arriva, in the alex scheme. They
+# haul the Bavorsky expres (alex, RE 25 / EC Praha - Plzen - Domazlice - Furth
+# im Wald - Schwandorf - Regensburg - Muenchen) between Plzen and Schwandorf;
+# the Czech leg is Plzen - Domazlice - Ceska Kubice (line 180, not
+# electrified). Seen in 2026: 223 065, 068, 069, 071 (vagonWEB), and 063, 066,
+# 070, 072 in the photo record in CZ. Diesel-electric Bo'Bo', MTU 16V 4000,
+# 2,000 kW, 140 km/h, 80 t; 19.28 m over buffers, 2.87 m wide, 4.26 m high,
+# bogie centres 10.36 m (side markings). Drawn at length 10 like the other
+# 19 m locomotives (Vectron, pak128.cs 1216 / 1116 / ES64U2).
+#
+# Livery alex (photos: 223 068 Domazlice side-on, 223 065 "alexa" Plzen 2024,
+# 223 070 Plzen front, 223 063 Schwandorf 2024, 223 066 Lindau, 223 067/071/072;
+# OeBB 2016 006 side-on for the body): petrol blue; a white "C" band wraps each
+# cab (behind the windscreen, over the sides of the raised cab roof dome); white
+# rounded machine-room roof shoulder with a silver roof; blue dome tops and
+# fronts; blue sill, light-grey band and yellow-orange stripe along the side
+# from C band to C band; blue side panels with vertical-slat louvres and a big
+# white "= alex"; front with a black windscreen and amber destination display,
+# white "= alex", lamps in black housings, black buffer beam and plough. The
+# research described the upper side as white - the side-on photos show blue
+# side panels with only the roof shoulder white. 223 072's "Griass di Allgaeu"
+# advert is not drawn.
+#
+# Sprites are rendered from a box model, original art:
+# tools/railrender/er20.py (regenerate with `python tools/railrender/er20.py`).
+
+vehicles:
+  - id: "223"
+    role_en: "diesel locomotive"
+    role_cs: "motorová lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 4200000
+      payload: 0
+      speed: 140
+      weight: 80
+      runningcost: 320
+      fixed_cost: 2000
+      intro_year: 2007
+      intro_month: 12
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      engine_type: diesel
+      power: 2000
+      gear: 130
+      smoke: Diesel_small
+      length: 10
+    extended:
+      axles: 4
+
+liveries:
+  - color: alex
+    name_en: "alex"
+    name_cs: "alex"

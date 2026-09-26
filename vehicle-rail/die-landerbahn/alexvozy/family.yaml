@@ -1,0 +1,124 @@
+agency: DieLanderbahn
+type: "alexvozy"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Die Länderbahn"
+  agency_cs: "Die Länderbahn"
+  family_en: "alex"
+  family_cs: "alex"
+
+# Die Länderbahn (DLB, brand "alex") coaches of the "Bavorský expres"
+# EC/RE 350-363 Praha - Plzeň - Domažlice - Furth im Wald - Schwandorf -
+# Regensburg - München, every 2 h. Two DLB coaches per train run the whole way
+# (plus ČD Bdmpee 233 through coaches); ČD 362 hauls Praha - Plzeň, DLB 223
+# (ER 20) Plzeň - Schwandorf. vagonWEB 2026 compositions (8 Feb - 2 Sep 2026)
+# show Bmz 618/628/636/639/659/729/781/785, ABbmdz 124/180/184/189 and ABvmz
+# 502/503. All 26.40 m over buffers, 200 km/h.
+# - Bmz 61 83 21-90 6xx/7xx: ex-FS (Trenitalia) Z1 (UIC-Z Eurofima type),
+#   still Italian-registered, 66 seats in 11 compartments.
+# - ABbmdz 61 83 21-90 1xx: ex-FS Z1, 24 1st + 16 2nd class + 6 (vagonWEB
+#   "24+6+16"), same body and window layout; yellow 1st-class line above the
+#   1st class section.
+# - ABvmz 56 80 39-90 5xx: ex-DB Amz 210 / Avmz rebuilt 2007 (20 1st + 33 2nd
+#   class + multi-purpose room), 41 t, deep skirt.
+#
+# Livery "alex" - each car as it really runs:
+# - Z1 cars in the current grey alex scheme: mid-grey upper body with
+#   light-framed windows, a thin orange line under the windows, a white lower
+#   panel with the blue "= alex" logo, dark grey skirt, light roof (photo Bmz
+#   61 83 21-90 174-5, hellertal.startbilder.de 910536; vagonWEB
+#   B-2190-alex-a/b, ABbmdz-a/b; in the 2026 train on bahnbilder 1440718 and
+#   1437913). The research text called the body "light silver-grey"; the
+#   photo and drawing show a mid-grey upper body over a white panel.
+# - ABvmz in the older blue alex scheme: blue body, orange line at the window
+#   sill, cream lower band, blue skirt, white line under the roof, the orange
+#   and cream bands crossing the blue doors (photo ABvmz 56 80 39-95 507,
+#   hellertal 860585, 2023). Confirmed in 2026: bahnbilder 1437913
+#   (Regensburg, 3 Apr 2026, first car behind ES 64 U2-096 of the Praha
+#   train) and vagonWEB (ABvmz 502 on 7 Jun 2026, 503 on 21 Aug 2026).
+#
+# Sprites are rendered from a box model: tools/railrender/ops_coaches.py on
+# tools/railrender/coachkit.py; regenerate with
+# `python tools/railrender/ops_coaches.py alexvozy`. Length 13 = 26.4 m.
+# Coaches couple with any locomotive or coach (prev/next: any).
+
+vehicles:
+  - id: "Bmz61-83-21-90"
+    display_id: "Bmz 61 83 21-90"
+    role_en: "2nd class compartment coach"
+    role_cs: "oddílový vůz 2. třídy"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2200000
+      payload: 66
+      speed: 200
+      weight: 46
+      runningcost: 28
+      fixed_cost: 270
+      intro_year: 2019
+      intro_month: 1
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "ABbmdz61-83-21-90"
+    display_id: "ABbmdz 61 83 21-90"
+    role_en: "1st/2nd class coach with bike space"
+    role_cs: "vůz 1./2. třídy s prostorem pro kola"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 2350000
+      payload: 40
+      speed: 200
+      weight: 46
+      runningcost: 24
+      fixed_cost: 275
+      intro_year: 2019
+      intro_month: 1
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "ABvmz56-80-39-90"
+    display_id: "ABvmz 56 80 39-90"
+    role_en: "1st/2nd class compartment coach"
+    role_cs: "oddílový vůz 1./2. třídy"
+    row: 2
+    prev: any
+    next: any
+    fields:
+      cost: 2300000
+      payload: 53
+      speed: 200
+      weight: 41
+      runningcost: 26
+      fixed_cost: 275
+      intro_year: 2007
+      intro_month: 12
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: alex
+    name_en: "alex"
+    name_cs: "alex"

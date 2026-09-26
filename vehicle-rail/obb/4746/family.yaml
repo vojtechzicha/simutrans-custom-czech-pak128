@@ -1,0 +1,133 @@
+agency: OBB
+type: "4746"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "ÖBB"
+  agency_cs: "ÖBB"
+  family_en: "Cityjet (Siemens Desiro ML)"
+  family_cs: "Cityjet (Siemens Desiro ML)"
+
+# ÖBB class 4746 "Cityjet", Siemens Desiro ML, 3-car EMU (the 15 kV / 25 kV
+# version of the 4744; in service from 2016). Bo'2' + 2'2' + 2'Bo', 75.15 m over
+# couplers, 2.82 m wide, 145 t, 2,600 kW, 160 km/h, 244 seats + 24 tip-up.
+# On Czech track: REX41 Wien FJB - Gmünd NÖ - České Velenice on weekends (e.g.
+# 4746 073 on 14 Feb 2026), only the short 25 kV stub Gmünd - České Velenice;
+# no Czech approval beyond that (research E5), so occasional.
+#
+# Livery Cityjet (photos: "18.07.26 Tulln an der Donau 4746113", "4746.054
+# Hausleiten 2020", "2017-11-16 (115) ÖBB 4746 013 at Bahnhof Wolkersdorf";
+# vagonWEB drawing 4746-a): white upper body; the lower body in red / orange /
+# red horizontal bands (the "fine stripe structure" of the research is the
+# orange band seen in the sunlit Hausleiten photo); windows in black frames,
+# the low-floor windows between the doors in one black band; dark grey doors
+# with a light centre seal; grey "cityjet" script and red ÖBB logos on the
+# white. Front: huge dark windscreen framed silver-grey with a red outline (the
+# research's "black from roof to windscreen" is the windscreen itself; the
+# frame is silver in the Tulln and Wolkersdorf photos), light grey band with a
+# red ÖBB below it, red lower front with the lamp clusters, black coupler area.
+#
+# Sprites: rendered from a box model, original art:
+#   tools/railrender/obb_cityjet.py  (regenerate: python tools/railrender/obb_cityjet.py)
+# Car lengths 12 + 13 + 12 carunits (24.7 + 25.8 + 24.7 m); the unit is modelled
+# on one axis and each row rendered with its front on the Simutrans anchor, so
+# the joints meet in all 8 views (tools/consist_preview.py). Row 0 = car A
+# (leading cab, headlights), row 1 = middle car, row 2 = car B (tail lights,
+# pantograph next to the middle car, drawn raised as in the drawing). Units
+# couple in multiple (A-M-B-A-M-B...).
+
+vehicles:
+  - id: "4746-A"
+    display_id: "4746"
+    role_en: "cab car A"
+    role_cs: "čelní vůz A"
+    row: 0
+    head: true
+    tail: false
+    prev: ["4746-B"]
+    next: ["4746-M"]
+    couple_liveries: prev     # the rear car of a unit ahead may wear any livery
+    fields:
+      cost: 3300000
+      payload: 86
+      speed: 160
+      weight: 50
+      runningcost: 70
+      fixed_cost: 700
+      intro_year: 2016
+      intro_month: 3
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+      engine_type: electric
+      power: 1300
+      gear: 130
+    extended:
+      axles: 4
+
+  - id: "4746-M"
+    display_id: "4746"
+    role_en: "middle car"
+    role_cs: "vložený vůz"
+    row: 1
+    head: false
+    tail: false
+    prev: ["4746-A"]
+    next: ["4746-B"]
+    fields:
+      cost: 2400000
+      payload: 96
+      speed: 160
+      weight: 45
+      runningcost: 30
+      fixed_cost: 300
+      intro_year: 2016
+      intro_month: 3
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "4746-B"
+    display_id: "4746"
+    role_en: "cab car B"
+    role_cs: "čelní vůz B"
+    row: 2
+    head: false
+    tail: true
+    prev: ["4746-M"]
+    next: ["4746-A"]
+    couple_liveries: next     # the lead car of a unit behind may wear any livery
+    fields:
+      cost: 3300000
+      payload: 86
+      speed: 160
+      weight: 50
+      runningcost: 70
+      fixed_cost: 700
+      intro_year: 2016
+      intro_month: 3
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+      engine_type: electric
+      power: 1300
+      gear: 130
+    extended:
+      axles: 4
+
+liveries:
+  - color: cityjet
+    name_en: "Cityjet"
+    name_cs: "Cityjet"

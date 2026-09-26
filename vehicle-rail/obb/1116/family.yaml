@@ -1,0 +1,61 @@
+agency: OBB
+type: "1116"
+copyright: Lubak91/TommPa9   # pak128.CS obb_1016 drawing (same body), repainted
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ÖBB"
+  agency_cs: "ÖBB"
+  family_en: "Siemens ES64U2 Taurus"
+  family_cs: "Siemens ES64U2 Taurus"
+
+# ÖBB class 1116 (Siemens ES64U2 "Taurus", 15 kV / 25 kV). On Czech track in
+# 2026: REX1 Wien - Hohenau - Břeclav with double-deck push-pull sets, S3/R/SB
+# 3800-3807 Linz - Summerau - Horní Dvořiště - České Budějovice with CityShuttle
+# sets, REX3/REX41 Wien FJB - Gmünd - České Velenice, REX "Silva Nortica" to
+# České Velenice, the Chopin/Carpatia/Metropol portions München - Wien -
+# Břeclav. 19.28 m over buffers, 3.00 m wide, Bo'Bo', 86 t, 6.4 MW, 230 km/h.
+# Drawn at length 10 like the native 1016/1216.
+#
+# Livery obbcervena (photos 1116 057 at České Budějovice jižní zastávka, 1116
+# 186 at České Budějovice 2024): ÖBB red, dark-grey solebar band, white "ÖBB"
+# wordmark mid-side and on the lower front. The few railjet / Nightjet / advert
+# wraps are left out.
+#
+# Sheet: the pak128.CS obb_1016 drawing (the 15 kV twin of the 1116, same body
+# with the one-piece side grilles) repainted like the 1216 family: plain glass,
+# lamp specials, the old ÖBB "Pflatsch" decal replaced by the current wordmark,
+# diagonal/end views raised 3 px, with the same one-off painter script as the
+# 1216 (not in the repo).
+
+vehicles:
+  - id: "1116"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 6500000
+      payload: 0
+      speed: 230
+      weight: 86
+      runningcost: 204
+      fixed_cost: 3000
+      intro_year: 2000
+      intro_month: 1
+      retire_year: 2055
+      retire_month: 1
+      waytype: track
+      engine_type: electric
+      power: 6400
+      gear: 160
+      length: 10
+    extended:
+      axles: 4
+
+liveries:
+  - color: obbcervena
+    name_en: "ÖBB red"
+    name_cs: "ÖBB červená"
