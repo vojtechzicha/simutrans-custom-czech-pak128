@@ -60,8 +60,8 @@ vehicles:
   # 2004-11 from Btn 750/755. Najbrt 2 or the delivery red-cream (still the
   # majority in 2020-24 data).
   - id: "054"
-    role_en: "trailer"
-    role_cs: "přípojný vůz"
+    role_en: "trailer Bdtn 756/757"
+    role_cs: "přípojný vůz Bdtn 756/757"
     row: 1
     liveries: [najbrt2, cervenokremova]
     head: false
@@ -90,8 +90,8 @@ vehicles:
   # Pars nova 2006-10 from Postw vans, 63 seats + bikes, 41 t, 120 km/h; the cab
   # front is the 854's full front. Najbrt 2 (29 of 34) or red-cream.
   - id: "954"
-    role_en: "control car"
-    role_cs: "řídicí vůz"
+    role_en: "control car Bfbrdtn 794 / ABfbrdtn 795"
+    role_cs: "řídicí vůz Bfbrdtn 794 / ABfbrdtn 795"
     row: 2
     liveries: [najbrt2, cervenokremova]
     head: false
