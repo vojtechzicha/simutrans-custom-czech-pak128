@@ -17,6 +17,16 @@ A single pak file per agency and transport mode — for example, every shipped
 
 | Family | Liveries |
 | --- | --- |
+| ČD řada 111 ("Tyristorka", shunting electric) | Najbrt 2, Najbrt 1.2 |
+| ČD řada 113 ("Žehlička", Tábor–Bechyně) | oranžovo-krémová, zeleno-krémová |
+| ČD řada 162 ("Peršing") | Najbrt 2, Najbrt 1.2 |
+| ČD řada 163 ("Peršing") | Najbrt 2, zeleno-žlutá |
+| ČD řada 193 (Siemens Vectron MS) | ČD Vectron, ČD Vectron RS Lease |
+| ČD řada 210 ("Jezevec") | Najbrt 2, modro-krémová, červeno-žlutá |
+| ČD řada 362 ("Eso", incl. the 362.2 rebuilds) | Najbrt 2, Najbrt 1.2 |
+| ČD řada 371 ("Bastard") | Najbrt 2 |
+| ČD řada 380 (Škoda 109E) | ČD 109E, Najbrt 2 |
+| ČD řada 384 (Siemens Vectron MS 230) | ČD 230 km/h |
 | ČD řada 440 (RegioPanter, 3 kV; renumbered 640.1 in 2021–22) | Najbrt 1.2, Najbrt 2 |
 | ČD řada 471 (CityElefant) + 071 + 971 | CityElefant bílo-modro-červená, PID šedo-červená, Najbrt 1, Najbrt 2 |
 | ČD řada 530 / 550 (Moravia, owned by Jihomoravský kraj) | Jihomoravský kraj |
@@ -28,6 +38,13 @@ A single pak file per agency and transport mode — for example, every shipped
 | ČD řada 660.0, 660.1 (InterPanter) | Najbrt 2 |
 | ČD řada 680 (Pendolino) | stříbrno-tyrkysová (Kotas) |
 | ČD řada 690.2 (battery RegioPanter) | ČD zeleno-modro-bílá |
+| ČD řada 704 (ČKD T 238.0 shunter) | červeno-krémová, Najbrt 2, Najbrt 1.2 |
+| ČD řada 714 ("Velká krava") | červeno-modrá, Najbrt 2, Najbrt 1.2 |
+| ČD řada 743.2 (CZ LOKO EffiShunter 1000M) | Najbrt 2 |
+| ČD řada 750.7 ("Brejlovec", CZ LOKO rebuild) | Najbrt 2, Najbrt 1.2 |
+| ČD řada 754 ("Brejlovec") | Najbrt 2, Najbrt 1.2, Najbrt 1, červeno-žlutá, modro-krémová |
+| ČD řada 794 (CZ LOKO shunter) | Najbrt 2 |
+| ČD řada 799 ("Adéla" depot shunter) | oranžovo-modrá, Najbrt 2 |
 | ČD řada 809 ("Šukafon") | Najbrt 1, Najbrt 2, červeno-krémová, červeno-žlutá |
 | ČD řada 810 ("Šukafon") + 010 trailer | Najbrt 1, Najbrt 2, červeno-krémová; 810 also in Pardubický kraj and PID červeno-modro-bílá |
 | ČD řada 811 (RegioMouse) + 012 trailer | Najbrt 2, Moravskoslezský kraj |
