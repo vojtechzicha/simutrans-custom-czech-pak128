@@ -79,6 +79,11 @@ side, and a dark anthracite skirt.
 - **844** (7 units, 2026) and **847** (10 units): white roof and cab hood (847:
   bare-aluminium roof equipment), blue sides with the arc motif and swooshes,
   blue lower front, grey skirt.
+- **650.2 RegioPanter** (13 units, Plzeň, since 2021): the design chosen by a
+  public poll in 2017, the same one Arriva's ex-ČD 650s carry on line P1. White
+  cant rail and cab hood, dark-blue roof boxes, royal-blue body, yellow doors,
+  long green / white / yellow swooshes, a yellow bar over the 1st class, mid-blue
+  front panel with the kraj emblem, dark-grey skirt, yellow anti-climber.
 
 | Zone          | RGB (approx.)     | Hex     |
 | ------------- | ----------------- | ------- |
@@ -139,7 +144,7 @@ The PID unified visual style as applied to ČD trains. The rolling-stock applica
 | Roof                       | 7016   | Anthrazitgrau     | `41, 49, 51`     | #293133 |
 | Under-frame (black)        | 9005   | Tiefschwarz       | `10, 10, 10`     | #0A0A0A |
 
-Where the red goes depends on the class: on the 847 one red stripe beside each door (and one right of centre on the fronts), on the RS1 (841.2 / 841.3) a red block over the short end section behind each cab, on the RegioNova red bands at the doors.
+Where the red goes depends on the class: on the 847 one red stripe beside each door (and one right of centre on the fronts), on the RS1 (841.2 / 841.3) a red block over the short end section behind each cab, on the RegioNova red bands at the doors. On the RegioPanter 640.2 (ROPID 2025 rules: RAL 7038 grey, RAL 3020 red, RAL 9005 black window band and doors, RAL 7022 roof gear) one red block stands on the car-end side of each door, from the cant down to the skirt with the black window band crossing it, and the front is grey on the left and red on the right of centre with the white ČD logo. On the 471 CityElefant the inner half of every single-deck end section is red over its full height, the upper and lower decks sit in continuous black window bands, and the cab front has a black mask with one vertical red band right of centre.
 
 The signature element is the **full-height red vertical band at every door position** — wraps from below the windows down to the skirt, doors included. The folder/livery name `pidsedocervena` ("grey-red") is accurate for the train application.
 
@@ -199,6 +204,91 @@ lower front, yellow skirt edge, dark ČD lettering.
 Only 809 281 (repainted 2006) still runs in it.
 
 ---
+
+## Najbrt on the Panter family (RegioPanter 440 / 640 / 650, InterPanter 660)
+
+On the Škoda Panter body Najbrt 2 is a **sky-blue body** (RAL 5015) between a
+**near-white cant rail** and a **sapphire waist line**, then a light-grey stripe
+and a **sapphire valance**; **sapphire doors**, a light-grey roof with **sapphire
+roof boxes**, a light-grey GRP cab hood slanting back past the cab-side window, a
+sapphire visor over the black windscreen, a sky-blue front panel with the white
+ČD logo, sapphire skirt and a yellow anti-climber. A yellow stripe under the cant
+marks the 1st class. The InterPanter wears the same scheme with one door per side.
+
+## Najbrt 1.2 (`najbrt1_2`) — Panter as delivered, 2011–13
+
+The first RegioPanters (640.001–003, 650.001–004 and ten of the twelve 440 /
+640.1) still carry the transitional scheme they were delivered in. It is Najbrt 2
+with five differences: **dark-grey roof boxes** (RAL 7022), a **dark-grey cap**
+above the windscreen, a **sapphire diagonal wedge** under the cab-side window, and
+a **wide light-grey lower band without the sapphire valance**; the lower front
+corners are dark grey on some photos and sapphire on others.
+
+## Najbrt on the 471 CityElefant
+
+The double-decker splits the corporate colours by deck. **Najbrt 1** (028–030,
+061–075): light-grey roof and upper deck (no dark band), a sky-blue band from under
+the upper windows down to the lower deck, a thin sapphire stripe, light-grey lower
+deck, **dark-grey skirt**, sapphire doors, a sapphire block round the cab door and
+a sky-blue cab mask. **Najbrt 2** (076–083): **sapphire roof and upper-deck zone**,
+a thin light line that also crosses the front above the windscreen, the sky-blue
+band (now including the cab-side window), sapphire stripe, light-grey lower deck,
+**sapphire skirt** and doors.
+
+## CityElefant bílo-modro-červená (`cityelefantcervena`) — 471, 2006 scheme
+
+The scheme the 471 got with the CityElefant name in 2006 (units 031–060 and the
+older units repainted at overhaul; all seven CityElefant-liveried Bohumín units
+still wear it). Silver-white body and roof; on the double-deck middle, from the top:
+**light-blue** band with the upper windows, thin white line, **red** band between
+the decks, white line, light-blue band with the lower windows, white line and a
+**dark blue-grey skirt**. **Red doors**. Behind each cab the stack starts in a
+curved swoosh ending in a red crescent, with the white "CityElefant" wordmark; the
+cab front has a dark-grey mask round the windscreen. The original 1997–2006
+"ledovec" (white with a royal-blue band, left service 2024) is not modelled.
+
+| Zone        | RGB (shipped)      | Hex     |
+| ----------- | ------------------ | ------- |
+| Light blue  | `90, 143, 196`     | #5A8FC4 |
+| Red         | `210, 71, 47`      | #D2472F |
+| Silver      | `213, 215, 212`    | #D5D7D4 |
+| Skirt       | `78, 90, 100`      | #4E5A64 |
+| Cab mask    | `86, 91, 97`       | #565B61 |
+
+## Stříbrno-tyrkysová (`cdpendolino`) — 680 Pendolino
+
+Patrik Kotas's design, the only livery the 680 has ever worn (renewed in film at
+the 2017–18 modernisation). **Silver-grey body**, an **anthracite window band**
+edged below by a **thin yellow line** that turns up at the band ends, a
+**turquoise cant-rail stripe**, a **turquoise lower band and skirt**, grey roof with
+dark pantograph wells. The cab cars have an anthracite "helmet" (cab roof and
+windscreen surround) and a broad yellow band sweeping forward across the nose with
+the headlights, silver below it and a turquoise lower nose.
+
+| Zone        | RGB (shipped)      | Hex     |
+| ----------- | ------------------ | ------- |
+| Silver      | `208, 212, 218`    | #D0D4DA |
+| Turquoise   | `34, 166, 190`     | #22A6BE |
+| Yellow      | `240, 194, 30`     | #F0C21E |
+| Anthracite  | —                  | #3F454D |
+
+## ČD zeleno-modro-bílá (`cdzelenomodrobila`) — 690.2 battery RegioPanter
+
+The four battery units of 2024 (690.247–250, Ostrava – Veřovice). Each car is
+**green at its cab end** and **sapphire at its inner end**, joined by a band of
+interlocking loops, so a unit reads green – loops – navy | navy – loops – green.
+Below that it is Najbrt 2: sapphire line, light-grey stripe, sapphire valance and
+doors; light-grey roof with navy battery boxes, white cant rail, a yellow stripe
+over the 1st class, and a two-tone green front panel under a sapphire visor.
+
+## Jihomoravský kraj (`jihomoravskykraj`) — Moravia 530 / 550
+
+The Moravia units owned by Jihomoravský kraj (operated by ČD) all wear one JMK
+scheme: **magenta** (Pantone 1787 C, #FB5271) roof shoulders running into the cab
+corners, and magenta doors; a white / light-grey body with a **black window band**
+and a black skirt; over each bogie the black rises to the roof band above a tall
+white panel, stepping down in 30° diagonals. The cab face is black with the white
+number and the "jmk" logo, the plough edge yellow. No ČD logo and no 1st class.
 
 ## Najbrt 2 on the PESA units (844 / 847) and the GTW (848)
 

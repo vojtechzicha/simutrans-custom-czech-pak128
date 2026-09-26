@@ -17,7 +17,17 @@ A single pak file per agency and transport mode — for example, every shipped
 
 | Family | Liveries |
 | --- | --- |
+| ČD řada 440 (RegioPanter, 3 kV; renumbered 640.1 in 2021–22) | Najbrt 1.2, Najbrt 2 |
+| ČD řada 471 (CityElefant) + 071 + 971 | CityElefant bílo-modro-červená, PID šedo-červená, Najbrt 1, Najbrt 2 |
+| ČD řada 530 / 550 (Moravia, owned by Jihomoravský kraj) | Jihomoravský kraj |
+| ČD řada 640, 640.1 (RegioPanter) | Najbrt 1.2, Najbrt 2 |
+| ČD řada 640.2 (RegioPanter) | Najbrt 2, PID šedo-červená |
 | ČD řada 642 (Siemens Desiro Classic) | DÚK zeleno-bílá |
+| ČD řada 650 (RegioPanter) | Najbrt 1.2, Najbrt 2 |
+| ČD řada 650.2 (RegioPanter) | Najbrt 2, Plzeňský kraj |
+| ČD řada 660.0, 660.1 (InterPanter) | Najbrt 2 |
+| ČD řada 680 (Pendolino) | stříbrno-tyrkysová (Kotas) |
+| ČD řada 690.2 (battery RegioPanter) | ČD zeleno-modro-bílá |
 | ČD řada 809 ("Šukafon") | Najbrt 1, Najbrt 2, červeno-krémová, červeno-žlutá |
 | ČD řada 810 ("Šukafon") + 010 trailer | Najbrt 1, Najbrt 2, červeno-krémová; 810 also in Pardubický kraj and PID červeno-modro-bílá |
 | ČD řada 811 (RegioMouse) + 012 trailer | Najbrt 2, Moravskoslezský kraj |
@@ -97,9 +107,6 @@ Also on `main`, still being refined (see [`TODO.md`](TODO.md)):
   - Frýdek-Místek, Třinec, Český Těšín, Nový Jičín, Studénka, Krnov, Hranice
     and Přerov (contracted MHD, town or operator schemes).
   - Kladno, DPMLB Mladá Boleslav, Kolín, Příbram, Benešov and Tábor.
-- **ČD rail EMUs** — 471 CityElefant and the 440/640/650/660/681/690 Panter
-  family, in various stages of sprite repaint; see [`TODO.md`](TODO.md). (Every
-  ČD diesel unit in service in 2026 is finished; see the table above.)
 - **Die Länderbahn CZ** — 654 Pesa LINK II.
 - **Supermarkets** (city industries, `VZ-Supermarkets-city.pak`) — 14 Czech
   chains as consumer industries in three size classes: 1×1 stores (Žabka, Tesco

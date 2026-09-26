@@ -1,9 +1,9 @@
 # Sprite TODO list
 
-The ČD diesel units are finished (see below). The EMU entries further down still
-ship placeholder sprites copied from the closest-colour upstream source; each item
-names the placeholder you'll see in-game today, the livery it has to become, and any
-real-world caveats.
+The ČD diesel and electric units are finished (see below). Entries further down
+still ship placeholder sprites copied from the closest-colour upstream source; each
+item names the placeholder you'll see in-game today, the livery it has to become,
+and any real-world caveats.
 
 Convention:
 - placeholder: file currently shipped under `vehicle-rail/.../sprites/<color>.png`
@@ -54,77 +54,28 @@ RS1s (NEB, BWEGT, OSB, BSB), the retro 854.021 / 1969 854.225 museum schemes, an
 
 ---
 
-# EMUs
+## ČD electric units (EMUs) — done
 
-## 471 CityElefant
+Every ČD-operated EMU class in service in September 2026 is in the set, in every
+livery it runs in, repainted with the zone painter on the upstream TommPa9 bodies
+(the RegioPanters share one body module, so every Panter scheme sits on the same
+silhouette) and checked in-game on catenary test rings. Units of one family
+couple into pairs across liveries.
 
-3-car formation (471 motor + 071 trailer + 971 cab trailer). All four placeholders
-use the same source: pak128cs `cd_471a.png` (3 rows already laid out front motor
-→ middle → rear cab).
+- [x] **471** CityElefant + 071 + 971: CityElefant bílo-modro-červená (2006), PID šedo-červená, Najbrt 1, Najbrt 2.
+- [x] **640** / **640.1** (ex-440) RegioPanter: Najbrt 1.2, Najbrt 2. **440** kept as the historical 3 kV class (to 2022).
+- [x] **640.2**: Najbrt 2, PID šedo-červená.
+- [x] **650**: Najbrt 1.2, Najbrt 2. **650.2**: Najbrt 2, Plzeňský kraj.
+- [x] **690.2** battery RegioPanter: ČD zeleno-modro-bílá.
+- [x] **660.0** / **660.1** InterPanter: Najbrt 2 (one door per side; 064.1 unpowered).
+- [x] **680** Pendolino (was filed as 681): Kotas stříbrno-tyrkysová.
+- [x] **530** / **550** Moravia (Jihomoravský kraj, operated by ČD): Jihomoravský kraj.
 
-- [x] `471/sprites/cityelefantcervena.png` — pak128cs CityElefant red/white/blue —
-  **direct match.** Optional: bring small details (logo, current ČD typography) in line
-  with the 2020s look.
-- [ ] `471/sprites/pidsedocervena.png` — CityElefant red source → **PID šedo-červená**
-  (silver body + red doors + grey roof).
-- [ ] `471/sprites/najbrt1.png` — CityElefant red source → **Najbrt 1** (navy + white
-  waistband, red door frames).
-- [ ] `471/sprites/najbrt2.png` — CityElefant red source → **Najbrt 2** (navy + bright
-  red doors).
-
-## 660.0 InterPanter (3-car)
-
-- [ ] `660_0/sprites/najbrt2.png` — pak128_czr 640.png (RegioPanter Najbrt 2 livery).
-  Body shells of InterPanter and RegioPanter are visually similar. **Close match for
-  the livery**, but the InterPanter front mask differs slightly from the suburban
-  RegioPanter (different headlight cluster, longer nose) — touch up the cab profile.
-
-## 660.1 InterPanter (5-car)
-
-- [ ] `660_1/sprites/najbrt2.png` — same caveat as 660.0. The middle three vehicles
-  (662.1, 064.1, 662.2) all reuse the middle motor row of `640.png` as placeholder; the
-  middle trailer (064.1) should ideally be redrawn without pantographs.
-
-## 681 Pendolino
-
-- [x] `681/sprites/cdpendolino.png` — pak128cs `cd_680_pendolino.png` (ČD Pendolino
-  livery, all 7 cars laid out). **Direct match.** Upstream is filed under class 680;
-  ČD reclassified the set to 681 in 2008 — only the model badge differs.
-
-## 650 RegioPanter (2-car)
-
-- [ ] `650/sprites/najbrt1_2.png` — pak128_czr `650_P2.png` (Najbrt 2 base) → repaint
-  waistband to **Najbrt 1.2** (transitional dark-blue + slimmer yellow band).
-- [x] `650/sprites/najbrt2.png` — pak128_czr `650_P2.png` is already **Najbrt 2**. Direct match.
-
-## 640 RegioPanter (3-car)
-
-- [ ] `640/sprites/najbrt1_2.png` — pak128_czr `640.png` Najbrt 2 base → repaint to **Najbrt 1.2**.
-- [x] `640/sprites/najbrt2.png` — pak128_czr `640.png` is already **Najbrt 2**. Direct match.
-
-## 440 RegioPanter (3-car)
-
-- [ ] `440/sprites/najbrt1_2.png` — pak128cs `cd_440_panther.png` (early Panter blue
-  livery) → adjust to **Najbrt 1.2** if it doesn't read close enough.
-- [ ] `440/sprites/najbrt2.png` — pak128cs `cd_440_panther.png` → tweak door colors for
-  **Najbrt 2** (early Panter livery is similar to Najbrt 1; bright red doors needed).
-
-## 640.1 RegioPanter (3-car)
-
-- [ ] `640_1/sprites/najbrt1_2.png` — pak128_czr `640.png` → repaint waistband to
-  **Najbrt 1.2**.
-- [x] `640_1/sprites/najbrt2.png` — pak128_czr `640.png` is already **Najbrt 2**. Direct match.
-
-## 640.2 RegioPanter (3-car)
-
-- [x] `640_2/sprites/pidsedocervena.png` — pak128_czr `640_PID.png` is already the **PID
-  šedo-červená** livery. Direct match.
-- [x] `640_2/sprites/najbrt2.png` — pak128_czr `640.png` is already **Najbrt 2**. Direct match.
-
-## 690.2 RegioPanter (2-car, battery)
-
-- [x] `690_2/sprites/cdzelenomodrobila.png` — pak128_czr `690.png` is already the
-  battery-electric **ČD zeleno-modro-bílá** livery. Direct match.
+Not modelled on purpose: the 1997–2006 471 "ledovec" scheme (left service 2024),
+advertising wraps (650.233 ODIS, 471 "20 let PID", 680 ad wraps), kraj decals on
+the Najbrt 2 640.2 / 650.2, the 690.0 battery units (passenger service from 2027),
+and the withdrawn 451/452, 460/560 and 470. RegioJet's, Arriva's and Leo
+Express's EMUs live in their own agency paks.
 
 ---
 
