@@ -1,12 +1,14 @@
 # ČD ComfortJet (Siemens Viaggio Comfort, 2022-26), 20 nine-car sets:
 # loco + Bdmpz 883 + 4x Bmpz 885 + Bbmpz 884 + BRmpz 882 + Ampz 881 + Afmpz 880 driving
-# trailer (push-pull since 6/2026). The Bdmpz 883 / 885 / 884 / 881 art is the CZR
-# ComfortJet (Lubak91, from CZR-vehicles-rail-pass-CD.pak); the Afmpz 880 reuses the
+# trailer (push-pull since 6/2026). The 883 / 885 / 884 / 881 are the CZR ComfortJet
+# ported 1:1 (the set couples either way round, as in CZR); the Afmpz 880 reuses the
 # CZR railjet Afmpz 890 cab car and the BRmpz 882 the CZR ARbmpz 892 without the
-# 1st-class line (same Siemens family, same painted style). Frozen source:
+# 1st-class line (same Siemens family, same painted style). The middle cars look
+# alike on purpose: the fixed order of the set tells them apart.
+# Art: CZR (Lubak91, CZR-vehicles-rail-pass-CD.pak), frozen in
 # tools/railrender/src/czr_cd_jets.png; regenerate with
-# `python tools/railrender/cd_coaches.py comfortjet`. The middle cars look alike on
-# purpose: the fixed order of the set tells them apart.
+# `python tools/railrender/cd_coaches.py comfortjet`. Cost, capacity, speed, weight and
+# coupling lists as in the CZR pak (intro 2008/12, retire 2048 kept from CZR).
 
 agency: CeskeDrahy
 type: "ComfortJet"
@@ -25,42 +27,45 @@ vehicles:
     role_en: "2nd class end coach"
     role_cs: "koncový vůz 2. třídy"
     row: 0
-    tail: false
     prev: any
-    next: ["Bmpz885"]
+    next: any
     fields:
-      cost: 2600000
+      cost: 2351400
       payload: 141
       speed: 230
       weight: 50
       runningcost: 47
-      fixed_cost: 289
-      intro_year: 2024
+      fixed_cost: 261
+      intro_year: 2008
       intro_month: 12
+      retire_year: 2048
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 13
     extended:
       axles: 4
 
-  - id: "Bmpz885"
-    display_id: "Bmpz 885"
-    role_en: "2nd class coach"
-    role_cs: "vůz 2. třídy"
+  - id: "Ampz881"
+    display_id: "Ampz 881"
+    role_en: "1st class open coach"
+    role_cs: "velkoprostorový vůz 1. třídy"
     row: 1
     head: false
     tail: false
-    prev: ["Bdmpz883", "Bmpz885"]
-    next: ["Bmpz885", "Bbmpz884"]
+    prev: ["Bdmpz883", "Bbmpz884", "BRmpz882"]
+    next: ["Bbmpz884", "Bdmpz883", "Afmpz880"]
     fields:
-      cost: 2600000
-      payload: 159
+      cost: 2351400
+      payload: 139
       speed: 230
       weight: 50
-      runningcost: 51
-      fixed_cost: 289
-      intro_year: 2024
+      runningcost: 46
+      fixed_cost: 261
+      intro_year: 2008
       intro_month: 12
+      retire_year: 2048
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 13
@@ -74,17 +79,45 @@ vehicles:
     row: 2
     head: false
     tail: false
-    prev: ["Bmpz885"]
-    next: ["BRmpz882", "Ampz881"]
+    prev: ["Ampz881", "Bmpz885"]
+    next: ["Bmpz885", "Ampz881", "BRmpz882"]
     fields:
-      cost: 2600000
+      cost: 2351400
       payload: 122
       speed: 230
       weight: 50
       runningcost: 42
-      fixed_cost: 289
-      intro_year: 2024
+      fixed_cost: 261
+      intro_year: 2008
       intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmpz885"
+    display_id: "Bmpz 885"
+    role_en: "2nd class coach"
+    role_cs: "vůz 2. třídy"
+    row: 3
+    head: false
+    tail: false
+    prev: ["Bbmpz884", "Bmpz885", "Bdmpz883"]
+    next: ["Bdmpz883", "Bmpz885", "Bbmpz884"]
+    fields:
+      cost: 2351400
+      payload: 159
+      speed: 230
+      weight: 50
+      runningcost: 51
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 13
@@ -95,44 +128,22 @@ vehicles:
     display_id: "BRmpz 882"
     role_en: "2nd class coach with restaurant"
     role_cs: "vůz 2. třídy s restaurací"
-    row: 3
+    row: 4
     head: false
     tail: false
     prev: ["Bbmpz884"]
     next: ["Ampz881"]
     fields:
-      cost: 2600000
+      cost: 2646400
       payload: 44
       speed: 230
       weight: 50
       runningcost: 22
-      fixed_cost: 289
-      intro_year: 2024
+      fixed_cost: 294
+      intro_year: 2008
       intro_month: 12
-      waytype: track
-      freight: Passagiere
-      length: 13
-    extended:
-      axles: 4
-
-  - id: "Ampz881"
-    display_id: "Ampz 881"
-    role_en: "1st class open coach"
-    role_cs: "velkoprostorový vůz 1. třídy"
-    row: 4
-    head: false
-    tail: true
-    prev: ["Bbmpz884", "BRmpz882"]
-    next: ["Afmpz880"]
-    fields:
-      cost: 2900000
-      payload: 139
-      speed: 230
-      weight: 50
-      runningcost: 46
-      fixed_cost: 322
-      intro_year: 2024
-      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 13
@@ -149,14 +160,16 @@ vehicles:
     prev: ["Ampz881"]
     next: []
     fields:
-      cost: 4350000
+      cost: 2646400
       payload: 97
       speed: 230
-      weight: 50
+      weight: 54
       runningcost: 36
-      fixed_cost: 483
-      intro_year: 2024
+      fixed_cost: 294
+      intro_year: 2008
       intro_month: 12
+      retire_year: 2048
+      retire_month: 12
       waytype: track
       freight: Passagiere
       length: 13

@@ -201,17 +201,73 @@ FAMILIES = {
 # (cab leading) and -rear (cab at the tail)."""),
 }
 
-# ComfortJet: id -> (display id, role, payload, CZR sheet row, drop the yellow line)
-CJ = [
-    ("Bdmpz883", "Bdmpz 883", "Bend", 141, 0, False),
-    ("Bmpz885", "Bmpz 885", "Bmid", 159, 3, False),
-    ("Bbmpz884", "Bbmpz 884", "Bprm", 122, 2, False),
-    ("BRmpz882", "BRmpz 882", "BR", 44, 4, True),
-    ("Ampz881", "Ampz 881", "Ao", 139, 1, False),
-    ("Afmpz880", "Afmpz 880", "ABcab", 97, 5, False),
-]
-CJ_NEXT = {"Bdmpz883": ["Bmpz885"], "Bmpz885": ["Bmpz885", "Bbmpz884"], "Bbmpz884": ["BRmpz882", "Ampz881"],   # sets without the restaurant car still couple
-           "BRmpz882": ["Ampz881"], "Ampz881": ["Afmpz880"], "Afmpz880": []}
+# ------------------------------------------------------------------ CZR ports
+# The ČD railjet, InterJet and ComfortJet sets keep the CZR art (Lubak91,
+# CZR-vehicles-rail-pass-CD.pak) frozen in src/czr_cd_jets.png, in the pak's
+# object order. Each object is ported 1:1 with its CZR coupling lists (read from
+# the pak: an empty list = no constraint on that side) and its cost, capacity,
+# speed and weight. id -> (display id, role, sheet row, cost, payload, speed,
+# weight t, prev, next, drop the yellow line)
+CZR = {
+    "comfortjet": [
+        ("Bdmpz883", "Bdmpz 883", "Bend", 0, 2351400, 141, 230, 50, "any", "any", False),
+        ("Ampz881", "Ampz 881", "Ao", 1, 2351400, 139, 230, 50,
+         ["Bdmpz883", "Bbmpz884", "BRmpz882"], ["Bbmpz884", "Bdmpz883", "Afmpz880"], False),
+        ("Bbmpz884", "Bbmpz 884", "Bprm", 2, 2351400, 122, 230, 50,
+         ["Ampz881", "Bmpz885"], ["Bmpz885", "Ampz881", "BRmpz882"], False),
+        ("Bmpz885", "Bmpz 885", "Bmid", 3, 2351400, 159, 230, 50,
+         ["Bbmpz884", "Bmpz885", "Bdmpz883"], ["Bdmpz883", "Bmpz885", "Bbmpz884"], False),
+        # added: the restaurant car (from the railjet ARbmpz 892, 1st-class line removed)
+        # and the driving trailer (the railjet Afmpz 890 cab car)
+        ("BRmpz882", "BRmpz 882", "BR", 19, 2646400, 44, 230, 50, ["Bbmpz884"], ["Ampz881"], True),
+        ("Afmpz880", "Afmpz 880", "ABcab", 20, 2646400, 97, 230, 54, ["Ampz881"], [], False),
+    ],
+    "interjet": [
+        ("Bdmpz896-1", "Bdmpz 896", "Bend", 4, 2351400, 141, 200, 50, "any", ["Bmpz895-2"], False),
+        ("Bmpz895-2", "Bmpz 895", "Bmid", 5, 2351400, 159, 200, 50, ["Bdmpz896-1"], ["Bmpz895-3", "Bbmpz897-4"], False),
+        ("Bmpz895-3", "Bmpz 895", "Bmid", 6, 2351400, 159, 200, 50, ["Bmpz895-2"], ["Bbmpz897-4"], False),
+        ("Bbmpz897-4", "Bbmpz 897", "Bprm", 7, 2351400, 122, 200, 50, ["Bmpz895-2", "Bmpz895-3"], ["Ampz894-5"], False),
+        ("Ampz894-5", "Ampz 894", "Ao", 8, 2351400, 139, 200, 50, ["Bbmpz897-4"], "any", False),
+        ("Ampz894-R1", "Ampz 894", "Ao", 9, 2351400, 139, 200, 50, "any", ["Bbmpz897-R2"], False),
+        ("Bbmpz897-R2", "Bbmpz 897", "Bprm", 10, 2351400, 122, 200, 50, ["Ampz894-R1"], ["Bmpz895-R3"], False),
+        ("Bmpz895-R3", "Bmpz 895", "Bmid", 11, 2351400, 159, 200, 50, ["Bbmpz897-R2"], ["Bmpz895-R4", "Bdmpz896-R5"], False),
+        ("Bmpz895-R4", "Bmpz 895", "Bmid", 12, 2351400, 159, 200, 50, ["Bmpz895-R3"], ["Bdmpz896-R5"], False),
+        ("Bdmpz896-R5", "Bdmpz 896", "Bend", 13, 2351400, 141, 200, 50, ["Bmpz895-R4", "Bmpz895-R3"], "any", False),
+    ],
+    "railjet": [
+        ("Bmpz893-1", "Bmpz 893", "Bbike", 14, 2351400, 141, 230, 50, "any", ["Bmpz891-2"], False),
+        ("Bmpz891-2", "Bmpz 891", "Bo", 15, 2351400, 141, 230, 50, ["Bmpz893-1"], ["Bmpz891-3"], False),
+        ("Bmpz891-3", "Bmpz 891", "Bo", 16, 2351400, 141, 230, 50, ["Bmpz891-2"], ["Bmpz891-4"], False),
+        ("Bmpz891-4", "Bmpz 891", "Bo", 17, 2351400, 141, 230, 50, ["Bmpz891-3"], ["Bmpz891-5"], False),
+        ("Bmpz891-5", "Bmpz 891", "Bo", 18, 2351400, 141, 230, 50, ["Bmpz891-4"], ["ARbmpz892-6"], False),
+        ("ARbmpz892-6", "ARbmpz 892", "AR", 19, 2646400, 30, 230, 50, ["Bmpz891-5"], ["Afmpz890-7"], False),
+        ("Afmpz890-7", "Afmpz 890", "ABcab", 20, 2646400, 97, 230, 54, ["ARbmpz892-6"], "any", False),
+        ("Afmpz890-R1", "Afmpz 890", "ABcab", 21, 2646400, 97, 230, 54, "any", ["ARbmpz892-R2"], False),
+        ("ARbmpz892-R2", "ARbmpz 892", "AR", 22, 2646400, 30, 230, 50, ["Afmpz890-R1"], ["Bmpz891-R3"], False),
+        ("Bmpz891-R3", "Bmpz 891", "Bo", 23, 2351400, 141, 230, 50, ["ARbmpz892-R2"], ["Bmpz891-R4"], False),
+        ("Bmpz891-R4", "Bmpz 891", "Bo", 24, 2351400, 141, 230, 50, ["Bmpz891-R3"], ["Bmpz891-R5"], False),
+        ("Bmpz891-R5", "Bmpz 891", "Bo", 25, 2351400, 141, 230, 50, ["Bmpz891-R4"], ["Bmpz891-R6"], False),
+        ("Bmpz891-R6", "Bmpz 891", "Bo", 26, 2351400, 141, 230, 50, ["Bmpz891-R5"], ["Bmpz893-R7"], False),
+        ("Bmpz893-R7", "Bmpz 893", "Bbike", 27, 2351400, 141, 230, 50, ["Bmpz891-R6"], "any", False),
+    ],
+}
+CZR_META = {
+    "comfortjet": ("ComfortJet", "ComfortJet", "comfortjet", """# ČD ComfortJet (Siemens Viaggio Comfort, 2022-26), 20 nine-car sets:
+# loco + Bdmpz 883 + 4x Bmpz 885 + Bbmpz 884 + BRmpz 882 + Ampz 881 + Afmpz 880 driving
+# trailer (push-pull since 6/2026). The 883 / 885 / 884 / 881 are the CZR ComfortJet
+# ported 1:1 (the set couples either way round, as in CZR); the Afmpz 880 reuses the
+# CZR railjet Afmpz 890 cab car and the BRmpz 882 the CZR ARbmpz 892 without the
+# 1st-class line (same Siemens family, same painted style). The middle cars look
+# alike on purpose: the fixed order of the set tells them apart."""),
+    "interjet": ("InterJet", "InterJet", "interjet", """# ČD InterJet (Siemens Viaggio, 2020-21), 10 five-car sets based in Cheb (R15, IC
+# Západní expres): Bdmpz 896 + 2x Bmpz 895 + Bbmpz 897 + Ampz 894. The CZR InterJet
+# ported 1:1: ids -1..-5 are the set with the Bdmpz 896 next to the locomotive,
+# -R1..-R5 the same set turned round (Ampz 894 next to the locomotive)."""),
+    "railjet": ("Railjet", "railjet", "railjet", """# ČD railjet (Siemens Viaggio, 2014), 7 seven-car sets, now on the Praha - Budapest
+# "Metropolitan": Bmpz 893 + 4x Bmpz 891 + ARbmpz 892 + Afmpz 890 driving trailer. The
+# CZR railjet ported 1:1: ids -1..-7 are the set with the Bmpz 893 next to the
+# locomotive and the cab car at the tail, -R1..-R7 the set with the cab car leading."""),
+}
 
 
 def _empty_row():
@@ -227,12 +283,13 @@ def coach_rows(fam, liv):
     return rows
 
 
-def cj_rows():
-    """ComfortJet rows from the frozen CZR sheet (pak-extracted: 4 px low, so lifted)."""
+def czr_rows(fam):
+    """Rows from the frozen CZR sheet (pak-extracted: 4 px low, so lifted)."""
     from PIL import Image
     src = np.array(Image.open(os.path.join(HERE, "src", "czr_cd_jets.png")).convert("RGB"))
     rows = []
-    for (vid, _, _, _, r, noyellow) in CJ:
+    for car in CZR[fam]:
+        r, noyellow = car[3], car[10]
         band = src[r * 128:(r + 1) * 128].copy()
         lifted = np.zeros_like(band)
         lifted[:, :] = T
@@ -258,7 +315,8 @@ def jobs():
                     livs.append(x)
         out[fam] = [(liv, (lambda f=fam, l=liv: coach_rows(f, l)),
                      [v for (v, _, _, _) in FAMILIES[fam]["cars"]]) for liv in livs]
-    out["comfortjet"] = [("comfortjet", cj_rows, [c[0] for c in CJ])]
+    for fam in CZR:
+        out[fam] = [(CZR_META[fam][2], (lambda f=fam: czr_rows(f)), [c[0] for c in CZR[fam]])]
     return out
 
 
@@ -332,32 +390,23 @@ def family_yaml(fam):
     return "\n".join(out) + "\n"
 
 
-def comfortjet_yaml():
-    out = ["""# ČD ComfortJet (Siemens Viaggio Comfort, 2022-26), 20 nine-car sets:
-# loco + Bdmpz 883 + 4x Bmpz 885 + Bbmpz 884 + BRmpz 882 + Ampz 881 + Afmpz 880 driving
-# trailer (push-pull since 6/2026). The Bdmpz 883 / 885 / 884 / 881 art is the CZR
-# ComfortJet (Lubak91, from CZR-vehicles-rail-pass-CD.pak); the Afmpz 880 reuses the
-# CZR railjet Afmpz 890 cab car and the BRmpz 882 the CZR ARbmpz 892 without the
-# 1st-class line (same Siemens family, same painted style). Frozen source:
-# tools/railrender/src/czr_cd_jets.png; regenerate with
-# `python tools/railrender/cd_coaches.py comfortjet`. The middle cars look alike on
-# purpose: the fixed order of the set tells them apart.""",
-           "", "agency: CeskeDrahy", 'type: "ComfortJet"', "copyright: Lubak91",
+def czr_yaml(fam):
+    typ, fname, liv, comment = CZR_META[fam]
+    out = [comment,
+           "# Art: CZR (Lubak91, CZR-vehicles-rail-pass-CD.pak), frozen in",
+           "# tools/railrender/src/czr_cd_jets.png; regenerate with",
+           f"# `python tools/railrender/cd_coaches.py {fam}`. Cost, capacity, speed, weight and",
+           "# coupling lists as in the CZR pak (intro 2008/12, retire 2048 kept from CZR).",
+           "", "agency: CeskeDrahy", f"type: {_q(typ)}", "copyright: Lubak91",
            "windows_lit_when_loaded: true", "", "display:", '  agency_en: "ČD"', '  agency_cs: "ČD"',
-           '  family_en: "ComfortJet"', '  family_cs: "ComfortJet"', "", "vehicles:"]
-    ids = [c[0] for c in CJ]
-    for row, (vid, disp, role, pay, _, _) in enumerate(CJ):
-        prev = [p for p in ids if vid in CJ_NEXT[p]]
-        nxt = CJ_NEXT[vid]
-        head, tail = False, False
-        if vid == "Bdmpz883":
-            prev, head = "any", None     # couples to the locomotive
-        if vid in ("Afmpz880", "Ampz881"):
-            tail = True                  # sets also run without the driving trailer
-        cost = 2900000 if role in ("Ao", "ABcab") else 2600000
-        out += vehicle_yaml(vid, disp, role, row, pay, 230, 50, (2024, 12), None, 13,
-                            int(cost * (1.5 if role == "ABcab" else 1)), prev, nxt, head, tail)
-    out += ["liveries:", "  - color: comfortjet", '    name_en: "ComfortJet"', '    name_cs: "ComfortJet"']
+           f"  family_en: {_q(fname)}", f"  family_cs: {_q(fname)}", "", "vehicles:"]
+    for row, (vid, disp, role, _, cost, pay, speed, weight, prev, nxt, _) in enumerate(CZR[fam]):
+        # CZR lists never contain "none": a listed side takes only those partners
+        head = None if prev == "any" else (prev == [])
+        tail = None if nxt == "any" else (nxt == [])
+        out += vehicle_yaml(vid, disp, role, row, pay, speed, weight, (2008, 12), 2048, 13, cost,
+                            prev, nxt, head, tail)
+    out += ["liveries:", f"  - color: {liv}", f"    name_en: {_q(fname)}", f"    name_cs: {_q(fname)}"]
     return "\n".join(out) + "\n"
 
 
@@ -385,7 +434,7 @@ def main():
             print("wrote", os.path.relpath(out, REPO))
         if write_yaml:
             with open(os.path.join(d, "family.yaml"), "w", encoding="utf-8", newline="\n") as f:
-                f.write(comfortjet_yaml() if fam == "comfortjet" else family_yaml(fam))
+                f.write(czr_yaml(fam) if fam in CZR else family_yaml(fam))
             print("wrote", os.path.relpath(os.path.join(d, "family.yaml"), REPO))
 
 

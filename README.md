@@ -51,6 +51,7 @@ A single pak file per agency and transport mode — for example, every shipped
 | ČD Studénka coaches: Bdpee 231, ABpee 347, Bdtee 276, Bdt 279 / 280, "sysel" driving trailers Bfhpvee 295 / ABfhpvee 395 | Najbrt 2, Najbrt 1 |
 | ČD double-deck coaches: Görlitz Bdmteeo 294 / 296, Škoda 13Ev set (ABfbdmteeo 396 + Bdmteeo 297 / 298) | Najbrt 2 |
 | ČD ComfortJet, 9-car set incl. Afmpz 880 driving trailer and BRmpz 882 (CZR art) | ComfortJet |
+| ČD railjet (7-car) and InterJet (5-car), each also turned round (CZR art, ported 1:1) | railjet, InterJet |
 | DPmML SOR NB 12, NS 12, NB 18 and NS 18 (bus) | Most žluto-červená |
 | DPmML Irisbus Citelis 12M and Citelis 18M (bus) | Most žluto-červená |
 | DPmML Iveco Urbanway 18M (bus) | Most žluto-červená |

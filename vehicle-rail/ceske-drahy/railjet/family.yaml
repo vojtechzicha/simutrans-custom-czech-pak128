@@ -1,0 +1,385 @@
+# ČD railjet (Siemens Viaggio, 2014), 7 seven-car sets, now on the Praha - Budapest
+# "Metropolitan": Bmpz 893 + 4x Bmpz 891 + ARbmpz 892 + Afmpz 890 driving trailer. The
+# CZR railjet ported 1:1: ids -1..-7 are the set with the Bmpz 893 next to the
+# locomotive and the cab car at the tail, -R1..-R7 the set with the cab car leading.
+# Art: CZR (Lubak91, CZR-vehicles-rail-pass-CD.pak), frozen in
+# tools/railrender/src/czr_cd_jets.png; regenerate with
+# `python tools/railrender/cd_coaches.py railjet`. Cost, capacity, speed, weight and
+# coupling lists as in the CZR pak (intro 2008/12, retire 2048 kept from CZR).
+
+agency: CeskeDrahy
+type: "Railjet"
+copyright: Lubak91
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "railjet"
+  family_cs: "railjet"
+
+vehicles:
+  - id: "Bmpz893-1"
+    display_id: "Bmpz 893"
+    role_en: "2nd class coach with bicycle space"
+    role_cs: "vůz 2. třídy s prostorem pro kola"
+    row: 0
+    tail: false
+    prev: any
+    next: ["Bmpz891-2"]
+    fields:
+      cost: 2351400
+      payload: 141
+      speed: 230
+      weight: 50
+      runningcost: 47
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmpz891-2"
+    display_id: "Bmpz 891"
+    role_en: "2nd class open coach"
+    role_cs: "velkoprostorový vůz 2. třídy"
+    row: 1
+    head: false
+    tail: false
+    prev: ["Bmpz893-1"]
+    next: ["Bmpz891-3"]
+    fields:
+      cost: 2351400
+      payload: 141
+      speed: 230
+      weight: 50
+      runningcost: 47
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmpz891-3"
+    display_id: "Bmpz 891"
+    role_en: "2nd class open coach"
+    role_cs: "velkoprostorový vůz 2. třídy"
+    row: 2
+    head: false
+    tail: false
+    prev: ["Bmpz891-2"]
+    next: ["Bmpz891-4"]
+    fields:
+      cost: 2351400
+      payload: 141
+      speed: 230
+      weight: 50
+      runningcost: 47
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmpz891-4"
+    display_id: "Bmpz 891"
+    role_en: "2nd class open coach"
+    role_cs: "velkoprostorový vůz 2. třídy"
+    row: 3
+    head: false
+    tail: false
+    prev: ["Bmpz891-3"]
+    next: ["Bmpz891-5"]
+    fields:
+      cost: 2351400
+      payload: 141
+      speed: 230
+      weight: 50
+      runningcost: 47
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmpz891-5"
+    display_id: "Bmpz 891"
+    role_en: "2nd class open coach"
+    role_cs: "velkoprostorový vůz 2. třídy"
+    row: 4
+    head: false
+    tail: false
+    prev: ["Bmpz891-4"]
+    next: ["ARbmpz892-6"]
+    fields:
+      cost: 2351400
+      payload: 141
+      speed: 230
+      weight: 50
+      runningcost: 47
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "ARbmpz892-6"
+    display_id: "ARbmpz 892"
+    role_en: "1st class coach with bistro"
+    role_cs: "vůz 1. třídy s bistrem"
+    row: 5
+    head: false
+    tail: false
+    prev: ["Bmpz891-5"]
+    next: ["Afmpz890-7"]
+    fields:
+      cost: 2646400
+      payload: 30
+      speed: 230
+      weight: 50
+      runningcost: 19
+      fixed_cost: 294
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Afmpz890-7"
+    display_id: "Afmpz 890"
+    role_en: "1st/2nd class driving trailer"
+    role_cs: "řídicí vůz 1./2. třídy"
+    row: 6
+    head: false
+    prev: ["ARbmpz892-6"]
+    next: any
+    fields:
+      cost: 2646400
+      payload: 97
+      speed: 230
+      weight: 54
+      runningcost: 36
+      fixed_cost: 294
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Afmpz890-R1"
+    display_id: "Afmpz 890"
+    role_en: "1st/2nd class driving trailer"
+    role_cs: "řídicí vůz 1./2. třídy"
+    row: 7
+    tail: false
+    prev: any
+    next: ["ARbmpz892-R2"]
+    fields:
+      cost: 2646400
+      payload: 97
+      speed: 230
+      weight: 54
+      runningcost: 36
+      fixed_cost: 294
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "ARbmpz892-R2"
+    display_id: "ARbmpz 892"
+    role_en: "1st class coach with bistro"
+    role_cs: "vůz 1. třídy s bistrem"
+    row: 8
+    head: false
+    tail: false
+    prev: ["Afmpz890-R1"]
+    next: ["Bmpz891-R3"]
+    fields:
+      cost: 2646400
+      payload: 30
+      speed: 230
+      weight: 50
+      runningcost: 19
+      fixed_cost: 294
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmpz891-R3"
+    display_id: "Bmpz 891"
+    role_en: "2nd class open coach"
+    role_cs: "velkoprostorový vůz 2. třídy"
+    row: 9
+    head: false
+    tail: false
+    prev: ["ARbmpz892-R2"]
+    next: ["Bmpz891-R4"]
+    fields:
+      cost: 2351400
+      payload: 141
+      speed: 230
+      weight: 50
+      runningcost: 47
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmpz891-R4"
+    display_id: "Bmpz 891"
+    role_en: "2nd class open coach"
+    role_cs: "velkoprostorový vůz 2. třídy"
+    row: 10
+    head: false
+    tail: false
+    prev: ["Bmpz891-R3"]
+    next: ["Bmpz891-R5"]
+    fields:
+      cost: 2351400
+      payload: 141
+      speed: 230
+      weight: 50
+      runningcost: 47
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmpz891-R5"
+    display_id: "Bmpz 891"
+    role_en: "2nd class open coach"
+    role_cs: "velkoprostorový vůz 2. třídy"
+    row: 11
+    head: false
+    tail: false
+    prev: ["Bmpz891-R4"]
+    next: ["Bmpz891-R6"]
+    fields:
+      cost: 2351400
+      payload: 141
+      speed: 230
+      weight: 50
+      runningcost: 47
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmpz891-R6"
+    display_id: "Bmpz 891"
+    role_en: "2nd class open coach"
+    role_cs: "velkoprostorový vůz 2. třídy"
+    row: 12
+    head: false
+    tail: false
+    prev: ["Bmpz891-R5"]
+    next: ["Bmpz893-R7"]
+    fields:
+      cost: 2351400
+      payload: 141
+      speed: 230
+      weight: 50
+      runningcost: 47
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmpz893-R7"
+    display_id: "Bmpz 893"
+    role_en: "2nd class coach with bicycle space"
+    role_cs: "vůz 2. třídy s prostorem pro kola"
+    row: 13
+    head: false
+    prev: ["Bmpz891-R6"]
+    next: any
+    fields:
+      cost: 2351400
+      payload: 141
+      speed: 230
+      weight: 50
+      runningcost: 47
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: railjet
+    name_en: "railjet"
+    name_cs: "railjet"

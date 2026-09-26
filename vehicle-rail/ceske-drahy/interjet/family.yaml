@@ -1,0 +1,281 @@
+# ČD InterJet (Siemens Viaggio, 2020-21), 10 five-car sets based in Cheb (R15, IC
+# Západní expres): Bdmpz 896 + 2x Bmpz 895 + Bbmpz 897 + Ampz 894. The CZR InterJet
+# ported 1:1: ids -1..-5 are the set with the Bdmpz 896 next to the locomotive,
+# -R1..-R5 the same set turned round (Ampz 894 next to the locomotive).
+# Art: CZR (Lubak91, CZR-vehicles-rail-pass-CD.pak), frozen in
+# tools/railrender/src/czr_cd_jets.png; regenerate with
+# `python tools/railrender/cd_coaches.py interjet`. Cost, capacity, speed, weight and
+# coupling lists as in the CZR pak (intro 2008/12, retire 2048 kept from CZR).
+
+agency: CeskeDrahy
+type: "InterJet"
+copyright: Lubak91
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "ČD"
+  agency_cs: "ČD"
+  family_en: "InterJet"
+  family_cs: "InterJet"
+
+vehicles:
+  - id: "Bdmpz896-1"
+    display_id: "Bdmpz 896"
+    role_en: "2nd class end coach"
+    role_cs: "koncový vůz 2. třídy"
+    row: 0
+    tail: false
+    prev: any
+    next: ["Bmpz895-2"]
+    fields:
+      cost: 2351400
+      payload: 141
+      speed: 200
+      weight: 50
+      runningcost: 45
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmpz895-2"
+    display_id: "Bmpz 895"
+    role_en: "2nd class coach"
+    role_cs: "vůz 2. třídy"
+    row: 1
+    head: false
+    tail: false
+    prev: ["Bdmpz896-1"]
+    next: ["Bmpz895-3", "Bbmpz897-4"]
+    fields:
+      cost: 2351400
+      payload: 159
+      speed: 200
+      weight: 50
+      runningcost: 50
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmpz895-3"
+    display_id: "Bmpz 895"
+    role_en: "2nd class coach"
+    role_cs: "vůz 2. třídy"
+    row: 2
+    head: false
+    tail: false
+    prev: ["Bmpz895-2"]
+    next: ["Bbmpz897-4"]
+    fields:
+      cost: 2351400
+      payload: 159
+      speed: 200
+      weight: 50
+      runningcost: 50
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bbmpz897-4"
+    display_id: "Bbmpz 897"
+    role_en: "2nd class coach for wheelchairs and bicycles"
+    role_cs: "vůz 2. třídy pro vozíčkáře a kola"
+    row: 3
+    head: false
+    tail: false
+    prev: ["Bmpz895-2", "Bmpz895-3"]
+    next: ["Ampz894-5"]
+    fields:
+      cost: 2351400
+      payload: 122
+      speed: 200
+      weight: 50
+      runningcost: 40
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Ampz894-5"
+    display_id: "Ampz 894"
+    role_en: "1st class open coach"
+    role_cs: "velkoprostorový vůz 1. třídy"
+    row: 4
+    head: false
+    prev: ["Bbmpz897-4"]
+    next: any
+    fields:
+      cost: 2351400
+      payload: 139
+      speed: 200
+      weight: 50
+      runningcost: 45
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Ampz894-R1"
+    display_id: "Ampz 894"
+    role_en: "1st class open coach"
+    role_cs: "velkoprostorový vůz 1. třídy"
+    row: 5
+    tail: false
+    prev: any
+    next: ["Bbmpz897-R2"]
+    fields:
+      cost: 2351400
+      payload: 139
+      speed: 200
+      weight: 50
+      runningcost: 45
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bbmpz897-R2"
+    display_id: "Bbmpz 897"
+    role_en: "2nd class coach for wheelchairs and bicycles"
+    role_cs: "vůz 2. třídy pro vozíčkáře a kola"
+    row: 6
+    head: false
+    tail: false
+    prev: ["Ampz894-R1"]
+    next: ["Bmpz895-R3"]
+    fields:
+      cost: 2351400
+      payload: 122
+      speed: 200
+      weight: 50
+      runningcost: 40
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmpz895-R3"
+    display_id: "Bmpz 895"
+    role_en: "2nd class coach"
+    role_cs: "vůz 2. třídy"
+    row: 7
+    head: false
+    tail: false
+    prev: ["Bbmpz897-R2"]
+    next: ["Bmpz895-R4", "Bdmpz896-R5"]
+    fields:
+      cost: 2351400
+      payload: 159
+      speed: 200
+      weight: 50
+      runningcost: 50
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmpz895-R4"
+    display_id: "Bmpz 895"
+    role_en: "2nd class coach"
+    role_cs: "vůz 2. třídy"
+    row: 8
+    head: false
+    tail: false
+    prev: ["Bmpz895-R3"]
+    next: ["Bdmpz896-R5"]
+    fields:
+      cost: 2351400
+      payload: 159
+      speed: 200
+      weight: 50
+      runningcost: 50
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bdmpz896-R5"
+    display_id: "Bdmpz 896"
+    role_en: "2nd class end coach"
+    role_cs: "koncový vůz 2. třídy"
+    row: 9
+    head: false
+    prev: ["Bmpz895-R4", "Bmpz895-R3"]
+    next: any
+    fields:
+      cost: 2351400
+      payload: 141
+      speed: 200
+      weight: 50
+      runningcost: 45
+      fixed_cost: 261
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: interjet
+    name_en: "InterJet"
+    name_cs: "InterJet"
