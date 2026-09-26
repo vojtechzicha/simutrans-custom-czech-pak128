@@ -4,14 +4,16 @@ repaints of Sim's pak128.CS drawings.
 
 Families and liveries (sheet rows in family order; a car a livery never had
 leaves its row blank):
-  842  rows 842, 054, 954, 954-front - najbrt1 (842), najbrt2 (all four),
-                            cervenokremova (054, 954, 954-front)
+  842  rows 842, 054, 954, 954-front, 954.2, 954.2-front - najbrt1 (842),
+       najbrt2 (all six), cervenokremova (all but the 842)
   843  rows 843, 043, 943 - najbrt1, najbrt2 (all three),
                             cervenokremova (843, 043)
   854  row 854            - najbrt2, cervenokremova
-054 = Bdtn 756/757 intermediate trailer, 954 = Bfbrdtn 794 / ABfbrdtn 795
-control car (both drawn with the 854 set), 043 = Btn 753, 943 = Bftn 791.
-954-front is the 954 turned round to lead a set (cab ahead), see turn_round().
+054 = Bdtn 756/757 intermediate trailer, 954 = Bfbrdtn 794 control car, 954.2
+= ABfbrdtn 795 control car with 1st class at the gangway end (yellow line under
+the roof there), all drawn with the 854 set; 043 = Btn 753, 943 = Bftn 791.
+The -front rows are the control cars turned round to lead a set (cab ahead),
+see turn_round().
 
 Frozen bases (src/84x_85x/, source coordinates, one 128-px row per ref; the
 first ref of a body gives its FIX pixels, the others help the zone map):
@@ -20,7 +22,8 @@ first ref of a body gives its FIX pixels, the others help the zone map):
   943.png, 043.png  pak128.CS rail-psg mail/842_843/943_balkan, 043_balkan
   854.png  CD 854 "Hydra", ČSD M 296.1 and uni_854 (vehicle.motorak.853_854 /
            854_uni, both halves of each split car composited)
-  954.png  Bfbrdtn 954 and ABfbrdtn 954 (853_854)
+  954.png  Bfbrdtn 954 and ABfbrdtn 954 (853_854); the ABfbrdtn row is the
+           base of the 954.2
   054.png  uni_054 (854_uni)
 pak128.CS splits these long cars into two halves with complementary
 checkerboard dithering; painting one half alone leaves a checkerboard in the
@@ -42,7 +45,8 @@ sys.path.insert(0, HERE)
 from body import Body, lum, auto_doors
 from paint import paint, recolor_lum, add_marks, save_sheet, preview
 from palette import (SAPPHIRE, SKY, LGREY, N2_STRIPE, UMBRA, RC_RED, RC_CREAM,
-                     RC_ROOF, BLACK, dk)
+                     RC_ROOF, BLACK, YELLOW, dk)
+import warp
 
 REPO = os.path.dirname(os.path.dirname(HERE))
 FAM = os.path.join(REPO, "vehicle-rail", "ceske-drahy")
@@ -209,6 +213,9 @@ B954 = dict(
     glass_extra=win_glass(1, 3, ST), diag_glass=glass_like, windscreen=True, fix=keep_dark,
 )
 
+# 954.2 (ABfbrdtn 795): the same body on Sim's ABfbrdtn drawing
+B954A = dict(B954, name="954A", refs=[(SRC + "954.png", 1), (SRC + "954.png", 0)])
+
 B054 = dict(
     name="054",
     refs=[(SRC + "054.png", 0)],
@@ -222,7 +229,11 @@ B054 = dict(
 _cache = {}
 
 
+BODY = {"954.2": "954A"}
+
+
 def body(name):
+    name = BODY.get(name, name)
     if name not in _cache:
         _cache[name] = Body(globals()["B" + name])
     return _cache[name]
@@ -345,9 +356,33 @@ def marks_85x(name, veh):
     return [], []
 
 
+# 954.2: the 1st class (15 seats, three open bays) fills the gangway end; the
+# roof-edge line is yellow over it (vagonWEB drawing, photos of 795 2xx)
+FIRST_END = 0.28
+
+
+def from_gangway(c):
+    """Position along a control car drawn cab-behind, 0 = gangway end, 1 =
+    cab; None off the side faces."""
+    col = c["col"]
+    src = col if col in (3, 7) else warp.SIDE_SRC.get(col)
+    if src is None:
+        return None
+    return 1 - c["u"] if src == 3 else c["u"]
+
+
+def first_line(other):
+    def f(c):
+        g = from_gangway(c)
+        return YELLOW if g is not None and 0 <= g < FIRST_END else other
+    return f
+
+
 def render_85x(veh, liv):
     b = body(veh)
     spec, roof = livery_85x(liv)
+    if veh == "954.2":
+        spec["ROOF_EDGE"] = first_line(spec["ROOF_EDGE"])
     a = paint(b, spec)
     a = fill_fix_livery(b, a)
     a = recolor_lum(b, a, "ROOF", SOOT if (liv == "najbrt2" and veh == "854") else roof)
@@ -383,17 +418,18 @@ def turn_round(a, length):
 
 
 def render(veh, liv):
-    if veh == "954-front":
-        return turn_round(render("954", liv), 12)
-    return render_85x(veh, liv) if veh in ("854", "954", "054") else render_84x(veh, liv)
+    if veh.endswith("-front"):
+        return turn_round(render(veh[:-len("-front")], liv), 12)
+    return render_85x(veh, liv) if veh in ("854", "954", "954.2", "054") else render_84x(veh, liv)
 
 
 # ------------------------------------------------------------ families
 FAMILIES = {
     # family dir: (sheet rows, {livery: cars that exist in it})
-    "842": (["842", "054", "954", "954-front"],
-            {"najbrt1": ["842"], "najbrt2": ["842", "054", "954", "954-front"],
-             "cervenokremova": ["054", "954", "954-front"]}),
+    "842": (["842", "054", "954", "954-front", "954.2", "954.2-front"],
+            {"najbrt1": ["842"],
+             "najbrt2": ["842", "054", "954", "954-front", "954.2", "954.2-front"],
+             "cervenokremova": ["054", "954", "954-front", "954.2", "954.2-front"]}),
     "843": (["843", "043", "943"], {"najbrt1": ["843", "043", "943"], "najbrt2": ["843", "043", "943"],
                                      "cervenokremova": ["843", "043"]}),
     "854": (["854"], {"najbrt2": ["854"], "cervenokremova": ["854"]}),

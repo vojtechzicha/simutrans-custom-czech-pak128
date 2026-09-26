@@ -20,8 +20,10 @@ display:
 # way round with the control car leading: 954-front + (054 +) 842 (e.g.
 # ABfbrdtn 795 + 842). Mixed liveries in one set are normal
 # (red-cream trailers behind a Najbrt railcar), so any livery couples with any.
-# The 954 is drawn with its cab at the rear and ends a set; 954-front is the
-# same car turned round (cab ahead) and leads one.
+# Control cars: 954 = Bfbrdtn 794 (2nd class only), 954.2 = ABfbrdtn 795 (with
+# 1st class); either can stand wherever the other can. Each is drawn with its
+# cab at the rear and ends a set; its -front twin is the same car turned round
+# (cab ahead) and leads one.
 # Sources: pak128cs rail-psg mail/842_843/842_balkan.png (842 body), pak128.cs
 # vehicle.motorak.853_854.pak (954) and vehicle.motorak.854_uni.pak (054).
 
@@ -35,8 +37,8 @@ vehicles:
     liveries: [najbrt1, najbrt2]
     head: true
     tail: true
-    prev: ["054", "954-front"]
-    next: ["054", "954"]
+    prev: ["054", "954-front", "954.2-front"]
+    next: ["054", "954", "954.2"]
     couple_liveries: true
     fields:
       cost: 2679000
@@ -69,8 +71,8 @@ vehicles:
     liveries: [najbrt2, cervenokremova]
     head: false
     tail: true                # may end a set: 842 + Bdtn runs without a control car
-    prev: ["842", "054", "954-front"]
-    next: ["054", "954", "842"]
+    prev: ["842", "054", "954-front", "954.2-front"]
+    next: ["054", "954", "954.2", "842"]
     couple_liveries: true
     fields:
       cost: 1350000
@@ -89,12 +91,12 @@ vehicles:
     extended:
       axles: 4
 
-  # Bfbrdtn 794 / ABfbrdtn 795 (ex 954 / 954.2): 24.5 m control car rebuilt by
-  # Pars nova 2006-10 from Postw vans, 63 seats + bikes, 41 t, 120 km/h; the cab
-  # front is the 854's full front. Najbrt 2 (29 of 34) or red-cream.
+  # Bfbrdtn 794 (ex 954): 24.5 m 2nd-class control car rebuilt by Pars nova
+  # 2006-10 from Postw vans, 63 seats + bikes, 41 t, 120 km/h; the cab front is
+  # the 854's full front. Najbrt 2 or red-cream (304, 306, 308 in 2021).
   - id: "954"
-    role_en: "control car Bfbrdtn 794 / ABfbrdtn 795"
-    role_cs: "řídicí vůz Bfbrdtn 794 / ABfbrdtn 795"
+    role_en: "control car Bfbrdtn 794"
+    role_cs: "řídicí vůz Bfbrdtn 794"
     row: 2
     liveries: [najbrt2, cervenokremova]
     head: false
@@ -122,8 +124,8 @@ vehicles:
   # the 954 turned round: cab ahead, leads a set (sheet row 3)
   - id: "954-front"
     display_id: "954"
-    role_en: "front control car Bfbrdtn 794 / ABfbrdtn 795"
-    role_cs: "přední řídicí vůz Bfbrdtn 794 / ABfbrdtn 795"
+    role_en: "front control car Bfbrdtn 794"
+    role_cs: "přední řídicí vůz Bfbrdtn 794"
     row: 3
     liveries: [najbrt2, cervenokremova]
     head: true
@@ -140,6 +142,66 @@ vehicles:
       fixed_cost: 90
       intro_year: 2006
       intro_month: 6
+      retire_year: 2034
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  # ABfbrdtn 795 (ex 954.2): the same car with 1st class (15 seats in three open
+  # bays at the gangway end, yellow line under the roof there) + 38 2nd-class
+  # seats + 8 folding; 26 rebuilt by Pars nova 2007-10, Najbrt 2 or red-cream
+  # (225, 216). With the 854 until 2026, now behind the 842.
+  - id: "954.2"
+    role_en: "1st/2nd class control car ABfbrdtn 795"
+    role_cs: "řídicí vůz 1./2. třídy ABfbrdtn 795"
+    row: 4
+    liveries: [najbrt2, cervenokremova]
+    head: false
+    tail: true
+    prev: ["842", "054"]
+    next: []
+    couple_liveries: true
+    fields:
+      cost: 1650000
+      payload: 61
+      speed: 120
+      weight: 41
+      runningcost: 11
+      fixed_cost: 90
+      intro_year: 2007
+      intro_month: 9
+      retire_year: 2034
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  # the 954.2 turned round: cab ahead, leads a set (sheet row 5)
+  - id: "954.2-front"
+    display_id: "954.2"
+    role_en: "front 1st/2nd class control car ABfbrdtn 795"
+    role_cs: "přední řídicí vůz 1./2. třídy ABfbrdtn 795"
+    row: 5
+    liveries: [najbrt2, cervenokremova]
+    head: true
+    tail: false
+    prev: []
+    next: ["054", "842"]
+    couple_liveries: true
+    fields:
+      cost: 1650000
+      payload: 61
+      speed: 120
+      weight: 41
+      runningcost: 11
+      fixed_cost: 90
+      intro_year: 2007
+      intro_month: 9
       retire_year: 2034
       retire_month: 12
       waytype: track
