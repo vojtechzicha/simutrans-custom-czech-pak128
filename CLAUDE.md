@@ -183,6 +183,19 @@ The ČD loco-hauled coaches (`vehicle-rail/ceske-drahy/coach_*`, `13ev`, `comfor
 
 The ČD locomotives (`vehicle-rail/ceske-drahy/`: 111, 113, 162, 163, 193, 210, 362, 371, 380, 384, 704, 714, 743_2, 750_7, 754, 794, 799) are rendered the same way, one script per body group, each taking `[family …] [--preview DIR]`: `cd_loco_e99.py` (162/163/362/371 on `rj_locos.E99`), `cd_loco_modern.py` (384 on `vectron.py`), `cd_loco_centrecab.py` (111/113/210), `cd_loco_brejlovec.py` (754, 750.7), `cd_loco_hood.py` (714, 743.2) and `cd_loco_shunter.py` (704/794/799). One variant per real livery: where the TommPa9 / CZR pak128.cs drawing of a livery looked better than the render, the family ships that drawing instead (162/362/371 Najbrt 1.2, 163 green-yellow, the older schemes, all of 193 and 380, and the families 151, 242, 750 and 1216). Those sheets are extracted from the compiled pak, shifted up 4 px to source coordinates, and are static (the generators no longer write them); a livery with upstream art names its credit in `copyright:`. All paint comes from `cd_loco_livery.py` (colour slugs and names too): Najbrt 2 on a loco is `LOCO_SKY` upper body, a white stripe at headlight level and sapphire below, lighter than the RAL 5015 on the units, as every loco photo shows.
 
+#### Render style (agreed 2026-09-26)
+
+Box renders lost against the hand-drawn pak128.cs art, and the ČD 362 "Eso" render read as a rounded "Laminatka". The user picked the agreed style over four rounds of variants. `tools/railrender/style.py` holds its rules and constants, and `tools/railrender/src/style_ref_362.png` is the approved 362. Every new rendered family follows it:
+
+- **Shape before paint.** Take the class's signature shape from photos. A boxy loco gets sharp corners, a vertical front and a flat roof with a hard edge; chamfers, stepped roofs and leaning fronts are only for rounded bodies.
+- **Roof edge.** A dark gutter where roof meets body, never a light rim.
+- **Livery zones.** Use the photo's proportions; measure them.
+- **Signature detail.** Ribbing, louvre bands and roof equipment where the real loco has them. No 1-px side lettering.
+- **Pantographs.** Light arms with a dark 2-px head bar.
+- **Post-process.** Run `style.polish(img, **style.POLISH)` on every rendered sheet.
+
+Before a rendered family ships, publish a comparison page for the user to pick from. Show photos, the native or hand-drawn reference, and 2–4 variants at 1× and 3× on grass. Existing sheets were drawn before this style and stay as they are unless the user asks.
+
 Articulated units are modelled on one u axis and each car's tile keeps only its own pixels. Lettering must read left to right as seen: on the +v side screen-left is the vehicle's rear, on the -v side its front. Locomotives are drawn about 2–3 px taller than coaches, like the natives (ČD 363, 380, ÖBB 1216).
 
 ### Painted rail sprites (`tools/railpaint/`)
