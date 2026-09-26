@@ -35,15 +35,12 @@ display:
 # vagonWEB drawing 640-2-duk-a (layout; its #00A508 is too dark, photos show
 # lime #63BB3B..#77BC28).
 #
-# Sprites: zone-map repaint of the ČD RegioPanter art (TommPa9, pak128_czr):
-# the cab cars from vehicle-rail/ceske-drahy/650 najbrt2 (the ČD 640's cab
-# cars are the same drawing in another palette), the middle car from
-# vehicle-rail/ceske-drahy/640 najbrt2 row 1, so RegioJet's, ČD's and Arriva's
-# RegioPanters share one silhouette in game. Script
-# tools/railrender/rj_regiopanter.py (regenerate:
-# python tools/railrender/rj_regiopanter.py). Rows: 0 = 640 (front cab car,
-# pantograph, headlights), 1 = 642 (middle car), 2 = 641 (rear cab car, tail
-# lights); car lengths 13 + 13 + 13 like the ČD family.
+# Sprites: painted on the shared RegioPanter body of tools/railpaint/panter.py
+# (TommPa9's drawings, the same body as every ČD, Arriva and JMK RegioPanter), the
+# DÚK scheme as one zone dict in tools/railrender/rj_regiopanter.py (regenerate:
+# python tools/railrender/regiojet.py 640_2). Glass stays the lit special.
+# Rows: 0 = 640 (cab + pantograph, headlights), 1 = 642 (middle car), 2 = 641
+# (cab at the rear, tail lights); car lengths 13 + 13 + 13 like the ČD family.
 # Only the complete unit is buildable.
 
 vehicles:
