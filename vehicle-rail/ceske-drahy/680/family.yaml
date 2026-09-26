@@ -16,7 +16,7 @@ display:
 # cars and 681 / 683 / 684 / 682 the powered ones (4 x 980 kW = 3920 kW).
 # Approved for 200 km/h (design 230); regular service from Dec 2005.
 # Art: pak128cs rail-psg mail/680/cd_680_pendolino.png (TommPa9) repainted to the
-# real Kotas livery (scratchpad work/p2/fam_680.py). End cars 27.65 m (length 13),
+# real Kotas livery zone by zone, keeping the upstream shading. End cars 27.65 m (length 13),
 # middle cars 25.9 m (length 12).
 
 vehicles:
