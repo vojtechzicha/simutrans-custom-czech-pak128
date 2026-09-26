@@ -1,5 +1,5 @@
 agency: CeskeDrahy
-type: "681"
+type: "680"
 copyright: TommPa9
 
 # Windows light up at night only while passengers are aboard.
@@ -11,9 +11,13 @@ display:
   family_en: "Pendolino"
   family_cs: "Pendolino"
 
-# 7-car tilting EMU (681+081+683+084+684+082+682). Source DAT:
-# pak128cs rail-psg mail/680/cd_680_pendolino.dat (upstream labels it 680/081/etc;
-# ČD reclassified the set to 681). All figures verbatim from the source.
+# 7-car tilting EMU, unit class 680 (Alstom, 7 units built 2003-05, 6 in service
+# in 2026): 681 + 081 + 683 + 084 + 684 + 082 + 682, where 681 / 682 are the cab
+# cars and 681 / 683 / 684 / 682 the powered ones (4 x 980 kW = 3920 kW).
+# Approved for 200 km/h (design 230); regular service from Dec 2005.
+# Art: pak128cs rail-psg mail/680/cd_680_pendolino.png (TommPa9) repainted to the
+# real Kotas livery (scratchpad work/p2/fam_680.py). End cars 27.65 m (length 13),
+# middle cars 25.9 m (length 12).
 
 vehicles:
   - id: "681"
@@ -27,19 +31,19 @@ vehicles:
     fields:
       cost: 18384000
       payload: 53
-      speed: 230
+      speed: 200
       weight: 57
       runningcost: 60
       fixed_cost: 883
-      intro_year: 2003
-      intro_month: 6
-      retire_year: 2073
+      intro_year: 2005
+      intro_month: 12
+      retire_year: 2035
       retire_month: 1
       waytype: track
       freight: Passagiere
       length: 13
       engine_type: Electric
-      power: 1000
+      power: 980
       gear: 190
     extended:
       axles: 4
@@ -55,13 +59,13 @@ vehicles:
     fields:
       cost: 18384000
       payload: 52
-      speed: 230
+      speed: 200
       weight: 57
       runningcost: 60
       fixed_cost: 883
-      intro_year: 2003
-      intro_month: 6
-      retire_year: 2073
+      intro_year: 2005
+      intro_month: 12
+      retire_year: 2035
       retire_month: 1
       waytype: track
       freight: Passagiere
@@ -80,19 +84,19 @@ vehicles:
     fields:
       cost: 18384000
       payload: 24
-      speed: 230
+      speed: 200
       weight: 56
       runningcost: 60
       fixed_cost: 883
-      intro_year: 2003
-      intro_month: 6
-      retire_year: 2073
+      intro_year: 2005
+      intro_month: 12
+      retire_year: 2035
       retire_month: 1
       waytype: track
       freight: Passagiere
       length: 12
       engine_type: Electric
-      power: 1000
+      power: 980
       gear: 190
     extended:
       axles: 4
@@ -108,13 +112,13 @@ vehicles:
     fields:
       cost: 18384000
       payload: 46
-      speed: 230
+      speed: 200
       weight: 44
       runningcost: 60
       fixed_cost: 883
-      intro_year: 2003
-      intro_month: 6
-      retire_year: 2073
+      intro_year: 2005
+      intro_month: 12
+      retire_year: 2035
       retire_month: 1
       waytype: track
       freight: Passagiere
@@ -133,26 +137,26 @@ vehicles:
     fields:
       cost: 18384000
       payload: 53
-      speed: 230
+      speed: 200
       weight: 56
       runningcost: 60
       fixed_cost: 883
-      intro_year: 2003
-      intro_month: 6
-      retire_year: 2073
+      intro_year: 2005
+      intro_month: 12
+      retire_year: 2035
       retire_month: 1
       waytype: track
       freight: Passagiere
       length: 12
       engine_type: Electric
-      power: 1000
+      power: 980
       gear: 190
     extended:
       axles: 4
 
   - id: "082"
-    role_en: "1st class trailer"
-    role_cs: "vůz 1. třídy"
+    role_en: "2nd class trailer"
+    role_cs: "vůz 2. třídy"
     row: 5
     head: false
     tail: false
@@ -161,13 +165,13 @@ vehicles:
     fields:
       cost: 18384000
       payload: 52
-      speed: 230
+      speed: 200
       weight: 57
       runningcost: 60
       fixed_cost: 883
-      intro_year: 2003
-      intro_month: 6
-      retire_year: 2073
+      intro_year: 2005
+      intro_month: 12
+      retire_year: 2035
       retire_month: 1
       waytype: track
       freight: Passagiere
@@ -186,25 +190,27 @@ vehicles:
     fields:
       cost: 18384000
       payload: 53
-      speed: 230
+      speed: 200
       weight: 57
       runningcost: 60
       fixed_cost: 883
-      intro_year: 2003
-      intro_month: 6
-      retire_year: 2073
+      intro_year: 2005
+      intro_month: 12
+      retire_year: 2035
       retire_month: 1
       waytype: track
       freight: Passagiere
       length: 13
       engine_type: Electric
-      power: 1000
+      power: 980
       gear: 190
     extended:
       axles: 4
 
 liveries:
   - color: cdpendolino
-    name_en: "ČD Pendolino"
-    name_cs: "ČD pendolino"
-    source: pak128cs/rail-psg mail/680/cd_680_pendolino.png (ČD Pendolino livery — direct match)
+    name_en: "silver-turquoise"
+    name_cs: "stříbrno-tyrkysová"
+    # Patrik Kotas's design, the only livery the 680 has ever worn: silver body,
+    # anthracite window band edged below in yellow, turquoise cantrail stripe and
+    # lower band, anthracite cab helmet with a yellow nose band
