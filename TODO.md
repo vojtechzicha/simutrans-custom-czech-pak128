@@ -1,6 +1,7 @@
 # Sprite TODO list
 
-The ČD diesel and electric units are finished (see below). Entries further down
+The ČD diesel and electric units (see below), locomotives and loco-hauled coaches
+are finished. Entries further down
 still ship placeholder sprites copied from the closest-colour upstream source; each
 item names the placeholder you'll see in-game today, the livery it has to become,
 and any real-world caveats.
@@ -83,21 +84,22 @@ Express's EMUs live in their own agency paks.
 
 Most DPO rolling stock was extracted from the upstream `CZ-vehicle-bus.pak` /
 `CZ-vehicle-tram.pak` / `CZ-vehicle-trolleybus.pak` via `tools/pak_extract.py`,
-so its sprites already carry the correct DPO modro-žlutá and tyrkysová liveries
-— no repaint work pending there. Two newer fleet additions ship with placeholder
-art borrowed from a visually similar family until proper sprites exist.
+so its sprites already carry the correct DPO modro-žlutá and tyrkysová liveries.
+The upstream CZ-Ostrava vehicles are uninstalled.
 
-## Škoda 39T ForCity Smart (tram)
+Done:
 
-- [ ] `vehicle-tram/dpo/39t_forcitysmart/sprites/dpotyrkysova.png` — placeholder is
-  the Stadler Tango NF2 (2-section) sprite. The 39T is a 7-section, 100% low-floor,
-  bidirectional 31 m car (delivered 2021–2024, 38 cars in DPO turquoise) — its
-  silhouette is longer, sleeker, and symmetrical end-to-end. Repaint or redraw to
-  match the real ForCity Smart Ostrava body.
+- [x] **Škoda 39T ForCity Smart** (tram) — drawn from scratch with a box model
+  (3f8c84a), joint gap fixed (b7e09b6).
+- [x] **Rošero First CNG** (bus) — drawn from scratch (14506dd); it used to be a
+  copy of the Dekstra art. Same commit: the Temsa-bodied Škoda 36Tr.
+- [x] **Scania Unvi Urbis DD** — redrawn (the upstream sheet was double-deck only
+  in the ne view).
 
-## Rošero First CNG (bus)
+Still open:
 
-- [ ] `vehicle-bus/dpo/roserofirst/sprites/dpotyrkysova.png` — placeholder is the
-  Iveco-Dekstra LE 37 sprite. The Rošero First is also an ~8 m Iveco-Daily-based
-  CNG midibus so the body proportions are close, but the front and roof gas-tank
-  silhouette differ. Touch up to match the Rošero First profile.
+- [ ] **Inekon 01 Trio** and **Astra** (`t2001_trio`, `ltm1008_astra`) share one
+  identical sheet. They are sister designs, but the Trio has a rounder nose.
+- [ ] Missing tram families: **Vario LFR.S** (16 cars) and **Vario LF2R.S** (2).
+- [ ] Missing trolleybus: the **SOR TNB 12** prototype.
+- [ ] **Solaris Urbino 12 Electric** is covered only by the Urbino 12 IV art.
