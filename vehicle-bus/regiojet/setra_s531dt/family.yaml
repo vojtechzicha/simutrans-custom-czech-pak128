@@ -1,0 +1,75 @@
+agency: RegioJet
+type: "Setra_S531DT"
+# Sprites carry their own lane placement (body footprint matched to the median
+# of native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "Setra S 531 DT"
+  family_cs: "Setra S 531 DT"
+
+# Setra S 531 DT (TopClass 500 double-decker) of STUDENT AGENCY k.s.
+# (RegioJet coaches): #326-345 (8-10/2023), #346-357 (5/2025), #358-367
+# (2/2026, 72-seat domestic 2+2 batch), #368-379 (5-6/2026); 54 in service in
+# September 2026, frame contract for up to 150. 14.0 m (+ rear skibox) x
+# 2.55 x 4.00 m, 3 axles, 57-58 seats (2+1 upstairs, "Fun&Relax+"),
+# Mercedes OM 471 375 kW (510 hp), GO 250-8 PowerShift. International
+# flagship, domestic since 2/2026. Source: seznam-autobusu.cz (operator 142,
+# complete record), research/buses.md.
+#
+# Livery zluta (photos #329, #340, #353, #360): all-black front (both decks'
+# glazing + black mask, yellow bumper, "SETRA" band between the headlights,
+# destination display between the decks), full-length black upper-deck
+# window band under a silver roof-edge trim, yellow arrow panel between the
+# decks over the front half (slanted front end, pointed rear end, white
+# pictograms), lower-deck glazing on the front half ending in a diagonal
+# sweep up to the upper band, grey "SETRA" line under the glazing and along
+# the sweep, big red "|| REGIO" + blue "JET" between the decks on the rear
+# half, yellow wheel covers, yellow rear skibox with its own tail lights.
+# The right (door) side is not photographed; it mirrors the left side with
+# the glazed front door and a glazed middle door ahead of the drive axle.
+#
+# Sprite: original box-model render (vojtechzicha), not upstream art.
+# Script: tools/busrender/rj_buses.py (models in rj_busmodels.py, class
+# SetraS531DT; renderer rj_vrender.py; lane placement rj_lane.py). Geometry
+# perspective-corrected from the #340 left profile: front axle 2.69 m, drive
+# 9.52, tag 10.87, skibox 0.62 m deep. Drawn like native pak128.cs buses:
+# length x 1.08 (15.1 m body + 0.67 m skibox), width 3.1 m, true height
+# (side 4.09 m to the trim, the silver trim needs its own pixel row).
+# Length 10 carunits (14.6 m with the skibox at 1.5 m per carunit).
+
+vehicles:
+  - id: "Setra_S531DT"
+    role_en: "coach"
+    role_cs: "dálkový autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 1600000
+      payload: 58
+      speed: 100
+      weight: 20
+      runningcost: 40
+      fixed_cost: 240
+      intro_year: 2023
+      intro_month: 8
+      waytype: road
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 375
+      gear: 58
+      smoke: Diesel
+    extended:
+      axles: 3
+
+liveries:
+  - color: zluta
+    name_en: "RegioJet yellow"
+    name_cs: "RegioJet žlutá"

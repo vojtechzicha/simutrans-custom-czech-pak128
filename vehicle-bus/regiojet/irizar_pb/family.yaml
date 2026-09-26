@@ -1,0 +1,76 @@
+agency: RegioJet
+type: "Irizar_PB"
+# Sprites carry their own lane placement (body footprint matched to the median
+# of native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "Irizar PB"
+  family_cs: "Irizar PB"
+
+# Irizar PB 15.37 of STUDENT AGENCY k.s. (Student Agency, RegioJet from
+# 4/2016): 151 built for the Czech fleet 2006-2015 on Scania K380-K480 EB
+# 6x2(*4) and Volvo chassis (peak 109 in 2015), the backbone of the domestic
+# and international Fun&Relax services; the first four (#66-69, Scania K380EB
+# 6x2) entered service in 12/2006, the last two (#254, #256) left in 8/2026.
+# 15.0 x 2.55 x 3.70 m, 3 axles, 63+2 seats. Power by batch 279 / 309 / 346 /
+# 353 / 331 kW (Scania) and ~338 kW (Volvo); 331 kW = the DC13 Euro VI of the
+# 2015 batch, the one that ran until 2026. Source: seznam-autobusu.cz
+# (operator 142, complete record), research/buses.md.
+# Replaces the upstream CZR-Regiojet-ScaniaIrizar_15M (a generic Scania
+# Irizar PB: 279 kW, 120 km/h and payload 163 are errors; real 100 km/h
+# limiter, 63 seats).
+#
+# Livery zluta (RegioJet-era photos #194, #228, #237, #242): all-over
+# yellow incl. roof and mirrors, black window band, big curved windscreen
+# under a tall yellow "eyebrow" roof cap, big first side window with the
+# Fun&Relax sticker and a downward sweep towards the front, six dark
+# pictograms mid-side, red "|| REGIO" + blue "JET" low over the rear axles.
+# The Student Agency era (2006-2016) was the same yellow with the bracketed
+# "STUDENT AGENCY express" wordmark; it is not a separate livery here.
+#
+# Sprite: original box-model render (vojtechzicha), not upstream art.
+# Script: tools/busrender/rj_buses.py (models in rj_busmodels.py, class
+# IrizarPB; renderer rj_vrender.py; lane placement rj_lane.py). Geometry:
+# front axle 3.00 m, drive 10.35, tag 11.75; front door and a narrow middle
+# door ahead of the drive axle (right side, #80, #194); window band
+# 2.43-3.36 m, windscreen 1.0-3.15 m. Drawn like native pak128.cs buses:
+# length x 1.08 (16.2 m), width 3.1 m, true height. Length 10 carunits.
+
+vehicles:
+  - id: "Irizar_PB"
+    role_en: "coach"
+    role_cs: "dálkový autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 1100000
+      payload: 63
+      speed: 100
+      weight: 18
+      runningcost: 35
+      fixed_cost: 185
+      intro_year: 2006
+      intro_month: 12
+      retire_year: 2026
+      retire_month: 8
+      waytype: road
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 331
+      gear: 58
+      smoke: Diesel
+    extended:
+      axles: 3
+
+liveries:
+  - color: zluta
+    name_en: "RegioJet yellow"
+    name_cs: "RegioJet žlutá"

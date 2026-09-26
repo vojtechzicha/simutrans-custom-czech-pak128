@@ -1,0 +1,109 @@
+agency: RegioJet
+type: "Irizar_i8"
+# Sprites carry their own lane placement (body footprint matched to the median
+# of native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "RegioJet"
+  agency_cs: "RegioJet"
+  family_en: "Irizar i8"
+  family_cs: "Irizar i8"
+
+# Irizar i8 15M of STUDENT AGENCY k.s. (RegioJet coaches), 64 built for RJ:
+# #262-281 Scania K450 EB 6x2*4 NI and #282-306 Volvo B11R 6x2 (3-5/2016),
+# #307-315 Scania 2019 (DB IC Bus batch, wheelchair lift, 59 seats), #316-325
+# Scania 2020 (lift, 61 seats); ~59 in service in September 2026, no end of
+# service announced (Setra S 531 DT deliveries replace them step by step).
+# 14.98 x 2.55 x 3.98 m, 3 axles (tag axle behind the drive axle), 63+1+1
+# seats, Scania DC13 450 hp = 331 kW (Volvo 339 kW), Fun&Relax international
+# and domestic lines. Source: seznam-autobusu.cz (operator 142, complete
+# record), research/buses.md.
+#
+# Liveries (photos #271, #291, #295, #315, #321 on seznam-autobusu.cz):
+# - zluta: all-over RegioJet yellow incl. roof and mirrors, black window band,
+#   black windscreen up to the yellow roof cap, big first side window with a
+#   downward sweep towards the front and the "Fun&Relax ON BOARD" sticker,
+#   row of six dark pictograms mid-side, red "|| REGIO" + blue "JET" low over
+#   the rear axles ("||" at the rear end on the right side, at the front end
+#   on the left, so it reads left to right on both).
+# - zlutostribrna: the ex-DB 2019 batch #307-315 (DB IC Bus white/red 2019-21,
+#   plain white 2021-25, repainted RegioJet yellow 2/2025-4/2025) keeps its
+#   silver-grey luggage doors from 6.5 m back (yellow strip above the rear
+#   axles), four white pictograms, no Fun&Relax sticker, logo ~1 m further
+#   back. Its own vehicle entry: in service in this livery from 2/2025, 59
+#   seats (wheelchair lift).
+#
+# Sprite: original box-model render (vojtechzicha), not upstream art.
+# Script: tools/busrender/rj_buses.py (models in rj_busmodels.py, class
+# IrizarI8; renderer rj_vrender.py = vectorised copy of the DP Ostrava bus
+# raycaster; lane placement rj_lane.py). Geometry perspective-corrected
+# from the #271/#315 profiles: front axle 3.05 m, drive 10.50, tag 11.90;
+# front door behind the front corner and a narrow middle door ahead of the
+# drive axle (right side); window band 2.48-3.58 m. Drawn like native
+# pak128.cs buses: length x 1.08 (16.2 m), width 3.1 m, true height.
+# Length 10 carunits (15 m at 1.5 m per carunit).
+
+vehicles:
+  - id: "Irizar_i8"
+    role_en: "coach"
+    role_cs: "dálkový autobus"
+    row: 0
+    liveries: [zluta]
+    prev: []
+    next: []
+    fields:
+      cost: 1250000
+      payload: 63
+      speed: 100
+      weight: 19
+      runningcost: 36
+      fixed_cost: 200
+      intro_year: 2016
+      intro_month: 3
+      waytype: road
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 331
+      gear: 58
+      smoke: Diesel
+    extended:
+      axles: 3
+
+  - id: "Irizar_i8_2019"
+    role_en: "coach"
+    role_cs: "dálkový autobus"
+    row: 0
+    liveries: [zlutostribrna]
+    prev: []
+    next: []
+    fields:
+      cost: 1250000
+      payload: 59
+      speed: 100
+      weight: 19
+      runningcost: 36
+      fixed_cost: 200
+      intro_year: 2025
+      intro_month: 2
+      waytype: road
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 331
+      gear: 58
+      smoke: Diesel
+    extended:
+      axles: 3
+
+liveries:
+  - color: zluta
+    name_en: "RegioJet yellow"
+    name_cs: "RegioJet žlutá"
+  - color: zlutostribrna
+    name_en: "RegioJet yellow, silver lockers"
+    name_cs: "RegioJet žlutá, stříbrné schránky"
