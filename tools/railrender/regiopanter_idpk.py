@@ -31,7 +31,9 @@ from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
-SRC = os.path.join(REPO, "vehicle-rail", "ceske-drahy", "650", "sprites", "najbrt2.png")
+# frozen copy of the TommPa9 CD 650 sheet as the CD family shipped it until 2026-09
+# (the CD family has since been repainted)
+SRC = os.path.join(HERE, "src", "regiopanter_650_tommpa9.png")
 
 T = (231, 255, 255)
 
