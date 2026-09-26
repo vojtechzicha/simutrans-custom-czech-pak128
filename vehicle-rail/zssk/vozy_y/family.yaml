@@ -1,0 +1,170 @@
+agency: ZSSK
+type: "UIC-Y"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "ZSSK"
+  agency_cs: "ZSSK"
+  family_en: "UIC-Y"
+  family_cs: "UIC-Y"
+
+# ZSSK 24.5 m UIC-Y coaches modernised by ŽOS Vrútky, 160 km/h, doors at both
+# ends (the ARpeer at one end only). On Czech track in 2026 (vagonWEB 2026
+# compositions and the Jan-Sep 2026 reports):
+# - Apeer 61 56 19-70 017-022: 1st class compartments, ex-Görlitz Bc 59-41,
+#   2002 (017-021 seen): 1st class car of the "Valašský expres" Praha - Vsetín
+#   and the "Ostravan" instead of an Ampz.
+# - Aeer 61 56 19-70 031-045: 1st class compartments, Bautzen UIC-Y, 2003-05
+#   (031, 032, 034): 1st class car of R 340-349 "Kysučan" Žilina - Ostrava.
+# - Beer 61 56 20-70 021-072: 2nd class compartments, Bautzen, 2003-06
+#   (022, 025, 028, 033, 068): R "Kysučan", EC 280-283 substitute.
+# - Bpeer 61 56 29-70: open 2nd class with 6 bike hooks, 2000-03 (002,
+#   023-025): R "Kysučan" and EN 442/443 "Slovakia" Praha - Humenné.
+# - ARpeer 61 56 85-70 001-003: 1st class (24) + bistro (17), ex-Győr B/Bh,
+#   2001: one in every EC 278-283 "Metropolitan" set Praha - Brno - Břeclav.
+#
+# Livery (the ZSSK red / white / grey scheme, the only one these cars wear;
+# photos Aeer 19-70 044-1 and ARpeer 85-70 002-8, Commons; vagonWEB drawings
+# Apeer/Aeer/Beer/Bpeer-2970-B/ARpeer-IS -a/-b): red from the roof down to
+# just under the windows, white middle band, light grey sill band, weathered
+# grey roof (darker than on the Z2 cars), red doors with a grey foot, orange
+# ZSSK logo near the left end of each side, white class numerals by the
+# doors, the yellow 1st class line along the top of the red on the Apeer,
+# Aeer and the 1st class half of the ARpeer, bike pictograms on the Bpeer.
+# Deviation from the drawing: the ARpeer side a follows the 002-8 photo
+# (no window at the kitchen end and none at 7.6-8.9 m, both drawn by
+# vagonWEB); side b as drawn. Only the Aeer 033/042-044 carry the big "1 plus"
+# lettering; the cars seen in CZ are plain, so it is left out.
+#
+# Sprites are rendered from a box model: tools/railrender/zssk_coaches.py on
+# tools/railrender/coachkit.py; regenerate with
+# `python tools/railrender/zssk_coaches.py vozy_y`. Length 12 = 24.5 m.
+# Coaches couple with any locomotive or coach (prev/next: any).
+
+vehicles:
+  - id: "Apeer19-70"
+    display_id: "Apeer 19-70"
+    role_en: "1st class compartment coach"
+    role_cs: "oddílový vůz 1. třídy"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 1900000
+      payload: 52
+      speed: 160
+      weight: 42
+      runningcost: 27
+      fixed_cost: 250
+      intro_year: 2002
+      intro_month: 6
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "Aeer19-70"
+    display_id: "Aeer 19-70"
+    role_en: "1st class compartment coach"
+    role_cs: "oddílový vůz 1. třídy"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 1900000
+      payload: 54
+      speed: 160
+      weight: 41
+      runningcost: 27
+      fixed_cost: 250
+      intro_year: 2003
+      intro_month: 6
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "Beer20-70"
+    display_id: "Beer 20-70"
+    role_en: "2nd class compartment coach"
+    role_cs: "oddílový vůz 2. třídy"
+    row: 2
+    prev: any
+    next: any
+    fields:
+      cost: 1750000
+      payload: 60
+      speed: 160
+      weight: 41
+      runningcost: 25
+      fixed_cost: 235
+      intro_year: 2003
+      intro_month: 6
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "Bpeer29-70"
+    display_id: "Bpeer 29-70"
+    role_en: "2nd class open coach with bike hooks"
+    role_cs: "velkoprostorový vůz 2. třídy s háky na kola"
+    row: 3
+    prev: any
+    next: any
+    fields:
+      cost: 1800000
+      payload: 66
+      speed: 160
+      weight: 40
+      runningcost: 26
+      fixed_cost: 240
+      intro_year: 2000
+      intro_month: 6
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+  - id: "ARpeer85-70"
+    display_id: "ARpeer 85-70"
+    role_en: "1st class coach with bistro"
+    role_cs: "vůz 1. třídy s bistrem"
+    row: 4
+    prev: any
+    next: any
+    fields:
+      cost: 2300000
+      payload: 41
+      speed: 160
+      weight: 44
+      runningcost: 34
+      fixed_cost: 320
+      intro_year: 2001
+      intro_month: 6
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+liveries:
+  - color: cervenobilasiva
+    name_en: "red-white-grey"
+    name_cs: "červeno-bílo-šedá"

@@ -1,0 +1,119 @@
+agency: MAV
+type: "EN"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "MÁV"
+  agency_cs: "MÁV"
+  family_en: "EuroNight"
+  family_cs: "EuroNight"
+
+# MÁV night cars running through the Czech Republic in 2026: the Budapest -
+# Berlin group of EN 476/477 "Metropol", split at Břeclav and run on as EN
+# 40476/40457 with ÖBB NJ 456/457 Břeclav - Brno - Pardubice - Praha - Ústí
+# n. L. - Děčín (- Dresden - Berlin), daily (vagonWEB 2026: planned WLABmz
+# 7191.0 or 7191.1 + Bcmz 5091.1 or 5091.2 + Amz 1991.3; seen Sep 2026 WLABmz
+# 62 55 71-91 002-9 / 004-5 / 009-4, Bcmz 61 55 50-91 202-1 / 204-7 / 207-0).
+# The Amz 19-91 (1st class seats) of the group is in ../ic.
+# - WLABmz 62 55 71-91.0 (Waggonbau Görlitz 1994-95, ex-RŽD/LG, bought from
+#   Wagon Service Travel 2020): sleeper, 11 x 3 berths, doors at both ends;
+#   side a = compartment side with 12 windows (one in the blue end zone with
+#   the white bed pictogram), side b = corridor side (drawings
+#   WLABmz-7191-0-m-a/b, photo 003-7 Wien, vagonWEB). Stands for the CAF
+#   7191.1 too.
+# - Bcmz 61 55 50-91.2 (ex-DB Bvcmz, rebuilt, bought 2020): couchette, rounded
+#   roof ends, narrow doors near the ends, the couchette pictogram on the blue
+#   end zone beside two separate windows (drawing Bcmz-5091-2-m-a; photo 202-1
+#   Koper-Capodistria 21 Aug 2026, which shows that zone at the right-hand end
+#   of its side, i.e. at the same physical end; the vagonWEB "b" drawing is a
+#   copy of "a" and is not used).
+# - Bcmz 61 55 50-91.1 (CAF 1994, rebuilt 2018-20): couchette on the Bmz
+#   2191.1 body, 10 compartments, 60 berths (drawing Bcmz-5091-1-m-a; photo
+#   100-7 Budapest-Keleti 18 Aug 2026 with the new "MÁV" wordmark).
+#
+# Livery "MÁV IC" 2016+ (see ../ic for the scheme and the photos).
+#
+# Sprites are rendered from a box model: tools/railrender/mav_pkp_coaches.py
+# on tools/railrender/coachkit.py; regenerate with
+# `python tools/railrender/mav_pkp_coaches.py mavnoc`. Length 13 = 26.4 m.
+# Coaches couple with any locomotive or coach (prev/next: any).
+
+vehicles:
+  - id: "WLABmz71-91"
+    display_id: "WLABmz 71-91"
+    role_en: "sleeping car"
+    role_cs: "lůžkový vůz"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2900000
+      payload: 33
+      speed: 200
+      weight: 56
+      runningcost: 36
+      fixed_cost: 340
+      intro_year: 2020
+      intro_month: 12
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bcmz50-91-2"
+    display_id: "Bcmz 50-91.2"
+    role_en: "couchette car"
+    role_cs: "lehátkový vůz"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 2400000
+      payload: 54
+      speed: 200
+      weight: 50
+      runningcost: 32
+      fixed_cost: 300
+      intro_year: 2020
+      intro_month: 12
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bcmz50-91-1"
+    display_id: "Bcmz 50-91.1"
+    role_en: "couchette car"
+    role_cs: "lehátkový vůz"
+    row: 2
+    prev: any
+    next: any
+    fields:
+      cost: 2400000
+      payload: 60
+      speed: 200
+      weight: 50
+      runningcost: 32
+      fixed_cost: 300
+      intro_year: 2019
+      intro_month: 1
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: mavic
+    name_en: "MÁV IC"
+    name_cs: "MÁV IC"

@@ -1,0 +1,219 @@
+agency: EuropeanSleeper
+type: "vozy"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "European Sleeper"
+  agency_cs: "European Sleeper"
+  family_en: "night train"
+  family_cs: "noční vlak"
+
+# Coaches of European Sleeper ES 452/453 Praha - Ústí n. L. - Děčín - Dresden -
+# Berlin - Amsterdam - Rotterdam - Brussels, 3x weekly (Czech railway
+# undertaking: Cityrail), hauled by a Railpool/LINEAS TRAXX 186 (sibling
+# family ../186). Coaches are hired, mixed liveries. vagonWEB 2026 (planned +
+# 31 observed formations, 30 Dec 2025 - 8 Sep 2026):
+# - 7-11x Bvcmz 248 couchettes of Euro-Express (56 80 50-71 118/119/123/124,
+#   61 80 50-71 101/203/207/230-233) in every train; the Bvcmz 248.3
+#   61 80 50-71 202 with pivoting-folding doors in most.
+# - 2x Bcomh 56 80 50-70 057/058 (Euro-Express couchettes) Dec 2025 - Aug 2026.
+# - Am 56 80 11-80 019/021 (Euro-Express, sold as "Budget" seats) May-Jun 2026.
+# - 1-2x WLABmz AB33 sleepers of BTEX 61 81 71-71 455/457/463 from Apr 2026.
+# - 1x WLABee AB30 sleeper of GfF 61 81 70-70 001/003/004 (CIWL type P,
+#   24.0 m) until May 2026.
+# - RDC Bvcmz 248 61 80 50-71 112 (RDC blue) in ES 452 on 5 and 7 May 2026.
+# Not shipped: GfF Bimz 264 (4 summer trips, no photo), the TRI BDcm ex-CNL and
+# GfF Bcmh of 2024/25 (not in any 2026 formation).
+#
+# Liveries (photos win over the drawings):
+# - vinovokremova, Euro-Express classic: wine red, a cream line under the roof,
+#   a thin cream line under the windows and the wide cream band below it
+#   (Commons "European Sleeper w Euro Express Bvcmz 248.3 118-9 / 232-1",
+#   27 Mar 2024; bahnbilder 1444473, ES 452 at Brussels 24 Apr 2026).
+# - euroexpressmesic, Euro-Express new livery: magenta, a cream swoosh through
+#   a big crescent moon, lighter pink above it, stars, "COUCHETTE",
+#   "www.Euro-Express.eu" (bahnbilder 1444474: 56 80 50-71 118-9 in ES 452 on
+#   24 Apr 2026; vagonWEB Bvcmz248-neu for 118/231, 248.3_z-neu for 202,
+#   which also has a silver roof and grey window frames).
+# - rdcmodra, RDC blue with a light-grey roof and white lettering: the BTEX
+#   WLABmz (Commons WLAB33s 456/462 at Paris Nord, 7 Apr 2026) and the RDC
+#   Bvcmz, whose colours and window table are those of leo-express/bvcmz
+#   (ric.py), so the same pool looks the same in both paks.
+# - nerezova, GfF stainless: stainless-steel type P body, ribbed lower half, a
+#   yellow line under the roof, dark blue sill line, white doors in blue frames
+#   (vagonWEB WLABee-7070-AB30; Commons photo of WLABee 004 at Rotterdam
+#   22 Jul 2024).
+#
+# Sprites are rendered from box models: tools/railrender/es_coaches.py on
+# tools/railrender/coachkit.py; regenerate with
+# `python tools/railrender/es_coaches.py`. Every livery sheet has the same six
+# rows; a vehicle's row is empty in the sheets of liveries it does not wear.
+# Lengths: 13 (26.4 m), the WLABee 12 (24.0 m). Coaches couple with any
+# locomotive or coach (prev/next: any).
+
+vehicles:
+  - id: "Bvcmz248"
+    display_id: "Bvcmz 248"
+    role_en: "couchette car"
+    role_cs: "lehátkový vůz"
+    row: 0
+    liveries: [vinovokremova, euroexpressmesic, rdcmodra]
+    prev: any
+    next: any
+    fields:
+      cost: 2300000
+      payload: 60
+      speed: 200
+      weight: 47
+      runningcost: 30
+      fixed_cost: 290
+      intro_year: 2024
+      intro_month: 3
+      retire_year: 2036
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bvcmz248.3"
+    display_id: "Bvcmz 248.3"
+    role_en: "couchette car"
+    role_cs: "lehátkový vůz"
+    row: 1
+    liveries: [euroexpressmesic]
+    prev: any
+    next: any
+    fields:
+      cost: 2300000
+      payload: 50
+      speed: 200
+      weight: 47
+      runningcost: 30
+      fixed_cost: 290
+      intro_year: 2024
+      intro_month: 3
+      retire_year: 2036
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bcomh"
+    display_id: "Bcomh"
+    role_en: "couchette car"
+    role_cs: "lehátkový vůz"
+    row: 2
+    liveries: [vinovokremova]
+    prev: any
+    next: any
+    fields:
+      cost: 2000000
+      payload: 60
+      speed: 160
+      weight: 45
+      runningcost: 30
+      fixed_cost: 270
+      intro_year: 2024
+      intro_month: 3
+      retire_year: 2036
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Am"
+    display_id: "Am"
+    role_en: "seated car (Budget)"
+    role_cs: "vůz k sezení (Budget)"
+    row: 3
+    liveries: [vinovokremova]
+    prev: any
+    next: any
+    fields:
+      cost: 2000000
+      payload: 66
+      speed: 200
+      weight: 43
+      runningcost: 26
+      fixed_cost: 260
+      intro_year: 2024
+      intro_month: 3
+      retire_year: 2036
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "WLABmz-AB33"
+    display_id: "WLABmz AB33"
+    role_en: "sleeping car (BTEX)"
+    role_cs: "lůžkový vůz (BTEX)"
+    row: 4
+    liveries: [rdcmodra]
+    prev: any
+    next: any
+    fields:
+      cost: 2900000
+      payload: 33
+      speed: 200
+      weight: 56
+      runningcost: 36
+      fixed_cost: 340
+      intro_year: 2026
+      intro_month: 4
+      retire_year: 2036
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "WLABee-AB30"
+    display_id: "WLABee AB30"
+    role_en: "sleeping car type P (GfF)"
+    role_cs: "lůžkový vůz typu P (GfF)"
+    row: 5
+    liveries: [nerezova]
+    prev: any
+    next: any
+    fields:
+      cost: 2600000
+      payload: 30
+      speed: 160
+      weight: 52
+      runningcost: 34
+      fixed_cost: 320
+      intro_year: 2024
+      intro_month: 3
+      retire_year: 2036
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+liveries:
+  - color: vinovokremova
+    name_en: "Euro-Express wine red-cream"
+    name_cs: "Euro-Express vínovo-krémová"
+  - color: euroexpressmesic
+    name_en: "Euro-Express moon"
+    name_cs: "Euro-Express s měsícem"
+  - color: rdcmodra
+    name_en: "RDC blue"
+    name_cs: "RDC modrá"
+  - color: nerezova
+    name_en: "GfF stainless steel"
+    name_cs: "GfF nerezová"

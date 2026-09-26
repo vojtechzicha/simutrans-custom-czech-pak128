@@ -1,0 +1,149 @@
+agency: KolejeDolnoslaskie
+type: "31WE"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Koleje Dolnośląskie"
+  agency_cs: "Koleje Dolnośląskie"
+  family_en: "Newag Impuls"
+  family_cs: "Newag Impuls"
+
+# Newag Impuls 31WE of Koleje Dolnośląskie (KD): 10 four-section EMUs,
+# 31WE-001...005 (2013) and 020...024; some are Czech-equipped and stand in for
+# the 45WE on D3/D9 to Lichkov (31WE-021 photographed at Lichkov, 94 51 2 140 655
+# worked OsP 6285 / Os 6284 in 2026). Bo'2'2'2'Bo', 3 kV DC, 4 x 500 kW,
+# 160 km/h, 74.4 m, 2,895 mm wide, 135 t, 202-204 seats. Doors 1-2-2-1 per
+# side (vagonweb side drawing 31WE-v2-a). Pantographs on B and C next to the
+# joints with the cab sections, lowered on B, raised on C.
+#
+# Livery: the KD white / yellow wave scheme of the 45WE (see 45we/family.yaml):
+# "KD" + red swoosh behind the cab on the right-hand side, crest + "DOLNY
+# ŚLĄSK" on the left-hand side (photos 31WE-022A Jelenia Góra 2025, 31WE
+# Wrocław Aug 2025, 31WE-023 Wrocław 2020, 31WE-022D Lichkov, 31WE-021 Lichkov).
+#
+# Sprites: tools/railrender/impuls.py (python tools/railrender/impuls.py 31we),
+# the 45WE model with four sections: lengths 10, 8, 8, 10 carunits (21.5 m end
+# sections, 16 m middle sections; 36 cu = 73.1 m for 74.4 m), sections start at
+# 0, 10, 18, 26 cu. Headlights on A, tail lights on D. Units couple in multiple.
+
+vehicles:
+  - id: "31WE-A"
+    display_id: "31WE"
+    role_en: "cab car A"
+    role_cs: "čelní vůz A"
+    row: 0
+    head: true
+    tail: false
+    prev: ["31WE-D"]
+    next: ["31WE-B"]
+    couple_liveries: prev     # the rear car of a unit ahead may wear any livery
+    fields:
+      cost: 3200000
+      payload: 40
+      speed: 160
+      weight: 37
+      runningcost: 75
+      fixed_cost: 800
+      intro_year: 2013
+      intro_month: 4
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: electric
+      power: 1000
+      gear: 130
+    extended:
+      axles: 3
+
+  - id: "31WE-B"
+    display_id: "31WE"
+    role_en: "middle car B"
+    role_cs: "vložený vůz B"
+    row: 1
+    head: false
+    tail: false
+    prev: ["31WE-A"]
+    next: ["31WE-C"]
+    fields:
+      cost: 2100000
+      payload: 62
+      speed: 160
+      weight: 31
+      runningcost: 35
+      fixed_cost: 260
+      intro_year: 2013
+      intro_month: 4
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "31WE-C"
+    display_id: "31WE"
+    role_en: "middle car C"
+    role_cs: "vložený vůz C"
+    row: 2
+    head: false
+    tail: false
+    prev: ["31WE-B"]
+    next: ["31WE-D"]
+    fields:
+      cost: 2100000
+      payload: 62
+      speed: 160
+      weight: 30
+      runningcost: 35
+      fixed_cost: 260
+      intro_year: 2013
+      intro_month: 4
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "31WE-D"
+    display_id: "31WE"
+    role_en: "cab car D"
+    role_cs: "čelní vůz D"
+    row: 3
+    head: false
+    tail: true
+    prev: ["31WE-C"]
+    next: ["31WE-A"]
+    couple_liveries: next     # the lead car of a unit behind may wear any livery
+    fields:
+      cost: 3200000
+      payload: 40
+      speed: 160
+      weight: 37
+      runningcost: 75
+      fixed_cost: 800
+      intro_year: 2013
+      intro_month: 4
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: electric
+      power: 1000
+      gear: 130
+    extended:
+      axles: 3
+
+liveries:
+  - color: bilozluta
+    name_en: "white-yellow"
+    name_cs: "bílo-žlutá"

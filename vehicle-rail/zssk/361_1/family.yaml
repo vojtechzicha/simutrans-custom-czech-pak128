@@ -1,0 +1,73 @@
+agency: ZSSK
+type: "361.1"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ZSSK"
+  agency_cs: "ZSSK"
+  family_en: "Škoda 69E Peršing"
+  family_cs: "Škoda 69E Peršing"
+
+# ZSSK class 361.1: ŽOS Vrútky rebuilt the Škoda 69E class 163 "Peršing" into
+# dual-system (3 kV DC / 25 kV 50 Hz) locomotives, 21 x 361.1 (361 101-130).
+# On Czech track in 2026: R 340-349 "Kysučan" Žilina - Čadca - Český Těšín -
+# Bohumín - Ostrava hl.n. - Ostrava-Svinov, five pairs a day (361 109, 126,
+# 127, 128, 129, 130 seen). 16.8 m over buffers, 2.94 m wide, 4.65 m high,
+# Bo'Bo', 86 t, 3 600 kW (DC) / 3 200 kW (AC), 160 km/h. Drawn at length 8 like
+# the native pak128.cs 163 / 363.
+#
+# Liveries (photos 361 124 Praha hl.n., 361 126 Praha 2024, 361 128 Vsetín,
+# 361 107 Bratislava 2018; 361 129 Praha 2023 x2 and Kolín line Aug 2025):
+# - cervenobila: the ZSSK "Blonski" scheme on all but 129: red upper body,
+#   off-white ribbed band, grey frame, light-grey roof with dark louvre
+#   grilles; front: red with the two windscreens in white frames, off-white
+#   band with two lamp pairs and the number, grey lower front, yellow beam.
+# - korporatni: the ZSSK corporate scheme (361 129 since 2022, seen in CZ in
+#   2023 and 2025): cabs as above; the machine-room side red with a thin white
+#   line along the top, a white wedge in front of the right-hand cab door as
+#   seen (the same from either side), red down to the frame in front of it
+#   with the big white ZSSK arc logo, the off-white band only on the left part.
+# The research note "3 portholes per side" is wrong: the photos show two round
+# portholes behind each cab door (four per side).
+#
+# Sprites are rendered from a box model (tools/railrender/zssk361.py on the
+# pak128.cs-calibrated railkit renderer; regenerate with
+# `python tools/railrender/ops.py zssk/361_1`): the installed
+# ZSSK_361.1_Pershing is the generic 163 drawing (squat body, no portholes,
+# oversized yellow pantographs), not worth porting.
+
+vehicles:
+  - id: "361.1"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 4800000
+      payload: 0
+      speed: 160
+      weight: 86
+      runningcost: 250
+      fixed_cost: 2500
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      engine_type: electric
+      power: 3600
+      gear: 160
+      length: 8
+    extended:
+      axles: 4
+
+liveries:
+  - color: cervenobila
+    name_en: "red-white"
+    name_cs: "červeno-bílá"
+  - color: korporatni
+    name_en: "ZSSK corporate"
+    name_cs: "ZSSK korporátní"

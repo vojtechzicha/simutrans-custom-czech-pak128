@@ -1,0 +1,150 @@
+agency: KolejeSlaskie
+type: "31WEbc"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Koleje Śląskie"
+  agency_cs: "Koleje Śląskie"
+  family_en: "Newag Impuls 2"
+  family_cs: "Newag Impuls 2"
+
+# Newag Impuls 2 31WEbc of Koleje Śląskie (KŚ): four-section EMUs, first three
+# in service 24 Feb 2025, more delivered through 2025 (31WEbc-001...012 seen);
+# the planned type of line S71 Katowice - Rybnik - Wodzisław Śl. - Chałupki -
+# Bohumín (Os 2960-2969, 5 pairs a day, ~3 km on Czech track). Bo'2'2'2'Bo',
+# 3 kV DC, 2,000 kW, 160 km/h, 75.6 m, 192 seats + 208 standing. Separate cab
+# doors, doors 2-2-2-2 per side (vagonweb side drawing 31WEbc-a).
+# Pantographs on B and C next to the joints with the cab sections.
+#
+# Livery (KŚ): white body, azure nose and cab sides with the white body ending
+# in a rounded edge under the cab side window, azure roof and a thin azure
+# stripe along the sole bar, black window band, yellow doors framed in azure,
+# the KŚ ribbon (yellow / green / blue stripes) behind each cab. Photo
+# 31WEbc-001 at Katowice (Os 44139 to Chałupki, research/ops/photos/ks).
+#
+# Sprites: tools/railrender/impuls.py with the Impuls 2 cab
+# (python tools/railrender/impuls.py 31webc). Lengths 10, 8, 8, 10 carunits
+# (end sections 21.65 m, middle sections 16.3 m), sections start at 0, 10, 18,
+# 26 cu. Headlights on A, tail lights on D. Units couple in multiple.
+
+vehicles:
+  - id: "31WEbc-A"
+    display_id: "31WEbc"
+    role_en: "cab car A"
+    role_cs: "čelní vůz A"
+    row: 0
+    head: true
+    tail: false
+    prev: ["31WEbc-D"]
+    next: ["31WEbc-B"]
+    couple_liveries: prev     # the rear car of a unit ahead may wear any livery
+    fields:
+      cost: 3200000
+      payload: 38
+      speed: 160
+      weight: 38
+      runningcost: 75
+      fixed_cost: 800
+      intro_year: 2025
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: electric
+      power: 1000
+      gear: 130
+    extended:
+      axles: 3
+
+  - id: "31WEbc-B"
+    display_id: "31WEbc"
+    role_en: "middle car B"
+    role_cs: "vložený vůz B"
+    row: 1
+    head: false
+    tail: false
+    prev: ["31WEbc-A"]
+    next: ["31WEbc-C"]
+    fields:
+      cost: 2100000
+      payload: 58
+      speed: 160
+      weight: 32
+      runningcost: 35
+      fixed_cost: 260
+      intro_year: 2025
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "31WEbc-C"
+    display_id: "31WEbc"
+    role_en: "middle car C"
+    role_cs: "vložený vůz C"
+    row: 2
+    head: false
+    tail: false
+    prev: ["31WEbc-B"]
+    next: ["31WEbc-D"]
+    fields:
+      cost: 2100000
+      payload: 58
+      speed: 160
+      weight: 32
+      runningcost: 35
+      fixed_cost: 260
+      intro_year: 2025
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "31WEbc-D"
+    display_id: "31WEbc"
+    role_en: "cab car D"
+    role_cs: "čelní vůz D"
+    row: 3
+    head: false
+    tail: true
+    prev: ["31WEbc-C"]
+    next: ["31WEbc-A"]
+    couple_liveries: next     # the lead car of a unit behind may wear any livery
+    fields:
+      cost: 3200000
+      payload: 38
+      speed: 160
+      weight: 38
+      runningcost: 75
+      fixed_cost: 800
+      intro_year: 2025
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: electric
+      power: 1000
+      gear: 130
+    extended:
+      axles: 3
+
+liveries:
+  - color: bilomodra
+    name_en: "white-blue"
+    name_cs: "bílo-modrá"

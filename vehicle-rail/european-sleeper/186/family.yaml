@@ -1,0 +1,66 @@
+agency: EuropeanSleeper
+type: "186"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "European Sleeper"
+  agency_cs: "European Sleeper"
+  family_en: "Bombardier TRAXX F140 MS"
+  family_cs: "Bombardier TRAXX F140 MS"
+
+# Bombardier TRAXX F140 MS, class 186 (AC3), Railpool 91 80 6186 291 leased to
+# LINEAS and hired by Train Charter Services for European Sleeper ES 452/453
+# Praha hl.n. - Usti n.L. - Decin - Dresden - Berlin - Amsterdam - Brussels,
+# 3x weekly; the railway undertaking on Czech track is Cityrail (CTR).
+# Photographed at Praha hl.n. (26 Mar 2024), Brussels (27 Mar 2024, side-on)
+# and Rotterdam (22 Jul 2024, ES 453 to Praha). Other Railpool 186/188 work the
+# train too (186 182 in LINEAS white, 186 289 in Railpool silver in 2025, 188
+# 121 on the Paris service in 2026) - only the documented LINEAS 186 291 is
+# drawn. 18.90 m over buffers, 2.98 m wide, 4.28 m over the lowered
+# pantographs, bogie centres 10.44 m, Bo'Bo', 5.6 MW, 140 km/h, 85 t. Drawn at
+# length 10 like the other 19 m locomotives (Vectron, pak128.cs 1216 / ES64U2).
+#
+# Livery lineas (186 291's "LINEAS / train charter / Decarbonizing Borderless
+# Performance" wrap; the two ends differ): cab 1 navy-black with teal stripes
+# across the front and along the cab side, white "LINEAS"; machine room
+# navy-black with blue mountains, a light-blue arch bridge over pale water and
+# the teal "DECARBONIZING BORDERLESS PERFORMANCE" boxes, white "train charter"
+# near cab 2; cab 2 medium blue with lighter faceted triangles and a broad
+# white diagonal across the front; grey roof-edge grilles. The three teal
+# stripes are drawn as two 1 px stripes (three do not fit 2.5 px at 1x).
+#
+# Sprites are rendered from a box model, original art:
+# tools/railrender/traxx.py (regenerate with `python tools/railrender/traxx.py`).
+
+vehicles:
+  - id: "186"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 5900000
+      payload: 0
+      speed: 140
+      weight: 85
+      runningcost: 190
+      fixed_cost: 2700
+      intro_year: 2024
+      intro_month: 3
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      engine_type: electric
+      power: 5600
+      gear: 160
+      length: 10
+    extended:
+      axles: 4
+
+liveries:
+  - color: lineas
+    name_en: "LINEAS"
+    name_cs: "LINEAS"

@@ -1,0 +1,150 @@
+agency: ZSSK
+type: "UIC-Z2"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "ZSSK"
+  agency_cs: "ZSSK"
+  family_en: "UIC-Z2"
+  family_cs: "UIC-Z2"
+
+# ZSSK 26.4 m UIC-Z2 long-distance coaches, 2.825 m wide, 160 km/h,
+# air-conditioned, doors at both ends. On Czech track in 2026 (vagonWEB 2026
+# compositions and the Jan-Sep 2026 reports):
+#   EC 278-283 "Metropolitan" Praha - Pardubice - Brno - Břeclav (- Bratislava
+#   - Budapest): a whole ZSSK set, Ampz + ARpeer + Bdghmeer + 2 Bmz + 2 Bmpz
+#   (+2 Bmz on peak days); EC 120-129 / 220-223 "Valašský expres" Praha -
+#   Vsetín: Ampz + 2 Bmpz; EC 140-145 "Ostravan" Praha - Ostrava - Český
+#   Těšín: Ampz + Bmpz / Bmz (+4 Bmz on Sundays); R 340-349 "Kysučan" Žilina -
+#   Ostrava-Svinov: Bdghmeer + Bmz.
+# - Ampz 61 56 10-70 001-007: open 1st class, 52 seats, new-built by ŽOS
+#   Vrútky 2020-21 (001-006 seen in CZ).
+# - Bmpz 61 56 22-70 001-028: open 2nd class, 84 seats, ŽOS Vrútky 2018-20.
+# - Bmz 61 56 21-70 101-140: 11 compartments, 66 seats, ŽOS Trnava rebuild of
+#   Bautzen Bmeer 2018-20 (101-110, 117-120, 127-132 seen in CZ).
+# - Bdghmeer 61 56 28-70 001-030: 2nd class, 31+4 compartment and 12+2 open
+#   seats, 5 bikes behind a double loading door, wheelchair lift (021-030),
+#   displays (026-030); ŽOS Vrútky rebuild 2009-14 (001, 024, 026-030 in CZ).
+#
+# Livery (ZSSK red / white / grey long-distance scheme, the only one these
+# cars wear; photos Bmpz 22-70 006-5 Budapest-Nyugati, Bmz 21-70 104-9 and
+# another Bmz, Ampz 10-70 005-1, Bdghmeer 28-70 028-3, all Commons; vagonWEB
+# drawings Ampz/Bmpz/Bmz/Bdghmeer-IS -a/-b): red from the roof down to just
+# under the windows (windows in the red field), white middle band, light grey
+# sill band (a deeper grey skirt on the ŽOS Vrútky Ampz / Bmpz), light grey
+# roof with AC units, red doors with a grey foot (the Bdghmeer loading door
+# carries the white band), red / white / grey end walls with black bellows,
+# orange ZSSK logo on the white band near the left end of each side, the
+# dark passenger display near the right end, white class numerals by the
+# doors, and on the Ampz the yellow 1st class line along the top of the red.
+#
+# Sprites are rendered from a box model: tools/railrender/zssk_coaches.py
+# (window / door tables from the vagonWEB side drawings, both sides) on
+# tools/railrender/coachkit.py; regenerate with
+# `python tools/railrender/zssk_coaches.py vozy_z`. Length 13 = 26.4 m, like
+# the native pak128.cs coaches. Coaches couple with any locomotive or coach
+# (prev/next: any).
+
+vehicles:
+  - id: "Ampz10-70"
+    display_id: "Ampz 10-70"
+    role_en: "1st class open coach"
+    role_cs: "velkoprostorový vůz 1. třídy"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2600000
+      payload: 52
+      speed: 160
+      weight: 47
+      runningcost: 32
+      fixed_cost: 300
+      intro_year: 2020
+      intro_month: 12
+      retire_year: 2055
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmpz22-70"
+    display_id: "Bmpz 22-70"
+    role_en: "2nd class open coach"
+    role_cs: "velkoprostorový vůz 2. třídy"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 2400000
+      payload: 84
+      speed: 160
+      weight: 47
+      runningcost: 30
+      fixed_cost: 280
+      intro_year: 2018
+      intro_month: 12
+      retire_year: 2055
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bmz21-70"
+    display_id: "Bmz 21-70"
+    role_en: "2nd class compartment coach"
+    role_cs: "oddílový vůz 2. třídy"
+    row: 2
+    prev: any
+    next: any
+    fields:
+      cost: 2100000
+      payload: 66
+      speed: 160
+      weight: 48
+      runningcost: 28
+      fixed_cost: 270
+      intro_year: 2018
+      intro_month: 6
+      retire_year: 2050
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bdghmeer28-70"
+    display_id: "Bdghmeer 28-70"
+    role_en: "2nd class coach with bike area"
+    role_cs: "vůz 2. třídy s oddílem pro jízdní kola"
+    row: 3
+    prev: any
+    next: any
+    fields:
+      cost: 2200000
+      payload: 49
+      speed: 160
+      weight: 49
+      runningcost: 29
+      fixed_cost: 280
+      intro_year: 2009
+      intro_month: 6
+      retire_year: 2045
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+liveries:
+  - color: cervenobilasiva
+    name_en: "red-white-grey"
+    name_cs: "červeno-bílo-šedá"

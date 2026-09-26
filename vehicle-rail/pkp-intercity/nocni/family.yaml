@@ -1,0 +1,122 @@
+agency: PKPIntercity
+type: "EN"
+copyright: vojtechzicha      # original art, rendered from a box model
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "PKP Intercity"
+  agency_cs: "PKP Intercity"
+  family_en: "EuroNight"
+  family_cs: "EuroNight"
+
+# PKP Intercity night coaches on Czech track in 2026 (vagonWEB 2026
+# compositions + Jan-Sep 2026 reports):
+# - EN 406/407 "Chopin" (München / Budapest -) Wien - Břeclav - Ostrava -
+#   Bohumín (- Warszawa / Przemyśl): WLAB 10 mnouz 305Ad + Bc 10 mnouz 134Ab
+#   (München cars, EN 40406/40416; seen Sep 2026 WLAB 61 51 70-90 003 / 008,
+#   Bc 61 51 50-70 002), and WLAB 9 bmnouz 308A arriving from Budapest in EN
+#   476/477 (seen 61 51 70-70 058 / 062).
+# - Baltic Express IC 460/461 Praha - Pardubice - Lichkov (- Gdynia): WLAB 9
+#   bmnouz 308A.
+# - Adriatic Express through cars in summer: Bc 10 mnouz 172A (the
+#   modernised 134Ab, same look).
+# Vehicles:
+# - Bc 10 mnouz 134Ab (HCP 1991-92): couchette, 10 compartments + attendant,
+#   entrance at one end (drawings Bc10mnouz-134Ab-m-a/b).
+# - WLAB 10 mnouz 305Ad: 26.4 m sleeper, 10 compartments, entrance at one end
+#   (drawing WLABmnouz-305Ad-m-a).
+# - WLAB 9 bmnouz 308A: 24.5 m sleeper, 9 compartments incl. an accessible
+#   one, length 12 (drawing WLAB9bnouz-308A-m-a/b, photo 308A Świnoujście
+#   2017).
+#
+# Livery "blue-white" = PKP IC night scheme (photos Bc 10 mnouz 134Ab 006-5
+# Budapest-Keleti Jun 2019, 308A Świnoujście Jul 2017, 134A Warszawa 2012):
+# ultramarine body, doors and end walls, separate windows, a white band under
+# the windows with the orange line in its lower part, ultramarine below it,
+# the IC logo in the white band. The newer vagonWEB drawings put the windows
+# in a black band; no photo of that was found, so the photos are followed.
+#
+# Sprites are rendered from a box model: tools/railrender/mav_pkp_coaches.py
+# on tools/railrender/coachkit.py; regenerate with
+# `python tools/railrender/mav_pkp_coaches.py pkpnoc`. Lengths 13 (26.4 m)
+# and 12 (24.5 m). Coaches couple with any locomotive or coach (prev/next:
+# any).
+
+vehicles:
+  - id: "Bc10mnouz"
+    display_id: "Bc 10 mnouz"
+    role_en: "couchette car"
+    role_cs: "lehátkový vůz"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 2400000
+      payload: 60
+      speed: 160
+      weight: 50
+      runningcost: 32
+      fixed_cost: 300
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "WLAB10mnouz"
+    display_id: "WLAB 10 mnouz"
+    role_en: "sleeping car"
+    role_cs: "lůžkový vůz"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 2900000
+      payload: 30
+      speed: 160
+      weight: 56
+      runningcost: 36
+      fixed_cost: 340
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "WLAB9bmnouz"
+    display_id: "WLAB 9 bmnouz"
+    role_en: "sleeping car with accessible compartment"
+    role_cs: "lůžkový vůz s oddílem pro vozíčkáře"
+    row: 2
+    prev: any
+    next: any
+    fields:
+      cost: 2800000
+      payload: 25
+      speed: 160
+      weight: 52
+      runningcost: 34
+      fixed_cost: 330
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2040
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 12
+    extended:
+      axles: 4
+
+liveries:
+  - color: modrobila
+    name_en: "blue-white"
+    name_cs: "modro-bílá"

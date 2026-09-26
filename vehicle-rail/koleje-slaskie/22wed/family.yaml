@@ -1,0 +1,150 @@
+agency: KolejeSlaskie
+type: "22WEd"
+copyright: vojtechzicha      # original art, drawn from scratch
+# no image_offset: the rail default [0, 4] matches the renderer's anchors
+
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "Koleje Śląskie"
+  agency_cs: "Koleje Śląskie"
+  family_en: "Pesa Elf 2"
+  family_cs: "Pesa Elf 2"
+
+# Pesa Elf 2 22WEd(g) of Koleje Śląskie (KŚ): 12 four-section EMUs delivered
+# Feb 2018 - May 2019; approved for Czech track by UTK in Oct 2025 and the
+# regular stand-in on line S71 Katowice - Chałupki - Bohumín (22WEdg-007 seen
+# in 2026). Bo'2'2'2'Bo' on Jakobs bogies, 3 kV DC, 4 x 500 kW, 160 km/h,
+# ~75 m, 2,880 mm wide, 4,280 mm high, 190 seats + 150 standing. Doors
+# 2-2-2-2 per side (vagonweb side drawing 22WEd-a).
+#
+# Livery (KŚ): azure nose with a dark grey face mask, azure roof, white body,
+# black window band, thin azure stripe along the sole bar, yellow doors framed
+# in azure, KŚ ribbon behind the cabs. Photos 22WEd-002 Gliwice 2025,
+# 22WEd-012 Częstochowa 2025, 22WEd-002A / -006 / -010B (Commons).
+#
+# Sprites: tools/railrender/elf2.py (python tools/railrender/elf2.py 22wed),
+# the Impuls unit model of impuls.py with the Elf 2 cab. Lengths 10, 8, 8, 10
+# carunits (end sections 22 m, middle sections 16.3 m), sections start at 0,
+# 10, 18, 26 cu. Headlights on A, tail lights on B (Pesa letters the sections A-C-D-B, cab
+# ends A and B: fronts 22WEd-010B, 22WEd-012B). Units couple in multiple, also
+# with the 3-section 21WEa (Commons photo "Coupled 22WEd-010 with 21WEa-003").
+
+vehicles:
+  - id: "22WEd-A"
+    display_id: "22WEd"
+    role_en: "cab car A"
+    role_cs: "čelní vůz A"
+    row: 0
+    head: true
+    tail: false
+    prev: ["22WEd-B", "21wea/21WEa-B"]
+    next: ["22WEd-C"]
+    couple_liveries: prev     # the rear car of a unit ahead may wear any livery
+    fields:
+      cost: 3200000
+      payload: 38
+      speed: 160
+      weight: 37
+      runningcost: 75
+      fixed_cost: 800
+      intro_year: 2018
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: electric
+      power: 1000
+      gear: 130
+    extended:
+      axles: 3
+
+  - id: "22WEd-C"
+    display_id: "22WEd"
+    role_en: "middle car C"
+    role_cs: "vložený vůz C"
+    row: 1
+    head: false
+    tail: false
+    prev: ["22WEd-A"]
+    next: ["22WEd-D"]
+    fields:
+      cost: 2100000
+      payload: 57
+      speed: 160
+      weight: 31
+      runningcost: 35
+      fixed_cost: 260
+      intro_year: 2018
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "22WEd-D"
+    display_id: "22WEd"
+    role_en: "middle car D"
+    role_cs: "vložený vůz D"
+    row: 2
+    head: false
+    tail: false
+    prev: ["22WEd-C"]
+    next: ["22WEd-B"]
+    fields:
+      cost: 2100000
+      payload: 57
+      speed: 160
+      weight: 30
+      runningcost: 35
+      fixed_cost: 260
+      intro_year: 2018
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 8
+    extended:
+      axles: 2
+
+  - id: "22WEd-B"
+    display_id: "22WEd"
+    role_en: "cab car B"
+    role_cs: "čelní vůz B"
+    row: 3
+    head: false
+    tail: true
+    prev: ["22WEd-D"]
+    next: ["22WEd-A", "21wea/21WEa-A"]
+    couple_liveries: next     # the lead car of a unit behind may wear any livery
+    fields:
+      cost: 3200000
+      payload: 38
+      speed: 160
+      weight: 37
+      runningcost: 75
+      fixed_cost: 800
+      intro_year: 2018
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      freight: Passagiere
+      length: 10
+      engine_type: electric
+      power: 1000
+      gear: 130
+    extended:
+      axles: 3
+
+liveries:
+  - color: bilomodra
+    name_en: "white-blue"
+    name_cs: "bílo-modrá"
