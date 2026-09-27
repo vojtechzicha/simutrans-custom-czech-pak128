@@ -181,6 +181,35 @@ objects:
     intro_year: 1900
   name_en: D1 SSSR platform exit signal (P)
   name_cs: D1 SSSR odjezdové návěstidlo nástupní koleje (P)
+- id: D1-New-AH
+  sprite: d1-new-ah
+  generate:
+    hradlo: automatic
+    cabinet: true
+  copyright: Lubak91, Vladki
+  fields:
+    is_signal: 1
+    is_blockpost: 1
+    cost: 4000
+    offset_left: 10
+    intro_year: 1960
+  name_en: D1 AŽD 70 automatic block post signal (automatické hradlo)
+  name_cs: D1 AŽD 70 oddílové návěstidlo automatického hradla
+- id: D1-Old-Hradlo
+  sprite: d1-old-hradlo
+  generate:
+    hradlo: manual
+    house: pair
+    hut: brick
+  copyright: Lubak91, Vladki
+  fields:
+    is_signal: 1
+    is_blockpost: 1
+    cost: 6000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 SSSR block post signal with the hradlo hut
+  name_cs: D1 SSSR oddílové návěstidlo hradla se stavědlem hradla
 - id: D1-Old-LT
   sprite: d1-old-lt
   generate:

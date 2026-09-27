@@ -23,6 +23,17 @@ state, plus a last row with the cursor (col 0) and the 32×32 toolbar icon
                                       yellow for when the engine shows them
   {d3: LT|P}                          drawn D3 objects (lichoběžníková tabulka,
                                       Místo zastavení board with a lamp)
+  {hradlo: automatic|manual, cabinet: bool, house: pair|all, hut: brick|prefab}
+                                      block signal of a hradlo (block post): a
+                                      main signal with the red plate and the
+                                      red-and-white mast band (D1 čl. 67: every
+                                      main signal for trains except AB).
+                                      automatic: AŽD 70, optionally the relay
+                                      cabinet at the foot. manual: SSSR, plus
+                                      the block post hut outboard of the track,
+                                      along it from the mast; house: pair draws the hut only in
+                                      the N and W images, so a pair (one signal
+                                      per direction) shows one hut
 
 Function code (the plate under the head, real D1 plate colours): block white,
 shunt blue, presignal black, long red, choose red + direction indicator box on
@@ -100,6 +111,7 @@ FONT = {  # 3×5
     "C": ["011", "100", "100", "100", "011"], "L": ["100", "100", "100", "100", "111"],
     "T": ["111", "010", "010", "010", "010"], "D": ["110", "101", "101", "101", "110"],
     "3": ["110", "001", "010", "001", "110"],
+    "H": ["101", "101", "111", "101", "101"], "A": ["010", "101", "111", "101", "101"],
 }
 
 
@@ -400,6 +412,136 @@ def gen_d3(kind: str) -> Image.Image:
     return out
 
 
+# ---------------------------------------------------------------- hradlo
+
+# tile coordinates: x east, y south (0..1 across the tile), z up in pixels;
+# the tile diamond's top vertex (x = y = 0) is at (64, 64)
+def iso(x, y, z=0.0):
+    return 64 + (x - y) * 64, 64 + (x + y) * 32 - z
+
+
+def to_tile(sx, sy):
+    """Screen pixel of a ground point -> tile (x, y)."""
+    a, b = (sx - 64) / 64, (sy - 64) / 32
+    return (a + b) / 2, (b - a) / 2
+
+
+def shade(c, f):
+    return tuple(max(0, min(255, round(v * f))) for v in c)
+
+
+def poly(im, pts, colour):
+    from PIL import ImageDraw
+    ImageDraw.Draw(im).polygon([(round(px), round(py)) for px, py in pts], fill=colour)
+
+
+def box(im, x0, x1, y0, y1, z0, z1, colour):
+    """Axis-aligned box with pak128 lighting: south face x0.835, east face
+    x0.61, top x1.0."""
+    poly(im, [iso(x0, y1, z0), iso(x1, y1, z0), iso(x1, y1, z1), iso(x0, y1, z1)], shade(colour, 0.835))
+    poly(im, [iso(x1, y0, z0), iso(x1, y1, z0), iso(x1, y1, z1), iso(x1, y0, z1)], shade(colour, 0.61))
+    poly(im, [iso(x0, y0, z1), iso(x1, y0, z1), iso(x1, y1, z1), iso(x0, y1, z1)], colour)
+
+
+HUTS = {  # walls, roof, trim
+    "brick": ((224, 208, 170), (160, 64, 44), (120, 44, 34)),     # plastered hut, red tiled roof
+    "prefab": ((176, 180, 178), (84, 88, 90), (60, 62, 64)),      # grey prefabricated booth, flat roof
+}
+LIT_GLASS = (0x4D, 0x4D, 0x4D)   # special: dark by day, lit at night (the post is manned)
+
+# hut footprint per image direction (outboard of the mast, clear of the track)
+# (x0, x1, y0, y1); along the track from the mast so the hut never covers it
+HUT_AT = {0: (0.80, 0.98, 0.30, 0.54), 1: (0.02, 0.20, 0.46, 0.70),
+          2: (0.30, 0.54, 0.02, 0.20), 3: (0.46, 0.70, 0.80, 0.98)}
+
+
+def hut(im, col, kind):
+    walls, roof, trim = HUTS[kind]
+    x0, x1, y0, y1 = HUT_AT[col]
+    wall_h = 13
+    box(im, x0, x1, y0, y1, 0, wall_h, walls)
+    px = im.load()
+
+    def dot(x, y, z, c):
+        sx, sy = iso(x, y, z)
+        px[round(sx), round(sy)] = c
+    # windows on the south and east faces (lit specials), a door on the south
+    for f in (0.3, 0.7):
+        for dz in (7, 8, 9):
+            dot(x0 + (x1 - x0) * f, y1, dz, LIT_GLASS)
+            dot(x1, y0 + (y1 - y0) * f, dz, LIT_GLASS)
+    for dz in range(1, 8):
+        dot(x0 + (x1 - x0) * 0.5, y1, dz, shade(trim, 0.8))
+    if kind == "prefab":
+        box(im, x0 - 0.01, x1 + 0.01, y0 - 0.01, y1 + 0.01, wall_h, wall_h + 2, roof)
+        return
+    # gabled roof, ridge along the longer side
+    zr, e = wall_h + 7, 0.02
+    if (x1 - x0) >= (y1 - y0):
+        ym = (y0 + y1) / 2
+        poly(im, [iso(x0 - e, y0 - e, wall_h), iso(x1 + e, y0 - e, wall_h), iso(x1 + e, ym, zr), iso(x0 - e, ym, zr)], shade(roof, 0.9))
+        poly(im, [iso(x1, y0, wall_h), iso(x1, y1, wall_h), iso(x1, ym, zr)], shade(walls, 0.61))
+        poly(im, [iso(x0 - e, y1 + e, wall_h), iso(x1 + e, y1 + e, wall_h), iso(x1 + e, ym, zr), iso(x0 - e, ym, zr)], roof)
+    else:
+        xm = (x0 + x1) / 2
+        poly(im, [iso(x0 - e, y0 - e, wall_h), iso(xm, y0 - e, zr), iso(xm, y1 + e, zr), iso(x0 - e, y1 + e, wall_h)], shade(roof, 0.9))
+        poly(im, [iso(x0, y1, wall_h), iso(x1, y1, wall_h), iso(xm, y1, zr)], shade(walls, 0.835))
+        poly(im, [iso(x1 + e, y0 - e, wall_h), iso(xm, y0 - e, zr), iso(xm, y1 + e, zr), iso(x1 + e, y1 + e, wall_h)], shade(roof, 0.75))
+
+
+def over(im, top):
+    """Paste the non-background pixels of top onto im."""
+    tp, ip = top.load(), im.load()
+    for y in range(TILE):
+        for x in range(TILE):
+            if tp[x, y] != BG:
+                ip[x, y] = tp[x, y]
+
+
+# main signals with the red-white mast band: automatic = AŽD 70, manual = SSSR
+BASE = {"automatic": "AZD70_3aspect_absolute", "manual": "SSSR_3aspect_absolute"}
+
+
+def cabinet(im, col):
+    """Relay cabinet at the mast foot, outboard (automatic hradlo)."""
+    mx, my = to_tile(*foot(col))
+    ox, oy = {0: (0.08, 0.06), 1: (-0.08, -0.06), 2: (0.06, -0.08), 3: (-0.06, 0.08)}[col]
+    cx, cy = mx + ox, my + oy
+    box(im, cx - 0.03, cx + 0.03, cy - 0.025, cy + 0.025, 0, 8, (150, 156, 150))
+
+
+def gen_hradlo(kind: str, with_cabinet: bool, house: str, hut_kind: str) -> Image.Image:
+    src = load_sheet(BASE[kind])
+    src_rows = src.height // TILE - 1
+    out = new_sheet(2)
+    for col in range(4):
+        a = Anchor(tile(src, 0, col), col, False)
+        mx, my = to_tile(*foot(col))
+        for row in range(2):
+            sig = tile(src, row, col)
+            draw_plate(sig, a.plate_box(), "red")
+            extra = None
+            if kind == "manual" and (house == "all" or col in (0, 2)):
+                x0, x1, y0, y1 = HUT_AT[col]
+                extra = (lambda im, c=col: hut(im, c, hut_kind), (x0 + x1) / 2 + (y0 + y1) / 2)
+            elif kind == "automatic" and with_cabinet:
+                extra = (lambda im, c=col: cabinet(im, c), 99 if col in (1, 3) else -1)
+            if extra:
+                draw, d = extra
+                im = Image.new("RGB", (TILE, TILE), BG)
+                if d > mx + my:             # in front of the mast
+                    over(im, sig)
+                    draw(im)
+                else:
+                    draw(im)
+                    over(im, sig)
+                sig = im
+            out.paste(sig, (col * TILE, row * TILE))
+    finish_skin(out, 2, src, src_rows, "AH" if kind == "automatic" else "HR", "red",
+                picture=None if kind == "automatic" else "HR")
+    return out
+
+
 # ---------------------------------------------------------------- cursor / icon
 
 def draw_text(px, x, y, s, colour):
@@ -442,6 +584,23 @@ def finish_skin(out, rows, src, src_rows, label, chip, d3=False, picture=None):
             for x in range(8, 11):
                 px[x, y] = (22, 24, 26)
         px[9, 6] = LAMP_RED
+    elif picture == "HR":
+        for y in range(8, 28):
+            px[6, y] = (90, 96, 98)
+        for y in range(4, 11):
+            for x in range(4, 9):
+                px[x, y] = (22, 24, 26)
+        px[6, 6] = LAMP_RED
+        for y in range(12, 16):                   # red plate
+            for x in range(4, 8):
+                px[x, y] = (198, 32, 32)
+        for y in range(20, 28):                   # hut
+            for x in range(9, 20):
+                px[x, y] = (224, 208, 170)
+        for i in range(6):                        # roof
+            for x in range(8 + i, 21 - i):
+                px[x, 19 - i] = (160, 64, 44)
+        px[12, 23] = px[16, 23] = LIT_GLASS
     if chip:
         fill, rim = PLATES[chip]
         for y in range(5, 11):
@@ -467,6 +626,8 @@ def build(obj: dict) -> Image.Image:
         return load_sheet(g["port"])
     if "d3" in g:
         return gen_d3(g["d3"])
+    if "hradlo" in g:
+        return gen_hradlo(g["hradlo"], g.get("cabinet", False), g.get("house", "pair"), g.get("hut", "brick"))
     return gen_d1(g["style"], g["function"])
 
 
