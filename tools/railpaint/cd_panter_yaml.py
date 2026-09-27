@@ -86,6 +86,23 @@ FAM = {
 # (146 seats), same JMK scheme as the 530. Pantograph on the 550."""),
 }
 
+# families whose units also run in multiple with each other (lead car of one
+# behind the rear car of another); units of one family always couple
+MULTI = [("530", "550")]    # JMK Moravia: 530 + 550 on S2 / S3 (Křižanov – Brno)
+
+
+def partners(fam, end):
+    """Sibling-family partners of a unit end: 'lead' -> rear cars, 'rear' -> lead cars."""
+    out = []
+    for group in MULTI:
+        if fam in group:
+            for o in group:
+                if o != fam:
+                    ids = FAM[o]["ids"]
+                    out.append(f"{o}/{ids[-1] if end == 'lead' else ids[0]}")
+    return out
+
+
 HEAD = """agency: CeskeDrahy
 type: "{type}"
 copyright: TommPa9
@@ -155,12 +172,12 @@ def render(fam):
     for r, i in enumerate(ids):
         if r == 0:
             role = ("front motor car", "přední motorový vůz")
-            head, tail, prev, nxt = "true", "false", [rear], [ids[1]]
+            head, tail, prev, nxt = "true", "false", [rear] + partners(fam, "lead"), [ids[1]]
             couple = "    couple_liveries: prev\n"
             payload, weight, rc, fc = 110, 53, 60, 614
         elif r == len(ids) - 1:
             role = ("rear motor car", "zadní motorový vůz")
-            head, tail, prev, nxt = "false", "true", [ids[r - 1]], [lead]
+            head, tail, prev, nxt = "false", "true", [ids[r - 1]], [lead] + partners(fam, "rear")
             couple = "    couple_liveries: next\n"
             payload, weight, rc, fc = 110, 53, 50, 520
         else:
