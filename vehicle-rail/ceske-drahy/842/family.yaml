@@ -37,8 +37,8 @@ vehicles:
     liveries: [najbrt1, najbrt2]
     head: true
     tail: true
-    prev: ["054", "954-front", "954.2-front"]
-    next: ["054", "954", "954.2"]
+    prev: ["054", "954-front", "954.2-front", "842", "954", "954.2", "843/843", "843/943"]
+    next: ["054", "954", "954.2", "842", "954-front", "954.2-front", "843/843", "843/943-front"]
     couple_liveries: true
     fields:
       cost: 2679000
@@ -103,7 +103,7 @@ vehicles:
     head: false
     tail: true
     prev: ["842", "054"]
-    next: []
+    next: ["842", "954-front", "954.2-front", "843/843", "843/943-front"]
     couple_liveries: true
     fields:
       cost: 1600000
@@ -131,7 +131,7 @@ vehicles:
     liveries: [najbrt2, cervenokremova]
     head: true
     tail: false
-    prev: []
+    prev: ["842", "954", "954.2", "843/843", "843/943"]
     next: ["054", "842"]
     couple_liveries: true
     fields:
@@ -163,7 +163,7 @@ vehicles:
     head: false
     tail: true
     prev: ["842", "054"]
-    next: []
+    next: ["842", "954-front", "954.2-front", "843/843", "843/943-front"]
     couple_liveries: true
     fields:
       cost: 1650000
@@ -191,7 +191,7 @@ vehicles:
     liveries: [najbrt2, cervenokremova]
     head: true
     tail: false
-    prev: []
+    prev: ["842", "954", "954.2", "843/843", "843/943"]
     next: ["054", "842"]
     couple_liveries: true
     fields:

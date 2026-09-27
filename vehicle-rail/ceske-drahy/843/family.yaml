@@ -37,8 +37,8 @@ vehicles:
     row: 0
     head: true
     tail: true
-    prev: ["043", "943", "943-front", "842/054", "814_0/814.0", "814_0/914-reverse"]
-    next: ["043", "943", "943-front", "842/054", "814_0/914", "814_0/814.0-reverse"]
+    prev: ["043", "943", "943-front", "842/054", "814_0/814.0", "814_0/914-reverse", "842/842", "842/954", "842/954.2", "843"]
+    next: ["043", "943", "943-front", "842/054", "814_0/914", "814_0/814.0-reverse", "842/842", "842/954-front", "842/954.2-front", "843"]
     couple_liveries: true
     fields:
       cost: 3126800
@@ -99,7 +99,7 @@ vehicles:
     head: false
     tail: true
     prev: ["843", "043", "842/054"]
-    next: ["043", "843"]              # another set behind (two sets in multiple)
+    next: ["043", "843", "842/842", "842/954-front", "842/954.2-front", "943-front"]  # another set behind (two sets in multiple)
     couple_liveries: true
     fields:
       cost: 1413200
@@ -127,7 +127,7 @@ vehicles:
     liveries: [najbrt1, najbrt2]
     head: true
     tail: false
-    prev: ["043", "843"]              # another set ahead (two sets in multiple)
+    prev: ["043", "843", "842/842", "842/954", "842/954.2", "943"]  # another set ahead (two sets in multiple)
     next: ["043", "843", "842/054"]
     couple_liveries: true
     fields:
