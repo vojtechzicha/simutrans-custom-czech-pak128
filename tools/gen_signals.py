@@ -9,7 +9,7 @@ state, plus a last row with the cursor (col 0) and the 32×32 toolbar icon
 
 ``generate`` forms:
   {port: <pak128.cs name>}           copy the sheet 1:1
-  {style: new|old|dwarf, function: block|shunt|pre|choose|long|P}
+  {style: new|old|dwarf, function: block|autoblock|shunt|pre|choose|long|P}
                                       D1 signal: a pak128.cs base of that style
                                       plus the function's identification plate
   {lt: new|old|dwarf, head: choose|calling-on, letter: bool}
@@ -35,8 +35,9 @@ state, plus a last row with the cursor (col 0) and the 32×32 toolbar icon
                                       the N and W images, so a pair (one signal
                                       per direction) shows one hut
 
-Function code (the plate under the head, real D1 plate colours): block white,
-shunt blue, presignal black, long red, choose red + direction indicator box on
+Function code (the plate under the head, real D1 plate colours): block none
+(a two-lamp head, red and green only, on the red-white mast; the only D1 signal
+without a plate), autoblock white on a white mast (D1 čl. 69), shunt blue, presignal black, long red, choose red + direction indicator box on
 top of the head (lit when the signal is clear), P red + white track-number
 plate. The D1 LTs are light entry signals (see lt: below).
 
@@ -78,7 +79,8 @@ FRONT = [True, False, True, False]
 # style -> function -> (base object, plate, extra)
 BASES = {
     "new": {
-        "block": ("AZD70_3aspect_permissive", "white", None),
+        "block": ("AZD70_Signal", None, None),
+        "autoblock": ("AZD70_3aspect_permissive", "white", None),
         "shunt": ("AZD70_Signal_Shunting", "blue", None),
         "pre": ("AZD70_PreSignal", "black", None),
         "choose": ("AZD70_3aspect_choose", "red", "indicator"),
@@ -86,7 +88,8 @@ BASES = {
         "P": ("AZD70_3aspect_absolute", "red", "number"),
     },
     "old": {
-        "block": ("SSSR_3aspect_permissive", "white", None),
+        "block": ("SSSR_Signal", None, None),
+        "autoblock": ("SSSR_3aspect_permissive", "white", None),
         "shunt": ("SSSR_Signal_Shunting", "blue", None),
         "pre": ("SSSR_PreSignal", "black", None),
         "choose": ("SSSR_3aspect_choose", "red", "indicator"),
@@ -94,7 +97,8 @@ BASES = {
         "P": ("SSSR_3aspect_absolute", "red", "number"),
     },
     "dwarf": {
-        "block": ("SSSR_LongSignal_Dwarf", "white", None),
+        "block": ("SSSR_LongSignal_Dwarf", None, None),
+        "autoblock": ("SSSR_LongSignal_Dwarf", "white", None),
         "shunt": ("SSSR_Signal_Shunting_Dwarf", "blue", None),
         "pre": ("SSSR_PreSignal_Station_Dwarf", "black", None),
         "choose": ("SSSR_LongSignal_Dwarf", "red", "indicator"),
@@ -105,8 +109,8 @@ BASES = {
 STATE_ROWS = {"pre": 3, "choose": 3}  # everything else: red + green
 # choose: red, green, yellow (sent to another platform / a diverging route; the
 # two-yellow 40 km/h row of the base, or the green lamp recoloured on the dwarf)
-ICON_LABEL = {"block": "B", "shunt": "S", "pre": "PR", "choose": "C", "long": "L", "P": "P", "LT": "LT"}
-ICON_CHIP = {"block": "white", "shunt": "blue", "pre": "black", "choose": "red", "long": "red", "P": "red"}
+ICON_LABEL = {"block": "B", "autoblock": "AB", "shunt": "S", "pre": "PR", "choose": "C", "long": "L", "P": "P", "LT": "LT"}
+ICON_CHIP = {"block": None, "autoblock": "white", "shunt": "blue", "pre": "black", "choose": "red", "long": "red", "P": "red"}
 
 FONT = {  # 3×5
     "B": ["110", "101", "110", "101", "110"], "S": ["011", "100", "010", "001", "110"],
@@ -328,7 +332,8 @@ def gen_d1(style: str, function: str) -> Image.Image:
                 im = to_yellow(tile(src, 1, col))
             else:
                 im = tile(src, row, col)
-            draw_plate(im, a.plate_box(), plate)
+            if plate:
+                draw_plate(im, a.plate_box(), plate)
             if extra == "number":
                 draw_number_plate(im, a.plate_box(dy=6, h=6))
             if extra == "indicator":
