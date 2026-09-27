@@ -90,16 +90,17 @@ objects:
 - id: D1-New-LT
   sprite: d1-new-lt
   generate:
-    style: new
-    function: LT
+    lt: new
+    head: single
+    letter: true
   copyright: Lubak91, Vladki
   fields:
     station_boundary: 1
     cost: 500
     offset_left: 10
     intro_year: 1900
-  name_en: D1 AŽD 70 station boundary (LT)
-  name_cs: D1 AŽD 70 hranice dopravny (LT)
+  name_en: D1 AŽD 70 entry signal, station boundary (LT)
+  name_cs: D1 AŽD 70 vjezdové návěstidlo, hranice dopravny (LT)
 - id: D1-Old-Block
   sprite: d1-old-block
   generate:
@@ -183,16 +184,17 @@ objects:
 - id: D1-Old-LT
   sprite: d1-old-lt
   generate:
-    style: old
-    function: LT
+    lt: old
+    head: choose
+    letter: true
   copyright: Lubak91, Vladki
   fields:
     station_boundary: 1
     cost: 500
     offset_left: 10
     intro_year: 1900
-  name_en: D1 SSSR station boundary (LT)
-  name_cs: D1 SSSR hranice dopravny (LT)
+  name_en: D1 SSSR entry signal, station boundary (LT)
+  name_cs: D1 SSSR vjezdové návěstidlo, hranice dopravny (LT)
 - id: D1-Dwarf-Block
   sprite: d1-dwarf-block
   generate:
@@ -276,16 +278,17 @@ objects:
 - id: D1-Dwarf-LT
   sprite: d1-dwarf-lt
   generate:
-    style: dwarf
-    function: LT
+    lt: dwarf
+    head: choose
+    letter: true
   copyright: Lubak91, Vladki
   fields:
     station_boundary: 1
     cost: 500
     offset_left: 10
     intro_year: 1900
-  name_en: D1 dwarf station boundary (LT)
-  name_cs: D1 trpasličí hranice dopravny (LT)
+  name_en: D1 dwarf entry signal, station boundary (LT)
+  name_cs: D1 trpasličí vjezdové návěstidlo, hranice dopravny (LT)
 - id: D3-P
   sprite: d3-p
   generate:

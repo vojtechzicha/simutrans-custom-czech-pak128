@@ -9,17 +9,25 @@ state, plus a last row with the cursor (col 0) and the 32×32 toolbar icon
 
 ``generate`` forms:
   {port: <pak128.cs name>}           copy the sheet 1:1
-  {style: new|old|dwarf, function: block|shunt|pre|choose|long|P|LT}
+  {style: new|old|dwarf, function: block|shunt|pre|choose|long|P}
                                       D1 signal: a pak128.cs base of that style
                                       plus the function's identification plate
+  {lt: new|old|dwarf, head: choose|single, letter: bool}
+                                      LT as a light entry signal (vjezdové
+                                      návěstidlo, like choose but without the
+                                      direction indicator box; letter: white L
+                                      on the red plate). The pak sheet keeps
+                                      only the red state (the engine takes
+                                      exactly 4 images for station_boundary);
+                                      <sprite>-states.png holds red, green and
+                                      yellow for when the engine shows them
   {d3: LT|P}                          drawn D3 objects (lichoběžníková tabulka,
                                       Místo zastavení board with a lamp)
 
 Function code (the plate under the head, real D1 plate colours): block white,
 shunt blue, presignal black, long red, choose red + direction indicator box on
 top of the head (lit when the signal is clear), P red + white track-number
-plate. LT replaces the head of the style's mast with a numbered
-lichoběžníková tabulka.
+plate. The D1 LTs are light entry signals (see lt: below).
 
 Usage:
     python tools/gen_signals.py signal-rail/signals [--only ID ...] [--preview DIR]
@@ -64,7 +72,6 @@ BASES = {
         "choose": ("AZD70_3aspect_choose", "red", "indicator"),
         "long": ("AZD70_LongSignal", "red", None),
         "P": ("AZD70_3aspect_absolute", "red", "number"),
-        "LT": ("AZD70_OneWaySignal", None, "board"),
     },
     "old": {
         "block": ("SSSR_3aspect_permissive", "white", None),
@@ -73,7 +80,6 @@ BASES = {
         "choose": ("SSSR_3aspect_choose", "red", "indicator"),
         "long": ("SSSR_LongSignal", "red", None),
         "P": ("SSSR_3aspect_absolute", "red", "number"),
-        "LT": ("SSSR_Signal", None, "board"),
     },
     "dwarf": {
         "block": ("SSSR_LongSignal_Dwarf", "white", None),
@@ -82,10 +88,9 @@ BASES = {
         "choose": ("SSSR_LongSignal_Dwarf", "red", "indicator"),
         "long": ("SSSR_LongSignal_Dwarf", "red", None),
         "P": ("SSSR_LongSignal_Dwarf", "red", "number"),
-        "LT": ("SSSR_LongSignal_Dwarf", None, "board"),
     },
 }
-STATE_ROWS = {"pre": 3, "LT": 1}  # everything else: red + green
+STATE_ROWS = {"pre": 3}  # everything else: red + green
 ICON_LABEL = {"block": "B", "shunt": "S", "pre": "PR", "choose": "C", "long": "L", "P": "P", "LT": "LT"}
 ICON_CHIP = {"block": "white", "shunt": "blue", "pre": "black", "choose": "red", "long": "red", "P": "red"}
 
@@ -250,48 +255,74 @@ def gen_d1(style: str, function: str) -> Image.Image:
         a = Anchor(tile(src, 0, col), col, dwarf)
         for row in range(rows):
             im = tile(src, row, col)
-            if extra == "board":
-                im = lt_from(im, a, dwarf)
-            else:
-                draw_plate(im, a.plate_box(), plate)
-                if extra == "number":
-                    draw_number_plate(im, a.plate_box(dy=6, h=6))
-                if extra == "indicator":
-                    draw_indicator(im, a, lit=row == 1)
+            draw_plate(im, a.plate_box(), plate)
+            if extra == "number":
+                draw_number_plate(im, a.plate_box(dy=6, h=6))
+            if extra == "indicator":
+                draw_indicator(im, a, lit=row == 1)
             out.paste(im, (col * TILE, row * TILE))
-    finish_skin(out, rows, src, src_rows, ICON_LABEL[function], ICON_CHIP.get(function),
-                picture="LT" if function == "LT" else None)
+    finish_skin(out, rows, src, src_rows, ICON_LABEL[function], ICON_CHIP.get(function))
     return out
 
 
-def lt_from(im, a: Anchor, dwarf: bool):
+# ---------------------------------------------------------------- LT (light)
+
+# base per style and head; (red, green, yellow) state rows in that base
+LT_BASES = {
+    ("new", "choose"): ("AZD70_3aspect_choose", (0, 3, 4)),
+    ("new", "single"): ("AZD70_4aspect_absolute", (0, 1, 3)),
+    ("old", "choose"): ("SSSR_3aspect_choose", (0, 3, 4)),
+    ("old", "single"): ("SSSR_3aspect_absolute", (0, 1, 2)),
+    ("dwarf", "choose"): ("SSSR_LongSignal_Dwarf", (0, 1, None)),   # yellow = the green lamp recoloured
+}
+
+
+def draw_letter_plate(im, box):
+    """Solid red plate with a white L, the entry signal's letter (a rim would
+    leave no room for the letter at this size)."""
+    x0, y0, w, h = box
     px = im.load()
-    if dwarf:
-        cut = a.y0 + 9
-        erase_above(im, cut)
-        row = [x for x in range(TILE) if px[x, cut + 2] != BG]
-        cx = round(sum(row) / len(row))
-        if a.front:
-            trapezoid(im, cx, cut + 1, wb=9, wt=5, h=6)
-        else:
-            slab(im, cx, cut + 1, h=6)
-        return im
-    # mast: black-and-white band, head replaced by the board
-    if a.front:
-        cols = [a.edge, a.edge - a.side]
-        for y in range(a.hb + 1, a.y1 - 8):
-            for x in cols:
-                if px[x, y] != BG and is_band(px[x, y]):
-                    px[x, y] = BLACK if (y // 2) % 2 else WHITE
-    erase_above(im, a.hb)
-    lo, hi = sorted((a.edge, a.edge - 4 * a.side))
-    row = [x for x in range(lo, hi + 1) if px[x, a.hb + 3] != BG]
-    cx = round(sum(row) / len(row)) if row else a.edge
-    if a.front:
-        trapezoid(im, cx, a.hb + 1)
-    else:
-        slab(im, cx, a.hb + 1)
+    red = PLATES["red"][0]
+    for y in range(y0, y0 + h):
+        for x in range(x0, x0 + w):
+            px[x, y] = red
+    if w >= 4:
+        for y in range(y0 + 1, y0 + h - 1):
+            px[x0 + 1, y] = WHITE
+        px[x0 + 2, y0 + h - 2] = WHITE
+
+
+def to_yellow(im):
+    px = im.load()
+    for y in range(TILE):
+        for x in range(TILE):
+            if px[x, y] == LAMP_GREEN:
+                px[x, y] = LAMP_YELLOW
     return im
+
+
+def gen_lt(style: str, head: str, letter: bool) -> tuple[Image.Image, Image.Image]:
+    base, rows = LT_BASES[(style, head)]
+    src = load_sheet(base)
+    src_rows = src.height // TILE - 1
+    dwarf = style == "dwarf"
+    states = new_sheet(3)
+    for col in range(4):
+        a = Anchor(tile(src, 0, col), col, dwarf)
+        for i, r in enumerate(rows):
+            im = tile(src, r if r is not None else rows[1], col)
+            if r is None:
+                im = to_yellow(im)
+            if letter:
+                draw_letter_plate(im, a.plate_box(h=6))
+            else:
+                draw_plate(im, a.plate_box(), "red")
+            states.paste(im, (col * TILE, i * TILE))
+    finish_skin(states, 3, src, src_rows, "LT", "red")
+    pak = new_sheet(1)
+    pak.paste(states.crop((0, 0, 4 * TILE, TILE)), (0, 0))
+    finish_skin(pak, 1, src, src_rows, "LT", "red")
+    return pak, states
 
 
 # ---------------------------------------------------------------- D3
@@ -430,6 +461,8 @@ def finish_skin(out, rows, src, src_rows, label, chip, d3=False, picture=None):
 
 def build(obj: dict) -> Image.Image:
     g = obj["generate"]
+    if "lt" in g:
+        return gen_lt(g["lt"], g.get("head", "choose"), g.get("letter", False))
     if "port" in g:
         return load_sheet(g["port"])
     if "d3" in g:
@@ -451,6 +484,9 @@ def main() -> int:
         if "generate" not in obj or (args.only and obj["id"] not in args.only):
             continue
         sheet = build(obj)
+        if isinstance(sheet, tuple):              # LT: pak sheet + all-states sheet
+            sheet, states = sheet
+            states.save(out_dir / f"{obj['sprite']}-states.png")
         sheet.save(out_dir / f"{obj['sprite']}.png")
         if args.preview:
             args.preview.mkdir(parents=True, exist_ok=True)
