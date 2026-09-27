@@ -18,7 +18,10 @@ display:
 # (842/054) in place of the 043, e.g. 943 + Bdtn 757 + 843 (Olomouc 2026). The
 # 943 is drawn with its cab at the rear and ends a set; 943-front is the same
 # car turned round (cab ahead) and leads one. Mixed liveries in one set are
-# normal (the 842-family Bdtn couples only in the same livery).
+# normal (the 842-family Bdtn couples only in the same livery). An 843 also
+# runs in multiple with a whole 814.0 RegioNova set, ahead of it or behind it
+# and either way round (e.g. Krnov - Opava východ 2026); cross-family, so
+# Najbrt 2 only.
 # Sources: pak128cs rail-psg mail/842_843/843_balkan.png, 043_balkan.png,
 # 943_balkan.png (bodies; Najbrt 1 as reference for the zone map).
 
@@ -31,8 +34,8 @@ vehicles:
     row: 0
     head: true
     tail: true
-    prev: ["043", "943-front", "842/054"]
-    next: ["043", "943", "842/054"]
+    prev: ["043", "943-front", "842/054", "814_0/814.0", "814_0/914-reverse"]
+    next: ["043", "943", "842/054", "814_0/914", "814_0/814.0-reverse"]
     couple_liveries: true
     fields:
       cost: 3126800

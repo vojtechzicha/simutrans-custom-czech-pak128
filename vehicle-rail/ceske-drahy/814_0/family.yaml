@@ -28,7 +28,9 @@ display:
 # end). Constraints reject single cars and cross-mixed orientations. The two
 # cars of one set wear the same livery; whole sets run in multiple, in either
 # orientation and any livery (the lead car of a set takes the rear car of the
-# set ahead, the rear car the lead car of the set behind).
+# set ahead, the rear car the lead car of the set behind). A set also runs in
+# multiple with an 843 railcar, ahead of it or behind it (843/843; the link
+# crosses families, so it resolves in Najbrt 2 only).
 
 vehicles:
   - id: "914"
@@ -37,7 +39,7 @@ vehicles:
     row: 0
     head: true
     tail: false
-    prev: ["814.0", "914-reverse"]
+    prev: ["814.0", "914-reverse", "843/843"]
     next: ["814.0"]
     couple_liveries: prev     # the rear car of a set ahead may wear any livery
     fields:
@@ -64,7 +66,7 @@ vehicles:
     head: false
     tail: true
     prev: ["914"]
-    next: ["914", "814.0-reverse"]
+    next: ["914", "814.0-reverse", "843/843"]
     couple_liveries: next     # the lead car of a set behind may wear any livery
     fields:
       cost: 1317800
@@ -94,7 +96,7 @@ vehicles:
     row: 2
     head: true
     tail: false
-    prev: ["814.0", "914-reverse"]
+    prev: ["814.0", "914-reverse", "843/843"]
     next: ["914-reverse"]
     couple_liveries: prev
     fields:
@@ -126,7 +128,7 @@ vehicles:
     head: false
     tail: true
     prev: ["814.0-reverse"]
-    next: ["914", "814.0-reverse"]
+    next: ["914", "814.0-reverse", "843/843"]
     couple_liveries: next
     fields:
       cost: 979000
