@@ -91,7 +91,8 @@ CARS = {
     "WLABmee823": ("WLABmee 823", "WL", 30, 160, 55, (2000, 12), None),
     "Bdmtee281": ("Bdmtee 281", "Bbike", 96, 160, 40, (1989, 6), 2035),
     "Bdmtee275": ("Bdmtee 275", "Bo", 96, 160, 40, (1990, 6), 2035),
-    "Bdmtee267": ("Bdmtee 267", "Bo", 78, 160, 41, (2008, 6), 2040),
+    "Bdmtee267": ("Bdmtee 267", "Bo", 78, 160, 41, (2019, 6), 2040),
+    "Bdmtee263": ("Bdmtee 263", "Bbike", 74, 160, 40, (2008, 9), 2035),
     "Aee140": ("Aee 140", "A", 54, 160, 41, (2000, 6), None),
     "Apee139": ("Apee 139", "Ao", 60, 160, 41, (2002, 6), None),
     "Bee238": ("Bee 238", "B", 60, 160, 41, (2001, 6), None),
@@ -157,10 +158,12 @@ FAMILIES = {
 # Bdmpee 233, the 1st class + bistro ARmpee 829 / 832 and the WLABmee 823 sleeper."""),
     "coach_honecker": dict(type="Honecker", en="honecker", cs="honecker", cars=[
         ("Bdmtee281", "Bdmtee281", None, N2), ("Bdmtee275", "Bdmtee275", None, N2),
-        ("Bdmtee267", "Bdmtee267", None, N2)],
+        ("Bdmtee267", "Bdmtee267", None, N2), ("Bdmtee263", "Bdmtee263", None, N2)],
         comment="""# "Honecker" UIC-X 26.4 m open coaches (Bautzen 1989-90), doors at 1/4 and 3/4 of
 # the length: Bdmtee 281 (two bike areas), 275 (one rebuilt into a service
-# compartment) and the refurbished 263 / 265-268 with fixed windows (as 267)."""),
+# compartment), the Bdmtee 263 (281 / 275 with a new interior, 74 seats and bike
+# hooks; outside still a 281: tilting windows, no AC) and the DPOV-refurbished
+# Bdmtee 267 (2019, fixed windows, still no AC)."""),
     "coach_uicy": dict(type="UICY", en="UIC-Y", cs="UIC-Y", cars=[
         ("Aee140", "Aee140", None, N2), ("Apee139", "Apee139", None, N2),
         ("Bee238", "Bee238", None, N2), ("Bpee237", "Bpee237", None, N2)],

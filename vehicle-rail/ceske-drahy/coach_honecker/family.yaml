@@ -1,6 +1,8 @@
 # "Honecker" UIC-X 26.4 m open coaches (Bautzen 1989-90), doors at 1/4 and 3/4 of
 # the length: Bdmtee 281 (two bike areas), 275 (one rebuilt into a service
-# compartment) and the refurbished 263 / 265-268 with fixed windows (as 267).
+# compartment), the Bdmtee 263 (281 / 275 with a new interior, 74 seats and bike
+# hooks; outside still a 281: tilting windows, no AC) and the DPOV-refurbished
+# Bdmtee 267 (2019, fixed windows, still no AC).
 # Original art drawn from scratch: box models from the vagonWEB scale side drawings,
 # rendered by tools/railrender/cdcoach.py (regenerate with
 # `python tools/railrender/cd_coaches.py coach_honecker`). Najbrt 2: RAL 7035 lower body,
@@ -81,9 +83,33 @@ vehicles:
       weight: 41
       runningcost: 28
       fixed_cost: 167
-      intro_year: 2008
+      intro_year: 2019
       intro_month: 6
       retire_year: 2040
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Bdmtee263"
+    display_id: "Bdmtee 263"
+    role_en: "2nd class coach with bicycle space"
+    role_cs: "vůz 2. třídy s prostorem pro kola"
+    row: 3
+    prev: any
+    next: any
+    fields:
+      cost: 1500000
+      payload: 74
+      speed: 160
+      weight: 40
+      runningcost: 26
+      fixed_cost: 167
+      intro_year: 2008
+      intro_month: 9
+      retire_year: 2035
       retire_month: 12
       waytype: track
       freight: Passagiere

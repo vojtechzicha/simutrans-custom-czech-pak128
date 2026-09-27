@@ -154,11 +154,16 @@ TYPES = {
         + [(20.4, 20.9, "f"), (21.6, 22.7, "f")] + row(23.1, 2, 1.5, 1.1, "t"),
         doors=[(6.4, 8.5), (17.9, 20.0)], door="dbl", roofp="x", vents=True,
         picto=[(3.7, 4.8, "bike")]),
-    "Bdmtee267": dict(   # refurbished 263/265-268: fixed windows, AC units
+    "Bdmtee267": dict(   # DPOV-refurbished 2019: fixed windows, no AC
         L=26.4, win=row(0.7, 3, 1.5, 1.1) + [(5.4, 6.1, "w")] + row(8.9, 6, 1.5, 1.1)
         + [(20.4, 20.9, "f")] + row(21.6, 3, 1.5, 1.1),
-        doors=[(6.4, 8.5), (17.9, 20.0)], door="dbl", roofp="x", ac=[(3.0, 5.0), (21.4, 23.4)],
+        doors=[(6.4, 8.5), (17.9, 20.0)], door="dbl", roofp="x", vents=True,
         picto=[(3.7, 4.8, "bike")]),
+    "Bdmtee263": dict(   # 281 / 275 with a new interior (2008-11): outside a 281
+        L=26.4, win=row(0.7, 3, 1.5, 1.1, "t") + [(5.4, 6.1, "t")] + row(8.9, 6, 1.5, 1.1, "t")
+        + [(20.4, 20.9, "f")] + row(21.6, 3, 1.5, 1.1, "t"),
+        doors=[(6.4, 8.5), (17.9, 20.0)], door="dbl", roofp="x", vents=True,
+        picto=[(3.7, 4.8, "bike"), (21.6, 22.7, "bike")]),
     # --- ex-Hungarian UIC-Y 24.5 m (Dunakeszi rebuilds), AC
     "Aee140": dict(      # Aee140: 9 1st-class compartments
         L=24.5, win=[(1.8, 2.4, "f")] + row(3.3, 9, 2.1, 1.3) + [(22.1, 22.7, "f")],
