@@ -31,7 +31,7 @@ vehicles:
     row: 0
     head: true
     tail: false
-    prev: ["661.1"]
+    prev: ["661.1", "660_0/661.0"]
     next: ["662.1"]
     couple_liveries: prev     # the rear car of a unit ahead may wear any livery
     fields:
@@ -140,7 +140,7 @@ vehicles:
     head: false
     tail: true
     prev: ["662.2"]
-    next: ["660.1"]
+    next: ["660.1", "660_0/660.0"]
     couple_liveries: next     # the lead car of a unit behind may wear any livery
     fields:
       cost: 19000000
