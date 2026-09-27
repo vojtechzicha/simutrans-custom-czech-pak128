@@ -91,7 +91,7 @@ objects:
   sprite: d1-new-lt
   generate:
     lt: new
-    head: single
+    head: calling-on
     letter: true
   copyright: Lubak91, Vladki
   fields:

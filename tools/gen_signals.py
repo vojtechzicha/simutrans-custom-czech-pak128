@@ -12,15 +12,15 @@ state, plus a last row with the cursor (col 0) and the 32×32 toolbar icon
   {style: new|old|dwarf, function: block|shunt|pre|choose|long|P}
                                       D1 signal: a pak128.cs base of that style
                                       plus the function's identification plate
-  {lt: new|old|dwarf, head: choose|single, letter: bool}
+  {lt: new|old|dwarf, head: choose|calling-on, letter: bool}
                                       LT as a light entry signal (vjezdové
                                       návěstidlo, like choose but without the
                                       direction indicator box; letter: white L
-                                      on the red plate). The pak sheet keeps
-                                      only the red state (the engine takes
-                                      exactly 4 images for station_boundary);
-                                      <sprite>-states.png holds red, green and
-                                      yellow for when the engine shows them
+                                      on the red plate), 12 images: red (no
+                                      train let in), green (route straight
+                                      through the throat), yellow (a diverging
+                                      route: two yellows, 40 km/h, on the
+                                      AŽD 70 and SSSR heads; one on the dwarf)
   {d3: LT|P}                          drawn D3 objects (lichoběžníková tabulka,
                                       Místo zastavení board with a lamp)
   {hradlo: automatic|manual, cabinet: bool, house: pair|all, hut: brick|prefab}
@@ -279,13 +279,14 @@ def gen_d1(style: str, function: str) -> Image.Image:
 
 # ---------------------------------------------------------------- LT (light)
 
-# base per style and head; (red, green, yellow) state rows in that base
+# base per style and head; (red, green, yellow) state rows in that base.
+# Yellow is the two-yellow 40 km/h aspect where the head has a lower yellow
+# lamp (AŽD 70 5-lamp heads, the SSSR double head).
 LT_BASES = {
-    ("new", "choose"): ("AZD70_3aspect_choose", (0, 3, 4)),
-    ("new", "single"): ("AZD70_4aspect_absolute", (0, 1, 3)),
-    ("old", "choose"): ("SSSR_3aspect_choose", (0, 3, 4)),
-    ("old", "single"): ("SSSR_3aspect_absolute", (0, 1, 2)),
-    ("dwarf", "choose"): ("SSSR_LongSignal_Dwarf", (0, 1, None)),   # yellow = the green lamp recoloured
+    ("new", "choose"): ("AZD70_3aspect_choose", (0, 3, 2)),
+    ("new", "calling-on"): ("AZD70_4aspect_choose", (0, 4, 3)),      # 5 lamps incl. the white calling-on lamp
+    ("old", "choose"): ("SSSR_3aspect_choose", (0, 3, 2)),
+    ("dwarf", "choose"): ("SSSR_LongSignal_Dwarf", (0, 1, None)),   # single yellow = the green lamp recoloured
 }
 
 
@@ -313,7 +314,7 @@ def to_yellow(im):
     return im
 
 
-def gen_lt(style: str, head: str, letter: bool) -> tuple[Image.Image, Image.Image]:
+def gen_lt(style: str, head: str, letter: bool) -> Image.Image:
     base, rows = LT_BASES[(style, head)]
     src = load_sheet(base)
     src_rows = src.height // TILE - 1
@@ -331,10 +332,7 @@ def gen_lt(style: str, head: str, letter: bool) -> tuple[Image.Image, Image.Imag
                 draw_plate(im, a.plate_box(), "red")
             states.paste(im, (col * TILE, i * TILE))
     finish_skin(states, 3, src, src_rows, "LT", "red")
-    pak = new_sheet(1)
-    pak.paste(states.crop((0, 0, 4 * TILE, TILE)), (0, 0))
-    finish_skin(pak, 1, src, src_rows, "LT", "red")
-    return pak, states
+    return states
 
 
 # ---------------------------------------------------------------- D3
@@ -645,9 +643,6 @@ def main() -> int:
         if "generate" not in obj or (args.only and obj["id"] not in args.only):
             continue
         sheet = build(obj)
-        if isinstance(sheet, tuple):              # LT: pak sheet + all-states sheet
-            sheet, states = sheet
-            states.save(out_dir / f"{obj['sprite']}-states.png")
         sheet.save(out_dir / f"{obj['sprite']}.png")
         if args.preview:
             args.preview.mkdir(parents=True, exist_ok=True)
