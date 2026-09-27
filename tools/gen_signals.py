@@ -22,7 +22,7 @@ state, plus a last row with the cursor (col 0) and the 32×32 toolbar icon
                                       route: two yellows, 40 km/h, on the
                                       AŽD 70 and SSSR heads; one on the dwarf)
   {d3: LT|P}                          drawn D3 objects (lichoběžníková tabulka,
-                                      Místo zastavení board with a lamp)
+                                      low Místo zastavení board, no lamp)
   {hradlo: automatic|manual, cabinet: bool, house: pair|all, hut: brick|prefab}
                                       block signal of a hradlo (block post): a
                                       main signal with the red plate and the
@@ -47,6 +47,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import math
 import statistics
 import sys
 from pathlib import Path
@@ -101,7 +102,9 @@ BASES = {
         "P": ("SSSR_LongSignal_Dwarf", "red", "number"),
     },
 }
-STATE_ROWS = {"pre": 3}  # everything else: red + green
+STATE_ROWS = {"pre": 3, "choose": 3}  # everything else: red + green
+# choose: red, green, yellow (sent to another platform / a diverging route; the
+# two-yellow 40 km/h row of the base, or the green lamp recoloured on the dwarf)
 ICON_LABEL = {"block": "B", "shunt": "S", "pre": "PR", "choose": "C", "long": "L", "P": "P", "LT": "LT"}
 ICON_CHIP = {"block": "white", "shunt": "blue", "pre": "black", "choose": "red", "long": "red", "P": "red"}
 
@@ -232,13 +235,67 @@ def trapezoid(im, cx, ybot, number=True, reflect=False, wb=11, wt=7, h=7):
             px[x, y] = (178, 180, 188)
 
 
-def slab(im, cx, ybot, h=7, w=2):
-    """A board seen edge-on."""
+# A flat board stands across the track, so it is drawn in the pak128 projection
+# like pak128.cs's own boards (Minimum*): the N and W images show its painted
+# face, S and E its grey back, and it slants 1 px down per 2 px across the
+# screen in N/S (the board's plane runs east-west) and 1 px up in W/E.
+BACK_FILL, BACK_RIM = (132, 134, 138), (92, 94, 98)
+SLANT = [0.5, 0.5, -0.5, -0.5]
+
+
+SS = 8  # supersampling for board outlines
+
+
+def _mask(poly, col, cx, ybot):
+    """Pixel-coverage mask (dict (x, y) -> bool) of a polygon given in board
+    coordinates (u across from the centre, v up from the bottom edge)."""
+    from PIL import ImageDraw
+    k = SLANT[col]
+    pts = [((cx + u + 0.5) * SS, (ybot + 1 - v + k * u) * SS) for u, v in poly]
+    m = Image.new("L", (TILE * SS, TILE * SS), 0)
+    ImageDraw.Draw(m).polygon(pts, fill=255)
+    small = m.resize((TILE, TILE), Image.BOX)
+    return {(x, y) for y in range(TILE) for x in range(TILE) if small.getpixel((x, y)) >= 128}
+
+
+def board(im, col, cx, ybot, outer, inner, fill, rim, extras=()):
+    """A flat board across the track. outer/inner are its outline and the
+    outline of its painted field (rim = between them) in board coordinates;
+    N/W images get fill/rim, S/E the grey back. extras: (u, v, colour) marks
+    on the face (reflectors, a digit)."""
     px = im.load()
-    for y in range(ybot - h + 1, ybot + 1):
-        px[cx, y] = (200, 202, 204)
-        if w > 1:
-            px[cx + 1, y] = (90, 92, 96)
+    out_m, in_m = _mask(outer, col, cx, ybot), _mask(inner, col, cx, ybot)
+    for x, y in out_m:
+        if FRONT[col]:
+            px[x, y] = fill if (x, y) in in_m else rim
+        else:
+            px[x, y] = BACK_FILL if (x, y) in in_m else BACK_RIM
+    if FRONT[col]:
+        k = SLANT[col]
+        for u, v, colour in extras:
+            px[cx + round(u), ybot - round(v) + math.floor(k * u + 0.5)] = colour
+
+
+def trapezoid_poly(wb, wt, h, inset=0.0):
+    """Isosceles trapezoid on its longer base, shrunk by inset px."""
+    slope = (wb - wt) / 2 / h            # side inset per unit height
+    side = inset * math.hypot(1, slope)  # horizontal inset of the slanted side
+    return [(-wb / 2 + side + inset * slope, inset), (wb / 2 - side - inset * slope, inset),
+            (wt / 2 - side + inset * slope, h - inset), (-wt / 2 + side - inset * slope, h - inset)]
+
+
+def lt_board(im, col, cx, ybot, number, wb=13, wt=9, h=7):
+    """Lichoběžníková tabulka (D1 čl. 976, drawing Ž09-3): white isosceles
+    trapezoid on its longer base, black rim, reflectors in the corners; the D1
+    variant (čl. 1002) carries a black track number instead."""
+    extras = []
+    if number:
+        extras = [(0, v, BLACK) for v in range(2, h - 1)] + [(-1, h - 3, BLACK)]
+    else:
+        r = (178, 180, 188)
+        extras = [(-wb / 2 + 2, 1, r), (wb / 2 - 2, 1, r), (-wt / 2 + 1.5, h - 2, r), (wt / 2 - 1.5, h - 2, r)]
+    board(im, col, cx, ybot, trapezoid_poly(wb, wt, h), trapezoid_poly(wb, wt, h, 1.0),
+          WHITE, BLACK, extras)
 
 
 def erase_above(im, y):
@@ -260,18 +317,22 @@ def gen_d1(style: str, function: str) -> Image.Image:
     src = load_sheet(base)
     src_rows = src.height // TILE - 1
     rows = STATE_ROWS.get(function, 2)
-    assert src_rows >= rows, f"{base} has {src_rows} state rows, need {rows}"
+    recolour = function == "choose" and src_rows < rows      # dwarf: no yellow row
+    assert src_rows >= rows or recolour, f"{base} has {src_rows} state rows, need {rows}"
     dwarf = style == "dwarf"
     out = new_sheet(rows)
     for col in range(4):
         a = Anchor(tile(src, 0, col), col, dwarf)
         for row in range(rows):
-            im = tile(src, row, col)
+            if recolour and row == 2:
+                im = to_yellow(tile(src, 1, col))
+            else:
+                im = tile(src, row, col)
             draw_plate(im, a.plate_box(), plate)
             if extra == "number":
                 draw_number_plate(im, a.plate_box(dy=6, h=6))
             if extra == "indicator":
-                draw_indicator(im, a, lit=row == 1)
+                draw_indicator(im, a, lit=row >= 1)
             out.paste(im, (col * TILE, row * TILE))
     finish_skin(out, rows, src, src_rows, ICON_LABEL[function], ICON_CHIP.get(function))
     return out
@@ -346,43 +407,27 @@ def foot(col: int) -> tuple[int, int]:
     return round(sum(xs) / len(xs)), y1
 
 
-def post(im, x, top, bot, band):
+def post(im, x, top, bot, band_top=None):
+    """A 2 px steel post; band_top starts the oblique black-and-white band
+    (označovací pás) of the lichoběžníková tabulka, right under its board."""
     px = im.load()
     for y in range(top, bot + 1):
         px[x, y] = (112, 118, 120)
         px[x + 1, y] = (70, 76, 78)
     for xx in range(x - 1, x + 3):
         px[xx, bot + 1] = (48, 48, 50)
-    if band:
-        for y in range(top + 10, top + 24):
+    if band_top is not None:
+        for y in range(band_top, band_top + 12):
             px[x, y] = BLACK if (y // 2) % 2 else WHITE
             px[x + 1, y] = BLACK if ((y + 1) // 2) % 2 else (200, 200, 200)
 
 
-def misto_zastaveni(im, cx, ytop, front, w=9, h=6):
-    """Návěst Místo zastavení: white board on its long side with a red border."""
-    px = im.load()
-    if not front:
-        for y in range(ytop, ytop + h):
-            px[cx, y] = (206, 30, 30)
-            px[cx + 1, y] = (150, 26, 26)
-        return
-    x0 = cx - w // 2
-    for y in range(ytop, ytop + h):
-        for x in range(x0, x0 + w):
-            border = y in (ytop, ytop + h - 1) or x in (x0, x0 + w - 1)
-            px[x, y] = (206, 30, 30) if border else WHITE
-
-
-def lamp(im, cx, ytop, colour, front, side):
-    px = im.load()
-    w = 3 if front else 2
-    x0 = cx - 1 if front else cx
-    for y in range(ytop, ytop + 4):
-        for x in range(x0, x0 + w):
-            px[x, y] = (22, 24, 26)
-    lx = cx if front else (x0 + 1 if side > 0 else x0)
-    px[lx, ytop + 1] = px[lx, ytop + 2] = colour
+def misto_zastaveni(im, col, cx, ybot, w=9, h=6):
+    """Návěst Místo zastavení (D1 čl. 988): white board on its long side with a
+    red border."""
+    outer = [(-w / 2, 0), (w / 2, 0), (w / 2, h), (-w / 2, h)]
+    inner = [(-w / 2 + 1, 1), (w / 2 - 1, 1), (w / 2 - 1, h - 1), (-w / 2 + 1, h - 1)]
+    board(im, col, cx, ybot, outer, inner, WHITE, (206, 30, 30))
 
 
 def gen_d3(kind: str) -> Image.Image:
@@ -394,16 +439,13 @@ def gen_d3(kind: str) -> Image.Image:
         for row in range(rows):
             im = Image.new("RGB", (TILE, TILE), BG)
             if kind == "LT":
-                post(im, x, fy - 30, fy, band=True)
-                if FRONT[col]:
-                    trapezoid(im, x + 1, fy - 29, number=False, reflect=True, wb=13, wt=8, h=8)
-                else:
-                    slab(im, x, fy - 29, h=8)
+                post(im, x, fy - 32, fy, band_top=fy - 28)
+                lt_board(im, col, x + 1, fy - 29, number=False)
             else:
-                post(im, x, fy - 26, fy, band=False)
-                misto_zastaveni(im, x + 1 if FRONT[col] else x, fy - 30, FRONT[col])
-                lamp(im, x + 1 if FRONT[col] else x, fy - 35, LAMP_RED if row == 0 else LAMP_GREEN,
-                     FRONT[col], LAMP_SIDE[col])
+                # a low sign, about half the LT's height, with no lamp: red and
+                # green look the same (the train's behaviour shows the state)
+                post(im, x, fy - 19, fy)
+                misto_zastaveni(im, col, x + 1, fy - 17)
             out.paste(im, (col * TILE, row * TILE))
     base = load_sheet("AZD70_OneWaySignal")
     finish_skin(out, rows, base, base.height // TILE - 1, kind, None, d3=True, picture=kind)
@@ -573,15 +615,11 @@ def finish_skin(out, rows, src, src_rows, label, chip, d3=False, picture=None):
                 if mini.getpixel((x, y)) != BG:
                     px[x - 11, y - 6] = mini.getpixel((x, y))
     elif picture == "P":
-        for y in range(16, 28):
+        for y in range(18, 28):
             px[9, y] = (90, 96, 98)
-        for y in range(10, 16):
+        for y in range(12, 18):
             for x in range(5, 14):
-                px[x, y] = (206, 30, 30) if y in (10, 15) or x in (5, 13) else WHITE
-        for y in range(4, 9):
-            for x in range(8, 11):
-                px[x, y] = (22, 24, 26)
-        px[9, 6] = LAMP_RED
+                px[x, y] = (206, 30, 30) if y in (12, 17) or x in (5, 13) else WHITE
     elif picture == "HR":
         for y in range(8, 28):
             px[6, y] = (90, 96, 98)
