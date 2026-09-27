@@ -11,15 +11,29 @@ objects:
   sprite: d1-new-block
   generate:
     style: new
-    function: block
+    function: autoblock
+  copyright: Lubak91, Vladki
+  fields:
+    is_signal: 1
+    is_autoblock: 1
+    cost: 3000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 AŽD 70 automatic block signal (autoblock)
+  name_cs: D1 AŽD 70 oddílové návěstidlo automatického bloku
+- id: D1-New-Main
+  sprite: d1-new-main
+  generate:
+    style: new
+    function: main
   copyright: Lubak91, Vladki
   fields:
     is_signal: 1
     cost: 3000
     offset_left: 10
     intro_year: 1900
-  name_en: D1 AŽD 70 block signal
-  name_cs: D1 AŽD 70 oddílové návěstidlo
+  name_en: D1 AŽD 70 main signal
+  name_cs: D1 AŽD 70 hlavní návěstidlo
 - id: D1-New-Shunt
   sprite: d1-new-shunt
   generate:
@@ -105,15 +119,29 @@ objects:
   sprite: d1-old-block
   generate:
     style: old
-    function: block
+    function: autoblock
+  copyright: Lubak91, Vladki
+  fields:
+    is_signal: 1
+    is_autoblock: 1
+    cost: 3000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 SSSR automatic block signal (autoblock)
+  name_cs: D1 SSSR oddílové návěstidlo automatického bloku
+- id: D1-Old-Main
+  sprite: d1-old-main
+  generate:
+    style: old
+    function: main
   copyright: Lubak91, Vladki
   fields:
     is_signal: 1
     cost: 3000
     offset_left: 10
     intro_year: 1900
-  name_en: D1 SSSR block signal
-  name_cs: D1 SSSR oddílové návěstidlo
+  name_en: D1 SSSR main signal
+  name_cs: D1 SSSR hlavní návěstidlo
 - id: D1-Old-Shunt
   sprite: d1-old-shunt
   generate:
@@ -228,15 +256,29 @@ objects:
   sprite: d1-dwarf-block
   generate:
     style: dwarf
-    function: block
+    function: autoblock
+  copyright: Lubak91, Vladki
+  fields:
+    is_signal: 1
+    is_autoblock: 1
+    cost: 4000
+    offset_left: 10
+    intro_year: 1900
+  name_en: D1 dwarf automatic block signal (autoblock)
+  name_cs: D1 trpasličí oddílové návěstidlo automatického bloku
+- id: D1-Dwarf-Main
+  sprite: d1-dwarf-main
+  generate:
+    style: dwarf
+    function: main
   copyright: Lubak91, Vladki
   fields:
     is_signal: 1
     cost: 4000
     offset_left: 10
     intro_year: 1900
-  name_en: D1 dwarf block signal
-  name_cs: D1 trpasličí oddílové návěstidlo
+  name_en: D1 dwarf main signal
+  name_cs: D1 trpasličí hlavní návěstidlo
 - id: D1-Dwarf-Shunt
   sprite: d1-dwarf-shunt
   generate:
