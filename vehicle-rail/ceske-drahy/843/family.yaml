@@ -14,8 +14,11 @@ display:
 # Class 843 diesel-electric railcar (MSV Studénka / ČKD 1995-97, 31 built) and its
 # own trailers: 043 (Btn 753) intermediate car and 943 (Bftn 791) control car.
 # Sets in 2026: 843 solo, 843 + 043 + 943 (Olomouc - Krnov - Ostrava, only place
-# the 943 runs), 843 + 043 + 843 (Brno). The 943 is drawn with its cab at the
-# rear, so it ends a set. Mixed liveries in one set are normal.
+# the 943 runs), 843 + 043 + 843 (Brno), and the Bdtn 757 of the 842 family
+# (842/054) in place of the 043, e.g. 943 + Bdtn 757 + 843 (Olomouc 2026). The
+# 943 is drawn with its cab at the rear and ends a set; 943-front is the same
+# car turned round (cab ahead) and leads one. Mixed liveries in one set are
+# normal (the 842-family Bdtn couples only in the same livery).
 # Sources: pak128cs rail-psg mail/842_843/843_balkan.png, 043_balkan.png,
 # 943_balkan.png (bodies; Najbrt 1 as reference for the zone map).
 
@@ -28,8 +31,8 @@ vehicles:
     row: 0
     head: true
     tail: true
-    prev: ["043"]
-    next: ["043", "943"]
+    prev: ["043", "943-front", "842/054"]
+    next: ["043", "943", "842/054"]
     couple_liveries: true
     fields:
       cost: 3126800
@@ -55,12 +58,12 @@ vehicles:
   # Btn 753 (ex 043): 19.7 m, 72 seats, 31 t, 120 km/h, 32 built, all in service.
   # 11 x Najbrt 1, 18 x Najbrt 2, 3 x red-cream (Brno).
   - id: "043"
-    role_en: "trailer"
-    role_cs: "přípojný vůz"
+    role_en: "trailer Btn 753"
+    role_cs: "přípojný vůz Btn 753"
     row: 1
     head: false
     tail: false
-    prev: ["843", "043"]
+    prev: ["843", "043", "943-front"]
     next: ["043", "943", "843"]
     couple_liveries: true
     fields:
@@ -83,14 +86,43 @@ vehicles:
   # Bftn 791 (ex 943): 19.7 m control car, 64 seats, 30 t, 120 km/h, 11 built,
   # 10 in service at Olomouc. 3 x Najbrt 1, 8 x Najbrt 2 (red-cream is history).
   - id: "943"
-    role_en: "control car"
-    role_cs: "řídicí vůz"
+    role_en: "control car Bftn 791"
+    role_cs: "řídicí vůz Bftn 791"
     row: 2
     liveries: [najbrt1, najbrt2]
     head: false
     tail: true
-    prev: ["843", "043"]
+    prev: ["843", "043", "842/054"]
     next: []
+    couple_liveries: true
+    fields:
+      cost: 1413200
+      payload: 64
+      speed: 120
+      weight: 30
+      runningcost: 9
+      fixed_cost: 69
+      intro_year: 1996
+      intro_month: 6
+      retire_year: 2032
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 9
+    extended:
+      axles: 4
+
+  # the 943 turned round: cab ahead, leads a set (sheet row 3)
+  - id: "943-front"
+    display_id: "943"
+    role_en: "front control car Bftn 791"
+    role_cs: "přední řídicí vůz Bftn 791"
+    row: 3
+    liveries: [najbrt1, najbrt2]
+    head: true
+    tail: false
+    prev: []
+    next: ["043", "843", "842/054"]
     couple_liveries: true
     fields:
       cost: 1413200

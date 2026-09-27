@@ -6,7 +6,7 @@ Families and liveries (sheet rows in family order; a car a livery never had
 leaves its row blank):
   842  rows 842, 054, 954, 954-front, 954.2, 954.2-front - najbrt1 (842),
        najbrt2 (all six), cervenokremova (all but the 842)
-  843  rows 843, 043, 943 - najbrt1, najbrt2 (all three),
+  843  rows 843, 043, 943, 943-front - najbrt1, najbrt2 (all four),
                             cervenokremova (843, 043)
   854  row 854            - najbrt2, cervenokremova
 054 = Bdtn 756/757 intermediate trailer, 954 = Bfbrdtn 794 control car, 954.2
@@ -396,6 +396,9 @@ PX_PER_CU = [(-4, -2), (0, -2.83), (4, -2), (5.66, 0), (4, 2), (0, 2.83), (-4, 2
 T = (231, 255, 255)
 
 
+LENGTH = {"943": 9}               # carunits, where not 12
+
+
 def turn_round(a, length):
     """A sheet row -> the same car facing the other way: direction columns
     shifted by 4, head / tail lamps swapped, and the body moved so it sits
@@ -419,7 +422,8 @@ def turn_round(a, length):
 
 def render(veh, liv):
     if veh.endswith("-front"):
-        return turn_round(render(veh[:-len("-front")], liv), 12)
+        base = veh[:-len("-front")]
+        return turn_round(render(base, liv), LENGTH.get(base, 12))
     return render_85x(veh, liv) if veh in ("854", "954", "954.2", "054") else render_84x(veh, liv)
 
 
@@ -430,8 +434,9 @@ FAMILIES = {
             {"najbrt1": ["842"],
              "najbrt2": ["842", "054", "954", "954-front", "954.2", "954.2-front"],
              "cervenokremova": ["054", "954", "954-front", "954.2", "954.2-front"]}),
-    "843": (["843", "043", "943"], {"najbrt1": ["843", "043", "943"], "najbrt2": ["843", "043", "943"],
-                                     "cervenokremova": ["843", "043"]}),
+    "843": (["843", "043", "943", "943-front"],
+            {"najbrt1": ["843", "043", "943", "943-front"], "najbrt2": ["843", "043", "943", "943-front"],
+             "cervenokremova": ["843", "043"]}),
     "854": (["854"], {"najbrt2": ["854"], "cervenokremova": ["854"]}),
 }
 BLANK = np.zeros((128, 1024, 3), np.uint8)

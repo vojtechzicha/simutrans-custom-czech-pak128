@@ -63,7 +63,8 @@ vehicles:
 
   # Bdtn 756 (ex 054.2): 24.5 m, 88 seats, 37 t, 120 km/h; 64 rebuilt by KOS Krnov
   # 2004-11 from Btn 750/755. Najbrt 2 or the delivery red-cream (still the
-  # majority in 2020-24 data).
+  # majority in 2020-24 data). Also runs in 843 sets (843/...: 943 + Bdtn 757 +
+  # 843 at Olomouc), in the same livery as the 843-family cars.
   - id: "054"
     role_en: "trailer Bdtn 756/757"
     role_cs: "přípojný vůz Bdtn 756/757"
@@ -71,8 +72,8 @@ vehicles:
     liveries: [najbrt2, cervenokremova]
     head: false
     tail: true                # may end a set: 842 + Bdtn runs without a control car
-    prev: ["842", "054", "954-front", "954.2-front"]
-    next: ["054", "954", "954.2", "842"]
+    prev: ["842", "054", "954-front", "954.2-front", "843/843", "843/943-front"]
+    next: ["054", "954", "954.2", "842", "843/843", "843/943"]
     couple_liveries: true
     fields:
       cost: 1350000
