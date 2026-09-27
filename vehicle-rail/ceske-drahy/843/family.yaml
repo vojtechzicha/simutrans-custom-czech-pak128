@@ -18,7 +18,10 @@ display:
 # (842/054) in place of the 043, e.g. 943 + Bdtn 757 + 843 (Olomouc 2026). The
 # 943 is drawn with its cab at the rear and ends a set; 943-front is the same
 # car turned round (cab ahead) and leads one. Mixed liveries in one set are
-# normal (the 842-family Bdtn couples only in the same livery). An 843 also
+# normal (the 842-family Bdtn couples only in the same livery). Two sets run
+# in multiple with the 943 in the middle, e.g. 843 + 043 + 943 + 043 + 843
+# (Olomouc - Ostrava 2026), so a 943 may have another set behind it and a
+# 943-front another set ahead. An 843 also
 # runs in multiple with a whole 814.0 RegioNova set, ahead of it or behind it
 # and either way round (e.g. Krnov - Opava východ 2026); cross-family, so
 # Najbrt 2 only.
@@ -34,8 +37,8 @@ vehicles:
     row: 0
     head: true
     tail: true
-    prev: ["043", "943-front", "842/054", "814_0/814.0", "814_0/914-reverse"]
-    next: ["043", "943", "842/054", "814_0/914", "814_0/814.0-reverse"]
+    prev: ["043", "943", "943-front", "842/054", "814_0/814.0", "814_0/914-reverse"]
+    next: ["043", "943", "943-front", "842/054", "814_0/914", "814_0/814.0-reverse"]
     couple_liveries: true
     fields:
       cost: 3126800
@@ -66,8 +69,8 @@ vehicles:
     row: 1
     head: false
     tail: false
-    prev: ["843", "043", "943-front"]
-    next: ["043", "943", "843"]
+    prev: ["843", "043", "943", "943-front"]
+    next: ["043", "943", "943-front", "843"]
     couple_liveries: true
     fields:
       cost: 1323200
@@ -96,7 +99,7 @@ vehicles:
     head: false
     tail: true
     prev: ["843", "043", "842/054"]
-    next: []
+    next: ["043", "843"]              # another set behind (two sets in multiple)
     couple_liveries: true
     fields:
       cost: 1413200
@@ -124,7 +127,7 @@ vehicles:
     liveries: [najbrt1, najbrt2]
     head: true
     tail: false
-    prev: []
+    prev: ["043", "843"]              # another set ahead (two sets in multiple)
     next: ["043", "843", "842/054"]
     couple_liveries: true
     fields:
