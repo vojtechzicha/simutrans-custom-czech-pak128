@@ -96,6 +96,9 @@ vehicles:
     #                         # same agency-mode pak (e.g. prev: ["t3r_p/T3R.P"] lets a T3R.PLF couple with
     #                         # a T3R.P); it resolves to the same livery and is skipped where the sibling
     #                         # lacks that livery. Declare it on both vehicles (Prev and Next must agree).
+    # couple_sibling_liveries: true  # (or prev / next) sibling partners resolve to that vehicle in
+    #                         # EVERY livery of the sibling family, e.g. a red-cream T3R.P with a
+    #                         # wine-silver T3R.PLF. Set it on both sides with couple_liveries.
     # prev: any / next: any   # no constraint on that side at all: couples with anything, like native
     #                         # locomotives and coaches (loco-hauled stock, the front of a Talgo set)
     # reverse: false          # if true, share another row's sprites but rotate direction labels 180°

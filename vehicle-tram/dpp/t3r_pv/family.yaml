@@ -20,10 +20,13 @@ display:
 # = 91). Prague: 35 built 2003-2007 (8151-8185); 20 left in Sep 2026, being
 # scrapped (7 in 2025, 4 in 2026). Runs solo or in 2-car sets.
 #
-# Livery: DPP red-cream (17 of the 20; 1 wine-silver, 2 adverts): cream roof
+# Liveries: DPP red-cream (17 of the 20; 2 adverts): cream roof
 # ends, window pillars and skirt, red belt, red nose with round headlamps,
 # black bumper, orange LED displays. Unlike the current T3R.P no cab
 # air-conditioner box on the front dome (photos of 8155 in 2021, 8178, 8181).
+# Wine-silver (1 car): the T3R.P wine-silver sheet on this body (derived
+# pixel for pixel, without the T3R.P's cab A/C box). Pairs with cars of either
+# livery.
 #
 # Sprite: Lubak91's shaded T3R.P drawing (pak128_czr Praha Tatra_T3.png - the
 # same body outline as TommPa9's flat Pragoimex_T3RP sheet of the native
@@ -43,6 +46,8 @@ vehicles:
     # 2-car sets with any Prague T3 rebuild of the same livery (e.g. T3R.PLF + T3R.P), as DPP runs them
     prev: ["T3R.PV", "t3r_p/T3R.P", "t3r_plf/T3R.PLF", "t3m2_dvc/T3M.2-DVC"]
     next: ["T3R.PV", "t3r_p/T3R.P", "t3r_plf/T3R.PLF", "t3m2_dvc/T3M.2-DVC"]
+    couple_liveries: true      # red-cream + wine-silver pairs run in Prague
+    couple_sibling_liveries: true
     fields:
       cost: 880000
       payload: 91
@@ -65,3 +70,6 @@ liveries:
   - color: dppcervenokremova
     name_en: "DPP red-cream"
     name_cs: "DPP červeno-krémová"
+  - color: dppvinovostribrna
+    name_en: "DPP wine-silver"
+    name_cs: "DPP vínovo-stříbrná"

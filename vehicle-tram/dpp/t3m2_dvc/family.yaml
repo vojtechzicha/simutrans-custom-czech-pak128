@@ -41,6 +41,8 @@ vehicles:
     # 2-car sets with any Prague T3 rebuild of the same livery (e.g. T3R.PLF + T3R.P), as DPP runs them
     prev: ["T3M.2-DVC", "t3r_p/T3R.P", "t3r_plf/T3R.PLF", "t3r_pv/T3R.PV"]
     next: ["T3M.2-DVC", "t3r_p/T3R.P", "t3r_plf/T3R.PLF", "t3r_pv/T3R.PV"]
+    couple_liveries: true      # red-cream + wine-silver pairs run in Prague
+    couple_sibling_liveries: true
     fields:
       cost: 840000
       payload: 105

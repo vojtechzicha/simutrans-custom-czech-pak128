@@ -227,6 +227,10 @@ def emit_dat(family: dict, livery: dict, siblings: dict | None = None) -> str:
         # in the same agency-mode pak (e.g. a T3R.PLF leading a T3R.P trailer). It
         # resolves to that family's object in the SAME livery and is skipped when
         # the sibling has no such livery/vehicle, so no dangling constraint is emitted.
+        # couple_sibling_liveries (true | "prev" | "next", like couple_liveries):
+        # on that side it resolves to the sibling's object in EVERY livery instead
+        # (e.g. a red-cream T3R.P coupled with a wine-silver T3R.PLF).
+        sib_couple = v.get("couple_sibling_liveries", False)
         def partner_entries(pid: str, side: str) -> list[str]:
             if "/" not in pid:
                 return [f"{b}-{slug(pid)}" for b in partner_bns(pid, side)]
@@ -237,6 +241,9 @@ def emit_dat(family: dict, livery: dict, siblings: dict | None = None) -> str:
             ov = {x["id"]: x for x in other["vehicles"]}.get(vid)
             if ov is None:
                 raise ValueError(f"vehicle {v['id']}: sibling '{folder}' has no vehicle '{vid}'")
+            if sib_couple is True or sib_couple == side:
+                return [f"{basename_for(other, olv)}-{slug(vid)}"
+                        for olv in other["liveries"] if in_livery(ov, olv)]
             olv = next((lv for lv in other["liveries"] if lv["color"] == livery["color"]), None)
             if olv is None or not in_livery(ov, olv):
                 return []
