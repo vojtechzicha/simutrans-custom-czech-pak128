@@ -18,6 +18,10 @@ display:
 # against real-world data (cost / speed / payload / power / dates) before
 # building. Role labels and family display names are TODOs.
 
+# Turquoise (DPO "modrá s bílým proužkem", the current scheme on 1503-1505):
+# the blue-yellow sheet recoloured pixel by pixel with the colour map of the
+# DPO Vario LF / LF2 sheets, which exist in both schemes (same drawing style).
+
 vehicles:
   - id: "KT8D5R_N1"
     # original pak name: CZ-Ostrava-KT8D5R_N1
@@ -99,3 +103,6 @@ liveries:
   - color: dpomodrozluta
     name_en: "DPO blue-yellow"
     name_cs: "DPO modro-žlutá"
+  - color: dpotyrkysova
+    name_en: "DPO turquoise"
+    name_cs: "DPO tyrkysová"

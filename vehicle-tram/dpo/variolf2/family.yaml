@@ -10,12 +10,14 @@ copyright: TommPa9
 display:
   agency_en: "DPO"
   agency_cs: "DPO"
-  family_en: "Pragoimex Vario LF2"
-  family_cs: "Pragoimex Vario LF2"
+  family_en: "Pragoimex Vario LF2 / VarioLF2R.S"
+  family_cs: "Pragoimex Vario LF2 / VarioLF2R.S"
 
 # Two-section articulated short low-floor tram (front + rear must couple).
 # Two DPO Ostrava liveries: blue-yellow (modro-žlutá) and turquoise (tyrkysová).
 # Auto-extracted fields verified against real-world DPO service history.
+# Also stands for the VarioLF2R.S (1402, 1403, K2G rebuilds on the same body;
+# Škoda electrics and sliding vents are all that differ).
 
 vehicles:
   - id: "A"

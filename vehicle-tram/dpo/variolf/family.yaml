@@ -10,12 +10,16 @@ copyright: TommPa9
 display:
   agency_en: "DPO"
   agency_cs: "DPO"
-  family_en: "Pragoimex Vario LF"
-  family_cs: "Pragoimex Vario LF"
+  family_en: "Pragoimex Vario LF / VarioLFR.E / VarioLFR.S / T3R.EVN"
+  family_cs: "Pragoimex Vario LF / VarioLFR.E / VarioLFR.S / T3R.EVN"
 
 # Single-car partially low-floor T3 modernization. Two DPO Ostrava liveries:
 # the original blue-yellow scheme and a later turquoise rebrand. Auto-extracted
 # fields verified against real-world DPO data.
+# The same object stands for the Ostrava VarioLFR.E (1313-1357), VarioLFR.S
+# (1358-1373) and the two T3R.EVN prototypes (1311, 1312): one VarCB3LF body
+# and Pelikán front, differing only in electrics, doors and vents, which do
+# not show at this scale; hence all four names in the display string.
 
 vehicles:
   - id: "VarioLF"
