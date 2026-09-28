@@ -18,8 +18,8 @@ display:
 # (1604, 1606-1608, 1611, 1613-1614, 1619, 1631, 1634, 1639-1640, 1651-1652);
 # first conversions 1994 (1639, 1640). Runs solo or as a 2-car set. The 4
 # Tatra T3P (1589, 1620, 1628, 1629; Pars nova 2002-05) keep the same classic
-# body, doors and diamond pantograph (bmhd drawing t3p.svg), so this family also
-# stands in for them.
+# body, doors and diamond pantograph (bmhd drawing t3p.svg); they are their own
+# family (t3p) on this sheet.
 #
 # Livery: DPMB tram "unifik" (bmhd register: all non-advert T3G/T3P): light grey
 # roof, dark grey window band with a darker cantrail line, white line under
@@ -42,8 +42,8 @@ vehicles:
     head: true                 # runs solo ...
     tail: true
     # 2-car sets with any Brno T3 variant (e.g. T3G + T3R), as upstream allowed
-    prev: ["T3G", "t3r/T3R", "t3r_pv/T3R.PV", "t3r_ev/T3R.EV"]
-    next: ["T3G", "t3r/T3R", "t3r_pv/T3R.PV", "t3r_ev/T3R.EV"]
+    prev: ["T3G", "t3r/T3R", "t3r_pv/T3R.PV", "t3r_ev/T3R.EV", "t3p/T3P"]
+    next: ["T3G", "t3r/T3R", "t3r_pv/T3R.PV", "t3r_ev/T3R.EV", "t3p/T3P"]
     fields:
       cost: 840000
       payload: 110

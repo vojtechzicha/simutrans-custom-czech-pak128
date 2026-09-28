@@ -1,0 +1,55 @@
+agency: DPBrno
+type: "T3P"
+image_offset: [0, 0]       # sprites carry their own placement (upstream convention)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "Tatra T3P"
+  family_cs: "Tatra T3P"
+
+# Tatra T3P: 4 Brno T3 cars (1589, 1620, 1628, 1629) rebuilt by Pars nova in
+# 2002-05, keeping the classic rounded T3 body, silver four-leaf folding doors
+# and diamond pantograph of the T3G (bmhd drawing t3p.svg). They run as T3P +
+# T3P pairs (e.g. 1620 + 1589, 1628 + 1629 on line 6) and couple with every
+# Brno T3 variant.
+#
+# Livery: DPMB "unifik", the same as the T3G.
+# Sprite: the T3G sheet (vehicle-tram/dpmb/t3g, Lubak91's CZR-Brno-Tatra_T3G
+# repainted), since the two look the same at this scale. Economy as the T3G.
+
+vehicles:
+  - id: "T3P"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: true                 # runs solo ...
+    tail: true
+    # 2-car sets with any Brno T3 variant (T3P + T3P on line 6)
+    prev: ["T3P", "t3g/T3G", "t3r/T3R", "t3r_pv/T3R.PV", "t3r_ev/T3R.EV"]
+    next: ["T3P", "t3g/T3G", "t3r/T3R", "t3r_pv/T3R.PV", "t3r_ev/T3R.EV"]
+    fields:
+      cost: 840000
+      payload: 110
+      speed: 65
+      weight: 16
+      runningcost: 24
+      fixed_cost: 100
+      intro_year: 2002
+      intro_month: 1
+      retire_year: 2030
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 11
+      engine_type: electric
+      power: 160
+      gear: 130
+
+liveries:
+  - color: dpmbsedobilocervena
+    name_en: "DPMB grey-white-red"
+    name_cs: "DPMB šedo-bílo-červená"

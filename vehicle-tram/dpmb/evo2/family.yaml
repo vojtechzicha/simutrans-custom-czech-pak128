@@ -44,7 +44,7 @@ vehicles:
     row: 0
     head: true
     tail: false
-    prev: []
+    prev: ["EVO2b"]          # a second EVO2 set ahead (line 1 runs pairs)
     next: ["EVO2b"]
     fields:
       cost: 672000
@@ -71,7 +71,7 @@ vehicles:
     head: false
     tail: true
     prev: ["EVO2"]
-    next: []
+    next: ["EVO2"]           # a second EVO2 set behind
     fields:
       cost: 525000
       payload: 75
