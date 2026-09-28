@@ -88,7 +88,11 @@ FAM = {
 
 # families whose units also run in multiple with each other (lead car of one
 # behind the rear car of another); units of one family always couple
-MULTI = [("530", "550")]    # JMK Moravia: 530 + 550 on S2 / S3 (Křižanov – Brno)
+MULTI = [
+    ("530", "550"),    # JMK Moravia: 530 + 550 on S2 / S3 (Křižanov – Brno)
+    ("640", "650"),    # 7Ev, Brno: 640 + 650 (TS 602 from 2014, still one Friday train
+                       # Zastávka u Brna – Brno-Maloměřic in 2025/26, alanbutschek.cz oběhy)
+]
 
 
 def partners(fam, end):

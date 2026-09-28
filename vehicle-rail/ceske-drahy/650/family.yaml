@@ -26,7 +26,7 @@ vehicles:
     row: 0
     head: true
     tail: false
-    prev: ["651"]
+    prev: ["651", "640/641"]
     next: ["651"]
     couple_liveries: prev
     fields:
@@ -56,7 +56,7 @@ vehicles:
     head: false
     tail: true
     prev: ["650"]
-    next: ["650"]
+    next: ["650", "640/640"]
     couple_liveries: next
     fields:
       cost: 18384000
