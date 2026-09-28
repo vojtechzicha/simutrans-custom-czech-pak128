@@ -11,8 +11,8 @@ windows_lit_when_loaded: true
 display:
   agency_en: "DPMO"
   agency_cs: "DPMO"
-  family_en: "Pragoimex VarioLF"
-  family_cs: "Pragoimex VarioLF"
+  family_en: "Pragoimex VarioLF / VarioLF.E / VarioLFR.E / VarioLFR.S"
+  family_cs: "Pragoimex VarioLF / VarioLF.E / VarioLFR.E / VarioLFR.S"
 
 # Pragoimex VarioLF.E (251-253), VarioLFR.E (231-237) and VarioLFR.S (238-248):
 # same body at this scale. Runs solo or in pairs.
