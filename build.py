@@ -207,6 +207,12 @@ def emit_dat(family: dict, livery: dict, siblings: dict | None = None) -> str:
             for col, d in enumerate(DIRECTIONS):
                 src_col = (col + 4) % 8 if reverse else col
                 lines.append(f"freightimage[{d}]={bn}.{v['row']}.{src_col},{x_off},{y_off}")
+        elif v.get("loaded_row") is not None:
+            # a separately drawn loaded image (e.g. passengers at the windows of an
+            # upstream port) on its own sheet row
+            for col, d in enumerate(DIRECTIONS):
+                src_col = (col + 4) % 8 if reverse else col
+                lines.append(f"freightimage[{d}]={bn}.{v['loaded_row']}.{src_col},{x_off},{y_off}")
         lines.append("")
         can_head = v.get("head", True)
         can_tail = v.get("tail", True)

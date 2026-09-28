@@ -1,0 +1,170 @@
+agency: DPPraha
+type: "Konka"
+image_offset: [0, 0]       # extracted with their tile placement baked in
+copyright: TommPa9
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "horse tramway"
+  family_cs: "koněspřežka"
+
+# Prague horse tramway (koněspřežka) 1875-1905: one, two or four horses lead,
+# a Brill (1875) or Ringhoffer (1876, 1885) car follows.
+# 1:1 port of the pak128.CS vehicles.trams.pak object(s) kun_1_tram, kun_2_tram, kun_4_tram, 1875_Brill_Praha_vlek, 1876_ringhoffer_Praha_vlek, 1885_ringhoffer_Praha_vlek:
+# art extracted with tools/pak_extract.py, data and coupling as in that pak,
+# which is no longer installed (the VZ paks hold every Praha, Brno and Ostrava tram).
+
+vehicles:
+  - id: "kun_1"
+    role_en: "one horse"
+    role_cs: "jeden kůň"
+    row: 0
+    head: true
+    tail: true
+    prev: ["kun_1", "kun_2", "kun_4"]
+    next: ["kun_1", "kun_2", "kun_4", "Brill1875", "Ringhoffer1876", "Ringhoffer1885"]
+    fields:
+      cost: 3500
+      payload: 0
+      speed: 15
+      weight: 1
+      runningcost: 1
+      fixed_cost: 1
+      intro_year: 1869
+      intro_month: 1
+      retire_year: 1905
+      retire_month: 1
+      waytype: schiene_tram
+      freight: None
+      length: 2
+      engine_type: bio
+      power: 1
+      gear: 250
+
+  - id: "kun_2"
+    role_en: "two horses"
+    role_cs: "dva koně"
+    row: 1
+    head: true
+    tail: true
+    prev: ["kun_1", "kun_2", "kun_4"]
+    next: ["kun_1", "kun_2", "kun_4", "Brill1875", "Ringhoffer1876", "Ringhoffer1885"]
+    fields:
+      cost: 7000
+      payload: 0
+      speed: 15
+      weight: 2
+      runningcost: 2
+      fixed_cost: 2
+      intro_year: 1869
+      intro_month: 1
+      retire_year: 1905
+      retire_month: 1
+      waytype: schiene_tram
+      freight: None
+      length: 2
+      engine_type: bio
+      power: 2
+      gear: 500
+
+  - id: "kun_4"
+    role_en: "four horses"
+    role_cs: "čtyři koně"
+    row: 2
+    head: true
+    tail: true
+    prev: ["kun_1", "kun_2", "kun_4"]
+    next: ["kun_1", "kun_2", "kun_4", "Brill1875", "Ringhoffer1876", "Ringhoffer1885"]
+    fields:
+      cost: 14000
+      payload: 0
+      speed: 15
+      weight: 4
+      runningcost: 4
+      fixed_cost: 4
+      intro_year: 1869
+      intro_month: 1
+      retire_year: 1905
+      retire_month: 1
+      waytype: schiene_tram
+      freight: None
+      length: 4
+      engine_type: bio
+      power: 4
+      gear: 1000
+
+  - id: "Brill1875"
+    role_en: "horse tram car (Brill 1875)"
+    role_cs: "vůz koněspřežky (Brill 1875)"
+    row: 3
+    head: false
+    tail: true
+    prev: ["kun_1", "kun_2", "kun_4"]
+    next: []
+    fields:
+      cost: 28300
+      payload: 18
+      speed: 15
+      weight: 1
+      runningcost: 9
+      fixed_cost: 9
+      intro_year: 1875
+      intro_month: 1
+      retire_year: 1905
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 5
+
+  - id: "Ringhoffer1876"
+    role_en: "horse tram car (Ringhoffer 1876)"
+    role_cs: "vůz koněspřežky (Ringhoffer 1876)"
+    row: 4
+    head: false
+    tail: true
+    prev: ["kun_1", "kun_2", "kun_4"]
+    next: []
+    fields:
+      cost: 29300
+      payload: 20
+      speed: 15
+      weight: 1
+      runningcost: 9
+      fixed_cost: 9
+      intro_year: 1876
+      intro_month: 1
+      retire_year: 1905
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 5
+
+  - id: "Ringhoffer1885"
+    role_en: "horse tram car (Ringhoffer 1885)"
+    role_cs: "vůz koněspřežky (Ringhoffer 1885)"
+    row: 5
+    loaded_row: 6     # the upstream loaded image (passengers at the windows)
+    head: false
+    tail: true
+    prev: ["kun_1", "kun_2", "kun_4"]
+    next: []
+    fields:
+      cost: 29300
+      payload: 26
+      speed: 15
+      weight: 2
+      runningcost: 8
+      fixed_cost: 8
+      intro_year: 1885
+      intro_month: 1
+      retire_year: 1905
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 6
+
+liveries:
+  - color: historicka
+    name_en: "historic"
+    name_cs: "historický"

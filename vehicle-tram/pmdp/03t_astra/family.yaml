@@ -1,0 +1,93 @@
+agency: PMDP
+type: "03T"
+image_offset: [0, 0]       # extracted with their tile placement baked in
+copyright: TommPa9
+
+display:
+  agency_en: "PMDP"
+  agency_cs: "PMDP"
+  family_en: "Škoda 03T Astra"
+  family_cs: "Škoda 03T Astra"
+
+# Škoda 03T Astra in Plzeň, 3 sections (front, low-floor middle, rear).
+# 1:1 port of the pak128.CS vehicles.trams.pak object(s) Skoda 03T Astra (Plzen), Skoda 03T Astra (Plzen) 2, Skoda 03T Astra (Plzen) 3:
+# art extracted with tools/pak_extract.py, data and coupling as in that pak,
+# which is no longer installed (the VZ paks hold every Praha, Brno and Ostrava tram).
+
+vehicles:
+  - id: "03T"
+    role_en: "front section"
+    role_cs: "přední článek"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["03T_2"]
+    fields:
+      cost: 360000
+      payload: 35
+      speed: 70
+      weight: 8
+      runningcost: 22
+      fixed_cost: 99
+      intro_year: 1997
+      intro_month: 1
+      retire_year: 2015
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 4
+      engine_type: electric
+      power: 360
+      gear: 100
+
+  - id: "03T_2"
+    role_en: "middle section (low-floor)"
+    role_cs: "střední článek (nízkopodlažní)"
+    row: 1
+    head: false
+    tail: false
+    prev: ["03T"]
+    next: ["03T_3"]
+    fields:
+      cost: 360000
+      payload: 85
+      speed: 70
+      weight: 9
+      runningcost: 10
+      fixed_cost: 45
+      intro_year: 1997
+      intro_month: 1
+      retire_year: 2015
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 5
+
+  - id: "03T_3"
+    role_en: "rear section"
+    role_cs: "zadní článek"
+    row: 2
+    head: false
+    tail: true
+    prev: ["03T_2"]
+    next: []
+    fields:
+      cost: 360000
+      payload: 35
+      speed: 70
+      weight: 8
+      runningcost: 12
+      fixed_cost: 54
+      intro_year: 1997
+      intro_month: 1
+      retire_year: 2015
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 4
+
+liveries:
+  - color: pmdpzlutoseda
+    name_en: "PMDP yellow-grey"
+    name_cs: "PMDP žluto-šedá"

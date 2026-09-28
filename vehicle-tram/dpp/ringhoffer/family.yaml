@@ -1,0 +1,48 @@
+agency: DPPraha
+type: "Ringhoffer"
+image_offset: [0, 0]       # extracted with their tile placement baked in
+copyright: MHD
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Ringhoffer (1908)"
+  family_cs: "Ringhoffer (1908)"
+
+# Ringhoffer two-axle motor car of 1908-1925, solo or as a pair.
+# 1:1 port of the pak128.CS vehicles.trams.pak object(s) tram.ringhoffer:
+# art extracted with tools/pak_extract.py, data and coupling as in that pak,
+# which is no longer installed (the VZ paks hold every Praha, Brno and Ostrava tram).
+
+vehicles:
+  - id: "Ringhoffer"
+    role_en: "motor car"
+    role_cs: "motorový vůz"
+    row: 0
+    loaded_row: 1     # the upstream loaded image (passengers at the windows)
+    head: true
+    tail: true
+    prev: ["Ringhoffer"]
+    next: ["Ringhoffer"]
+    fields:
+      cost: 1200000
+      payload: 66
+      speed: 40
+      weight: 8
+      runningcost: 12
+      fixed_cost: 31
+      intro_year: 1908
+      intro_month: 2
+      retire_year: 1925
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 52
+      gear: 100
+
+liveries:
+  - color: historicka
+    name_en: "historic"
+    name_cs: "historický"

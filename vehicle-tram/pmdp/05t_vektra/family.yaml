@@ -1,0 +1,139 @@
+agency: PMDP
+type: "05T"
+image_offset: [0, 0]       # extracted with their tile placement baked in
+copyright: TommPa9
+
+display:
+  agency_en: "PMDP"
+  agency_cs: "PMDP"
+  family_en: "Škoda 05T Vektra"
+  family_cs: "Škoda 05T Vektra"
+
+# Škoda 05T Vektra demonstrator (Plzeň 1999-2010), 5 sections.
+# 1:1 port of the pak128.CS vehicles.trams.pak object(s) Skoda_05T_Vektra, Skoda_05T_Vektra_2, Skoda_05T_Vektra_3, Skoda_05T_Vektra_4, Skoda_05T_Vektra_5:
+# art extracted with tools/pak_extract.py, data and coupling as in that pak,
+# which is no longer installed (the VZ paks hold every Praha, Brno and Ostrava tram).
+
+vehicles:
+  - id: "05T"
+    role_en: "front section"
+    role_cs: "přední článek"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["05T_2"]
+    fields:
+      cost: 360000
+      payload: 35
+      speed: 70
+      weight: 8
+      runningcost: 22
+      fixed_cost: 99
+      intro_year: 1999
+      intro_month: 9
+      retire_year: 2010
+      retire_month: 4
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 4
+      engine_type: electric
+      power: 540
+      gear: 100
+
+  - id: "05T_2"
+    role_en: "second section"
+    role_cs: "druhý článek"
+    row: 1
+    head: false
+    tail: false
+    prev: ["05T"]
+    next: ["05T_3"]
+    fields:
+      cost: 360000
+      payload: 85
+      speed: 70
+      weight: 9
+      runningcost: 10
+      fixed_cost: 45
+      intro_year: 1999
+      intro_month: 9
+      retire_year: 2010
+      retire_month: 4
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 5
+
+  - id: "05T_3"
+    role_en: "middle section"
+    role_cs: "prostřední článek"
+    row: 2
+    head: false
+    tail: false
+    prev: ["05T_2"]
+    next: ["05T_4"]
+    fields:
+      cost: 360000
+      payload: 20
+      speed: 70
+      weight: 5
+      runningcost: 10
+      fixed_cost: 45
+      intro_year: 1999
+      intro_month: 9
+      retire_year: 2010
+      retire_month: 4
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 3
+
+  - id: "05T_4"
+    role_en: "fourth section"
+    role_cs: "čtvrtý článek"
+    row: 3
+    head: false
+    tail: false
+    prev: ["05T_3"]
+    next: ["05T_5"]
+    fields:
+      cost: 360000
+      payload: 85
+      speed: 70
+      weight: 9
+      runningcost: 10
+      fixed_cost: 45
+      intro_year: 1999
+      intro_month: 9
+      retire_year: 2010
+      retire_month: 4
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 5
+
+  - id: "05T_5"
+    role_en: "rear section"
+    role_cs: "zadní článek"
+    row: 4
+    head: false
+    tail: true
+    prev: ["05T_4"]
+    next: []
+    fields:
+      cost: 360000
+      payload: 35
+      speed: 70
+      weight: 8
+      runningcost: 12
+      fixed_cost: 54
+      intro_year: 1999
+      intro_month: 9
+      retire_year: 2010
+      retire_month: 4
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 4
+
+liveries:
+  - color: skodabilomodra
+    name_en: "Škoda white-blue"
+    name_cs: "Škoda bílo-modrá"

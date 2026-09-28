@@ -1,0 +1,66 @@
+agency: DPPraha
+type: "Trabuko"
+image_offset: [0, 0]       # extracted with their tile placement baked in
+copyright: TommPa9
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Ringhoffer Trabuko"
+  family_cs: "Ringhoffer Trabuko"
+
+# Ringhoffer "Trabuko" motor car (1938) and trailer (1947); they couple with anything, as upstream.
+# 1:1 port of the pak128.CS vehicles.trams.pak object(s) Ringhofer_trabuko, Ringhofer_trabuko_vlek:
+# art extracted with tools/pak_extract.py, data and coupling as in that pak,
+# which is no longer installed (the VZ paks hold every Praha, Brno and Ostrava tram).
+
+vehicles:
+  - id: "Trabuko"
+    role_en: "motor car"
+    role_cs: "motorový vůz"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 28600
+      payload: 70
+      speed: 40
+      weight: 11
+      runningcost: 22
+      fixed_cost: 56
+      intro_year: 1938
+      intro_month: 1
+      retire_year: 1963
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 9
+      engine_type: electric
+      power: 55
+      gear: 100
+
+  - id: "Trabuko_vlek"
+    role_en: "trailer"
+    role_cs: "vlečný vůz"
+    row: 1
+    prev: any
+    next: any
+    fields:
+      cost: 28600
+      payload: 70
+      speed: 40
+      weight: 12
+      runningcost: 22
+      fixed_cost: 56
+      intro_year: 1947
+      intro_month: 1
+      retire_year: 1963
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 9
+
+liveries:
+  - color: historicka
+    name_en: "historic"
+    name_cs: "historický"

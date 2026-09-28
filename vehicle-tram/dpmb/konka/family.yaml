@@ -1,0 +1,123 @@
+agency: DPBrno
+type: "Konka"
+image_offset: [0, 0]       # extracted with their tile placement baked in
+copyright: TommPa9
+
+display:
+  agency_en: "DPMB"
+  agency_cs: "DPMB"
+  family_en: "horse tramway"
+  family_cs: "koněspřežka"
+
+# Brno horse tramway (koněspřežka) 1869-1880: one, two or four horses lead,
+# the Dreyhansel (1869) car follows.
+# 1:1 port of the pak128.CS vehicles.trams.pak object(s) kun_1_tram, kun_2_tram, kun_4_tram, 1869_Dreyhansel_Brno_vlek:
+# art extracted with tools/pak_extract.py, data and coupling as in that pak,
+# which is no longer installed (the VZ paks hold every Praha, Brno and Ostrava tram).
+
+vehicles:
+  - id: "kun_1"
+    role_en: "one horse"
+    role_cs: "jeden kůň"
+    row: 0
+    head: true
+    tail: true
+    prev: ["kun_1", "kun_2", "kun_4"]
+    next: ["kun_1", "kun_2", "kun_4", "Dreyhansel1869"]
+    fields:
+      cost: 3500
+      payload: 0
+      speed: 15
+      weight: 1
+      runningcost: 1
+      fixed_cost: 1
+      intro_year: 1869
+      intro_month: 1
+      retire_year: 1905
+      retire_month: 1
+      waytype: schiene_tram
+      freight: None
+      length: 2
+      engine_type: bio
+      power: 1
+      gear: 250
+
+  - id: "kun_2"
+    role_en: "two horses"
+    role_cs: "dva koně"
+    row: 1
+    head: true
+    tail: true
+    prev: ["kun_1", "kun_2", "kun_4"]
+    next: ["kun_1", "kun_2", "kun_4", "Dreyhansel1869"]
+    fields:
+      cost: 7000
+      payload: 0
+      speed: 15
+      weight: 2
+      runningcost: 2
+      fixed_cost: 2
+      intro_year: 1869
+      intro_month: 1
+      retire_year: 1905
+      retire_month: 1
+      waytype: schiene_tram
+      freight: None
+      length: 2
+      engine_type: bio
+      power: 2
+      gear: 500
+
+  - id: "kun_4"
+    role_en: "four horses"
+    role_cs: "čtyři koně"
+    row: 2
+    head: true
+    tail: true
+    prev: ["kun_1", "kun_2", "kun_4"]
+    next: ["kun_1", "kun_2", "kun_4", "Dreyhansel1869"]
+    fields:
+      cost: 14000
+      payload: 0
+      speed: 15
+      weight: 4
+      runningcost: 4
+      fixed_cost: 4
+      intro_year: 1869
+      intro_month: 1
+      retire_year: 1905
+      retire_month: 1
+      waytype: schiene_tram
+      freight: None
+      length: 4
+      engine_type: bio
+      power: 4
+      gear: 1000
+
+  - id: "Dreyhansel1869"
+    role_en: "horse tram car (Dreyhansel 1869)"
+    role_cs: "vůz koněspřežky (Dreyhansel 1869)"
+    row: 3
+    head: false
+    tail: true
+    prev: ["kun_1", "kun_2", "kun_4"]
+    next: []
+    fields:
+      cost: 28600
+      payload: 24
+      speed: 15
+      weight: 2
+      runningcost: 10
+      fixed_cost: 10
+      intro_year: 1869
+      intro_month: 1
+      retire_year: 1880
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 6
+
+liveries:
+  - color: historicka
+    name_en: "historic"
+    name_cs: "historický"

@@ -101,6 +101,8 @@ vehicles:
     #                         # wine-silver T3R.PLF. Set it on both sides with couple_liveries.
     # prev: any / next: any   # no constraint on that side at all: couples with anything, like native
     #                         # locomotives and coaches (loco-hauled stock, the front of a Talgo set)
+    # loaded_row: 3           # sheet row of a separately drawn loaded image (upstream ports whose
+    #                         # loaded image differs; families without windows_lit_when_loaded only)
     # reverse: false          # if true, share another row's sprites but rotate direction labels 180°
     #                         # (col index shifts by +4 mod 8 — used for the rear motor of a trio)
     # couple_liveries: false  # if true, each prev/next partner id resolves to that vehicle in EVERY

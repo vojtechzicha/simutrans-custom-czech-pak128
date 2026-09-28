@@ -1,0 +1,75 @@
+agency: DPPraha
+type: "Krizik1891"
+image_offset: [0, 0]       # extracted with their tile placement baked in
+copyright: TommPa9
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Křižík 1891"
+  family_cs: "Křižík 1891"
+
+# The 1891 electric tram of František Křižík at the Prague Jubilee Exhibition
+# (Ringhoffer bodies): the larger and the smaller car, each running solo.
+# 1:1 port of the pak128.CS vehicles.trams.pak object(s) 1891_ringhoffer_krizik_vystavni_draha_praha, 1891_ringhoffer_vystavni_draha_praha:
+# art extracted with tools/pak_extract.py, data and coupling as in that pak,
+# which is no longer installed (the VZ paks hold every Praha, Brno and Ostrava tram).
+
+vehicles:
+  - id: "Krizik"
+    role_en: "exhibition motor car"
+    role_cs: "motorový vůz výstavní dráhy"
+    row: 0
+    loaded_row: 2     # the upstream loaded image (passengers at the windows)
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 12000
+      payload: 32
+      speed: 20
+      weight: 3
+      runningcost: 7
+      fixed_cost: 9
+      intro_year: 1891
+      intro_month: 2
+      retire_year: 1893
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 7
+      engine_type: electric
+      power: 6
+      gear: 100
+
+  - id: "Vystavni"
+    role_en: "small exhibition motor car"
+    role_cs: "malý motorový vůz výstavní dráhy"
+    row: 1
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 28600
+      payload: 20
+      speed: 20
+      weight: 2
+      runningcost: 12
+      fixed_cost: 15
+      intro_year: 1891
+      intro_month: 1
+      retire_year: 1893
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 4
+      engine_type: electric
+      power: 6
+      gear: 100
+
+liveries:
+  - color: historicka
+    name_en: "historic"
+    name_cs: "historický"

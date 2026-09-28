@@ -1,0 +1,45 @@
+agency: DPPraha
+type: "T2"
+image_offset: [0, 0]       # extracted with their tile placement baked in
+copyright: TommPa9
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Tatra T2"
+  family_cs: "Tatra T2"
+
+# Tatra T2 as built (1957).
+# 1:1 port of the pak128.CS vehicles.trams.pak object(s) Tatra_T2:
+# art extracted with tools/pak_extract.py, data and coupling as in that pak,
+# which is no longer installed (the VZ paks hold every Praha, Brno and Ostrava tram).
+
+vehicles:
+  - id: "T2"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 38600
+      payload: 100
+      speed: 65
+      weight: 18
+      runningcost: 22
+      fixed_cost: 92
+      intro_year: 1957
+      intro_month: 1
+      retire_year: 1982
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 11
+      engine_type: electric
+      power: 160
+      gear: 100
+
+liveries:
+  - color: historicka
+    name_en: "historic"
+    name_cs: "historický"
