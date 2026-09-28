@@ -1,0 +1,56 @@
+agency: PMDP
+type: "T3R.PLF"
+image_offset: [0, 0]       # sprites carry their own placement (upstream convention)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "PMDP"
+  agency_cs: "PMDP"
+  family_en: "Tatra T3R.PLF"
+  family_cs: "Tatra T3R.PLF"
+
+# Tatra T3R.PLF (Pragoimex / KOS), PMDP 315-332 (2008-10): partly low-floor
+# T3 rebuilds, 15.1 m, 21.5 t, 22 seated + 105 standing, 4 x 40 kW, 65 km/h. Fixed
+# pairs 315+316 ... 331+332, solo at weekends and in the evening.
+# Sprite: the VZ Prague T3R.PLF sheet (Lubak91's T3 drawing lengthened to the
+# PLF) with the single-arm pantograph of Lubak91's Brno T3R.PV drawing, as the
+# Plzeň cars carry (the Prague ones keep a diamond).
+# Livery: PMDP "žluto-šedo-bílá" (yellow-grey-white), recoloured zone by zone
+# from the base sheet with its shading kept (colour class + position against
+# the window band in each column), no shapes changed.
+# Roof light grey, grey window band, yellow lower body, white stripe above the
+# yellow skirt.
+
+vehicles:
+  - id: "T3R.PLF"
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: true                 # runs solo ...
+    tail: true
+    prev: ["T3R.PLF"]          # fixed PLF + PLF pairs (315+316 ... 331+332), solo at weekends
+    next: ["T3R.PLF"]
+    fields:
+      cost: 960000
+      payload: 127
+      speed: 65
+      weight: 20
+      runningcost: 25
+      fixed_cost: 109
+      intro_year: 2008
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 12
+      engine_type: electric
+      power: 160
+      gear: 130
+
+liveries:
+  - color: pmdpzlutosedobila
+    name_en: "PMDP yellow-grey-white"
+    name_cs: "PMDP žluto-šedo-bílá"

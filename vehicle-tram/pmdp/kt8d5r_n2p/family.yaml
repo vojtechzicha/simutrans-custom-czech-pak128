@@ -1,0 +1,108 @@
+agency: PMDP
+type: "KT8D5R.N2P"
+image_offset: [0, 0]       # sprites carry their own placement (upstream convention)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "PMDP"
+  agency_cs: "PMDP"
+  family_en: "Tatra KT8D5R.N2P"
+  family_cs: "Tatra KT8D5R.N2P"
+
+# Tatra KT8D5R.N2P, PMDP 288-296, 298, 299: KT8D5 of 1989 rebuilt by KOS
+# 2006-09 with a low-floor middle section; 30.3 m, 42 t, 56 seated + 171
+# standing, 8 x 45 kW, 65 km/h. Double-ended, always solo.
+# Sprite: TommPa9's KT8D5.RN2P (the VZ Prague sheet in its original red-white-
+# grey, whose belt and skirt map onto the Plzeň scheme).
+# Livery: PMDP "žluto-šedo-bílá" (yellow-grey-white), recoloured zone by zone
+# from the base sheet with its shading kept (colour class + position against
+# the window band in each column), no shapes changed.
+# Light grey roof, mid-grey window band round the windscreens, yellow lower
+# body and doors, a white stripe above the yellow skirt. The pantograph stays
+# dark grey as drawn (yellow on the real cars).
+
+vehicles:
+  - id: "KT8D5R.N2P"
+    display_id: "KT8D5R.N2P"
+    role_en: "front section"
+    role_cs: "přední článek"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["KT8D5R.N2P_2"]
+    fields:
+      cost: 616000
+      payload: 88
+      speed: 65
+      weight: 16
+      runningcost: 22
+      fixed_cost: 91
+      intro_year: 2006
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 180
+
+  - id: "KT8D5R.N2P_2"
+    display_id: "KT8D5R.N2P"
+    role_en: "middle section (low-floor)"
+    role_cs: "střední nízkopodlažní článek"
+    row: 1
+    head: false
+    tail: false
+    prev: ["KT8D5R.N2P"]
+    next: ["KT8D5R.N2P_3"]
+    fields:
+      cost: 378000
+      payload: 54
+      speed: 65
+      weight: 11
+      runningcost: 15
+      fixed_cost: 62
+      intro_year: 2006
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 5
+      engine_type: electric
+      power: 0
+
+  - id: "KT8D5R.N2P_3"
+    display_id: "KT8D5R.N2P"
+    role_en: "rear section"
+    role_cs: "zadní článek"
+    row: 2
+    head: false
+    tail: true
+    prev: ["KT8D5R.N2P_2"]
+    next: []
+    fields:
+      cost: 616000
+      payload: 88
+      speed: 65
+      weight: 16
+      runningcost: 20
+      fixed_cost: 58
+      intro_year: 2006
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 180
+
+liveries:
+  - color: pmdpzlutosedobila
+    name_en: "PMDP yellow-grey-white"
+    name_cs: "PMDP žluto-šedo-bílá"

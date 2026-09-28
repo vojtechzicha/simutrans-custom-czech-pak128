@@ -9,7 +9,8 @@ display:
   family_en: "Škoda 03T Astra"
   family_cs: "Škoda 03T Astra"
 
-# Škoda 03T Astra in Plzeň, 3 sections (front, low-floor middle, rear).
+# Škoda 03T Astra in Plzeň, 3 sections (front, low-floor middle, rear); the last
+# Plzeň Astras (301, 303) ran on 18 March 2021.
 # 1:1 port of the pak128.CS vehicles.trams.pak object(s) Skoda 03T Astra (Plzen), Skoda 03T Astra (Plzen) 2, Skoda 03T Astra (Plzen) 3:
 # art extracted with tools/pak_extract.py, data and coupling as in that pak,
 # which is no longer installed (the VZ paks hold every Praha, Brno and Ostrava tram).
@@ -32,8 +33,8 @@ vehicles:
       fixed_cost: 99
       intro_year: 1997
       intro_month: 1
-      retire_year: 2015
-      retire_month: 1
+      retire_year: 2021
+      retire_month: 3
       waytype: schiene_tram
       freight: Passagiere
       length: 4
@@ -58,8 +59,8 @@ vehicles:
       fixed_cost: 45
       intro_year: 1997
       intro_month: 1
-      retire_year: 2015
-      retire_month: 1
+      retire_year: 2021
+      retire_month: 3
       waytype: schiene_tram
       freight: Passagiere
       length: 5
@@ -81,8 +82,8 @@ vehicles:
       fixed_cost: 54
       intro_year: 1997
       intro_month: 1
-      retire_year: 2015
-      retire_month: 1
+      retire_year: 2021
+      retire_month: 3
       waytype: schiene_tram
       freight: Passagiere
       length: 4
