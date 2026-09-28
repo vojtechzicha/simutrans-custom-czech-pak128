@@ -1,0 +1,110 @@
+agency: PMDP
+type: "40T"
+image_offset: [0, 0]       # sprites carry their own placement (like the 45T)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PMDP"
+  agency_cs: "PMDP"
+  family_en: "Škoda 40T ForCity Smart (40T0 / 40T1 / 40T2)"
+  family_cs: "Škoda 40T ForCity Smart (40T0 / 40T1 / 40T2)"
+
+# Škoda 40T ForCity Smart, PMDP Plzeň's bidirectional low-floor tram: 22 cars
+# 385-406 (40T0 385-386, 40T1 387-396, 40T2 397-406), 2021-2025; the
+# sub-series look the same at sprite scale, so one object set covers all
+# three. 29.14 m, 2.50 m wide, 3.57 m high, 3 sections, 100 % low floor,
+# 4 bogies (one under each end section, two under the middle section, not
+# under the joints), identical cabs at both ends with a narrow, rounded front
+# (the wide double door behind each cab forces it), 5 double doors on each
+# side (2 on each end section, 1 in the middle). 45.77 t empty, 64 seated +
+# 121 standing, 8 x 70 kW = 560 kW, 70 km/h. Always runs solo.
+# Livery (PMDP yellow, as on the 40T): all yellow including the roof; black cab
+# cap and windscreen surround; black flush glazing band with a thin white line
+# under it that runs across both fronts; yellow lower body; yellow-framed
+# doors with dark glass; light-grey lower edge and bogie fairings; grey
+# bellows; orange LED destination displays; yellow single-arm pantograph
+# (leading section raised, trailing lowered, as on the 45T).
+# Sprites: original 3D model rendered to the pak128.cs projection, adapted
+# from the Brno 45T model (same renderer, heights and per-direction front
+# anchor). Sections 7 + 8 + 7 units (1 unit = 1.325 m): the middle body is
+# ~1.2 x an end section on side-on photos (cars 385, 399). Each cab section
+# carries the full grey bellows at its joint end; every section's front sits
+# at the same per-direction point, so the joints close in all 8 directions.
+# The rear cab section has its own row (tail lights, lowered pantograph)
+# instead of reverse: true.
+# Economy: the 45T's per-convoy totals scaled by length (29.14 / 31.0).
+
+vehicles:
+  - id: "40T"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["40T_2"]
+    fields:
+      cost: 425000
+      payload: 59
+      speed: 70
+      weight: 14
+      runningcost: 20
+      fixed_cost: 108
+      intro_year: 2021
+      retire_year: 2060
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 7
+      engine_type: electric
+      power: 560
+
+  - id: "40T_2"
+    display_id: "40T"
+    role_en: "middle section"
+    role_cs: "střední díl"
+    row: 1
+    head: false
+    tail: false
+    prev: ["40T"]
+    next: ["40T_3"]
+    fields:
+      cost: 425000
+      payload: 67
+      speed: 70
+      weight: 18
+      runningcost: 16
+      fixed_cost: 73
+      intro_year: 2021
+      retire_year: 2060
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+
+  - id: "40T_3"
+    display_id: "40T"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 2
+    head: false
+    tail: true
+    prev: ["40T_2"]
+    next: []
+    fields:
+      cost: 425000
+      payload: 59
+      speed: 70
+      weight: 14
+      runningcost: 20
+      fixed_cost: 108
+      intro_year: 2021
+      retire_year: 2060
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 7
+
+liveries:
+  - color: pmdpzlutosedobila
+    name_en: "PMDP yellow-grey-white"
+    name_cs: "PMDP žluto-šedo-bílá"
