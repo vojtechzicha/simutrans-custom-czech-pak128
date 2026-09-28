@@ -303,18 +303,6 @@ def lt_board(im, col, cx, ybot, number, wb=13, wt=9, h=7):
           WHITE, BLACK, extras)
 
 
-def erase_above(im, y):
-    px = im.load()
-    for yy in range(0, y + 1):
-        for x in range(TILE):
-            px[x, yy] = BG
-
-
-def is_band(p):
-    r, g, b = p
-    return (r > 150 and g < 130) or min(p) > 160 or (b > 150 and r < 130)
-
-
 # ---------------------------------------------------------------- D1
 
 def gen_d1(style: str, function: str) -> Image.Image:
