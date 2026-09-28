@@ -1,0 +1,98 @@
+agency: PMDP
+type: "EVO2"
+copyright: TommPa9
+
+# The sprites carry their own track placement (same convention as the upstream
+# tram art, whose dats use no offset), so no extra shift; [0, 4] would sink them.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+
+display:
+  agency_en: "PMDP"
+  agency_cs: "PMDP"
+  family_en: "Pragoimex EVO2"
+  family_cs: "Pragoimex EVO2"
+
+# Pragoimex / TW Team EVO2 in Plzeň: two-section, six-axle, 100% low-floor
+# unidirectional tram, 3 bogies (two under the front section, one under the
+# rear). PMDP runs 16 cars (369-384), delivered 2019-2021; 21.65-21.9 m,
+# 2.56 m wide, 27.5 t empty, 6 x 65 = 390 kW, 65 km/h, 45+2 seats + 92
+# standing = 139 passengers. Doors on the right side only (single door behind
+# the cab + double door on the front section, two double doors on the rear).
+# Mostly solo, but two coupled sets run too.
+# Livery (PMDP yellow-grey-white, from Commons "EVO2-PMDP.jpg" (374) and the
+# plzensketramvaje.cz EVO2 gallery): white roof, yellow cantrail band, dark
+# grey strip above the black-framed glazing, yellow lower body with a white
+# stripe across its middle, grey skirt; doors yellow with glazed upper part;
+# the band starts behind the windscreen wrap, white above it (the white cap
+# runs round onto the side); front: white cap framing a yellow field, green LED
+# display, black wrap-round windscreen with a thin white frame down the
+# corners, black lower panel between white lamp pods, yellow bumper; yellow
+# single-arm pantograph, light grey bellows.
+# Sprite: the EVO2 3D model shared with vehicle-tram/dpmb/evo2 and
+# vehicle-tram/dp-most-litvinov/evo2, ray-marched to the pak128 projection and
+# painted in the PMDP livery. Sections 9 + 7 length units like Most (same car
+# length). Stats: the Most EVO2 figures scaled to Plzeň's capacity (same price
+# scale), weight and power split by section.
+#
+# Constraint structure: EVO2 (head section) and EVO2b (rear section) must couple
+# together, but a second pair can follow — EVO2+EVO2b+EVO2+EVO2b — so EVO2.prev
+# allows another EVO2b and EVO2b.next allows another EVO2.
+
+vehicles:
+  - id: "EVO2"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: ["EVO2b"]
+    next: ["EVO2b"]
+    fields:
+      cost: 511000
+      payload: 73
+      speed: 65
+      weight: 16
+      runningcost: 22
+      fixed_cost: 92
+      intro_year: 2019
+      intro_month: 9
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 9
+      engine_type: electric
+      power: 260
+
+  - id: "EVO2b"
+    display_id: "EVO2"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["EVO2"]
+    next: ["EVO2"]
+    fields:
+      cost: 462000
+      payload: 66
+      speed: 65
+      weight: 12
+      runningcost: 20
+      fixed_cost: 59
+      intro_year: 2019
+      intro_month: 9
+      retire_year: 2060
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 7
+      engine_type: electric
+      power: 130
+
+liveries:
+  - color: pmdpzlutosedobila
+    name_en: "PMDP yellow-grey-white"
+    name_cs: "PMDP žluto-šedo-bílá"
