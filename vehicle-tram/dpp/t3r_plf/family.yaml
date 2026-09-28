@@ -5,7 +5,7 @@ type: "T3R.PLF"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: TommPa9, Lubak91
 
 display:
   agency_en: "DPP"
@@ -31,13 +31,13 @@ display:
 # around the middle, silver roof, window band and skirt, silver front with a
 # burgundy lobe round each headlamp meeting in a V).
 #
-# Sprite: Lubak91's T3R.P drawing (pak128_czr Praha Tatra_T3.png, shaded), not
-# the flat-grey TommPa9 T3R.PLF sheet, so it matches the native CZR T3R.P it
-# runs with. Redrawn as a PLF: +1 length unit (one extra window bay inserted
-# between the bogies behind the pantograph, front kept in place), red belt and
-# skirt lowered 1 px along the low-floor middle, diamond pantograph repainted
-# ochre-yellow, glass on the lit-window specials, amber LED destination
-# displays. The wine-silver sheet is the same drawing repainted.
+# Sprite: the car has the VarCB3LF body of the Vario LF (tall windows, the red
+# belt dipping at the low-floor middle) with the classic T3 (Kardaus) ends and
+# a diamond pantograph (photos of 8284, 8277). So the body is TommPa9's Vario
+# drawing (the VZ Brno VarioLFR.E sheet) repainted in each DPP scheme, with both
+# end caps and the diamond pantograph from Lubak91's T3 drawing (the previous
+# sheet of this family, same livery), fitted per view; each view then placed
+# where the previous drawing sat, so pairs with a T3R.P still meet.
 # Economy scaled from CZR-Praha-Tatra_T3RP (840 000 / 24 / 100, gear 130):
 # a newer, longer low-floor car at the same 4 x 40 kW.
 
