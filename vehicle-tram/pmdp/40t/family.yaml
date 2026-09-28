@@ -25,14 +25,14 @@ display:
 # under it that runs across both fronts; yellow lower body; yellow-framed
 # doors with dark glass; light-grey lower edge and bogie fairings; grey
 # bellows; orange LED destination displays; yellow single-arm pantograph
-# (leading section raised, trailing lowered, as on the 45T).
+# on the front cab section only: the real car has one (photo of 399).
 # Sprites: original 3D model rendered to the pak128.cs projection, adapted
 # from the Brno 45T model (same renderer, heights and per-direction front
 # anchor). Sections 7 + 8 + 7 units (1 unit = 1.325 m): the middle body is
 # ~1.2 x an end section on side-on photos (cars 385, 399). Each cab section
 # carries the full grey bellows at its joint end; every section's front sits
 # at the same per-direction point, so the joints close in all 8 directions.
-# The rear cab section has its own row (tail lights, lowered pantograph)
+# The rear cab section has its own row (tail lights, no pantograph)
 # instead of reverse: true.
 # Economy: the 45T's per-convoy totals scaled by length (29.14 / 31.0).
 

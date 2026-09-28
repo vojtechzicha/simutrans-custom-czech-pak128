@@ -24,7 +24,8 @@ display:
 # top rear of the cab sections); black window band; black-framed glass doors;
 # red skirt and red bogie fairings; both fronts: black raked windscreen, red top
 # cap, white band, red lower valance; light grey roof with dark equipment
-# covers; yellow single-arm pantograph (leading section raised, trailing lowered).
+# covers; one yellow single-arm pantograph, on the front cab section only (photos
+# of 1760, 1761: the other cab section has none).
 # Sprites: redrawn from scratch as a 3D model rendered to the pak128.cs
 # projection (replaces the upstream CZR-Brno-Skoda_45T placeholder, which is
 # the Prague 15T with a repainted front). Sections 8 + 7 + 8 units like the
@@ -32,7 +33,7 @@ display:
 # grey bellows at its articulation end. Every section's front sits at the same
 # per-direction point (engine front anchoring), placed like the native
 # pak128.cs trams, so the joints close in all 8 directions. The rear cab
-# section has its own row (tail lights, lowered pantograph) instead of
+# section has its own row (tail lights, no pantograph) instead of
 # reverse: true.
 # Economy: per-convoy totals of the upstream CZR-Brno-Skoda_45T / 15T (cost,
 # running and fixed cost); power on the leading section like upstream.

@@ -1,0 +1,93 @@
+agency: PMDP
+type: "VarioLF2_2IN"
+image_offset: [0, 0]       # sprites carry their own placement (EVO2 renderer, like vehicle-tram/pmdp/evo2)
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "PMDP"
+  agency_cs: "PMDP"
+  family_en: "Pragoimex VarioLF2/2 IN"
+  family_cs: "Pragoimex VarioLF2/2 IN"
+
+# Pragoimex VarioLF2/2 IN ("Inka"), PMDP Plzeň 361-363 and 366 (2013-14):
+# bidirectional two-section, partly low-floor (43 %) tram on three motored
+# bogies (one under each cab, one under the joint), 23.7 m, 2.48 m wide,
+# 31.0 t, 6 x 80 = 480 kW, 65 km/h, 44 seated + 123 standing. An identical cab
+# at both ends, sliding doors on both sides: per side a single door behind one
+# cab and a double door in each section's low-floor part. Runs solo (the
+# occasional VarioLF+ trailer is left out).
+# Livery PMDP žluto-šedo-bílá (Commons photos of 362, 363, 366): yellow roof
+# and body, black glazing band, dark grey sill band, a thin yellow line, a
+# white stripe, yellow lower body and skirt; doors yellow with full-height
+# glass. Front: the EVO2 cab (PO architekti) instead of the Pelikán Vario
+# front: black mask with the green LED display, wrap-round windscreen and a
+# lower panel carrying a headlight and a red tail lamp at each corner; yellow
+# bumper, yellow roof dome. Light grey bellows, yellow single-arm pantograph
+# with a dark head on the front section only.
+# Sprite: the EVO2 3D model of vehicle-tram/pmdp/evo2 (same ray marcher and
+# track placement), one cab section at length 8 (16 units = 23.7 m, each
+# section carries half the bellows). Row 0 is the section with the pantograph,
+# row 1 the same section without it. The rear section is row 1 with
+# reverse: true (exact at length 8): turned 180 degrees its cab faces
+# backwards, its joint meets the front section's, and its visible side shows
+# the other side's door layout, so the tram has 1 single + 2 double doors per
+# side like the real car. Both cabs show headlights and tail lamps (both are
+# lit-special colours, always on), because the two ends share one drawing.
+# Economy: the PMDP price scale (7 000 per passenger, running / fixed cost per
+# passenger as the PMDP EVO2), split evenly; weight and power per section.
+
+vehicles:
+  - id: "VarioLF2_2IN"
+    role_en: "front section"
+    role_cs: "přední článek"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["VarioLF2_2IN-rear"]
+    fields:
+      cost: 588000
+      payload: 84
+      speed: 65
+      weight: 16
+      runningcost: 25
+      fixed_cost: 91
+      intro_year: 2013
+      retire_year: 2050
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 240
+
+  - id: "VarioLF2_2IN-rear"
+    display_id: "VarioLF2_2IN"
+    role_en: "rear section"
+    role_cs: "zadní článek"
+    row: 1
+    reverse: true
+    head: false
+    tail: true
+    prev: ["VarioLF2_2IN"]
+    next: []
+    fields:
+      cost: 581000
+      payload: 83
+      speed: 65
+      weight: 15
+      runningcost: 25
+      fixed_cost: 91
+      intro_year: 2013
+      retire_year: 2050
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 240
+
+liveries:
+  - color: pmdpzlutosedobila
+    name_en: "PMDP yellow-grey-white"
+    name_cs: "PMDP žluto-šedo-bílá"
