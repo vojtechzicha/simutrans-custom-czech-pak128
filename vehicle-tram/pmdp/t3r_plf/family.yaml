@@ -3,7 +3,7 @@ type: "T3R.PLF"
 image_offset: [0, 0]       # sprites carry their own placement (upstream convention)
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: TommPa9, Lubak91
 
 display:
   agency_en: "PMDP"
@@ -14,14 +14,12 @@ display:
 # Tatra T3R.PLF (Pragoimex / KOS), PMDP 315-332 (2008-10): partly low-floor
 # T3 rebuilds, 15.1 m, 21.5 t, 22 seated + 105 standing, 4 x 40 kW, 65 km/h. Fixed
 # pairs 315+316 ... 331+332, solo at weekends and in the evening.
-# Sprite: the VZ Prague T3R.PLF sheet (Lubak91's T3 drawing lengthened to the
-# PLF) with the single-arm pantograph of Lubak91's Brno T3R.PV drawing, as the
-# Plzeň cars carry (the Prague ones keep a diamond).
-# Livery: PMDP "žluto-šedo-bílá" (yellow-grey-white), recoloured zone by zone
-# from the base sheet with its shading kept (colour class + position against
-# the window band in each column), no shapes changed.
-# Roof light grey, grey window band, yellow lower body, white stripe above the
-# yellow skirt.
+# Sprite: the car has the VarCB3LF body of the Vario LF (flush dark glazing band,
+# yellow up to the roof, the white stripe dipping at the low-floor middle) with
+# the classic rounded T3 (Kardaus) ends (photo of 325 + 326, plzensketramvaje.cz).
+# So the body is TommPa9's Vario drawing (the VZ PMDP VarioLFR.S sheet) and both
+# end caps come from Lubak91's T3 drawing (the VZ Prague T3R.PLF sheet, repainted
+# PMDP, grey roof taken to the Vario's yellow), fitted per view onto the Vario ends.
 
 vehicles:
   - id: "T3R.PLF"
