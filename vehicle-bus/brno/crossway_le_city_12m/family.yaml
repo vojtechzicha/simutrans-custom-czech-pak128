@@ -1,0 +1,58 @@
+agency: Brno
+type: "Crossway_LE_City_12M"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+display:
+  agency_en: "Brno"
+  agency_cs: "Brno"
+  family_en: "Iveco Crossway LE CITY 12M"
+  family_cs: "Iveco Crossway LE CITY 12M"
+
+# Iveco Crossway LE CITY 12M (diesel), 12.0 x 2.55 x 3.1 m, doors 2-2-2,
+# about 96 places, Iveco Cursor 9 265 kW, 85 km/h.
+# On Brno city lines (25 Sep 2026): BDS-BUS 6J9 5195-5197 (built 2021, in
+# service 2/2022) on line 74.
+# Livery: IDS JMK white-grey with a red roof (photos of 6J9 5195 / 5196,
+# seznam-autobusu 451515 / 392887): red roof and roof rim straight over the
+# black glazing, white band under the windows down to the wheel-arch tops,
+# silver-grey lower body; white front panel under the windscreen with a grey
+# lower front from the headlamps down; white rear with a grey bumper; white
+# A/C unit on the front half of the roof; green LED displays.
+# Sprite: the DPMP Crossway LE City 12M diesel sheet (Lubak91 body, lane
+# placement already normalised), repainted by zone on a box model of the body,
+# the single rear door widened to a double one, displays green
+# (agents/misc/p_clc.py in the session scratchpad).
+
+vehicles:
+  - id: "Crossway_LE_City_12M"
+    display_id: "Crossway LE CITY 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 720000
+      payload: 96
+      speed: 85
+      weight: 12
+      runningcost: 25
+      fixed_cost: 138
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 265
+      gear: 56
+      smoke: Diesel_small
+
+liveries:
+  - color: idsjmk
+    name_en: "IDS JMK white-grey · BDS-BUS"
+    name_cs: "IDS JMK bílo-šedá · BDS-BUS"

@@ -1,0 +1,73 @@
+agency: Praha
+type: "Lions_City_L"
+# Sprites carry their own lane placement (body centred on the median lane
+# footprint of native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+# original art (build.py needs the key; vojtechzicha is only listed once)
+copyright: vojtechzicha
+
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "MAN Lion's City L"
+  family_cs: "MAN Lion's City L"
+
+# MAN Lion's City L, type NL 323 (the 2004-2019 Lion's City generation
+# stretched to 14.7 m): Arriva City 9287-9292 (2019 / 2021, trikolora) and
+# 9293-9295 (2021, scheme A) on Prague line 223. 14.70 x 2.55 x 2.88 m, three
+# axles (front, drive axle 6.925 m behind it, tag axle 1.40 m further),
+# doors 2-2-2 (front overhang, middle, behind the tag axle), MAN D2066 LUH
+# 235 kW (Euro VI-D), about 125 passengers, air conditioning
+# (seznam-autobusu.cz, cars 9292, 9293).
+# Liveries (photos 9288, 9290, 9292 trikolora; 9293 right side, 9294 left
+# rear, 9295 from above, scheme A):
+# - PID trikolora: blue roof and roof-edge strip, black window band, white
+#   band under the windows, red lower body; blue A-pillars, white mask with a
+#   red bumper and red corners; blue A/C unit at the rear of the roof.
+# - PID scheme A: grey body, black window band, three red columns per side
+#   (front arch, ahead of the tandem, round the tag axle) crossing the roof,
+#   red block on the vehicle's left of the lower front, red stripe on the
+#   rear.
+# Sprite: box-model render (agent man, tools/busrender/praha_man.py
+# LionsCityL, the user's variant v3): drawn at its true 14.70 m (60 px in
+# the side views, as the DPP Crossway LE CITY 14,5M), window line 1.20 m,
+# white band 47 % of the lower body, 0.32 m rear A/C; engine grille low in
+# the right rear corner. length 10 (not 8) so two queued buses keep their
+# drawn 15 m apart, as the DPP Crossway LE CITY 14,5M.
+
+vehicles:
+  - id: "Lions_City_L"
+    display_id: "Lion's City L"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 900000
+      payload: 125
+      speed: 90
+      weight: 14
+      runningcost: 31
+      fixed_cost: 156
+      intro_year: 2019
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 235
+      gear: 56
+      smoke: Diesel_small
+
+liveries:
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white · Arriva City"
+    name_cs: "PID červeno-modro-bílá · Arriva City"
+  - color: pidsedocervena
+    name_en: "PID grey-red · Arriva City"
+    name_cs: "PID šedo-červená · Arriva City"

@@ -1,0 +1,71 @@
+agency: Praha
+type: "Dekstra_LF_38"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "Dekstra LF 38 / SKD Stratos LF 38"
+  family_cs: "Dekstra LF 38 / SKD Stratos LF 38"
+
+# Dekstra LF 38 (and its predecessor, the SKD Iveco Stratos LF 38, same body):
+# low-floor midibus on the Iveco Daily 70C chassis, about 7.8 x 2.2 x 2.9 m,
+# Daily cab front with the front wheels under the cab, doors 2-2 (double door
+# right behind the front wheel, double door in the rear overhang), about
+# 40 places, Iveco F1C 3.0 diesel 132 kW, about 5 t.
+# On Prague city lines (21-29 Sep 2026): Martin Uher 1106 (2019), 1108 (2020),
+# 1109 (2022, the last Dekstra built) on line 242; ABOUT ME 1905 / 1906
+# (Dekstra LF 38, 2019) and 1904 (Stratos LF 38, 2014) on line 194.
+# Liveries:
+# - PID scheme A (photos of 1108 / 1109, seznam-autobusu 446183 / 414090):
+#   grey body, black glazing, a red column right behind the front door (skirt to
+#   window line) with a red roof band from the cab roof back over it, red block
+#   on the vehicle's left of the lower front (bonnet to bumper), rear with the
+#   central red stripe of the scheme.
+# - PID trikolora (photos of 1905 in 2019, seznam-autobusu 241014 / 241068):
+#   blue roof and roof-edge strip, black glazing, white band under the windows,
+#   red lower body; white bonnet with a red bumper; rear blue top, white, red
+#   bumper. (1904-1906 now run in advert wraps, which are not drawn.)
+# Sprite: the Tabor Dekstra LF 38 CNG sheet (VTPsim's LE 37 art shortened to the
+# real length, 32 px in the side views) with the CNG tank fairing cut off the
+# roof silhouette and its outline flattened (the Prague cars are diesel and
+# the photos show a plain roof), repainted by zone on a box model of the body
+# (agents/misc/p_dekstra.py in the session scratchpad).
+
+vehicles:
+  - id: "Dekstra_LF_38"
+    display_id: "LF 38"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 330000
+      payload: 40
+      speed: 90
+      weight: 5
+      runningcost: 18
+      fixed_cost: 100
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 132
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Martin Uher"
+    name_cs: "PID šedo-červená · Martin Uher"
+    fields: {intro_year: 2019, intro_month: 7}
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white · ABOUT ME"
+    name_cs: "PID červeno-modro-bílá · ABOUT ME"

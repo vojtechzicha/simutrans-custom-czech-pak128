@@ -1,0 +1,62 @@
+agency: Praha
+type: "Naomi"
+# Sprites carry their own water-lane placement (hull centre on the per-view
+# origin of the native pak128.cs Ferry_yeu_128set / Veveri_ship_128set), so no
+# extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard (wheelhouse glass).
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "Naomi (P1 Břehule, P5 Břehouš, P6 Ledňáček)"
+  family_cs: "Naomi (P1 Břehule, P5 Břehouš, P6 Ledňáček)"
+
+# Real vehicle: Naomi-type ferry boats of Pražské Benátky (design Zdeněk
+# Bergman), three built for the PID ferries P1 Sedlec - Zámky (Břehule),
+# P5 Císařská louka - Výtoň (Břehouš) and P6 Lahovičky - Nádraží Modřany
+# (Ledňáček), first in service 20 Sep 2016. 8.5 x 3.15 m, draught 44 cm,
+# 22 kW diesel, 12 passengers + bikes (prazskebenatky.cz, převozní lodě).
+# Livery: near-black hull with white name and number, red deck and gunwale,
+# bottle-green flat canopy with a scalloped valance on thin black posts, low
+# black railings, varnished wheelhouse (arched windows, cream top band) at
+# 62-83 % of the length towards the bow, red-white lifebuoys, radar/lamp mast,
+# Czech flag at the stern (photos img/c34c Břehule side, c01 three boats bow-on,
+# c20 Lahovičky).
+# Sprite: original box render, tools/shiprender/praha_ferries.py (boatkit.py
+# on tools/busrender/render.py) at its true size on the render.py road scale
+# (8.5 m = 36 px in the side views, next to 51 px for a 12 m bus and 47 px for
+# the Kazi), in the bold detail the user picked: a plain deep canopy valance,
+# a light canopy outline and the top railing only. Hull centre on the water lane of
+# the native Ferry_yeu_128set / Veveri_ship_128set.
+
+vehicles:
+  - id: "Naomi"
+    role_en: "ferry boat"
+    role_cs: "převozní loď"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 60000
+      payload: 12
+      speed: 12
+      power: 22
+      weight: 7
+      runningcost: 20
+      fixed_cost: 45
+      gear: 100
+      intro_year: 2016
+      intro_month: 9
+      retire_year: 2060
+      retire_month: 12
+      waytype: water
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+
+liveries:
+  - color: pbcernocervena
+    name_en: "Pražské Benátky"
+    name_cs: "Pražské Benátky"

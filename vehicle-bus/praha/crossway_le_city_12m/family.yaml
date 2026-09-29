@@ -1,0 +1,53 @@
+agency: Praha
+type: "Crossway_LE_City_12M"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "Iveco Crossway LE City 12M"
+  family_cs: "Iveco Crossway LE City 12M"
+
+# Iveco Crossway LE CITY 12M: 12 x 2.55 m, 3 doors, about 96 places, Cursor 9
+# 265 kW, 85 km/h; built from 2013.
+# On Prague city lines (21-29 Sep 2026): Arriva City 9461 (built 2015; back
+# with Arriva City since 4/2020) of its 2 cars, plain white.
+# Livery: plain white, black glazing band and windscreen (photo of 9461,
+# 2020s; it wore the PID trikolóra in 2015-17).
+# Sprite: the DPMP Crossway LE City 12M sheet (Lubak91's art, lane normalised),
+# the DPMP red roof line, sill stripe and skirt turned into the white of the
+# neighbouring panel of the same face.
+
+vehicles:
+  - id: "Crossway_LE_City_12M"
+    display_id: "Crossway LE City 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 640000
+      payload: 96
+      speed: 85
+      weight: 12
+      runningcost: 26
+      fixed_cost: 133
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 265
+      gear: 56
+      smoke: Diesel_small
+
+liveries:
+  - color: bila
+    name_en: "white · Arriva City"
+    name_cs: "bílá · Arriva City"

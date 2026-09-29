@@ -26,7 +26,10 @@ display:
 # its drawn length) starts right behind it; the joint closes in all 8
 # directions with the engine's 8-unit spacing. Sprite: VTPsim's art, glass
 # converted to the lit-window specials, displays amber; the upstream's second
-# side display over door 4 of the rear section (not on the real bus) removed.
+# side display over door 4 of the rear section (not on the real bus) removed;
+# the two white roof A/C units added, one on the rear half of the front section
+# and one on the front half of the rear section, flanking the bellows (photos
+# of 5017, 5073, 5093).
 
 vehicles:
   - id: "NB_18-A"

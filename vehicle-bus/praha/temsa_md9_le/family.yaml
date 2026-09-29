@@ -1,0 +1,62 @@
+agency: Praha
+type: "TEMSA_MD9_LE"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "TEMSA MD9 LE"
+  family_cs: "TEMSA MD9 LE"
+
+# TEMSA MD9 LE low-entry midibus (registered as Škoda MD9 LE, marketed in CZ
+# as Škoda D'City 9 LE): 9.536 x 2.40 x 3.132 m, wheelbase 4.60 m, 2 doors
+# (single front ahead of the front axle, double centre door ahead of the rear
+# axle), 30 seats + 40 standing = 70, Cummins ISB E6 182 kW + Allison 6-speed,
+# GVW 14.44 t (temsa.com MD9 LE data sheet); 80 km/h assumed like the other
+# PID midibuses.
+# Arriva City 9047-9048 (2023), in Prague service from 4 June 2024
+# (cs-dopravak.cz "Škoda D'CITY 9 LE v pražské premiéře", seznam-autobusu.cz).
+# Livery: PID scheme A (photos of 9047 and 9048): light grey body and roof,
+# black glazing band, red columns around the front axle (door 1 .. 1.1 m
+# behind the wheel) and the rear axle, continued over the roof edge and roof;
+# grey louvred engine corner, red block on the vehicle's left of the lower
+# front, amber LED displays.
+# Sprite: original box render, tools/busrender/praha_small.py (TEMSA), at
+# real length (40 px in the side views, as the ICN 9.5) on the native 12 m
+# lane footprint; the user picked the variant drawn a little taller and
+# wider (2.58 m, 3.12 m roof, tall windscreen) with the raised rear roof
+# fairing. Length 7 as the DPP ICN 9.5; economy from the ICN 9.5.
+
+vehicles:
+  - id: "TEMSA_MD9_LE"
+    display_id: "MD9 LE"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 450000
+      payload: 70
+      speed: 80
+      weight: 9
+      runningcost: 23
+      fixed_cost: 150
+      intro_year: 2024
+      intro_month: 6
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 182
+      gear: 53
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Arriva City"
+    name_cs: "PID šedo-červená · Arriva City"

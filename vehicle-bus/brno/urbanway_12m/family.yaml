@@ -1,0 +1,54 @@
+agency: Brno
+type: "Urbanway_12M"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha      # original art (build.py requires the key)
+display:
+  agency_en: "Brno"
+  agency_cs: "Brno"
+  family_en: "Iveco Urbanway 12M"
+  family_cs: "Iveco Urbanway 12M"
+
+# Iveco Urbanway 12M (diesel), BDS-BUS 6J2 3507: built 2019 (MHD Moravský
+# Krumlov until 01/2022), since 03/2025 the reserve car for Brno city lines 48
+# and 74. 12.0 x 2.5 m, 3 double doors (2-2-2, seznam-autobusu), air
+# conditioning, FPT Tector 7 210 kW, about 100 passengers, 80 km/h, about 11 t.
+# Livery: plain white (photos seznam-autobusu 422546 / 438496): white body, roof
+# and 2013 face with the silver IVECO grille band, continuous black glazing
+# band, white A/C unit over the front third of the roof, engine-bay grille low
+# in the left rear corner; green LED displays, as the DPMB Urbanways.
+# Sprite: rendered by tools/busrender/praha.py on the Urbanway 12M body of
+# tools/busrender/dpmhk.py (the same body as the Praha Urbanway 12M).
+
+vehicles:
+  - id: "Urbanway_12M"
+    display_id: "Urbanway 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 650000
+      payload: 100
+      speed: 80
+      weight: 11
+      runningcost: 24
+      fixed_cost: 123
+      intro_year: 2013
+      intro_month: 6
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 210
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: bila
+    name_en: "white · BDS-BUS"
+    name_cs: "bílá · BDS-BUS"

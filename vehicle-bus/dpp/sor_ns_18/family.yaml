@@ -1,0 +1,87 @@
+agency: DPPraha
+type: "SOR_NS_18"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha      # original art (build.py requires the key)
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "SOR NS 18"
+  family_cs: "SOR NS 18"
+
+# SOR NS 18 (diesel), DPP Prague 5998: one car, built 2021, delivered May 2021
+# and in service from November 2021 (rented for a symbolic 100 CZK a month,
+# first on line 125). 18.75 x 2.55 m, 4 double doors (2-2-2-2), Iveco Cursor
+# F2C 243 kW (Euro VI step E) + ZF Ecolife, 80 km/h, about 150 passengers
+# (seznam-autobusu, zdopravy.cz 12/2021).
+# Livery: DPP city red-white (photos zdopravy.cz 12/2021): white roof, black
+# glazing band up to the roof edge, a white band under it and red lower body;
+# black front roof cap edged by the red SOR wing that runs down the A-pillar;
+# black side panel ahead of the front wheel with the red bumper line along its
+# foot; front: black mask, silver chevron band, white lamp clusters, red lower
+# front; amber displays.
+# Sprite: rendered by tools/busrender/praha.py on the NS 18 body of
+# tools/busrender/dpmhk.py (the same body as the Praha NS 18 family): A/C
+# behind the cap, a low unit mid front section, one on the rear section,
+# louvred engine bay and engine-tower grille at the rear. Sections as the DPP
+# NB 18 (8 + 6).
+
+vehicles:
+  - id: "SOR_NS_18-A"
+    display_id: "NS 18"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["SOR_NS_18-B"]
+    fields:
+      cost: 500000
+      payload: 90
+      speed: 80
+      weight: 9
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2021
+      intro_month: 5
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+
+  - id: "SOR_NS_18-B"
+    display_id: "NS 18"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["SOR_NS_18-A"]
+    next: []
+    fields:
+      cost: 363453
+      payload: 60
+      speed: 80
+      weight: 8
+      runningcost: 11
+      fixed_cost: 56
+      intro_year: 2021
+      intro_month: 5
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 243
+      gear: 62
+      smoke: Diesel_small
+
+liveries:
+  - color: dppcervenobila
+    name_en: "DPP red-white"
+    name_cs: "DPP červeno-bílá"

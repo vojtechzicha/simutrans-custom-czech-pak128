@@ -1,0 +1,69 @@
+agency: DPPraha
+type: "Tourismo_15_RHD"
+# Sprites carry their own lane placement (body footprint on the median lane
+# of native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Mercedes-Benz Tourismo 15 RHD"
+  family_cs: "Mercedes-Benz Tourismo 15 RHD"
+
+# Mercedes-Benz Tourismo 15 RHD, DPP Prague charter coach 4AJ 7335 (built
+# 2014, delivered 13 Nov 2014, in service 18 Nov 2014, garáž Klíčov;
+# seznam-autobusu.cz vuz/45548). Second-generation Tourismo (the type since
+# 2006), 13.99 x 2.55 x 3.68 m, 3 axles (tag axle behind the drive axle),
+# front door ahead of the front axle and a middle door on the right side,
+# Mercedes OM 470 (~315 kW), ~59 + 2 seats, 100 km/h.
+# Livery 'bila' (seznam: "bílá s logem dopravce"; photos of 4AJ 7335 on
+# seznam-autobusu.cz 116949-116952, 449650): white body and roof, black
+# glazing band with a black top frame, black windscreen with the black cap,
+# and the large red DPP emblem over the rear quarter of both sides (a swash
+# falling from under the glazing at the rear corner, then an oval ring with a
+# narrow white hole ending just behind the tag axle); small red DPP logo mid-
+# side and on the rear under the rear window.
+# Sprite: original box-model render (vojtechzicha), not upstream art; model
+# Tourismo15 in tools/busrender/dpp_coaches.py (RegioJet coach pipeline:
+# rj_vrender raycaster, lengths x 1.08, width 3.1 m, true heights, rj_lane
+# placement), variant 'a' picked by the user (rounded roof edge, locker seams,
+# amber side marker lamps). Heights from the photos: glazing band 2.20-3.63 m
+# with the black top row, front-door glazing down to ~1.0 m.
+# Stats: seats as the type; cost and running costs scaled from the RegioJet
+# Irizar PB. Length 10 (15 m) like the RegioJet 15 m coaches: the body is
+# drawn 15.1 m long, so queued coaches don't overlap.
+
+vehicles:
+  - id: "Tourismo_15_RHD"
+    display_id: "Tourismo 15 RHD"
+    role_en: "coach"
+    role_cs: "zájezdový autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 1050000
+      payload: 61
+      speed: 100
+      weight: 15
+      runningcost: 34
+      fixed_cost: 180
+      intro_year: 2006
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 315
+      gear: 58
+      smoke: Diesel
+
+liveries:
+  - color: bila
+    name_en: "white"
+    name_cs: "bílá"

@@ -1,0 +1,56 @@
+agency: Praha
+type: "Urbino_8_9_LE"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "Solaris Urbino 8.9 LE"
+  family_cs: "Solaris Urbino 8,9 LE"
+
+# Solaris Urbino 8,9 LE midibus, 8.95 x 2.40 x 3.05 m, 2 doors (single front,
+# double centre), about 67 places, Cummins ISB6.7 180 kW; built from 2010.
+# On Prague city lines (21-29 Sep 2026): Vega Tour 8420 on line 238 (Fashion
+# Arena shuttle).
+# Livery: Fashion Arena (photo fa_solaris): orange front and front part of the
+# side (slanted rear edge from the roof edge to behind the front wheel), dark
+# navy-grey sides behind with the white "YOUR OUTLET SHOPPING DESTINATION"
+# lettering shown as a broken light band, cream centre panel of the Solaris
+# front mask, black windscreen band, orange front roof.
+# Sprite: the DPP Urbino 8,9 LE sheet (VTPsim's Urbino 8, 35 px in the side
+# views), repainted by zone on a box model of the body (agents/misc/p_urbino.py
+# in the session scratchpad).
+
+vehicles:
+  - id: "Urbino_8_9_LE"
+    display_id: "Urbino 8,9 LE"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 480000
+      payload: 67
+      speed: 100
+      weight: 9
+      runningcost: 22
+      fixed_cost: 110
+      intro_year: 2010
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 180
+      gear: 57
+      smoke: Diesel_small
+
+liveries:
+  - color: fashionarena
+    name_en: "Fashion Arena · Vega Tour"
+    name_cs: "Fashion Arena · Vega Tour"

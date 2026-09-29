@@ -1,0 +1,61 @@
+agency: Praha
+type: "SOR_BN_8_5"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "SOR BN 8.5"
+  family_cs: "SOR BN 8,5"
+
+# SOR BN 8,5, low-entry midibus: 8.5 x 2.525 x 2.9 m, doors 1-2-0, about 21
+# seats / 60 total, Iveco Tector 5 137 kW; built from 2010. It is the BN 9,5
+# with about 1.2 m less wheelbase: one window bay between the front axle and the
+# centre door instead of two (photos), the rear with the raised floor, engine
+# grille and overhang unchanged.
+# On Prague city lines (21-29 Sep 2026): Stenbus 1711 (2015) on line 212; its
+# sister 1712 (2019) is in the same scheme.
+# Livery: old PID trikolóra, as the BN 9,5: blue roof and cant rail, black
+# glazing band, white band, thin black belt line, red lower body, white upper
+# front mask over a red lower front; rear: blue top round the rear window,
+# white centre, red bumper (photos of 1711 from the front, side and rear,
+# 2015-2026).
+# Sprite: VTPsim's pak128_czr SOR BN 9,5 painted as the BN 9,5 of this set and
+# shortened: a window bay cut out between the front axle and the centre door
+# (4 px in the side views, 4 x 2 px along the body in the diagonal views, 3 px
+# in the end-on views), so it is 34 px long in the side views against 38 px for
+# the BN 9,5.
+
+vehicles:
+  - id: "SOR_BN_8_5"
+    display_id: "BN 8,5"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 400000
+      payload: 60
+      speed: 90
+      weight: 7
+      runningcost: 21
+      fixed_cost: 140
+      intro_year: 2010
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 137
+      gear: 53
+      smoke: Diesel_small
+
+liveries:
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white · Stenbus"
+    name_cs: "PID červeno-modro-bílá · Stenbus"

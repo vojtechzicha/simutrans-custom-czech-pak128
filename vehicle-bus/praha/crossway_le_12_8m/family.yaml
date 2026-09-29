@@ -1,0 +1,61 @@
+agency: Praha
+type: "Crossway_LE_12_8M"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "Irisbus Crossway LE 12.8M"
+  family_cs: "Irisbus Crossway LE 12,8M"
+
+# Irisbus Crossway LE 12,8M: 12.76 x 2.55 x 3.215 m, 3 doors, about 105
+# places, Cursor 8 243 kW, 85 km/h; built from 2007.
+# On Prague city lines (21-29 Sep 2026): ARANEA 1477 (2011) and 1488 in the
+# old PID trikolóra, Arriva City 9411 (2013, with Arriva City since 1/2014) in
+# plain white.
+# Liveries: trikolóra = ultramarine roof, black glazing band, white band,
+# red lower body from the wheel-arch tops; front: blue roof cap, black
+# windscreen, white middle, red lower front wrapping round the corners; rear:
+# blue above the rear window, white, red lower third (photos of 1477 and 1488,
+# 2020-2026). White: plain white, black glazing (photo of 9411).
+# Sprite: the DPP Crossway LE 12,8M sheet (Lubak91's CZR-Praha art, lane
+# normalised), repainted: roof and rear cap PID ultramarine, the DPP red sill
+# stripe under the windows white; for the white car all red turned into the
+# white of the same face.
+
+vehicles:
+  - id: "Crossway_LE_12_8M"
+    display_id: "Crossway LE 12,8M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 650000
+      payload: 105
+      speed: 85
+      weight: 11
+      runningcost: 27
+      fixed_cost: 135
+      intro_year: 2008
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 243
+      gear: 56
+      smoke: Diesel_small
+
+liveries:
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white · ARANEA"
+    name_cs: "PID červeno-modro-bílá · ARANEA"
+  - color: bila
+    name_en: "white · Arriva City"
+    name_cs: "bílá · Arriva City"

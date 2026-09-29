@@ -1,0 +1,66 @@
+agency: Praha
+type: "NovoCiti_Life"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "Isuzu NovoCiti Life"
+  family_cs: "Isuzu NovoCiti Life"
+
+# Isuzu NovoCiti Life (Class I), 7.9 m low-floor midibus: 7.9 x 2.3 x 3.0 m,
+# 2 doors (front, centre), about 60 places, Isuzu 4HK1 5.2 l diesel 140 kW.
+# On Prague city lines (21-29 Sep 2026): ABOUT ME 1908 / 1909 (2024) on line
+# 153; Vega Tour 8421 (2021) on line 238 (Fashion Arena shuttle).
+# Liveries:
+# - PID scheme A (photos of 1908 / 1909, seznam-autobusu 451285 / 419078):
+#   grey body and roof, black glazing up to the roof edge with a thin grey
+#   strip, red columns over the front wheel arch and across the rear corner,
+#   continued as red bands over the roof; black band under the windscreen, red
+#   block on the vehicle's left of the lower front; central red stripe on the
+#   rear. The white A/C unit is drawn between the two roof bands. (Rear
+#   wraps of 1908 / 1909 are not drawn.)
+# - Fashion Arena (Vega Tour 8421, photo fa_isuzu): orange front and front part
+#   of the side (slanted rear edge from the roof edge to behind the front
+#   wheel), dark navy-grey sides behind with the white "YOUR OUTLET SHOPPING
+#   DESTINATION" lettering shown as a broken light band, orange front roof.
+# Sprite: the DPMP NovoCiti Life sheet (VTPsim's Urbino 8 body shortened to
+# 7.9 m, 31 px in the side views), repainted by zone on a box model of the
+# body (agents/misc/p_novociti.py in the session scratchpad).
+
+vehicles:
+  - id: "NovoCiti_Life"
+    display_id: "NovoCiti Life"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 420000
+      payload: 60
+      speed: 90
+      weight: 7
+      runningcost: 20
+      fixed_cost: 120
+      intro_year: 2018
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 140
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · ABOUT ME"
+    name_cs: "PID šedo-červená · ABOUT ME"
+  - color: fashionarena
+    name_en: "Fashion Arena · Vega Tour"
+    name_cs: "Fashion Arena · Vega Tour"

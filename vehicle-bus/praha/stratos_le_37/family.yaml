@@ -1,0 +1,58 @@
+agency: Praha
+type: "Stratos_LE_37"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "SKD Stratos LE 37"
+  family_cs: "SKD Stratos LE 37"
+
+# SKD Iveco Stratos LE 37 (the body later built as the Iveco-Dekstra LE 37):
+# low-entry midibus on the Iveco Daily chassis, about 7.7 x 2.2 x 2.9 m, Daily
+# cab front, doors 1-2 (single door behind the front wheel, double door in the
+# rear overhang), about 40 places, Iveco F1C 3.0 diesel 125 kW.
+# On Prague city lines (21-29 Sep 2026): ABOUT ME 1910 (2013) on line 242.
+# Livery: PID trikolora (1910 now wears an O2 advert wrap, which is not drawn):
+# blue roof and roof-edge strip, black glazing, white band under the windows,
+# red lower body, white bonnet with a red bumper, rear blue top / white / red.
+# Painted like the Dekstra LF 38 trikolora (photos of Dekstra 1905, 2019).
+# Sprite: the Dekstra LF 38 trikolora sheet of this pak (Tabor sheet, VTPsim's
+# LE 37 art shortened to 7.7 m, 32 px). The DPO Dekstra LE 37 sheet named as
+# the base is drawn 39 px long, as long as the 9.5 m ICN, so its shortened
+# Tabor derivative is used instead; the front door stays double (1 px wider
+# than the real single door).
+
+vehicles:
+  - id: "Stratos_LE_37"
+    display_id: "LE 37"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 320000
+      payload: 40
+      speed: 90
+      weight: 5
+      runningcost: 18
+      fixed_cost: 100
+      intro_year: 2009
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 125
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white · ABOUT ME"
+    name_cs: "PID červeno-modro-bílá · ABOUT ME"

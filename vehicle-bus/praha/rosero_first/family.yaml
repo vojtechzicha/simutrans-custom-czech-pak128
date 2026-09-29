@@ -1,0 +1,57 @@
+agency: Praha
+type: "Rosero_First"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "Rošero First FCLLI"
+  family_cs: "Rošero First FCLLI"
+
+# Rošero-P First FCLLI: low-entry midibus on the Iveco Daily 70C chassis (2006
+# Daily cab front), about 8.2 x 2.2 x 3.0 m, door behind the front wheel and a
+# door in the rear overhang, about 35 places, Iveco F1C 3.0 diesel 125 kW.
+# On Prague city lines (21-29 Sep 2026): ABOUT ME 1913 and 1902 (both 2012) on
+# lines 153 / 194 / 242.
+# Livery: plain white body and roof, black glazing, white roof A/C unit on the
+# front half of the roof (photos of 1902 / 1913, seznam-autobusu 441797 /
+# 447325; 1902 carries advert panels, not drawn).
+# Sprite: the Tabor Rosero First sheet unchanged (VTPsim's LE 37 art shortened
+# to the real length, 2-1 doors, roof A/C unit, already plain white with the
+# lit-window glass and amber displays). The DPO Rosero First was the other
+# candidate; it carries a CNG roof pod and no A/C, so the Tabor one is closer
+# to the Prague diesel cars.
+
+vehicles:
+  - id: "Rosero_First"
+    display_id: "First FCLLI"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 300000
+      payload: 35
+      speed: 90
+      weight: 5
+      runningcost: 18
+      fixed_cost: 95
+      intro_year: 2012
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 125
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: bila
+    name_en: "white · ABOUT ME"
+    name_cs: "bílá · ABOUT ME"

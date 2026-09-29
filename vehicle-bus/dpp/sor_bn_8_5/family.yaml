@@ -1,0 +1,59 @@
+agency: DPPraha
+type: "SOR_BN_8_5"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "SOR BN 8.5"
+  family_cs: "SOR BN 8,5"
+
+# SOR BN 8,5, low-entry midibus: 8.5 x 2.525 x 2.9 m, doors 1-2-0, about 21
+# seats / 60 total, Iveco Tector 5 137 kW; built from 2010. It is the BN 9,5
+# with about 1.2 m less wheelbase: one window bay between the front axle and the
+# centre door instead of two (photos), the rear with the raised floor, engine
+# grille and overhang unchanged.
+# DPP 2071 (ex-2022), a 2013 SOR demonstrator, with DPP since 2016 (garage
+# Řepy); a one-off, not seen on city lines in the Sep 2026 survey.
+# Livery: DPP classic city scheme: white roof and cant rail, black glazing
+# band, white band, red lower body from the wheel-arch tops, black upper front
+# mask with the DPP logo over a red bumper (Wikimedia Commons photos "Zličín,
+# SOR BN 8,5 DPP" and "V Šáreckém údolí, autobus SOR BN 8,5").
+# Sprite: VTPsim's pak128_czr SOR BN 9,5 shortened as the Praha BN 8,5 (same
+# body), the blue roof repainted white (the shades of the DPMP BN 9,5), the
+# black front mask kept, glass converted to the lit-window specials, the
+# green-light displays made amber LED, lane placement normalised.
+
+vehicles:
+  - id: "SOR_BN_8_5"
+    display_id: "BN 8,5"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 400000
+      payload: 60
+      speed: 90
+      weight: 7
+      runningcost: 21
+      fixed_cost: 140
+      intro_year: 2010
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 137
+      gear: 53
+      smoke: Diesel_small
+
+liveries:
+  - color: dppcervenobila
+    name_en: "DPP red-white"
+    name_cs: "DPP červeno-bílá"

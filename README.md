@@ -204,6 +204,26 @@ ComfortJet coaches are CZR art ported 1:1.
     NS 12, ICN 9,5, Irisbus Citelis 12M CNG, Iveco Crossway LE CITY 12M NP,
     LE CITY 14,5M and LE LINE 12M, Solaris Urbino 18.
   - DPMB trolleybuses: Škoda 26Tr, 27Tr, 31Tr, 32Tr and SOR TNS 12.
+  - DPP also: SOR BN 8,5, NS 18, the NB 12 in PID grey-red, the BN 12 in DPP
+    red-white, the driving-school Iveco Crossway PRO 10,8M / 12M and the
+    Mercedes-Benz Tourismo RHD (DPP red) and Tourismo 15 RHD coaches.
+- **Prague city lines, other operators (`VZ-Praha-bus.pak`, `VZ-Praha-water.pak`)**
+  — every type and livery seen on PID city lines 100–299 / 900s in September
+  2026 for Arriva City, ČSAD Střední Čechy, ČSAD Polkost, ABOUT ME, Stenbus,
+  ARANEA, Martin Uher and Vega Tour. One package for all of them; the operator
+  appears only in the livery name. SOR NB 12, NS 12, NS 18, NC 18, BN 8,5 / 9,5 /
+  10,5 / 12, CN 9,5 and ICN 9,5; Iveco Urbanway, Streetway and E-Way 12M,
+  Crossway LE 12M / 12,8M and LE City 12M; MAN Lion's City 12C (and
+  EfficientHybrid), L, NL 293 and Lion's Intercity LE 12; Scania Citywide LF;
+  BMC Neocity 8,5 and Procity 10,6; TEMSA MD9 LE; Erduman Sprinter 519;
+  Isuzu NovoCiti Life; Dekstra LF 38, Stratos LE 37, Rošero First, Solaris
+  Urbino 8,9 LE. Liveries: PID grey-red, PID red-blue-white, city red-white,
+  white, Veolia red-grey, turquoise and the Fashion Arena scheme of line 238.
+  The PID ferries are the Pražské Benátky Naomi boats (P1, P5, P6) and Baba
+  (P2), and PPS's Holka 2 (P4).
+- **Brno city lines, other operators (`VZ-Brno-bus.pak`)** — BDS-BUS on lines 48
+  and 74: MAN NL 283 Lion's City, Iveco Crossway LE City 12M and SOR CN 12 in
+  the IDS JMK scheme, Iveco Urbanway 12M in white.
 - **Other city (MHD) fleets** — the active September 2026 rosters of 16 more
   towns, imported from the older pak128_czr sets and completed. Placeholder and
   wrong-livery art was repainted, missing types were drawn from the closest body,

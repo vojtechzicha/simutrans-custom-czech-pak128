@@ -1,0 +1,53 @@
+agency: Praha
+type: "Streetway_12M"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "Iveco Streetway 12M"
+  family_cs: "Iveco Streetway 12M"
+
+# Iveco Streetway 12M (Otokar Kent C body): 12.0 x 2.54 x 3.245 m, 3 double
+# doors (2-2-2), about 86 places, FPT Cursor 9 228 kW, 90 km/h.
+# On Prague city lines (21-29 Sep 2026): ČSAD Střední Čechy 8103 (built 2022)
+# and 8105-8107 (2023), in service with ČSAD SČ from 28 Feb 2023; 5 cars in
+# the fleet.
+# Livery: PID scheme A with the original front, exactly as on DPP 4101-4183
+# (photos of 8103 and 8107).
+# Sprite: the DPP Streetway 12M sheet (box render of the Kent C body at the
+# scale and lane of the DPMP Streetway), copied 1:1.
+
+vehicles:
+  - id: "Streetway_12M"
+    display_id: "Streetway 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 640000
+      payload: 86
+      speed: 90
+      weight: 12
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2023
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 228
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · ČSAD Střední Čechy"
+    name_cs: "PID šedo-červená · ČSAD Střední Čechy"

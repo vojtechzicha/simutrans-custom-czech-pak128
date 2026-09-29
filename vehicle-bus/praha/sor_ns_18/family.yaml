@@ -1,0 +1,88 @@
+agency: Praha
+type: "SOR_NS_18"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha      # original art (build.py requires the key)
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "SOR NS 18"
+  family_cs: "SOR NS 18"
+
+# SOR NS 18 (diesel), low-floor articulated city bus: 18.75 x 2.55 m, 4 double
+# doors (2-2-2-2), about 150 passengers, Iveco Cursor 243 kW + ZF Ecolife,
+# 80 km/h, about 16.5 t (DPP test car 5998, seznam-autobusu). Model on sale
+# from 2021. Arriva City 9378-9380 (2024) on Prague city lines.
+# Livery: PID 2021 scheme A as the SOR NS 12: grey body, black glazing band up
+# to the roof edge, black front cap with the silver SOR wing, black panel under
+# the driver's window, red block on the vehicle's left of the lower front and
+# rear; three red columns per side, measured by projective fit on the side
+# photo of 9378: over the front axle (1.75-3.75 m from the front), ahead of the
+# middle axle (6.45-8.00 m) and over the rear axle (14.3-16.2 m), each
+# continued as a band across the roof.
+# Sprite: rendered by tools/busrender/praha.py on the NS 18 body of
+# tools/busrender/dpmhk.py (DPMHK NS 18 geometry, joint 11.10 m): A/C units
+# between the roof bands on both sections, louvred engine bay in the last side
+# bay and engine-tower grille on the rear. Two sections like the DPP NB 18:
+# front section length 8, rear section length 6, drawn at 4/3 m per carunit
+# with the (4 - L/2) shift so the joint closes in all 8 directions.
+
+vehicles:
+  - id: "SOR_NS_18-A"
+    display_id: "NS 18"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["SOR_NS_18-B"]
+    fields:
+      cost: 500000
+      payload: 90
+      speed: 80
+      weight: 9
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2021
+      intro_month: 5
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+
+  - id: "SOR_NS_18-B"
+    display_id: "NS 18"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["SOR_NS_18-A"]
+    next: []
+    fields:
+      cost: 363453
+      payload: 60
+      speed: 80
+      weight: 8
+      runningcost: 11
+      fixed_cost: 56
+      intro_year: 2021
+      intro_month: 5
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 243
+      gear: 62
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Arriva City"
+    name_cs: "PID šedo-červená · Arriva City"

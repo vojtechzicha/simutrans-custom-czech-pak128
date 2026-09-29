@@ -1,0 +1,72 @@
+agency: Praha
+type: "SOR_BN_9_5"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "SOR BN 9.5"
+  family_cs: "SOR BN 9,5"
+
+# SOR BN 9,5, low-entry midibus: 9.6 x 2.525 x 2.9 m, doors 1-2-0 (single
+# front, double centre just ahead of the rear axle), low floor to the centre
+# door, raised rear section, about 23-28 seats / 71 total, Iveco Tector 185 kW;
+# built from 2005.
+# On Prague city lines (21-29 Sep 2026): ABOUT ME 1941-1948 (2015-16), Arriva
+# City 9042-9046 (2019-20), ČSAD Střední Čechy 7985-7990 (2019-20); the
+# advertising wraps (1941, 1946, 9042, 9043) are not drawn.
+# Livery: old PID trikolóra: blue roof and cant rail (rear roof raised), black
+# glazing band, white band under the windows (narrow at the front, tall behind
+# the centre door where the floor steps up), thin black belt line, red lower
+# body; front: white upper mask, red lower front with the lamps (photos of
+# 1943, side / front / rear, 2016-2023).
+# Livery 2, PID scheme A (2021): ABOUT ME 1942 (2015), repainted 01/2026
+# (seznam-autobusu; no photo of it in the new paint yet, so the layout follows
+# the same SOR body family, ČSAD Střední Čechy CN 9,5 7981 / 7984, photos
+# 2024-25, and the DPP ICN 9,5): light grey body and roof, continuous black
+# glazing, red columns from the skirt to the window line over the front axle
+# (door 1 .. just behind the front wheel) and over the rear axle (just behind
+# the rear wheel centre .. door 2), continued above the windows and as bands
+# across the roof, red block on the vehicle's left of the lower front and of
+# the lower rear; colours of the DPP ICN 9,5.
+# Sprite: VTPsim's pak128_czr Praha SOR BN 9,5; blue repainted the PID
+# ultramarine of the DPP BN 12, the black NB-style front mask repainted white
+# over red as on the DPP BN 12, glass converted to the lit-window specials, the
+# green-light displays made amber LED, lane placement normalised.
+
+vehicles:
+  - id: "SOR_BN_9_5"
+    display_id: "BN 9,5"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 455000
+      payload: 71
+      speed: 90
+      weight: 8
+      runningcost: 24
+      fixed_cost: 154
+      intro_year: 2005
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 185
+      gear: 53
+      smoke: Diesel_small
+
+liveries:
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white · ABOUT ME, Arriva City, ČSAD Střední Čechy"
+    name_cs: "PID červeno-modro-bílá · ABOUT ME, Arriva City, ČSAD Střední Čechy"
+  - color: pidsedocervena
+    name_en: "PID grey-red · ABOUT ME"
+    name_cs: "PID šedo-červená · ABOUT ME"

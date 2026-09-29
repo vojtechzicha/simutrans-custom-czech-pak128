@@ -1,0 +1,67 @@
+agency: DPPraha
+type: "Crossway_Pro_10_8M"
+# Sprites carry their own lane placement (body footprint matched to the
+# median of native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Iveco Crossway PRO 10.8M"
+  family_cs: "Iveco Crossway PRO 10,8M"
+
+# Iveco Crossway PRO 10,8M, DPP Prague driving-school buses (autoškola,
+# garáž Hostivař): 6AZ 6097 (built 2018, in service 6/2018) and 8AB 9031
+# (2020, 4/2020); seznam-autobusu.cz vuz/74627, vuz/88415. High-floor
+# interurban Crossway (2013 Euro VI body), 10.795 x 2.55 x ~3.15 m (3.35 m
+# over the A/C), wheelbase ~5.1 m, doors 1-1-0 (front door ahead of the
+# front axle, single middle door just ahead of the rear axle), Iveco Cursor 9
+# 265 kW with a Voith 4-speed automatic, ~41 seats + ~30 standing, 100 km/h.
+# Livery 'bila' (seznam: "bílá"; photos 6AZ 6097 on seznam-autobusu.cz
+# 239834/239835/370132): plain white body and roof, black flush glazing band
+# whose lower edge dips one step behind the front door (the 'CROSSWAY'
+# swoosh), black windscreen and front-door glazing, grey IVECO bar on the
+# white front mask, small red DPP logo and blue driving-school L plates
+# (front, both sides, big one on the rear), engine grille at the right rear.
+# Sprite: original box-model render (vojtechzicha), not upstream art; model
+# CrosswayPro108 in tools/busrender/dpp_coaches.py (RegioJet coach pipeline: rj_vrender
+# raycaster, lengths x 1.08, width 3.1 m, true heights, rj_lane placement).
+# Heights from the side-on photo 370132: body 0.32 m, glazing band
+# 1.75-2.94 m, white roof rim to 3.18 m, A/C pod over the front half.
+# Stats: real power/speed; cost and running costs scaled from the DPP
+# Streetway 12M / NB 12; length 8, drawn shorter than the 12 m buses.
+
+vehicles:
+  - id: "Crossway_Pro_10_8M"
+    display_id: "Crossway PRO 10,8M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 590000
+      payload: 71
+      speed: 100
+      weight: 10
+      runningcost: 24
+      fixed_cost: 120
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 265
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: bila
+    name_en: "white"
+    name_cs: "bílá"

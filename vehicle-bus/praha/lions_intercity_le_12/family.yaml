@@ -1,0 +1,63 @@
+agency: Praha
+type: "Lions_Intercity_LE_12"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+# original art (build.py needs the key; vojtechzicha is only listed once)
+copyright: vojtechzicha
+
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "MAN Lion's Intercity LE 12"
+  family_cs: "MAN Lion's Intercity LE 12"
+
+# MAN Lion's Intercity LE 12, type LEÜ 330 (low-entry suburban bus, series
+# from 2020): Vega Tour 8431-8434 (2024 / 2026), 8434 seen on Prague city line
+# 238. 12.28 x 2.55 m, wheelbase 6.09 m, doors 1-2-0 (single-leaf front door,
+# double door ahead of the rear axle), MAN D1556 LOH 243 kW (Euro VI-E),
+# about 90 passengers, air conditioning (seznam-autobusu.cz, cars 8431,
+# 8434). Same body at ČSAD Polkost 1603-1635 (suburban).
+# Livery: PID scheme A (photos 8431 left side, Polkost 1616 right side):
+# grey body, black window band reaching lower in the low-entry front, red
+# columns round the front arch (door 1 to behind the arch) and the rear arch
+# (door 2 to behind the arch) crossing the roof, new-generation MAN black
+# face with red on the vehicle's left of the lower front.
+# Sprite: box-model render (agent man, tools/busrender/praha_man.py
+# IntercityLE, the user's variant v1): the 12C face, fairing and fins, the
+# higher glass of the raised rear, engine louvres low in the rear corners,
+# amber LED displays.
+
+vehicles:
+  - id: "Lions_Intercity_LE_12"
+    display_id: "Lion's Intercity LE 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 650000
+      payload: 90
+      speed: 100
+      weight: 12
+      runningcost: 25
+      fixed_cost: 130
+      intro_year: 2020
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 243
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Vega Tour"
+    name_cs: "PID šedo-červená · Vega Tour"

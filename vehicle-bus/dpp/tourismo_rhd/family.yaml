@@ -1,0 +1,67 @@
+agency: DPPraha
+type: "Tourismo_RHD"
+# Sprites carry their own lane placement (body footprint on the median lane
+# of native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Mercedes-Benz Tourismo RHD"
+  family_cs: "Mercedes-Benz Tourismo RHD"
+
+# Mercedes-Benz Tourismo RHD (M/2), DPP Prague charter coach 8002 II
+# (1AM B773, built 2025, in service 12/2025, garáž Klíčov; seznam-autobusu.cz
+# vuz/144877). Current Tourismo generation (from 2017), 12.14 x 2.55 x
+# 3.71 m, 2 axles, doors 1-1-0 (front door ahead of the front axle, middle
+# door ahead of the rear axle), OM 470 (~315 kW), ~49 + 2 seats, 100 km/h.
+# Livery 'dppcervena' (seznam: "červená" + "grafika panoramatu Prahy, zlatá"
+# from 2/2026; photos 449626 / 449650 on seznam-autobusu.cz): DPP red body,
+# roof and mirrors, black glazing band whose lower edge sweeps down to the
+# front door, black windscreen; a thin gold line along the side rising into
+# the Prague skyline near the rear, gold "Praha" script over the rear
+# lockers, white dpp logos mid-side, on the front and on the rear. This is
+# DPP's own coach livery, not an advert wrap; DPP has no Tourismo in the PID
+# grey-red scheme.
+# Sprite: original box-model render (vojtechzicha), not upstream art; model
+# TourismoNew in tools/busrender/dpp_coaches.py (RegioJet coach pipeline:
+# rj_vrender raycaster, lengths x 1.08, width 3.1 m, true heights, rj_lane
+# placement), variant 'a' picked by the user (rounded roof edge, locker
+# seams, amber side marker lamps).
+# Stats: seats as the type; cost and running costs scaled from the RegioJet
+# Irizar PB and the Tourismo 15 RHD. Length 8 like the 12 m buses.
+
+vehicles:
+  - id: "Tourismo_RHD"
+    display_id: "Tourismo RHD"
+    role_en: "coach"
+    role_cs: "zájezdový autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 900000
+      payload: 51
+      speed: 100
+      weight: 13
+      runningcost: 30
+      fixed_cost: 160
+      intro_year: 2017
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 315
+      gear: 56
+      smoke: Diesel
+
+liveries:
+  - color: dppcervena
+    name_en: "DPP red"
+    name_cs: "DPP červená"

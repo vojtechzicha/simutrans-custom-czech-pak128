@@ -1,0 +1,68 @@
+agency: Praha
+type: "Urbanway_12M"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha      # original art (build.py requires the key)
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "Iveco Urbanway 12M"
+  family_cs: "Iveco Urbanway 12M"
+
+# Iveco Urbanway 12M (diesel), low-floor city bus on sale from 2013: 12.0 x
+# 2.55 m, 3 double doors (2-2-2), about 100 passengers, FPT Tector 7 210 kW,
+# 80 km/h, about 11 t. On Prague city lines (21-29 Sep 2026):
+# red-blue-white ČSAD Střední Čechy 8047-8050 (2019) and 8094-8097 (2020),
+# Arriva City 9472-9473 (2015), ARANEA 1490 (2020), Stenbus 1747 (2015),
+# ČSAD Polkost 1581 (2016); grey-red ČSAD Střední Čechy 8100-8102 (2021) and
+# 8136-8140 (2024).
+# Livery B, old PID trikolora (photos of 8096 / 8047 / 1747): blue roof, roof
+# pod, cant and windscreen cap, thin blue A-pillar edge, black glazing band,
+# white band, red lower body; 2013 face: white nose with the silver IVECO grille
+# band and the red bumper sweeping up at the corners.
+# Livery A, PID 2021 scheme (photos of 8136 / 8139): grey body, black glazing
+# band up to the roof edge, red columns over the front axle (1.85-4.10 m) and
+# ahead of / over the rear axle (7.40-9.55 m, projective fit on both photos),
+# continued as roof bands; 2024 face (black windscreen surround, grey band with
+# slim lamps and the IVECO letters) with the red block on the vehicle's left
+# of the lower front. Drawn with the 2024 face of 8136-8140 (5 of the 8 cars);
+# 8100-8102 have the 2013 face.
+# Sprite: rendered by tools/busrender/praha.py on the Urbanway 12M body of
+# tools/busrender/dpmhk.py (DPMHK geometry, roof A/C, black engine panel behind
+# door 3); amber LED displays.
+
+vehicles:
+  - id: "Urbanway_12M"
+    display_id: "Urbanway 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 620000
+      payload: 100
+      speed: 80
+      weight: 11
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2013
+      intro_month: 6
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 210
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white · ČSAD Střední Čechy, Arriva City, ARANEA, Stenbus, ČSAD Polkost"
+    name_cs: "PID červeno-modro-bílá · ČSAD Střední Čechy, Arriva City, ARANEA, Stenbus, ČSAD Polkost"
+  - color: pidsedocervena
+    name_en: "PID grey-red · ČSAD Střední Čechy"
+    name_cs: "PID šedo-červená · ČSAD Střední Čechy"

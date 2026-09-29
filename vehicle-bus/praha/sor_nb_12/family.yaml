@@ -1,0 +1,69 @@
+agency: Praha
+type: "SOR_NB_12"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "SOR NB 12 City"
+  family_cs: "SOR NB 12 City"
+
+# SOR NB 12 City, low-floor 12 m city bus: 12.18 x 2.55 x 3.11 m, 4 double
+# doors, about 88 places, Iveco Tector 210 kW, 80 km/h; built from 2009 (the
+# same type as DPP's 3641-4100).
+# On Prague city lines (21-29 Sep 2026): Arriva City 9400-9403 (2012),
+# 9466-9483 (2015-16) and 9115-9124 (2017-18), ABOUT ME 1962-1964 (2013), all in
+# the old PID trikolóra; ARANEA 1481 (2013) plain white; ARANEA 1478 (2011) and
+# Stenbus 1740 (2012), both ex-DPP, still in the DPP city scheme. The
+# advertising wraps (9116, 9122, 9123, ARANEA 2454) are not drawn.
+# Liveries: trikolóra = ultramarine roof and cant rail, black glazing band,
+# narrow white band, red lower body, black windscreen and mask over a white
+# front with a red bumper (photos of 9120, 9124, 9401, 9402, 9467, 1964);
+# white = plain white with black glazing (photo of 1481); city = white roof and
+# body, black window band, red lower body (photos of 1478 next to DPP 4072,
+# 1740).
+# Sprite: the DPP NB 12 sheets (VTPsim's pak128_czr Praha NB 12, repainted and
+# lane-normalised in the DPP family, with the roof A/C unit behind the front
+# roof edge that every photographed car carries: blue on the trikolóra cars as
+# on 9120, white on the others), copied 1:1; the white livery is the city
+# sheet with its red turned into the white of the same face.
+
+vehicles:
+  - id: "NB_12"
+    display_id: "NB 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 604804
+      payload: 88
+      speed: 80
+      weight: 11
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2009
+      intro_month: 8
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 210
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white · Arriva City, ABOUT ME"
+    name_cs: "PID červeno-modro-bílá · Arriva City, ABOUT ME"
+  - color: bila
+    name_en: "white · ARANEA"
+    name_cs: "bílá · ARANEA"
+  - color: mestskacervenobila
+    name_en: "city red-white · ARANEA, Stenbus"
+    name_cs: "městská červeno-bílá · ARANEA, Stenbus"

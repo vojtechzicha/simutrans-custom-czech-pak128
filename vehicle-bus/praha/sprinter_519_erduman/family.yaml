@@ -1,0 +1,64 @@
+agency: Praha
+type: "Sprinter_519_Erduman"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "Erduman Mercedes-Benz Sprinter 519 CDI"
+  family_cs: "Erduman Mercedes-Benz Sprinter 519 CDI"
+
+# Erduman (Seyyah) low-floor city minibus on the Mercedes-Benz Sprinter 519
+# CDI chassis: about 7.4 x 2.02 m, wheelbase 4.325 m, one folding door behind
+# the front axle, 13 SEGE seats + 2 folding + 7 standing = 22 passengers
+# (busportal.cz "První nízkopodlažní Erduman Mercedes-Benz Sprinter má ve
+# flotile ABOUT ME"), 3.0 l V6 140 kW, 100 km/h (speed sticker on the rear of
+# 1907 / 1911 / 1912).
+# ABOUT ME: 1907 (2023, first in service 16 Feb 2024 on line 194), 1911
+# (2024) and 1912 (2025); 1907 has an advertising wrap on the rear, not drawn
+# (seznam-autobusu.cz).
+# Livery: PID scheme A (photos of 1907, 1911, 1912): silver-grey body, a red
+# column behind the cab on the left and behind the door on the right carried
+# over the roof edge, red diagonal on the vehicle's left of the bonnet and
+# bumper, red left rear door up to the window; roof-mounted amber front
+# display box and rear A/C unit.
+# Sprite: original box render, tools/busrender/praha_small.py (SPRINTER), at
+# real length (31 px in the side views, clearly smaller than the 36-40 px
+# midibuses) on the native 12 m lane footprint; the user picked the variant
+# drawn 2.30 m wide with a 2.82 m roof so it reads at 1x. Length 5 (7.4 m, on
+# the DPP scale of 12 m = 8, 9.55 m = 7, 8.95 m = 6); economy scaled from the
+# midibuses.
+
+vehicles:
+  - id: "Sprinter_519_Erduman"
+    display_id: "Sprinter 519 CDI"
+    role_en: "minibus"
+    role_cs: "minibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 190000
+      payload: 22
+      speed: 100
+      weight: 4
+      runningcost: 12
+      fixed_cost: 70
+      intro_year: 2024
+      intro_month: 2
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 140
+      gear: 64
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · ABOUT ME"
+    name_cs: "PID šedo-červená · ABOUT ME"

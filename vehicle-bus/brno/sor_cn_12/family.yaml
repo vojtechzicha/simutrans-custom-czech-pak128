@@ -1,0 +1,62 @@
+agency: Brno
+type: "SOR_CN_12"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+display:
+  agency_en: "Brno"
+  agency_cs: "Brno"
+  family_en: "SOR CN 12"
+  family_cs: "SOR CN 12"
+
+# SOR CN 12, suburban bus with a raised floor: about 12.0 x 2.525 x 3.1 m,
+# doors 1-2-0, about 45 seats / 95 total, Iveco Tector / Cursor about 194 kW;
+# built from 2004.
+# On Brno city line 74: BDS-BUS 7J1 5363 (IDS JMK scheme).
+# Livery: IDS JMK regional scheme: light grey roof with a red line along the
+# roof edges (the red cant rail down to the window tops and the red cap over
+# the windscreen; the roof reads grey from above, photos of the BDS-BUS MAN
+# 6J9 519x cars), a white A/C unit on the front roof section, black glazing band, white
+# band under the windows, dark belt line at the wheel-arch tops, silver-grey
+# lower body; front: white mask under the windscreen, grey bumper with the
+# lamps; green LED destination displays (seznam-autobusu photo of 7J1 5363,
+# 2025). The red and grey are the ones of the pak128_czr IDS JMK buses.
+# Sprite: VTPsim's pak128_czr IREDO SOR CN 12 White (the cleaner of the two
+# upstream CN 12 sheets): roof light grey with red edge lines, lower body under the belt
+# line grey, the front roof hatch drawn as the white A/C box, the black
+# NB-style front mask white over a grey bumper, glass converted to the
+# lit-window specials, displays green LED (as the car; a plain colour, not the
+# light special), lane placement normalised.
+
+vehicles:
+  - id: "SOR_CN_12"
+    display_id: "CN 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 560000
+      payload: 95
+      speed: 100
+      weight: 10
+      runningcost: 26
+      fixed_cost: 130
+      intro_year: 2004
+      intro_month: 9
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 194
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: idsjmk
+    name_en: "IDS JMK white-grey · BDS-BUS"
+    name_cs: "IDS JMK bílo-šedá · BDS-BUS"

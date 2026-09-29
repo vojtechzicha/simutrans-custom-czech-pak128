@@ -67,6 +67,7 @@ Transport modes: `vehicle-rail/`, `vehicle-bus/`, `vehicle-tram/`, `vehicle-wate
 agency: CeskeDrahy            # PascalCase, goes into basename verbatim
 type: "814.0"                 # used as basename Type token; dots → underscores when emitted
 copyright: Sim                # original upstream credit; build appends ", vojtechzicha"
+#                             # required: fully original art uses `copyright: vojtechzicha`
 # image_offset: [0, 4]        # optional x,y pixel offset makeobj applies to every image
 #                             # (default [0, 4], suited to the rail sources); road families
 #                             # whose sprites are already placed at the native pak128.cs
@@ -234,6 +235,21 @@ Regenerate everything with `python tools/railpaint/cd.py [family …] [--preview
 The DPMHK Hradec Králové families (`vehicle-bus/dpmhk/`, `vehicle-trolleybus/dpmhk/`) are rendered, not painted: `render.py` is the orthographic box raycaster in the pak128 road projection (1.5 px/m across, 4 px/m up; the same one the Prague/Brno SOR NS renders used) and `dpmhk.py` holds one parametric body model (SOR NS, SOR NB, Iveco Urbanway, SOR EBN), the DPMHK liveries as texture rules, trolley poles aimed at the pak128.cs wire of the own lane, and the per-view lane origins (a bare 12 m box on the median footprint of native 12 m buses). Single vehicles are drawn at real length; articulated sections at 4/3 m per carunit with the (4 − L/2) shift, joints at the real positions. Livery bands are whole multiples of 0.25 m, i.e. whole pixel rows in every view. Regenerate with `python tools/busrender/dpmhk.py [family …] [--preview DIR]`; change the model and regenerate rather than editing the PNGs.
 
 The RegioJet coach buses (`vehicle-bus/regiojet/`) come from `tools/busrender/rj_buses.py`. It uses its own vectorised copy of the DP Ostrava bus raycaster (`rj_vrender.py`), with the models in `rj_busmodels.py` and lane placement in `rj_lane.py`. The long coaches are drawn about 1.08 × their real length, like the native Citywide 15 and the upstream Irizar. The per-view shift is measured on a plain box of the model's footprint and then applied to the model, so a longer body extends along the lane and never sideways.
+
+### Prague and Brno packages for other operators (`vehicle-bus/praha/`, `vehicle-bus/brno/`, `vehicle-water/praha/`)
+
+City vehicles of operators other than the city's transit company go into one package per city, not one per operator: agency `Praha` builds `VZ-Praha-bus.pak` and `VZ-Praha-water.pak`, and agency `Brno` builds `VZ-Brno-bus.pak`. `VZ-DPPraha-*` and `VZ-DPBrno-*` stay the transit company's own fleet, and regional PID lines get a separate package later. There is one object per type × livery, shared by every operator that runs it. The operator is never in `name=`; it appears only in the livery display name, e.g. `name_en: "PID red-blue-white · Arriva City, ABOUT ME"`.
+
+The scope is the vehicles seen on city lines (Prague 100–299 and the 900s), in every real livery, as agreed with the Prague and Brno timetable sessions. Advert wraps get no object, except the standing Fashion Arena livery of line 238. The PID schemes are operator-independent: `pidsedocervena` (grey with red columns, 2021+) and `pidcervenomodrobila` (the older red-blue-white) must read the same as on the DPP families.
+
+Sheets that are repaints of upstream or VZ art are kept as PNGs, like the DPP repaints. The rendered ones regenerate with `python tools/busrender/<driver>.py [family …] [--preview DIR]`:
+
+- `praha.py` holds the PID liveries on the `dpmhk.py` bodies: SOR NS 12 / NS 18 / NC 18, the Urbanway 12M, the DPP NS 18 and the Brno Urbanway.
+- `praha_man.py` draws MAN Lion's City 12C (and EfficientHybrid), L (14.7 m, length 10), NL 293 / NL 283 (old generation) and Lion's Intercity LE 12.
+- `praha_small.py` draws BMC Neocity 8.5, BMC Procity 10.6, TEMSA MD9 LE and the Erduman Sprinter 519. `length` follows the DPP scale: 12 m = 8, about 9.5 m = 7, about 9 m = 6, 7.5 m = 5.
+- `dpp_coaches.py` (on the RegioJet coach modules) draws DPP's Crossway PRO 10.8M / 12M and the Tourismo RHD / 15 RHD (length 10).
+
+The PID ferries (Naomi type for P1 / P5 / P6, Kazi type Baba for P2, Holka 2 for P4) come from `python tools/shiprender/praha_ferries.py [family …] [--preview DIR]` (models in `boatkit.py`). They sit on the water lane of the native small ferries (`fitlane.py` re-derives it from `src/`), with `image_offset: [0, 0]` and `length: 8`. Only the Naomi and Kazi wheelhouse glass lights up.
 
 ## Multi-vehicle consists
 

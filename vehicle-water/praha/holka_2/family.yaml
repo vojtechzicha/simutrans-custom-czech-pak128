@@ -1,0 +1,61 @@
+agency: Praha
+type: "Holka_2"
+# Sprites carry their own water-lane placement (hull centre on the per-view
+# origin of the native pak128.cs Ferry_yeu_128set / Veveri_ship_128set), so no
+# extra shift.
+image_offset: [0, 0]
+# Open boat with no glazing: nothing lights up.
+windows_lit_when_loaded: false
+copyright: vojtechzicha
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "Holka 2 (P4)"
+  family_cs: "Holka 2 (P4)"
+
+# Real vehicle: Holka 2, the Prague Boats (PPS) ferry of the PID line P4
+# Dostihová - Belárie (Apr-Oct). Specs are unpublished; its predecessor Hol Ka
+# is 6 x 2.6 m, draught 0.4 m, deck 0.5 m above the water, 1.75 m headroom,
+# 2 t, 18 kW, 12 passengers (prague-boats.cz). Holka 2 scaled from photos
+# (standing adult vs canopy): about 6.5 x 2.6 m, same capacity.
+# Livery: royal-blue steel pontoon with a darker bottom, dark rubbing strip,
+# light grey deck, blue canopy top with a white skirt on stainless posts,
+# stainless railings, back-to-back bench down the middle, white helm console
+# with blue "HOLKA 2" at the bow corner, green lamp on the canopy, orange
+# lifebuoy and Czech flag at the stern (photos img/hk2c, hk3c, hk4c).
+# Sprite: original box render, tools/shiprender/praha_ferries.py (boatkit.py
+# on tools/busrender/render.py), drawn at 1.2x its true size (the user's pick
+# for readability): about 33 px long in the side views, with a deeper white
+# skirt and a white canopy outline. Hull centre on the water lane of the
+# native Ferry_yeu_128set / Veveri_ship_128set.
+
+vehicles:
+  - id: "Holka_2"
+    display_id: "Holka 2"
+    role_en: "ferry boat"
+    role_cs: "převozní loď"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 50000
+      payload: 12
+      speed: 10
+      power: 18
+      weight: 2
+      runningcost: 16
+      fixed_cost: 36
+      gear: 100
+      intro_year: 2024
+      intro_month: 4
+      retire_year: 2060
+      retire_month: 12
+      waytype: water
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+
+liveries:
+  - color: ppsmodrobila
+    name_en: "PPS blue-white"
+    name_cs: "PPS modro-bílá"

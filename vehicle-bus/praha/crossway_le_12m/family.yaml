@@ -1,0 +1,57 @@
+agency: Praha
+type: "Crossway_LE_12M"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "Irisbus Crossway LE 12M"
+  family_cs: "Irisbus Crossway LE 12M"
+
+# Irisbus Crossway LE 12M, 12.0 x 2.55 x 3.1 m, 2 double doors (front, centre),
+# about 95 places, Iveco Cursor 8 243 kW; Crossway LE built from 2007.
+# On Prague city lines (21-29 Sep 2026): Stenbus 1748 (2012) on lines 221 / 240.
+# Livery: the city red-white look of the DPP Crossways (photo of 1748,
+# seznam-autobusu 440456): white roof and body, black window band, white band
+# under the windows down to the wheel-arch tops, red lower body; white front
+# panel under the windscreen, red lower front and bumper. Unlike the DPP
+# Crossways, 1748 has no red sill stripe under the windows / windscreen.
+# Sprite: Lubak91's upstream Crossway LE 12M and LE 12.8M are the same drawing
+# (identical silhouettes, same doors), so this is the DPP Crossway LE 12,8M
+# sheet (already repainted and lane-normalised) with the sill stripe returned
+# to the upstream window-band pixels (agents/misc/cw12.py in the session
+# scratchpad).
+
+vehicles:
+  - id: "Crossway_LE_12M"
+    display_id: "Crossway LE 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 630000
+      payload: 95
+      speed: 85
+      weight: 11
+      runningcost: 26
+      fixed_cost: 132
+      intro_year: 2007
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 243
+      gear: 56
+      smoke: Diesel_small
+
+liveries:
+  - color: mestskacervenobila
+    name_en: "city red-white · Stenbus"
+    name_cs: "městská červeno-bílá · Stenbus"

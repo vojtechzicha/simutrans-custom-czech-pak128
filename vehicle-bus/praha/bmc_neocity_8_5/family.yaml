@@ -1,0 +1,72 @@
+agency: Praha
+type: "BMC_Neocity_8_5"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "BMC Neocity 8.5"
+  family_cs: "BMC Neocity 8,5"
+
+# BMC Neocity 8,5 low-floor midibus: 8.50 x 2.45 x 3.14 m, rear overhang
+# 1.925 m, 2 doors (single front ahead of the front axle, double centre door
+# just ahead of the rear axle), 21 seats + 2 folding / 72 total, Cummins
+# ISB4.5 157 kW + Voith DIWA.6, 90 km/h (speed sticker on the rear of 1915)
+# (cs-dopravak.cz "Malá BMC Neocity od ABOUT ME na linkách", busplan.cz).
+# ABOUT ME runs six: 1949-1950 (2021, first in Prague service 7 May 2021, old
+# PID tricolour) and 1915-1918 (2022-23, in service June-December 2023)
+# (seznam-autobusu.cz).
+# Livery pidcervenomodrobila (photos of 1950, foto-busy 302889 / 315331):
+# blue roof edge, rear corner pillars and raised roof fairing over the rear
+# 2/3 (no separate A/C pod), flat front
+# roof light grey, black glazing band, white band over a red skirt, black
+# upper rear over white and red; painted as the Procity 10.6 tricolour.
+# Livery pidsedocervena: PID scheme A (photos of 1915, 1916, 1917 on seznam-autobusu.cz):
+# grey body and roof, black glazing band up to a dark strip above the
+# windows; red columns around the front axle (door 1 .. just behind the
+# wheel) and around the rear axle (door 2 .. the engine bay), continued as
+# red roof-edge and roof bands; grey louvred engine tower at the rear corner;
+# black upper rear with the small rear window, red block on the vehicle's
+# left of the lower front and rear; amber LED displays.
+# Sprite: original box render, tools/busrender/praha_small.py (NEOCITY / NEOCITY_TRI), at
+# real length (36 px in the side views, next to 40 px for the ICN 9.5 and
+# 51 px for the 12 m NB 12) on the native 12 m lane footprint; the "real
+# proportions" variant picked by the user. Length 6 like the DPP Urbino 8.9 LE
+# (8.95 m); economy scaled below the DPP ICN 9.5.
+
+vehicles:
+  - id: "BMC_Neocity_8_5"
+    display_id: "Neocity 8,5"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 420000
+      payload: 72
+      speed: 90
+      weight: 8
+      runningcost: 21
+      fixed_cost: 140
+      intro_year: 2021
+      intro_month: 5
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 157
+      gear: 56
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · ABOUT ME"
+    name_cs: "PID šedo-červená · ABOUT ME"
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white · ABOUT ME"
+    name_cs: "PID červeno-modro-bílá · ABOUT ME"

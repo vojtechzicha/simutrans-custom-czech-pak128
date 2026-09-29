@@ -1,0 +1,63 @@
+agency: Brno
+type: "Lions_City_NL283"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+# original art (build.py needs the key; vojtechzicha is only listed once)
+copyright: vojtechzicha
+display:
+  agency_en: "Brno"
+  agency_cs: "Brno"
+  family_en: "MAN Lion's City NL 283"
+  family_cs: "MAN Lion's City NL 283"
+
+# MAN NL 283 Lion's City (A21, the last builds of the 2004-2019 Lion's City
+# body), BDS-BUS 6J9 5190-5192: built 2021, in service from 1/2022 (depot
+# Pozořice), on Brno city line 48 (and regional 151). 11.98 x 2.50 x 2.88 m,
+# wheelbase 6.12 m, doors 2-2-2, MAN D2066 LUH63 206 kW (Euro VI-D), ZF 6 AP
+# 1400 B EcoLife, 31+1 seats, about 95 passengers, green Bustec LED displays,
+# air conditioning (seznam-autobusu.cz, car 6J9 5190).
+# Livery: IDS JMK regional scheme, "bílo-šedá s červenou střechou" (photos of
+# 6J9 5190 / 5192, seznam-autobusu.cz 404916, 409944, 432981): white body,
+# black window band up to a red line along the roof edge (the "red roof" is
+# that edge strip; the roof top itself reads light grey from above), silver-
+# grey lower body below about 0.86 m, black front face with the green
+# display, white mask, grey bumper; white rear with a black rear window and a
+# grey bumper; white rear A/C unit.
+# Sprite: the old-gen Lion's City box model of the Prague NL 293 (agent man,
+# tools/busrender/praha_man.py OldGen) in the IDS JMK colours, same lane
+# placement.
+
+vehicles:
+  - id: "Lions_City_NL283"
+    display_id: "Lion's City NL 283"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 610000
+      payload: 95
+      speed: 90
+      weight: 11
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2021
+      intro_month: 12
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 206
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: idsjmk
+    name_en: "IDS JMK white-grey · BDS-BUS"
+    name_cs: "IDS JMK bílo-šedá · BDS-BUS"

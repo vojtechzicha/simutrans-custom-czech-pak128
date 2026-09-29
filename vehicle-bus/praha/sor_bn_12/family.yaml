@@ -1,0 +1,55 @@
+agency: Praha
+type: "SOR_BN_12"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "SOR BN 12"
+  family_cs: "SOR BN 12"
+
+# SOR BN 12 low-entry bus: 11.79 x 2.525 x 2.95 m, 2 doors (single front,
+# double centre), raised rear section, about 88 places, 210 kW, 80 km/h;
+# built from 2008 (DPP ran 2008-09 rentals).
+# On Prague city lines (21-29 Sep 2026): ABOUT ME 1968 and 1969 (built 2012,
+# ex Veolia), still in the Veolia scheme.
+# Livery: Veolia red-grey: red roof and upper body down to below the windows,
+# black glazing, a dark belt line, silver-grey lower body; red front mask
+# round the windscreen, grey bumper with the lamps (photos of 1968, 2025-26).
+# Sprite: the DPP SOR BN 12 sheet (VTPsim's CZR-Praha art, lane normalised),
+# repainted: the PID blue roof and the white band red, the red lower body
+# silver-grey under a 1 px dark belt, the front mask red over a grey bumper.
+
+vehicles:
+  - id: "BN_12"
+    display_id: "BN 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 539104
+      payload: 88
+      speed: 80
+      weight: 10
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2008
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 210
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: veoliacervenoseda
+    name_en: "Veolia red-grey · ABOUT ME"
+    name_cs: "Veolia červeno-šedá · ABOUT ME"

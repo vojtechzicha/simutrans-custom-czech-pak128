@@ -1,0 +1,71 @@
+agency: Praha
+type: "SOR_NS_12"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha      # original art (build.py requires the key)
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "SOR NS 12"
+  family_cs: "SOR NS 12"
+
+# SOR NS 12 (diesel), low-floor city bus: 12.0 x 2.55 x 2.995 m, wheelbase
+# 5.90 m, overhangs 2.70 / 3.40 m, 3 double doors (2-2-2), 24-32 seats /
+# about 100 total, Iveco Tector 7 210 kW + ZF Ecolife, 80 km/h, about 11 t;
+# engine in a tower in the left rear corner (cs.wikipedia SOR NS 12).
+# On Prague city lines (21-29 Sep 2026): grey-red Arriva City 9185-9191 (2024-25)
+# and 8838 (2026), Stenbus 1750 (2019) and 1768-1770 (2024-25), ARANEA 1493
+# (2017); red-blue-white Stenbus 1751-1759 (2019-21).
+# Livery A, PID 2021 scheme: grey body, continuous black glazing band up to the
+# roof edge, black front roof cap with the silver SOR wing up the A-pillar, red
+# columns over the front axle (behind door 1) and over the rear axle (ahead of
+# door 3) continued as bands across the roof, black panel under the driver's
+# window, red block on the vehicle's left of the lower front and lower rear
+# (photos of 1768 side, 9186 / 9189 front, 9190 rear: the rear red block covers
+# the left half, not a central stripe). Livery B, old PID trikolora: blue roof,
+# roof pod, cant and front cap, black glazing band, white band, red lower body;
+# front: black mask, silver lamp clusters, white centre, red bumper, silver
+# wing (photos of 1752 side, 1759 front).
+# Sprite: rendered by tools/busrender/praha.py on the NS 12 body of
+# tools/busrender/dpmhk.py (the DPMHK / DPP ENS 12 geometry). A matches the DPP
+# ENS 12 render (same colours, cap, columns, doors) without its roof batteries
+# and pantograph: the diesel roof has one A/C unit between the red roof bands
+# (photos of 1768 / 1752), the last window bay of both sides is the louvred
+# engine bay and the rear shows the engine-tower grille on the left and the rear
+# window with the amber route number on the right (photo of 9190).
+
+vehicles:
+  - id: "SOR_NS_12"
+    display_id: "NS 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 620000
+      payload: 100
+      speed: 80
+      weight: 11
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2017
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 210
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Arriva City, Stenbus, ARANEA"
+    name_cs: "PID šedo-červená · Arriva City, Stenbus, ARANEA"
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white · Stenbus"
+    name_cs: "PID červeno-modro-bílá · Stenbus"

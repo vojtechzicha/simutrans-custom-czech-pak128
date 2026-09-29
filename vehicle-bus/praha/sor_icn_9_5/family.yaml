@@ -1,0 +1,55 @@
+agency: Praha
+type: "ICN_9_5"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "SOR ICN 9.5"
+  family_cs: "SOR ICN 9,5"
+
+# SOR ICN 9,5 low-entry midibus: 9.55 x 2.525 x 3.12 m, 2 doors (single front,
+# double centre), 27 seats / 73 total, FPT NEF 6.7 184 kW, 80 km/h; first in
+# Prague service at DPP in November 2023.
+# On Prague city lines (21-29 Sep 2026): Arriva City 9011-9015 (2024) of its
+# 11 cars; 9011 and 9015 carry advertising wraps and are not drawn.
+# Livery: PID scheme A, exactly as on the DPP cars (photos of Arriva 9013 and
+# 9014: grey body and roof, black glazing band, red columns over both axles
+# continued across the roof, red lower front block on the vehicle's left,
+# amber LED displays, grey roof A/C pod between the bands).
+# Sprite: the DPP ICN 9,5 sheet (original render of the ICN body at 40 px in
+# the side views), copied 1:1; length 7 as the DPP family.
+
+vehicles:
+  - id: "ICN_9_5"
+    display_id: "ICN 9,5"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 455000
+      payload: 73
+      speed: 80
+      weight: 9
+      runningcost: 24
+      fixed_cost: 154
+      intro_year: 2023
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 184
+      gear: 53
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Arriva City"
+    name_cs: "PID šedo-červená · Arriva City"

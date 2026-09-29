@@ -1,0 +1,56 @@
+agency: Praha
+type: "SOR_BN_10_5"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "SOR BN 10.5"
+  family_cs: "SOR BN 10,5"
+
+# SOR BN 10,5, low-entry bus: about 10.4 x 2.525 x 2.9 m, doors 1-2-1 (single
+# front, double centre just ahead of the rear axle, single rear behind it),
+# about 85 total, Iveco Tector 185 kW; built from 2005.
+# On Prague city lines (21-29 Sep 2026): ABOUT ME 1958 (2016, ex-Arriva 9455,
+# with ABOUT ME since 02/2025) on line 164.
+# Livery: plain white roof and body, black glazing, thin dark line at the
+# wheel-arch tops, white front mask and bumper (photos of 9455 / 1958, side
+# with the three doors and front, 2016-2025).
+# Sprite: VTPsim's pak128_czr Příbram SOR BN 10 (the 1-2-1 door BN 10,5 body):
+# red body, red roof and grey skirt repainted white, the black front mask
+# white, glass converted to the lit-window specials, the green-light displays
+# made amber LED, lane placement normalised. 44 px long in the side views.
+
+vehicles:
+  - id: "SOR_BN_10_5"
+    display_id: "BN 10,5"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 490000
+      payload: 85
+      speed: 90
+      weight: 9
+      runningcost: 24
+      fixed_cost: 150
+      intro_year: 2005
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 185
+      gear: 53
+      smoke: Diesel_small
+
+liveries:
+  - color: bila
+    name_en: "white · ABOUT ME"
+    name_cs: "bílá · ABOUT ME"

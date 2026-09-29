@@ -1,0 +1,65 @@
+agency: Praha
+type: "Lions_City_12C"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+# original art (build.py needs the key; vojtechzicha is only listed once)
+copyright: vojtechzicha
+
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "MAN Lion's City 12C"
+  family_cs: "MAN Lion's City 12C"
+
+# MAN Lion's City 12 (2018 generation, series from 2019), type NL 330 "12C":
+# Stenbus 1761-1764 (2021) and ČSAD Polkost 1598 (2022), 1653-1655 (2026) on
+# Prague city lines 221 / 222 / 227 / 240. 12.185 x 2.55 m, wheelbase 6.005 m
+# (overhangs 2.78 / 3.40 m), doors 2-2-2, MAN D1556 LOH 243 kW (Euro VI-E),
+# 30+2+1 seats, about 90 passengers, air conditioning (seznam-autobusu.cz,
+# cars 1598, 1650, 1761).
+# Livery: PID scheme A (photos 1653 left side, 1761 from above, 1598, 1762-
+# 1764): grey body, black window band, red columns round the front arch
+# (door 1 to behind the arch) and the rear arch (door 2 to door 3), crossing
+# the roof; black one-piece face with the display, grey corner fins front and
+# rear, red on the vehicle's left of the lower front, red block left of
+# centre on the rear.
+# Sprite: box-model render (agent man, tools/busrender/praha_man.py NewGen,
+# the user's variant v2): the roof-line fairing over the front 60 % of the
+# roof drawn 0.28 m tall with a dark seam so the step reads, the A/C unit at
+# its rear end, the engine-tower louvres in the last left window bay, amber
+# LED displays, mirrors.
+
+vehicles:
+  - id: "Lions_City_12C"
+    display_id: "Lion's City 12C"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 660000
+      payload: 90
+      speed: 90
+      weight: 11
+      runningcost: 25
+      fixed_cost: 130
+      intro_year: 2019
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 243
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Stenbus, ČSAD Polkost"
+    name_cs: "PID šedo-červená · Stenbus, ČSAD Polkost"

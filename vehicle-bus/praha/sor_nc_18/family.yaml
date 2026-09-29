@@ -1,0 +1,89 @@
+agency: Praha
+type: "SOR_NC_18"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha      # original art (build.py requires the key)
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "SOR NC 18"
+  family_cs: "SOR NC 18"
+
+# SOR NC 18, low-floor suburban articulated bus (built 2009-2015, 5 cars; front
+# derived from the SOR NB 18): 18.75 x 2.55 x 2.90 m, wheelbase 6.18 + 6.57 m,
+# overhangs 2.47 / 3.53 m, floor 360 mm, 3 double doors (two in the front
+# section, one in the rear section), 59 seats / 145 total, Iveco Cursor 243 kW
+# + ZF Ecomat, 80 km/h, 15.5 t; engine and gearbox in the left rear corner
+# (cs.wikipedia SOR NC 18). Arriva City 9930 (2015, ex SOR demonstrator) on
+# Prague city lines.
+# Livery: plain white (photo seznam-autobusu 449390 of 9930): white body and
+# roof, black glazing band that reaches lower between doors 1 and 2, NB-style
+# face with a white nose and rectangular lamps under a black mask; amber
+# displays.
+# Sprite: new model, rendered by tools/busrender/praha.py with the renderer of
+# tools/busrender/dpmhk.py. Doors and joint placed by projective fit on the
+# Autotec 2010 side photo and on 9930; roof A/C units, a dark roof rack and the
+# raised engine box at the rear from photos of 9930 and the Pardubice / Hrnčíře
+# cars; louvred engine bay in the left rear corner, rear with the grille band
+# under the high rear window. Two sections like the DPP NB 18 (8 + 6, joint
+# 11.10 m from the front).
+
+vehicles:
+  - id: "SOR_NC_18-A"
+    display_id: "NC 18"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["SOR_NC_18-B"]
+    fields:
+      cost: 500000
+      payload: 85
+      speed: 80
+      weight: 9
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2009
+      intro_month: 6
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+
+  - id: "SOR_NC_18-B"
+    display_id: "NC 18"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["SOR_NC_18-A"]
+    next: []
+    fields:
+      cost: 363453
+      payload: 60
+      speed: 80
+      weight: 7
+      runningcost: 11
+      fixed_cost: 56
+      intro_year: 2009
+      intro_month: 6
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 243
+      gear: 62
+      smoke: Diesel_small
+
+liveries:
+  - color: bila
+    name_en: "white · Arriva City"
+    name_cs: "bílá · Arriva City"

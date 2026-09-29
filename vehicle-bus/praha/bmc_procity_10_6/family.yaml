@@ -1,0 +1,71 @@
+agency: Praha
+type: "BMC_Procity_10_6"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "BMC Procity 10.6 / 10.7"
+  family_cs: "BMC Procity 10,6 / 10,7"
+
+# BMC Procity 10,6 low-floor bus: 10.59 x 2.55 x 3.08 m, 3 double doors (the
+# rear one behind the rear axle), 22 seats / 95 total, Cummins ISB6.7 209 kW +
+# ZF Ecolife, 80 km/h (speed sticker on the rear of 1954) (busplan.cz,
+# busportal.cz "Nová značka autobusů v PID: BMC").
+# ABOUT ME: 1951-1953 (2021, old PID tricolour, in service 1 April 2021 on
+# line 164), 1954 (2021) and 1955 (2023) in scheme A, and the Procity 10,7
+# 1956 (in service 18 Sep 2026), the same look in scheme A; the display names
+# carry both types (seznam-autobusu.cz).
+# Livery pidcervenomodrobila (photos of 1951, 1952, 1953): black glazing band
+# under a blue roof edge, white band under the windows over a red skirt, blue
+# raised roof fairing; the flat front part of the roof is light grey, not
+# blue (photos of 1951 from above, 308150 / 308151 on foto-busy), and the rear
+# A/C unit white; black upper front and rear, white lower front over a red
+# bumper.
+# Livery pidsedocervena (photos of 1954, 1955): PID scheme A, grey body and
+# roof, black glazing band, red columns around both axles (on the door side
+# the front one from door 1 back past the wheel) continued as roof bands, red
+# block on the vehicle's left of the lower front and rear.
+# Sprite: original box render, tools/busrender/praha_small.py (PROCITY /
+# PROCITY_A), at real length (45 px in the side views) on the native 12 m
+# lane footprint; the user's pick of the variants has the window band from
+# 1.3 m, so the tricolour shows 2 white and 2 red rows like the DPP SOR BN 12.
+# Length 7 like the DPP Urbino 10.5 / ICN 9.5; economy between the DPP ICN 9.5
+# and the 12 m SOR BN 12.
+
+vehicles:
+  - id: "BMC_Procity_10_6"
+    display_id: "Procity 10,6"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 500000
+      payload: 95
+      speed: 80
+      weight: 10
+      runningcost: 25
+      fixed_cost: 150
+      intro_year: 2021
+      intro_month: 4
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 209
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white · ABOUT ME"
+    name_cs: "PID červeno-modro-bílá · ABOUT ME"
+  - color: pidsedocervena
+    name_en: "PID grey-red · ABOUT ME"
+    name_cs: "PID šedo-červená · ABOUT ME"

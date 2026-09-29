@@ -1,0 +1,64 @@
+agency: DPPraha
+type: "Crossway_Pro_12M"
+# Sprites carry their own lane placement (body footprint matched to the
+# median of native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Iveco Crossway PRO 12M"
+  family_cs: "Iveco Crossway PRO 12M"
+
+# Iveco Crossway PRO 12M, DPP Prague driving-school bus 5AZ 5534 (built
+# 2016, delivered 12/2016, in service 2/2017, autoškola garáž Hostivař;
+# seznam-autobusu.cz vuz/64411). High-floor interurban Crossway (2013 Euro VI
+# body), 12.0 x 2.55 x ~3.15 m (3.35 m over the A/C), wheelbase ~6.08 m,
+# doors 1-1-0, Iveco Cursor 9 265 kW with a 6-speed manual gearbox, ~49 seats
+# + ~30 standing, 100 km/h.
+# Livery 'bila' (seznam: "bílá"; photos of 5AZ 5534 on seznam-autobusu.cz
+# 179871/179872): plain white body and roof, black flush glazing band with
+# the one-step dip behind the front door, black windscreen and front-door
+# glazing, grey IVECO bar on the white front mask, small red DPP logo and
+# blue driving-school L plates, engine grille at the right rear.
+# Sprite: original box-model render (vojtechzicha), not upstream art; model
+# CrosswayPro12 in tools/busrender/dpp_coaches.py (RegioJet coach pipeline: rj_vrender
+# raycaster, lengths x 1.08, width 3.1 m, true heights, rj_lane placement),
+# same body rules as the 10.8M, one window bay longer.
+# Stats: real power/speed; cost and running costs scaled from the DPP
+# Streetway 12M / NB 12; length 8 like the 12 m city buses.
+
+vehicles:
+  - id: "Crossway_Pro_12M"
+    display_id: "Crossway PRO 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 650000
+      payload: 80
+      speed: 100
+      weight: 11
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 265
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: bila
+    name_en: "white"
+    name_cs: "bílá"

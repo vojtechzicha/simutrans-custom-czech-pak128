@@ -1,0 +1,58 @@
+agency: Praha
+type: "Citywide_LF_12M"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "Scania Citywide LF 12M"
+  family_cs: "Scania Citywide LF 12M"
+
+# Scania Citywide LF 12M (diesel), 12.0 x 2.55 x 3.2 m, 3 double doors, about
+# 90 places, Scania DC09 206 kW; Citywide LF built from 2011.
+# On Prague city lines (21-29 Sep 2026): CSAD Polkost 1588-1593 (2019) on
+# lines 115 / 227.
+# Livery: PID trikolora (photos of 1588 / 1590 / 1592 / 1593, seznam-autobusu
+# 402251 / 426240 / 450811 / 450800): blue roof, blue A/C pod over the middle
+# of the roof and blue roof-edge strip, black glazing, white band down to the
+# wheel-arch tops (half the lower body), red below; white front mask with a
+# red bumper rising around the headlamps; rear blue top, white, red bumper.
+# Diesel: no CNG tank fairing on the roof.
+# Sprite: the Kladno Citywide LF 12M CNG sheet (Lubak91's F-M body); its roof
+# carries no raised tank box, so the roof is repainted blue as a plain roof
+# with the A/C pod drawn on; body repainted by zone on a box model
+# (agents/misc/p_citywide.py in the session scratchpad).
+
+vehicles:
+  - id: "Citywide_LF_12M"
+    display_id: "Citywide LF 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 660000
+      payload: 90
+      speed: 80
+      weight: 11
+      runningcost: 25
+      fixed_cost: 130
+      intro_year: 2011
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 206
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white · ČSAD Polkost"
+    name_cs: "PID červeno-modro-bílá · ČSAD Polkost"

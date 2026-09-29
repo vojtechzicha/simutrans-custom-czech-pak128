@@ -1,0 +1,60 @@
+agency: Praha
+type: "Kazi"
+# Sprites carry their own water-lane placement (hull centre on the per-view
+# origin of the native pak128.cs Ferry_yeu_128set / Veveri_ship_128set), so no
+# extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard (wheelhouse glass).
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "Kazi (P2 Baba)"
+  family_cs: "Kazi (P2 Baba)"
+
+# Real vehicle: Baba, a Kazi-type ferry boat of Pražské Benátky (design
+# Zdeněk Bergman, after the Vltava "naháč" salt boat), built 2016 for the PID
+# ferry P2 V Podbabě - Podhoří, first in service 12 Jul 2016. 11.2 x 3.7 m,
+# draught 50 cm, 43 kW diesel, 40 passengers + bikes, step-free
+# (prazskebenatky.cz, převozní lodě).
+# Livery: the Naomi scheme on the longer hull: near-black hull with white BABA
+# and PVČS 112 609, red deck, long bottle-green canopy with a scalloped
+# valance, varnished wheelhouse near the bow (15-27 % from the bow), raked and
+# raised bow, benches and tables aft, Czech flag at the stern (photos img/c33c,
+# c35, c30).
+# Sprite: original box render, tools/shiprender/praha_ferries.py (boatkit.py
+# on tools/busrender/render.py) at its true size on the render.py road scale
+# (11.2 m = 47 px in the side views, next to 51 px for a 12 m bus), scalloped
+# canopy valance and two railings. Hull centre on the water lane of the
+# native Ferry_yeu_128set / Veveri_ship_128set.
+
+vehicles:
+  - id: "Kazi"
+    role_en: "ferry boat"
+    role_cs: "převozní loď"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 110000
+      payload: 40
+      speed: 12
+      power: 43
+      weight: 13
+      runningcost: 30
+      fixed_cost: 70
+      gear: 100
+      intro_year: 2016
+      intro_month: 7
+      retire_year: 2060
+      retire_month: 12
+      waytype: water
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+
+liveries:
+  - color: pbcernocervena
+    name_en: "Pražské Benátky"
+    name_cs: "Pražské Benátky"

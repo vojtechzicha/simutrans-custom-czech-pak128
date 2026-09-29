@@ -1,0 +1,60 @@
+agency: Praha
+type: "Lions_City_12C_Hybrid"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+# original art (build.py needs the key; vojtechzicha is only listed once)
+copyright: vojtechzicha
+
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "MAN Lion's City 12C EfficientHybrid"
+  family_cs: "MAN Lion's City 12C EfficientHybrid"
+
+# MAN Lion's City 12 EfficientHybrid: Arriva City 9151-9154 (2021) and 9168 /
+# 9169 (2023), type NL 280 (D1556 LOH 206 kW), and ČSAD Polkost 1650-1652
+# (2025), type NL 330 (D1556 LOH 243 kW), on Prague city lines 115 / 146 /
+# 163 / 209 / 227 (seznam-autobusu.cz). The same 12.185 m body as the 12C,
+# doors 2-2-2 on every car on city lines (photos 9152, 9168, 1650; only the
+# ex-demonstrator 1596, not on city lines, is 2-2-0), 30+2+1 seats, about 90
+# passengers. Stats use the NL 330 (243 kW).
+# Livery: PID scheme A as the 12C (photos 1650, 1651, 9152, 9168, 9169).
+# Sprite: the 12C render (agent man, tools/busrender/praha_man.py Hybrid, the
+# user's variant v2) plus the MAN hybrid roof module (the ultracapacitor
+# box): a light box with dark grilles behind the A/C fairing, over the rear
+# axle, as on 9168 and 1651.
+
+vehicles:
+  - id: "Lions_City_12C_Hybrid"
+    display_id: "Lion's City 12C EfficientHybrid"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 720000
+      payload: 90
+      speed: 90
+      weight: 12
+      runningcost: 23
+      fixed_cost: 140
+      intro_year: 2019
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 243
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Arriva City, ČSAD Polkost"
+    name_cs: "PID šedo-červená · Arriva City, ČSAD Polkost"

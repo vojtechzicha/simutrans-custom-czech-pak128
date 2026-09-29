@@ -25,10 +25,20 @@ display:
 # Second livery: old PID regional scheme (C), still worn by 3687-3688 (2013):
 # ultramarine roof and roof edge, black window band, white band, red lower
 # half (as the SOR BN 12); successor of the upstream CZR-Praha-SOR_NB_12_PR.
+# Third livery: PID scheme A (grey), so far only on 3694 (2015; photo on
+# line 149, Sep 2026): grey body and roof, black window band, black
+# windscreen and mask, red blocks between doors 1 and 2 (over the front axle)
+# and between doors 3 and 4 (over the rear axle), continued above the windows
+# and across the roof, red lower front on the vehicle's left, central red
+# stripe on the rear; light-grey roof A/C unit behind the front roof edge.
 # Sprites: VTPsim's CZR-Praha-SOR_NB_12 (already white-roofed) and
 # CZR-Praha-SOR_NB_12_PR (its mid-blue roof repainted the PID ultramarine
 # sampled from photos of 3688), glass converted to the lit-window specials,
-# the displays (drawn with the red-light special) made amber.
+# the displays (drawn with the red-light special) made amber; the roof A/C
+# unit just behind the front roof edge added (white on the city cars as on
+# 4072, painted roof blue on 3687 / 3688, light grey on 3694). The scheme A
+# sheet is the city sheet repainted zone by zone (white and red to RAL 7038
+# grey and RAL 3020 red as on the DPP Streetway / ICN sheets).
 
 vehicles:
   - id: "NB_12"
@@ -64,3 +74,6 @@ liveries:
   - color: pidcervenomodrobila
     name_en: "PID red-blue-white"
     name_cs: "PID červeno-modro-bílá"
+  - color: pidsedocervena
+    name_en: "PID grey-red"
+    name_cs: "PID šedo-červená"

@@ -1,0 +1,70 @@
+agency: Praha
+type: "SOR_CN_9_5"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "SOR CN 9.5"
+  family_cs: "SOR CN 9,5"
+
+# SOR CN 9,5, suburban midibus with a raised floor: about 9.5 x 2.525 x 3.05 m,
+# doors 1-2-0 (single front, double centre, seznam-autobusu), manual 6-speed,
+# Iveco Tector 185 kW; built from 2007 (earliest cars on seznam-autobusu).
+# On Prague city lines (21-29 Sep 2026): ABOUT ME 1939 (2014, ex-OAD Kolín
+# 8507, since 06/2025) and 1940 (2015), ČSAD Střední Čechy 7978 / 7979 (2018) in
+# the PID red-blue-white scheme; Stenbus 1700 (2016, since 01/2026) in
+# turquoise.
+# Livery 1, old PID trikolóra: blue roof and cant rail down to the window tops
+# (the rear roof section raised), black glazing band, a wide white band under
+# the windows all along (high floor), thin black belt line, red lower body;
+# front: black windscreen, white upper mask, red lower front with the lamps
+# (photos of 1939 side and front, 2015-2025).
+# Livery 2, Stenbus 1700: turquoise all over incl. roof and front, a thin
+# yellow line low along both sides at the wheel-arch tops, none on the front
+# (photos of 1700 on X221, 01/2026, and at night, 2026).
+# Sprite: VTPsim's pak128_czr PID SOR CN 9,5, which is a byte copy of his
+# SOR BN 9,5; the front-section window sill raised one row so the white band
+# runs level all along as on the CN (the BN steps up behind the centre door),
+# blue repainted the PID ultramarine of the DPP BN 12, the black NB-style front
+# mask repainted white over red as on the DPP BN 12, glass converted to the
+# lit-window specials, the green-light displays made amber LED, lane placement
+# normalised to the native 12 m median. 38 px long in the side views, next to
+# 40 px for the DPP ICN 9,5 and 51 px for the 12 m buses.
+
+vehicles:
+  - id: "SOR_CN_9_5"
+    display_id: "CN 9,5"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 470000
+      payload: 71
+      speed: 90
+      weight: 9
+      runningcost: 24
+      fixed_cost: 154
+      intro_year: 2007
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 185
+      gear: 53
+      smoke: Diesel_small
+
+liveries:
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white · ABOUT ME, ČSAD Střední Čechy"
+    name_cs: "PID červeno-modro-bílá · ABOUT ME, ČSAD Střední Čechy"
+  - color: tyrkysovozluta
+    name_en: "turquoise-yellow · Stenbus"
+    name_cs: "tyrkysovo-žlutá · Stenbus"

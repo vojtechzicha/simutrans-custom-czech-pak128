@@ -20,12 +20,16 @@ display:
 # Livery: old PID regional scheme (C): dark ultramarine-blue roof and roof
 # edge, black window band, white band under the windows, red lower half;
 # red lower front mask under a white upper mask; amber LED displays.
+# Second livery: DPP city scheme on 4507 (ex 3999, built 2012; photo 2020s):
+# white roof and body, black window band, white band, red lower body, black
+# windscreen and mask over a red lower front.
 # Sprite: VTPsim's CZR-Praha-SOR_BN_12; its mid-blue roof repainted the PID
 # ultramarine (sampled from photos of NB 12 3688, same scheme), the black front
 # mask it copied from the NB 12 City repainted white above the red lower front
 # (photos of 4539 and 3110), glass converted to the lit-window specials, the
 # displays (drawn with the green-light special) made amber, lane placement
-# normalised (the upstream sat up to 10 px off the native lane).
+# normalised (the upstream sat up to 10 px off the native lane). The city
+# sheet repaints the PID sheet: blue roof white, the white front mask black.
 
 vehicles:
   - id: "BN_12"
@@ -58,3 +62,7 @@ liveries:
   - color: pidcervenomodrobila
     name_en: "PID red-blue-white"
     name_cs: "PID červeno-modro-bílá"
+  - color: dppcervenobila
+    name_en: "DPP red-white"
+    name_cs: "DPP červeno-bílá"
+    fields: {intro_year: 2012, intro_month: 1}   # 3999 (now 4507), built 2012
