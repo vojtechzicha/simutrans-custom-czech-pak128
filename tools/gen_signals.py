@@ -38,7 +38,7 @@ state, plus a last row with the cursor (col 0) and the 32×32 toolbar icon
 Function code (the plate under the head, real D1 plate colours): main none
 (a two-lamp head, red and green only, on the red-white mast; the only D1 signal
 without a plate), autoblock (the Block objects, is_autoblock) white on a white
-mast (D1 čl. 69), shunt blue, presignal black, long red, choose red + direction indicator box on
+mast (D1 čl. 69), in 12 images: red, green, yellow (one yellow lamp), shunt blue, presignal black, long red, choose red + direction indicator box on
 top of the head (lit when the signal is clear), P red + white track-number
 plate. The D1 LTs are light entry signals (see lt: below).
 
@@ -107,9 +107,12 @@ BASES = {
         "P": ("SSSR_LongSignal_Dwarf", "red", "number"),
     },
 }
-STATE_ROWS = {"pre": 3, "choose": 3}  # everything else: red + green
+STATE_ROWS = {"pre": 3, "choose": 3, "autoblock": 3}  # everything else: red + green
 # choose: red, green, yellow (sent to another platform / a diverging route; the
 # two-yellow 40 km/h row of the base, or the green lamp recoloured on the dwarf)
+# autoblock: red, green, yellow (výstraha: the block ends at a signal other than
+# an autoblock, or has a switch in it; the single-yellow row of the permissive
+# base, or the green lamp recoloured on the dwarf)
 ICON_LABEL = {"main": "B", "autoblock": "AB", "shunt": "S", "pre": "PR", "choose": "C", "long": "L", "P": "P", "LT": "LT"}
 ICON_CHIP = {"main": None, "autoblock": "white", "shunt": "blue", "pre": "black", "choose": "red", "long": "red", "P": "red"}
 
@@ -310,7 +313,7 @@ def gen_d1(style: str, function: str) -> Image.Image:
     src = load_sheet(base)
     src_rows = src.height // TILE - 1
     rows = STATE_ROWS.get(function, 2)
-    recolour = function == "choose" and src_rows < rows      # dwarf: no yellow row
+    recolour = function in ("choose", "autoblock") and src_rows < rows      # dwarf: no yellow row
     assert src_rows >= rows or recolour, f"{base} has {src_rows} state rows, need {rows}"
     dwarf = style == "dwarf"
     out = new_sheet(rows)
