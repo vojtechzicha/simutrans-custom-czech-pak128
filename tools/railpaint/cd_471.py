@@ -58,6 +58,9 @@ CE_SKIRT = (78, 90, 100)
 CE_MASK = (86, 91, 97)
 CE_ROOF = (200, 203, 204)
 
+# PID 2020: the roof is dark grey, about half the body white in photos from above
+PID_ROOF = (98, 101, 104)
+
 
 # ------------------------------------------------------------------ body
 def cls(p):
@@ -414,11 +417,11 @@ def livery_spec(b, name):
                 return SKY
             return SKY
 
-    roof = {"cityelefantcervena": CE_ROOF, "pidsedocervena": PID_GREY,
+    roof = {"cityelefantcervena": CE_ROOF, "pidsedocervena": PID_ROOF,
             "najbrt1": LGREY, "najbrt2": SAPPHIRE}[name]
     spec = {
         "ROOF": roof, "ROOF_EDGE": roof,
-        "PANTO": (PANTO, "flat"),
+        "PANTO": (PANTO_HI if roof == PID_ROOF else PANTO, "flat"),   # light on the dark roof
         "CABWIN": (CABGLASS, "flat"),
         "LAMPDARK": ((70, 74, 80), "flat"),
         "HEAD": ((0xFF, 0xFF, 0x53), "flat"),     # incl. the round top lamp of the 471 cab
