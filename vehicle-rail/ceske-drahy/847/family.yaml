@@ -19,7 +19,8 @@ display:
 # Sprites: the pak128_czr PESA drawing shared with the 844 (see
 # 844/family.yaml); row 0 = front section, row 1 = rear section, `length: 9`
 # closes the Jakobs joint. The front section shows lit headlights, the rear
-# section lit tail lamps.
+# section lit tail lamps. Units run in multiple (847 + 847, any livery): the
+# front section takes a rear section ahead of it, the rear one a front one behind.
 
 vehicles:
   - id: "847"
@@ -28,8 +29,9 @@ vehicles:
     row: 0
     head: true
     tail: false
-    prev: []
+    prev: ["847b"]
     next: ["847b"]
+    couple_liveries: prev
     fields:
       cost: 1674750
       payload: 105
@@ -59,7 +61,8 @@ vehicles:
     head: false
     tail: true
     prev: ["847"]
-    next: []
+    next: ["847"]
+    couple_liveries: next
     fields:
       cost: 1674750
       payload: 105
