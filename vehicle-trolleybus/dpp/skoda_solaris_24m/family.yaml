@@ -54,7 +54,7 @@ vehicles:
       waytype: road
       freight: Passagiere
       length: 8
-      engine_type: electric
+      engine_type: battery
       power: 160
       gear: 62
 
@@ -81,7 +81,7 @@ vehicles:
       waytype: road
       freight: Passagiere
       length: 5
-      engine_type: electric
+      engine_type: battery
       power: 160
       gear: 62
 
@@ -108,7 +108,7 @@ vehicles:
       waytype: road
       freight: Passagiere
       length: 6
-      engine_type: electric
+      engine_type: battery
 
 liveries:
   - color: pidsedocervena

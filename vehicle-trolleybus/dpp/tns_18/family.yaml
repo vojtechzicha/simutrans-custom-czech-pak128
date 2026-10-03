@@ -55,7 +55,7 @@ vehicles:
       waytype: road
       freight: Passagiere
       length: 8
-      engine_type: electric
+      engine_type: battery
 
   - id: "TNS_18-B"
     display_id: "TNS 18"
@@ -80,7 +80,7 @@ vehicles:
       waytype: road
       freight: Passagiere
       length: 6
-      engine_type: electric
+      engine_type: battery
       power: 240
       gear: 62
 

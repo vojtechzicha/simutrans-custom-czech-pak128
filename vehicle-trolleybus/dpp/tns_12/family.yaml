@@ -45,7 +45,7 @@ vehicles:
       waytype: road
       freight: Passagiere
       length: 8
-      engine_type: electric
+      engine_type: battery
       power: 175
       gear: 53
 
