@@ -23,6 +23,9 @@ display:
 # repaint (last ones 2024, kept as a real historical scheme); PID on 841.224
 # only; Najbrt 2 on 841.223; plain light grey on 841.225–227.
 #
+# Runs solo or in multiple, 841.2 + 841.2 (e.g. Česká Třebová - Letovice,
+# vagonWEB 2026); mixed liveries in one set are possible, so any livery couples.
+#
 # Body: pak128.CS CD_840 (Lubak91), repainted per livery by tools/railpaint/cd_rs1.py; see the 840 family.
 
 vehicles:
@@ -30,6 +33,9 @@ vehicles:
     role_en: "railcar"
     role_cs: "motorový vůz"
     row: 0
+    prev: ["841.2"]
+    next: ["841.2"]
+    couple_liveries: true
     fields:
       cost: 3290000
       payload: 113
