@@ -21,8 +21,7 @@ display:
 # ABfbrdtn 795 + 842). Mixed liveries in one set are normal
 # (red-cream trailers behind a Najbrt railcar), so any livery couples with any.
 # The trailers are also loco-hauled: 754 + 3 x Bdtn 757 + ABfbrdtn 795 (Os,
-# vagonWEB 2025), so the 054 couples with anything and the rear control cars
-# take anything ahead of them.
+# vagonWEB 2025), so the 054 may also follow a 750 / 750.7 / 754 (any livery).
 # Control cars: 954 = Bfbrdtn 794 (2nd class only), 954.2 = ABfbrdtn 795 (with
 # 1st class); either can stand wherever the other can. Each is drawn with its
 # cab at the rear and ends a set; its -front twin is the same car turned round
@@ -73,8 +72,13 @@ vehicles:
     role_cs: "přípojný vůz Bdtn 756/757"
     row: 1
     liveries: [najbrt2, cervenokremova]
-    prev: any                 # also behind a locomotive (754 + Bdtn 757 ...)
-    next: any
+    head: false
+    tail: true                # may end a set: 842 + Bdtn runs without a control car
+    prev: ["842", "054", "954-front", "954.2-front", "843/843", "843/943-front",
+           "750/750", "750_7/750.7", "754/754"]   # also loco-hauled: 754 + Bdtn 757 ...
+    next: ["054", "954", "954.2", "842", "843/843", "843/943"]
+    couple_liveries: true
+    couple_sibling_liveries: prev   # any livery of the locomotive ahead
     fields:
       cost: 1350000
       payload: 88
@@ -102,7 +106,7 @@ vehicles:
     liveries: [najbrt2, cervenokremova]
     head: false
     tail: true
-    prev: any                 # 842, 054, or a locomotive / coach ahead
+    prev: ["842", "054"]
     next: ["842", "954-front", "954.2-front", "843/843", "843/943-front"]
     couple_liveries: true
     fields:
@@ -162,7 +166,7 @@ vehicles:
     liveries: [najbrt2, cervenokremova]
     head: false
     tail: true
-    prev: any                 # 842, 054, or a locomotive / coach ahead
+    prev: ["842", "054"]
     next: ["842", "954-front", "954.2-front", "843/843", "843/943-front"]
     couple_liveries: true
     fields:
