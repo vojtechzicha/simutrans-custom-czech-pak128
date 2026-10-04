@@ -20,6 +20,7 @@ scripts (each has a main):
   es_coaches.py         european-sleeper/vozy
   traxx.py              european-sleeper/186
   ops_vectron.py        pkp-intercity/vectron
+  zssk_vectron.py       zssk/193
   pkp_locos.py          pkp-intercity/ep09, eu07
   impuls.py, elf2.py    koleje-dolnoslaskie/*, koleje-slaskie/*
   obb_dosto.py, obb_cityshuttle.py, obb_cityjet.py   obb/dosto, cityshuttle, 4746
