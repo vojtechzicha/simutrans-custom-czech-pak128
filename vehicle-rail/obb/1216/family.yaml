@@ -34,12 +34,43 @@ display:
 # pantograph arms with a dark head bar, style.polish).
 # Regenerate with `python tools/railrender/taurus.py obb/1216`.
 # The grey "railjet" wordmark is left out (1-px lettering).
+#
+# The railjet livery has a train end (the taller grey field), so it has a second
+# object, "1216-rear": the same loco turned round, for the tail of a railjet whose
+# Afmpz cab car leads (obb/railjet ids -R1..-R7). Sheet row 1, railjet only.
 
 vehicles:
   - id: "1216"
     role_en: "electric locomotive"
     role_cs: "elektrická lokomotiva"
     row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 6600000
+      payload: 0
+      speed: 230
+      weight: 87
+      runningcost: 206
+      fixed_cost: 3030
+      intro_year: 2008
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 1
+      waytype: track
+      engine_type: electric
+      power: 6400
+      gear: 160
+      length: 10
+    extended:
+      axles: 4
+
+  - id: "1216-rear"
+    display_id: "1216"
+    role_en: "electric locomotive, pushing (railjet cab car leading)"
+    role_cs: "elektrická lokomotiva, sunoucí (railjet řídicím vozem vpřed)"
+    row: 1
+    liveries: [railjet]
     prev: any
     next: any
     fields:

@@ -15,6 +15,8 @@ family.yaml):
                        a thin bright-red line on that edge; black windscreen band
                        wrapping round the cab side windows. The grey "railjet"
                        wordmark is left out (1-px lettering reads as noise).
+                       Row 1 is the loco turned round (train end leading),
+                       the obb/1216 "1216-rear" object.
   obb/1216, obb/1116 obbcervena
                        ÖBB red, dark-grey solebar band; the white "ÖBB" wordmark
                        is left out for the same reason.
@@ -63,8 +65,9 @@ PPC = {"ne": 5.66, "sw": 5.66, "w": 4.0, "e": 4.0, "n": 4.0, "s": 4.0, "nw": 2.8
 
 
 class OpsTaurus(Taurus):
-    def __init__(self, liv):
+    def __init__(self, liv, turned=False):
         self.lv = liv
+        self.turned = turned
         t = {"railjet": dict(body=RJ_CARMINE, band=RJ_CARMINE, low=RJ_SLATE, low_rows=1,
                              cab=BLACK, nose=RJ_CARMINE, frame=FRAME),
              "obbcervena": dict(body=OBB_RED, band=OBB_RED, low=OBB_GREY, low_rows=0,
@@ -83,7 +86,7 @@ class OpsTaurus(Taurus):
             if r >= top - 1 and cu < self.UCAB:
                 return t["cab"]
             # slate lower field rising towards the rear (train) end
-            fu = u                                  # from the leading cab
+            fu = (L - u) if self.turned else u      # from the outer cab
             if fu > self.UCAB + 0.2:
                 k = 1 + int(round(2.0 * min(1.0, (fu - self.UCAB - 0.2) / (L - 2 * self.UCAB - 0.4))))
                 if r <= k:
@@ -123,8 +126,14 @@ FAMILIES = {
 }
 
 
-def row(liv):
-    parts, lines = OpsTaurus(liv).build()
+# Sheets with a second row: the loco turned round, its train end leading (the 1216
+# pushing a railjet whose Afmpz cab car leads). Only the livery turns; the raised
+# pantograph stays the trailing one.
+TURNED = {("obb/1216", "railjet")}
+
+
+def row(liv, turned=False):
+    parts, lines = OpsTaurus(liv, turned).build()
     return [R.vehicle_tile(parts, lines, d, 0.0, {"V"}) for d in DIRS]
 
 
@@ -138,11 +147,11 @@ def main():
         os.makedirs(prev, exist_ok=True)
     for fam in (args or list(FAMILIES)):
         for liv in FAMILIES[fam]:
-            rows = [row(liv)]
+            rows = [row(liv)] + ([row(liv, True)] if (fam, liv) in TURNED else [])
             out = os.path.join(REPO, "vehicle-rail", fam, "sprites", f"{liv}.png")
             K.save_styled(rows, out)
             if prev:
-                R.preview(rows, os.path.join(prev, f"{fam.replace('/', '_')}_{liv}.png"), z=4, labels=[liv])
+                R.preview(rows, os.path.join(prev, f"{fam.replace('/', '_')}_{liv}.png"), z=4, labels=[liv, f"{liv} turned"][:len(rows)])
             print("wrote", os.path.relpath(out, REPO))
 
 
