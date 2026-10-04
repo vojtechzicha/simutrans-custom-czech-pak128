@@ -22,6 +22,11 @@ display:
 # Praha SOR_NB_12, same geometry) plus a small white A/C unit behind the
 # front, matching the SOR NB 18. Placement and glass unchanged. The source dat
 # had no `length` (engine default 8, which the sprite is drawn for).
+# Second livery: car 83 (ex-DPP 3574, built 2009, in Most since 10/2024) in the
+# DPP city red-white (Most colours 2024-26, back in the city scheme since
+# 2026): the DPP family's dppcervenobila sheet (the same VTPsim art at the
+# same placement), with its white roof A/C unit behind the front, the
+# displays green LED as on 83 in Most (photos 2025).
 
 vehicles:
   - id: "NB_12"
@@ -56,3 +61,6 @@ liveries:
   - color: mostzlutocervena
     name_en: "Most, yellow-red"
     name_cs: "Most, žluto-červená"
+  - color: prahacervenobila
+    name_en: "Prague red-white"
+    name_cs: "pražská červeno-bílá"

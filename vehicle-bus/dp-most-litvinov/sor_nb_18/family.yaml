@@ -26,6 +26,12 @@ display:
 # windscreen, white stripe, red lower front); yellow upper rear framing the
 # rear window, red bumper; silver bellows; amber destination displays.
 # Data: 18.75 m, ~150 passengers split 90/60, 243 kW, 80 km/h, ~15 t.
+# Second livery: car 189 (ex-DPP 6668, built 2011, in Most since 12 Sep 2026)
+# still in the DPP city red-white: the DPP family's dppcervenobila sheet (the
+# same VTPsim art at the same placement as the Most sheet), with the two white
+# roof A/C units flanking the bellows as on 6668 (photo 2026) and the Prague
+# amber displays. The joint closes with lengths 8 + 8 as with the DPP 8 + 6:
+# the gap is set by the front section's length only.
 
 vehicles:
   - id: "SOR_NB_18-A"
@@ -85,3 +91,6 @@ liveries:
   - color: mostzlutocervena
     name_en: "Most, yellow-red"
     name_cs: "Most, žluto-červená"
+  - color: prahacervenobila
+    name_en: "Prague red-white"
+    name_cs: "pražská červeno-bílá"
