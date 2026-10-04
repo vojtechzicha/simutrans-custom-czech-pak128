@@ -1,0 +1,53 @@
+agency: MHDTrutnov
+type: "Crossway_LE_City_12M"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "MHD Trutnov"
+  agency_cs: "MHD Trutnov"
+  family_en: "Iveco Crossway LE City 12M"
+  family_cs: "Iveco Crossway LE City 12M"
+
+# Iveco Crossway LE City 12M, 3 doors. Trutnov MHD reserve: 1TI 2918 (2017, ex
+# MHD Přerov, in Trutnov since 3/2025), plain Arriva light blue without the
+# Trutnov graphics (photo 449877).
+# Sprite: the Přerov sheet (Lubak91's art), the white swoosh cut down to the short
+# Arriva wordmark and the displays amber (khk_town.rows_lecity).
+# Regenerate with tools/busrender/khk_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Crossway_LE_City_12M"
+    display_id: "Crossway LE City 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 800000
+      payload: 95
+      speed: 80
+      weight: 12
+      runningcost: 26
+      fixed_cost: 135
+      intro_year: 2017
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 243
+      gear: 56
+      smoke: Diesel_small
+
+liveries:
+  - color: arrivamodra
+    name_en: "Arriva light blue"
+    name_cs: "Arriva světle modrá"

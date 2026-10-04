@@ -1,0 +1,59 @@
+agency: IREDO
+type: "SOR_EBN_11_1"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "IREDO"
+  agency_cs: "IREDO"
+  family_en: "SOR EBN 11,1"
+  family_cs: "SOR EBN 11,1"
+
+# SOR EBN 11,1 battery bus, 11.1 m, 3 doors, about 85 places, TAM 1052 120 kW.
+# In 2026: Transdev Čechy EL2 60FA and EL2 62FA (2026, MHD Rychnov n. Kn.): the
+# Rychnov e-bus scheme, the current SOR face (photos 441351, vhdfoto 42828);
+# KAD 6H9 5510 (2018, MHD Vrchlabí 480): grass-green metallic, white roof, since
+# 10/2025 (photo 439058), the older face. Not the DPMHK EBN 11 paint
+# (sorzelenametaliza: dark green nose and skirt, white side panels), so a
+# livery of its own.
+# Sprite: original box-model render (vojtechzicha): the SOR EBN body of
+# tools/busrender/dpmhk.py painted by khk_town.KVeh.
+# Regenerate with tools/busrender/khk_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_EBN_11_1"
+    display_id: "EBN 11,1"
+    role_en: "electric bus"
+    role_cs: "elektrobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 900000
+      payload: 85
+      speed: 80
+      weight: 12
+      runningcost: 20
+      fixed_cost: 150
+      intro_year: 2018
+      intro_month: 9
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: battery
+      power: 120
+      gear: 57
+
+liveries:
+  - color: transdev
+    name_en: "white-black with the red figure · Transdev Čechy"
+    name_cs: "bílo-černá s červenou postavou · Transdev Čechy"
+  - color: kadzelena
+    name_en: "green metallic · KAD"
+    name_cs: "zelená metalíza · KAD"

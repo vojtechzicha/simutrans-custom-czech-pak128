@@ -1,0 +1,51 @@
+agency: MHDTrutnov
+type: "SOR_NB_12"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "MHD Trutnov"
+  agency_cs: "MHD Trutnov"
+  family_en: "SOR NB 12 City"
+  family_cs: "SOR NB 12 City"
+
+# SOR NB 12 City, 12.18 m, 4 doors. Trutnov MHD: 8T9 2189 (2013, ex MHD Třinec,
+# in Trutnov since 11/2022, repainted in the Trutnov scheme; photo 415210).
+# Sprite: VTPsim's NB 12 (the DPP city sheet), repainted by khk_town.rows_nb12.
+# Regenerate with tools/busrender/khk_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_NB_12"
+    display_id: "NB 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 604804
+      payload: 88
+      speed: 80
+      weight: 11
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2009
+      intro_month: 8
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 210
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: trutnovmhd
+    name_en: "MHD Trutnov light blue"
+    name_cs: "MHD Trutnov světle modrá"

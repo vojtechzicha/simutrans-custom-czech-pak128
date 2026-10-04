@@ -1,0 +1,81 @@
+agency: MHDTrutnov
+type: "SOR_NBG_18"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "MHD Trutnov"
+  agency_cs: "MHD Trutnov"
+  family_en: "SOR NBG 18"
+  family_cs: "SOR NBG 18"
+
+# SOR NBG 18 (CNG), 18.75 m, 4 doors, pusher (Iveco Cursor 8 CNG 213 kW).
+# Trutnov MHD: 6E1 3718-3720, 3 cars (2018). Fixed consist: front section A +
+# powered rear section B. CNG: engine_type diesel (upstream convention), no smoke.
+# Sprite: VTPsim's NB 18 body as repainted for the Kladno NBG 18 (CNG tank fairing),
+# white and red turned Arriva light blue by khk_town.rows_nbg18, the black
+# band under the windscreen kept, pixel mosaic on the rear half of the front
+# section and on the rear section, TRUTNOV logo on both (photos 398768, 442882).
+# Regenerate with tools/busrender/khk_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_NBG_18-A"
+    display_id: "SOR NBG 18"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["SOR_NBG_18-B"]
+    fields:
+      cost: 540000
+      payload: 90
+      speed: 80
+      weight: 9
+      runningcost: 25
+      fixed_cost: 128
+      intro_year: 2018
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+
+  - id: "SOR_NBG_18-B"
+    display_id: "SOR NBG 18"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["SOR_NBG_18-A"]
+    next: []
+    fields:
+      cost: 390000
+      payload: 60
+      speed: 80
+      weight: 8
+      runningcost: 11
+      fixed_cost: 56
+      intro_year: 2018
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 213
+      gear: 62
+
+liveries:
+  - color: trutnovmhd
+    name_en: "MHD Trutnov light blue"
+    name_cs: "MHD Trutnov světle modrá"

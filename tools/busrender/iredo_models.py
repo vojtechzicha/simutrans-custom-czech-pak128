@@ -191,31 +191,56 @@ class PTransport(Livery):
     def rear(self, bus, v, k):
         if k <= 1:
             return self.RED
-        if k in (bus.R_BAND0 - 1, bus.R_BAND0 - 3):
-            return self.RED                         # the two lines across the rear
+        if k == bus.R_BAND0 - 1:
+            return self.RED                         # the band continues across the rear
         return None
 
 
-class PTransportOld(Livery):
-    """P-transport (older): plain yellow with red bumpers."""
-    slug = "ptransportzluta"
-    body = (0xF4, 0xC2, 0x12)
-    roof = (0xF6, 0xCA, 0x22)
-    ac = (0xF6, 0xCA, 0x22)
-    seam = (0xD4, 0xA2, 0x08)
-    RED = (0xD6, 0x22, 0x1C)
-    bumper = (0xD6, 0x22, 0x1C)
+class DvurKralove(Livery):
+    """MHD Dvůr Králové nad Labem (KAD): white with a green waist band and
+    skirt and the town photo wrap between them, reduced to its colour fields
+    front to rear: lions, the arcaded square (sky, red roofs, facades), the
+    blown-glass baubles. Same palette and zones as khk_small.DvurKralove on
+    the Dekstra LF 38."""
+    slug = "dvurkralove"
+    GREEN = (0x46, 0xAA, 0x3A)
+    P = {"sky": (0x86, 0xAE, 0xD8), "facade": (0xD6, 0xB8, 0x86), "facade2": (0xE8, 0xD8, 0xB4),
+         "roofs": (0xA4, 0x4C, 0x34), "bauble": (0x7A, 0x4E, 0x30), "bauble_hi": (0xC8, 0x9A, 0x48),
+         "lion": (0xB8, 0x82, 0x44), "lion_dk": (0x6E, 0x4A, 0x28)}
+    bumper = (0x46, 0xAA, 0x3A)
 
     def side(self, bus, x, k, right):
-        if k == 0 and (x < 0.9 or x >= bus.real_len - 0.5):
-            return self.RED
-        return None
+        b0 = bus.R_BAND0
+        if k == b0 - 1 or k == 0:
+            return self.GREEN
+        u = x / bus.real_len
+        if u < 0.30 or not 1 <= k < b0 - 1:
+            return None
+        r = (b0 - 2) - k                      # 0 = first photo row under the band
+        n = b0 - 2
+        d = (bus.colidx(x, 0.0) + k) % 2 == 0
+        P = self.P
+        if u < 0.50:
+            return P["lion_dk"] if (r == 1 and d) or (r >= n - 1 and not d) else P["lion"]
+        if u < 0.75:
+            if r == 0:
+                return P["sky"]
+            if r == 1:
+                return P["roofs"]
+            return P["facade"] if d else P["facade2"]
+        return P["bauble_hi"] if d and r % 2 else P["bauble"]
 
     def front(self, bus, v, k):
-        return self.RED if k <= 1 and not (k == 1 and abs(v) < 0.28) else None
+        if k == 0 or (k == 4 and abs(v) > 0.95):
+            return self.GREEN
+        return None
 
     def rear(self, bus, v, k):
-        return self.RED if k == 0 else None
+        if k == 0 or k == bus.R_BAND0 - 1:
+            return self.GREEN
+        if 1 <= k < bus.R_BAND0 - 1 and k >= 3:
+            return self.P["facade"] if int(v * 4) % 2 else self.P["sky"]
+        return None
 
 
 class BusLineGreen(Livery):
@@ -248,7 +273,7 @@ class BusLineLime(BusLineGreen):
     WHITE = (0x5E, 0x8E, 0x2A)     # dark green BusLine swoosh on lime
 
 
-LIVERIES = {c.slug: c for c in (Livery, Transdev, CDS, PTransport, PTransportOld, BusLineGreen, BusLineLime)}
+LIVERIES = {c.slug: c for c in (Livery, Transdev, CDS, PTransport, DvurKralove, BusLineGreen, BusLineLime)}
 
 
 # ====================================================================== body
@@ -275,6 +300,7 @@ class RegioBus(Coach):
     FIG_DX = 0.55                  # Transdev figure: metres behind the front axle
     REAR_GLASS = (7, 10)           # rear window rows (k0, k1 inclusive)
     ENGINE_GRILLE = True
+    KHK_STICKER = True             # the kraj sticker panel on the rear window (IREDO buses)
 
     def __init__(self, livery):
         self.lv = LIVERIES[livery]()
@@ -414,6 +440,8 @@ class RegioBus(Coach):
         av = abs(v)
         k = self.row(z)
         g0, g1 = self.REAR_GLASS
+        if g0 <= k <= g1 and av < W2 - 0.22 and not self.KHK_STICKER:
+            return GLASS_HI if k == g1 else GLASS
         if g0 <= k <= g1 and av < W2 - 0.22:
             # the KHK sticker: a light panel over the upper rear window with
             # the red/blue chevron at the bus's left (viewer's right) and the

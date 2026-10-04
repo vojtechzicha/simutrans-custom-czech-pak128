@@ -1,0 +1,57 @@
+agency: MHDSpindleruvMlyn
+type: "Irisbus_Crossway_LE_12M"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "MHD Špindlerův Mlýn"
+  agency_cs: "MHD Špindlerův Mlýn"
+  family_en: "Irisbus Crossway LE 12M"
+  family_cs: "Irisbus Crossway LE 12M"
+
+# Irisbus Crossway LE 12M. Služby města Špindlerův Mlýn: 8H1 9232 (2013, ex Slovak
+# Lines, since 1/2023) all-over red with the SMŠM logo (photo 440624); 6B9 6628
+# (2010, since 2/2026, skibus 696003) plain white (photo 422585). 6H7 9955 wears
+# a Raiffeisenbank advert wrap: not drawn.
+# Sprite: original box-model render (vojtechzicha): IrisbusCrosswayLE of
+# tools/busrender/iredo_models.py with the livery of khk_town.py.
+# Regenerate with tools/busrender/khk_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Irisbus_Crossway_LE_12M"
+    display_id: "Crossway LE 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 600000
+      payload: 92
+      speed: 100
+      weight: 11
+      runningcost: 24
+      fixed_cost: 122
+      intro_year: 2007
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 243
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: smsmcervena
+    name_en: "red"
+    name_cs: "červená"
+  - color: bila
+    name_en: "white"
+    name_cs: "bílá"

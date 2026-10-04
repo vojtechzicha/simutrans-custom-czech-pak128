@@ -180,6 +180,16 @@ ComfortJet coaches are CZR art ported 1:1.
   Irisbus Citelis 18M, and the one-off SOR EBN 9,5 (Zelená linka) and EBN 11.
   Liveries: the classic DPMHK red-yellow-white (white-front and SOR NS
   black-front executions) and the 2026 vertical design with the crowned G.
+- **Královéhradecký kraj (IREDO)**: the regional buses running in October 2026,
+  in the four operator liveries (BusLine KHK white, Transdev white with the red
+  figure, CDS Náchod yellow, P-transport yellow-red) plus the legacy BusLine
+  greens. They cover the SOR CN / C / ICN, Iveco and Irisbus Crossway, Setra LE
+  business, Evadys, Arway, Irizar i4, Dekstra, Rošero, NovoCiti Life and
+  Sprinter. The town lines are included: SOR EBN e-buses in Náchod, Rychnov and
+  Vrchlabí, the Dvůr Králové photo wrap and the Vrchlabí Citywide BEV, all in
+  `VZ-IREDO-bus.pak`. Towns outside IREDO have their own paks: Trutnov (Arriva
+  blue with the mosaic: 26BB, NBG 18, NB 12 and reserves), Špindlerův Mlýn,
+  Jičín, Nová Paka and Kostelec nad Orlicí.
 - **DP hl. m. Prahy (DPP) and DP města Brna (DPMB)** — the complete active
   September 2026 bus, tram and trolleybus fleets of both cities as VZ families,
   replacing the upstream CZR/CZ Praha and Brno paks. Placeholder art was redrawn

@@ -251,6 +251,21 @@ Sheets that are repaints of upstream or VZ art are kept as PNGs, like the DPP re
 
 The PID ferries (Naomi type for P1 / P5 / P6, Kazi type Baba for P2, Holka 2 for P4) come from `python tools/shiprender/praha_ferries.py [family …] [--preview DIR]` (models in `boatkit.py`). They sit on the water lane of the native small ferries (`fitlane.py` re-derives it from `src/`), with `image_offset: [0, 0]` and `length: 8`. Only the Naomi and Kazi wheelhouse glass lights up.
 
+### Královéhradecký kraj (`vehicle-bus/iredo/`, `vehicle-bus/mhd-<town>/`)
+
+The kraj's regional buses are named after the integrated system: agency `IREDO` builds `VZ-IREDO-bus.pak`, which also holds the town lines integrated in IREDO (Náchod, Rychnov nad Kněžnou, Týniště, Vrchlabí, Dvůr Králové). Town systems outside IREDO get their own `MHD<Town>` pak (Trutnov, Špindlerův Mlýn, Jičín, Nová Paka, Kostelec nad Orlicí). As in Prague, there is one object per type × livery and the operator appears only in the livery display name. Pardubický kraj's IREDO buses will go into the same `VZ-IREDO-bus.pak` later.
+
+The kraj has no uniform IREDO paint. Each contract operator keeps its own scheme: `bila` (BusLine KHK, KAD), `transdev` (white with the big red Transdev figure), `cds` (CDS Náchod yellow with the red CDS), `ptransport` (P-transport yellow-red), plus the legacy BusLine `buslinezelena` / `buslinezlutozelena`. Every IREDO bus carries the kraj sticker, drawn as a light panel over the upper rear window; town-pak buses don't. The scope is the vehicles each operator ran in October 2026. On seznam-autobusu.cz, count only operator periods that are open-ended ("od m/yyyy"): a vehicle in service elsewhere has already left.
+
+The art regenerates with:
+
+- `iredo.py` (models in `iredo_models.py`, on the RegioJet coach modules): the SOR CN / C and Crossway families. The SOR CN's signature (raised rear roof and window line, the middle door rising into it, rounded caps, hopper windows) is drawn exaggerated, as the user required, so it reads like the VTPsim hand art.
+- `iredo_coaches.py` (models in `iredo_coachmodels.py`): Setra S 415 / 418 LE, Evadys, Arway, Irizar i4, Axer and SOR ICN.
+- `khk_small.py`: midibuses and vans, rendered on `praha_small.py` or repainted from VTPsim's sheets.
+- `khk_town.py`: the SOR EBN on the `dpmhk.py` bodies, and the Trutnov and Špindlerův Mlýn fleets.
+
+Each driver takes `[family …] [--yaml] [--preview DIR]`; `--yaml` regenerates the family.yaml files from the driver's tables.
+
 ## Multi-vehicle consists
 
 This Simutrans build does **not** support `bidirectional=1` (auto-flip) or `can_lead_from_rear=1`. Don't emit them. Multi-vehicle consists are modelled by **separate vehicle definitions per consist position**, each with its own sprite row.

@@ -31,8 +31,8 @@ LIVERY = {
     "transdev": ("white with the red figure", "bílá s červenou postavou"),
     "cds": ("yellow", "žlutá"),
     "ptransport": ("yellow-red", "žluto-červená"),
-    "ptransportzluta": ("yellow with red bumpers", "žlutá s červenými nárazníky"),
     "buslinezelena": ("green", "zelená"),
+    "dvurkralove": ("white-green, town photo wrap", "zeleno-bílá s fotografiemi města"),
     "buslinezlutozelena": ("yellow-green", "žlutozelená"),
 }
 
@@ -73,71 +73,47 @@ FAMILIES = {
         [("bila", "BusLine KHK, KAD"), ("transdev", "Transdev Čechy, KAD")],
         fields(620000, 90, 100, 11, 235, 8, 2020),
         "SOR CN 12,3 low-entry interurban, 12.3 m, doors 1-2-0, ~49 seats + standing,\n"
-        "Cummins 6.7 l ~235 kW. KHK 2026: BusLine KHK 30 (white), Transdev Čechy 35\n"
-        "(white + red figure), KAD 4."),
+        "Cummins 6.7 l ~235 kW. KHK 2026: BusLine KHK 28 (white), Transdev Čechy 32\n"
+        "(white + red figure), KAD 3 (2 white, 1 ex-Transdev)."),
     "sor_cn_10_5": fam("SorCN105", "SOR_CN_10_5", "SOR CN 10,5", BUS,
-        [("bila", "BusLine KHK, KAD"), ("transdev", "Transdev Čechy"), ("cds", "CDS Náchod"),
-         ("buslinezelena", "BusLine KHK"), ("buslinezlutozelena", "BusLine KHK")],
+        [("bila", "BusLine KHK, Transdev Čechy, KAD"), ("transdev", "Transdev Čechy"),
+         ("cds", "CDS Náchod"), ("buslinezlutozelena", "BusLine KHK")],
         fields(560000, 78, 100, 10, 210, 7, 2011),
-        "SOR CN 10,5 low-entry interurban, 10.6 m. KHK 2026: BusLine KHK 26 (17 white,\n"
-        "7 yellow-green, 2 green), Transdev Čechy 33, CDS Náchod 5, KAD 2."),
+        "SOR CN 10,5 low-entry interurban, 10.6 m. KHK 2026: BusLine KHK 19 (16 white,\n"
+        "3 yellow-green), Transdev Čechy 33 (31 with the figure), CDS Náchod 3, KAD 1."),
     "sor_cn_9_5": fam("SorCN95", "SOR_CN_9_5", "SOR CN 9,5", MIDI,
-        [("bila", "BusLine KHK"), ("transdev", "Transdev Čechy"), ("cds", "CDS Náchod"),
-         ("buslinezelena", "BusLine KHK")],
+        [("bila", "BusLine KHK"), ("transdev", "Transdev Čechy"), ("cds", "CDS Náchod")],
         fields(520000, 68, 90, 9, 180, 7, 2011),
-        "SOR CN 9,5 low-entry midibus, 9.5 m. KHK 2026: BusLine KHK 11, Transdev\n"
-        "Čechy 11, CDS Náchod 5."),
-    "sor_cn_8_5": fam("SorCN85", "SOR_CN_8_5", "SOR CN 8,5", MIDI,
-        [("bila", "KAD")],
-        fields(470000, 58, 90, 8, 160, 6, 2010),
-        "SOR CN 8,5 low-entry midibus, 8.5 m. KHK 2026: KAD 1."),
-    "sor_cng_12_3": fam("SorCNG", "SOR_CNG_12_3", "SOR CNG 12,3", BUS,
-        [("buslinezelena", "BusLine KHK")],
-        fields(660000, 88, 100, 12, 228, 8, 2015, smoke=None),
-        "SOR CNG 12,3: the CN 12,3 on compressed gas, tank fairing over the front roof.\n"
-        "KHK 2026: BusLine KHK 2 (green). CNG: engine_type diesel (upstream\n"
-        "convention), no smoke."),
+        "SOR CN 9,5 low-entry midibus, 9.5 m. KHK 2026: BusLine KHK 8, Transdev\n"
+        "Čechy 11, CDS Náchod 2."),
     "sor_c_10_5": fam("SorC105", "SOR_C_10_5", "SOR C 10,5", BUS,
-        [("bila", "BusLine KHK, Transdev Čechy"), ("transdev", "Transdev Čechy"), ("cds", "CDS Náchod")],
+        [("bila", "Transdev Čechy"), ("transdev", "Transdev Čechy")],
         fields(520000, 75, 100, 10, 200, 7, 2005),
-        "SOR C 10,5 high-floor interurban, 10.5 m, doors 1-1-0. KHK 2026: BusLine KHK 2,\n"
-        "Transdev Čechy 3, CDS Náchod 2."),
-    "sor_c_9_5": fam("SorC95", "SOR_C_9_5", "SOR C 9,5", MIDI,
-        [("cds", "CDS Náchod"), ("bila", "KAD")],
-        fields(480000, 65, 90, 9, 180, 7, 2005),
-        "SOR C 9,5 high-floor midibus. KHK 2026: CDS Náchod 2, KAD 1."),
-    "sor_lc_12": fam("SorLC12", "SOR_LC_12", "SOR LC 12", BUS,
-        [("cds", "CDS Náchod")],
-        fields(600000, 70, 100, 11, 220, 8, 2009),
-        "SOR LC 12 long-distance high-floor bus. KHK 2026: CDS Náchod 2."),
-    "sor_lc_10_5": fam("SorLC105", "SOR_LC_10_5", "SOR LC 10,5", BUS,
-        [("cds", "CDS Náchod")],
-        fields(540000, 60, 100, 10, 200, 7, 2009),
-        "SOR LC 10,5 long-distance high-floor bus. KHK 2026: CDS Náchod 1."),
+        "SOR C 10,5 high-floor interurban, 10.5 m, doors 1-1-0. KHK 2026: Transdev\n"
+        "Čechy 2 (one white, one with the figure)."),
     # ------------------------------------------------------------ Iveco
     "crossway_le_line_12m": fam("CrosswayLELine", "Crossway_LE_Line_12M", "Iveco Crossway LE LINE 12M", BUS,
-        [("bila", "BusLine KHK, KAD"), ("transdev", "Transdev Čechy, KAD"), ("cds", "CDS Náchod"),
-         ("ptransport", "P-transport"), ("ptransportzluta", "P-transport"), ("buslinezelena", "BusLine KHK")],
+        [("bila", "BusLine KHK, Transdev Čechy, KAD"), ("transdev", "Transdev Čechy, KAD"),
+         ("cds", "CDS Náchod"), ("ptransport", "P-transport"), ("buslinezelena", "BusLine KHK")],
         fields(640000, 92, 100, 11, 243, 8, 2014),
         "Iveco Crossway LE LINE 12M low-entry interurban (2013+ front), doors 2-2-0.\n"
-        "KHK 2026: BusLine KHK 23 (white, 8 green), Transdev Čechy 23, CDS Náchod 31,\n"
-        "P-transport 7, KAD 6."),
+        "KHK 2026: BusLine KHK 11 (6 white, 5 green), Transdev Čechy 21 (17 with the\n"
+        "figure), CDS Náchod 28, P-transport 6, KAD 4."),
     "crossway_le_line_10_8m": fam("CrosswayLELine108", "Crossway_LE_Line_10_8M", "Iveco Crossway LE LINE 10,8M", BUS,
-        [("bila", "BusLine KHK"), ("buslinezelena", "BusLine KHK"), ("cds", "CDS Náchod"),
-         ("ptransport", "P-transport")],
+        [("bila", "BusLine KHK"), ("cds", "CDS Náchod"), ("ptransport", "P-transport")],
         fields(590000, 80, 100, 10, 210, 7, 2014),
-        "Iveco Crossway LE LINE 10,8M. KHK 2026: BusLine KHK 7 (4 white, 3 green), CDS\n"
-        "Náchod 3, P-transport 1."),
+        "Iveco Crossway LE LINE 10,8M. KHK 2026: BusLine KHK 4, CDS Náchod 2,\n"
+        "P-transport 1."),
     "crossway_le_line_14_5m": fam("CrosswayLELine145", "Crossway_LE_Line_14_5M", "Iveco Crossway LE LINE 14,5M", BUS,
         [("bila", "BusLine KHK"), ("transdev", "Transdev Čechy"), ("cds", "CDS Náchod")],
         fields(720000, 110, 100, 14, 265, 10, 2018),
-        "Iveco Crossway LE LINE 14,5M, three axles (tag axle). KHK 2026: BusLine KHK 4,\n"
-        "Transdev Čechy 4, CDS Náchod 1."),
+        "Iveco Crossway LE LINE 14,5M, three axles (tag axle). KHK 2026: BusLine KHK 3,\n"
+        "Transdev Čechy 3, CDS Náchod 1."),
     "crossway_line_12m": fam("CrosswayLine", "Crossway_Line_12M", "Iveco Crossway LINE 12M", BUS,
         [("cds", "CDS Náchod"), ("ptransport", "P-transport"), ("bila", "KAD")],
         fields(600000, 80, 100, 11, 243, 8, 2015),
         "Iveco Crossway LINE 12M high-floor interurban, doors 1-1-0. KHK 2026: CDS\n"
-        "Náchod 19, P-transport 6, KAD 1."),
+        "Náchod 18, P-transport 4, KAD 1."),
     "crossway_line_13m": fam("CrosswayLine13", "Crossway_Line_13M", "Iveco Crossway LINE 13M", BUS,
         [("bila", "BusLine KHK"), ("ptransport", "P-transport")],
         fields(650000, 88, 100, 12, 265, 9, 2018),
@@ -145,30 +121,25 @@ FAMILIES = {
     "crossway_pro_13m": fam("CrosswayPro13", "Crossway_Pro_13M", "Iveco Crossway PRO 13M", BUS,
         [("bila", "BusLine KHK")],
         fields(680000, 85, 100, 12, 265, 9, 2017),
-        "Iveco Crossway PRO 13M, three axles. KHK 2026: BusLine KHK 4."),
+        "Iveco Crossway PRO 13M, three axles. KHK 2026: BusLine KHK 1."),
     "crossway_le_city_12m": fam("CrosswayLECity12", "Crossway_LE_City_12M", "Iveco Crossway LE CITY 12M", BUS,
         [("transdev", "Transdev Čechy")],
         fields(630000, 100, 85, 11, 243, 8, 2014),
         "Iveco Crossway LE CITY 12M, three double doors. KHK 2026: Transdev Čechy 1."),
+    "crossway_le_city_10_8m": fam("CrosswayLECity108", "Crossway_LE_City_10_8M", "Iveco Crossway LE CITY 10,8M", BUS,
+        [("dvurkralove", "KAD")],
+        fields(580000, 85, 85, 10, 210, 7, 2021),
+        "Iveco Crossway LE CITY 10,8M, doors 2-2-0. MHD Dvůr Králové nad Labem (KAD,\n"
+        "7H7 2724, 2021, IREDO lines 481/482) in the town photo wrap."),
     "irisbus_crossway_le_12m": fam("IrisbusCrosswayLE", "Irisbus_Crossway_LE_12M", "Irisbus Crossway LE 12M", BUS,
-        [("transdev", "Transdev Čechy"), ("bila", "Transdev Čechy"), ("ptransport", "P-transport")],
+        [("transdev", "Transdev Čechy"), ("bila", "Transdev Čechy")],
         fields(600000, 92, 100, 11, 243, 8, 2007),
-        "Irisbus Crossway LE 12M (2007-2013 front). KHK 2026: Transdev Čechy 6 (4 with\n"
-        "the figure), P-transport 1."),
-    "irisbus_crossway_le_10_8m": fam("IrisbusCrosswayLE108", "Irisbus_Crossway_LE_10_8M", "Irisbus Crossway LE 10,8M", BUS,
-        [("cds", "CDS Náchod")],
-        fields(560000, 80, 100, 10, 210, 7, 2009),
-        "Irisbus Crossway LE 10,8M. KHK 2026: CDS Náchod 1."),
-    "irisbus_crossway_12m": fam("IrisbusCrossway", "Irisbus_Crossway_12M", "Irisbus Crossway 12M", BUS,
-        [("bila", "BusLine KHK"), ("ptransport", "P-transport"), ("ptransportzluta", "P-transport")],
-        fields(560000, 80, 100, 11, 243, 8, 2006),
-        "Irisbus Crossway 12M high-floor interurban (2006-2013). KHK 2026: BusLine KHK 5,\n"
-        "P-transport 2."),
+        "Irisbus Crossway LE 12M (2007-2013 front). KHK 2026: Transdev Čechy 2 (one\n"
+        "with the figure, one white)."),
     "irisbus_crossway_12_8m": fam("IrisbusCrossway128", "Irisbus_Crossway_12_8M", "Irisbus Crossway 12,8M", BUS,
-        [("bila", "BusLine KHK, Transdev Čechy"), ("ptransport", "P-transport")],
+        [("bila", "Transdev Čechy")],
         fields(590000, 86, 100, 12, 243, 9, 2006),
-        "Irisbus Crossway 12,8M high-floor interurban. KHK 2026: BusLine KHK 1, Transdev\n"
-        "Čechy 1, P-transport 1."),
+        "Irisbus Crossway 12,8M high-floor interurban. KHK 2026: Transdev Čechy 1."),
 }
 
 

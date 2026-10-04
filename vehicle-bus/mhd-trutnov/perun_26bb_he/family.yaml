@@ -1,0 +1,54 @@
+agency: MHDTrutnov
+type: "Perun_26BB_HE"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "MHD Trutnov"
+  agency_cs: "MHD Trutnov"
+  family_en: "Škoda Perun 26BB HE"
+  family_cs: "Škoda Perun 26BB HE"
+
+# Škoda Perun 26BB HE battery bus (Solaris Urbino 12 IV body), 12 m, 3 doors.
+# Trutnov MHD (ARRIVA autobusy): 6E1 8260-8263, 4 cars, in service since 2/2019.
+# Sprite: TommPa9's Solaris Urbino 12 IV electric (the Tábor sheet, roof battery
+# fairing; it has the Urbino IV rear window line, which the smaller VTPsim
+# Urbino III of the Třinec 26BB lacks), repainted by khk_town.rows_26bb: COMETT
+# white and the chequered patch Arriva light blue, pixel mosaic and white
+# TRUTNOV MHD logo (photos 232403, 414852).
+# Regenerate with tools/busrender/khk_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Perun_26BB_HE"
+    display_id: "26BB HE"
+    role_en: "electric bus"
+    role_cs: "elektrobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 1000000
+      payload: 85
+      speed: 80
+      weight: 12
+      runningcost: 20
+      fixed_cost: 150
+      intro_year: 2018
+      intro_month: 12
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: battery
+      power: 160
+      gear: 54
+
+liveries:
+  - color: trutnovmhd
+    name_en: "MHD Trutnov light blue"
+    name_cs: "MHD Trutnov světle modrá"

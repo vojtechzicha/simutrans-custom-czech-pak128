@@ -1,0 +1,52 @@
+agency: MHDTrutnov
+type: "Crossway_Pro_13M"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "MHD Trutnov"
+  agency_cs: "MHD Trutnov"
+  family_en: "Iveco Crossway PRO 13M"
+  family_cs: "Iveco Crossway PRO 13M"
+
+# Iveco Crossway PRO 13M, three axles. Trutnov MHD reserve since 2024: 6E7 6343
+# (2015, ex Germany), white with the small light-blue Arriva logo (photo 418274).
+# Sprite: original box-model render (vojtechzicha): CrosswayPro13 of
+# tools/busrender/iredo_models.py with the livery of khk_town.py.
+# Regenerate with tools/busrender/khk_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Crossway_Pro_13M"
+    display_id: "Crossway PRO 13M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 680000
+      payload: 85
+      speed: 100
+      weight: 12
+      runningcost: 27
+      fixed_cost: 139
+      intro_year: 2017
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 9
+      engine_type: diesel
+      power: 265
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: arrivabila
+    name_en: "white"
+    name_cs: "bílá"

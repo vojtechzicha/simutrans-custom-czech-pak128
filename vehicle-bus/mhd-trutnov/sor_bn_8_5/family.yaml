@@ -1,0 +1,52 @@
+agency: MHDTrutnov
+type: "SOR_BN_8_5"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "MHD Trutnov"
+  agency_cs: "MHD Trutnov"
+  family_en: "SOR BN 8.5"
+  family_cs: "SOR BN 8,5"
+
+# SOR BN 8,5 midibus. Trutnov MHD: 5E9 3012 (2017), line 7 since 2/2025, plain
+# white with a small Arriva logo (photo 442526).
+# Sprite: VTPsim's BN 9,5 shortened (the DPP BN 8,5 sheet), its red turned into the
+# white of the same face (khk_town.rows_bn85).
+# Regenerate with tools/busrender/khk_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_BN_8_5"
+    display_id: "BN 8,5"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 400000
+      payload: 60
+      speed: 90
+      weight: 7
+      runningcost: 21
+      fixed_cost: 140
+      intro_year: 2010
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 137
+      gear: 53
+      smoke: Diesel_small
+
+liveries:
+  - color: bila
+    name_en: "white"
+    name_cs: "bílá"
