@@ -9,7 +9,8 @@
 # almost every IC set: taller window band, windows only in the middle 60 % of the car,
 # light silver-grey roof.
 # RJ car codes are used as vehicle ids (they are painted on every car and used in RJ
-# consist lists); display_id is the UIC type.
+# consist lists); display_id is the RJ car code
+# (as vagonWEB shows it, so a depot search for it finds the car) and the UIC type.
 
 agency: RegioJet
 type: "Astra"
@@ -24,7 +25,7 @@ display:
 
 vehicles:
   - id: "Bm000"
-    display_id: "Bmpz 20-90"
+    display_id: "Bm000 · Bmpz 20-90"
     role_en: "Standard open coach (Astra)"
     role_cs: "velkoprostorový vůz Standard (Astra)"
     row: 0

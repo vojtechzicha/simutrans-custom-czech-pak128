@@ -12,7 +12,8 @@
 # LED display). Several Ampz 18-91 and most Bmz 28-91 are only foil-wrapped and still
 # show the red ÖBB roof (livery zlutacervenastrecha, vagonWEB "-cs-" drawings).
 # RJ car codes are used as vehicle ids (they are painted on every car and used in RJ
-# consist lists); display_id is the UIC type.
+# consist lists); display_id is the RJ car code
+# (as vagonWEB shows it, so a depot search for it finds the car) and the UIC type.
 
 agency: RegioJet
 type: "OBB"
@@ -27,7 +28,7 @@ display:
 
 vehicles:
   - id: "A000"
-    display_id: "Ampz 18-91"
+    display_id: "A000 · Ampz 18-91"
     role_en: "Business + Relax coach"
     role_cs: "vůz Business + Relax"
     row: 0
@@ -50,7 +51,7 @@ vehicles:
       axles: 4
 
   - id: "A100"
-    display_id: "Ampz 18-95"
+    display_id: "A100 · Ampz 18-95"
     role_en: "Business + Relax coach"
     role_cs: "vůz Business + Relax"
     row: 1
@@ -73,7 +74,7 @@ vehicles:
       axles: 4
 
   - id: "AB000"
-    display_id: "ABmz 30-90"
+    display_id: "AB000 · ABmz 30-90"
     role_en: "Standard coach"
     role_cs: "vůz Standard"
     row: 2
@@ -96,7 +97,7 @@ vehicles:
       axles: 4
 
   - id: "Bk000"
-    display_id: "Bmz 28-91"
+    display_id: "Bk000 · Bmz 28-91"
     role_en: "Standard coach with kids' compartment"
     role_cs: "vůz Standard s dětským oddílem"
     row: 3
@@ -119,7 +120,7 @@ vehicles:
       axles: 4
 
   - id: "Bk100"
-    display_id: "Bmz 21-90"
+    display_id: "Bk100 · Bmz 21-90"
     role_en: "Standard coach with kids' compartment"
     role_cs: "vůz Standard s dětským oddílem"
     row: 4

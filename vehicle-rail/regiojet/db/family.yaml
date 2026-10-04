@@ -14,7 +14,8 @@
 # pictogram on the door), Bp500 = Bpmmz 20-91 (DB 284.5, fresh 2026 repaints with a
 # light roof and skirt).
 # RJ car codes are used as vehicle ids (they are painted on every car and used in RJ
-# consist lists); display_id is the UIC type.
+# consist lists); display_id is the RJ car code
+# (as vagonWEB shows it, so a depot search for it finds the car) and the UIC type.
 
 agency: RegioJet
 type: "DB"
@@ -29,7 +30,7 @@ display:
 
 vehicles:
   - id: "Am500"
-    display_id: "Avmz 19-91"
+    display_id: "Am500 · Avmz 19-91"
     role_en: "Standard compartment coach"
     role_cs: "oddílový vůz Standard"
     row: 0
@@ -51,7 +52,7 @@ vehicles:
       axles: 4
 
   - id: "Ak100"
-    display_id: "Avmmz 19-91"
+    display_id: "Ak100 · Avmmz 19-91"
     role_en: "Standard compartment coach"
     role_cs: "oddílový vůz Standard"
     row: 1
@@ -73,7 +74,7 @@ vehicles:
       axles: 4
 
   - id: "Bm100"
-    display_id: "Bmpz 28-90"
+    display_id: "Bm100 · Bmpz 28-90"
     role_en: "Low cost open coach"
     role_cs: "velkoprostorový vůz Low cost"
     row: 2
@@ -95,7 +96,7 @@ vehicles:
       axles: 4
 
   - id: "Ap100"
-    display_id: "Bmpz 28-90"
+    display_id: "Ap100 · Bmpz 28-90"
     role_en: "Relax open coach"
     role_cs: "velkoprostorový vůz Relax"
     row: 3
@@ -117,7 +118,7 @@ vehicles:
       axles: 4
 
   - id: "Ap200"
-    display_id: "Apmmz 18-90"
+    display_id: "Ap200 · Apmmz 18-90"
     role_en: "Relax open coach"
     role_cs: "velkoprostorový vůz Relax"
     row: 4
@@ -139,7 +140,7 @@ vehicles:
       axles: 4
 
   - id: "Bp200"
-    display_id: "Bpmz 20-91"
+    display_id: "Bp200 · Bpmz 20-91"
     role_en: "Low cost open coach"
     role_cs: "velkoprostorový vůz Low cost"
     row: 5
@@ -161,7 +162,7 @@ vehicles:
       axles: 4
 
   - id: "Bp200.9"
-    display_id: "Bpmz 20-91"
+    display_id: "Bp200.9 · Bpmz 20-91"
     role_en: "Low cost coach with bike space"
     role_cs: "vůz Low cost s oddílem pro kola"
     row: 6
@@ -183,7 +184,7 @@ vehicles:
       axles: 4
 
   - id: "Bp100"
-    display_id: "Bpmbz 29-91"
+    display_id: "Bp100 · Bpmbz 29-91"
     role_en: "Low cost accessible coach"
     role_cs: "vůz Low cost pro vozíčkáře"
     row: 7
@@ -205,7 +206,7 @@ vehicles:
       axles: 4
 
   - id: "Bp500"
-    display_id: "Bpmmz 20-91"
+    display_id: "Bp500 · Bpmmz 20-91"
     role_en: "Low cost open coach"
     role_cs: "velkoprostorový vůz Low cost"
     row: 8

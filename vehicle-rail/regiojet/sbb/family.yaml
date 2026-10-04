@@ -9,7 +9,8 @@
 # same Eurofima car via DB), Bp000 = Bmpz 20-73 (SBB Schlieren 1980 open car, R8 cars
 # 4-5, silvery reflective glass, 160 km/h).
 # RJ car codes are used as vehicle ids (they are painted on every car and used in RJ
-# consist lists); display_id is the UIC type.
+# consist lists); display_id is the RJ car code
+# (as vagonWEB shows it, so a depot search for it finds the car) and the UIC type.
 
 agency: RegioJet
 type: "SBB"
@@ -24,7 +25,7 @@ display:
 
 vehicles:
   - id: "Am000"
-    display_id: "Amz 19-90"
+    display_id: "Am000 · Amz 19-90"
     role_en: "Business (1st class) coach"
     role_cs: "vůz Business (1. třída)"
     row: 0
@@ -46,7 +47,7 @@ vehicles:
       axles: 4
 
   - id: "Am900"
-    display_id: "Bmz 29-90"
+    display_id: "Am900 · Bmz 29-90"
     role_en: "Standard compartment coach"
     role_cs: "oddílový vůz Standard"
     row: 1
@@ -68,7 +69,7 @@ vehicles:
       axles: 4
 
   - id: "Bp000"
-    display_id: "Bmpz 20-73"
+    display_id: "Bp000 · Bmpz 20-73"
     role_en: "Low cost open coach"
     role_cs: "velkoprostorový vůz Low cost"
     row: 2
