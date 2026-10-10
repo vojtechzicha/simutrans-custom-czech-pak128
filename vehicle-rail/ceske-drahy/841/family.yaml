@@ -16,6 +16,9 @@ display:
 # Třebová. All still in Najbrt 1 (a few carry partial town ad wraps). Same body
 # and data as the 840: 25.5 m, 2 × 265 kW, 120 km/h, 43 t tare.
 #
+# Runs solo or in multiple, 841 + 841 (e.g. Os 24871 Zruč nad Sázavou -
+# Havlíčkův Brod, Řazení vlaků 2026).
+#
 # Body: pak128.CS CD_840 (Lubak91; CD_841 in the same pak is identical), see
 # the 840 family; one shared sheet per livery.
 
@@ -24,6 +27,8 @@ vehicles:
     role_en: "railcar"
     role_cs: "motorový vůz"
     row: 0
+    prev: ["841"]
+    next: ["841"]
     fields:
       cost: 3290000
       payload: 113
