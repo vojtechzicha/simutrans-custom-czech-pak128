@@ -14,9 +14,8 @@ display:
   family_cs: "SOR EBN 10.5"
 
 # Auto-extracted from CZ-vehicle-bus.pak via tools/pak_extract.py families.
-# Numeric fields below come straight from the binary VHCL payload — verify
-# against real-world data (cost / speed / payload / power / dates) before
-# building. Role labels and family display names are TODOs.
+# Numeric fields come from the upstream VHCL payload; service dates were
+# checked against the 2025–2026 DPO roster.
 
 vehicles:
   - id: "SOR_EBN105"

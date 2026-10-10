@@ -14,7 +14,6 @@ display:
   family_en: "Pragoimex EVO1"
   family_cs: "Pragoimex EVO1"
 
-# Scaffolded by scripts/import_tram_fleets.py — see TRAM_BACKLOG.md.
 # Pragoimex EVO1 #316: the 2015 prototype (tested in Prague), in Most since 2016;
 # unidirectional, runs solo. Sprite: the redrawn EVO1 body (TommPa9's Olomouc EVO1
 # template) in the standard DPmML yellow-red as worn on the EVO1: red roof and upper

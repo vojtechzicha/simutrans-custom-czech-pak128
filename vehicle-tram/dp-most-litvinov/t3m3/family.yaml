@@ -14,8 +14,8 @@ display:
   family_en: "Tatra T3M.3"
   family_cs: "Tatra T3M.3"
 
-# Scaffolded by scripts/import_tram_fleets.py — see TRAM_BACKLOG.md.
-# PLACEHOLDER ART: the existing Most T3 sprite (same body, correct paint).
+# PLACEHOLDER ART: the former Most T3 sheet, unchanged (same body, correct
+# paint); the TV14 dash and door windows are not drawn yet (see TODO.md).
 # T3M.3 (TV14 modernisation of 1982–87 T3SU/T3SUCS, nos. 204–313) is the high-floor
 # backbone: 25 operational cars, solo or as two-car sets (intercity line 4).
 # Only detail differences from the classic T3 (dash, doors).
