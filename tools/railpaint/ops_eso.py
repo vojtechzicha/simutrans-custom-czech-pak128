@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""RegioJet 162 / 362.2 and ZSSK 361.1: TommPa9's Eso / Peršing drawing repainted,
-the same way as the ČD 162 / 163 / 362 / 371 (cd_eso.py, variant E3).
+"""RegioJet 162 / 362.2, ZSSK 361.1 and ŽSR 362: TommPa9's Eso / Peršing drawing
+repainted, the same way as the ČD 162 / 163 / 362 / 371 (cd_eso.py, variant E3).
 
-    python tools/railpaint/ops_eso.py [regiojet/162|regiojet/362_2|zssk/361_1 ...] [--preview DIR]
+    python tools/railpaint/ops_eso.py [regiojet/162|regiojet/362_2|zssk/361_1|zsr/362 ...] [--preview DIR]
 
 Every family takes the details of one of his class sheets (src/tommpa9_eso/)
 and the paint of its own photos, in the colours of the operator's other VZ
@@ -27,6 +27,9 @@ dark gutter where the roof meets the side.
                   rule (361 129): the machine room red with a white line along
                   the top, a white wedge before the right-hand cab door as seen,
                   the big white arc logo, the off-white band only on the left.
+  zsr/362         modrobezova on his own ZSR_362_Pershing: the 1990s ŽSR dark blue
+                  with the beige band, his yellow pantographs (ported because the
+                  user's save runs it; kept a ŽSR loco at the user's wish).
 """
 import os
 import sys
@@ -70,6 +73,7 @@ Z_FRAMEW = (0xEE, 0xEC, 0xE6)
 Z_YELLOW = (0xE8, 0xC2, 0x1A)
 Z_ROOF = (0xA4, 0xA6, 0xA8)
 Z_LOUVRE = (0x7A, 0x14, 0x18)
+ZSR_BEIGE = (0xD2, 0xCC, 0xA0)        # his beige band (0xC5C58C seen square-on)
 
 
 def as_seen(u, col):
@@ -187,6 +191,10 @@ def liveries():
             "ZSSK_361.1_Pershing",
             E.Livery({"body": Z_RED, "band": Z_WHITE, "frame": Z_GREY, "louvre": Z_LOUVRE},
                      template="ZSSK_361.1_Pershing", frames=Z_FRAMEW, beam=Z_YELLOW, roof=Z_ROOF), 0),
+        ("zsr/362", "modrobezova"): (
+            "ZSR_362_Pershing",
+            E.Livery({"body": E.CL.BC_BLUE, "stripe": ZSR_BEIGE, "louvre": E.LOUVRE_GREY},
+                     template="ZSR_362_Pershing", panto=None), 0),
         ("zssk/361_1", "korporatni"): (
             "ZSSK_361.1_Pershing",
             E.Livery({"body": Z_RED, "band": Z_WHITE, "frame": Z_GREY, "louvre": Z_LOUVRE}, rules=zssk_corp,

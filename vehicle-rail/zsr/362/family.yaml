@@ -1,0 +1,52 @@
+# ŽSR class 362: the Škoda 69E (ČSD ES 499.1 "Eso") dual-system locomotive in the
+# 1990s ŽSR scheme, dark blue with a beige band. Ported because the user's save runs
+# TommPa9's pak128.cs ZSR_362_Pershing; the user wants it kept as a ŽSR loco
+# (2026-10-10), not merged into the ČD 362. Figures as in the upstream pak.
+#
+# Sprites: TommPa9's ZSR_362_Pershing repainted by tools/railpaint/ops_eso.py like
+# the ČD Eso family (variant E3): his layout in the shared colours, a dark roof
+# gutter, his yellow pantographs. Regenerate with
+# `python tools/railpaint/ops_eso.py zsr/362`. Length 8 like the native.
+
+agency: ZSR
+type: "362"
+copyright: TommPa9      # his pak128.cs ZSR 362 Peršing, repainted
+# Locomotive: no passengers, so the cab glass is plain and never lights up.
+windows_lit_when_loaded: false
+
+display:
+  agency_en: "ŽSR"
+  agency_cs: "ŽSR"
+  family_en: "Škoda 69E Peršing"
+  family_cs: "Škoda 69E Peršing"
+
+vehicles:
+  - id: "362"
+    role_en: "electric locomotive"
+    role_cs: "elektrická lokomotiva"
+    row: 0
+    prev: any
+    next: any
+    fields:
+      cost: 4251600
+      payload: 0
+      speed: 140
+      weight: 87
+      runningcost: 265
+      fixed_cost: 2374
+      intro_year: 1993
+      intro_month: 1
+      retire_year: 2006
+      retire_month: 1
+      waytype: track
+      engine_type: electric
+      power: 3480
+      gear: 133
+      length: 8
+    extended:
+      axles: 4
+
+liveries:
+  - color: modrobezova
+    name_en: "blue-beige"
+    name_cs: "modro-béžová"

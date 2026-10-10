@@ -148,7 +148,7 @@ ComfortJet coaches are CZR art ported 1:1.
     7-car railjet both ways round: locomotive leading, or the Afmpz cab car
     leading with a turned 1216 pushing at the tail).
   - Slovak, Polish and Hungarian: **ZSSK** (813 + 913, 361.1, day and sleeping
-    coaches), **MÁV** (IC and night coaches), **PKP Intercity** (EU44, EP09, EU07,
+    coaches), **ŽSR** (362 in the 1990s blue-beige), **MÁV** (IC and night coaches), **PKP Intercity** (EU44, EP09, EU07,
     leased Vectrons, day and night coaches), **Koleje Dolnośląskie** (Impuls 45WE
     and 31WE to Lichkov), **Koleje Śląskie** (Impuls 2 31WEbc, Elf 2 22WEd and
     21WEa to Bohumín) and **European Sleeper** (LINEAS Traxx 186 and its coaches).
