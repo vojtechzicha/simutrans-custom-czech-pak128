@@ -13,7 +13,7 @@ display:
   family_en: "SOR TNB 12"
   family_cs: "SOR TNB 12"
 
-# CANDIDATE (under review). SOR TNB 12, the only one built: the 2009
+# SOR TNB 12, the only one built: the 2009
 # prototype (SOR Libchavy body on the NB 12, Cegelec TV Europulse electrics,
 # final assembly by DPO). On loan to DPO from 2/2010 as 9997, passenger trials
 # from 26 April 2010, type approval 22 December 2010, bought by DPO and
@@ -24,10 +24,10 @@ display:
 # 12.18 x 2.55 m, 3.40 m over the poles, 4 double doors, 28 seats + 67
 # standing = 95, Pragoimex asynchronous motor 175 kW, 65 km/h, 10.2 t.
 # Livery (seznam-autobusu: "bílá s modrou střechou", from new to today): white
-# body, black glazing band and front mask, light blue roof, cant rail and front
-# cap; the gold swirl and the "SOR Trolejbus" lettering are not drawn.
+# body, black glazing band and front mask, light blue cant rail and front cap
+# (variant B, picked 2026-10-10: the roof itself stays white); the gold swirl and the "SOR Trolejbus" lettering are not drawn.
 # Sprite: VTPsim's SOR NB 12 (the white Praha sheet) moved onto the DPO 26Tr
-# footprint, its front roof A/C unit removed, the roof painted blue, the white
+# footprint, its front roof A/C unit removed, the cant rail painted blue, the white
 # roof container of the traction equipment with the louvred resistor box ahead
 # of it added, and the 26Tr poles (TommPa9) set pixel for pixel at the rear
 # end of the container: tools/busrender/dpo_derived.py.

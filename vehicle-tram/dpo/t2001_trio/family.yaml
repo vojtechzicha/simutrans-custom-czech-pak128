@@ -16,6 +16,11 @@ display:
 # Auto-extracted from CZ-vehicle-tram.pak via tools/pak_extract.py families.
 # Numeric fields come from the upstream VHCL payload; service dates were
 # checked against the 2025–2026 DPO roster.
+# Sprite: the Astra (ltm1008_astra) sheet with the Trio's front end, generated
+# by tools/tramrender/dpo_trio.py (variant A, picked 2026-10-10: blue crescent under the
+# windscreen with the headlights in the white corners, a lower light-grey roof
+# unit set back from the cab edge; --variant B also rakes the windscreen and
+# frames the cab side window in blue). Middle section and rear end unchanged.
 
 vehicles:
   - id: "T2001_Trio"

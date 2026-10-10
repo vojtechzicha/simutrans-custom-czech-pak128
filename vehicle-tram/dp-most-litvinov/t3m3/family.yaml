@@ -15,11 +15,11 @@ display:
   family_cs: "Tatra T3M.3"
 
 # Sprite: Lubak91's Most T3 sheet with the TV14 details painted on by
-# tools/railpaint/most_t3m3.py (candidate b, picked 2026-10-10): green LED
+# tools/railpaint/most_t3m3.py (candidate a, picked 2026-10-10): green LED
 # destination displays in the always-lit 01DD01 (front and first window behind
-# the middle door), yellow folding doors with tall windows, and the dark bumper
-# band under the headlights (photos of 205, 237, 257, 2024-26).
-# Regenerate: python tools/railpaint/most_t3m3.py b
+# the middle door) and yellow folding doors with tall windows (photos of 205,
+# 237, 257, 2024-26).
+# Regenerate: python tools/railpaint/most_t3m3.py a
 # T3M.3 (TV14 modernisation of 1982–87 T3SU/T3SUCS, nos. 204–313) is the high-floor
 # backbone: 25 operational cars, solo or as two-car sets (intercity line 4).
 # Only detail differences from the classic T3 (dash, doors).

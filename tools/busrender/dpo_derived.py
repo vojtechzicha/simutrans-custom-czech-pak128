@@ -48,7 +48,7 @@ TR26_SRC = "vehicle-trolleybus/dpo/26trsolaris/sprites/dpotyrkysova.png"
 NB12_SRC = "vehicle-bus/praha/sor_nb_12/sprites/bila.png"
 
 # the chosen variant per family (what goes into sprites/)
-VARIANT = {"solarisurbino12_s4_electric": "B", "sor_tnb_12": "A"}
+VARIANT = {"solarisurbino12_s4_electric": "B", "sor_tnb_12": "B"}
 OUT = {"solarisurbino12_s4_electric": "vehicle-bus/dpo/solarisurbino12_s4_electric/sprites/dpotyrkysova.png",
        "sor_tnb_12": "vehicle-trolleybus/dpo/sor_tnb_12/sprites/bilamodrastrecha.png"}
 
