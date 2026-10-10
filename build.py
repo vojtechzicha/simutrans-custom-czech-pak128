@@ -311,8 +311,10 @@ def emit_tab_entries(family: dict, livery: dict, lang: str, mode: str) -> list[s
     return out
 
 
-# Station sets (station-<mode>/.../station.yaml). Every object is a 16-layout
-# through stop drawn on the standard sheet written by tools/gen_platforms.py:
+# Station sets (station-<mode>/.../station.yaml). An object is a 16-layout
+# through stop unless it sets ``layouts`` (e.g. 2 or 4 for the road layover
+# stops of tools/gen_layover.py), drawn on the standard sheet of
+# tools/gen_platforms.py:
 # rows 0-1 back / 2-3 front images for season 0 (layouts 0-7, 8-15), rows 4-7
 # the same for season 1 (snow), row 8 = build cursor (col 0) and 32x32 toolbar
 # icon (col 1). Cells left entirely transparent are not referenced.
@@ -320,7 +322,7 @@ STATION_LAYOUTS = 16
 STATION_SEASONS = 2
 STATION_CURSOR = (8, 0)
 STATION_ICON = (8, 1)
-MODE_WAYTYPES = {"rail": "track"}
+MODE_WAYTYPES = {"rail": "track", "road": "road"}
 TRANSPARENT_RGB = (231, 255, 255)
 
 
@@ -349,6 +351,7 @@ def nonempty_cells(png: Path, tile: int = 128) -> set[tuple[int, int]]:
 
 def emit_station_dat(spec: dict, obj: dict, mode: str, cells: set[tuple[int, int]]) -> str:
     bn = station_basename(spec, obj)
+    layouts = obj.get("layouts", STATION_LAYOUTS)
     credit = spec.get("copyright")
     fields = {"type": "stop", "waytype": MODE_WAYTYPES[mode], "noinfo": 1}
     fields.update(obj.get("fields", {}))
@@ -356,14 +359,14 @@ def emit_station_dat(spec: dict, obj: dict, mode: str, cells: set[tuple[int, int
         "obj=building",
         f"name={bn}",
         f"copyright={credit + ', ' if credit else ''}vojtechzicha",
-        f"dims=1,1,{STATION_LAYOUTS}",
+        f"dims=1,1,{layouts}",
     ]
     lines += [f"{k}={v}" for k, v in fields.items()]
     lines.append(f"icon=> {bn}.{STATION_ICON[0]}.{STATION_ICON[1]}")
     lines.append(f"cursor={bn}.{STATION_CURSOR[0]}.{STATION_CURSOR[1]}")
     lines.append("")
     for season in range(STATION_SEASONS):
-        for layout in range(STATION_LAYOUTS):
+        for layout in range(layouts):
             for kind, key in (("back", "BackImage"), ("front", "FrontImage")):
                 row, col = station_sheet_cell(kind, season, layout)
                 if (row, col) in cells:

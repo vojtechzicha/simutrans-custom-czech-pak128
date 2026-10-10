@@ -1,0 +1,47 @@
+# Bus layover bays ("odstavná stání"): road stops where buses wait out their
+# layover beside the road instead of blocking a stop. They take no passengers,
+# mail or goods. The `layover` key exists only in the simutrans-122.0 fork
+# (engine session simutrans-122-0-16, 2026-10-10): the engine parks buses at
+# fixed bay centres in the map frame, so the geometry in tools/gen_layover.py
+# is shared with the engine. Bay centres, in tile units from the road centre
+# line (native asphalt +-0.335, lane centres +-0.135, a bus ~0.13 wide):
+#
+#   layover=1  one side, two bays side by side at 0.275 and 0.415
+#              layouts 0 N-S bays east, 1 E-W bays north, 2 N-S bays west,
+#              3 E-W bays south (rotation-consistent: L -> L-1 turns the
+#              bay side clockwise, as ribi_t::rotate90)
+#   layover=2  both sides, one bay outside each lane at +-0.40
+#              layouts 0 N-S, 1 E-W
+#   layover=3  dead end, two bays either side of the axis at +-0.25 and a
+#              paved turning area; layouts 0..3 = the road leaves to S, E, N, W
+#
+# Sprites are generated: python tools/gen_layover.py station-road/odstavne-stani
+
+group: Stations
+makeobj: fork
+install: false           # held in dist/hold/ until the fork engine with `layover=` ships
+
+objects:
+  - id: BusLayover-DeadEnd
+    sprite: odstavne-slepe
+    layouts: 4
+    generate: {layover: 3}
+    name_en: "Bus layover bays (dead end)"
+    name_cs: "Odstavná stání autobusů (slepá)"
+    fields: {layover: 3, level: 1, enables_pax: 0, enables_post: 0, enables_ware: 0, intro_year: 1950}
+
+  - id: BusLayover-OneSide
+    sprite: odstavne-jednostranne
+    layouts: 4
+    generate: {layover: 1}
+    name_en: "Bus layover bays (one side)"
+    name_cs: "Odstavná stání autobusů (jednostranná)"
+    fields: {layover: 1, level: 1, enables_pax: 0, enables_post: 0, enables_ware: 0, intro_year: 1950}
+
+  - id: BusLayover-BothSides
+    sprite: odstavne-oboustranne
+    layouts: 2
+    generate: {layover: 2}
+    name_en: "Bus layover bays (both sides)"
+    name_cs: "Odstavná stání autobusů (oboustranná)"
+    fields: {layover: 2, level: 1, enables_pax: 0, enables_post: 0, enables_ware: 0, intro_year: 1950}
