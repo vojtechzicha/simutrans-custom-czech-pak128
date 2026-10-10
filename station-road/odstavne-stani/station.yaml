@@ -19,7 +19,6 @@
 
 group: Stations
 makeobj: fork
-install: false           # held in dist/hold/ until the fork engine with `layover=` ships
 
 objects:
   - id: BusLayover-DeadEnd
