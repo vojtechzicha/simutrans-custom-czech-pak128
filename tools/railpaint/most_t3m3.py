@@ -46,7 +46,7 @@ SPRITE = os.path.join(REPO, "vehicle-tram", "dp-most-litvinov", "t3m3", "sprites
 BG = (231, 255, 255)
 YELLOW = (255, 242, 0)        # body yellow of the base
 LED_PANEL = (38, 38, 38)      # 262626, already on the base (pantograph head)
-LED_TEXT = (80, 210, 90)      # plain green, not the always-lit 01DD01 special
+LED_TEXT = (1, 221, 1)        # 01DD01: the always-lit green special, so the displays glow at night
 BAND = (62, 62, 62)           # 3e3e3e, already on the base
 GRASS = (78, 136, 56)         # pak128.CS temperate grass (tools/gen_shops.py)
 
@@ -170,7 +170,7 @@ def paint(cand):
 def check(a):
     base = load_base()
     new = {tuple(c) for c in a.reshape(-1, 3)} - {tuple(c) for c in base.reshape(-1, 3)}
-    bad = [c for c in new if (c[0] << 16 | c[1] << 8 | c[2]) in RGBTAB]
+    bad = [c for c in new if (c[0] << 16 | c[1] << 8 | c[2]) in RGBTAB - {0x01DD01}]
     if bad:
         raise SystemExit(f"new colours hit rgbtab specials: {bad}")
 
