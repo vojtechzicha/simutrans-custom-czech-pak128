@@ -40,8 +40,6 @@ T3R.PV / T3R.EV, the DPO 26Tr / 27Tr partial-trolleybus variants. Their
 
 ## Build limitations
 
-- [ ] `build.py` has no per-livery dates, so a livery is buildable for the whole
-  intro–retire span of its family (e.g. Arriva's DB red).
 - [ ] No `bidirectional=1` support in this Simutrans build: single-ended
   modelling of bidirectional trams (Most EVO2) and push-pull trains.
 
