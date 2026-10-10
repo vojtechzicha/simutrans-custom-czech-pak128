@@ -47,7 +47,7 @@ SRC = os.path.join(HERE, "src", "tommpa9_eso")
 FAM = os.path.join(REPO, "vehicle-rail", "ceske-drahy")
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(REPO, "tools", "railrender"))
-from handpaint import HandBase, T, hexarr, load, save, scale, shade, template_zones, unspecial  # noqa: E402
+from handpaint import HandBase, T, hexarr, load, lum, save, scale, shade, template_zones, unspecial  # noqa: E402
 import cd_loco_livery as CL  # noqa: E402
 
 REFS = sorted(f[:-4] for f in os.listdir(SRC) if f.endswith(".png"))
@@ -86,17 +86,33 @@ CMAP = {
                        **{h: "band" for h in (0xC5C58C, 0xCECEA5, 0xBDBD7B)},
                        **{h: "stripe" for h in (0xF7F700, 0xFFFF00, 0xEFEF00)},
                        **{h: "louvre" for h in GREYS_LOUVRE}},
+    "CSD_ES_499.1_Eso": {**{h: "body" for h in (0x0829AD, 0x0831CE, 0x08218C)},
+                         **{h: "stripe" for h in (0xEFDE00, 0xFFEF00, 0xE6D600)},
+                         **{h: "louvre" for h in GREYS_LOUVRE}},
+    "ZSSK_361.1_Pershing": {**{h: "body" for h in (0xAD0000, 0xBD0000, 0x9C0000)},
+                            **{h: "band" for h in (0xE6E6E6, 0xEFEFEF, 0xDEDEDE)},
+                            **{h: "frame" for h in (0xA5A5A5, 0xB5B5B5)},
+                            **{h: "louvre" for h in (0x840000,)}},
 }
 
 
 class Livery:
-    """zones: zone -> albedo; template: sheet name or None (rules); frames /
-    beam: windscreen frame and buffer beam colour or None (keep the drawing);
-    logo: white side mark (Najbrt 2); panto: pantograph colour or None (his)."""
+    """zones: zone -> albedo. The zone of a face pixel comes from `rules`
+    (callable(face, K, U, view) -> zone name; Najbrt 2 by default) or from `template`
+    (one of his sheets, CMAP). frames / beam: windscreen frame and buffer beam
+    colour or None (keep the drawing); logo: white side mark (Najbrt 2); panto:
+    pantograph colour or None (his); roof: roof colour or None (his grey);
+    gutter: the roof edge along the sides; extra: callable(hb, put,
+    zone_colour) drawn last (lettering); drop_marks: paint over his red side
+    marks and plates (set by logo)."""
 
-    def __init__(self, zones, template=None, frames=None, beam=None, logo=False, panto=PANTO_GREY):
+    def __init__(self, zones, template=None, frames=None, beam=None, logo=False, panto=PANTO_GREY,
+                 rules=None, roof=None, gutter=GUTTER, extra=None, drop_marks=False):
         self.zones, self.template = zones, template
         self.frames, self.beam, self.logo, self.panto = frames, beam, logo, panto
+        self.rules = rules or (None if template else (lambda f, k, u, c: n2_zone(f, k)))
+        self.roof, self.gutter, self.extra = roof, gutter, extra
+        self.drop_marks = drop_marks or logo
 
 
 def livery(fam, name):
@@ -128,12 +144,9 @@ JOBS = {
     "371": ["najbrt2", "najbrt1_2", "cervenozluta"],
 }
 
-# base-sheet colours: paint to repaint, his louvre band, his marks
-PAINT = {0x003A73, 0x00428C, 0x00316B, 0xF7E68C, 0xF7EF9C, 0xF7E684,      # 362 blue / cream
-         0x005200, 0x006B00, 0x004200, 0xE6B500, 0xEFBD00, 0xD6AD00,      # 162 / 163 green, yellow
-         0xB53A00, 0xC54200, 0x9C3100, 0xC5C58C, 0xCECEA5, 0xBDBD7B,      # 371 red, cream
-         0xF7F700, 0xFFFF00, 0xEFEF00, 0x003173, 0x00295A}           # (0xFFFF00: the 371's
-#   lit yellow line on the walls; the same colour on the roof is a pantograph)
+# a base sheet's own CMAP lists its paint (the 371's lit yellow line 0xFFFF00 is
+# paint on the walls; the same colour on the roof is a pantograph); every other
+# pixel of it is one of his details and stays
 PANTO_YELLOW = {0xFFFF00, 0xE6E600, 0xFFEF00}
 RED_MARK, PLATE = 0xFF0000, 0xC5C5C5
 
@@ -147,17 +160,22 @@ def n2_zone(face, k):
 _bases = {}
 
 
-def base(fam):
-    if fam not in _bases:
-        names = [BASE[fam]] + [n for n in REFS if n != BASE[fam]]
-        _bases[fam] = HandBase([load(os.path.join(SRC, n + ".png")) for n in names], 0,
-                               {3: 83, 7: 83}, {1: 81, 5: 89}, 8, 8)
-    return _bases[fam]
+def hand_base(name):
+    """HandBase of one of his sheets, aligned with all 21 sheets of the body."""
+    if name not in _bases:
+        names = [name] + [n for n in REFS if n != name]
+        _bases[name] = HandBase([load(os.path.join(SRC, n + ".png")) for n in names], 0,
+                                {3: 83, 7: 83}, {1: 81, 5: 89}, 8, 8)
+    return _bases[name]
 
 
 def paint(fam, name):
-    hb = base(fam)
-    L = livery(fam, name)
+    return paint_livery(BASE[fam], livery(fam, name))
+
+
+def paint_livery(base_name, L):
+    hb = hand_base(base_name)
+    own = CMAP[base_name]
     v = hexarr(hb.base)
     out = hb.base.copy()
     painted = np.zeros(hb.solid.shape, bool)
@@ -172,7 +190,7 @@ def paint(fam, name):
 
     def zone_colour(y, x):
         if zones is None:
-            return L.zones[n2_zone(hb.face[y, x], hb.K[y, x])]
+            return L.zones[L.rules(hb.face[y, x], hb.K[y, x], hb.U[y, x], hb.col[y, x])]
         z = zones[y, x]
         return L.zones.get(z) if z else None
 
@@ -183,17 +201,21 @@ def paint(fam, name):
                 out[y, x] = L.panto
                 painted[y, x] = True
             elif hv == 0x848484 and k >= -2:
-                out[y, x] = GUTTER
+                out[y, x] = L.gutter
+                painted[y, x] = True
+            elif L.roof is not None and lum(hb.base[y, x]) >= 30:
+                out[y, x] = shade(L.roof, min(1.4, max(0.6, lum(hb.base[y, x]) / 66.0)))
                 painted[y, x] = True
             continue
         if f not in ("S", "E"):
             continue
-        if hv in PAINT or (L.logo and hv in (RED_MARK, PLATE)):
+        zb = own.get(hv)
+        if zb == "louvre" and f == "S":
+            put(y, x, L.zones["louvre"])
+        elif (zb is not None and zb != "louvre") or (L.drop_marks and hv in (RED_MARK, PLATE)):
             c = zone_colour(y, x)
             if c is not None:
                 put(y, x, c)
-        elif f == "S" and hv in GREYS_LOUVRE:
-            put(y, x, L.zones["louvre"])
     # buffer beam: the row under each end face (his near-black, not the buffers)
     if L.beam is not None:
         for c in range(8):
@@ -219,6 +241,8 @@ def paint(fam, name):
             for x in xs:
                 for y in np.where((hb.face[:, X0 + x] == "S") & (hb.K[:, X0 + x] == 3))[0]:
                     put(y, X0 + x, WHITE)
+    if L.extra is not None:
+        L.extra(hb, put, zone_colour)
     return unspecial(out, painted)
 
 

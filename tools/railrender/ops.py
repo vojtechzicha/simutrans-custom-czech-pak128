@@ -8,7 +8,8 @@ have no generator of their own.
 
 Covered here: KŽC 749 / 751 (kzc_t478.py), the ČSD green Y coaches
 (kzc_yvoz.py), Bix / RBix (kzc_bix.py), MBM rail M 131.1 and its Blm trailer
-(mbm_hurvinek.py), MBM rail 708 (mbm_708.py) and ZSSK 361.1 (zssk361.py).
+(mbm_hurvinek.py) and MBM rail 708 (mbm_708.py). ZSSK 361.1 is TommPa9's
+Peršing repainted by tools/railpaint/ops_eso.py.
 
 The other rendered families of this set regenerate with their own model
 scripts (each has a main):
@@ -43,7 +44,7 @@ import style as S  # noqa: E402
 
 # locomotives: post-processed with the 2026-09-26 render style (coaches and
 # units of this set keep their sheets as rendered)
-POLISHED = {"kzc/749", "kzc/751", "mbm-rail/708", "zssk/361_1"}
+POLISHED = {"kzc/749", "kzc/751", "mbm-rail/708"}
 
 # 749 / 751: family livery -> kzc_t478 model key
 T478 = {"749": [("vinovosediva", "rudenka"), ("cervenosediva", "cervena"), ("modrobila", "modrobila")],
@@ -52,7 +53,7 @@ T478 = {"749": [("vinovosediva", "rudenka"), ("cervenosediva", "cervena"), ("mod
 
 def jobs():
     """family dir -> list of (livery, rows-callable, preview labels)."""
-    import kzc_t478, kzc_yvoz, kzc_bix, mbm_hurvinek, mbm_708, zssk361
+    import kzc_t478, kzc_yvoz, kzc_bix, mbm_hurvinek, mbm_708
     out = {}
     for fam, livs in T478.items():
         out["kzc/" + fam] = [(c, (lambda m=m: kzc_t478.rows(m)), [fam]) for c, m in livs]
@@ -61,7 +62,6 @@ def jobs():
     out["mbm-rail/m131_1"] = [("vinova", lambda: mbm_hurvinek.render_rows(mbm_hurvinek.M131), ["M131.1"])]
     out["mbm-rail/blm"] = [("tmavocervena", lambda: mbm_hurvinek.render_rows(mbm_hurvinek.BLM), ["Blm"])]
     out["mbm-rail/708"] = [("oranzovomodra", mbm_708.render_rows, ["708"])]
-    out["zssk/361_1"] = [(liv, (lambda liv=liv: zssk361.rows(liv)), ["361.1"]) for liv in zssk361.LIVERIES]
     return out
 
 

@@ -61,6 +61,10 @@ def jobs():
         except ImportError:
             continue
         out.update(mod.JOBS)
+    # the 162 and the 362.2 are TommPa9's Eso repainted since 2026-10-10
+    # (tools/railpaint/ops_eso.py); the E99 box model is no longer written
+    for fam in ("162", "362_2"):
+        out.pop(fam, None)
     return out
 
 

@@ -1,6 +1,6 @@
 agency: ZSSK
 type: "361.1"
-copyright: vojtechzicha      # original art, rendered from a box model
+copyright: TommPa9      # his pak128.cs ZSSK 361.1 Peršing, repainted
 # Locomotive: no passengers, so the cab glass is plain and never lights up.
 windows_lit_when_loaded: false
 
@@ -32,14 +32,11 @@ display:
 # The research note "3 portholes per side" is wrong: the photos show two round
 # portholes behind each cab door (four per side).
 #
-# Sprites are rendered in the 2026-09-26 render style (tools/railrender/style.py:
-# the Peršing as a hard-edged box with a vertical front and a flat roof whose
-# edge is a dark gutter, ribbed machine-room panels, light pantographs with a
-# dark head bar, polish post-process) from a box model (tools/railrender/zssk361.py on the
-# pak128.cs-calibrated railkit renderer; regenerate with
-# `python tools/railrender/ops.py zssk/361_1`): the installed
-# ZSSK_361.1_Pershing is the generic 163 drawing (squat body, no portholes,
-# oversized yellow pantographs), not worth porting.
+# Sprites: TommPa9's pak128.cs ZSSK_361.1_Pershing repainted by
+# tools/railpaint/ops_eso.py, like the ČD Eso family (2026-10-10, when the user
+# chose his drawings over the box renders): cervenobila on his own layout in the
+# ZSSK colours, korporatni by rule on the same drawing. Regenerate with
+# `python tools/railpaint/ops_eso.py zssk/361_1`.
 
 vehicles:
   - id: "361.1"

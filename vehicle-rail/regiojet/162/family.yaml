@@ -19,17 +19,15 @@
 # small logo on the right. The FNM green/grey that only 162.112 wore until 2012 is
 # not shipped (outside the 2026 scope; it returns on 362.220).
 #
-# Sprites: original art rendered from a box model, tools/railrender/rj_locos.py
-# (class E99); regenerate with `python tools/railrender/regiojet.py 162`. Length 8
-# like the native CD 363 (same body family).
-# Rendered in the 2026-09-26 render style (tools/railrender/style.py, applied in
-# tools/railrender/rj_style.py; regenerate with `python tools/railrender/regiojet.py 162`):
-# the approved ČD 362 slab box (vertical front, flat roof, dark gutter), ribbed sides; the
-# red-brown pantograph arms stay, with a dark head bar.
+# Sprites: TommPa9's pak128.cs Eso drawing (CD_162 details) repainted in RJ yellow by
+# tools/railpaint/ops_eso.py, like the ČD 162 / 362 (2026-10-10). The big
+# "|| REGIOJET" is his own, taken pixel for pixel from his RJ 162 sheet. Regenerate
+# with `python tools/railpaint/ops_eso.py regiojet/162`. Length 8 like the native
+# CD 363 (same body family).
 
 agency: RegioJet
 type: "162"
-copyright: vojtechzicha      # original art, drawn from scratch
+copyright: TommPa9      # his pak128.cs Eso and RJ 162, repainted
 windows_lit_when_loaded: false
 
 display:
