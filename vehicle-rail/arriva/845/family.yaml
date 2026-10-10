@@ -130,3 +130,4 @@ liveries:
   - color: dbcervena
     name_en: "DB red"
     name_cs: "DB červená"
+    fields: {intro_year: 2019, intro_month: 12, retire_year: 2022, retire_month: 1}   # Dec 2019 - ~2021

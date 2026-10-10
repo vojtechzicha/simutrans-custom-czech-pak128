@@ -121,6 +121,7 @@ liveries:
   - color: crystalvalley
     name_en: "Crystal Valley"
     name_cs: "Crystal Valley"
+    fields: {intro_year: 2021, intro_month: 9}   # 642.336, since 17 Sep 2021
   - color: dbcervena
     name_en: "DB red"
     name_cs: "DB červená"
