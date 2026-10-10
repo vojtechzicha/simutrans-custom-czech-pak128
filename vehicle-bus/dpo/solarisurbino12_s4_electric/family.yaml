@@ -1,0 +1,64 @@
+agency: DPOstrava
+type: "SolarisUrbino12_s4_electric"
+# The sheet keeps the tile placement of the DPO Urbino 12 IV sheet it is
+# derived from, so no extra shift (the default [0, 4] would sink it 4 px).
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: TommPa9
+
+display:
+  agency_en: "DPO"
+  agency_cs: "DPO"
+  family_en: "Solaris Urbino 12 IV electric"
+  family_cs: "Solaris Urbino 12 IV electric"
+
+# CANDIDATE (under review). Solaris Urbino 12 IV electric, DPO 5008-5031: 24
+# cars, built 2022, in service 3/2022-12/2022, all running in 2026 (20 at
+# Hranečník, 4 at Poruba). 12 m, doors 2-2-2, 28 seats + 57 standing = 85,
+# ZF CeTrax traction motor 300 kW (seznam-autobusu.cz: Medcom electrics),
+# Solaris High Power batteries over 90 kWh, charged by plug in the depot or by
+# an OppCharge inverted pantograph (Hranečník, Valchařská, Svinov). DPO blue
+# with the white stripe, like the diesel Urbino 12 IV. Up to 70 more are on
+# order for 2027-2028 (same type, larger batteries); not separate here.
+# Until now the e-buses were only covered by the diesel Urbino 12 IV object;
+# this is a new object, the diesel family is unchanged.
+# Sprite: TommPa9's DPO Urbino 12 IV sheet with the roof battery fairing
+# added by tools/busrender/dpo_derived.py: the long fairing from the front
+# dome to about 1 m before the tail, the black front part of its sides, the
+# white "ooo" e-mark near the rear and the OppCharge contact rails above the
+# front axle. No other body change: the diesel's rear has no exhaust or engine
+# tower in the drawing either.
+# Economy relative to the diesel Urbino 12 IV (cost 912 498, runningcost 31):
+# dearer to buy, cheaper to run, like the other VZ e-buses (Tábor Urbino 12
+# electric 1 000 000 / 20, DPO 36Tr partial trolleybus 1 075 000 / 19).
+
+vehicles:
+  - id: "SolarisUrbino12_s4_electric"
+    role_en: "electric bus"
+    role_cs: "elektrobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 1100000
+      payload: 85
+      speed: 75
+      weight: 14
+      runningcost: 20
+      fixed_cost: 160
+      intro_year: 2022
+      intro_month: 3
+      retire_year: 2042
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: battery
+      power: 300
+      gear: 53
+
+liveries:
+  - color: dpotyrkysova
+    name_en: "DPO turquoise"
+    name_cs: "DPO tyrkysová"

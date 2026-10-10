@@ -17,11 +17,14 @@ T3R.PV / T3R.EV, the DPO 26Tr / 27Tr partial-trolleybus variants. Their
 - [ ] **DPO Inekon 01 Trio** and **Astra** (`t2001_trio`, `ltm1008_astra`) share
   one sheet. They are sister designs, but the Trio has a rounder nose.
 - [ ] **DPO Solaris Urbino 12 Electric** is covered only by the Urbino 12 IV art.
+  Candidate under review: `vehicle-bus/dpo/solarisurbino12_s4_electric`
+  (roof fairing added by `tools/busrender/dpo_derived.py`).
 
 ## Missing types and liveries
 
 - [ ] DPO trams: **Vario LFR.S** (16 cars) and **Vario LF2R.S** (2).
-- [ ] DPO trolleybus: the **SOR TNB 12** prototype.
+- [ ] DPO trolleybus: the **SOR TNB 12** prototype. Candidate under review:
+  `vehicle-trolleybus/dpo/sor_tnb_12` (`tools/busrender/dpo_derived.py`).
 - [ ] ČD **841.3** in Liberecký kraj colours, when the cars start in December 2026.
 - [ ] ČD **690.0** battery units, when passenger service starts in 2027.
 - [ ] Pardubický kraj **IREDO** buses, into the same `VZ-IREDO-bus.pak`.

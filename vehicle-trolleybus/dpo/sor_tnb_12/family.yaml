@@ -1,0 +1,63 @@
+agency: DPOstrava
+type: "SOR_TNB_12"
+# The body sits on the footprint of the DPO 26Tr sheet (whose poles it
+# carries), so no extra shift (the default [0, 4] would sink it 4 px).
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim, TommPa9
+
+display:
+  agency_en: "DPO"
+  agency_cs: "DPO"
+  family_en: "SOR TNB 12"
+  family_cs: "SOR TNB 12"
+
+# CANDIDATE (under review). SOR TNB 12, the only one built: the 2009
+# prototype (SOR Libchavy body on the NB 12, Cegelec TV Europulse electrics,
+# final assembly by DPO). On loan to DPO from 2/2010 as 9997, passenger trials
+# from 26 April 2010, type approval 22 December 2010, bought by DPO and
+# numbered 3912 from 2/2011. cs.wikipedia lists it as written off between
+# October 2025 and January 2026 and then returned to service; seznam-autobusu
+# shows it on lines 102, 108 and 109 in October 2026. Classic version without
+# a traction battery: engine_type electric (wire only), like the 26Tr.
+# 12.18 x 2.55 m, 3.40 m over the poles, 4 double doors, 28 seats + 67
+# standing = 95, Pragoimex asynchronous motor 175 kW, 65 km/h, 10.2 t.
+# Livery (seznam-autobusu: "bílá s modrou střechou", from new to today): white
+# body, black glazing band and front mask, light blue roof, cant rail and front
+# cap; the gold swirl and the "SOR Trolejbus" lettering are not drawn.
+# Sprite: VTPsim's SOR NB 12 (the white Praha sheet) moved onto the DPO 26Tr
+# footprint, its front roof A/C unit removed, the roof painted blue, the white
+# roof container of the traction equipment with the louvred resistor box ahead
+# of it added, and the 26Tr poles (TommPa9) set pixel for pixel at the rear
+# end of the container: tools/busrender/dpo_derived.py.
+# Economy like the 26Tr (same motor), a little cheaper as an old prototype.
+
+vehicles:
+  - id: "SOR_TNB_12"
+    role_en: "trolleybus"
+    role_cs: "trolejbus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 850000
+      payload: 95
+      speed: 65
+      weight: 10
+      runningcost: 18
+      fixed_cost: 81
+      intro_year: 2011
+      intro_month: 2
+      retire_year: 2030
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: electric
+      power: 175
+
+liveries:
+  - color: bilamodrastrecha
+    name_en: "white with a blue roof"
+    name_cs: "bílá s modrou střechou"
