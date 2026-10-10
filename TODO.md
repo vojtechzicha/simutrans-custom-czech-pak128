@@ -11,21 +11,17 @@ Kolín NovoCiti), the RegioPanter 440 / 640 / 640.1, 840 / 841, T3G / T3P,
 T3R.PV / T3R.EV, the DPO 26Tr / 27Tr partial-trolleybus variants. Their
 `family.yaml` comments say so.
 
-- [ ] **DPO Inekon 01 Trio** and **Astra** (`t2001_trio`, `ltm1008_astra`) share
-  one sheet. They are sister designs, but the Trio has a rounder nose.
 
 ## Missing types and liveries
 
-- [ ] DPO trams: **Vario LFR.S** (16 cars) and **Vario LF2R.S** (2).
+- [ ] DPO trams: **Vario LFR.S** (16 cars) and **Vario LF2R.S** (2). Candidates with
+  roof A/C units and equipment boxes were rejected (2026-10-10): don't add roof
+  boxes to the Vario body.
 - [ ] ČD **841.3** in Liberecký kraj colours, when the cars start in December 2026.
 - [ ] ČD **690.0** battery units, when passenger service starts in 2027.
 - [ ] Pardubický kraj **IREDO** buses, into the same `VZ-IREDO-bus.pak`.
 - [ ] A **PID** package for the regional (non-city) lines around Prague.
 
-- [ ] DPO buses and trolleybuses sit 4–14 px off the native lane **along the road**
-  in some views (Urbino 12 family +10 px in ne, Dekstra LE 37 up to 14 px in
-  nw/se); sideways they are right. Shows as a jump when a bus turns onto a
-  diagonal.
 
 ## Re-check against new photos
 
