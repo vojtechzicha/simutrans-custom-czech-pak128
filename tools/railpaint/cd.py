@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Regenerate every painted ČD rail sheet (the DMUs and EMUs of
-VZ-CeskeDrahy-rail) by running the family painters in this folder.
+VZ-CeskeDrahy-rail, and the Eso and Brejlovec locomotives on TommPa9's
+drawings) by running the family painters in this folder.
 
     python tools/railpaint/cd.py                   # every painted ČD family
     python tools/railpaint/cd.py 810 471 650_2     # only these family dirs
@@ -30,6 +31,8 @@ PAINTERS = {
     "cd_680": ["680"],
     "cd_emu": ["440", "640", "640_1", "640_2", "650", "650_2", "690_2", "530", "550",
                "660_0", "660_1"],
+    "cd_eso": ["362", "162", "163", "371"],
+    "cd_brejlovec": ["754", "750_7", "750"],
 }
 SINGLE = {"cd_471", "cd_680"}
 

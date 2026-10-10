@@ -2,10 +2,10 @@
 # Unmodernised 750s have left ČD passenger service (the 750.7 rebuilds are family
 # 750_7); kept because savegames still run it.
 #
-# Sprites: zelenosediva is TommPa9's pak128.cs CD_750_Brejlovec itself (lifted 4 px to
-# source coordinates); najbrt1_2 repaints his Brejlovec body with
-# tools/railpaint/cd_brejlovec.py. Regenerate with
-# `python tools/railpaint/cd_brejlovec.py 750`.
+# Sprites: TommPa9's pak128.cs Brejlovec with the details redrawn as on the 754
+# (tools/railpaint/cd_brejlovec.py, variant B2): zelenosediva takes the layout of his
+# CD_750_Brejlovec, najbrt1_2 that of his Najbrt 1.2 Brejlovec, both in the shared ČD
+# colours. Regenerate with `python tools/railpaint/cd_brejlovec.py 750`.
 
 agency: CeskeDrahy
 type: "750"

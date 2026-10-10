@@ -17,15 +17,17 @@
 #   najbrt1_2 (162.054) light grey cab ends and fronts with a light blue window band,
 #             a dark blue wedge behind each cab and light blue between, dark grey
 #             sill, light grey roof.
+#   zelenokremova  ČSD green with a cream band (TommPa9's CD 162 scheme).
 #
-# Sprites: every livery rendered in the 2026-09-26 style (tools/railrender/style.py:
-# slab Eso / Persing box, dark roof gutter, ribbed sides, measured livery zones,
-# no side lettering, light pantograph arms with a dark head bar, style.polish);
-# regenerate with `python tools/railrender/cd_loco_e99.py 162`. Length 8.
+# Sprites: TommPa9's pak128.cs drawing CD_162_Rychly_Pershing (the class's own details),
+# repainted by tools/railpaint/cd_eso.py: Najbrt 2 by rule from the photos, every other
+# livery from his own sheet in that livery, all in the shared ČD colours with a dark
+# roof gutter (variant E3, chosen by the user on 2026-10-10). Regenerate with
+# `python tools/railpaint/cd_eso.py 162`. Length 8.
 
 agency: CeskeDrahy
 type: "162"
-copyright: vojtechzicha      # original art, drawn from scratch
+copyright: TommPa9      # his pak128.cs Eso / Peršing / Bastard, repainted
 windows_lit_when_loaded: false
 
 display:

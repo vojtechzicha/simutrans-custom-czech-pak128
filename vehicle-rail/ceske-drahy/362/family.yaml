@@ -17,17 +17,20 @@
 #   najbrt1_2 (about 9: 030, 042, 055, 062, 080, 087, 109, 111, 131) light grey cab
 #             ends and fronts with a light blue window band, a dark blue wedge
 #             behind each cab and light blue between, dark grey sill, light roof.
-# Not shipped (one-offs): 362.001 orange 1980 scheme, 362.078 ČSD retro, 362.165
-# blue-cream, advertising on 081 and 110.
+#   modrokremova  dark blue with a cream band (TommPa9's CD 362 "Rychlé Eso" scheme,
+#             kept because savegames run it).
+# Not shipped (one-offs): 362.001 orange 1980 scheme, 362.078 ČSD retro, advertising
+# on 081 and 110.
 #
-# Sprites: every livery rendered in the 2026-09-26 style (tools/railrender/style.py:
-# slab Eso / Persing box, dark roof gutter, ribbed sides, measured livery zones,
-# no side lettering, light pantograph arms with a dark head bar, style.polish);
-# regenerate with `python tools/railrender/cd_loco_e99.py 362`. Length 8.
+# Sprites: TommPa9's pak128.cs drawing CD_362_Rychle_Eso (the class's own details),
+# repainted by tools/railpaint/cd_eso.py: Najbrt 2 by rule from the photos, every other
+# livery from his own sheet in that livery, all in the shared ČD colours with a dark
+# roof gutter (variant E3, chosen by the user on 2026-10-10). Regenerate with
+# `python tools/railpaint/cd_eso.py 362`. Length 8.
 
 agency: CeskeDrahy
 type: "362"
-copyright: vojtechzicha      # original art, drawn from scratch
+copyright: TommPa9      # his pak128.cs Eso / Peršing / Bastard, repainted
 windows_lit_when_loaded: false
 
 display:

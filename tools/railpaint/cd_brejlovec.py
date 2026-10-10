@@ -1,32 +1,37 @@
 #!/usr/bin/env python3
-"""ČD Brejlovec (754, 750.7, 750): TommPa9's pak128.cs drawing, repainted.
+"""ČD Brejlovec (754, 750.7, 750): TommPa9's pak128.cs drawing with the 754's
+own details redrawn, in every livery.
 
     python tools/railpaint/cd_brejlovec.py [754|750_7|750 ...] [--preview DIR]
 
-The user found every box render of the Brejlovec unrecognisable, so the sheets
-repaint TommPa9's hand-drawn T 478 / 75x body instead and keep its shape,
-shading and details. All eleven of his Brejlovec liveries in pak128.cs share one
-silhouette (frozen in src/tommpa9_brejlovec/, lifted 4 px to source
-coordinates). Comparing them tells what each pixel is:
+The user chose variant B2 of the 2026-10-10 review: TommPa9's hand-drawn T 478
+silhouette and shading (all eleven of his Brejlovec liveries share it, frozen in
+src/tommpa9_brejlovec/, lifted 4 px to source coordinates), but not his coach-
+like window dashes. handpaint.HandBase aligns the eleven sheets to get exact
+face rows: side wall K 0-1 the shoulder under the roof, K 2-8 the wall, K 9 the
+frame; end face K 0 the cab roof edge, K 1-4 the goggle frame round the two
+windscreens, K 5-7 the nose, K 8+ lamps and buffer beam.
 
-- FIX     identical in every livery: windows, goggles, lamps, black lines;
-- FRAME   dark grey on the blue (balkan) sheet but not red on the 753: underframe;
-- ROOF    dark grey on the blue sheet and red on the 753: the roof and its
-          shoulders (the lowest two roof rows of a column are the shoulder);
-- CAB     red on the 752 (red cab blocks on a blue hood): both cab blocks;
-- wall    everything else: the body sides and the cab fronts.
+Redrawn on every livery (from the photos of 754 045, 754 062 and the 754 at
+České Velenice): the two louvre panels behind cab 1, six portholes high on the
+hood, a small louvre before cab 2, the radiator grille on the roof near cab 2,
+raised one pixel above the roof line, and the goggle frame wrapping round the
+cab corners. The 750.7 rebuild gets one wide windscreen in the frame.
 
-Livery zones are painted by whole pixel rows counted from the top of the wall
-in every column (r = 0 is the row just under the roof shoulder), so stripes
-stay one pixel row thick in every view. Each colour is multiplied by the
-original pixel's light (its red level on the 753, or its grey level on the
-750 low band), so TommPa9's lighting and edge highlights survive.
+Liveries (colours from cd_loco_livery.py; layouts by rule or from his own sheet
+in that livery, every colour of it mapped to a zone):
 
-The 750.7 gets its rebuilt fronts by repainting the end-face pixels: the white
-goggle frame and split screen become one wide dark windscreen with a body-
-coloured frame, as on the CZ LOKO rebuild.
+  najbrt2       rules: light roof rim, sky, white stripe at lamp level, sapphire
+                below it, white goggle frames, sapphire-grey roof.
+  najbrt1_2     his CD_754_Brejlovec_(balkan): light grey cab ends and fronts,
+                sky and sapphire trapezoids along the hood, dark grey shoulders,
+                frame and lower front, blue goggle frames, grey roof.
+  najbrt1       the same layout on a white body and roof, sapphire frame (754.068).
+  cervenozluta  his CD_753: red body and roof, the broad yellow band at nose
+                level, white goggle frames, dark grey lamp zone (754.044).
+  modrokremova  rules: light blue, cream band, dark blue roof and frame (754.013).
+  zelenosediva  his CD_750: dark green over a light grey band (750).
 """
-import colorsys
 import os
 import sys
 
@@ -37,274 +42,89 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
 SRC = os.path.join(HERE, "src", "tommpa9_brejlovec")
 FAM = os.path.join(REPO, "vehicle-rail", "ceske-drahy")
+sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(REPO, "tools", "railrender"))
+from handpaint import (FACT, HandBase, T, even_slots, hexarr, load, lum, save, shade,  # noqa: E402
+                       template_zones, unspecial)
 import cd_loco_livery as CL  # noqa: E402
 
-T = np.array([231, 255, 255])
-REFS = ["CD_750_Brejlovec", "CD_750_Brejlovec_(balkan)", "CD_752_Brejlovec", "CD_753_Brejlovec",
-        "CD_754_Brejlovec", "CD_754_Brejlovec_(balkan)", "CD_755_Brejlovec", "CD_Cargo_753_Brejlovec_",
-        "CSD_T_478.1_Brejlovec", "CSD_T_478.2_Brejlovec", "CSD_T_478.3_Brejlovec"]
-SPECIAL = {
-    0x244B67, 0x395E7C, 0x4C7191, 0x6084A7, 0x7497BD, 0x88ABD3, 0x9CBEE9, 0xB0D2FF,
-    0x7B5803, 0x8E6F04, 0xA18605, 0xB49D07, 0xC6B408, 0xD9CB0A, 0xECE20B, 0xFFF90D,
-    0x57656F, 0x7F9BF1, 0xFFFF53, 0xFF211D, 0x01DD01, 0x6B6B6B, 0x9B9B9B, 0xB3B3B3,
-    0xC9C9C9, 0xDFDFDF, 0xE3E3FF, 0xC1B1D1, 0x4D4D4D, 0xFF017F, 0x0101FF,
-}
-KEEP = {0xFFFF53, 0xFF211D}          # head / tail lights stay specials
+REFS = sorted(f[:-4] for f in os.listdir(SRC) if f.endswith(".png"))
+BASE = "CD_754_Brejlovec_(balkan)"
 
-
-def load(name):
-    return np.array(Image.open(os.path.join(SRC, name + ".png")).convert("RGB")).astype(int)
-
-
-def fam(c):
-    r, g, b = [x / 255 for x in c]
-    h, l, s = colorsys.rgb_to_hls(r, g, b)
-    if l < 0.09:
-        return "k"
-    if s < 0.18 or (max(r, g, b) - min(r, g, b)) < 0.12:
-        return "w" if l > 0.72 else ("g" if l > 0.36 else "d")
-    h *= 360
-    if h < 20 or h >= 330:
-        return "r"
-    if h < 70:
-        return "y"
-    if h < 170:
-        return "t"
-    return "b"
-
-
-class Base:
-    """Zones, row indices and light of the shared TommPa9 silhouette."""
-
-    def __init__(self):
-        R = {k: load(k) for k in REFS}
-        self.R = R
-        self.solid = ~np.all(R[REFS[0]] == T, axis=2)
-        F = {k: np.vectorize(lambda a, b, c: fam((a, b, c)))(v[..., 0], v[..., 1], v[..., 2])
-             for k, v in R.items()}
-        b752, b753, bB = F["CD_752_Brejlovec"], F["CD_753_Brejlovec"], F["CD_754_Brejlovec_(balkan)"]
-        same = np.all([np.all(R[k] == R[REFS[0]], axis=2) for k in REFS], axis=0)
-        body = self.solid & ~same
-        Z = np.full(self.solid.shape, "", object)
-        Z[self.solid] = "FIX"
-        Z[body] = "WALL"
-        Z[body & (bB == "d") & (b753 == "r")] = "ROOF"
-        Z[body & (bB == "d") & (b753 != "r")] = "FRAME"
-        # lamps (the roof headlight): yellow on both the blue and the green sheet
-        Z[body & (bB == "y") & (F["CD_750_Brejlovec"] == "y")] = "FIX"
-        self.cab = body & (b752 == "r")
-        # windscreen / cab-window glass: TommPa9's non-darkening grey 0x6B6B6B
-        self.glass = self.solid & np.all(R["CD_754_Brejlovec_(balkan)"] == [0x6B, 0x6B, 0x6B], axis=2)
-        near = np.zeros_like(self.glass)
-        for dy in (-1, 0, 1):          # 8-neighbour: a closed frame, no checker
-            for dx in (-1, 0, 1):
-                near |= np.roll(np.roll(self.glass, dy, 0), dx, 1)
-        self.surround = near & (Z == "WALL")
-        self.view = np.tile(np.repeat(np.arange(8), 128), (Z.shape[0], 1))
-        self.Z = Z
-        # light: the 753's red level (top face bd = 1.0), else the 750's grey
-        r753, g750 = R["CD_753_Brejlovec"], R["CD_750_Brejlovec"]
-        fac = np.ones(Z.shape)
-        red = b753 == "r"
-        fac[red] = r753[..., 0][red] / 0xBD
-        grey = ~red & (F["CD_750_Brejlovec"] == "g")
-        fac[grey] = g750[..., 1][grey] / 0xAD
-        self.fac = np.clip(fac, 0.55, 1.2)
-        # row indices per column: r = wall row from the wall top, q = roof row
-        # from the roof bottom (0, 1 = shoulder)
-        H, W = Z.shape
-        self.r = np.full(Z.shape, -1)
-        self.q = np.full(Z.shape, -1)
-        self.wallrows = np.zeros(Z.shape, int)
-        for x in range(W):
-            col = Z[:, x]
-            roof = [y for y in range(H) if col[y] == "ROOF"]
-            for i, y in enumerate(sorted(roof, reverse=True)):
-                self.q[y, x] = i
-            # the wall starts right under the roof (or at the first wall pixel
-            # where a column has no roof) and runs down to the frame
-            if roof:
-                # end of the first roof run from the top (FIX roof details inside
-                # the run belong to it); in the end views the column crosses the
-                # roof, then the cab front, then more roof lower down
-                y = min(roof)
-                last = y
-                while y < H and col[y] in ("ROOF", "FIX"):
-                    if col[y] == "ROOF":
-                        last = y
-                    elif not any(col[yy] == "ROOF" for yy in range(y + 1, min(H, y + 3))):
-                        break
-                    y += 1
-                top = last + 1
-            else:
-                walls = [y for y in range(H) if col[y] == "WALL"]
-                if not walls:
-                    continue
-                top = min(walls)
-            ys = []
-            for y in range(top, H):
-                if col[y] in ("WALL", "FIX"):
-                    ys.append(y)
-                else:
-                    break
-            # the wall height ends at the last paintable row (lamps and buffer
-            # beam FIX pixels below it don't count)
-            walls = [y for y in ys if col[y] == "WALL"]
-            n = (max(walls) - top + 1) if walls else len(ys)
-            for y in ys:
-                self.r[y, x] = y - top
-                self.wallrows[y, x] = n
-            # wall-coloured specks inside the roof are roof details
-            for y in range(0, top):
-                if col[y] == "WALL":
-                    self.r[y, x] = -1
-        # u along the body, 0 = the tile's left end of the body, per view
-        self.u = np.zeros(Z.shape)
-        for c in range(8):
-            xs = np.where(self.solid[:, c * 128:(c + 1) * 128].any(axis=0))[0]
-            if len(xs):
-                x0, x1 = xs.min(), xs.max()
-                for x in range(x0, x1 + 1):
-                    self.u[:, c * 128 + x] = (x - x0) / max(1, x1 - x0)
-
-
-
-B = None
-
-
-def base():
-    global B
-    if B is None:
-        B = Base()
-    return B
-
-
-def shade(c, f):
-    return tuple(int(max(0, min(255, round(v * f)))) for v in c)
-
-
-def unspecial(a, painted):
-    """nudge accidental special colours off the table, in painted pixels only
-    (TommPa9's own pixels, e.g. his 0x6B6B6B glass, stay bit-exact)."""
-    hx = (a[..., 0] << 16) | (a[..., 1] << 8) | a[..., 2]
-    bad = np.isin(hx, list(SPECIAL - KEEP)) & painted
-    a[bad, 2] = np.where(a[bad, 2] < 255, a[bad, 2] + 1, 254)
-    return a
-
-
-# ------------------------------------------------------------------ liveries
-SKY, WHITE, SAPPH, LGREY = CL.LOCO_SKY, CL.WHITE, CL.SAPPHIRE, CL.LGREY
-ROOF_N2 = (60, 70, 92)          # dark sapphire-grey roof top (754.062, 754.045)
+SKY, WHITE, SAPPHIRE, LGREY = CL.LOCO_SKY, CL.WHITE, CL.SAPPHIRE, CL.LGREY
+RIM = (206, 214, 220)              # light strip along the top of the side (Najbrt 2)
+ROOF_N2 = (62, 74, 98)             # sapphire-grey roof
 ROOF_GREY = (98, 102, 106)
-FRAME = (46, 48, 51)
-RED = (196, 32, 40)
-YEL = (242, 194, 0)
-CREAM = (232, 222, 188)
-BC_BLUE = (28, 58, 118)
-N1_WHITE = CL.N1_WHITE
-BC_SKY = (54, 136, 206)       # 754.013 blue-cream: light-blue upper body
+FRAME_DK = (40, 42, 46)
+DGREY = (58, 61, 64)               # Najbrt 1.2 shoulders, frame, lower front
+GRILLE = (34, 38, 46)              # roof radiator grille
+GRILLE_HI = (70, 78, 92)
+PORTHOLE = (24, 28, 34)
+ZG_GREEN = (0, 78, 78)             # ČSD / ČD 750 dark teal green (his sheet)
+ZG_GREY = (165, 167, 168)
+BC_SKY = (54, 136, 206)            # 754.013 blue-cream: light blue body
+
+GLASS = {0x6B6B6B}
+LAMPS = {0xFFFF53, 0xFF0000, 0xFF7B00, 0xFF211D, 0xFFFF00, 0xC1B1D1}
+
+# his colours, every view's shade of one paint, per template sheet
+N12_MAP = {**{h: "sky" for h in (0x0063C5, 0x1073E6, 0x004A9C)},
+           **{h: "navy" for h in (0x001942, 0x102152, 0x001031, 0x001029)},
+           **{h: "cab" for h in (0xB5BDC5, 0xD6DEE6, 0x8C949C, 0xC5CED6, 0x9CA5AD, 0x7B848C)},
+           **{h: "dgrey" for h in (0x313131, 0x3A3A3A, 0x292929, 0x424242)},
+           **{h: "louvre" for h in (0x0052B5,)}}
+CMAP = {
+    "CD_754_Brejlovec_(balkan)": N12_MAP,
+    "CD_753_Brejlovec": {**{h: "red_hi" for h in (0xB50000, 0x840000, 0xBD0000)},
+                         **{h: "red" for h in (0x8C0000, 0xA50000, 0x730000, 0x940000)},
+                         **{h: "yellow" for h in (0xFFDE10, 0xFFE631, 0xF7D600, 0xFFDE08, 0xFFE621, 0xEFCE00)},
+                         **{h: "frame" for h in (0x525252, 0x636363, 0x4A4A4A)},
+                         **{h: "white" for h in (0xE6E6E6, 0xD6D6D6, 0xEFEFEF)}},
+    "CD_750_Brejlovec": {**{h: "green" for h in (0x003131, 0x002929, 0x003A3A, 0x004242, 0x004A4A)},
+                         **{h: "grey" for h in (0x9C9C9C, 0xADADAD, 0xA5A5A5, 0x949494, 0xB5B5B5)},
+                         **{h: "frame" for h in (0x3A3A3A, 0x4A4A4A, 0x313131)},
+                         **{h: "white" for h in (0xF7F7F7, 0xEFEFEF, 0xFFFFFF)}},
+}
 
 
-def n2_wall(r, n):
-    """Najbrt 2 wall: sky, one white row at headlight level, sapphire below."""
-    if r >= n - 2:
-        return SAPPH
-    if r == n - 3:
-        return WHITE
-    return SKY
+class Livery:
+    def __init__(self, zones, roof, frame, template=None, rules=None):
+        self.zones, self.roof, self.frame = zones, roof, frame
+        self.template, self.rules = template, rules
 
 
-def roof_n2(q):
-    if q == 0:
-        return SKY
-    if q == 1:
-        return WHITE
-    return ROOF_N2
+def n2_rules(face, k):
+    if face == "S":
+        return "rim" if k == 0 else "sky" if k <= 5 else "white" if k == 6 else "sapphire" if k <= 8 else "frame"
+    return ("roof" if k == 0 else "white" if k <= 4 else "sky" if k <= 6 else "white" if k == 7 else "sapphire")
 
 
-def trapezoid(u, r, n, cab2_right=True):
-    """Najbrt 1 / 1.2 wedges rising toward cab 2: sapphire over sky."""
-    t = u if cab2_right else 1 - u
-    h = r / max(1, n - 1)              # 0 top .. 1 bottom
-    edge = 0.30 + 0.45 * h             # the wedge leans toward cab 2
-    if t > edge + 0.18:
-        return SAPPH
-    if t > edge:
-        return SKY
-    return None
+def bc_rules(face, k):
+    if face == "S":
+        return "sky" if k <= 4 else "cream" if k <= 7 else "blue"
+    return ("roof" if k == 0 else "cream" if k <= 4 else "sky" if k <= 6 else "cream" if k == 7 else "blue")
 
 
-def paint(liv, front=None):
-    b = base()
-    Z, cab, r, q, n, u, fac = b.Z, b.cab, b.r, b.q, b.wallrows, b.u, b.fac
-    src = b.R["CD_754_Brejlovec_(balkan)"]
-    out = src.copy()
-    painted = np.zeros(Z.shape, bool)
-    H, W = Z.shape
-    for y in range(H):
-        for x in range(W):
-            z = Z[y, x]
-            if z in ("", "FIX"):
-                continue
-            if z == "WALL" and r[y, x] < 0 and not b.surround[y, x]:
-                z = "ROOF"
-            c = None
-            if z == "FRAME":
-                c = FRAME
-            elif z == "ROOF":
-                qq = q[y, x] if b.view[y, x] not in (1, 5) else 9
-                if liv in ("najbrt2", "najbrt1_2"):
-                    c = roof_n2(qq) if liv == "najbrt2" else (
-                        LGREY if cab[y, x] and qq <= 1 else (SKY if qq == 0 else ROOF_GREY))
-                elif liv == "najbrt1":
-                    c = N1_WHITE if qq <= 1 or cab[y, x] else (212, 216, 218)
-                elif liv == "cervenozluta":
-                    c = RED if qq <= 1 else ROOF_GREY
-                elif liv == "modrokremova":
-                    c = BC_SKY if qq == 0 else BC_BLUE
-            else:  # WALL
-                rr, nn = r[y, x], n[y, x]
-                if rr < 0:
-                    rr, nn = 0, 7
-                if liv == "najbrt2":
-                    c = n2_wall(rr, nn)
-                elif liv in ("najbrt1_2", "najbrt1"):
-                    body = LGREY if liv == "najbrt1_2" else N1_WHITE
-                    if cab[y, x]:
-                        c = body if rr < nn - 2 else (SAPPH if liv == "najbrt1" else (58, 61, 64))
-                    else:
-                        c = trapezoid(u[y, x] % 1.0, rr, nn) or (SKY if liv == "najbrt1_2" else body)
-                        if rr >= nn - 1:
-                            c = SAPPH if liv == "najbrt1" else (58, 61, 64)
-                elif liv == "cervenozluta":
-                    c = YEL if nn - 4 <= rr <= nn - 2 else RED
-                elif liv == "modrokremova":
-                    c = BC_BLUE if rr >= nn - 2 else (CREAM if rr >= nn - 5 else BC_SKY)
-            if z == "WALL" and b.surround[y, x] and liv in ("najbrt2", "najbrt1_2", "najbrt1"):
-                c = WHITE
-            if c is not None:
-                out[y, x] = shade(c, fac[y, x])
-                painted[y, x] = True
-    if front:
-        front(out, b)
-        painted &= ~np.all(out == [0x6B, 0x6B, 0x6B], axis=2)   # new glass = TommPa9's glass
-    return unspecial(out, painted)
-
-
-
-def front_7507(out, b):
-    """750.7: the goggle pair becomes one wide windscreen: frame pixels that sit
-    between two glass pixels of the same row (the centre pillar) turn to glass."""
-    g = b.glass
-    H, W = g.shape
-    for y in range(H):
-        xs = np.where(g[y])[0]
-        for x0, x1 in zip(xs[:-1], xs[1:]):
-            # only views that show a front; the ne / sw side views hold the
-            # cab side windows, whose pillars stay
-            if 1 < x1 - x0 <= 3 and x0 // 128 == x1 // 128 and x0 // 128 not in (3, 7):
-                out[y, x0 + 1:x1] = (0x6B, 0x6B, 0x6B)
+def livery(name):
+    if name == "najbrt2":
+        return Livery({"rim": RIM, "sky": SKY, "white": WHITE, "sapphire": SAPPHIRE, "frame": FRAME_DK,
+                       "roof": ROOF_N2}, ROOF_N2, WHITE, rules=n2_rules)
+    if name == "najbrt1_2":
+        return Livery({"sky": SKY, "navy": SAPPHIRE, "cab": LGREY, "dgrey": DGREY, "louvre": SKY},
+                      ROOF_GREY, SKY, template=BASE)
+    if name == "najbrt1":
+        return Livery({"sky": SKY, "navy": SAPPHIRE, "cab": CL.N1_WHITE, "dgrey": CL.N1_WHITE,
+                       "dgrey_low": SAPPHIRE, "louvre": SKY}, (212, 216, 218), SKY, template=BASE)
+    if name == "cervenozluta":
+        return Livery({"red_hi": shade(CL.RY_RED, 1.15), "red": CL.RY_RED, "yellow": CL.RY_YELLOW,
+                       "frame": DGREY, "white": WHITE}, CL.RY_RED, WHITE, template="CD_753_Brejlovec")
+    if name == "modrokremova":
+        return Livery({"sky": BC_SKY, "cream": CL.BC_CREAM, "blue": CL.BC_BLUE, "roof": CL.BC_BLUE},
+                      CL.BC_BLUE, CL.BC_CREAM, rules=bc_rules)
+    if name == "zelenosediva":
+        return Livery({"green": ZG_GREEN, "grey": ZG_GREY, "frame": DGREY, "white": WHITE},
+                      ZG_GREEN, WHITE, template="CD_750_Brejlovec")
+    raise ValueError(name)
 
 
 JOBS = {
@@ -313,11 +133,168 @@ JOBS = {
     "750": ["zelenosediva", "najbrt1_2"],
 }
 
+_hb = None
 
-def sheet(fam_, liv):
-    if fam_ == "750" and liv == "zelenosediva":
-        return base().R["CD_750_Brejlovec"].copy()      # TommPa9's own green-grey, unchanged
-    return paint(liv, front_7507 if fam_ == "750_7" else None)
+
+def base():
+    global _hb
+    if _hb is None:
+        names = [BASE] + [n for n in REFS if n != BASE]
+        _hb = HandBase([load(os.path.join(SRC, n + ".png")) for n in names], 0,
+                       {3: 81, 7: 81}, {1: 81, 5: 88}, 10, 10, side_prof_x=range(50, 70), end_width=7)
+    return _hb
+
+
+def paint(fam, name):
+    hb = base()
+    L = livery(name)
+    v = hexarr(hb.base)
+    out = hb.base.copy()
+    painted = np.zeros(hb.solid.shape, bool)
+    zones = None
+    if L.template:
+        zones = template_zones(hb, load(os.path.join(SRC, L.template + ".png")), CMAP[L.template])
+        if name == "najbrt1":
+            # Najbrt 1: the grey shoulders become the white roof, the frame and
+            # the lower front sapphire
+            low = (zones == "dgrey") & (((hb.face == "S") & (hb.K >= 8)) | ((hb.face == "E") & (hb.K >= 8)))
+            zones[low] = "dgrey_low"
+
+    def zc(y, x):
+        """the livery colour of a face pixel (albedo) or None."""
+        if L.rules:
+            return L.zones[L.rules(hb.face[y, x], hb.K[y, x])]
+        z = zones[y, x]
+        return L.zones.get(z) if z else None
+
+    def put(y, x, c, face=None, flat=False):
+        out[y, x] = c if flat else shade(c, hb.factor(y, x, face))
+        painted[y, x] = True
+
+    # ---------------------------------------------------------------- body
+    for y, x in zip(*np.where(hb.solid)):
+        f, hv = hb.face[y, x], v[y, x]
+        if hv in GLASS or (hv in LAMPS and f != "S"):
+            continue
+        if f in ("S", "E"):
+            c = zc(y, x)
+            if c is not None:
+                put(y, x, c)
+        elif f == "R":
+            # the roof keeps his light / dark structure in the livery's colour;
+            # his black fan slots become plain roof (the grille replaces them)
+            Lm = lum(hb.base[y, x])
+            if Lm < 40:
+                Lm = 66.0
+            put(y, x, tuple(int(max(0, min(255, t * (0.75 + 0.25 * Lm / 66.0)))) for t in L.roof), flat=True)
+    # ------------------------------------------------------------- details
+    for c in (0, 2, 3, 4, 6, 7):
+        cu = hb.column_u(c)
+        cols = sorted(cu)
+        X0 = c * 128
+        # two louvre panels behind cab 1: horizontal slats in a darker frame
+        lv = [x for x in cols if 0.13 <= cu[x] <= 0.31]
+        if lv:
+            mid = lv[len(lv) // 2]
+            for x in lv:
+                for y in np.where((hb.face[:, X0 + x] == "S") & (hb.K[:, X0 + x] >= 1) & (hb.K[:, X0 + x] <= 5))[0]:
+                    zcol = zc(y, X0 + x)
+                    if zcol is None:
+                        continue
+                    k = hb.K[y, X0 + x]
+                    f = 0.78 if (x in (lv[0], lv[-1]) or x == mid) else (0.70 if k % 2 else 0.95)
+                    put(y, X0 + x, tuple(int(t * f) for t in zcol))
+        # six portholes high on the hood
+        ph = [x for x in cols if 0.36 <= cu[x] <= 0.74]
+        for x in even_slots(ph, 6):
+            for y in np.where((hb.face[:, X0 + x] == "S") & np.isin(hb.K[:, X0 + x], (2, 3)))[0]:
+                put(y, X0 + x, PORTHOLE, flat=True)
+        # small louvre before cab 2
+        for x in [x for x in cols if 0.80 <= cu[x] <= 0.85]:
+            for y in np.where((hb.face[:, X0 + x] == "S") & np.isin(hb.K[:, X0 + x], (3, 4, 5)))[0]:
+                zcol = zc(y, X0 + x)
+                if zcol is not None:
+                    put(y, X0 + x, tuple(int(t * 0.72) for t in zcol))
+        # radiator grille on the roof near cab 2
+        wide = c in (3, 7)
+        for x in [x for x in cols if 0.58 <= cu[x] <= 0.86]:
+            for y in np.where((hb.face[:, X0 + x] == "R") & (hb.K[:, X0 + x] >= -4) & (hb.K[:, X0 + x] <= -2))[0]:
+                hi = (x % 2 == 0) if wide else ((x + hb.K[y, X0 + x]) % 2 == 0)
+                put(y, X0 + x, GRILLE_HI if hi else GRILLE, flat=True)
+    # the grille on the roof strip of the end views (rows toward cab 2)
+    for c in (1, 5):
+        X0 = c * 128
+        ys = [y for y in range(128) if (hb.face[y, X0:X0 + 128] == "R").any()]
+        y0, y1 = min(ys), max(ys)            # far end .. near end of the strip
+        for y in range(y0, y1 + 1):
+            t = (y - y0) / max(1, y1 - y0)
+            u = (1 - t) if c == 5 else t     # se: near = front; nw: near = rear
+            if 0.58 <= u <= 0.86:
+                for x in range(X0 + 60, X0 + 67):
+                    if hb.face[y, x] == "R":
+                        put(y, x, GRILLE_HI if (y % 2 == 0) else GRILLE, flat=True)
+    cooler_hump(hb, out, painted)
+    wrap_goggles(hb, out, painted, L.frame)
+    if fam == "750_7":
+        wide_screen(hb, out, painted)
+    return unspecial(out, painted)
+
+
+# moving up across the roof from its near edge goes toward the front (w, s) or
+# the rear (n, e) of the loco: u per roof row is about 1 / 32
+ROOF_DU = {0: -1, 6: -1, 2: +1, 4: +1}
+
+
+def cooler_hump(hb, out, painted, ua=0.58, ub=0.86):
+    """the radiator stands one pixel proud of the roof: a grille-top row above
+    the silhouette over its length."""
+    for c in (0, 2, 3, 4, 6, 7):
+        X0 = c * 128
+        cu = hb.column_u(c)
+        for x in range(128):
+            col = np.where(hb.solid[:, X0 + x])[0]
+            if not len(col) or x not in cu:
+                continue
+            ytop = col.min()
+            if hb.face[ytop, X0 + x] != "R":
+                continue
+            h = hb.top[(c, x)] - ytop
+            u = cu[x] + (0 if c in (3, 7) else ROOF_DU[c] * h / 32.0)
+            if ua <= u <= ub:
+                out[ytop - 1, X0 + x] = GRILLE_HI
+                out[ytop, X0 + x] = GRILLE
+                painted[ytop - 1, X0 + x] = painted[ytop, X0 + x] = True
+
+
+def wrap_goggles(hb, out, painted, frame):
+    """the goggle frame wraps round the cab corners: the side-face column at
+    each cab end gets the frame colour in rows K 2-4."""
+    v = hexarr(hb.base)
+    for c in (0, 2, 3, 4, 6, 7):
+        X0 = c * 128
+        cu = hb.column_u(c)
+        if not cu:
+            continue
+        for x in (min(cu, key=lambda q: cu[q]), max(cu, key=lambda q: cu[q])):
+            for y in np.where((hb.face[:, X0 + x] == "S") & np.isin(hb.K[:, X0 + x], (2, 3, 4)))[0]:
+                if v[y, X0 + x] not in GLASS:
+                    out[y, X0 + x] = shade(frame, FACT["S"].get(c, 0.87))
+                    painted[y, X0 + x] = True
+
+
+def wide_screen(hb, out, painted):
+    """750.7: one wide windscreen, the goggle pillar between the panes (end
+    face rows K 2-3) becomes glass in every view that shows a cab front."""
+    glass = hexarr(hb.base) == 0x6B6B6B
+    for y, x in zip(*np.where((hb.face == "E") & (hb.K >= 2) & (hb.K <= 3))):
+        if glass[y, x]:
+            continue
+        c = x // 128
+        left = any(glass[y, x - d] for d in (1, 2) if (x - d) // 128 == c)
+        right = any(glass[y, x + d] for d in (1, 2) if (x + d) // 128 == c)
+        if left and right:
+            out[y, x] = (0x6B, 0x6B, 0x6C)
+            painted[y, x] = True
 
 
 def main():
@@ -328,16 +305,16 @@ def main():
         prev = args[i + 1]
         del args[i:i + 2]
         os.makedirs(prev, exist_ok=True)
-    for f in (args or list(JOBS)):
-        for liv in JOBS[f]:
-            a = sheet(f, liv).astype(np.uint8)
-            out = os.path.join(FAM, f, "sprites", f"{liv}.png")
-            Image.fromarray(a).save(out)
-            print("wrote", os.path.relpath(out, REPO))
+    for fam in (args or list(JOBS)):
+        for name in JOBS[fam]:
+            a = paint(fam, name)
+            path = os.path.join(FAM, fam, "sprites", f"{name}.png")
+            save(a, path)
+            print("wrote", os.path.relpath(path, REPO))
             if prev:
-                g = a.copy()
+                g = a.astype(np.uint8).copy()
                 g[np.all(g == T, axis=2)] = (104, 124, 76)
-                Image.fromarray(g).resize((2048, 256), Image.NEAREST).save(os.path.join(prev, f"{f}_{liv}.png"))
+                Image.fromarray(g).resize((3072, 384), Image.NEAREST).save(os.path.join(prev, f"{fam}_{name}.png"))
 
 
 if __name__ == "__main__":

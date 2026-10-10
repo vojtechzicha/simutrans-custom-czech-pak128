@@ -80,9 +80,9 @@ locomotive types a savegame still runs.
 | ČD railjet (7-car) and InterJet (5-car), each also turned round (CZR art, ported 1:1) | railjet, InterJet |
 
 Most ČD sheets are drawn in this repo, either rendered from box models or
-repainted from pak128.CS bodies. The exceptions are the 151, 242 and 380, which
-keep TommPa9's hand-drawn pak128.cs sheets, and the Brejlovec (750, 750.7, 754),
-which is TommPa9's drawing repainted into each livery. The railjet, InterJet and
+repainted from pak128.CS bodies (the units, and the Eso / Peršing / Bastard and
+Brejlovec locomotives on TommPa9's drawings). The 151, 242 and 380 keep
+TommPa9's hand-drawn pak128.cs sheets as they are. The railjet, InterJet and
 ComfortJet coaches are CZR art ported 1:1.
 
 ### Other rail operators
@@ -295,7 +295,7 @@ ComfortJet coaches are CZR art ported 1:1.
   reference is `src/style_ref_362.png`.
 - **Repainted** from upstream pak128.CS art with the zone painter in
   `tools/railpaint/`, which keeps the original shading (most ČD units, the
-  Brejlovec).
+  Eso / Peršing / Bastard and Brejlovec locomotives).
 - **Generated** by `tools/gen_platforms.py`, `tools/gen_shops.py` and
   `tools/gen_signals.py` (stations, supermarkets, signals).
 - **Ported 1:1** from upstream objects that a savegame uses, with the upstream

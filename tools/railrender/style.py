@@ -22,6 +22,12 @@ Model rules (in the generator, not here):
 
 Post-process: apply polish(img, **POLISH) to every rendered sheet (outline,
 face edges, more saturated colours). Special colours are left bit-exact.
+
+Where TommPa9 drew the class himself, a repaint of his drawing beats any render:
+on 2026-10-10 the user replaced the ČD Eso (162 / 163 / 362 / 371) and Brejlovec
+renders with tools/railpaint/cd_eso.py and cd_brejlovec.py ("this is what I
+expected"). The 362 reference stays the target for families that have to be
+rendered.
 """
 import colorsys
 import numpy as np

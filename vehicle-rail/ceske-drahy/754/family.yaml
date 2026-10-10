@@ -26,11 +26,14 @@
 # Left out: the heritage "brejlovec" repaints (blue-white with the flash,
 # green-white, red with flash, black-white) and the ČSD all-red ones.
 #
-# Sprites: TommPa9's pak128.cs Brejlovec (the T 478 / 75x body all eleven of his
-# Brejlovec liveries share), repainted into each livery by the zone painter
-# tools/railpaint/cd_brejlovec.py; his shape, shading, goggles, windows and lamps are
-# kept, the Najbrt schemes add the white "brýle" frames round the windscreens.
-# Regenerate with `python tools/railpaint/cd_brejlovec.py 754`. Length 8.
+# Sprites: TommPa9's pak128.cs Brejlovec (the T 478 / 75x silhouette all eleven of his
+# Brejlovec liveries share) with the 754's own details redrawn from the photos by
+# tools/railpaint/cd_brejlovec.py: two louvre panels behind cab 1, six portholes, a
+# small louvre before cab 2, the radiator grille raised on the roof, goggle frames
+# wrapping round the cab corners (variant B2, chosen by the user on 2026-10-10).
+# Najbrt 2 and blue-cream by rule, the other liveries from his own sheets in that
+# livery, all in the shared ČD colours. Regenerate with
+# `python tools/railpaint/cd_brejlovec.py 754`. Length 8.
 
 agency: CeskeDrahy
 type: "754"

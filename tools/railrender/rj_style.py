@@ -12,7 +12,8 @@ modules keep their behaviour:
     corners, vertical front, flat roof whose sides are the dark gutter), horizontal
     ribbing on the plain body, the lowered FNM resistor box kept. Side A keeps the
     huge REGIOJET letters (a bold shape at 1x); the 1-px "POOL" / small words go.
-  - 362.2: RJEso362, the ČD 362 (cd_loco_e99) geometry and treatment one to one:
+  - 362.2: RJEso362, the geometry and treatment of the former ČD 362 render (cd_loco_e99.py,
+    removed 2026-10-10 when the ČD Eso went back to TommPa9's drawing; see git history) one to one:
     heavy resistor blocks + insulators, the dark louvre band high under the gutter
     on side B (a large light panel on the 212 / 220 retros), ribbing on the plain
     body only; the retro zones, toned-down light roofs and painted pantographs.
@@ -159,7 +160,7 @@ def e99_row(liv, unit="162"):
 
 # ------------------------------------------------------------------ 362.2
 # The 362.2 on the exact geometry and treatment of the approved ČD 362
-# (cd_loco_e99.CDE99.build): slab box, flat roof with a dark gutter, heavy
+# (the former cd_loco_e99.CDE99.build): slab box, flat roof with a dark gutter, heavy
 # resistor blocks + insulators on the roof, the dark louvre band high under the
 # gutter, ribbed plain sides. What differs on the real RJ locos (photos in the RJ
 # research dossier, research/photos/362-2_retro):
