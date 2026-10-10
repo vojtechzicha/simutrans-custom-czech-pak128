@@ -328,3 +328,32 @@ The **older** PID design in horizontal zones (not the newer vertical grey-red `p
 | Blue            | `22, 92, 172`      | #165CAC |
 | White           | `236, 236, 236`    | #ECECEC |
 | Red             | `218, 34, 44`      | #DA222C |
+
+---
+
+## Najbrt on the locomotives
+
+The rendered ČD locomotives take every colour from
+`tools/railrender/cd_loco_livery.py` (layouts checked on Commons photos of the
+362, 2024–2026). On a locomotive the light blue reads lighter than the RAL 5015
+of the units, so it has its own value.
+
+| Zone | Colour | RGB |
+| --- | --- | --- |
+| Najbrt 2 upper body and cab front above the stripe; Najbrt 1.2 / 1 lower trapezoid | loco light blue (`LOCO_SKY`) | `60, 148, 214` |
+| Najbrt 2 stripe at headlight level, running round both fronts | white | `236, 240, 242` |
+| Najbrt 2 lower body; Najbrt 1.2 / 1 upper trapezoid | RAL 5003 sapphire (`SAPPHIRE`, shared with the units) | `30, 52, 94` |
+| Najbrt 1.2 frame and roof | grey (`N12_GREY`) | `112, 116, 118` |
+| Najbrt 1 body, frame and roof | white (`N1_WHITE`) | `232, 236, 238` |
+| Solebar, bogies, buffer beam (all schemes) | near black (`FRAME`) | `38, 40, 43` |
+
+- **Najbrt 2** (`najbrt2`): light blue above the white stripe, sapphire below it
+  down to the solebar; grey roof gear; black windscreen surround; dark-blue ČD
+  logo mid-body.
+- **Najbrt 1.2** (`najbrt1_2`, "lichoběžníky"): light-grey body with a grey frame
+  and roof; on each side a big sapphire trapezoid over a light-blue one, rising
+  from the solebar towards one end over about the middle half of the side.
+- **Najbrt 1** (`najbrt1`): as Najbrt 1.2 on a white body, frame and roof.
+
+The older loco schemes (red-cream 704, blue-cream and red-yellow 210 / 754,
+red-blue 714, orange-blue 799, green-yellow 163) are defined in the same file.

@@ -15,6 +15,9 @@ version.
   detail in `CLAUDE.md` under "`family.yaml` schema".
 - **One PNG per livery.** Place it at `<family>/sprites/<color>.png`, sized
   `1024 × (vehicles × 128)`. Transparency color is RGB `(231, 255, 255)`.
+- **Regenerate, don't paint over generated sheets.** Most sheets come from a
+  renderer, painter or generator under `tools/` (see "How the art is made" in the
+  README). Change the script and rerun it; a hand edit is lost on the next run.
 - **Use the `VZ-` filename prefix** on every shipped asset so this addon set never
   collides with the upstream pak being shadowed.
 - **Preserve upstream credit.** Set `family.copyright` to the original upstream
@@ -28,19 +31,21 @@ version.
 
 1. Add or edit `vehicle-<mode>/<agency>/<family>/family.yaml` and the matching
    `sprites/<color>.png`.
-2. Run `python build.py <family-dir>` to build just your family.
-3. Drop the resulting `dist/VZ-…<color>.pak` into a Simutrans `addons/pak128/`
-   install and verify the result in the depot and in motion.
-4. Commit only the YAML and PNG changes — `build/`, `dist/`, and `*.pak` are
-   `.gitignore`d.
+2. Run `python build.py <family-dir> --no-install`. This builds the whole
+   agency-mode pak your family belongs to, e.g. `dist/VZ-CeskeDrahy-rail.pak`,
+   plus its translations `dist/text/en.VZ-….tab` and `cz.VZ-….tab`.
+3. Copy that pak into your pak128.CS folder and its two tabs into the folder's
+   `text/` subfolder, then check the result in the depot and in motion. For
+   multi-section vehicles, also run `tools/consist_preview.py` on the sheet.
+4. Commit only the YAML, PNG and tool changes — `build/`, `dist/`, and `*.pak`
+   are `.gitignore`d.
 
 ## Branch model
 
-Everything lives on `main`: finished families, families still being refined
-(placeholder sprites, extra liveries), working notes (`TODO.md`, `liveries.md`)
-and helper scripts. Larger pieces of work can be developed on a short-lived
-feature branch and merged back into `main`. The README lists which families are
-finished and which are still in progress.
+Everything lives on `main`: the families, the art tooling and the notes
+(`TODO.md`, `liveries.md`). Larger pieces of work are developed on a short-lived
+feature branch, rebased on `origin/main` and merged back. The README lists what
+ships; `TODO.md` lists what is still open (borrowed art, missing types).
 
 ## Reporting issues
 

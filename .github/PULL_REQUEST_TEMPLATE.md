@@ -11,7 +11,8 @@
 
 ## Checklist
 - [ ] No generated files committed (`build/`, `dist/`, `*.pak` are gitignored)
-- [ ] `python build.py <family>` runs cleanly
+- [ ] `python build.py <family> --no-install` runs cleanly
+- [ ] Generated sheets were regenerated from their `tools/` script, not edited by hand
 - [ ] PNG transparency uses RGB `(231, 255, 255)`; no unreferenced columns/rows
 - [ ] `family.copyright` names the upstream source (build appends `vojtechzicha`)
 - [ ] Verified in-game (depot + at least one direction of travel)
