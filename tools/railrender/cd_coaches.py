@@ -183,8 +183,8 @@ FAMILIES = {
         ("Bdt280", "Bdt280", None, ["najbrt2", "najbrt1"]),
         ("Bfhpvee295-front", "Bfhpvee295", "front", ["najbrt2", "najbrt1"]),
         ("Bfhpvee295-rear", "Bfhpvee295", "rear", ["najbrt2", "najbrt1"]),
-        ("ABfhpvee395-front", "ABfhpvee395", "front", ["najbrt1"]),
-        ("ABfhpvee395-rear", "ABfhpvee395", "rear", ["najbrt1"])],
+        ("ABfhpvee395-front", "ABfhpvee395", "front", ["najbrt2", "najbrt1"]),
+        ("ABfhpvee395-rear", "ABfhpvee395", "rear", ["najbrt2", "najbrt1"])],
         comment="""# Vagónka Studénka UIC-Y 24.5 m coaches: the Bdpee 231 panorama-window saloon
 # (ex Bp 282), ABpee 347, Bdtee 276, the Bdt 279 / 280 and the "sysel" driving
 # trailers Bfhpvee 295 / ABfhpvee 395. A driving trailer comes twice: -front

@@ -223,10 +223,10 @@ TYPES = {
         + [(22.0, 22.5, "f")],
         doors=[(7.1, 8.8), (23.0, 24.0)], door="dbl", roofp="y", ac=[(12.0, 14.0)],
         picto=[(4.1, 5.2, "bike")]),
-    "ABfhpvee395": dict(  # the same body with 1st class next to the cab
+    "ABfhpvee395": dict(  # ABfhpvee395-n2-a / -a: the same body, 1st class at the far end
         L=24.5, cab=True, win=[(0.9, 1.4, "w"), (1.8, 2.2, "w"), (4.1, 5.2, "w")] + row(9.5, 7, 1.8, 1.1)
         + [(22.0, 22.5, "f")],
-        doors=[(7.1, 8.8), (23.0, 24.0)], door="dbl", first=[(9.0, 16.2)], roofp="y", ac=[(12.0, 14.0)]),
+        doors=[(7.1, 8.8), (23.0, 24.0)], door="dbl", first=[(14.7, 22.9)], roofp="y", ac=[(12.0, 14.0)]),
     # --- double-deck (dd): Görlitz DDm and Škoda 13Ev, 26.8 m; openings per deck
     "Bdmteeo294": dict(  # Bmto-n2 / Bdmteeo294: Görlitz, bike area in one end
         L=26.8, dd="gorlitz", up=row(8.5, 6, 1.7, 1.3), low=row(8.5, 6, 1.7, 1.3),

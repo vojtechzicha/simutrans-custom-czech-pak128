@@ -196,7 +196,6 @@ vehicles:
     head: true
     prev: []
     next: any
-    liveries: [najbrt1]
     fields:
       cost: 1425000
       payload: 50
@@ -220,7 +219,6 @@ vehicles:
     tail: true
     prev: any
     next: []
-    liveries: [najbrt1]
     fields:
       cost: 1425000
       payload: 50
