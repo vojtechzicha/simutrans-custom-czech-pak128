@@ -19,6 +19,7 @@ details that survive at ~70 px per car:
     band of restaurant / sleeper / couchette cars, the blue lower body of BD
   - pictograms on the window band: bicycle, wheelchair, children's compartment
 """
+import numpy as np
 import railkit as R
 from railkit import Paint, Part, Lit
 from render import DIRS
@@ -219,12 +220,12 @@ TYPES = {
         doors=E24, door="fold", roofp="y", vents=True),
     # --- driving trailers (sysel): openings listed with the cab at 0 m
     "Bfhpvee295": dict(  # Bfhpvee295-n2: cab, bike/PRM area, double door, saloon
-        L=24.5, cab=True, win=[(0.9, 1.4, "w"), (1.8, 2.2, "w"), (4.1, 5.2, "w")] + row(9.5, 7, 1.8, 1.1)
+        L=24.5, cab="sysel", win=[(0.9, 1.4, "w"), (1.8, 2.2, "w"), (4.1, 5.2, "w")] + row(9.5, 7, 1.8, 1.1)
         + [(22.0, 22.5, "f")],
         doors=[(7.1, 8.8), (23.0, 24.0)], door="dbl", roofp="y", ac=[(12.0, 14.0)],
         picto=[(4.1, 5.2, "bike")]),
     "ABfhpvee395": dict(  # ABfhpvee395-n2-a / -a: the same body, 1st class at the far end
-        L=24.5, cab=True, win=[(0.9, 1.4, "w"), (1.8, 2.2, "w"), (4.1, 5.2, "w")] + row(9.5, 7, 1.8, 1.1)
+        L=24.5, cab="sysel", win=[(0.9, 1.4, "w"), (1.8, 2.2, "w"), (4.1, 5.2, "w")] + row(9.5, 7, 1.8, 1.1)
         + [(22.0, 22.5, "f")],
         doors=[(7.1, 8.8), (23.0, 24.0)], door="dbl", first=[(14.7, 22.9)], roofp="y", ac=[(12.0, 14.0)]),
     # --- double-deck (dd): Görlitz DDm and Škoda 13Ev, 26.8 m; openings per deck
@@ -313,6 +314,53 @@ def in_first(S, m):
     return bool(f) and any(a <= m <= b for (a, b) in f)
 
 
+# ------------------------------------------------------------------ sysel cab
+# The "sysel" driving trailers (Bfhpvee 295 / ABfhpvee 395), from the vagonWEB
+# drawings Bfhpvee295-n2-a / -a (10 px = 1 m) and head-on photos (80-30 022-5,
+# 80-30 303-9): the face stands 0.5 m behind the buffer faces. Over a dark buffer
+# beam with a thin yellow line sits a light-grey panel with the ČD logo between the
+# corner lamps, then the big windscreen, raked a little, and a rounded hood whose
+# dark-blue middle carries a round lamp and whose edges are sky blue. The cab is
+# sky blue all round: on the side over its full height back past the cab door
+# (a dark divider line to the grey lower body in Najbrt 2), up to the hood in
+# front. The hood and the windscreen are raked further back than on the drawing,
+# so the head reads at 1x (the user's pick of two variants, 2026-10-11).
+# Metres from the cab end; heights above the rail.
+SY_FACE = 0.50              # cab face behind the buffer faces
+SY_BODY = 2.05              # the plain body box starts here (the nose meets the roof)
+SY_CAB = 2.30               # sky-blue cab section on the side, below the window band
+SY_SKY_TOP = 2.30           # ... and up to the hood edge (sky-blue hood sides)
+SY_CAP_DARK = 1.05          # the hood is dark blue in Najbrt 1 too, up to here
+SY_BEAM_TOP = 1.22          # yellow line at the top of the buffer beam
+SY_WS = (2.22, 3.19)        # windscreen
+SY_WS_RAKE = 0.50           # windscreen top this far behind its bottom
+SY_HOOD_HW = 0.56           # half-width of the dark-blue middle of the hood (cu)
+SY_CABWINS = ((0.80, 1.25, 2.20, 2.85),  # cab side window: m0, m1, h0, h1
+              (1.78, 2.20, 2.20, 2.85))  # cab door window
+SY_WS_C = (0x4E, 0x5E, 0x6E)             # windscreen / cab window: plain, never lit
+SY_WS_HI = (0x84, 0x96, 0xA6)
+SY_CAP = (34, 56, 110)                   # dark-blue cap (the Najbrt 2 roof blue)
+SY_LAMP_OFF = (0xC8, 0xCC, 0xCE)
+SY_BEAM = (0x26, 0x28, 0x2C)
+SY_PLOUGH = (0xE8, 0xB8, 0x10)           # yellow edge of the snow plough
+
+
+def sysel_nose_m(h):
+    """Cab front surface at height h (m), in metres behind the buffer faces."""
+    if h < SY_WS[0]:
+        return SY_FACE + max(0.0, h - 0.55) * 0.02
+    if h < SY_WS[1]:
+        return SY_FACE + 0.03 + (h - SY_WS[0]) / (SY_WS[1] - SY_WS[0]) * SY_WS_RAKE
+    t = min(1.0, (h - SY_WS[1]) / (ZR * PX - SY_WS[1]))
+    top = SY_FACE + 0.03 + SY_WS_RAKE
+    return top + (SY_BODY - top) * t ** 1.6
+
+
+def sysel_cap_edge(m):
+    """Height (m) of the lower edge of the dark hood on the cab side at m."""
+    return 3.25 + max(0.0, m - 0.60) * 0.20
+
+
 # ------------------------------------------------------------------ model
 def coach(code, liv, u0=0.0, owner="C", cab=None):
     """Parts of ČD coach `code` (see TYPES) whose front buffer face is at consist-u u0.
@@ -343,12 +391,65 @@ def coach(code, liv, u0=0.0, owner="C", cab=None):
     P = {k: Paint(v) for k, v in C.items() if isinstance(v, tuple)}
     roofp = C["roof"]
 
+    sysel = S.get("cab") == "sysel"
+    n1 = liv in ("najbrt1", "najbrtbd1")
+    cap_dark = Paint(SY_CAP, top=(38, 62, 146))
+
+    def sysel_side(m, h):
+        """Side of the sky-blue cab section and its divider; None = plain side."""
+        if m < SY_SKY_TOP:
+            if h >= sysel_cap_edge(m):
+                return roofp if (m >= SY_CAP_DARK and h >= 3.55) else cap_dark
+            for (w0, w1, wh0, wh1) in SY_CABWINS:
+                if w0 <= m <= w1 and wh0 <= h <= wh1:
+                    return Paint(SY_WS_HI) if h > wh1 - 0.2 else Paint(SY_WS_C)
+        if m < SY_CAB and (h < b0 or m < SY_SKY_TOP):
+            if h < 0.55:
+                return Paint(SY_BEAM)
+            return P["band"]
+        if SY_CAB <= m < SY_CAB + 0.10 and not n1 and 0.95 <= h < b0:
+            return Paint(SAPPHIRE)               # dark divider to the grey lower body
+        return None
+
+    def sysel_face(v, z):
+        """The cab front, seen head-on; v lateral (cu), z model px."""
+        h = z * PX
+        av = abs(v)
+        hw = W if z < ZS else W - 0.2
+        if h < 0.40:
+            return Paint(SY_PLOUGH)              # snow plough edge
+        if h < SY_BEAM_TOP - 0.08:
+            return Paint(SY_BEAM)
+        if h < SY_BEAM_TOP:
+            return Paint(SY_PLOUGH)              # yellow line over the beam
+        if h >= SY_WS[1]:                        # hood
+            if av <= SY_HOOD_HW:
+                if 3.50 <= h <= 3.78 and av <= 0.13:
+                    return Lit(R.HEAD) if cab == "front" else Paint(SY_LAMP_OFF)
+                return cap_dark
+            return P["band"]
+        if h >= SY_WS[0]:
+            if av <= hw - 0.13:
+                return Paint(SY_WS_HI) if h > SY_WS[1] - 0.28 else Paint(SY_WS_C)
+            return P["band"]
+        if 1.42 <= h <= 1.88 and 0.50 <= av <= 0.76:
+            return Lit(R.HEAD if cab == "front" else R.TAIL)
+        if av < 0.48:
+            if 1.50 <= h <= 1.80 and av <= 0.15:
+                return Paint(SAPPHIRE)           # ČD logo
+            return Paint(LGREY)
+        return P["band"]
+
     def side(f, u, v, z, d):
         m = (u - u0) * M                     # physical metres from the front
         lm = m if f == "-v" else Lm - m      # metres as seen, left to right
         if flip:                             # openings are listed cab first
             m = Lm - m
         h = z * PX
+        if sysel and m < SY_CAB + 0.10:
+            r = sysel_side(m, h)
+            if r is not None:
+                return r
         # doors
         for i, (a, b) in enumerate(doors):
             if a <= m <= b and 0.50 <= h <= edge - 0.02:
@@ -436,7 +537,7 @@ def coach(code, liv, u0=0.0, owner="C", cab=None):
     def end(f, u, v, z, d):
         h = z * PX
         if S.get("cab") and f == ("+u" if flip else "-u"):
-            return cabface(f, u, v, z, d)
+            return sysel_face(v, z) if sysel else cabface(f, u, v, z, d)
         if abs(v) < 0.42 and h < 3.4:
             return Paint((0x2B, 0x2D, 0x2F))   # gangway door / bellows
         if h >= edge:
@@ -454,16 +555,69 @@ def coach(code, liv, u0=0.0, owner="C", cab=None):
             return side(f, u, v, z, d)
         return end(f, u, v, z, d)
 
+    def m2u(m):
+        return u0 + ((Lm - m) if flip else m) / M
+
+    def mbox(m0, m1, v0, v1, z0, z1, mat):
+        a, b = m2u(m0), m2u(m1)
+        return Part(min(a, b), max(a, b), v0, v1, z0, z1, mat, owner)
+
+    def nose_mat(f, u, v, z, d):
+        h = z * PX
+        m = (Lm - (u - u0) * M) if flip else (u - u0) * M
+        if f == ("+u" if flip else "-u"):
+            return sysel_face(v, z)
+        if f in ("+v", "-v"):
+            r = sysel_side(m, h)
+            return r if r is not None else P["band"]
+        if f == "+z":
+            if h >= SY_WS[1] - 0.1:
+                return cap_dark if abs(v) <= SY_HOOD_HW + 0.05 else P["band"]
+            if h >= SY_WS[0] - 0.1:
+                return Paint(SY_WS_HI)       # the raked windscreen seen from above
+            return sysel_face(v, z)
+        return cap_dark
+
+    def sysel_nose():
+        """Cab nose of horizontal slabs following sysel_nose_m, corners rounded in plan."""
+        out = []
+        zs = (list(np.arange(ZB, SY_WS[0] / PX, 0.6)) + list(np.arange(SY_WS[0] / PX, SY_WS[1] / PX, 0.3))
+              + list(np.arange(SY_WS[1] / PX, ZR - 0.01, 0.25)))
+        steps = [(0.0, 0.10, 0.18), (0.10, 0.25, 0.06), (0.25, 99.0, 0.0)]
+        for i, z0 in enumerate(zs):
+            z1 = zs[i + 1] if i + 1 < len(zs) else ZR
+            mf = sysel_nose_m((z0 + z1) / 2 * PX)
+            hw = W if z0 < ZS - 0.01 else W - 0.2
+            for (d0, d1, cut) in steps:
+                a, b = mf + d0, min(SY_BODY + 0.02, mf + d1)
+                if a < b:
+                    out.append(mbox(a, b, -(hw - cut), hw - cut, z0, z1, nose_mat))
+        # snow plough under the face, buffers and the coupler in front of it
+        out.append(mbox(SY_FACE + 0.02, SY_BODY + 0.5, -W + 0.10, W - 0.10, 0.32 / PX, ZB, nose_mat))
+        bp = Paint((0x30, 0x32, 0x36))
+        for vc in (-0.64, 0.64):
+            out.append(mbox(0.05, SY_FACE + 0.02, vc - 0.10, vc + 0.10, 2.2, 2.8, lambda *a_: bp))
+        return out
+
     parts = []
     ub0, ub1 = u0 + 0.14, u0 + L - 0.14
-    if S.get("cab"):                         # sysel: bulging cab end, no gangway
+    if sysel:                                # the nose slabs end where the body box starts
+        if flip:
+            ub1 = u0 + (Lm - SY_BODY) / M
+        else:
+            ub0 = u0 + SY_BODY / M
+        parts += sysel_nose()
+    elif S.get("cab"):                       # bulging cab end, no gangway
         if flip:
             ub1 = u0 + L - 0.05
         else:
             ub0 = u0 + 0.05
     parts.append(Part(ub0, ub1, -W, W, ZB, ZS, body_mat, owner))
-    if S["roofp"] == "y":                    # UIC-Y: roof ends slope down
-        parts.append(Part(ub0 + 0.35, ub1 - 0.35, -W + 0.2, W - 0.2, ZS, ZR, lambda *a: roofp, owner))
+    if S["roofp"] == "y":                    # UIC-Y: roof ends slope down; a sysel's cap closes its cab end
+        r0, r1 = ub0 + 0.35, ub1 - 0.35
+        if sysel:
+            r0, r1 = (r0, ub1) if flip else (ub0, r1)
+        parts.append(Part(r0, r1, -W + 0.2, W - 0.2, ZS, ZR, lambda *a: roofp, owner))
     elif S["roofp"] == "x":                  # honecker: rounded, narrower crown
         parts.append(Part(ub0 + 0.15, ub1 - 0.15, -W + 0.28, W - 0.28, ZS, ZR, lambda *a: roofp, owner))
     else:
@@ -477,9 +631,9 @@ def coach(code, liv, u0=0.0, owner="C", cab=None):
         for i in range(5):
             uc = u0 + (2.0 + i * (L - 4.0) / 4)
             parts.append(Part(uc - 0.18, uc + 0.18, -0.2, 0.2, ZR, ZR + 0.45, lambda *a_: vp, owner))
-    # gangways + buffers
+    # gangways + buffers (a sysel's cab end has its own, in sysel_nose)
     for (a, b) in ((u0 + 0.02, ub0), (ub1, u0 + L - 0.02)):
-        if b - a < 0.05:
+        if b - a < 0.05 or (sysel and (a == ub1) == bool(flip)):
             continue
         parts.append(Part(a, b, -0.40, 0.40, 2.6, ZS - 0.8, lambda *a_: Paint((0x2B, 0x2D, 0x2F)), owner))
         for vc in (-0.64, 0.64):
@@ -499,6 +653,32 @@ def coach(code, liv, u0=0.0, owner="C", cab=None):
 ZDS = 4.40 / PX            # dd side wall top (4.40 m)
 ZDR = 4.63 / PX            # dd roof crown
 EV_DOOR = (38, 40, 41)
+
+# Škoda 13Ev driving trailer nose, from the vagonWEB drawing ABfbdmteeo396-a and
+# photos (86-72 003, 004): upright to 2.0 m, 0.55 m behind the buffer faces, then
+# one long rake back to the roof (1.65 m over 2.3 m) and a rounded top. Head-on:
+# a yellow plough under a dark-blue lower front with the lamps at its corners, a
+# white sweep, the sky-blue face with the white ČD logo, the big windscreen up the
+# rake and a dark-blue top. Metres from the cab end; heights above the rail.
+EV_FACE = 0.55
+EV_BODY = 3.10             # the plain body box starts here
+EV_RAKE = (2.00, 4.30, 1.65)   # rake from h0 to h1, this far back
+EV_WS = (2.45, 4.10)
+EV_WS_C = (0x3A, 0x48, 0x56)
+EV_WS_HI = (0x70, 0x84, 0x96)
+EV_CABWIN = (2.45, 3.05, 2.45, 3.10)     # cab side window: m0, m1, h0, h1
+
+
+def ev_nose_m(h):
+    """13Ev cab front surface at height h (m), metres behind the buffer faces."""
+    h0, h1, back = EV_RAKE
+    if h < h0:
+        return EV_FACE
+    if h < h1:
+        return EV_FACE + (h - h0) / (h1 - h0) * back
+    t = min(1.0, (h - h1) / (ZDR * PX - h1))
+    top = EV_FACE + back
+    return top + (EV_BODY - top) * t ** 1.5
 
 
 def dd(code, liv, u0=0.0, owner="C", cab=None):
@@ -606,9 +786,78 @@ def dd(code, liv, u0=0.0, owner="C", cab=None):
             return side(f, u, v, z, d)
         return end(f, u, v, z, d)
 
+    nosed = ev and S.get("cab")
+
+    def ev_face(v, z):
+        """The 13Ev cab front, seen head-on."""
+        h = z * PX
+        av = abs(v)
+        if h < 0.45:
+            return Paint(SY_PLOUGH)
+        if h < 1.60:
+            if 1.32 <= h <= 1.56 and 0.42 <= av <= 0.80:
+                return Lit(R.HEAD if cab == "front" else R.TAIL)
+            return P["navy"]
+        if h < 1.74:
+            return Paint(NUM)                    # white sweep
+        if h < EV_WS[0]:
+            if 1.95 <= h <= 2.25 and av <= 0.20:
+                return Paint(NUM)                # ČD logo
+            return P["sky"]
+        if h < EV_WS[1] and av <= W - 0.12:
+            return Paint(EV_WS_HI) if h > EV_WS[1] - 0.35 else Paint(EV_WS_C)
+        return P["navy"]
+
+    def ev_nose_mat(f, u, v, z, d):
+        h = z * PX
+        m = (Lm - (u - u0) * M) if flip else (u - u0) * M
+        if f == ("+u" if flip else "-u"):
+            return ev_face(v, z)
+        if f in ("+v", "-v"):
+            if EV_CABWIN[0] <= m <= EV_CABWIN[1] and EV_CABWIN[2] <= h <= EV_CABWIN[3]:
+                return Paint(EV_WS_HI) if h > EV_CABWIN[3] - 0.2 else Paint(EV_WS_C)
+            if h >= EV_WS[0] and m < ev_nose_m(h) + 0.30:
+                return Paint(EV_WS_C)            # the windscreen wraps round the corner
+            return side(f, u, v, z, d)
+        if f == "+z":
+            if EV_WS[0] - 0.1 <= h < EV_WS[1]:   # the raked windscreen seen from above
+                return Paint(EV_WS_HI) if h > EV_WS[1] - 0.35 else Paint(EV_WS_C)
+            return ev_face(v, z) if h < EV_WS[0] else P["navy"]
+        return P["navy"]
+
+    def ev_nose():
+        out = []
+        def m2u(m):
+            return u0 + ((Lm - m) if flip else m) / M
+        def mbox(m0, m1, v0, v1, z0, z1, mt):
+            a, b = m2u(m0), m2u(m1)
+            return Part(min(a, b), max(a, b), v0, v1, z0, z1, mt, owner)
+        zs = (list(np.arange(ZB, EV_RAKE[0] / PX, 0.6)) + list(np.arange(EV_RAKE[0] / PX, ZDS - 0.01, 0.25))
+              + list(np.arange(ZDS, ZDR - 0.01, 0.2)))
+        steps = [(0.0, 0.10, 0.20), (0.10, 0.28, 0.07), (0.28, 99.0, 0.0)]
+        for i, z0 in enumerate(zs):
+            z1 = zs[i + 1] if i + 1 < len(zs) else ZDR
+            mf = ev_nose_m((z0 + z1) / 2 * PX)
+            hw = W if z0 < ZDS - 0.01 else W - 0.22
+            for (d0, d1, cut) in steps:
+                a, b = mf + d0, min(EV_BODY + 0.02, mf + d1)
+                if a < b:
+                    out.append(mbox(a, b, -(hw - cut), hw - cut, z0, z1, ev_nose_mat))
+        out.append(mbox(EV_FACE + 0.02, EV_BODY + 0.5, -W + 0.10, W - 0.10, 0.28 / PX, ZB, ev_nose_mat))
+        bp = Paint((0x30, 0x32, 0x36))
+        for vc in (-0.64, 0.64):
+            out.append(mbox(0.05, EV_FACE + 0.02, vc - 0.10, vc + 0.10, 2.2, 2.8, lambda *a_: bp))
+        return out
+
     parts = []
     ub0, ub1 = u0 + 0.14, u0 + L - 0.14
-    if S.get("cab"):
+    if nosed:
+        if flip:
+            ub1 = u0 + (Lm - EV_BODY) / M
+        else:
+            ub0 = u0 + EV_BODY / M
+        parts += ev_nose()
+    elif S.get("cab"):
         if flip:
             ub1 = u0 + L - 0.05
         else:
@@ -618,13 +867,19 @@ def dd(code, liv, u0=0.0, owner="C", cab=None):
     parts.append(Part(ub0, um0, -W, W, ZB, ZDS, mat, owner))
     parts.append(Part(um0, um1, -W, W, zlow, ZDS, mat, owner))
     parts.append(Part(um1, ub1, -W, W, ZB, ZDS, mat, owner))
-    parts.append(Part(ub0 + 0.1, ub1 - 0.1, -W + 0.22, W - 0.22, ZDS, ZDR, lambda *a: P["roof"], owner))
+    r0, r1 = ub0 + 0.1, ub1 - 0.1
+    if nosed:                                # the nose closes the roof at the cab end
+        r0, r1 = (r0, ub1) if flip else (ub0, r1)
+    parts.append(Part(r0, r1, -W + 0.22, W - 0.22, ZDS, ZDR, lambda *a: P["roof"], owner))
     if ev:
         acp = Paint((0x8C, 0x92, 0x96), top=(0xA4, 0xAA, 0xAE))
-        for (a, b) in ((2.0, 4.0), (22.8, 24.8)):
+        ac = [(2.0, 4.0), (22.8, 24.8)]
+        if nosed:                            # behind the raked nose
+            ac[1 if flip else 0] = (Lm - 5.6, Lm - 3.6) if flip else (3.6, 5.6)
+        for (a, b) in ac:
             parts.append(Part(u0 + a / M, u0 + b / M, -0.45, 0.45, ZDR, ZDR + 0.6, lambda *a_: acp, owner))
     for (a, b) in ((u0 + 0.02, ub0), (ub1, u0 + L - 0.02)):
-        if b - a < 0.05:
+        if b - a < 0.05 or (nosed and (a == ub1) == bool(flip)):
             continue
         parts.append(Part(a, b, -0.40, 0.40, 2.6, ZS - 0.8, lambda *a_: Paint((0x2B, 0x2D, 0x2F)), owner))
         for vc in (-0.64, 0.64):
