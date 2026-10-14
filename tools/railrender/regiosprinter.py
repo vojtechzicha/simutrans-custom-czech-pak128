@@ -8,10 +8,15 @@ structure after db628.py / gtw.py.
                   grey bag, no side buffers, low turquoise-green bumper skirt,
                   amber panels under the lamps (in the lime band), white roof boxes
 
-ONE Simutrans vehicle, cab at both ends (headlights at the front cab, tail
-lights at the rear cab): 24.80 m over buffers -> length 12 cu
-(M = 24.8 / 12 = 2.067 m per carunit).  The three articulated modules belong to
-the same owner; the joints show as narrow dark bellows.
+THREE Simutrans vehicles, one per articulated module, so the unit bends at
+its two joints in curves like the real one (and like the GTW in gtw.py):
+cab module A (length 5, headlights), middle module M (length 2, draws both
+bellows) and cab module B (length 5, tail lights), 24.80 m over buffers ->
+12 cu in all (M = 24.8 / 12 = 2.067 m per carunit; module A + half a joint
+= 10.2 m ~ 5 cu, middle module + joint = 4.4 m ~ 2 cu).  The unit is modelled
+on one u axis and each module's tile keeps only its own pixels, rendered with
+its own front on the Simutrans anchor (u 0 / 5 / 7).
+Sheet rows per livery: 818.0 A, M, B, then 818.2 A, M, B.
 
 Real car (baureihe654.de technical data, de.wikipedia "RegioSprinter"): 23.98 m
 over the body, 24.80 m with buffers (25.17 m with Scharfenberg couplers), end
@@ -420,23 +425,31 @@ class MidModule:
         return P
 
 
-# ------------------------------------------------------------------ the car
-def car(kind):
-    """Parts and lines of one RegioSprinter; kind 'rtb' (818.0) or 'vbg' (818.2)."""
+# ------------------------------------------------------------------ the unit
+LENGTHS = (5, 2, 5)        # cab module A, middle module M, cab module B (cu)
+
+
+def cars():
+    """(owner, consist-u of its front) of the three Simutrans vehicles."""
+    return [("A", 0.0), ("M", float(LENGTHS[0])), ("B", float(LENGTHS[0] + LENGTHS[1]))]
+
+
+def unit(kind):
+    """Parts, lines and cars of one RegioSprinter; kind 'rtb' (818.0) or 'vbg' (818.2)."""
     A = EndModule(kind, "A", +1, R.HEAD)
-    B = EndModule(kind, "A", -1, R.TAIL)
-    Mm = MidModule(kind, "A")
+    B = EndModule(kind, "B", -1, R.TAIL)
+    Mm = MidModule(kind, "M")
     parts = A.parts() + A.roof_parts() + Mm.parts() + B.parts() + B.roof_parts()
-    return parts, []
+    return parts, [], cars()
 
 
-def row(kind):
-    parts, lines = car(kind)
-    return [R.vehicle_tile(parts, lines, d, 0.0, {"A"}) for d in DIRS]
+def unit_rows(parts, lines, cars):
+    """One sheet row per module, each with its own front on the anchor."""
+    return [[R.vehicle_tile(parts, lines, d, uf, {own}) for d in DIRS] for (own, uf) in cars]
 
 
 def rows_for(liv):
-    """[818.0 ex-RTB row, 818.2 ex-VBG row] in livery `liv`."""
+    """[818.0 A, M, B, 818.2 A, M, B] in livery `liv`."""
     if liv not in LIVERIES:
         raise ValueError(liv)
-    return [row("rtb"), row("vbg")]
+    return unit_rows(*unit("rtb")) + unit_rows(*unit("vbg"))

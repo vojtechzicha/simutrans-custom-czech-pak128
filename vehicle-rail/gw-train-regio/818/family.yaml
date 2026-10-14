@@ -26,66 +26,190 @@ display:
 #
 # Sprites: drawn from scratch with the pak128 box raycaster in
 # tools/railrender/regiosprinter.py (regenerate with
-# `python tools/railrender/gwtr.py 818`). Row 0 = 818.0, row 1 = 818.2.
+# `python tools/railrender/gwtr.py 818`). Each car is three Simutrans
+# vehicles, one per module, so it bends at both joints in curves: cab module
+# A (length 5), middle module M (length 2) and cab module B (length 5), 12 in
+# all. Rows 0-2 = 818.0 A / M / B, rows 3-5 = 818.2 A / M / B. Power, payload,
+# weight and cost are split 2 : 1 : 2 (the engines sit in the cab modules).
+# Cars of one kind run in multiple: A takes the B of a car ahead, B the A of
+# a car behind.
 #
 # Livery: oranzovozelena, GWTR orange with dark-green cab ends and a lime
 # crescent, on all eleven cars. GWTR keeps it on the RegioSprinters; the South
 # Bohemian IDESKA scheme is not applied to them.
 
 vehicles:
-  - id: "818.0"
-    role_en: "railcar"
-    role_cs: "motorový vůz"
+  - id: "818.0-A"
+    display_id: "818.0"
+    role_en: "cab module A"
+    role_cs: "čelní článek A"
     row: 0
-    prev: ["818.0"]
-    next: ["818.0"]
+    tail: false
+    prev: ["818.0-B"]
+    next: ["818.0-M"]
+    couple_liveries: prev        # the rear module of a unit ahead
     fields:
-      cost: 2150000
-      payload: 95
+      cost: 880000
+      payload: 38
       speed: 120
-      weight: 32
-      runningcost: 58
-      fixed_cost: 640
+      weight: 12
+      runningcost: 23
+      fixed_cost: 256
       intro_year: 2017
       intro_month: 12
       retire_year: 2032
       retire_month: 12
       waytype: track
       freight: Passagiere
-      length: 12
+      length: 5
       engine_type: diesel
-      power: 396
+      power: 198
       smoke: Diesel_small
       gear: 120
     extended:
-      axles: 4
+      axles: 1
 
-  - id: "818.2"
-    role_en: "railcar"
-    role_cs: "motorový vůz"
+  - id: "818.0-M"
+    display_id: "818.0"
+    role_en: "middle module"
+    role_cs: "střední článek"
     row: 1
-    prev: ["818.2"]
-    next: ["818.2"]
+    head: false
+    tail: false
+    prev: ["818.0-A"]
+    next: ["818.0-B"]
     fields:
-      cost: 2150000
-      payload: 95
+      cost: 390000
+      payload: 19
       speed: 120
-      weight: 32
-      runningcost: 58
-      fixed_cost: 640
+      weight: 8
+      runningcost: 12
+      fixed_cost: 128
       intro_year: 2017
       intro_month: 12
       retire_year: 2032
       retire_month: 12
       waytype: track
       freight: Passagiere
-      length: 12
+      length: 2
+    extended:
+      axles: 2
+
+  - id: "818.0-B"
+    display_id: "818.0"
+    role_en: "cab module B"
+    role_cs: "čelní článek B"
+    row: 2
+    head: false
+    prev: ["818.0-M"]
+    next: ["818.0-A"]
+    couple_liveries: next        # the lead module of a unit behind
+    fields:
+      cost: 880000
+      payload: 38
+      speed: 120
+      weight: 12
+      runningcost: 23
+      fixed_cost: 256
+      intro_year: 2017
+      intro_month: 12
+      retire_year: 2032
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 5
       engine_type: diesel
-      power: 396
+      power: 198
       smoke: Diesel_small
       gear: 120
     extended:
-      axles: 4
+      axles: 1
+
+  - id: "818.2-A"
+    display_id: "818.2"
+    role_en: "cab module A"
+    role_cs: "čelní článek A"
+    row: 3
+    tail: false
+    prev: ["818.2-B"]
+    next: ["818.2-M"]
+    couple_liveries: prev        # the rear module of a unit ahead
+    fields:
+      cost: 880000
+      payload: 38
+      speed: 120
+      weight: 12
+      runningcost: 23
+      fixed_cost: 256
+      intro_year: 2017
+      intro_month: 12
+      retire_year: 2032
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 198
+      smoke: Diesel_small
+      gear: 120
+    extended:
+      axles: 1
+
+  - id: "818.2-M"
+    display_id: "818.2"
+    role_en: "middle module"
+    role_cs: "střední článek"
+    row: 4
+    head: false
+    tail: false
+    prev: ["818.2-A"]
+    next: ["818.2-B"]
+    fields:
+      cost: 390000
+      payload: 19
+      speed: 120
+      weight: 8
+      runningcost: 12
+      fixed_cost: 128
+      intro_year: 2017
+      intro_month: 12
+      retire_year: 2032
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 2
+    extended:
+      axles: 2
+
+  - id: "818.2-B"
+    display_id: "818.2"
+    role_en: "cab module B"
+    role_cs: "čelní článek B"
+    row: 5
+    head: false
+    prev: ["818.2-M"]
+    next: ["818.2-A"]
+    couple_liveries: next        # the lead module of a unit behind
+    fields:
+      cost: 880000
+      payload: 38
+      speed: 120
+      weight: 12
+      runningcost: 23
+      fixed_cost: 256
+      intro_year: 2017
+      intro_month: 12
+      retire_year: 2032
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 198
+      smoke: Diesel_small
+      gear: 120
+    extended:
+      axles: 1
 
 liveries:
   - color: oranzovozelena

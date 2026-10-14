@@ -36,7 +36,8 @@ def jobs():
     import db628, gwtr_m152, gwtr_rs1, regiosprinter
     return {
         "845": (db628.GWTR_LIVERIES, db628.rows_gwtr, ["845", "945", "845 rear"]),
-        "818": (regiosprinter.LIVERIES, regiosprinter.rows_for, ["818.0", "818.2"]),
+        "818": (regiosprinter.LIVERIES, regiosprinter.rows_for,
+                ["818.0-A", "818.0-M", "818.0-B", "818.2-A", "818.2-M", "818.2-B"]),
         "841_2": (gwtr_rs1.LIVERIES, gwtr_rs1.rows_for, ["841.2"]),
         "810": (gwtr_m152.LIVERIES_810, _m152_810, ["810", "816"]),
         "814_5": (gwtr_m152.LIVERIES_814, gwtr_m152.rows_814,

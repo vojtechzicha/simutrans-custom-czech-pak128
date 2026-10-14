@@ -43,37 +43,99 @@ display:
 # buffer front) with this livery added by tools/railrender/ops_regiosprinter.py;
 # regenerate with `python tools/railrender/ops_regiosprinter.py 818`.
 # Roof housings in green where the model has its AC boxes, plus a light-grey
-# box on each cab roof. One Simutrans vehicle, length 12 (24.8 m over
-# buffers), cabs at both ends; units couple in multiple.
+# box on each cab roof. Three Simutrans vehicles, one per module, so the unit
+# bends at both joints in curves: cab module A (length 5), middle module M
+# (length 2) and cab module B (length 5), 12 in all (24.8 m over buffers);
+# sheet rows 0 / 1 / 2 = A / M / B. Power, payload, weight and cost are split
+# 2 : 1 : 2 (the engines sit in the cab modules). Units couple in multiple:
+# A takes the B of a unit ahead, B the A of a unit behind.
 
 vehicles:
-  - id: "818"
-    role_en: "railcar"
-    role_cs: "motorový vůz"
+  - id: "818-A"
+    display_id: "818"
+    role_en: "cab module A"
+    role_cs: "čelní článek A"
     row: 0
-    prev: ["818"]
-    next: ["818"]
-    couple_liveries: true
+    tail: false
+    prev: ["818-B"]
+    next: ["818-M"]
+    couple_liveries: prev        # the rear module of a unit ahead
     fields:
-      cost: 2150000
-      payload: 65
+      cost: 880000
+      payload: 26
       speed: 100
-      weight: 36
-      runningcost: 58
-      fixed_cost: 640
+      weight: 14
+      runningcost: 23
+      fixed_cost: 256
       intro_year: 2019
       intro_month: 12
       retire_year: 2032
       retire_month: 12
       waytype: track
       freight: Passagiere
-      length: 12
+      length: 5
       engine_type: diesel
-      power: 396
+      power: 198
       smoke: Diesel_small
       gear: 120
     extended:
-      axles: 4
+      axles: 1
+
+  - id: "818-M"
+    display_id: "818"
+    role_en: "middle module"
+    role_cs: "střední článek"
+    row: 1
+    head: false
+    tail: false
+    prev: ["818-A"]
+    next: ["818-B"]
+    fields:
+      cost: 390000
+      payload: 13
+      speed: 100
+      weight: 8
+      runningcost: 12
+      fixed_cost: 128
+      intro_year: 2019
+      intro_month: 12
+      retire_year: 2032
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 2
+    extended:
+      axles: 2
+
+  - id: "818-B"
+    display_id: "818"
+    role_en: "cab module B"
+    role_cs: "čelní článek B"
+    row: 2
+    head: false
+    prev: ["818-M"]
+    next: ["818-A"]
+    couple_liveries: next        # the lead module of a unit behind
+    fields:
+      cost: 880000
+      payload: 26
+      speed: 100
+      weight: 14
+      runningcost: 23
+      fixed_cost: 256
+      intro_year: 2019
+      intro_month: 12
+      retire_year: 2032
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 198
+      smoke: Diesel_small
+      gear: 120
+    extended:
+      axles: 1
 
 liveries:
   - color: svestkovadraha

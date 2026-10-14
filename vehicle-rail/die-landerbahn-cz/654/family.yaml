@@ -22,7 +22,8 @@ display:
 # Dec 2029, BEMUs from 2031. Modernised by ČMŽO from 2020 (AC, info system).
 # (This family used to be a mislabelled 3-part "Pesa LINK II" placeholder
 # seeded from a tram sprite, ids 654-front / 054 / 654-rear; the coordinator
-# maps those savegame names to the single vehicle "654".)
+# mapped those savegame names to a single vehicle "654"; since 2026-10-14
+# the unit is three vehicles again, 654-A + 654-M + 654-B.)
 # Unit: three articulated sections A + 2 + A: a cab car on a powered single
 # axle at each end, both resting on the short middle module and its two
 # axles. End car body 9.64 m, middle 4.10 m, 23.98 m over the bodies, 25.17 m
@@ -52,37 +53,101 @@ display:
 # Roof: no AC housings (the DLB roofs are smooth, photos dlbcz_rs_1 / _4 / _8),
 # exhaust and horn fin behind the cab. Lamps (head / tail) behind the
 # windscreen's bottom corners, red-amber lamp units in the yellow band.
-# One Simutrans vehicle, length 12 (24.8 m, like one RS1), cabs at both ends.
-# Units couple in multiple (up to three in reality).
+# Three Simutrans vehicles, one per module, so the unit bends at both joints
+# in curves: cab module A (length 5, 9.64 m + buffer), middle module M
+# (length 2, 4.10 m) and cab module B (length 5), 12 in all (24.8 m, like one
+# RS1). Sheet rows 0 / 1 / 2 = A / M / B; check joints with
+# `python tools/consist_preview.py <sheet> 5,2,5 out.png`. Power, payload,
+# weight and cost of the old single vehicle are split 2 : 1 : 2 (the engines
+# sit in the cab modules). Units couple in multiple (up to three in reality):
+# A takes the B of a unit ahead, B the A of a unit behind.
 
 vehicles:
-  - id: "654"
-    role_en: "railcar"
-    role_cs: "motorový vůz"
+  - id: "654-A"
+    display_id: "654"
+    role_en: "cab module A"
+    role_cs: "čelní článek A"
     row: 0
-    prev: ["654"]
-    next: ["654"]
-    couple_liveries: true
+    tail: false
+    prev: ["654-B"]
+    next: ["654-M"]
+    couple_liveries: prev        # the rear module of a unit ahead
     fields:
-      cost: 2200000
-      payload: 70
+      cost: 900000
+      payload: 28
       speed: 120
-      weight: 32
-      runningcost: 60
-      fixed_cost: 650
+      weight: 12
+      runningcost: 24
+      fixed_cost: 260
       intro_year: 2019
       intro_month: 12
       retire_year: 2031
       retire_month: 12
       waytype: track
       freight: Passagiere
-      length: 12
+      length: 5
       engine_type: diesel
-      power: 456
+      power: 228
       smoke: Diesel_small
       gear: 120
     extended:
-      axles: 4
+      axles: 1
+
+  - id: "654-M"
+    display_id: "654"
+    role_en: "middle module"
+    role_cs: "střední článek"
+    row: 1
+    head: false
+    tail: false
+    prev: ["654-A"]
+    next: ["654-B"]
+    fields:
+      cost: 400000
+      payload: 14
+      speed: 120
+      weight: 8
+      runningcost: 12
+      fixed_cost: 130
+      intro_year: 2019
+      intro_month: 12
+      retire_year: 2031
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 2
+    extended:
+      axles: 2
+
+  - id: "654-B"
+    display_id: "654"
+    role_en: "cab module B"
+    role_cs: "čelní článek B"
+    row: 2
+    head: false
+    prev: ["654-M"]
+    next: ["654-A"]
+    couple_liveries: next        # the lead module of a unit behind
+    fields:
+      cost: 900000
+      payload: 28
+      speed: 120
+      weight: 12
+      runningcost: 24
+      fixed_cost: 260
+      intro_year: 2019
+      intro_month: 12
+      retire_year: 2031
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 228
+      smoke: Diesel_small
+      gear: 120
+    extended:
+      axles: 1
 
 liveries:
   - color: vogtlandbahn

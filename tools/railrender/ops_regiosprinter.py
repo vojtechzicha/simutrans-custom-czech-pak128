@@ -300,26 +300,26 @@ class OpsMid(RS.MidModule):
         return remapped(P, {id(RS.AC_VBG): body, id(RS.AC_RTB): body})
 
 
-# ------------------------------------------------------------------ the car
-def car(liv):
+# ------------------------------------------------------------------ the unit
+def unit(liv):
     kind = LIVERIES[liv]
     A = OpsEnd(kind, "A", +1, R.HEAD, liv)
-    B = OpsEnd(kind, "A", -1, R.TAIL, liv)
-    Mm = OpsMid(kind, "A", liv)
+    B = OpsEnd(kind, "B", -1, R.TAIL, liv)
+    Mm = OpsMid(kind, "M", liv)
     parts = A.parts() + A.roof_parts() + Mm.parts() + B.parts() + B.roof_parts()
-    return parts, []
+    return parts, [], RS.cars()
 
 
 def rows_for(liv):
-    """One row: the whole RegioSprinter (one Simutrans vehicle, length 12)."""
-    parts, lines = car(liv)
-    return [[R.vehicle_tile(parts, lines, d, 0.0, {"A"}) for d in DIRS]]
+    """Three rows, one per module (cab A length 5, middle M 2, cab B 5), as in
+    regiosprinter.py."""
+    return RS.unit_rows(*unit(liv))
 
 
 # family dir -> [(livery, preview labels)]
 FAMILIES = {
-    "die-landerbahn-cz/654": [("vogtlandbahn", ["654"])],
-    "azd-praha/818": [("svestkovadraha", ["818"])],
+    "die-landerbahn-cz/654": [("vogtlandbahn", ["654-A", "654-M", "654-B"])],
+    "azd-praha/818": [("svestkovadraha", ["818-A", "818-M", "818-B"])],
 }
 
 

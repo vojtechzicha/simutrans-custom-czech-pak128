@@ -342,7 +342,7 @@ PNG layout: row 0 = motor sprites, row 1 = middle sprites. Total 1024×256.
 
 With these constraints, the only buildable consist is `front + middle + rear`.
 
-`reverse: true` is only exact for `length: 8` sections: a 180°-rotated sprite keeps its body offset, which is wrong for any other length (see "Section placement"). Units whose end cars are not 8 carunits long (e.g. the Leo Express FLIRT 480, LINT 41) draw the rear cab car as its own row instead.
+`reverse: true` is only exact for `length: 8` sections: a 180°-rotated sprite keeps its body offset, which is wrong for any other length (see "Section placement"). Units whose end cars are not 8 carunits long (e.g. the Leo Express FLIRT 480, LINT 41, and the RegioSprinter's cab module A 5 + middle module M 2 + cab module B 5) draw the rear cab car as its own row instead.
 
 ### Loco-hauled stock
 
