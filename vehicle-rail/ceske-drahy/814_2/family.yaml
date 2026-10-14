@@ -14,9 +14,12 @@ display:
 # Three-car set: 814.2 motor car + 014 partly low-floor middle car + 814.2 motor
 # car, Pars nova 2007-10 (26 sets). Unit 42.41 m, 135 seats + 151 standing,
 # 62.3 t, 2 x 242 kW, 80 km/h. Took over Praha - Kladno - Rakovník from the 854
-# in May 2026. The only buildable consist is front + middle + rear; the rear
-# motor car is the front one turned round (row 2: direction columns shifted by
-# 4, moved one carunit forward, lamps swapped), so its tail lamps face backwards.
+# in May 2026. One set is front + middle + rear; the rear motor car is the front
+# one turned round (row 2: direction columns shifted by 4, moved one carunit
+# forward, lamps swapped), so its tail lamps face backwards. Sets run in multiple
+# with another trio or with an 814.0 + 914 pair (either orientation), ahead or
+# behind, in any livery: the front motor car takes the rear car of the set ahead,
+# the rear motor car the lead car of the set behind.
 
 vehicles:
   - id: "814.2-front"
@@ -26,8 +29,10 @@ vehicles:
     row: 0
     head: true
     tail: false
-    prev: []
+    prev: ["814.2-rear", "814_0/814.0", "814_0/914-reverse"]
     next: ["014"]
+    couple_liveries: prev           # the set ahead may wear any livery
+    couple_sibling_liveries: prev
     fields:
       cost: 1317400
       payload: 95                   # 48 seats + standing
@@ -82,7 +87,9 @@ vehicles:
     head: false
     tail: true
     prev: ["014"]
-    next: []
+    next: ["814.2-front", "814_0/914", "814_0/814.0-reverse"]
+    couple_liveries: next           # the set behind may wear any livery
+    couple_sibling_liveries: next
     fields:
       cost: 1317800
       payload: 95

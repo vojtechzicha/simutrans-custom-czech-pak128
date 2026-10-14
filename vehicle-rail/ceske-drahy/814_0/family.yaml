@@ -29,8 +29,9 @@ display:
 # cars of one set wear the same livery; whole sets run in multiple, in either
 # orientation and any livery (the lead car of a set takes the rear car of the
 # set ahead, the rear car the lead car of the set behind). A set also runs in
-# multiple with an 843 railcar, ahead of it or behind it (843/843; the link
-# crosses families, so it resolves in Najbrt 2 only).
+# multiple with an 814.2 trio in any livery, ahead or behind, and with an 843
+# railcar (843/843; the 843 side couples only in its own livery, so that link
+# works in Najbrt 2 only).
 
 vehicles:
   - id: "914"
@@ -39,9 +40,10 @@ vehicles:
     row: 0
     head: true
     tail: false
-    prev: ["814.0", "914-reverse", "843/843"]
+    prev: ["814.0", "914-reverse", "843/843", "814_2/814.2-rear"]
     next: ["814.0"]
     couple_liveries: prev     # the rear car of a set ahead may wear any livery
+    couple_sibling_liveries: prev
     fields:
       cost: 979000
       payload: 89                   # 36 seats + standing in the low-floor centre
@@ -66,8 +68,9 @@ vehicles:
     head: false
     tail: true
     prev: ["914"]
-    next: ["914", "814.0-reverse", "843/843"]
+    next: ["914", "814.0-reverse", "843/843", "814_2/814.2-front"]
     couple_liveries: next     # the lead car of a set behind may wear any livery
+    couple_sibling_liveries: next
     fields:
       cost: 1317800
       payload: 100                  # 48 seats + standing
@@ -96,9 +99,10 @@ vehicles:
     row: 2
     head: true
     tail: false
-    prev: ["814.0", "914-reverse", "843/843"]
+    prev: ["814.0", "914-reverse", "843/843", "814_2/814.2-rear"]
     next: ["914-reverse"]
     couple_liveries: prev
+    couple_sibling_liveries: prev
     fields:
       cost: 1317800
       payload: 100
@@ -128,8 +132,9 @@ vehicles:
     head: false
     tail: true
     prev: ["814.0-reverse"]
-    next: ["914", "814.0-reverse", "843/843"]
+    next: ["914", "814.0-reverse", "843/843", "814_2/814.2-front"]
     couple_liveries: next
+    couple_sibling_liveries: next
     fields:
       cost: 979000
       payload: 89
