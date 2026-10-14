@@ -18,6 +18,8 @@ display:
 # cars) now run behind the 842 and live in that family.
 # Source: pak128.cs vehicle.motorak.853_854.pak ("CD 854 Hydra" body; the ČSD
 # M 296.1 and the uni_854 sheet serve as extra references for the zone map).
+# Runs in multiple with an 814.0 + 914 RegioNova pair (either orientation),
+# ahead of it or behind it, in any livery (Kladno - Rakovník, 2026).
 
 vehicles:
   # 24.79 m, 48 seats, 50 t, 596 kW Caterpillar 3412E, hydrodynamic, 120 km/h.
@@ -25,6 +27,9 @@ vehicles:
     role_en: "railcar"
     role_cs: "motorový vůz"
     row: 0
+    prev: ["814_0/814.0", "814_0/914-reverse"]
+    next: ["814_0/914", "814_0/814.0-reverse"]
+    couple_sibling_liveries: true   # the 814 may wear any livery
     fields:
       cost: 2942400
       payload: 48
