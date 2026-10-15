@@ -216,15 +216,20 @@ CZR = {
     "comfortjet": [
         ("Bdmpz883", "Bdmpz 883", "Bend", 0, 2351400, 141, 230, 50, "any", "any", False),
         ("Ampz881", "Ampz 881", "Ao", 1, 2351400, 139, 230, 50,
-         ["Bdmpz883", "Bbmpz884", "BRmpz882"], ["Bbmpz884", "Bdmpz883", "Afmpz880"], False),
+         ["Bdmpz883", "Bbmpz884", "BRmpz882", "Afmpz880-front"],
+         ["Bbmpz884", "Bdmpz883", "Afmpz880", "BRmpz882"], False),
         ("Bbmpz884", "Bbmpz 884", "Bprm", 2, 2351400, 122, 230, 50,
-         ["Ampz881", "Bmpz885"], ["Bmpz885", "Ampz881", "BRmpz882"], False),
+         ["Ampz881", "Bmpz885", "BRmpz882"], ["Bmpz885", "Ampz881", "BRmpz882"], False),
         ("Bmpz885", "Bmpz 885", "Bmid", 3, 2351400, 159, 230, 50,
          ["Bbmpz884", "Bmpz885", "Bdmpz883"], ["Bdmpz883", "Bmpz885", "Bbmpz884"], False),
         # added: the restaurant car (from the railjet ARbmpz 892, 1st-class line removed)
         # and the driving trailer (the railjet Afmpz 890 cab car)
-        ("BRmpz882", "BRmpz 882", "BR", 19, 2646400, 44, 230, 50, ["Bbmpz884"], ["Ampz881"], True),
+        ("BRmpz882", "BRmpz 882", "BR", 19, 2646400, 44, 230, 50,
+         ["Bbmpz884", "Ampz881"], ["Ampz881", "Bbmpz884"], True),
         ("Afmpz880", "Afmpz 880", "ABcab", 20, 2646400, 97, 230, 54, ["Ampz881"], [], False),
+        # the set the other way round: the cab car leading, right behind the locomotive
+        # or pushed from the rear (CZR's turned Afmpz 890, the railjet's -R1 row)
+        ("Afmpz880-front", "Afmpz 880", "ABcab", 21, 2646400, 97, 230, 54, "any", ["Ampz881"], False),
     ],
     "interjet": [
         ("Bdmpz896-1", "Bdmpz 896", "Bend", 4, 2351400, 141, 200, 50, "any", ["Bmpz895-2"], False),
@@ -262,7 +267,9 @@ CZR_META = {
 # ported 1:1 (the set couples either way round, as in CZR); the Afmpz 880 reuses the
 # CZR railjet Afmpz 890 cab car and the BRmpz 882 the CZR ARbmpz 892 without the
 # 1st-class line (same Siemens family, same painted style). The middle cars look
-# alike on purpose: the fixed order of the set tells them apart."""),
+# alike on purpose: the fixed order of the set tells them apart. The set also runs
+# the other way round, loco + Afmpz 880-front (cab leading) + 881 + 882 + 884 +
+# 4x 885 + 883, as before push-pull approval."""),
     "interjet": ("InterJet", "InterJet", "interjet", """# ČD InterJet (Siemens Viaggio, 2020-21), 10 five-car sets based in Cheb (R15, IC
 # Západní expres): Bdmpz 896 + 2x Bmpz 895 + Bbmpz 897 + Ampz 894. The CZR InterJet
 # ported 1:1: ids -1..-5 are the set with the Bdmpz 896 next to the locomotive,

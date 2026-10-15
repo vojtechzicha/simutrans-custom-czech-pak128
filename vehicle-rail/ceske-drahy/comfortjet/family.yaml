@@ -4,7 +4,9 @@
 # ported 1:1 (the set couples either way round, as in CZR); the Afmpz 880 reuses the
 # CZR railjet Afmpz 890 cab car and the BRmpz 882 the CZR ARbmpz 892 without the
 # 1st-class line (same Siemens family, same painted style). The middle cars look
-# alike on purpose: the fixed order of the set tells them apart.
+# alike on purpose: the fixed order of the set tells them apart. The set also runs
+# the other way round, loco + Afmpz 880-front (cab leading) + 881 + 882 + 884 +
+# 4x 885 + 883, as before push-pull approval.
 # Art: CZR (Lubak91, CZR-vehicles-rail-pass-CD.pak), frozen in
 # tools/railrender/src/czr_cd_jets.png; regenerate with
 # `python tools/railrender/cd_coaches.py comfortjet`. Cost, capacity, speed, weight and
@@ -53,8 +55,8 @@ vehicles:
     row: 1
     head: false
     tail: false
-    prev: ["Bdmpz883", "Bbmpz884", "BRmpz882"]
-    next: ["Bbmpz884", "Bdmpz883", "Afmpz880"]
+    prev: ["Bdmpz883", "Bbmpz884", "BRmpz882", "Afmpz880-front"]
+    next: ["Bbmpz884", "Bdmpz883", "Afmpz880", "BRmpz882"]
     fields:
       cost: 2351400
       payload: 139
@@ -79,7 +81,7 @@ vehicles:
     row: 2
     head: false
     tail: false
-    prev: ["Ampz881", "Bmpz885"]
+    prev: ["Ampz881", "Bmpz885", "BRmpz882"]
     next: ["Bmpz885", "Ampz881", "BRmpz882"]
     fields:
       cost: 2351400
@@ -131,8 +133,8 @@ vehicles:
     row: 4
     head: false
     tail: false
-    prev: ["Bbmpz884"]
-    next: ["Ampz881"]
+    prev: ["Bbmpz884", "Ampz881"]
+    next: ["Ampz881", "Bbmpz884"]
     fields:
       cost: 2646400
       payload: 44
@@ -159,6 +161,31 @@ vehicles:
     tail: true
     prev: ["Ampz881"]
     next: []
+    fields:
+      cost: 2646400
+      payload: 97
+      speed: 230
+      weight: 54
+      runningcost: 36
+      fixed_cost: 294
+      intro_year: 2008
+      intro_month: 12
+      retire_year: 2048
+      retire_month: 12
+      waytype: track
+      freight: Passagiere
+      length: 13
+    extended:
+      axles: 4
+
+  - id: "Afmpz880-front"
+    display_id: "Afmpz 880"
+    role_en: "1st/2nd class driving trailer"
+    role_cs: "řídicí vůz 1./2. třídy"
+    row: 6
+    tail: false
+    prev: any
+    next: ["Ampz881"]
     fields:
       cost: 2646400
       payload: 97
