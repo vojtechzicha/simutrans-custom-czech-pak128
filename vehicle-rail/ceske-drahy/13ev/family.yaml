@@ -1,7 +1,7 @@
 # Škoda Vagonka 13Ev double-deck push-pull sets (2020-21), ABfbdmteeo 396 driving
 # trailer + Bdmteeo 297 + Bdmteeo 298 (multi-purpose space), with class 750.7 on
 # Ostrava - Frýdlant n. O. - Frenštát p. R. The driving trailer comes as -front
-# (cab leading) and -rear (cab at the tail).
+# (cab leading) and -rear (cab at the tail); both ends couple to anything.
 # Original art drawn from scratch: box models from the vagonWEB scale side drawings,
 # rendered by tools/railrender/cdcoach.py (regenerate with
 # `python tools/railrender/cd_coaches.py 13ev`). Najbrt 2: RAL 7035 lower body,
@@ -25,8 +25,7 @@ vehicles:
     role_en: "1st/2nd class driving trailer"
     role_cs: "řídicí vůz 1./2. třídy"
     row: 0
-    head: true
-    prev: []
+    prev: any
     next: any
     fields:
       cost: 2250000
@@ -48,9 +47,8 @@ vehicles:
     role_en: "1st/2nd class driving trailer"
     role_cs: "řídicí vůz 1./2. třídy"
     row: 1
-    tail: true
     prev: any
-    next: []
+    next: any
     fields:
       cost: 2250000
       payload: 81

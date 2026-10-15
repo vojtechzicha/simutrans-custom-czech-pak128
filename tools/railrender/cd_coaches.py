@@ -189,7 +189,8 @@ FAMILIES = {
 # (ex Bp 282), ABpee 347, Bdtee 276, the Bdt 279 / 280 and the "sysel" driving
 # trailers Bfhpvee 295 / ABfhpvee 395. A driving trailer comes twice: -front
 # with the cab leading (the locomotive pushes at the rear) and -rear with the cab
-# at the tail of a hauled train; the cab end takes nothing beyond it."""),
+# at the tail of a hauled train. Both ends couple to anything, so a driving
+# trailer also runs mid-train, e.g. right behind a 162 on R trains."""),
     "coach_patrove": dict(type="Patrove", en="double-deck", cs="patrový", cars=[
         ("Bdmteeo294", "Bdmteeo294", None, N2), ("Bdmteeo296", "Bdmteeo296", None, N2)],
         comment="""# Görlitz DDm double-deck coaches (26.8 m, 100 km/h): Bdmteeo 294 (bike area) and
@@ -201,7 +202,7 @@ FAMILIES = {
         comment="""# Škoda Vagonka 13Ev double-deck push-pull sets (2020-21), ABfbdmteeo 396 driving
 # trailer + Bdmteeo 297 + Bdmteeo 298 (multi-purpose space), with class 750.7 on
 # Ostrava - Frýdlant n. O. - Frenštát p. R. The driving trailer comes as -front
-# (cab leading) and -rear (cab at the tail)."""),
+# (cab leading) and -rear (cab at the tail); both ends couple to anything."""),
 }
 
 # ------------------------------------------------------------------ CZR ports
@@ -378,12 +379,10 @@ def family_yaml(fam):
            f"  family_en: {_q(F['en'])}", f"  family_cs: {_q(F['cs'])}", "", "vehicles:"]
     for row, (vid, code, cab, livs) in enumerate(F["cars"]):
         disp, role, pay, speed, weight, intro, retire = CARS[code]
+        # a driving trailer's cab end couples like any other end: -front / -rear only
+        # pick which way the cab faces, so it also runs mid-train (behind a locomotive)
         prev = nxt = "any"
         head = tail = None
-        if cab == "front":
-            prev, head = [], True
-        elif cab == "rear":
-            nxt, tail = [], True
         out += vehicle_yaml(vid, disp, role, row, pay, speed, weight, intro, retire,
                             cdcoach.length(code), cost_of(code), prev, nxt, head, tail, livs, all_livs)
     out += ["liveries:"]
