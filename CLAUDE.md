@@ -26,9 +26,11 @@ After a successful build, if `PAK_TARGET_DIR` is set in `.env` (or the process e
 - After every change merged to `main`, build and install it (`python build.py`, or `python build.py <path>` for the touched pak). Never leave a commit on `main` uninstalled, and never install from a branch or worktree that is not merged: the next install from `main` would silently replace it.
 - Install only into that folder, never into a Steam folder's `pak128.cs` directly.
 - A set built with the fork makeobj (`makeobj: fork`) needs a fork exe that knows its keys; the fork repo's `tools/windows/steam-fork.sh update` installs the exe on this PC and in OneDrive for the other PCs.
-- To check: `python build.py --no-install`, then every `dist/VZ-*.pak` and `dist/text/*.tab` must be byte-identical to the file in `PAK_TARGET_DIR` (on 2026-10-16 all 71 were, after `VZ-DPMostLitvinov-bus` from 6f9742a was installed). Copy only the files that differ: copying all of them makes OneDrive upload the whole pakset again.
+- To check: `python build.py --no-install`, then every `dist/VZ-*.pak` and `dist/text/*.tab` must be byte-identical to the file in `PAK_TARGET_DIR` (on 2026-10-16 all 71 were, after `VZ-DPMostLitvinov-bus` from 6f9742a was installed). The install step copies only the files that differ, since OneDrive uploads every file written.
 
 `makeobj` is located via the `MAKEOBJ_PATH` environment variable; if unset, the build runs `makeobj` from `PATH`. Requires `pyyaml` and `Pillow` (`pip install pyyaml pillow`) and Python 3.7+.
+
+The owner's MacBook builds the same paks byte for byte (all 213 files on 2026-10-16), so it may build and install from `main` too. makeobj writes objects in the order it finds the `.dat` files; Windows lists them in NTFS order, but macOS (APFS) returns them unordered, so outside Windows `build.py` passes the files in NTFS order instead of the directory. On the Mac, run the build with `.venv/bin/python` (a uv venv with pyyaml, Pillow, numpy and scipy, which the generators need). makeobj there is built from a clean `git archive origin/main` of `../simutrans-122.0` into its git-ignored `build/makeobj-src/` (`make -C makeobj CFG=mac-release`); `.env` points both `MAKEOBJ_PATH` and `MAKEOBJ_FORK_PATH` at it, and `PAK_TARGET_DIR` at `~/Library/CloudStorage/OneDrive-Personal/Games/Simutrans/pak128.cs`, the same OneDrive folder.
 
 **Do not hand-edit `.dat` or `.tab` files.** Edit the relevant `family.yaml` or the per-livery PNG instead.
 

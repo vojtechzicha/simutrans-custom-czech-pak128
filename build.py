@@ -42,6 +42,7 @@ on startup (existing environment variables take precedence); see ``.env.example`
 from __future__ import annotations
 
 import argparse
+import filecmp
 import os
 import shutil
 import subprocess
@@ -639,8 +640,14 @@ def build_pak(agency: str, mode: str, family_yamls: list[Path]) -> tuple[int, in
         # relative to ROOT, and a trailing slash on the input directory.
         rel_pak = pak.relative_to(ROOT).as_posix()
         rel_out = out_dir.relative_to(ROOT).as_posix() + "/"
+        # makeobj writes objects in the order it finds the .dat files: sorted
+        # (NTFS order) on Windows, unordered elsewhere (APFS: hash order). So
+        # outside Windows pass the files in NTFS order, keeping the paks
+        # byte-identical to the ones built on Windows.
+        inputs = [rel_out] if os.name == "nt" else sorted(
+            (p.relative_to(ROOT).as_posix() for p in out_dir.glob("*.dat")), key=str.upper)
         result = subprocess.run(
-            [makeobj, "pak128", rel_pak, rel_out],
+            [makeobj, "pak128", rel_pak, *inputs],
             cwd=ROOT,
             capture_output=True,
             text=True,
@@ -820,17 +827,24 @@ def install_paks(target_dir: Path, assume_yes: bool) -> int:
         else:
             print("  keeping orphans")
 
+    # Copy only what differs: the target is synced by OneDrive, which uploads
+    # every file written, changed or not.
+    def install(src: Path, dst: Path) -> bool:
+        if dst.is_file() and filecmp.cmp(src, dst, shallow=False):
+            return False
+        shutil.copy2(src, dst)
+        print(f"  installed {dst.relative_to(target_dir)}")
+        return True
+
     copied = 0
     for name, src in sorted(dist_paks.items()):
-        shutil.copy2(src, target_dir / name)
-        copied += 1
+        copied += install(src, target_dir / name)
     if dist_tabs:
         target_text.mkdir(exist_ok=True)
         for name, src in sorted(dist_tabs.items()):
-            shutil.copy2(src, target_text / name)
-            copied += 1
-    if copied:
-        print(f"\ninstalled {copied} file(s) to {target_dir}")
+            copied += install(src, target_text / name)
+    total = len(dist_paks) + len(dist_tabs)
+    print(f"\ninstalled {copied} file(s) to {target_dir}, {total - copied} already up to date")
     return copied
 
 
