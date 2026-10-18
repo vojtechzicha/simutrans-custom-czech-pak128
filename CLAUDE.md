@@ -255,6 +255,14 @@ The RegioJet coach buses (`vehicle-bus/regiojet/`) come from `tools/busrender/rj
 
 The DP Ostrava buses and trolleybuses (`vehicle-bus/dpo/`, `vehicle-trolleybus/dpo/`) are upstream sheets. `tools/busrender/dpo_derived.py` builds the Urbino 12 IV electric and the SOR TNB 12 from them. `tools/busrender/dpo_lane.py` then moves every view along the road only, so that the body front sits where a native 12 m bus has its front (the section-placement rule, with the length measured from the drawing because many DPO families keep `length: 8`); sideways nothing moves, so trolleybus poles stay on the wire. Run both after changing a DPO sheet; a second `dpo_lane.py` run changes nothing.
 
+### Rendered tram sprites (`tools/tramrender/`)
+
+The DPO Škoda 39T (`vehicle-tram/dpo/39t_forcitysmart`) comes from `dpo_39t.py` on `fieldrender.py`, an implicit-surface raymarcher in the rail projection of `tools/railrender/render.py`. A solid is a field function, so a nose rounded in plan, a raked windscreen and a curved roof shoulder are one expression each, where the box renderers stack bricks. One ray per pixel centre keeps edges and livery bands crisp. `flat=True` paints every side in one colour in every view, with `top_steps` steps on the shoulder, like the native DPO trams. Regenerate with `python tools/tramrender/dpo_39t.py [--variant NAME] [--out PNG]`.
+
+Every section is drawn complete, the way the native trams are. The engine's draw order covers the hidden end of a section. Cutting each tile to the pixels its section owns in a straight consist would leave a notch on curves. Each section's front sits on the front anchor of the native DPO trams, so any section lengths close at the joints (check with `consist_preview.py`).
+
+`dpo_palette.py` holds the DPO turquoise scheme chosen on 2026-10-18 for all DPO trams: body `00ADD6` (Pantone 312 C), roof `44C1E4` (the same paint lit from above, lighter on photos), flat sides with one shoulder step. The older DPO sheets still carry the dark teal roof `007B94` until they are redrawn. `tramkit.py` and `dpo_trio.py` edit existing tram sheets in place (roof boxes, ASCII pixel patches).
+
 ### Prague and Brno packages for other operators (`vehicle-bus/praha/`, `vehicle-bus/brno/`, `vehicle-water/praha/`)
 
 City vehicles of operators other than the city's transit company go into one package per city, not one per operator: agency `Praha` builds `VZ-Praha-bus.pak` and `VZ-Praha-water.pak`, and agency `Brno` builds `VZ-Brno-bus.pak`. `VZ-DPPraha-*` and `VZ-DPBrno-*` stay the transit company's own fleet, and regional PID lines get a separate package later. There is one object per type × livery, shared by every operator that runs it. The operator is never in `name=`; it appears only in the livery display name, e.g. `name_en: "PID red-blue-white · Arriva City, ABOUT ME"`.

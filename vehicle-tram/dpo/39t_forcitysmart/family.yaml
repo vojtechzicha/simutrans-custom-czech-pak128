@@ -1,11 +1,10 @@
 agency: DPOstrava
 type: "39T"
-# Sprites were extracted from the compiled upstream pak with their tile
-# placement baked in, so no extra shift (the default [0, 4] sank them 4 px).
+# The sprites carry the native DPO tram placement, so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: TommPa9
+copyright: vojtechzicha
 
 display:
   agency_en: "DPO"
@@ -13,15 +12,19 @@ display:
   family_en: "Škoda 39T ForCity Smart"
   family_cs: "Škoda 39T ForCity Smart"
 
-# Škoda 39T ForCity Smart Ostrava (Artic-based), 38 cars delivered 2021–2024,
-# all in service. Real car: 26.5 m, 100 % low floor, unidirectional (4 double
-# doors on the right), 60 seated + 140 standing, 4 × 100 kW, 80 km/h, 36.8 t.
-# Modelled as the two visible bodies: an 18 m cab section (12 carunits) and a
-# 9 m rear section (6 carunits). Sprite drawn from scratch from photos of cars
-# 1753/1755 (box model rendered in the pak128 projection): DPO turquoise, tall
-# black glass band, white sill line sweeping down under the black cab mask,
-# white-framed black doors, silver bellows; placed on the footprint of the
-# upstream DPO trams.
+# Škoda 39T ForCity Smart Ostrava (Artic-based), 38 cars 1751-1788 delivered
+# 2021-2024, all in service. Real car: 26.6 m, 2 sections on 2'Bo'Bo' (front
+# section on one bogie, rear on two), 100 % low floor, unidirectional, 5 double
+# doors on the right side only (3 + 2), 60 seated + 140 standing, 4 x 100 kW,
+# 80 km/h, 36.8 t.
+# Sections 10 + 8 carunits: the joint sits ~14.3 m behind the nose (perspective
+# fit on photos of 1753, 1766, 1768), rear section ~12.3 m. Payload, weight and
+# costs are the car's totals split by length.
+# Sprites: original model rendered by tools/tramrender/dpo_39t.py on the field
+# raymarcher (fieldrender.py): rounded nose with raked windscreen, black mask
+# and cap, LED headlights, rounded roof shoulders, DPO palette from
+# tools/tramrender/dpo_palette.py (turquoise body, sunlit turquoise roof).
+# Each section is drawn complete from the front anchor of the native DPO trams.
 
 vehicles:
   - id: "39T"
@@ -32,19 +35,19 @@ vehicles:
     prev: []
     next: ["39T_2"]
     fields:
-      cost: 45000
-      payload: 140
+      cost: 50000
+      payload: 111
       speed: 80
-      weight: 25
-      runningcost: 26
-      fixed_cost: 105
+      weight: 21
+      runningcost: 28
+      fixed_cost: 111
       intro_year: 2021
       intro_month: 10
       retire_year: 2080
       retire_month: 1
       waytype: schiene_tram
       freight: Passagiere
-      length: 12
+      length: 10
       engine_type: electric
       power: 200
 
@@ -56,19 +59,19 @@ vehicles:
     prev: ["39T"]
     next: []
     fields:
-      cost: 45000
-      payload: 60
+      cost: 40000
+      payload: 89
       speed: 80
-      weight: 12
-      runningcost: 24
-      fixed_cost: 95
+      weight: 16
+      runningcost: 22
+      fixed_cost: 89
       intro_year: 2021
       intro_month: 10
       retire_year: 2080
       retire_month: 1
       waytype: schiene_tram
       freight: Passagiere
-      length: 6
+      length: 8
       engine_type: electric
       power: 200
 
