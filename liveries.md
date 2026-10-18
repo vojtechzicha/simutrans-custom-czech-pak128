@@ -357,3 +357,19 @@ of the units, so it has its own value.
 
 The older loco schemes (red-cream 704, blue-cream and red-yellow 210 / 754,
 red-blue 714, orange-blue 799, green-yellow 163) are defined in the same file.
+
+---
+
+## DPO tyrkysová (`dpotyrkysova`) — DP Ostrava trams
+
+DPO's design manual gives the turquoise as Pantone 312 C / RAL 5012 (screen `#1DD3FF`). Sunlit sides on photos of the Škoda 39T sample at the same hue. The roof fairings are the same paint and look lighter from above, so the roof is drawn as a sunlit tint of the body colour. Sides are one flat colour in every view, and the rounded shoulder gets one in-between step. Source of truth: `tools/tramrender/dpo_palette.py` (chosen 2026-10-18 for the 39T, to be used for all DPO trams).
+
+| Zone        | RGB              | Hex     |
+| ----------- | ---------------- | ------- |
+| Body        | `0, 173, 214`    | #00ADD6 |
+| Roof        | `68, 193, 228`   | #44C1E4 |
+| White line  | `236, 238, 238`  | #ECEEEE |
+| Door frames | `228, 230, 230`  | #E4E6E6 |
+| Front mask  | `26, 28, 30`     | #1A1C1E |
+
+The other DPO tram sheets (Tango NF2, Vario LF / LF2 / LF3, KT8D5R.N1) still carry the earlier dark teal roof `#007B94` until they are repainted.
