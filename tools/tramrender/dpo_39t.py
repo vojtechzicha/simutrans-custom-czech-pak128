@@ -10,12 +10,14 @@ dpotyrkysova.png. Change the model here and regenerate, never edit the PNG.
 
 The real car (cs.wikipedia, Škoda): 26.6 m, 2.5 m wide, 3.555 m high, two
 sections, 2'Bo'Bo' (the front section on one bogie, the rear section on two),
-unidirectional, five double doors on the right side only. The split was measured
-on three side photos (1753, 1766, 1768) with a perspective fit of the lower body
-band: front section ~14.3 m to the joint, rear ~12.3 m, so 10 + 8 carunits.
-Doors (right side, from 1755): front section 3 (behind the cab, then two near
-the joint), rear section 2 (one mid, one at the tail). Bogies: front section
-~6.8 m from the nose, rear section at ~17 m and ~23.5 m.
+unidirectional, five double doors on the right side only. Layout measured on a
+near-orthographic side photo of 1760 (Commons "20230422 Skoda 39T DPO
+Vystaviste - U hradu 01.jpg"), in metres from the nose: joint centre 12.4
+(front section 12.4 m, rear 14.25 m, so 8 + 10 carunits); doors 1.35-2.9,
+6.9-8.5, 9.9-11.5 | 16.8-18.4, 23.8-25.4; bogies 4.9 | 14.8, 21.9; pantograph
+base 4.2. The window counts of the left side (1768: cab + 6 bays in front,
+7 behind) agree. Positions below are carunits, mapped piecewise so the joint
+lands on the section boundary.
 
 Livery (photos of 1751-1779, colours in dpo_palette.py): DPO turquoise on the
 body, a sunlit tint of it on the roof; black glazing band from the nose to the
@@ -56,7 +58,8 @@ SHEET = os.path.join(ROOT, "vehicle-tram", "dpo", "39t_forcitysmart", "sprites",
 ANCHOR = {"w": (41.25, 84.25), "nw": (64.0, 76.25), "n": (85.5, 85.25), "ne": (84.0, 97.25),
           "e": (75.75, 101.9), "se": (64.0, 106.0), "s": (52.1, 101.9), "sw": (36.5, 96.25)}
 
-LEN_A, LEN_B = 10, 8
+LEN_A, LEN_B = 8, 10
+JOINT = float(LEN_A)
 
 # ------------------------------------------------------------------ variants
 BASE = dict(
@@ -64,7 +67,7 @@ BASE = dict(
     z_bot=1.0,         # skirt bottom, px
     z_top=14.0,        # roof crown, px
     nose=0.06, tail=17.94,
-    joint=(9.80, 10.20),
+    joint=(JOINT - 0.20, JOINT + 0.20),
     rake=0.62,         # windscreen set-back at its top, carunits (measured ~0.3)
     nose_plan=0.7,     # plan radius of the nose corners (measured ~0.55)
     tail_plan=0.45,
@@ -86,14 +89,14 @@ VARIANTS = {
     "darkroof": dict(roof_top=0x007B94),
 }
 
-DOORS_A = [(2.30, 3.40), (6.20, 7.20), (8.30, 9.30)]
-DOORS_B = [(12.70, 13.80), (16.55, 17.55)]
-BOGIES = [4.8, 11.8, 16.0]
+DOORS_A = [(0.87, 1.87), (4.45, 5.46), (6.41, 7.43)]
+DOORS_B = [(11.10, 12.18), (16.01, 17.10)]
+BOGIES = [3.18, 9.71, 14.65]
 # window pillars (u): the right side has big panes between the doors, the left
-# side (no doors) an even rhythm of ~1.25 carunits
-PILLARS_R = [4.8, 11.45, 15.2]
-PILLARS_L = [3.2, 4.45, 5.7, 6.95, 8.2, 9.45, 11.4, 12.6, 13.8, 15.0, 16.2]
-PANTO_U = 3.6
+# side (no doors) 6 bays on the front section and 7 on the rear
+PILLARS_R = [3.03, 9.68, 13.40, 14.69]
+PILLARS_L = [2.03, 3.16, 4.29, 5.42, 6.55, 9.59, 10.85, 12.11, 13.37, 14.63, 15.90]
+PANTO_U = 2.73
 
 
 def build(p):
@@ -133,7 +136,7 @@ def build(p):
 
     def bellows(u, v, zs):
         f = cross(v, zs, w=W - 0.05, top=zt - 0.22, bot=zb + 0.1, r=rs * 0.8)
-        return np.maximum(f, np.abs(u - 10.0) - (j1 - j0) / 2.0 - 0.02)
+        return np.maximum(f, np.abs(u - JOINT) - (j1 - j0) / 2.0 - 0.02)
 
     def wheels(u, v, zs):
         d = np.min([np.abs(u - b) for b in BOGIES], axis=0) - 0.8
@@ -155,8 +158,10 @@ def build(p):
         zone = np.where(win, np.where(pill, "pillar", "glass"), zone)
         if cab:
             # cab side: black mask over the window band, the driver's window in it
-            cabm = (u < 1.95) & (z >= zf1 - 0.4) & (z < zwt + 0.3)
-            dwin = (u > 0.55) & (u < 1.75) & (z >= 7.0) & (z < 11.0)
+            # (up to the first door on the right, a little further on the left)
+            cab_end = np.where(v > 0, DOORS_A[0][0] - 0.01, 1.3)
+            cabm = (u < cab_end) & (z >= zf1 - 0.4) & (z < zwt + 0.3)
+            dwin = (u > 0.35) & (u < cab_end - 0.08) & (z >= 7.0) & (z < 11.0)
             zone = np.where(cabm, np.where(dwin, "cabglass", "mask"), zone)
         if tail_end:
             tm = (u > 17.15) & (z >= zw1) & (z < zwt)
@@ -216,10 +221,10 @@ def build(p):
     solids = [
         Solid(section_a, zone_a, "A"),
         Solid(section_b, zone_b, "B"),
-        Solid(lambda u, v, zs: np.maximum(bellows(u, v, zs), u - 10.0), zone_bellows, "A"),
-        Solid(lambda u, v, zs: np.maximum(bellows(u, v, zs), 10.0 - u), zone_bellows, "B"),
-        Solid(lambda u, v, zs: np.maximum(wheels(u, v, zs), u - 10.0), lambda P: np.full(len(P["u"]), "wheel", dtype=object), "A"),
-        Solid(lambda u, v, zs: np.maximum(wheels(u, v, zs), 10.0 - u), lambda P: np.full(len(P["u"]), "wheel", dtype=object), "B"),
+        Solid(lambda u, v, zs: np.maximum(bellows(u, v, zs), u - JOINT), zone_bellows, "A"),
+        Solid(lambda u, v, zs: np.maximum(bellows(u, v, zs), JOINT - u), zone_bellows, "B"),
+        Solid(lambda u, v, zs: np.maximum(wheels(u, v, zs), u - JOINT), lambda P: np.full(len(P["u"]), "wheel", dtype=object), "A"),
+        Solid(lambda u, v, zs: np.maximum(wheels(u, v, zs), JOINT - u), lambda P: np.full(len(P["u"]), "wheel", dtype=object), "B"),
     ]
 
     # pantograph: knee trailing, dark arms, 2-px head bar

@@ -17,9 +17,10 @@ display:
 # section on one bogie, rear on two), 100 % low floor, unidirectional, 5 double
 # doors on the right side only (3 + 2), 60 seated + 140 standing, 4 x 100 kW,
 # 80 km/h, 36.8 t.
-# Sections 10 + 8 carunits: the joint sits ~14.3 m behind the nose (perspective
-# fit on photos of 1753, 1766, 1768), rear section ~12.3 m. Payload, weight and
-# costs are the car's totals split by length.
+# Sections 8 + 10 carunits: on a near-orthographic side photo of 1760 the joint
+# sits 12.4 m behind the nose (front section, 3 doors, one bogie) and the rear
+# section is 14.25 m (2 doors, two bogies). Payload, weight and costs are the
+# car's totals split by length.
 # Sprites: original model rendered by tools/tramrender/dpo_39t.py on the field
 # raymarcher (fieldrender.py): rounded nose with raked windscreen, black mask
 # and cap, LED headlights, rounded roof shoulders, DPO palette from
@@ -35,30 +36,6 @@ vehicles:
     prev: []
     next: ["39T_2"]
     fields:
-      cost: 50000
-      payload: 111
-      speed: 80
-      weight: 21
-      runningcost: 28
-      fixed_cost: 111
-      intro_year: 2021
-      intro_month: 10
-      retire_year: 2080
-      retire_month: 1
-      waytype: schiene_tram
-      freight: Passagiere
-      length: 10
-      engine_type: electric
-      power: 200
-
-  - id: "39T_2"
-    role_en: "rear section"
-    role_cs: "zadní díl"
-    row: 1
-    head: false
-    prev: ["39T"]
-    next: []
-    fields:
       cost: 40000
       payload: 89
       speed: 80
@@ -72,6 +49,30 @@ vehicles:
       waytype: schiene_tram
       freight: Passagiere
       length: 8
+      engine_type: electric
+      power: 200
+
+  - id: "39T_2"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    prev: ["39T"]
+    next: []
+    fields:
+      cost: 50000
+      payload: 111
+      speed: 80
+      weight: 21
+      runningcost: 28
+      fixed_cost: 111
+      intro_year: 2021
+      intro_month: 10
+      retire_year: 2080
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 10
       engine_type: electric
       power: 200
 

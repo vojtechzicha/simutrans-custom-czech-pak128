@@ -25,9 +25,9 @@ T3R.PV / T3R.EV, the DPO 26Tr / 27Tr partial-trolleybus variants. Their
 
 ## Redraws and repaints
 
-- [ ] DPO **Stadler Tango NF2 (nOVA)**: refresh the art (the user finds it dated). Wikimedia
-  Commons "20230422 Skoda 39T DPO Vystaviste - U hradu 01.jpg" is in fact a nOVA,
-  side-on and near orthographic: use it for the section lengths and doors.
+- [ ] DPO **Stadler Tango NF2 (nOVA)**: refresh the art (the user finds it dated). Layout
+  reference: the Stadler type sketch on Commons ("Stadler DPO nOVA.png", doors 2 + 2,
+  3 bogies) and the side-on photo of 1727.
 - [ ] DPO trams: repaint every `dpotyrkysova` tram sheet in the palette of
   `tools/tramrender/dpo_palette.py` (roof `44C1E4` instead of `007B94`), as on the
   39T. Open: whether the DPO buses and trolleybuses get the same roof.
