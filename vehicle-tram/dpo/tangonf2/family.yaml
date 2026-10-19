@@ -1,11 +1,10 @@
 agency: DPOstrava
 type: "TangoNF2"
-# Sprites were extracted from the compiled upstream pak with their tile
-# placement baked in, so no extra shift (the default [0, 4] sank them 4 px).
+# The sprites carry the native DPO tram placement, so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: TommPa9
+copyright: vojtechzicha
 
 display:
   agency_en: "DPO"
@@ -13,9 +12,12 @@ display:
   family_en: "Stadler Tango NF2"
   family_cs: "Stadler Tango NF2"
 
-# Auto-extracted from CZ-vehicle-tram.pak via tools/pak_extract.py families.
-# Numeric fields come from the upstream VHCL payload; service dates were
-# checked against the 2025–2026 DPO roster.
+# Stadler Tango NF2 "nOVA", DPO 1701-1740: 24.9 m, two sections, one-way,
+# 4 double doors on the right side only, 3 bogies. Sections 9 + 8 carunits
+# (front 13.8 m, rear 11.1 m, from the Stadler type sketch). Economy and
+# capacity are the upstream CZ-Ostrava-TangoNF2 totals split by length.
+# Sprites: original model rendered by tools/tramrender/dpo_tango.py on
+# fieldtram.py (the 39T's two-section model), DPO palette from dpo_palette.py.
 
 vehicles:
   - id: "TangoNF2"
@@ -27,19 +29,19 @@ vehicles:
     prev: []
     next: ["TangoNF2_2"]
     fields:
-      cost: 38600
-      payload: 103
+      cost: 40900
+      payload: 88
       speed: 80
-      weight: 19
+      weight: 20
       runningcost: 22
-      fixed_cost: 91
+      fixed_cost: 79
       intro_year: 2018
       intro_month: 1
       retire_year: 2060
       retire_month: 1
       waytype: schiene_tram
       freight: Passagiere
-      length: 8
+      length: 9
       engine_type: electric
       power: 315
 
@@ -52,19 +54,19 @@ vehicles:
     prev: ["TangoNF2"]
     next: []
     fields:
-      cost: 38600
-      payload: 63
+      cost: 36300
+      payload: 78
       speed: 80
-      weight: 19
+      weight: 18
       runningcost: 20
-      fixed_cost: 58
+      fixed_cost: 70
       intro_year: 2018
       intro_month: 1
       retire_year: 2060
       retire_month: 1
       waytype: schiene_tram
       freight: Passagiere
-      length: 6
+      length: 8
       engine_type: electric
       power: 315
 
