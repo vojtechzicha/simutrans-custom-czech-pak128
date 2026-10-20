@@ -1,7 +1,7 @@
 # TODO
 
 Open work only. What ships is listed in [`README.md`](README.md); livery colours
-are in [`liveries.md`](liveries.md). Last checked 2026-10-10.
+are in [`liveries.md`](liveries.md). Last checked 2026-10-20.
 
 ## Art still borrowed or shared
 
@@ -14,8 +14,11 @@ T3R.PV / T3R.EV. Their
 
 ## Missing types and liveries
 
-- [ ] ČD **841.3** in Liberecký kraj colours, when the cars start in December 2026.
-- [ ] ČD **690.0** battery units, when passenger service starts in 2027.
+- [ ] ČD **841.3** in Liberecký kraj colours, when the 9 ex-SWEG cars start on
+  13 Dec 2026 (Frýdlant lines): reuse the 840 `libereckykraj` paint.
+- [ ] ČD **690.0** battery units (Škoda 15Ev5, 15 units) when passenger service starts
+  in early 2027 (S7 Ostrava – Český Těšín – Frýdek-Místek): the 690.2 green-blue-white
+  scheme, 3 doors per side, roof battery boxes along both cars.
 - [ ] Pardubický kraj (IREDO, shipped 2026-10-20): the one-off new bodies Mercedes-Benz
   Citaro C2 LE Ü, Intouro II ME (CAR-TOUR white-orange), Setra S 419 UL (also 15 for
   PID) and Iveco Feniksbus Suburban P; the subcontract stand-ins in other paint
@@ -39,13 +42,11 @@ T3R.PV / T3R.EV. Their
 
 ## Re-check against new photos
 
-- [ ] DPMHK **32Tr** (12 m): no side photo existed, so its yellow stripe ahead of
-  the rear axle is inferred from the 33Tr. Check once the cars run (from
-  October 2026).
-- [ ] Arriva **845**: the window band differs between units (945.107 / 945.205
-  dark, 845.301 / 845.317 blue pillars); the drawing uses blue pillars.
-- [ ] GW Train Regio: further IDESKA repaints of the Šumava RS1s, and whether
-  841 278 gets a livery (TRD silver now).
+- [ ] DPMHK **32Tr**: no photo of the left side yet (checked 2026-10-20; the right
+  side and the 33Tr's both sides match the drawing).
+- [ ] GW Train Regio: further IDESKA repaints of the Šumava RS1s, 841 278 (TRD
+  silver, at Hranice since April 2026, due for IDESKA), and whether 841 275 has the
+  IDESKA decals yet (the drawing of `oranzovozelena` shows them).
 - [ ] The ČD 848 (Lubak91's ZSSK 840 art) looks unlike the Arriva 848 render.
 
 ## Build limitations

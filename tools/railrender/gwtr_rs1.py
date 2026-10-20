@@ -27,7 +27,9 @@ lowest body row, k 11 the skirt under the cabs.
 
 Liveries: plzenskykraj (IDPK blue, white cab "C", yellow doors, swoosh),
 ideska (Jihocesky kraj dark green with bright-green bars, since 12/2025) and
-oranzovozelena (GWTR orange with green cab ends, as the RegioSprinter).
+oranzovozelena (GWTR orange with green cab ends, as the RegioSprinter, with the
+IDESKA decals since summer 2026). The IDESKA design reads the same from either
+side as seen, so it is mirrored on the car's right-hand side (_seen).
 
 Regenerate with `python tools/railrender/gwtr.py 841_2 [--preview DIR]`.
 """
@@ -457,9 +459,51 @@ def _pk_swoosh(c):
     return None
 
 
+def _seen(c):
+    """The IDESKA design follows the observer, not the cab ends: from either
+    side the low band is at the screen-left end and the hook at the
+    screen-right end (841 277 both sides, the decals on 841 271 / 273 / 276).
+    On the car's right-hand side (n, ne, e) the front nose is on screen-right,
+    so the design is mirrored there: u then runs left to right as seen."""
+    if c["side"] == "R":
+        return dict(c, u=1.0 - c["u"], side="L")
+    return c
+
+
+def _ideska_bars(c):
+    """Bright-green bars of the IDESKA design on the side (c from _seen):
+    lower bar with a rounded downturn at the left door, upper bar turning up
+    into the roofline at the right door."""
+    u, k = c["u"], c["k"]
+    if (k == 9 and 0.325 <= u <= 0.575) or (k == 10 and 0.316 <= u <= 0.332):
+        return True
+    return (k == 1 and 0.440 <= u <= 0.678) or (k == 0 and 0.668 <= u <= 0.684)
+
+
+def _ideska_glass(c):
+    """Printed on the glass: the white-green road "E" at the cab end of both
+    end windows and the white bar across the middle windows."""
+    u, k = c["u"], c["k"]
+    e = (WIN_FRONT[0] - 0.005 <= u <= WIN_FRONT[0] + 0.028) or (WIN_REAR[1] - 0.028 <= u <= WIN_REAR[1] + 0.005)
+    if e and k in (4, 6):
+        return ("flat", ID_WHITE)
+    if e and k == 5:
+        return ("flat", ID_BRIGHT)
+    if k == 5 and 0.38 <= u <= 0.62:
+        return ("flat", ID_WHITE)
+    return None
+
+
+def _ideska_word(c):
+    return lettering(c, "IDESKA", 0.105, 0.19, 8, 9) or lettering(c, "IDESKA", 0.81, 0.895, 8, 9)
+
+
 def ideska(c):
-    """End A (low green band from the nose) is the front, end B (green hook
-    under the roofline) the rear, as on 841 277."""
+    """Jihocesky kraj IDESKA in full paint (841 277, 272, 279): teal, low
+    green band from the nose at the screen-left end, green hook under the
+    roofline at the screen-right end (see _seen)."""
+    if c["face"] != END:
+        c = _seen(c)
     f, u, k, w = c["face"], c["u"], c["k"], c["w"]
     front = u < 0.5
     if f == ROOF:
@@ -467,7 +511,7 @@ def ideska(c):
             return None
         if c["box"]:
             return ID_BRIGHT                               # bright-green tops of the roof boxes
-        if k == -1 and (0.665 <= u <= 0.685 or 0.905 <= u <= 0.925):
+        if k == -1 and (0.668 <= u <= 0.684 or 0.949 <= u <= 0.964):
             return ID_BRIGHT                               # bars turning up into the roofline
         return ID_DARK
     if f == END:
@@ -484,33 +528,20 @@ def ideska(c):
         if not c["glass"]:
             return None
     if c["glass"]:
-        # printed on the glass: the road "E" at the cab end of both end
-        # windows, the white bar across the middle windows
-        e = (WIN_FRONT[0] - 0.005 <= u <= WIN_FRONT[0] + 0.028) or (WIN_REAR[1] - 0.028 <= u <= WIN_REAR[1] + 0.005)
-        if e and k in (4, 6):
-            return ("flat", ID_WHITE)
-        if e and k == 5:
-            return ("flat", ID_BRIGHT)
-        if k == 5 and 0.39 <= u <= 0.63:
-            return ("flat", ID_WHITE)
-        return None
+        return _ideska_glass(c)
     if c["door"]:
         return ID_BRIGHT
     if in_window(c):
         return ("dim", BLACK)
-    # front end section: low band from the nose, sweeping down round it
-    if front and ((9 <= k <= 10 and u <= 0.098) or (k == 11 and u < NOSE)):
+    # left end section: low band from the nose, sweeping down round it
+    if front and ((9 <= k <= 10 and u <= 0.08) or (k == 11 and u < NOSE)):
         return ID_BRIGHT
-    # rear end section: hook under the roofline next to the cab
-    if not front and ((1 <= k <= 2 and 0.875 <= u <= 0.915) or (k == 0 and 0.905 <= u <= 0.925)):
+    # right end section: hook under the roofline, rising along the cab joint
+    if not front and ((1 <= k <= 2 and 0.926 <= u <= 0.953) or (k == 0 and 0.949 <= u <= 0.964)):
         return ID_BRIGHT
-    # middle: lower bar with a rounded downturn at the front door, upper bar
-    # turning up into the roofline at the rear door
-    if (k == 9 and 0.325 <= u <= 0.585) or (k == 10 and 0.318 <= u <= 0.336):
+    if _ideska_bars(c):
         return ID_BRIGHT
-    if (k == 1 and 0.455 <= u <= 0.675) or (k == 0 and 0.665 <= u <= 0.685):
-        return ID_BRIGHT
-    if lettering(c, "IDESKA", 0.118, 0.222, 8, 9) or lettering(c, "IDESKA", 0.778, 0.882, 8, 9):
+    if _ideska_word(c):
         return ID_WHITE
     return ID_DARK
 
@@ -525,6 +556,10 @@ def _gw_boundary(k):
 
 
 def oranzovozelena(c):
+    """GWTR orange with green cab ends, carrying the IDESKA decal set since
+    summer 2026 (841 271, 273, 276): the IDESKA wordmark in place of the big
+    GW TRAIN, the green bars and the white window bar, laid out as seen
+    (_seen), as on the IDESKA cars."""
     f, k, w = c["face"], c["k"], c["w"]
     if f == ROOF:
         if c["fixed"]:
@@ -535,6 +570,8 @@ def oranzovozelena(c):
             return GW_GREEN                                # green cab dome
         if w < 0.095 and k >= -2:
             return GW_LIME                                 # crescent reaching the roof edge
+        if k == -1 and 0.668 <= _seen(c)["u"] <= 0.684:
+            return ID_BRIGHT                               # upper bar turning up into the roofline
         return GW_ROOF
     if f == END:
         if c["fixed"]:
@@ -551,13 +588,15 @@ def oranzovozelena(c):
             return GW_ORANGE
         if not c["glass"]:
             return None
+    sc = _seen(c)
     if c["glass"]:
-        return None
+        return _ideska_glass(sc)
     if c["door"]:
         return GW_GREEN
-    if k >= 8 and (lettering(c, "GW TRAIN", 0.07, 0.225, 8, 9, thr=0.3)
-                   or lettering(c, "GW TRAIN", 0.775, 0.93, 8, 9, thr=0.3)):
-        return GW_WHITE                                    # big white wordmark on the lower cab side
+    if k >= 8 and _ideska_word(sc):
+        return GW_WHITE                                    # IDESKA wordmark on the lower cab side
+    if _ideska_bars(sc) and not in_window(c):
+        return ID_BRIGHT
     b = _gw_boundary(k)
     if k <= 8 and w < b:
         return GW_GREEN

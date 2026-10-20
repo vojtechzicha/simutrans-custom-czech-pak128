@@ -485,9 +485,8 @@ class Veh:
         return GLASS2
 
     def logo_px(self, p, u, right):
-        """crowned G on the window band ahead of the yellow stripe (L2): a yellow
-        crown (bar + three dots) over a big white G; a second, yellow G overlaps it
-        on the door side"""
+        """crowned G on the window band right over the yellow stripe (L2): a yellow
+        crown (bar + three dots) over a big white G, as wide as the stripe"""
         a, b = self.logo
         z = p.z
         if not (a <= u < b):
@@ -893,11 +892,11 @@ MODELS = {
     "ns18": mk(NS18, pods=[(1.80, 3.60, 0.22, 0.80, "ac"), (12.2, 13.8, 0.20, 0.75, "ac")]),
     # Skoda 32Tr SOR (NS 12 body, traction battery), 2026 design
     "32tr": mk(NS12, pods=[(1.80, 6.60, 0.24, 0.95, "fair"), (8.70, 9.50, 0.14, 0.60, "fair")],
-               poles=(7.10, 0.30), stripe=(7.20, 7.95), logo=(6.25, 7.10)),
+               poles=(7.10, 0.30), stripe=(7.35, 7.95), logo=(7.25, 8.00)),
     # Skoda 33Tr SOR (NS 18 body, traction battery), 2026 design; poles on the
     # front section above the middle door
     "33tr": mk(NS18, pods=[(1.80, 5.40, 0.24, 0.95, "fair"), (12.0, 14.5, 0.20, 0.85, "fair")],
-               poles=(6.20, 0.30), stripe=(7.20, 7.95), logo=(6.25, 7.10)),
+               poles=(6.20, 0.30), stripe=(7.35, 7.95), logo=(7.25, 8.00)),
     # Skoda 30Tr SOR (SOR TNB 12 body): equipment fairing over the front 2/3 of
     # the roof, pole base near the rear axle, silver retriever rack behind it
     "30tr": mk(NB12, pods=[(1.60, 7.80, 0.30, 1.05, "fair")], poles=(8.40, 0.30),

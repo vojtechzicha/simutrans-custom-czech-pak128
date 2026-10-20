@@ -181,6 +181,22 @@ front. Cream `232, 224, 196`, red `184, 36, 60`.
 
 ---
 
+## IDESKA (`ideska`) — GW Train Regio 841.2, from 12/2025
+
+Jihočeský kraj IDS scheme on the Šumava RS1s (841 277, 272, 279): **teal body**
+`30, 107, 92`, **bright-green doors and roof boxes** `61, 160, 52`, black window
+frames, plain teal ends with a yellow strip on the bottom fairing. The side design
+reads the same from either side **as seen**, so each cab end has the low band on
+one side and the hook on the other: a low green band from the nose at the
+screen-left end, a white-green road "E" and the white IDESKA wordmark on each end
+section, a lower bar rising from the bottom just right of the left door, a white
+bar across the middle windows, an upper bar turning up into the roofline just left
+of the right door, and a green hook under the roofline at the screen-right end.
+Since summer 2026 the orange GWTR cars 271, 273 and 276 (`oranzovozelena`) carry the
+same decal set (bars, window bar, E, IDESKA in place of the big GW TRAIN).
+
+---
+
 ## Liberecký kraj (`libereckykraj`) — 840, from 2026
 
 IDOL red-white: **white body**, **red doors**, a **red bottom band sweeping up into

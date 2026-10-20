@@ -48,7 +48,7 @@ import railkit as R
 from railkit import Paint, Part
 from render import DIRS
 
-LIVERIES = ["arrivamodra", "tyrkysovokremova", "dbcervena"]
+LIVERIES = ["arrivamodra", "arrivamodrabezpruhu", "tyrkysovokremova", "dbcervena"]
 GWTR_LIVERIES = ["oranzovozelena", "dukzelenooranzova"]
 
 PX = 0.375                          # metres per model px (z)
@@ -104,14 +104,14 @@ EXHAUST = Paint(0x3E4145, top=0x2A2C2F)
 def livery(name):
     """Colour table + flags of a livery; geometry never depends on it."""
     if name == "arrivamodra":
-        # Arriva Blue (2019-): sky blue body, individual windows on blue
-        # pillars, anthracite panel round the window behind the cab door, cab
-        # door and front mask, slanted white + pale-blue stripe behind the cab door,
-        # lime skirt edge, white "arriva"; light-grey roof with AC boxes
+        # Arriva Blue (2019-): sky blue body, a continuous anthracite window
+        # band from the cab door to the gangway, anthracite cab door and front
+        # mask, slanted white + pale-blue stripe over the band behind the cab
+        # door, lime skirt edge, white "arriva"; light-grey roof with AC boxes
         blue = Paint(0x2DA5D8)
         anth = Paint(0x3A4046)
         return dict(
-            name=name, body=blue, band=Paint(0x464D54), door=anth, doorframe=anth,
+            name=name, body=blue, band=Paint(0x5A6168), door=anth, doorframe=anth,
             innerdoor=anth, word_z=(1.30, 1.66),
             roofside=blue, roof=Paint(0x2DA5D8, top=0xB0B6BB),
             mask=Paint(0x464C54), masktop=Paint(0x464C54, top=0x52585F),
@@ -119,6 +119,17 @@ def livery(name):
             stripe=Paint(0xF1F3F4), stripe2=Paint(0x90D0EC),
             beam=BLACK, skirt=Paint(0x3A3D40), skirtedge=Paint(0xC9DB3E),
             ac=True, lowband=None)
+    if name == "arrivamodrabezpruhu":
+        # unit 118 (845.118 + 945.118), Arriva Blue since 2019 but without the
+        # anthracite band, cab doors and mask and without the stripes: sky
+        # blue all over, individually framed windows, blue doors with dark gaps
+        blue = Paint(0x2DA5D8)
+        gap = Paint(0x1F5E7C)
+        d = livery("arrivamodra")
+        d.update(name=name, band=None, door=blue, doorframe=blue, innerdoor=blue,
+                 cabframe=gap, innerframe=gap, mask=blue,
+                 masktop=Paint(0x2DA5D8, top=0x5DBCE3))
+        return d
     if name == "tyrkysovokremova":
         # "Limetka" 2012-2019: turquoise body, lime cab + cab door, cream sweep
         # from the roof behind the cab down round the door, black mask, lime
@@ -345,10 +356,12 @@ class Car:
                 return C["stripe"]
             if pa <= m < wa:
                 return C["stripe2"]
-            # anthracite panel only round the vestibule window, between the cab
-            # door and the stripe; the saloon windows sit on blue pillars
-            if Z_B0 <= z <= Z_B1 and CABDOOR[1] - 0.05 <= m < pa:
+            # anthracite window band from the cab door to the gangway, under
+            # the stripes
+            if Z_B0 <= z <= Z_B1 and CABDOOR[1] - 0.05 <= m:
                 return C["band"]
+            return C["body"]
+        if nm == "arrivamodrabezpruhu":
             return C["body"]
         if nm == "tyrkysovokremova":
             if m < CABDOOR[0]:
@@ -372,7 +385,7 @@ class Car:
         if z >= ZS - 0.02:
             return C["roofside"]
         # doors (cab door both sides, inner door on the car's own left)
-        doors = [(CABDOOR, C["door"], None)]
+        doors = [(CABDOOR, C["door"], C.get("cabframe"))]
         if cs == "L":
             doors.append((INNERDOOR, C["innerdoor"], C.get("innerframe")))
         for ((a, b), leaf, frame) in doors:

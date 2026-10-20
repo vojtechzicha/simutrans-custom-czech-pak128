@@ -13,7 +13,8 @@ display:
 
 # GW Train Regio class 841.2: second-hand ADtranz / Stadler Regio-Shuttle RS1
 # railcars (DB class 650, built 1998-2005), ex-Bodensee-Oberschwaben-Bahn
-# (841 263-269) and ex-trans regio / NEB / Transdev / Erfurter Bahn
+# (six cars: 841 263, 265-269; the seventh, 650 354, burned in 2021 and is a
+# parts donor, so there is no 841 264) and ex-trans regio / NEB / Transdev / Erfurter Bahn
 # (841 270-279), adapted at ČMŽO-E Hranice and delivered 2021-25. 16 cars in
 # 2026: Pošumaví (P11 Strakonice - Klatovy, P23 Klatovy - Domažlice, Dec
 # 2023 - Dec 2033) 8 cars, Šumava 8 cars. 25.5 m, 2 × 257-265 kW, 120 km/h,
@@ -29,10 +30,15 @@ display:
 #                   swoosh, the 8 Pošumaví cars.
 #   ideska          IDESKA (Jihočeský kraj) dark green with bright-green
 #                   stripes, since Dec 2025 (841 277, 272, 279); all 8
-#                   Šumava cars are to follow within two years.
-#   oranzovozelena  GWTR orange with green cab ends (841 271, 273, 275, 276).
-# Left out: the TRD silver of 841 278 (in the works since April 2026, due for
-# IDESKA).
+#                   Šumava cars are to follow within two years. The design
+#                   reads the same from either side as seen (low band at the
+#                   left end, hook at the right end), photos of 2025-26.
+#   oranzovozelena  GWTR orange with green cab ends (841 271, 273, 275, 276),
+#                   with the IDESKA decal set since summer 2026 (271, 273,
+#                   276): IDESKA wordmark in place of the big GW TRAIN, green
+#                   bars, white window bar.
+# Left out: the TRD silver of 841 278 (in the works at Hranice since April
+# 2026, due for IDESKA).
 
 vehicles:
   - id: "841.2"

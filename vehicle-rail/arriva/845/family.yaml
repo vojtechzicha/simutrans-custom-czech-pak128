@@ -41,13 +41,17 @@ display:
 # checked on 845.104 / 845.301 / 845.317 / 945.107 / 945.318 photos.
 #
 # Liveries (all worn in Arriva service):
-#   arrivamodra       Arriva Blue 2019-, ≈47 units: sky blue with individual
-#                     windows on blue pillars, anthracite panel round the window
-#                     behind the cab door, anthracite cab doors / front mask,
-#                     slanted white + pale-blue stripe behind that panel, lime
-#                     skirt edge, white
+#   arrivamodra       Arriva Blue 2019-, ≈47 units: sky blue with a continuous
+#                     anthracite window band from the cab door to the gangway
+#                     on both cars (survey of the newest photo of every unit,
+#                     2026-10-20), anthracite cab doors / front mask, slanted
+#                     white + pale-blue stripe over the band behind the cab
+#                     door, lime skirt edge, white
 #                     "arriva"; light-grey roof with the AC retrofit (cab box +
 #                     saloon box per car, 945.107 2026 photo) and the exhaust.
+#   arrivamodrabezpruhu  unit 118 only (photos 2021-2024): the same sky blue
+#                     all over, without the band, the anthracite doors and mask
+#                     and the stripes; individually framed windows.
 #   tyrkysovokremova  turquoise-cream "Limetka" 2012-2019, still on 845.101,
 #                     .102, .104, .201: turquoise, lime cab front/sides and cab
 #                     doors, cream sweep from the roof behind the cab down round
@@ -124,6 +128,9 @@ liveries:
   - color: arrivamodra
     name_en: "Arriva blue"
     name_cs: "Arriva modrá"
+  - color: arrivamodrabezpruhu
+    name_en: "Arriva blue without stripes"
+    name_cs: "Arriva modrá bez pruhů"
   - color: tyrkysovokremova
     name_en: "turquoise-cream"
     name_cs: "tyrkysovo-krémová"
