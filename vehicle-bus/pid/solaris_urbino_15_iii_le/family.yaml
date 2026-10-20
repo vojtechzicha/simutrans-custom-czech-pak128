@@ -1,0 +1,54 @@
+agency: PID
+type: "Urbino_15_III_LE"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Solaris Urbino 15 III LE"
+  family_cs: "Solaris Urbino 15 III LE"
+
+# Solaris Urbino 15 III LE (three axles, doors 1-2-0), drawn on the DPO Urbino
+# 15 III body: 1 bus (Lutan 1845, 2014; green until 11/2024) in PID 2021 grey-
+# red (pidsedocervena).
+# Sprite: original box-model render (vojtechzicha): the Urbino 15 III model of
+# tools/busrender/dpo_solaris.py painted by pid.PSolaris in the PID
+# grey-red.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Urbino_15_III_LE"
+    display_id: "Urbino 15 III LE"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 600000
+      payload: 110
+      speed: 80
+      weight: 13
+      runningcost: 24
+      fixed_cost: 120
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 260
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Lutan"
+    name_cs: "PID šedo-červená · Lutan"

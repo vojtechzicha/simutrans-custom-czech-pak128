@@ -25,8 +25,7 @@ T3R.PV / T3R.EV. Their
   Crossways) are left out. CAR-TOUR's two Setra S 415 LE on BusLine KHK line 611109
   are the white `bilapk` object, which names CAR-TOUR.
 - [ ] **PID regional** (`VZ-PID-bus`): still missing the one-off bodies Integro II L
-  (2, Arriva Střední Čechy), Citaro C2 K, Citywide II LE 12,1M and Urbino 15 III LE
-  (1 each, Lutan). The Vehixel vans and the trikolóra Rošero First are registered
+  (2, Arriva Střední Čechy) and Scania Citywide II LE 12,1M (1, Lutan). The Vehixel vans and the trikolóra Rošero First are registered
   but were not seen in October 2026, so they get no object (research: session
   7bd4267d scratchpad research/pid_regional/).
 - [ ] Havířovsko III (kraj contract, Transdev Slezsko): 4 hydrogen SOR NSF 12 + 9

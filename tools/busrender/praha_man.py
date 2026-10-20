@@ -1081,6 +1081,32 @@ class ArticCitaro(ArticNewGen, CitaroC2):
     pass
 
 
+class CitaroC2K(CitaroC2):
+    """Mercedes-Benz Citaro C2 K (the short city Citaro): 10.63 m, overhangs 2.805 /
+    3.425 m, wheelbase 4.40 m, doors 2-2-2 (Lutan 1820 since 2025), A/C box on the
+    roof, engine tower in the last left window bay."""
+    L = 10.63
+    axles = [2.805, 7.205]
+    doors_r = [(0.28, 1.55), (4.55, 5.80), (8.10, 9.35)]
+    posts_r = [3.05, 4.30, 6.60, 9.85]
+    posts_l = [1.45, 2.95, 4.45, 5.95, 7.45, 8.95]
+    reds = [(1.55, 3.65), (6.25, 8.10)]
+    sidedisp = (2.00, 3.20)
+    hatches = [(5.00, 5.55)]
+    louvre = (9.45, 10.50)
+    LOGOS = [(3.90, 4.50), (8.50, 9.10)]
+
+    def __init__(self, view, livery="A", variant=None):
+        super().__init__(view, livery, variant)
+        self.roof_parts = [dict(kind="ac", u0=3.60, u1=6.40, inset=0.30, h0=0.0, h1=0.28)]
+
+    def lower_extra(self, face, u, h, pu, ph, right):
+        if self.liv == "A" and not self.is_red(u) and 0.72 <= h < 0.72 + ph and any_in(u, self.LOGOS) \
+                and not (right and any_in(u, self.doors_r)):
+            return self.c(RED_A, face)                 # red "pid" lettering
+        return None
+
+
 class CitaroC2LEU(CitaroC2):
     """Mercedes-Benz Citaro C2 LE Ü, the low-entry interurban: 12.135 m, overhangs
     2.805 / 3.485 m, wheelbase 5.845 m, doors 1-2-0, the window line raised

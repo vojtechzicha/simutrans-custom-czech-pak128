@@ -1,0 +1,53 @@
+agency: PID
+type: "Citaro_C2_K"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Mercedes-Benz Citaro C2 K"
+  family_cs: "Mercedes-Benz Citaro C2 K"
+
+# Mercedes-Benz Citaro C2 K, the short city Citaro (10.63 m, doors 2-2-2): 1 bus
+# (Lutan 1820, 2014; white until 3/2025) in PID 2021 grey-red (pidsedocervena).
+# Sprite: original box-model render (vojtechzicha): praha_man.CitaroC2K, the
+# Citaro C2 face on the NewGen box of tools/busrender/praha_man.py, PID
+# grey-red.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Citaro_C2_K"
+    display_id: "Mercedes-Benz Citaro C2 K"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 560000
+      payload: 75
+      speed: 80
+      weight: 10
+      runningcost: 20
+      fixed_cost: 110
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 220
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Lutan"
+    name_cs: "PID šedo-červená · Lutan"

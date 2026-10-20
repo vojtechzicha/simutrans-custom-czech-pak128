@@ -480,21 +480,22 @@ def _solaris():
     return DS, PSolaris
 
 
-def solaris(model, key, reds, kit=None, **kw):
-    """rows of a dpo_solaris model in a PID livery ("pa" / "pb")"""
+def solaris(model, key, reds, kit=None, lens=None, **kw):
+    """rows of a dpo_solaris model in a PID livery ("pa" / "pb"); lens = the yaml
+    lengths of the sections (default 8 + 6, or 8)"""
     def build():
         DS, PSolaris = _solaris()
         sp = DS.mk(DS.MODELS[model], reds=reds, **kw)
         if kit is not None:
             sp["kit"] = kit
-        lens = [8, 6] if len(sp["cu"]) == 2 else sp["cu"]
+        ls = lens or ([8, 6] if len(sp["cu"]) == 2 else sp["cu"])
         m = PSolaris(sp, key, DS.OPTS)
         rows = []
         for i, l in enumerate(m.cu):
             L = m.sec_len(i)
             tiles = []
             for d in DS.DIRS:
-                o = np.array(DS.H.origin_for(d)) + (4 - lens[i] / 2.0) * DS.H.PER_CU[d]
+                o = np.array(DS.H.origin_for(d)) + (4 - ls[i] / 2.0) * DS.H.PER_CU[d]
                 img, _ = DS.render(d, m.boxes(i), m.tex_for(i), L, o)
                 tiles.append(np.array(img)[:, :, :3].copy())
             rows.append(tiles)
@@ -512,6 +513,15 @@ U18_KIT3 = [dict(a=0.85, b=2.45, h=0.26, hw=0.66, kind="ac"),
 # Urbino 18 IV diesel: the low A/C fairing on the front section, the A/C box on the rear one
 U18_KIT4 = [dict(a=2.30, b=6.20, h=0.30, hw=1.00, kind="fair", rf=1.00, rr=0.30),
             dict(a=12.30, b=13.90, h=0.26, hw=0.85, kind="fair")]
+
+
+def man_single(name, length):
+    """a single-section praha_man body in the PID grey-red, placed by the section rule"""
+    def build():
+        import praha_man as PM
+        row = PM.build_row_rule(getattr(PM, name), "A", PM.V12, length)
+        return [[np.array(t)[:, :, :3].copy() for t in row]]
+    return build
 
 
 def man_10e():
@@ -774,6 +784,23 @@ FAMILIES = dict([
         sprite="original box-model render (vojtechzicha): praha_man.LionsCity10E, the 12C body"
         " of tools/busrender/praha_man.py shortened to 10.575 m with the battery roof, PID"
         " grey-red."),
+    fam("citaro_c2_k", "Citaro_C2_K", "Mercedes-Benz Citaro C2 K", MIDI,
+        f_(560000, 75, 80, 10, 20, 110, 2014, 7, "diesel", 220, 54, smoke=SMOKE),
+        [(A("Lutan"), None)],
+        man_single("CitaroC2K", 7),
+        "Mercedes-Benz Citaro C2 K, the short city Citaro (10.63 m, doors 2-2-2): 1 bus"
+        " (Lutan 1820, 2014; white until 3/2025) in " + GR,
+        sprite="original box-model render (vojtechzicha): praha_man.CitaroC2K, the Citaro C2"
+        " face on the NewGen box of tools/busrender/praha_man.py, PID grey-red."),
+    man("solaris_urbino_15_iii_le", "Urbino_15_III_LE", "Solaris Urbino 15 III LE",
+        T.one("Urbino_15_III_LE", "Urbino 15 III LE", BUS,
+              f_(600000, 110, 80, 13, 24, 120, 2014, 10, "diesel", 260, 54, smoke=SMOKE)),
+        [(A("Lutan"), solaris("u15", "pa", [(1.30, 3.75), (8.90, 11.75)], lens=[10],
+                              doors=[(0.30, 1.20), (5.25, 6.55)], single=[0]))],
+        "Solaris Urbino 15 III LE (three axles, doors 1-2-0), drawn on the DPO Urbino 15 III"
+        " body: 1 bus (Lutan 1845, 2014; green until 11/2024) in " + GR,
+        "original box-model render (vojtechzicha): the Urbino 15 III model of"
+        " tools/busrender/dpo_solaris.py painted by pid.PSolaris in the PID grey-red."),
     man("citaro_c2_gu", "Citaro_C2_GU", "Mercedes-Benz Citaro C2 GÜ",
         T.artic("Citaro_C2_GU", "Citaro C2 GÜ",
                 f_(650000, 80, 80, 11, 23, 118, 2024, 7, "diesel", 0, 54, intro_month=11),
