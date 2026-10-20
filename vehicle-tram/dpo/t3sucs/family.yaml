@@ -1,0 +1,57 @@
+agency: DPOstrava
+type: "T3SUCS"
+# Sprites were extracted from the compiled upstream pak with their tile
+# placement baked in, so no extra shift (the default [0, 4] sank them 4 px).
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "DPO"
+  agency_cs: "DPO"
+  family_en: "Tatra T3SUCS"
+  family_cs: "Tatra T3SUCS"
+
+# Fields copied from the t3 family (Lubak91's CZ-Ostrava-T3 object).
+# The unmodernised T3SUCS as delivered, with the diamond pantograph: the classic
+# look the t3 sheet had until 2026-10, kept as its own object (new name
+# VZ-DPOstrava-T3SUCS-dpomodrozluta-T3SUCS) after t3 became the T3R.P. The
+# last unmodernised T3s (original resistance control with accelerator) left
+# service at the end of 2022 (cs.wikipedia, Tramvajová doprava v Ostravě),
+# hence retire 2023-01.
+# Sprite: the same patched base as t3 (tools/tramrender/dpo_tatra.py): Lubak91's
+# diamond recoloured yellow, black route-number box with an LED, FFFF53
+# headlights, FF211D tail lights, plain cab glass, no brown strip across the
+# window tops, ne / sw on the DPO front anchor.
+
+vehicles:
+  - id: "T3SUCS"
+    # copied from t3 (original pak name CZ-Ostrava-T3); retire date see above
+    role_en: "tram car"
+    role_cs: "tramvajový vůz"
+    row: 0
+    head: false
+    tail: false
+    fields:
+      cost: 840000
+      payload: 110
+      speed: 65
+      weight: 16
+      runningcost: 24
+      fixed_cost: 100
+      intro_year: 1962
+      intro_month: 1
+      retire_year: 2023
+      retire_month: 1
+      waytype: schiene_tram
+      freight: Passagiere
+      length: 11
+      engine_type: electric
+      power: 160
+      gear: 130
+
+liveries:
+  - color: dpomodrozluta
+    name_en: "DPO blue-yellow"
+    name_cs: "DPO modro-žlutá"

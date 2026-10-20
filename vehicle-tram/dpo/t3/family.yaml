@@ -10,12 +10,22 @@ copyright: Lubak91
 display:
   agency_en: "DPO"
   agency_cs: "DPO"
-  family_en: "Tatra T3"
-  family_cs: "Tatra T3"
+  family_en: "Tatra T3R.P"
+  family_cs: "Tatra T3R.P"
 
 # Auto-extracted from CZ-vehicle-tram.pak via tools/pak_extract.py families.
 # Numeric fields come from the upstream VHCL payload; service dates were
 # checked against the 2025–2026 DPO roster.
+# The modernised T3R.P, the T3 that still runs in Ostrava in 2026 (10 cars, in
+# pairs). id and type stay "T3" so the object name VZ-DPOstrava-T3-dpomodrozluta-T3
+# (and savegames using it) is unchanged. The classic unmodernised look is the
+# separate family t3sucs.
+# Sprite: Lubak91's T3 sheet (frozen in tools/tramrender/src/dpo/) patched by
+# tools/tramrender/dpo_tatra.py: yellow single-arm pantograph (TommPa9's T6A5
+# one) about 1/3 back, white A/C box at the front of the roof (photos 983, 994),
+# black LED destination panel, FFFF53 headlights, FF211D tail lights, plain cab
+# glass, no brown strip across the window tops; ne / sw moved onto the DPO front
+# anchor so a pair at length 11 meets.
 
 vehicles:
   - id: "T3"

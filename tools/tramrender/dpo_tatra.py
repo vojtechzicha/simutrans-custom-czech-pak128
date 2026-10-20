@@ -133,8 +133,51 @@ def erase(t, m, fill):
             est[x] = top[left[-1]]
         elif right:
             est[x] = top[right[0]]
+    src = t.copy()
     for y, x in zip(*np.nonzero(m)):
-        t[y, x] = fill if y >= round(est[x]) else BG
+        if y < round(est[x]):
+            t[y, x] = BG
+        elif fill is not None:
+            t[y, x] = fill
+        else:                                   # nearest kept body pixel in the row
+            for dist in range(1, 16):
+                hit = [xx for xx in (x - dist, x + dist) if 0 <= xx < 128 and body[y, xx]]
+                if hit:
+                    t[y, x] = src[y, hit[0]]
+                    break
+
+
+def _frame(d):
+    u = np.array(tk.PER_CU[d], float)
+    a = np.array(tk.PER_CU[DIRS[(DIRS.index(d) + 2) % 8]], float)
+    return u / np.linalg.norm(u), a / np.linalg.norm(a)
+
+
+def roof_coords(t, d, roofcols, px, py):
+    """Position of screen point (px, py) on the roof (colours roofcols) of tile t in
+    view d, as fractions: along the car from the front (0) to the rear end (1),
+    and across the roof at that point."""
+    u, a = _frame(d)
+    ys, xs = np.nonzero(cmask(t, roofcols))
+    s, q = xs * u[0] + ys * u[1], xs * a[0] + ys * a[1]
+    ps, pq = px * u[0] + py * u[1], px * a[0] + py * a[1]
+    fa = (s.max() - ps) / (s.max() - s.min())
+    near = np.abs(s - ps) < 1.5
+    fq = (pq - q[near].min()) / max(1e-6, q[near].max() - q[near].min())
+    return fa, fq
+
+
+def roof_point(t, d, roofcols, fa, fq):
+    """Inverse of roof_coords: the screen point at fractions (fa, fq) of the roof."""
+    u, a = _frame(d)
+    ys, xs = np.nonzero(cmask(t, roofcols))
+    s, q = xs * u[0] + ys * u[1], xs * a[0] + ys * a[1]
+    ps = s.max() - fa * (s.max() - s.min())
+    near = np.abs(s - ps) < 1.5
+    pq = q[near].min() + fq * (q[near].max() - q[near].min())
+    M = np.array([u, a])
+    x, y = np.linalg.solve(M, np.array([ps, pq]))
+    return x, y
 
 
 def transplant(dst, src, m, dx, dy):
@@ -209,6 +252,28 @@ def single_arm(dst, col, dx, dy):
     transplant(dst, t6, m, dx, dy)
 
 
+def t6_base(col):
+    """Screen point where the T6A5 pantograph stands on its roof (centre of its two
+    lowest yellow rows) and its across-the-roof fraction there."""
+    t6 = tk.tile(load_src("t6a5_dpomodrozluta.png"), 0, col)
+    m = panto_mask(t6, T6_PANTO_BOX[col], extra=())
+    ys, xs = np.nonzero(m)
+    sel = ys >= ys.max() - 1
+    bx, by = xs[sel].mean(), ys[sel].mean()
+    t6r = t6.copy()
+    t6r[m] = ROOF                              # the base stands on the roof
+    return bx, by, roof_coords(t6r, DIRS[col], [ROOF], bx, by)[1]
+
+
+def single_arm_at(dst, col, roofcols, fa):
+    """The T6A5 single-arm with its base at fraction fa of dst's roof from the
+    front, at the same place across the roof as on the T6A5."""
+    bx, by, fq = t6_base(col)
+    x, y = roof_point(dst, DIRS[col], roofcols, fa, fq)
+    single_arm(dst, col, int(round(x - bx)), int(round(y - by)))
+    return x, y
+
+
 # ------------------------------------------------------------------ KT8D5R.N1
 KT8_DIAMOND_BOX = {0: (50, 67, 61, 79), 1: (58, 64, 68, 71), 2: (67, 68, 79, 80), 3: (62, 71, 73, 83),
                    4: (56, 74, 68, 85), 5: (58, 82, 68, 86), 6: (57, 74, 69, 85), 7: (47, 71, 58, 83)}
@@ -237,19 +302,19 @@ KT8_REAR_NW = """
 gbRRRRRRRbg
 ggbbbbbbbgg
 ggbdddddbgg
-ggbhgggh.gg
+ggbhggghbgg
 bgbgggggbgb
 wbbgggggbbw
 wwbgggggbww
 owwbbbbbwwo
-Twwwwwwwwwt
+TwwwwwwwwwT
  yryyyyyry
 """
 
 
 def kt8_rear_end(sh):
     t = tk.tile(sh, 2, 1)                                   # nw: the face
-    art(t, 58, 83, KT8_REAR_NW.replace("t", "T").replace("h.", "hb"), KT8_LEGEND)
+    art(t, 58, 83, KT8_REAR_NW, KT8_LEGEND)
     t = tk.tile(sh, 2, 0)                                   # w: face at the lower right
     put(t, [(74, 94), (74, 95)], LIT)                        # no handrail in the window
     put(t, [(76, 96), (72, 98)], INDICATOR)
@@ -293,8 +358,6 @@ TQ_MASK = H("%06X" % pal.MASK)
 TQ_PILLAR = H("%06X" % pal.PILLAR)
 
 GLASS = [LIT, LIT_HI, PLAIN, PLAIN_HI, SCREEN]
-KEEP = [BLACK, BELLOWS, FRAME, HEAD, TAIL, INDICATOR, REFLECTOR, LAMP_RIM, PIVOT,
-        AC_TOP, AC_SIDE, AC_SIDE_DARK] + PANTO_YELLOW
 PAINT = [BLUE, WHITE, YELLOW]            # body paint of the blue-yellow scheme
 
 # doors (right side: n, ne, e): column ranges; rows from the door's yellow
@@ -347,7 +410,6 @@ def kt8_turq(blue):
             band = _band(src, door_cols)
             paint = cmask(src, PAINT)
             roof = cmask(src, [ROOF])
-            glass = cmask(src, GLASS)
             t[roof] = TQ_ROOF
             for x in range(128):
                 col = paint[:, x]
@@ -375,7 +437,6 @@ def kt8_turq(blue):
                         t[y, x] = TQ_WHITE
                     else:
                         t[y, x] = TQ_BODY
-            del glass
     # the faces seen straight on: front (se) and rear (nw) drawn out
     leg = {"K": TQ_MASK, "W": TQ_WHITE, "B": TQ_BODY, "m": SCREEN, "L": HEAD, "T": TAIL,
            "o": INDICATOR, "r": REFLECTOR, "g": LIT, "h": LIT_HI, "d": FRAME, "k": BLACK}
@@ -421,6 +482,98 @@ TBBBBBBBBBT
  BrBBBBBrB
    BBkkkBB
 """
+
+
+# ------------------------------------------------------------------ Tatra T3 (Lubak91)
+# The DPO sheet is a T3SUCS / T3G as delivered (diamond pantograph); the ten cars
+# still running in 2026 are T3R.P. Both come from the same patched base.
+T3_STRIP = H("8C7B63")       # brown line across the window tops (tilting panes)
+T3_GLOW = H("7F9BF1")        # special colour on the pantograph head
+T3_PANTO = [H(h) for h in ("635200", "735A00", "5A5231", "212121", "312919", "3A3A3A", "191919",
+                           "5A5A5A", "525252", "424242", "4A4A4A", "7F9BF1", "3A3A29")]
+T3_PANTO_BOX = {0: (44, 58, 66, 80), 1: (56, 58, 70, 76), 2: (62, 58, 84, 80), 3: (46, 66, 64, 82),
+                4: (54, 64, 74, 86), 5: (56, 66, 70, 84), 6: (50, 64, 72, 86), 7: (52, 66, 76, 82)}
+# diamond recoloured: Lubak91's brown arms -> the DPO yellow of TommPa9's sheets
+T3_DIAMOND_YELLOW = {H("635200"): H("C5C500"), H("735A00"): H("E6E600"), H("5A5231"): H("A4A400"),
+                     H("312919"): H("3A3A10"), T3_GLOW: H("212121")}
+# driver's glass: windscreen and the cab side window behind it
+T3_CAB = {0: [(36, 68, 40, 86)], 2: [(85, 68, 90, 86)], 3: [(67, 80, 73, 93)], 4: [(67, 80, 82, 99)],
+          5: [(54, 84, 70, 100)], 6: [(44, 80, 58, 99)], 7: [(44, 80, 50, 93)]}
+# yellow route-number box above the windscreen (se, e, s)
+T3_ROUTE = {5: [(61, 86), (62, 86), (63, 86), (61, 87), (62, 87), (63, 87), (61, 88), (62, 88), (63, 88)],
+            4: [(71, 86), (71, 87), (72, 85), (72, 86), (73, 85), (73, 86)],
+            6: [(52, 85), (52, 86), (53, 85), (53, 86), (54, 86), (54, 87)]}
+# placement: the front on the DPO front anchor (39T / KT8 / Astra), as the length rule needs
+T3_SHIFT = {3: (10, 0), 7: (-7, 0)}
+
+
+def t3_base():
+    """Fixes both T3 variants share, before the pantograph."""
+    sh = load_src("t3_dpomodrozluta.png")
+    for c in range(8):
+        t = tk.tile(sh, 0, c)
+        recolor(t, {T3_STRIP: LIT_HI})                       # glass, not a brown strip
+        plain_glass(t, T3_CAB.get(c, []))
+    # headlights in the white panel under the windscreen (se): plain yellow -> lit
+    put(tk.tile(sh, 0, 5), [(59, 96), (65, 96)], HEAD)
+    # tail lights: red under the orange lamps of the rear end (w, n; ne rear corner)
+    put(tk.tile(sh, 0, 0), [(82, 98), (78, 100)], TAIL)
+    put(tk.tile(sh, 0, 2), [(43, 98), (47, 100)], TAIL)
+    put(tk.tile(sh, 0, 3), [(12, 91)], TAIL)
+    return sh
+
+
+def t3_route_box(sh, wide):
+    """Black LED destination box instead of the yellow route box. The T3R.P's
+    panel is wider (photo 994): seen head-on (se) it grows a pixel each side; in
+    the slanted e / s views the face is too narrow for more than the box. The
+    T3SUCS keeps the small route-number box (photo 990)."""
+    led = {5: [(62, 87)], 4: [(72, 86)], 6: [(53, 86)]}
+    for c, pts in T3_ROUTE.items():
+        t = tk.tile(sh, 0, c)
+        pts, lit = list(pts), list(led[c])
+        if wide and c == 5:
+            pts += [(60, y) for y in (86, 87, 88)] + [(64, y) for y in (86, 87, 88)]
+            lit += [(61, 87), (63, 87)]
+        put(t, pts, FRAME_BLACK)
+        put(t, lit, YELLOW)
+
+
+FRAME_BLACK = H("1A1A1A")
+
+
+def t3_shift(sh):
+    for c, (dx, dy) in T3_SHIFT.items():
+        t = tk.tile(sh, 0, c)
+        src = t.copy()
+        t[:] = BG
+        ys, xs = np.nonzero(~np.all(src == np.array(BG), axis=2))
+        t[ys + dy, xs + dx] = src[ys, xs]
+
+
+def build_t3rp():
+    sh = t3_base()
+    for c in range(8):
+        t = tk.tile(sh, 0, c)
+        m = cmask(t, T3_PANTO) & boxmask(t.shape, T3_PANTO_BOX[c])
+        erase(t, m, None)
+        single_arm_at(t, c, [ROOF], 0.33)
+        x, y = roof_point(t, DIRS[c], [ROOF], 0.10, t6_base(c)[2])
+        roof_pod(t, DIRS[c], x, y, protect=tk.is_panto if c in (0, 1, 2) else None)
+    t3_route_box(sh, wide=True)
+    t3_shift(sh)
+    return {"dpomodrozluta": sh}
+
+
+def build_t3sucs():
+    sh = t3_base()
+    for c in range(8):
+        t = tk.tile(sh, 0, c)
+        box = T3_PANTO_BOX[c]
+        recolor(t, T3_DIAMOND_YELLOW, [box])
+    t3_route_box(sh, wide=False)
+    t3_shift(sh)
+    return {"dpomodrozluta": sh}
 
 
 # ------------------------------------------------------------------ preview
@@ -479,6 +632,8 @@ def build_kt8():
 # family -> (builder, base sheet for the before/after preview, consists to preview)
 FAMILIES = {
     "kt8d5r_n1": (build_kt8, "kt8d5r_n1_dpomodrozluta.png", [((8, 5, 8), None)]),
+    "t3": (build_t3rp, "t3_dpomodrozluta.png", [((11, 11), (0, 0))]),
+    "t3sucs": (build_t3sucs, "t3_dpomodrozluta.png", [((11, 11), (0, 0))]),
 }
 
 
