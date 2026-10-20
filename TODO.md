@@ -23,6 +23,18 @@ T3R.PV / T3R.EV, the DPO 26Tr / 27Tr partial-trolleybus variants. Their
 - [ ] A **PID** package for the regional (non-city) lines around Prague.
 
 
+## DPO follow-ups
+
+- [ ] Drop the turquoise **Urbino 10** (`VZ-DPOstrava-SolarisUrbino10_s3-dpotyrkysova-…`):
+  no DPO Urbino 10 ever ran in turquoise and the owner dropped it, but every save
+  references it (14 times in FORK-CZR-VZ.sve). Migrate the live save first.
+- [ ] yaml dates that disagree with the art: 27Tr partial `intro_year: 2015` while it is
+  drawn as the 2024 Urbino IV batch; Rošero First `intro_year: 2018` against the 2021
+  delivery.
+- [ ] The Urbino 12 III and 18 III CNG batches have no object of their own; they share
+  the diesel art. `dpo_solaris.py` already draws the blue CNG fairing.
+
+
 ## Re-check against new photos
 
 - [ ] DPMHK **32Tr** (12 m): no side photo existed, so its yellow stripe ahead of
