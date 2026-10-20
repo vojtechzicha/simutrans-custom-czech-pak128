@@ -1,0 +1,52 @@
+agency: PID
+type: "Lions_City_10E"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "MAN Lion's City 10E"
+  family_cs: "MAN Lion's City 10E"
+
+# MAN Lion's City 10 E battery-electric midibus (10.575 m, doors 2-2-0): 7 buses
+# (Lutan, line 801, since 4/2025) in PID 2021 grey-red (pidsedocervena).
+# Sprite: original box-model render (vojtechzicha): praha_man.LionsCity10E, the
+# 12C body of tools/busrender/praha_man.py shortened to 10.575 m with
+# the battery roof, PID grey-red.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Lions_City_10E"
+    display_id: "Lion's City 10E"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 900000
+      payload: 80
+      speed: 80
+      weight: 12
+      runningcost: 20
+      fixed_cost: 130
+      intro_year: 2025
+      intro_month: 4
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: electric
+      power: 240
+      gear: 54
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Lutan"
+    name_cs: "PID šedo-červená · Lutan"

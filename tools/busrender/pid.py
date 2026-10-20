@@ -514,6 +514,13 @@ U18_KIT4 = [dict(a=2.30, b=6.20, h=0.30, hw=1.00, kind="fair", rf=1.00, rr=0.30)
             dict(a=12.30, b=13.90, h=0.26, hw=0.85, kind="fair")]
 
 
+def man_10e():
+    """MAN Lion's City 10 E (Lutan) in the PID grey-red, placed by the section rule (length 7)"""
+    import praha_man as PM
+    row = PM.build_row_rule(PM.LionsCity10E, "A", PM.V12, 7)
+    return [[np.array(t)[:, :, :3].copy() for t in row]]
+
+
 def man_artic(name, var=None):
     """rows of an articulated praha_man body (LionsCity18C, LionsCityG) in the PID
     grey-red, one row per section"""
@@ -758,6 +765,15 @@ FAMILIES = dict([
         " Čechy, 2018) in " + RBW,
         "original box-model render (vojtechzicha): the Urbino IV model of"
         " tools/busrender/dpo_solaris.py painted by pid.PSolaris in the PID liveries."),
+    fam("lions_city_10e", "Lions_City_10E", "MAN Lion's City 10E", MIDI,
+        f_(900000, 80, 80, 12, 20, 130, 2025, 7, "electric", 240, 54, intro_month=4),
+        [(A("Lutan"), None)],
+        man_10e,
+        "MAN Lion's City 10 E battery-electric midibus (10.575 m, doors 2-2-0): 7 buses"
+        " (Lutan, line 801, since 4/2025) in " + GR,
+        sprite="original box-model render (vojtechzicha): praha_man.LionsCity10E, the 12C body"
+        " of tools/busrender/praha_man.py shortened to 10.575 m with the battery roof, PID"
+        " grey-red."),
     man("citaro_c2_gu", "Citaro_C2_GU", "Mercedes-Benz Citaro C2 GÜ",
         T.artic("Citaro_C2_GU", "Citaro C2 GÜ",
                 f_(650000, 80, 80, 11, 23, 118, 2024, 7, "diesel", 0, 54, intro_month=11),

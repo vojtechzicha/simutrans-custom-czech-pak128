@@ -302,6 +302,7 @@ Agency `PID` builds `VZ-PID-bus.pak` with the buses of the suburban and regional
 
 The colours are those of praha.py "A" / "B". The articulated types come from two more models:
 - `praha_man.py`'s `Artic` mixin draws the MAN Lion's City 18C (on the 12C body), the Lion's City G (on the NL 293 body) and the Mercedes-Benz Citaro C2 GÜ (`CitaroC2`, a Citaro face on the NewGen box). Positions are given in real metres and mapped onto the drawn sections (7 + 6 carunits of `MPU` m). Each section is placed by the section rule and has its own bellows half (`build_artic_rows`).
+- `praha_man.LionsCity10E` is the 12C body shortened to 10.575 m with the battery roof. `build_row_rule` places a single-section body by the section rule instead of centring it.
 - `pid.PSolaris` is a subclass of `dpo_solaris.Solaris` that paints the DPO Urbino 18 III / IV models in both PID liveries ("pa" / "pb"). The DPO sheets stay untouched.
 
 Run `python tools/busrender/pid.py [family …] [--yaml] [--preview DIR]`. Still to come (TODO): the one-off bodies the repo doesn't have.

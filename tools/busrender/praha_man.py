@@ -804,6 +804,44 @@ def stretched(cls, length):
     return type(cls.__name__ + "_%d" % round(length * 100), (cls,), attrs)
 
 
+class LionsCity10E(NewGen):
+    """MAN Lion's City 10 E (electric, 2023+): 10.575 x 2.55 m, overhangs 2.775 /
+    3.40 m, wheelbase 4.40 m, doors 2-2-0; the battery packs under a roof fairing
+    over the whole length with the A/C on its rear part, no engine tower."""
+    L = 10.575
+    axles = [2.775, 7.175]
+    doors_r = [(0.28, 1.55), (4.95, 6.20)]
+    posts_r = [3.05, 4.45, 7.70, 9.20]
+    posts_l = [1.55, 3.05, 4.55, 6.05, 7.55, 9.05]
+    reds = [(1.55, 3.65), (6.25, 8.15)]
+    sidedisp = (2.10, 3.30)
+    hatches = []
+    louvre = (99, 99)
+    LOGOS = [(4.00, 4.70), (8.60, 9.30)]
+
+    def __init__(self, view, livery="A", variant=None):
+        super().__init__(view, livery, variant)
+        self.roof_parts = [dict(kind="fair", u0=0.25, u1=10.30, inset=0.0, h0=0.0, h1=0.28),
+                           dict(kind="ac", u0=6.90, u1=9.10, inset=0.45, h0=0.28, h1=0.40)]
+
+    def lower_extra(self, face, u, h, pu, ph, right):
+        if self.liv == "A" and not self.is_red(u) and 0.72 <= h < 0.72 + ph and any_in(u, self.LOGOS):
+            return self.c(RED_A, face)                 # red "pid" lettering
+        return None
+
+
+def build_row_rule(cls, livery, variant, length):
+    """a single-section bus drawn at its real length with its body centre placed
+    by the section rule, (4 - length/2) carunits ahead of the tile centre"""
+    row = []
+    for d in DIRS:
+        v0 = View(d, MPU, KH, (0, 0))
+        o = centre(d) - v0.Au * (cls.L / 2 + MPU * (4 - length / 2.0)) - v0.Av * (cls.W / 2)
+        view = View(d, MPU, KH, tuple(o))
+        row.append(render(view, cls(view, livery, variant).boxes()))
+    return row
+
+
 # ================================================================ articulated
 BELLOWS = {"top": 0x9C9FA4, "S": 0x8A8D92, "SE": 0x7F8287, "E": 0x74777C}   # dpmhk.py's
 RIB = 0x5E6166
