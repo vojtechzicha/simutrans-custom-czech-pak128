@@ -23,16 +23,6 @@ T3R.PV / T3R.EV, the DPO 26Tr / 27Tr partial-trolleybus variants. Their
 - [ ] A **PID** package for the regional (non-city) lines around Prague.
 
 
-## Redraws and repaints
-
-- [ ] DPO **Stadler Tango NF2 (nOVA)**: refresh the art (the user finds it dated). Layout
-  reference: the Stadler type sketch on Commons ("Stadler DPO nOVA.png", doors 2 + 2,
-  3 bogies) and the side-on photo of 1727.
-- [ ] DPO trams: repaint every `dpotyrkysova` tram sheet in the palette of
-  `tools/tramrender/dpo_palette.py` (roof `44C1E4` instead of `007B94`), as on the
-  39T. Open: whether the DPO buses and trolleybuses get the same roof.
-
-
 ## Re-check against new photos
 
 - [ ] DPMHK **32Tr** (12 m): no side photo existed, so its yellow stripe ahead of

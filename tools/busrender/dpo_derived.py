@@ -16,6 +16,11 @@ and poles from, are frozen in tools/busrender/src/ (dpo_tommpa9_*.png): the DPO
 Solaris families themselves are rendered by dpo_solaris.py since 2026-10-20.
 The Urbino 12 IV electric, derived here before, is part of dpo_solaris.py too.
 
+The result is moved along the road by dpo_lane.py's rule and written to
+tools/busrender/src/dpo/sor_tnb_12-bilamodrastrecha.png, the base that
+dpo_other.py patches into the shipped sheet (poles, roof edge, glass). Run
+dpo_other.py sor_tnb_12 after this script.
+
 Shapes added to the hand-drawn sheet are boxes rendered with render.py in a
 frame fitted per view to the sprite silhouette (fit()), so they sit on the
 roof of the drawing in every view. Without --variant the chosen variant
@@ -35,6 +40,7 @@ sys.path.insert(0, HERE)
 import dpmhk as H                                                       # noqa: E402
 from render import render, Box, DIRS                                    # noqa: E402
 import rj_lane                                                          # noqa: E402
+import dpo_lane                                                         # noqa: E402
 from rj_buscommon import SPECIAL                                        # noqa: E402
 
 T = (231, 255, 255)
@@ -46,7 +52,7 @@ NB12_SRC = "vehicle-bus/praha/sor_nb_12/sprites/bila.png"
 
 # the chosen variant per family (what goes into sprites/)
 VARIANT = {"sor_tnb_12": "B"}
-OUT = {"sor_tnb_12": "vehicle-trolleybus/dpo/sor_tnb_12/sprites/bilamodrastrecha.png"}
+OUT = {"sor_tnb_12": "tools/busrender/src/dpo/sor_tnb_12-bilamodrastrecha.png"}   # dpo_other.py's base
 
 
 # ------------------------------------------------------------------ helpers
@@ -352,9 +358,17 @@ def main():
         v = a.variant or VARIANT[fam]
         arr, info = build(fam, v)
         print(f"{fam} variant {v}:\n  " + "\n  ".join(info))
+        # place it along the road like dpo_lane.py does for the shipped sheets
+        length = dpo_lane.drawn_length(arr, 0)
+        for i, d in enumerate(DIRS):
+            dx, dy = dpo_lane.view_shift(arr[0:128, i * 128:(i + 1) * 128], d, length)
+            if (dx, dy) != (0, 0):
+                for r in range(arr.shape[0] // 128):
+                    sl = (slice(r * 128, (r + 1) * 128), slice(i * 128, (i + 1) * 128))
+                    arr[sl] = dpo_lane.shift_tile(arr[sl], dx, dy)
         path = os.path.join(REPO, *OUT[fam].split("/"))
         os.makedirs(os.path.dirname(path), exist_ok=True)
-        Image.fromarray(arr).save(path)
+        Image.fromarray(arr).save(path, optimize=True)
         print("wrote", OUT[fam])
 
 

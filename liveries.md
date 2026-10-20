@@ -372,4 +372,4 @@ DPO's design manual gives the turquoise as Pantone 312 C / RAL 5012 (screen `#1D
 | Door frames | `228, 230, 230`  | #E4E6E6 |
 | Front mask  | `26, 28, 30`     | #1A1C1E |
 
-The other DPO tram sheets (Tango NF2, Vario LF / LF2 / LF3, KT8D5R.N1) still carry the earlier dark teal roof `#007B94` until they are repainted.
+Since 2026-10-20 every DPO turquoise sheet (trams, buses and trolleybuses) uses this palette; the earlier dark teal roof `#007B94` is gone. The old blue-yellow scheme (`dpomodrozluta`) keeps its photographed roofs: medium blue on the Urbinos, white on the Trollino 12/15 and the SOR EBN 10.5.
