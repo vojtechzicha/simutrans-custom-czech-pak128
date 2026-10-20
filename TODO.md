@@ -21,18 +21,12 @@ T3R.PV / T3R.EV, the DPO 26Tr / 27Tr partial-trolleybus variants. Their
 - [ ] ČD **690.0** battery units, when passenger service starts in 2027.
 - [ ] Pardubický kraj **IREDO** buses, into the same `VZ-IREDO-bus.pak`.
 - [ ] A **PID** package for the regional (non-city) lines around Prague.
-- [ ] Uninstall `CZR-vehicles-bus-ODIS.pak` once the user agrees: `FORK-CZR-VZ.sve`
-  no longer uses it (migrated 2026-10-20 to `VZ-ODIS-bus`, line by line; original,
-  plan and name map in `D:\OneDrive\Games\Simutrans\uninstalled-CZR-ODIS-2026-10-20\`).
-  The other saves were not migrated. The `CZ-ODIS-*` buses live in VTPsim's
-  `CZ-vehicle-bus.pak`, which stays installed for its other objects.
-- [ ] ODIS Českotěšínsko II (Transdev Slezsko, from 13 Dec 2026): red ODIS buses,
-  among them the **SOR ICNG 10,5**, a body the repo doesn't have yet.
 - [ ] Havířovsko III (kraj contract, Transdev Slezsko): 4 hydrogen SOR NSF 12 + 9
   CNG buses in the red ODIS scheme from 12/2027 on the Havířov – Ostrava lines.
-  They go into `VZ-ODIS-bus`.
-- [ ] ODIS one-offs left out: Z-Group's SOR CN 12 63-1401 in the BORS Břeclav
-  yellow-blue, the two Transdev Slezsko SOR CNG 12 with a green CNG pod.
+  They go into `VZ-ODIS-bus` once the CNG type is known.
+- [ ] ODIS Českotěšínsko II: check the final fleet after 13 Dec 2026 (the tender
+  estimated about 38 buses; `VZ-ODIS-bus` has the red SOR ICNG 12,3 / 10,5 and
+  Crossway LE LINE 12M NP 2025 already).
 
 
 ## DPO follow-ups

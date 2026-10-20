@@ -227,6 +227,59 @@ class OdisCsad(KrajRing, T.CsadWG):
         return None
 
 
+class OdisCsadPod(OdisCsad):
+    """3ČSAD white-green with the bright green CNG pod of Transdev Slezsko's
+    two 2014 SOR CNG 12 (43-1101 / 43-1112, #223 / #222)"""
+    slug = "odis-3csad-pod"
+    ac = (0x5C, 0xC4, 0x3E)
+    rear_ac = (0xEE, 0xEE, 0xEC)
+
+    def ac_side(self):
+        return Sh((0x46, 0xA8, 0x30))
+
+
+BORS_YEL = (0xE6, 0x99, 0x28)
+BORS_BLUE = (0x35, 0x51, 0x88)
+RING_PALE = Ring(((0xDC, 0xE8, 0xF2), (0xB8, 0xD0, 0xE6)), None, (0x8C, 0xB4, 0xDC), (0x5E, 0x8A, 0xC4))
+
+
+class OdisBors(KrajRing, M.Livery):
+    """Z-Group's SOR CN 12 63-1401 (2016, ex BORS BUS Břeclav, at Kopřivnice since
+    6/2025) in the BORS yellow-blue: royal blue skirt up to the rub strip,
+    amber-yellow belt under the windows, a blue strip over them, yellow front
+    mask over a blue bumper; the kraj ring added in 2025 looks pale blue on the
+    only photo (unverified)"""
+    slug = "odis-bors"
+    body = BORS_YEL
+    roof = (0xEE, 0xEE, 0xEA)
+    ac = (0xEC, 0xEC, 0xE8)
+    seam = (0xC8, 0x82, 0x20)
+    bumper = BORS_BLUE
+    RING = RING_PALE
+
+    def side(self, bus, x, k, right):
+        c = self.ring(bus, x, k)
+        b0 = sill(bus, x)
+        if c is not None and k < b0:
+            return c
+        if k <= 1:
+            return BORS_BLUE
+        if k == getattr(bus, "RUB", None):
+            return None
+        if k < b0:
+            return BORS_YEL
+        band = bus.band_at(x)
+        if band and k >= band[1]:
+            return BORS_BLUE                            # the strip over the windows
+        return None
+
+    def front(self, bus, v, k):
+        return BORS_BLUE if k <= 1 else None
+
+    def rear(self, bus, v, k):
+        return BORS_BLUE if k <= 2 else None
+
+
 ODIS_RED = (0xDC, 0x06, 0x12)      # the ODIS scheme's signal red (~RAL 3020)
 ODIS_ROOF = (0xE6, 0x26, 0x2C)     # the same paint seen from above, lighter so the shape reads
 
@@ -268,7 +321,7 @@ class OdisRed(M.Livery):
         return Sh(ODIS_RED)
 
 
-for _lv in (OdisTransdev, OdisBila, OdisBilaZel, OdisBilaCerv, OdisCsad, OdisRed):
+for _lv in (OdisTransdev, OdisBila, OdisBilaZel, OdisBilaCerv, OdisCsad, OdisCsadPod, OdisBors, OdisRed):
     M.LIVERIES[_lv.slug] = _lv
 
 
@@ -300,8 +353,16 @@ class Regio:
         if self.REAR_AC:
             x0, x1, h = self.REAR_AC
             z0 = self.zr(self.top_row(x0)) + 0.08
-            boxes.append(Box(self.U(x1), self.U(x0), -0.95, 0.95, z0, z0 + h, self.ac))
+            boxes.append(Box(self.U(x1), self.U(x0), -0.95, 0.95, z0, z0 + h, self.rear_ac))
         return L, boxes, lines
+
+    def rear_ac(self, face, u, v, z):
+        """the second roof box: the livery's rear_ac colour (white A/C behind a
+        coloured CNG pod), else the pod colour"""
+        c = getattr(self.lv, "rear_ac", None)
+        if c is None:
+            return self.ac(face, u, v, z)
+        return c if face == "+z" else Sh(tuple(x * 0.93 for x in c))
 
 
 # ====================================================================== bodies
@@ -443,6 +504,15 @@ class IcnFace2025:
         if k == 0:
             return Sh(self.lv.bumper or self.lv.seam)
         return Sh(self.lv.body)
+
+
+class OSorICNG105(Regio, IcnFace2025, CM.SorICN105):
+    """SOR ICNG 10,5 (2026, Českotěšínsko II): the ICN 10,5 with the CNG pod over
+    the front half and a low box behind the middle door"""
+    AC = (1.4, 5.7)
+    AC_H = 0.42
+    REAR_AC = (7.6, 9.9, 0.20)
+    HATCHES = ()
 
 
 class OSorICNG123(Regio, IcnFace2025, CM.SorICN):
@@ -632,6 +702,9 @@ WZ_TDS = ("white, green kraj ring · Transdev Slezsko", "bílá, zelený krajsk�
 WZ_TDM = ("white, green kraj ring · Transdev Morava", "bílá, zelený krajský kruh · Transdev Morava")
 WC = ("white, red kraj ring · Transdev Slezsko", "bílá, červený krajský kruh · Transdev Slezsko")
 RED = ("ODIS red-black · Transdev Slezsko", "ODIS červeno-černá · Transdev Slezsko")
+WGP = ("3ČSAD white-green, green CNG box · Transdev Slezsko",
+       "3ČSAD bílo-zelená, zelený CNG box · Transdev Slezsko")
+BORS = ("BORS yellow-blue · Z-Group bus", "BORS žluto-modrá · Z-Group bus")
 ZG = ("white · Z-Group bus", "bílá · Z-Group bus")
 RENDER = ("original box-model render (vojtechzicha): {cls} of tools/busrender/odis.py\n"
           "(on the {base} body of {mod}) with the livery of odis.py.")
@@ -682,11 +755,15 @@ FAMILIES = dict([
     fam("sor_cn_12", "SOR_CN_12", "SOR CN 12",
         one("SOR_CN_12", "CN 12", BUS,
             f_(620000, 90, 100, 11, 25, 127, 2016, 8, "diesel", 235, 54, smoke="Diesel_small")),
-        [("transdev", *TD, model(OSorCN12, "odis-transdev"))],
+        [("transdev", *TD, model(OSorCN12, "odis-transdev")),
+         ("borszlutomodra", *BORS, model(OSorCN12, "odis-bors"))],
         "SOR CN 12 low-entry interurban (2016-2018), doors 1-2. Transdev Morava 54:\n"
         "62-1001 to 1025 (Novojičínsko západ), 82-, 83-, 84-10xx (Krnovsko, Bruntálsko,\n"
-        "Rýmařovsko). " + TD_NOTE + " The step under the raised rear\n"
-        "windows is painted black, so the band reads as one stripe.",
+        "Rýmařovsko). " + TD_NOTE + " The step under the raised rear"
+        " windows is painted black, so the band reads as one stripe. Z-Group bus 1:"
+        " 63-1401 (2016, ex BORS BUS Břeclav, Kopřivnice since 6/2025) in the BORS"
+        " yellow-blue (blue skirt, amber belt, blue strip over the windows) with the"
+        " kraj ring added in 2025, pale blue on the only photo (unverified).",
         rendered(OSorCN12)),
     fam("sor_cng_12", "SOR_CNG_12", "SOR CNG 12",
         one("SOR_CNG_12", "CNG 12", BUS,
@@ -694,12 +771,14 @@ FAMILIES = dict([
         [("transdev", *TD, model(OSorCNG12, "odis-transdev")),
          ("3csadbilozelena", *WG, model(OSorCNG12, "odis-3csad")),
          ("bilazelenykruh", *WZ_TDM, model(OSorCNG12, "odis-bilazel")),
-         ("bila", *ZG, model(OSorCNG12, "odis-bila"))],
+         ("bila", *ZG, model(OSorCNG12, "odis-bila")),
+         ("3csadbilozelenazelenybox", *WGP, model(OSorCNG12, "odis-3csad-pod"))],
         "SOR CNG 12 low-entry interurban (CNG; engine_type diesel, no smoke), the tank\n"
         "fairing over the front half and the A/C box on the raised rear roof. Transdev\n"
         "Morava 24 (2018-2019): 62-1101 to 1109, 24-1101 to 1115 (Hlučínsko, 555). " + TD_NOTE +
         " Transdev Slezsko 82 (2014-2018; Havířov, Český Těšín, Karviná, Orlová,"
-        " Frýdek-Místek): " + WG_NOTE + " Two 2014 cars have a green CNG pod (not drawn)."
+        " Frýdek-Místek): " + WG_NOTE + " Two 2014 cars, 43-1101 and 43-1112, have a"
+        " bright green CNG pod (their own livery here)."
         " White with the green ring: Transdev Morava 24-1120 (2015, ex MHD Bruntál, the"
         " BRUNTÁL emblem removed). Z-Group bus 62 (Novojičínsko východ, Opavsko,"
         " Vítkovsko): " + ZG_NOTE,
@@ -782,6 +861,15 @@ FAMILIES = dict([
         " CNG pod over the front half. Transdev Slezsko 26: 74-1101 to 1126"
         " (Jablunkovsko-Třinecko, from 12/2025). In " + RED_NOTE,
         rendered(OSorICNG123)),
+    fam("sor_icng_10_5", "SOR_ICNG_10_5", "SOR ICNG 10,5",
+        one("SOR_ICNG_10_5", "ICNG 10,5", BUS,
+            f_(660000, 76, 90, 11, 26, 135, 2026, 7, "diesel", 220, 54, intro_month=12)),
+        [("odiscervenocerna", *RED, model(OSorICNG105, "odis-cervena"))],
+        "SOR ICNG 10,5 (CNG; engine_type diesel, no smoke), the 2025 SOR face, the CNG pod"
+        " over the front half, doors 1-2-0. Transdev Slezsko, Českotěšínsko II from 13"
+        " Dec 2026 (delivered 10/2026 with SOR ICNG 12,3 and Crossway LE LINE 12M NP"
+        " (2025), about 38 buses in all). In " + RED_NOTE,
+        rendered(OSorICNG105)),
     fam("crossway_le_line_12m_np_2025", "Crossway_LE_Line_12M_NP_2025",
         "Iveco Crossway LE LINE 12M NP (2025)",
         one("Crossway_LE_Line_12M_NP_2025", "Crossway LE LINE 12M NP (2025)", BUS,

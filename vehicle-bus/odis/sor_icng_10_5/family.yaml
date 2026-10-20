@@ -1,0 +1,57 @@
+agency: ODIS
+type: "SOR_ICNG_10_5"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "ODIS"
+  agency_cs: "ODIS"
+  family_en: "SOR ICNG 10,5"
+  family_cs: "SOR ICNG 10,5"
+
+# SOR ICNG 10,5 (CNG; engine_type diesel, no smoke), the 2025 SOR face, the CNG
+# pod over the front half, doors 1-2-0. Transdev Slezsko, Českotěšínsko II from
+# 13 Dec 2026 (delivered 10/2026 with SOR ICNG 12,3 and Crossway LE LINE 12M NP
+# (2025), about 38 buses in all). In the kraj's ODIS scheme ("schéma ODIS,
+# červeno-černá", every new contract from 12/2025): signal red with a black
+# window band, the white folk-ornament line under the windows, the big white
+# ODIS logo, no ring.
+# Sprite: original box-model render (vojtechzicha): OSorICNG105 of
+# tools/busrender/odis.py (on the SorICN105 body of
+# iredo_coachmodels.py) with the livery of odis.py.
+# Regenerate with tools/busrender/odis.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_ICNG_10_5"
+    display_id: "ICNG 10,5"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 660000
+      payload: 76
+      speed: 90
+      weight: 11
+      runningcost: 26
+      fixed_cost: 135
+      intro_year: 2026
+      intro_month: 12
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 220
+      gear: 54
+
+liveries:
+  - color: odiscervenocerna
+    name_en: "ODIS red-black · Transdev Slezsko"
+    name_cs: "ODIS červeno-černá · Transdev Slezsko"

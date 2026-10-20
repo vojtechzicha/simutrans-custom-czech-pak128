@@ -201,11 +201,12 @@ ComfortJet coaches are CZR art ported 1:1.
     LE CITY 12M NP, Scania Citywide LE 12M and Suburban LE 15M CNG, Dekstra LE 37
     L CNG and Urbanway 10,5M CNG. White with the green or red ring: Crossway LE
     LINE 12M NP and Citywide LE 15M / 13,7M CNG. The red ODIS scheme of the
-    contracts from 12/2025: SOR ICNG 12,3, Crossway LE LINE 12M NP (2025) and
-    Rošero First CNG.
+    contracts from 12/2025: SOR ICNG 12,3 and 10,5 (Českotěšínsko II from
+    12/2026), Crossway LE LINE 12M NP (2025) and Rošero First CNG. Two SOR CNG 12
+    carry a green CNG box.
   - Z-Group bus, white: Setra S 415 LE business, SOR CNG 12 and CNG 10,5,
     Crossway LE CITY 12M NP, Scania Citywide LE 12M and Suburban LE 12,6M CNG and
-    MAN Lion's City Ü CNG.
+    MAN Lion's City Ü CNG, plus the ex-BORS SOR CN 12 in yellow-blue.
 - **DP hl. m. Prahy (DPP) and DP města Brna (DPMB)** — the complete active
   September 2026 bus, tram and trolleybus fleets of both cities as VZ families,
   replacing the upstream CZR/CZ Praha and Brno paks. Placeholder art was redrawn

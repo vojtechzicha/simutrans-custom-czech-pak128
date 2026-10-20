@@ -19,7 +19,10 @@ display:
 # Transdev & logo dopravy Moravskoslezského kraje"): white, black window band,
 # the big red Transdev figure, the kraj ring in salmon and reds over the rear
 # axle. The step under the raised rear windows is painted black, so the band
-# reads as one stripe.
+# reads as one stripe. Z-Group bus 1: 63-1401 (2016, ex BORS BUS Břeclav,
+# Kopřivnice since 6/2025) in the BORS yellow-blue (blue skirt, amber belt, blue
+# strip over the windows) with the kraj ring added in 2025, pale blue on the
+# only photo (unverified).
 # Sprite: original box-model render (vojtechzicha): OSorCN12 of
 # tools/busrender/odis.py (on the SorCN body of iredo_models.py) with
 # the livery of odis.py.
@@ -56,3 +59,6 @@ liveries:
   - color: transdev
     name_en: "white with the red figure · Transdev Morava"
     name_cs: "bílá s červenou postavou · Transdev Morava"
+  - color: borszlutomodra
+    name_en: "BORS yellow-blue · Z-Group bus"
+    name_cs: "BORS žluto-modrá · Z-Group bus"

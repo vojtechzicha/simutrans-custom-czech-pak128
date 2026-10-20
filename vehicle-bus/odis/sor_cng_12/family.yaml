@@ -23,12 +23,13 @@ display:
 # 3ČSAD white-green (Transdev Slezsko, the colours of ex ČSAD Havířov / Karviná
 # / Frýdek-Místek; seznam-autobusu "3ČSAD, bílo-zelená & logo dopravy
 # Moravskoslezského kraje"): white, black window band, green skirt with a dark
-# pinstripe, green lower front and rear, the kraj ring in greens. Two 2014 cars
-# have a green CNG pod (not drawn). White with the green ring: Transdev Morava
-# 24-1120 (2015, ex MHD Bruntál, the BRUNTÁL emblem removed). Z-Group bus 62
-# (Novojičínsko východ, Opavsko, Vítkovsko): Z-Group bus (ex ČSAD Vsetín;
-# Kopřivnice, Opava and Vítkov depots): white, black window band, the kraj ring
-# in its own colours (grey, the red and blue inner bands), navy fleet numbers.
+# pinstripe, green lower front and rear, the kraj ring in greens. Two 2014 cars,
+# 43-1101 and 43-1112, have a bright green CNG pod (their own livery here).
+# White with the green ring: Transdev Morava 24-1120 (2015, ex MHD Bruntál, the
+# BRUNTÁL emblem removed). Z-Group bus 62 (Novojičínsko východ, Opavsko,
+# Vítkovsko): Z-Group bus (ex ČSAD Vsetín; Kopřivnice, Opava and Vítkov depots):
+# white, black window band, the kraj ring in its own colours (grey, the red and
+# blue inner bands), navy fleet numbers.
 # Sprite: original box-model render (vojtechzicha): OSorCNG12 of
 # tools/busrender/odis.py (on the SorCNG body of iredo_models.py) with
 # the livery of odis.py.
@@ -73,3 +74,6 @@ liveries:
   - color: bila
     name_en: "white · Z-Group bus"
     name_cs: "bílá · Z-Group bus"
+  - color: 3csadbilozelenazelenybox
+    name_en: "3ČSAD white-green, green CNG box · Transdev Slezsko"
+    name_cs: "3ČSAD bílo-zelená, zelený CNG box · Transdev Slezsko"
