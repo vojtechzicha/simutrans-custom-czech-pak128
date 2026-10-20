@@ -1,0 +1,78 @@
+agency: DPOstrava
+type: "SolarisUrbino18_s3_CNG"
+# Sprites are rendered on the native lane footprint (tools/busrender/
+# dpo_solaris.py), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+# Art: rendered by tools/busrender/dpo_solaris.py (model u18_3cng, 2026-10-20):
+# Urbino III 18 m in sections 8 + 6, doors 2-2-2-2, the AC pod over the cab,
+# the gas fairing from 2.9 m to the joint, the rear-section fairing from the
+# bellows to 14.1 m and the low rear hump, all in the roof colour, engine tower
+# at the rear left (measured on 7861).
+
+display:
+  agency_en: "DPO"
+  agency_cs: "DPO"
+  family_en: "Solaris Urbino 18 III CNG"
+  family_cs: "Solaris Urbino 18 III CNG"
+
+# Solaris Urbino 18 III CNG, DPO 7851-7865 (15 built 2015, in service from
+# 10/2015), all 15 in service in October 2026: 14 blue-yellow, 7859 in the red
+# ODIS advert wrap (not drawn). CNG: engine_type diesel, no smoke.
+
+vehicles:
+  - id: "SolarisUrbino18_s3_CNG"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    tail: false
+    prev: []
+    next: ["SolarisUrbino18_s3_CNG_2"]
+    fields:
+      cost: 540000
+      payload: 142
+      speed: 75
+      weight: 10
+      runningcost: 16
+      fixed_cost: 75
+      intro_year: 2015
+      intro_month: 10
+      retire_year: 2035
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 0
+
+  - id: "SolarisUrbino18_s3_CNG_2"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    prev: ["SolarisUrbino18_s3_CNG"]
+    next: []
+    fields:
+      cost: 660000
+      payload: 56
+      speed: 75
+      weight: 8
+      runningcost: 17
+      fixed_cost: 80
+      intro_year: 2015
+      intro_month: 10
+      retire_year: 2035
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 239
+      gear: 61
+
+liveries:
+  - color: dpomodrozluta
+    name_en: "DPO blue-yellow"
+    name_cs: "DPO modro-žlutá"

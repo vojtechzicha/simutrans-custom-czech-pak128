@@ -41,8 +41,8 @@ vehicles:
       weight: 5
       runningcost: 18
       fixed_cost: 85
-      intro_year: 2018
-      intro_month: 1
+      intro_year: 2021
+      intro_month: 7
       retire_year: 2050
       retire_month: 12
       waytype: road

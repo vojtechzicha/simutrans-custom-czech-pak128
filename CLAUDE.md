@@ -255,7 +255,7 @@ The RegioJet coach buses (`vehicle-bus/regiojet/`) come from `tools/busrender/rj
 
 The DP Ostrava buses and trolleybuses are all generated:
 
-- **Solaris family.** The Urbino 10/12/15/18 III and IV, 26Tr, 27Tr and Trollino 12/15/18 (`vehicle-bus/dpo/`, `vehicle-trolleybus/dpo/`) come from `tools/busrender/dpo_solaris.py`, one parametric model on the `dpmhk.py` renderer. It places every vehicle itself by the section rule. Usage: `[family …] [--preview DIR] [--opt key=value]`; `--variants DIR` writes the look options without touching `sprites/`. The defaults are the owner's pick of 2026-10-20; the B options (subtle IV cap, subtle III dome, lighter fairing tops, blue Trollino roof) stay available through `--opt`.
+- **Solaris family.** The Urbino 10/12/15/18 III (12 / 18 also CNG) and IV, 26Tr, 27Tr and Trollino 12/15/18 (`vehicle-bus/dpo/`, `vehicle-trolleybus/dpo/`) come from `tools/busrender/dpo_solaris.py`, one parametric model on the `dpmhk.py` renderer. It places every vehicle itself by the section rule. Usage: `[family …] [--preview DIR] [--opt key=value]`; `--variants DIR` writes the look options without touching `sprites/`. The defaults are the owner's pick of 2026-10-20; the B options (subtle IV cap, subtle III dome, lighter fairing tops, blue Trollino roof) stay available through `--opt`.
 - **All the others** come from `python tools/busrender/dpo_other.py [family …] [--preview DIR] [--variant ekova=B|ebn=B]`.
   - The Ekova Electron 12 and the SOR EBN 10.5 are rendered as subclasses of the `dpmhk.py` body (`dpo_other_bodies.py`); variant A of each ships.
   - The Dekstra LE 37 and the Rošero First are VTPsim's LE 37 art from the Prague package, repainted zone by zone in DPO turquoise (`dpo_other_rebase.py`).

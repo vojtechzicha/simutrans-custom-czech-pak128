@@ -1,0 +1,56 @@
+agency: DPOstrava
+type: "SolarisUrbino12_s3_CNG"
+# Sprites are rendered on the native lane footprint (tools/busrender/
+# dpo_solaris.py), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+# Art: rendered by tools/busrender/dpo_solaris.py (model u12_3cng, 2026-10-20):
+# Urbino III 12 m, doors 2-2-2, the AC pod over the cab, the gas fairing from
+# 1.4 to 6.8 m and the low rear hump (8.9-11.6 m) in the roof colour, engine
+# tower at the rear left (measured on 7173).
+
+display:
+  agency_en: "DPO"
+  agency_cs: "DPO"
+  family_en: "Solaris Urbino 12 III CNG"
+  family_cs: "Solaris Urbino 12 III CNG"
+
+# Solaris Urbino 12 III CNG, DPO 7121-7210 (90 built 2015, in service from
+# 10/2015; Cummins ISL G 239 kW). 88 in service in October 2026: 78
+# blue-yellow, 6 turquoise (7121, 7129, 7169, 7206, 7207, 7208), 4 in advert
+# wraps (not drawn). CNG: engine_type diesel, no smoke.
+
+vehicles:
+  - id: "SolarisUrbino12_s3_CNG"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 960000
+      payload: 105
+      speed: 75
+      weight: 13
+      runningcost: 31
+      fixed_cost: 152
+      intro_year: 2015
+      intro_month: 10
+      retire_year: 2035
+      retire_month: 1
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 239
+      gear: 53
+
+liveries:
+  - color: dpomodrozluta
+    name_en: "DPO blue-yellow"
+    name_cs: "DPO modro-žlutá"
+  - color: dpotyrkysova
+    name_en: "DPO turquoise"
+    name_cs: "DPO tyrkysová"

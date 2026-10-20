@@ -166,9 +166,10 @@ ComfortJet coaches are CZR art ported 1:1.
   (buses); Pragoimex EVO2, EVO1, VarioLFR.S and Vario LF plus, Tatra T3M.3
   (trams). Most žluto-červená (the E-Way in Iveco demonstrator colours).
 - **DP Ostrava (DPO)** — full city fleet across all three urban modes (introduces
-  the `vehicle-trolleybus/` mode): 11 bus families, 12 tram families, 9 trolleybus
+  the `vehicle-trolleybus/` mode): 13 bus families, 12 tram families, 9 trolleybus
   families. Verified against the 2025–2026 active roster; real-world retirement
-  dates set on the handful of types that have left service.
+  dates set on the handful of types that have left service. The Urbino 12 / 18 III
+  CNG of 2015 have their own objects.
 - **DP města Pardubic (DPMP)** — the full active 2026 bus and trolleybus fleet:
   Irisbus Citybus 12M, Irisbus Citelis 12M (diesel + CNG), Iveco Crossway LE
   City 12M (diesel + hybrid), Iveco Urbanway 12M (diesel + CNG), Iveco Streetway

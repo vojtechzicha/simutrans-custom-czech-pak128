@@ -73,6 +73,10 @@ vehicles:
       gear: 61
 
 liveries:
+  # 3811-3812 turquoise, 3805-3810 still blue-yellow in 2026
   - color: dpotyrkysova
     name_en: "DPO turquoise"
     name_cs: "DPO tyrkysová"
+  - color: dpomodrozluta
+    name_en: "DPO blue-yellow"
+    name_cs: "DPO modro-žlutá"

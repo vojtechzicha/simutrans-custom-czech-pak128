@@ -6,6 +6,8 @@ Families (vehicle-bus/dpo/, vehicle-trolleybus/dpo/):
   solarisurbino12_s4 / 12_s4_electric / 18_s4  Urbino IV, turquoise
   26trsolaris(_partial), 27trsolaris            Skoda 26Tr / 27Tr, Urbino III body, turquoise
   27trsolaris_partial                           Skoda 27Tr of 2024, Urbino IV body, turquoise
+                                                (no battery despite the folder name)
+  solarisurbino12_s3_cng / 18_s3_cng            Urbino III CNG (2015)
   solaristrollino_12ac / 15ac / 18ac            Solaris Trollino (II / III), old scheme
 
 Geometry follows dpmhk.py: single vehicles at their real length, articulated
@@ -173,8 +175,13 @@ MODELS = {
     # Urbino 12 III diesel (7725-7787)
     "u12_3": mk(U12, tower=True, kit=[dict(a=0.85, b=2.45, h=0.26, hw=0.66, kind="ac")],
                 hatches=[4.80, 8.20]),
-    # Urbino 12 III CNG (7121-7190; no object of its own, preview only): blue gas fairing
-    "u12_3cng": mk(U12, tower=True, kit=[dict(a=1.20, b=8.70, h=0.42, hw=1.06, kind="fair", rf=0.8, rr=0.4)]),
+    # Urbino 12 III CNG (7121-7210, 2015), measured on 7173: the AC pod over the cab, the
+    # gas fairing from 1.4 m (full height from 2.5, flat to 6.5, ends 6.8), bare roof,
+    # the low rear hump 8.9-11.6 m; fairing and hump in the roof colour
+    "u12_3cng": mk(U12, tower=True, kit=[dict(a=0.35, b=1.35, h=0.26, hw=0.66, kind="ac"),
+                                         dict(a=1.40, b=6.80, h=0.50, hw=1.06, kind="fair", rf=1.0, rr=0.30),
+                                         dict(a=8.90, b=11.60, h=0.24, hw=0.90, kind="fair", rf=0.3, rr=0.3)],
+                   hatches=[7.80]),
     # Urbino 12 IV CNG (7211-7275): long gas fairing sloping down to the front, saloon AC behind it
     "u12_4": mk(U12, face="u4", rear="u4", tower=True, frieze=FRIEZE12,
                 kit=[dict(a=2.30, b=9.40, h=0.44, hw=1.08, kind="fair", rf=1.30, rr=0.40),
@@ -189,6 +196,14 @@ MODELS = {
     # Urbino 18 III diesel (7801-7807): blue AC pod on the front section
     "u18_3": mk(U18_3, tower=True, kit=[dict(a=0.85, b=2.45, h=0.26, hw=0.66, kind="ac")],
                 hatches=[5.2, 8.6, 13.0, 16.4]),
+    # Urbino 18 III CNG (7851-7865, 2015), measured on 7861: AC pod over the cab, a low
+    # cover behind it, the gas fairing from 2.9 m to the joint, the rear-section fairing
+    # from the bellows to 14.1 m, the low rear hump 14.6-17.8 m
+    "u18_3cng": mk(U18_3, tower=True, kit=[dict(a=0.35, b=1.60, h=0.26, hw=0.66, kind="ac"),
+                                           dict(a=1.60, b=2.90, h=0.12, hw=0.80, kind="fair"),
+                                           dict(a=2.90, b=10.00, h=0.50, hw=1.06, kind="fair", rf=0.6, rr=0.0),
+                                           dict(a=10.25, b=14.10, h=0.46, hw=1.04, kind="fair", rf=0.0, rr=0.5),
+                                           dict(a=14.60, b=17.80, h=0.24, hw=0.90, kind="fair", rf=0.3, rr=0.3)]),
     # Urbino 18 IV CNG (7866-7922): gas fairing on the front section, AC on the rear one
     "u18_4": mk(U18_4, tower=True, frieze=FRIEZE18,
                 kit=[dict(a=2.30, b=9.50, h=0.44, hw=1.08, kind="fair", rf=1.30, rr=0.40),
@@ -212,12 +227,13 @@ MODELS = {
                            dict(a=4.70, b=9.55, h=0.44, hw=1.04, kind="fair", rf=0.50, rr=0.0),
                            dict(a=10.65, b=11.95, h=0.40, hw=1.00, kind="fair", rf=0.0, rr=0.30)],
                poles=(11.40, 0.30), rack=(14.40, 17.30, 0.30), polecol="27tr"),
-    # Skoda 27Tr of 2024 (Urbino IV 18 m, traction batteries): grey battery boxes on the rear section
+    # Skoda 27Tr of 2024 (3813-3818, Urbino IV 18 m): no traction battery and no
+    # supercapacitors (2026-10-20 research), so no battery boxes; the traction fairing
+    # on the front section, the one behind the joint, a low AC box on the rear section
     "27trp": mk(U18_4, frieze=FRIEZE18,
                 kit=[dict(a=1.90, b=9.55, h=0.44, hw=1.06, kind="fair", rf=1.10, rr=0.0),
                      dict(a=10.70, b=12.00, h=0.40, hw=1.00, kind="fair", rf=0.0, rr=0.30),
-                     dict(a=12.70, b=14.30, h=0.26, hw=0.86, kind="batt"),
-                     dict(a=14.70, b=16.90, h=0.26, hw=0.86, kind="batt")],
+                     dict(a=13.40, b=14.90, h=0.24, hw=0.80, kind="fair")],
                 poles=(11.40, 0.30), polecol="27tr"),
     # Solaris Trollino 12 AC (Urbino II face): white AC dome, traction fairing, poles mid-roof
     "tr12": mk(U12, face="u2", kit=[dict(a=0.55, b=1.85, h=0.28, hw=0.70, kind="acw"),
@@ -731,18 +747,23 @@ TRW = "trollino"     # old scheme on a Trollino 12 / 15: white or blue roof by O
 
 # family dir -> (yaml lengths per section, {livery colour: [(model, livery key), ...]})
 FAMILIES = {
-    # dpotyrkysova: no DPO Urbino 10 ever ran in turquoise and the owner dropped it
-    # (2026-10-19), but the saves still use the object; it stays until they are migrated
-    "vehicle-bus/dpo/solarisurbino10_s3": ([7], {"dpomodrozluta": [("u10", OLD)], "dpotyrkysova": [("u10", TQL)]}),
+    # no DPO Urbino 10 ever ran in turquoise; the owner dropped that object, removed
+    # 2026-10-20 after FORK-CZR-VZ.sve was migrated to the blue-yellow one
+    "vehicle-bus/dpo/solarisurbino10_s3": ([7], {"dpomodrozluta": [("u10", OLD)]}),
     "vehicle-bus/dpo/solarisurbino12_s3": ([8], {"dpomodrozluta": [("u12_3", OLD)]}),
+    "vehicle-bus/dpo/solarisurbino12_s3_cng": ([8], {"dpomodrozluta": [("u12_3cng", OLD)],
+                                                     "dpotyrkysova": [("u12_3cng", TQL)]}),
     "vehicle-bus/dpo/solarisurbino12_s4": ([8], {"dpotyrkysova": [("u12_4", TQL)]}),
     "vehicle-bus/dpo/solarisurbino12_s4_electric": ([8], {"dpotyrkysova": [("u12_4e", TQL)]}),
     "vehicle-bus/dpo/solarisurbino15_s3": ([10], {"dpomodrozluta": [("u15", OLD)]}),
-    "vehicle-bus/dpo/solarisurbino18_s3": ([8, 6], {"dpomodrozluta": [("u18_3", OLD)]}),
+    "vehicle-bus/dpo/solarisurbino18_s3": ([8, 6], {"dpomodrozluta": [("u18_3", OLD)],
+                                                   "dpotyrkysova": [("u18_3", TQL)]}),
+    "vehicle-bus/dpo/solarisurbino18_s3_cng": ([8, 6], {"dpomodrozluta": [("u18_3cng", OLD)]}),
     "vehicle-bus/dpo/solarisurbino18_s4": ([8, 6], {"dpotyrkysova": [("u18_4", TQL)]}),
     "vehicle-trolleybus/dpo/26trsolaris": ([8], {"dpotyrkysova": [("26tr", TQL)]}),
     "vehicle-trolleybus/dpo/26trsolaris_partial": ([8], {"dpotyrkysova": [("26trp", TQL)]}),
-    "vehicle-trolleybus/dpo/27trsolaris": ([8, 6], {"dpotyrkysova": [("27tr", TQL)]}),
+    "vehicle-trolleybus/dpo/27trsolaris": ([8, 6], {"dpotyrkysova": [("27tr", TQL)],
+                                                    "dpomodrozluta": [("27tr", OLD)]}),
     "vehicle-trolleybus/dpo/27trsolaris_partial": ([8, 6], {"dpotyrkysova": [("27trp", TQL)]}),
     "vehicle-trolleybus/dpo/solaristrollino_12ac": ([8], {"dpomodrozluta": [("tr12", TRW)]}),
     "vehicle-trolleybus/dpo/solaristrollino_15ac": ([10], {"dpomodrozluta": [("tr15", TRW)]}),

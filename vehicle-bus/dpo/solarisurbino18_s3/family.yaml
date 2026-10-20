@@ -76,3 +76,7 @@ liveries:
   - color: dpomodrozluta
     name_en: "DPO blue-yellow"
     name_cs: "DPO modro-žlutá"
+  # 7804 and 7806, the two diesels still running in 2026, turquoise since 2019
+  - color: dpotyrkysova
+    name_en: "DPO turquoise"
+    name_cs: "DPO tyrkysová"

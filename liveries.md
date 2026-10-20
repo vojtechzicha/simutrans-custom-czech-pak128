@@ -430,3 +430,8 @@ Plain white `#F4F4F2` with a black window band and the ring. Z-Group bus uses th
 | Ornament line, ODIS logo | `244, 244, 242` | #F4F4F2 |
 
 Black window band and a black band under the windscreen. The white folk-ornament line runs one row under the windows (dotted at this scale, broken by the doors), and the big white ODIS logo sits two rows lower: between the front axle and the middle door on the door side, at mid-length on the other side. No ring.
+
+### One-offs in `VZ-ODIS-bus`
+
+- `3csadbilozelenazelenybox`: 3ČSAD white-green with the bright green CNG pod `#5CC43E` (side `#46A830`) of Transdev Slezsko's two 2014 SOR CNG 12; the A/C box behind it stays white.
+- `borszlutomodra`: Z-Group's ex-BORS Břeclav SOR CN 12 63-1401. Royal blue `#355188` skirt up to the rub strip, amber `#E69928` belt under the windows, a blue strip over them, yellow front mask over a blue bumper. The kraj ring added in 2025 looks pale blue (`#DCE8F2` / `#B8D0E6`, middle `#8CB4DC`, inner `#5E8AC4`) on the only photo, so this one is unverified.

@@ -8,18 +8,19 @@ windows_lit_when_loaded: true
 copyright: vojtechzicha
 # Art: rendered by tools/busrender/dpo_solaris.py (2026-10-20), replacing
 # TommPa9's sheets: the 2024 batch on the Urbino IV 18 m body, sections 8 + 6,
-# black frieze, grey battery boxes on the rear section, poles 1.2 m behind the joint.
+# black frieze, a low AC box on the rear section, poles 1.2 m behind the joint.
 
 display:
   agency_en: "DPO"
   agency_cs: "DPO"
-  family_en: "Škoda 27Tr Solaris (partial)"
-  family_cs: "Škoda 27Tr Solaris (parciální)"
+  family_en: "Škoda 27Tr Solaris (2024)"
+  family_cs: "Škoda 27Tr Solaris (2024)"
 
-# Partial-trolleybus variant of the articulated 27Tr in two sections, fitted
-# with a traction battery so the vehicle can leave the catenary and run
-# off-wire for a limited range. Drawn as the batch of 2024 on the Urbino IV
-# body (photo of 3814); intro_year 2015 is the upstream value.
+# The 27 TrNU of 2024, DPO 3813-3818 on the Urbino IV body (photo of 3814), in
+# service from 6 Jan 2025. Despite the folder and object name (kept for the
+# saves) they are plain trolleybuses: no traction battery and no supercapacitors
+# (cs.wikipedia; never logged on the battery-only lines 106 / 113), so
+# engine_type electric since 2026-10-20.
 
 vehicles:
   - id: "27TrSolaris_partial"
@@ -36,14 +37,14 @@ vehicles:
       weight: 10
       runningcost: 16
       fixed_cost: 76
-      intro_year: 2015
+      intro_year: 2025
       intro_month: 1
       retire_year: 2050
       retire_month: 1
       waytype: road
       freight: Passagiere
       length: 8
-      engine_type: battery
+      engine_type: electric
       power: 0
 
   - id: "27TrSolaris_partial_2"
@@ -60,14 +61,14 @@ vehicles:
       weight: 8
       runningcost: 17
       fixed_cost: 81
-      intro_year: 2015
+      intro_year: 2025
       intro_month: 1
       retire_year: 2050
       retire_month: 1
       waytype: road
       freight: Passagiere
       length: 6
-      engine_type: battery
+      engine_type: electric
       power: 265
       gear: 61
 

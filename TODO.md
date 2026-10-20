@@ -8,15 +8,12 @@ are in [`liveries.md`](liveries.md). Last checked 2026-10-10.
 Sheets that show another type's drawing. Other identical sheets in the repo are
 deliberate: the same body under another package or operator (DPP / Praha, DPMP /
 Kolín NovoCiti), the RegioPanter 440 / 640 / 640.1, 840 / 841, T3G / T3P,
-T3R.PV / T3R.EV, the DPO 26Tr / 27Tr partial-trolleybus variants. Their
+T3R.PV / T3R.EV. Their
 `family.yaml` comments say so.
 
 
 ## Missing types and liveries
 
-- [ ] DPO trams: **Vario LFR.S** (16 cars) and **Vario LF2R.S** (2). Candidates with
-  roof A/C units and equipment boxes were rejected (2026-10-10): don't add roof
-  boxes to the Vario body.
 - [ ] ČD **841.3** in Liberecký kraj colours, when the cars start in December 2026.
 - [ ] ČD **690.0** battery units, when passenger service starts in 2027.
 - [ ] Pardubický kraj **IREDO** buses, into the same `VZ-IREDO-bus.pak`.
@@ -27,18 +24,6 @@ T3R.PV / T3R.EV, the DPO 26Tr / 27Tr partial-trolleybus variants. Their
 - [ ] ODIS Českotěšínsko II: check the final fleet after 13 Dec 2026 (the tender
   estimated about 38 buses; `VZ-ODIS-bus` has the red SOR ICNG 12,3 / 10,5 and
   Crossway LE LINE 12M NP 2025 already).
-
-
-## DPO follow-ups
-
-- [ ] Drop the turquoise **Urbino 10** (`VZ-DPOstrava-SolarisUrbino10_s3-dpotyrkysova-…`):
-  no DPO Urbino 10 ever ran in turquoise and the owner dropped it, but every save
-  references it (14 times in FORK-CZR-VZ.sve). Migrate the live save first.
-- [ ] yaml dates that disagree with the art: 27Tr partial `intro_year: 2015` while it is
-  drawn as the 2024 Urbino IV batch; Rošero First `intro_year: 2018` against the 2021
-  delivery.
-- [ ] The Urbino 12 III and 18 III CNG batches have no object of their own; they share
-  the diesel art. `dpo_solaris.py` already draws the blue CNG fairing.
 
 
 ## Re-check against new photos
