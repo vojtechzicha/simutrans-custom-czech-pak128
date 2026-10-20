@@ -21,9 +21,11 @@ T3R.PV / T3R.EV, the DPO 26Tr / 27Tr partial-trolleybus variants. Their
 - [ ] ČD **690.0** battery units, when passenger service starts in 2027.
 - [ ] Pardubický kraj **IREDO** buses, into the same `VZ-IREDO-bus.pak`.
 - [ ] A **PID** package for the regional (non-city) lines around Prague.
-- [ ] Uninstall the `CZR-ODIS-*` pak and drop the `CZ-ODIS-*` objects once no save
-  uses them any more; `VZ-ODIS-bus` replaces them (migration plan of 2026-10-20 in
-  the ODIS memory note).
+- [ ] Uninstall `CZR-vehicles-bus-ODIS.pak` once the user agrees: `FORK-CZR-VZ.sve`
+  no longer uses it (migrated 2026-10-20 to `VZ-ODIS-bus`, line by line; original,
+  plan and name map in `D:\OneDrive\Games\Simutrans\uninstalled-CZR-ODIS-2026-10-20\`).
+  The other saves were not migrated. The `CZ-ODIS-*` buses live in VTPsim's
+  `CZ-vehicle-bus.pak`, which stays installed for its other objects.
 - [ ] ODIS Českotěšínsko II (Transdev Slezsko, from 13 Dec 2026): red ODIS buses,
   among them the **SOR ICNG 10,5**, a body the repo doesn't have yet.
 - [ ] Havířovsko III (kraj contract, Transdev Slezsko): 4 hydrogen SOR NSF 12 + 9
