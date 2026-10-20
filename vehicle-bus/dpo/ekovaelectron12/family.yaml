@@ -1,11 +1,11 @@
 agency: DPOstrava
 type: "EkovaElectron12"
-# Sprites were extracted from the compiled upstream pak with their tile
-# placement baked in, so no extra shift (the default [0, 4] sank them 4 px).
+# The sprite carries its own lane placement, so no extra shift (the default
+# [0, 4] would sink it 4 px).
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: TommPa9
+copyright: vojtechzicha
 
 display:
   agency_en: "DPO"
@@ -16,6 +16,13 @@ display:
 # Auto-extracted from CZ-vehicle-bus.pak via tools/pak_extract.py families.
 # Numeric fields come from the upstream VHCL payload; service dates were
 # checked against the 2025–2026 DPO roster.
+# Sprite: rendered by tools/busrender/dpo_other.py on the dpmhk.py body
+# (dpo_other_bodies.py), from photos of 5005 / 5006: 11.98 m, doors 2-2-2,
+# tall glazing with a white line under it, a tall turquoise band over the
+# windows, a full-length roof fairing that steps down at the rear, black front
+# mask over a turquoise front with a white band between the lamps. No
+# pantograph (plug and OppCharge charging). The upstream sheet was the Urbino
+# 12 IV with a pantograph.
 
 vehicles:
   - id: "EkovaElectron12"

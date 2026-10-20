@@ -30,7 +30,13 @@ display:
 # footprint, its front roof A/C unit removed, the cant rail painted blue, the white
 # roof container of the traction equipment with the louvred resistor box ahead
 # of it added, and the 26Tr poles (TommPa9) set pixel for pixel at the rear
-# end of the container: tools/busrender/dpo_derived.py.
+# end of the container: tools/busrender/dpo_derived.py. That sheet is frozen in
+# tools/busrender/src/dpo/ and patched by tools/busrender/dpo_other.py
+# (dpo_other_patch.py, from photos of 3912): the blue cant rail on both roof
+# edges in the end views, the black band under the side windows cut back to
+# the window frame except where it dips at the front, plain (unlit) windscreen
+# and driver's window, and light grey poles aimed at the wires of dpmhk.py in
+# place of the 26Tr ones.
 # Economy like the 26Tr (same motor), a little cheaper as an old prototype.
 
 vehicles:

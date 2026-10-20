@@ -16,6 +16,13 @@ display:
 # Auto-extracted from CZ-vehicle-trolleybus.pak via tools/pak_extract.py families.
 # Numeric fields come from the upstream VHCL payload; service dates were
 # checked against the 2025–2026 DPO roster.
+# TommPa9's drawing, patched by tools/busrender/dpo_other.py
+# (dpo_other_patch.py) on the frozen sheet in tools/busrender/src/dpo/, from
+# photos of 3312 / 3314: blue cant rail, blue line under the windows and the
+# orange stripe over the blue skirt in every view (front and rear too), plain
+# windscreen without the blue centre post, headlights in the white band, the
+# silver roof container over the rear half at its real length, and ochre poles
+# with black bases aimed at the wires of dpmhk.py from its front end.
 
 vehicles:
   - id: "21Tr"

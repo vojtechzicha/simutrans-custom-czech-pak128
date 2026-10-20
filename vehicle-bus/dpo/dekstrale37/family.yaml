@@ -1,7 +1,7 @@
 agency: DPOstrava
 type: "DekstraLE37"
-# Sprites were extracted from the compiled upstream pak with their tile
-# placement baked in, so no extra shift (the default [0, 4] sank them 4 px).
+# The sprite carries its own lane placement, so no extra shift (the default
+# [0, 4] would sink it 4 px).
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -16,6 +16,14 @@ display:
 # Auto-extracted from CZ-vehicle-bus.pak via tools/pak_extract.py families.
 # Numeric fields come from the upstream VHCL payload; service dates were
 # checked against the 2025–2026 DPO roster.
+# Sprite: VTPsim's LE 37 art of the Prague package (vehicle-bus/praha/
+# stratos_le_37, cut to 7.7 m, frozen in tools/busrender/src/dpo/) repainted in
+# DPO turquoise by tools/busrender/dpo_other.py (dpo_other_rebase.py), from
+# photos of 7304 / 7307 / 7310: single door 1 behind the front wheel, double
+# door 2 in the rear overhang, driver's window + 3 big windows on the left,
+# white line under the windows and across the bonnet under the IVECO grille,
+# light A/C box at the rear of the roof, silver wheels. The upstream DPO sheet
+# was drawn 9.2 m long with a door ahead of the front wheel.
 
 vehicles:
   - id: "DekstraLE37"

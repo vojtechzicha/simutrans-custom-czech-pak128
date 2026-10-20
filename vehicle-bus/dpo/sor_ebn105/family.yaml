@@ -1,11 +1,11 @@
 agency: DPOstrava
 type: "SOR_EBN105"
-# Sprites were extracted from the compiled upstream pak with their tile
-# placement baked in, so no extra shift (the default [0, 4] sank them 4 px).
+# The sprite carries its own lane placement, so no extra shift (the default
+# [0, 4] would sink it 4 px).
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 
 display:
   agency_en: "DPO"
@@ -16,6 +16,13 @@ display:
 # Auto-extracted from CZ-vehicle-bus.pak via tools/pak_extract.py families.
 # Numeric fields come from the upstream VHCL payload; service dates were
 # checked against the 2025–2026 DPO roster.
+# Sprite: rendered by tools/busrender/dpo_other.py as a 10.37 m variant of the
+# dpmhk.py SOR EBN body (dpo_other_bodies.py), from photos of 5002 / 5004:
+# white body and roof with a thin blue roof edge, blue roof pods and a big blue
+# unit at the rear of the roof, black window band, white panel, orange line and
+# blue lower zone (both drop towards the front, the driver's window reaches
+# lower), doors in the front overhang, mid-wheelbase and just ahead of the rear
+# axle. The upstream sheet was a dithered downscale (Lubak91).
 
 vehicles:
   - id: "SOR_EBN105"

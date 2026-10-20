@@ -22,6 +22,13 @@ display:
 # upper and lower window decks, white Ostrava skyline graphic between the
 # decks, silver line along the lower body, tinted glass roof with turquoise
 # ribs, black destination display between the two front windscreens.
+# Patched by tools/busrender/dpo_other.py (dpo_other_patch.py) on the frozen
+# sheet in tools/busrender/src/dpo/, from photos of 7991 / 7992: door 2 one
+# metre further back (one window between it and the rear wheel), the rear of
+# the lower deck windowless with the white grille graphic on both sides, the
+# light line under the lower glazing re-drawn there, the mirrors at
+# lower-deck level only, the painted parts of the glass roof in the light DPO
+# roof colour.
 
 vehicles:
   - id: "ScaniaUNVIUrbisDD"

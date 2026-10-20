@@ -21,8 +21,11 @@ display:
 # the pak128 projection, native 12 m bus proportions): tall black glazing band,
 # light grey line under it, three double doors on the right, full-length roof
 # fairing with the white "ooo" mark, black front "smile" band with the lamps.
-# Trolley poles transplanted pixel-for-pixel from the DPO 26Tr sheet, with the
-# body placed on the same footprint so they stay on the wires.
+# The body sits on the footprint of the other DPO trolleybus sheets. Patched
+# by tools/busrender/dpo_other.py (dpo_other_patch.py) on the frozen sheet in
+# tools/busrender/src/dpo/: the light grey line under the glazing on both
+# sides in every view, and black poles (as on the photos) aimed at the wires
+# of dpmhk.py; the poles transplanted from the 26Tr sheet are gone.
 #
 # engine_type=battery models the off-wire capability; in pak128.cs this means
 # the vehicle can operate on roads without overhead lines.

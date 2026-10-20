@@ -5,7 +5,7 @@ type: "RoseroFirst"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: vojtechzicha
+copyright: VTPsim
 
 display:
   agency_en: "DPO"
@@ -13,14 +13,19 @@ display:
   family_en: "Rošero First CNG"
   family_cs: "Rošero First CNG"
 
-# Rošero-P First FCLLI / FCLLI CNG: Iveco Daily based low-entry midibus,
-# ~7.7 m, ~30 passengers, ~110 kW. DPO took delivery of 5 units 2018–2021,
-# all in service.
-# Sprite drawn from scratch from photos of 5303/7311 (box model in the pak128
-# projection, native short-bus proportions): turquoise all over, Iveco Daily
-# bonnet with black grille and swept headlights, big windscreen with display,
-# dark side windows, two doors on the right (behind each axle), turquoise CNG
-# roof pod, small wheels with turquoise hub caps.
+# Rošero-P First FCLEI CNG: DPO 7311-7312 (2021), Iveco Daily 70C low-entry
+# midibus, about 8.0 m, Iveco F1C CNG 100 kW, doors 2-2 (a double door behind
+# the front wheel, a double door with a ramp behind the rear axle). Not the
+# electric First FCLLI (DPO 5301-5305, 2018-19, doors 1-2), which this family
+# does not draw.
+# Sprite: VTPsim's LE 37 art of the Prague package (vehicle-bus/praha/
+# stratos_le_37, frozen in tools/busrender/src/dpo/; the Prague Rosero First
+# sheet is the same drawing with a single rear door) repainted in DPO turquoise
+# by tools/busrender/dpo_other.py (dpo_other_rebase.py), from photos of 7311:
+# 2021 Daily front (white line on the bonnet, lamps at the bonnet corners,
+# black bumper), black window frames with the white line under them, the
+# turquoise CNG fairing over the rear two thirds of the roof with the Webasto
+# A/C box ahead of it, turquoise wheel rims.
 
 vehicles:
   - id: "RoseroFirst"
