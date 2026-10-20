@@ -261,7 +261,7 @@ The DPO Škoda 39T (`vehicle-tram/dpo/39t_forcitysmart`) comes from `dpo_39t.py`
 
 Every section is drawn complete, the way the native trams are. The engine's draw order covers the hidden end of a section. Cutting each tile to the pixels its section owns in a straight consist would leave a notch on curves. Each section's front sits on the front anchor of the native DPO trams, so any section lengths close at the joints (check with `consist_preview.py`).
 
-`dpo_palette.py` holds the DPO turquoise scheme chosen on 2026-10-18 for all DPO trams: body `00ADD6` (Pantone 312 C), roof `44C1E4` (the same paint lit from above, lighter on photos), flat sides with one shoulder step. The older DPO sheets still carry the dark teal roof `007B94` until they are redrawn. `tramkit.py` and `dpo_trio.py` edit existing tram sheets in place (roof boxes, ASCII pixel patches).
+`dpo_palette.py` holds the DPO turquoise scheme chosen on 2026-10-18 for all DPO trams: body `00ADD6` (Pantone 312 C), roof `44C1E4` (the same paint lit from above, lighter on photos), flat sides with one shoulder step. The older DPO sheets still carry the dark teal roof `007B94` until they are redrawn. `tramkit.py` and `dpo_trio.py` edit existing tram sheets in place (roof boxes, ASCII pixel patches). The DPO Varios (`variolf`, `variolf2`, `variolf2_plus`, `variolf3`, `variolf3_s2`) are TommPa9's drawings painted by `dpo_vario.py`: one per-pixel zone map of the shared Pelikán module, built from his blue-yellow sheets frozen in `src/dpo_vario/`, paints every livery. A colour map of one livery into another loses lines; paint from the zones instead.
 
 ### Prague and Brno packages for other operators (`vehicle-bus/praha/`, `vehicle-bus/brno/`, `vehicle-water/praha/`)
 
