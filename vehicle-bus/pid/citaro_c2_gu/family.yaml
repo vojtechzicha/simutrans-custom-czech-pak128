@@ -1,0 +1,83 @@
+agency: PID
+type: "Citaro_C2_GU"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Mercedes-Benz Citaro C2 GÜ"
+  family_cs: "Mercedes-Benz Citaro C2 GÜ"
+
+# Mercedes-Benz Citaro C2 GÜ suburban articulated (18.125 m, doors 1-2-2-0): 17
+# buses (ČSAD Benešov 12, UMBRELLA 5, 2024) in PID 2021 grey-red
+# (pidsedocervena). Front section 7 + rear 6.
+# Sprite: original box-model render (vojtechzicha): praha_man.CitaroC2GU, a
+# Citaro C2 face on the articulated NewGen box of
+# tools/busrender/praha_man.py, PID grey-red.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Citaro_C2_GU-A"
+    display_id: "Citaro C2 GÜ"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["Citaro_C2_GU-B"]
+    fields:
+      cost: 650000
+      payload: 80
+      speed: 80
+      weight: 11
+      runningcost: 23
+      fixed_cost: 118
+      intro_year: 2024
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 0
+      gear: 54
+
+  - id: "Citaro_C2_GU-B"
+    display_id: "Citaro C2 GÜ"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["Citaro_C2_GU-A"]
+    next: []
+    fields:
+      cost: 500000
+      payload: 65
+      speed: 80
+      weight: 7
+      runningcost: 17
+      fixed_cost: 90
+      intro_year: 2024
+      intro_month: 11
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 260
+      gear: 61
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · ČSAD Benešov, UMBRELLA"
+    name_cs: "PID šedo-červená · ČSAD Benešov, UMBRELLA"

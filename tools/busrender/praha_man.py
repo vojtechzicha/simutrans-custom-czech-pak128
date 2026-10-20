@@ -974,6 +974,93 @@ LionsCityG = articulated(
           dict(kind="ac", u0=11.30, u1=13.70, inset=0.30, h0=0.0, h1=0.22)])
 
 
+# ================================================================ Mercedes-Benz Citaro C2
+class CitaroC2(NewGen):
+    """Mercedes-Benz Citaro C2 (2011+) on the NewGen box: black front with the
+    big windscreen and the display behind it, black A-pillars, body-coloured
+    lower front with the headlights in black housings at the corners and the
+    star in the middle; black rear window band with vertical tail-light
+    clusters; flat roof with A/C boxes; engine tower in the last left window
+    bay. Used articulated (CitaroC2GU)."""
+
+    def front_corner(self, face, u, h, pu, ph, right):
+        if h >= self.band_bot(u, right):
+            return rgb(BLACK)                          # black A-pillar
+        return None
+
+    def roof_extra(self, u, v, pu, pv):
+        return None
+
+    def front(self, face, v, h, pv, ph):
+        W = self.W
+        if h < self.SKIRT:
+            return None
+        if h < self.SKIRT + ph:
+            return rgb(BUMPER)
+        edge = v < pv * 0.9 or v > W - pv * 0.9
+        if h < 1.00:
+            if 0.58 <= h < 0.58 + ph and (v < 0.50 or v > W - 0.50):
+                return rgb(HEAD) if (v < pv or v > W - pv) else rgb(BLACK)
+            if 0.80 <= h < 0.80 + ph and abs(v - W / 2) < 0.16:
+                return rgb(SEAM)                       # the star
+            if self.liv == "A" and v < W * 0.5 and h < 0.95:
+                return self.c(RED_A, face)             # red block, vehicle's left
+            return self.c(GREY, face)
+        if h >= self.H - ph:
+            return self.c(GREY, face)
+        if edge:
+            return rgb(BLACK)
+        if 2.55 <= h < 2.55 + ph and 0.30 <= v < W - 0.30:
+            return rgb(self.disp)
+        if 1.05 <= h < 2.45:
+            return rgb(GLASS2) if h >= 2.45 - ph else rgb(GLASS)
+        return rgb(BLACK)
+
+    def rear(self, face, v, h, pv, ph):
+        W = self.W
+        if h < self.SKIRT:
+            return None
+        if h < self.SKIRT + ph:
+            return rgb(BUMPER)
+        edge = v < pv * 0.9 or v > W - pv * 0.9
+        if edge and 0.75 <= h < 1.55:
+            return rgb(TAIL)
+        if h >= 1.70:
+            if h >= self.H - ph:
+                return self.c(GREY, face)
+            if 2.42 <= h < 2.42 + ph and 1.10 <= v < 1.70:
+                return rgb(self.disp)
+            if not edge and 1.70 + ph <= h < 2.35:
+                return rgb(GLASS)
+            return rgb(BLACK)
+        if self.liv == "A" and 0.35 <= v < 1.25 and h < 1.00:
+            return self.c(RED_A, face)
+        return self.c(GREY, face)
+
+
+class ArticCitaro(ArticNewGen, CitaroC2):
+    pass
+
+
+# Mercedes-Benz Citaro C2 GÜ (suburban articulated): 18.125 x 2.55 m, overhangs
+# 2.805 / 3.43 m, wheelbases 5.90 + 5.99 m (Mercedes-Benz facts sheet), doors
+# 1-2-2-0 (seznam-autobusu, ČSAD Benešov 2024), the joint 1.3 m behind the middle
+# axle; A/C boxes on both sections; PID grey-red columns (photo 7951).
+CitaroC2GU = articulated(
+    "CitaroC2GU", ArticCitaro, 18.125, [10.00], [7, 6],
+    axles=[2.805, 8.705, 14.695],
+    doors_r=[(0.30, 1.18), (5.60, 6.85), (10.55, 11.80)],
+    posts_r=[2.70, 4.15, 8.40, 13.25, 14.70, 16.15],
+    posts_l=[1.45, 2.95, 4.45, 5.95, 7.45, 8.95, 11.20, 12.70, 14.20, 15.70, 16.75],
+    reds=[(1.25, 3.75), (7.95, 10.05), (13.70, 15.70)],
+    LOGOS=[(4.60, 5.30), (16.20, 16.90)],
+    sidedisp=(1.35, 2.55),
+    hatches=[(4.40, 4.95), (12.40, 12.95)],
+    louvre=(16.80, 17.95),
+    ROOF=[dict(kind="ac", u0=4.20, u1=7.60, inset=0.30, h0=0.0, h1=0.28),
+          dict(kind="ac", u0=11.60, u1=13.60, inset=0.35, h0=0.0, h1=0.24)])
+
+
 MODELS = {"c12": NewGen, "hybrid": Hybrid, "ile": IntercityLE, "nl293": OldGen, "l": LionsCityL}
 
 

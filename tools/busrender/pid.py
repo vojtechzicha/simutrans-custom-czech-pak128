@@ -758,6 +758,15 @@ FAMILIES = dict([
         " Čechy, 2018) in " + RBW,
         "original box-model render (vojtechzicha): the Urbino IV model of"
         " tools/busrender/dpo_solaris.py painted by pid.PSolaris in the PID liveries."),
+    man("citaro_c2_gu", "Citaro_C2_GU", "Mercedes-Benz Citaro C2 GÜ",
+        T.artic("Citaro_C2_GU", "Citaro C2 GÜ",
+                f_(650000, 80, 80, 11, 23, 118, 2024, 7, "diesel", 0, 54, intro_month=11),
+                f_(500000, 65, 80, 7, 17, 90, 2024, 6, "diesel", 260, 61, intro_month=11, smoke=SMOKE)),
+        [(A("ČSAD Benešov, UMBRELLA"), man_artic("CitaroC2GU", "V12"))],
+        "Mercedes-Benz Citaro C2 GÜ suburban articulated (18.125 m, doors 1-2-2-0): 17 buses"
+        " (ČSAD Benešov 12, UMBRELLA 5, 2024) in " + GR + " Front section 7 + rear 6.",
+        "original box-model render (vojtechzicha): praha_man.CitaroC2GU, a Citaro C2 face on"
+        " the articulated NewGen box of tools/busrender/praha_man.py, PID grey-red."),
     man("lions_city_18c", "Lions_City_18C", "MAN Lion's City 18C",
         T.artic("Lions_City_18C", "Lion's City 18C",
                 f_(600000, 85, 80, 11, 22, 115, 2021, 7, "diesel", 0, 54, intro_month=3),
