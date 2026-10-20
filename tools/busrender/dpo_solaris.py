@@ -124,9 +124,12 @@ OPTS = {
     "fairtop": "roof",       # turquoise fairing tops: roof (44C1E4) | light (a step lighter)
     "trollino_roof": "white",  # Trollino 12 / 15 roof: white (photos) | blue
 }
-DOME = {"bold": [(1.70, 1.02, 0.20), (1.15, 0.74, 0.36), (0.60, 0.46, 0.50)],   # (length, half width, height) tiers
+# (length, half width, height above the roof) per tier, from the widest
+DOME = {"bold": [(1.80, 1.05, 0.22), (1.25, 0.78, 0.42), (0.65, 0.48, 0.60)],
         "subtle": [(1.20, 0.90, 0.16), (0.60, 0.55, 0.26)]}
-RAKE = {"bold": [(1.30, 1.80, 0.14), (1.80, 2.30, 0.30), (2.30, 2.80, 0.48), (2.80, 9.0, 0.70)],
+# (z from, z to, setback of the front from the bumper line) per step, one pixel row each
+RAKE = {"bold": [(1.30, 1.55, 0.10), (1.55, 1.80, 0.20), (1.80, 2.05, 0.32), (2.05, 2.30, 0.44),
+                 (2.30, 2.55, 0.56), (2.55, 2.80, 0.70), (2.80, 9.0, 0.85)],
         "subtle": [(1.30, 1.80, 0.08), (1.80, 2.30, 0.18), (2.30, 2.80, 0.30), (2.80, 9.0, 0.42)]}
 
 # ------------------------------------------------------------------ bodies
