@@ -304,7 +304,12 @@ The colours are those of praha.py "A" / "B". Run `python tools/busrender/pid.py 
 
 ### Královéhradecký kraj (`vehicle-bus/iredo/`, `vehicle-bus/mhd-<town>/`)
 
-The kraj's regional buses are named after the integrated system: agency `IREDO` builds `VZ-IREDO-bus.pak`, which also holds the town lines integrated in IREDO (Náchod, Rychnov nad Kněžnou, Týniště, Vrchlabí, Dvůr Králové). Town systems outside IREDO get their own `MHD<Town>` pak (Trutnov, Špindlerův Mlýn, Jičín, Nová Paka, Kostelec nad Orlicí). As in Prague, there is one object per type × livery and the operator appears only in the livery display name. Pardubický kraj's IREDO buses will go into the same `VZ-IREDO-bus.pak` later.
+The kraj's regional buses are named after the integrated system: agency `IREDO` builds `VZ-IREDO-bus.pak`, which also holds the town lines integrated in IREDO (Náchod, Rychnov nad Kněžnou, Týniště, Vrchlabí, Dvůr Králové). Town systems outside IREDO get their own `MHD<Town>` pak (Trutnov, Špindlerův Mlýn, Jičín, Nová Paka, Kostelec nad Orlicí). As in Prague, there is one object per type × livery and the operator appears only in the livery display name.
+
+Pardubický kraj's IREDO buses are in the same pak (October 2026: 8 areas, 2022–2032 contracts).
+- Its white buses carry no KHK sticker, so they are the livery `bilapk`. A livery switches the sticker off with `sticker = False`, in both iredo_models and khk_small. The SOR CN roof step is painted black.
+- Further liveries: Arriva's turquoise-cream, ZDAR's white-blue-red, BORS, and the PID trikolóra on the older SOR CN 12.
+- Its integrated town lines (Chrudim, Přelouč) are in VZ-IREDO too. Ústí nad Orlicí, Litomyšl and Polička have their own `MHD<Town>` paks, built by `tools/busrender/pk_town.py` from copies and repaints of repo sheets.
 
 The kraj has no uniform IREDO paint. Each contract operator keeps its own scheme: `bila` (BusLine KHK, KAD), `transdev` (white with the big red Transdev figure), `cds` (CDS Náchod yellow with the red CDS), `ptransport` (P-transport yellow-red), plus the legacy BusLine `buslinezelena` / `buslinezlutozelena`. Every IREDO bus carries the kraj sticker, drawn as a light panel over the upper rear window; town-pak buses don't. The scope is the vehicles each operator ran in October 2026. On seznam-autobusu.cz, count only operator periods that are open-ended ("od m/yyyy"): a vehicle in service elsewhere has already left.
 

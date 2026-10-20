@@ -52,3 +52,6 @@ liveries:
   - color: bila
     name_en: "white · BusLine KHK"
     name_cs: "bílá · BusLine KHK"
+  - color: bilapk
+    name_en: "white, Pardubický kraj · BusLine Pardubicko, ZDAR"
+    name_cs: "bílá, Pardubický kraj · BusLine Pardubicko, ZDAR"

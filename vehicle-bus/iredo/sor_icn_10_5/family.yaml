@@ -14,7 +14,8 @@ display:
   family_cs: "SOR ICN 10,5"
 
 # SOR ICN 10,5 low-entry interurban, 10.6 m, doors 1-2-0. KHK 2026: KAD 2 (2023);
-# Transdev Čechy's 4 (2022) run for BusLine Pardubicko.
+# Transdev Čechy's 4 (2022) run for BusLine Pardubicko. Pardubický kraj 2026: 18
+# white without the KHK sticker (BusLine Pardubicko 10, ZDAR 8).
 # Sprite: original box-model render (vojtechzicha), model SorICN105 in
 # tools/busrender/iredo_coachmodels.py; regenerate with
 # tools/busrender/iredo_coaches.py.
@@ -51,3 +52,6 @@ liveries:
   - color: bila
     name_en: "white · KAD"
     name_cs: "bílá · KAD"
+  - color: bilapk
+    name_en: "white, Pardubický kraj · BusLine Pardubicko, ZDAR"
+    name_cs: "bílá, Pardubický kraj · BusLine Pardubicko, ZDAR"

@@ -61,3 +61,6 @@ liveries:
   - color: ptransport
     name_en: "yellow-red · P-transport"
     name_cs: "žluto-červená · P-transport"
+  - color: bilapk
+    name_en: "white, Pardubický kraj · VYDRUS"
+    name_cs: "bílá, Pardubický kraj · VYDRUS"

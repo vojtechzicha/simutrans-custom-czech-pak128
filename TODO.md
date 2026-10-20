@@ -16,7 +16,12 @@ T3R.PV / T3R.EV. Their
 
 - [ ] ČD **841.3** in Liberecký kraj colours, when the cars start in December 2026.
 - [ ] ČD **690.0** battery units, when passenger service starts in 2027.
-- [ ] Pardubický kraj **IREDO** buses, into the same `VZ-IREDO-bus.pak`.
+- [ ] Pardubický kraj (IREDO, shipped 2026-10-20): the one-off new bodies Mercedes-Benz
+  Citaro C2 LE Ü, Intouro II ME (CAR-TOUR white-orange), Setra S 419 UL (also 15 for
+  PID) and Iveco Feniksbus Suburban P; the subcontract stand-ins in other paint
+  (Wrocław and brown SOR CN, Alto Adige and ICOM Crossways) are left out. Also:
+  CAR-TOUR runs two Setra S 415 LE on BusLine KHK line 611109, which the KHK
+  roster misses.
 - [ ] **PID regional** (`VZ-PID-bus`, phase 1 shipped 2026-10-20): still missing the
   new bodies MAN Lion's City 18C (78 buses), Setra S 515 LE (51) / S 510 LE (4),
   MAN Lion's City G (19), Mercedes-Benz Citaro C2 GÜ (17), Setra S 419 UL (15),

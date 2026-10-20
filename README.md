@@ -193,6 +193,15 @@ ComfortJet coaches are CZR art ported 1:1.
   `VZ-IREDO-bus.pak`. Towns outside IREDO have their own paks: Trutnov (Arriva
   blue with the mosaic: 26BB, NBG 18, NB 12 and reserves), Špindlerův Mlýn,
   Jičín, Nová Paka and Kostelec nad Orlicí.
+- **Pardubický kraj (IREDO)**: the regional buses of BusLine Pardubicko, ARRIVA
+  autobusy, ZDAR, UMBRELLA and CAR-TOUR (October 2026) in the same
+  `VZ-IREDO-bus.pak`. They are white without the Královéhradecký sticker, on the SOR CN
+  10,5 / 12 / 12,3, ICN 10,5, Crossway LE LINE 10,8M / 12M / 14,5M, Setra S 415 LE,
+  Rošero First, Dekstra LE 37 and NovoCiti Life. There are also Arriva's
+  turquoise-cream CN 10,5, ZDAR's white-blue-red and the BORS and PID SOR CN 12.
+  The integrated town lines of Chrudim (SOR NB 12 in three liveries, Urbanway 12M
+  CNG, Conecto LF, TEMSA MD9 LE) and Přelouč (SOR BN 8,5) are in it too. Ústí nad
+  Orlicí, Litomyšl (Rošero First) and Polička (Iveco Daily) have their own paks.
 - **Moravskoslezský kraj (ODIS)**: the regional buses running in October 2026
   (`VZ-ODIS-bus.pak`; the town fleets have their own paks, see below), each with
   the kraj ring over the rear axle in its operator's colours:

@@ -1,0 +1,52 @@
+agency: IREDO
+type: "SOR_BN_8_5"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "IREDO"
+  agency_cs: "IREDO"
+  family_en: "SOR BN 8,5"
+  family_cs: "SOR BN 8,5"
+
+# SOR BN 8,5 low-floor midibus. MHD Přelouč (line 655101, integrated in IREDO),
+# ARRIVA autobusy: 72237 (2017) and the ex-demonstrator 71754 (reserve), white.
+# Sprite: VTPsim's SOR BN 8,5, the white Trutnov sheet as is
+# (vehicle-bus/mhd-trutnov/sor_bn_8_5).
+# Regenerate with tools/busrender/pk_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_BN_8_5"
+    display_id: "SOR BN 8,5"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 420000
+      payload: 60
+      speed: 75
+      weight: 8
+      runningcost: 17
+      fixed_cost: 86
+      intro_year: 2016
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 160
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: bila
+    name_en: "white · ARRIVA autobusy (MHD Přelouč)"
+    name_cs: "bílá · ARRIVA autobusy (MHD Přelouč)"

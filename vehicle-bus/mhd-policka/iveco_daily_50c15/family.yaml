@@ -1,0 +1,53 @@
+agency: MHDPolicka
+type: "Iveco_Daily_50C15"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "MHD Polička"
+  agency_cs: "MHD Polička"
+  family_en: "Iveco Daily 50C15"
+  family_cs: "Iveco Daily 50C15"
+
+# Iveco Daily 50C15 minibus. MHD Polička (lines 685001-685003, not in IREDO),
+# Zlatovánek: 51776 (ex RUBAN, since 9/2022), grey metallic with the town's
+# "městská doprava" lettering (not drawn). The Renault Master reserve is left out.
+# Sprite: the Iveco Daily 50C13 render of vehicle-bus/mhd-nova-paka (same silver-grey van at
+# this scale) as is.
+# Regenerate with tools/busrender/pk_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Iveco_Daily_50C15"
+    display_id: "Iveco Daily 50C15"
+    role_en: "minibus"
+    role_cs: "minibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 160000
+      payload: 19
+      speed: 90
+      weight: 3
+      runningcost: 12
+      fixed_cost: 60
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 110
+      gear: 66
+      smoke: Diesel_small
+
+liveries:
+  - color: sedametaliza
+    name_en: "grey metallic · Zlatovánek"
+    name_cs: "šedá metalíza · Zlatovánek"

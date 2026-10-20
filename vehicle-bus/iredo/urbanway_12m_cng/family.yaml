@@ -1,0 +1,52 @@
+agency: IREDO
+type: "Urbanway_12M_CNG"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "IREDO"
+  agency_cs: "IREDO"
+  family_en: "Iveco Urbanway 12M CNG"
+  family_cs: "Iveco Urbanway 12M CNG"
+
+# Iveco Urbanway 12M CNG (CNG: engine_type diesel, no smoke), doors 2-2-2. MHD
+# Chrudim, ARRIVA autobusy: 64676 and 64677 (2016, ex MAD Kladno, here since
+# 2-3/2025), still in the MAD Kladno white with the red stripe.
+# Sprite: Lubak91's Urbanway 12M CNG, the MHD Kladno sheet as is
+# (vehicle-bus/mhd-kladno/urbanway_12m_cng).
+# Regenerate with tools/busrender/pk_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Urbanway_12M_CNG"
+    display_id: "Iveco Urbanway 12M CNG"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 800000
+      payload: 95
+      speed: 80
+      weight: 12
+      runningcost: 24
+      fixed_cost: 135
+      intro_year: 2016
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 213
+      gear: 56
+
+liveries:
+  - color: kladnobilocervena
+    name_en: "MAD Kladno white-red · ARRIVA autobusy (MHD Chrudim)"
+    name_cs: "MAD Kladno, bílo-červená · ARRIVA autobusy (MHD Chrudim)"

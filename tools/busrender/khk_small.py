@@ -297,6 +297,11 @@ class RBila(RLivery):
         return None
 
 
+class RBilaPK(RBila):
+    """Pardubický kraj white: as RBila, without the KHK rear sticker"""
+    sticker = False
+
+
 class RTransdev(RLivery):
     """white with the big red Transdev figure on the lower side behind the
     front door, small red mark on the front."""
@@ -527,7 +532,7 @@ def repaint(tiles, spec, liv, ref=0xEE, roof_k=1.05, ac=None, sticker=True, pods
                 new[y, x] = unspecial(tuple(min(255, max(0, round(v * k))) for v in cc))
         if ac:
             draw_ac(new, face, u, lr, ac, liv)
-        if sticker:
+        if sticker and liv.sticker:
             khk_sticker(new, t, face, lr)
         out.append(new)
     return out
@@ -604,7 +609,7 @@ NOVO_SPEC = {
 }
 
 RLIVERIES = {"bila": RBila, "transdev": RTransdev, "cds": RCDS, "ptransport": RPTransport,
-             "bilocerna": RBiloCerna, "dvurkralove": DvurKralove}
+             "bilocerna": RBiloCerna, "dvurkralove": DvurKralove, "bilapk": RBilaPK}
 
 
 def repaint_job(base, spec, ac=None, sticker=True, pods=True):
@@ -949,6 +954,7 @@ LIVNAME = {
     "dvurkralove": ("white-green, town photo wrap", "zeleno-bílá s fotografiemi města"),
     "stribrnajicin": ("silver, Jičín logo", "stříbrná s logem Jičína"),
     "stribrna": ("silver-grey", "stříbrošedá"),
+    "bilapk": ("white, Pardubický kraj", "bílá, Pardubický kraj"),
 }
 
 AGENCY = {
@@ -969,7 +975,7 @@ FAMILIES = {
         agency="IREDO", type="Dekstra_LE_37", name="Dekstra LE 37 / SKD Stratos LE 37", role=MIDI,
         copyright=VTP, job=repaint_job(LF38_BASE, LF38_SPEC, ac=(0.70, 0.90), pods=False),
         liveries=[("bila", "BusLine KHK, KAD"), ("transdev", "Transdev Čechy"),
-                  ("ptransport", "P-transport")],
+                  ("ptransport", "P-transport"), ("bilapk", "VYDRUS")],
         fields=fields(300000, 37, 90, 5, 132, 5, 2009),
         note="Iveco-Dekstra LE 37 (until 2016 SKD Stratos LE 37): low-entry midibus on the\n"
              "Iveco Daily 70C, about 7.7 x 2.2 x 2.9 m, doors 1-2 (door behind the front\n"
@@ -985,7 +991,8 @@ FAMILIES = {
         copyright=VTP, job=repaint_job(FIRST_BASE, FIRST_SPEC),
         liveries=[("cds", "CDS Náchod"), ("ptransport", "P-transport"),
                   ("bila", "BusLine KHK, Transdev Čechy"),
-                  ("bilocerna", "Transdev Čechy, MHD Týniště nad Orlicí")],
+                  ("bilocerna", "Transdev Čechy, MHD Týniště nad Orlicí"),
+                  ("bilapk", "ARRIVA autobusy, VYDRUS")],
         fields=fields(290000, 33, 90, 5, 132, 5, 2009),
         note="Rošero-P First FCLLI / FSLLI / FCLEI: low-entry midibus on the Iveco Daily\n"
              "70C, about 7.7 x 2.2 x 2.9 m, door behind the front wheel and a door in the\n"
@@ -998,7 +1005,7 @@ FAMILIES = {
     "vehicle-bus/iredo/novociti_life": dict(
         agency="IREDO", type="NovoCiti_Life", name="Isuzu NovoCiti Life", role=MIDI,
         copyright=VTP, job=repaint_job(NOVO_BASE, NOVO_SPEC),
-        liveries=[("bila", "BusLine KHK")],
+        liveries=[("bila", "BusLine KHK"), ("bilapk", "BusLine Pardubicko, ZDAR")],
         fields=fields(420000, 50, 90, 7, 140, 5, 2018),
         note="Isuzu NovoCiti Life (Class II), 7.9 m low-floor midibus, 7.9 x 2.3 x 3.0 m,\n"
              "doors 1-2, Isuzu 4HK1 5.2 l diesel 140 kW.\n"

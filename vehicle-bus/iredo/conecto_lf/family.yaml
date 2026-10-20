@@ -1,0 +1,52 @@
+agency: IREDO
+type: "Conecto_LF"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "IREDO"
+  agency_cs: "IREDO"
+  family_en: "Mercedes-Benz Conecto LF"
+  family_cs: "Mercedes-Benz Conecto LF"
+
+# Mercedes-Benz Conecto LF, doors 2-2-2. MHD Chrudim, ARRIVA autobusy: 62168 (2016,
+# since 4/2026), white with a red stripe under the windows.
+# Sprite: VTPsim's Conecto LF (the white Kolín sheet, vehicle-bus/mhd-kolin/conecto_lf)
+# repainted by odis_town.repaint, the red stripe by pk_town.py.
+# Regenerate with tools/busrender/pk_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Conecto_LF"
+    display_id: "Mercedes-Benz Conecto LF"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 600000
+      payload: 100
+      speed: 75
+      weight: 11
+      runningcost: 23
+      fixed_cost: 118
+      intro_year: 2016
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 220
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: bilacervenypruh
+    name_en: "white with a red stripe · ARRIVA autobusy (MHD Chrudim)"
+    name_cs: "bílá s červeným pruhem · ARRIVA autobusy (MHD Chrudim)"

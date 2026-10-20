@@ -1,0 +1,57 @@
+agency: MHDUstiNadOrlici
+type: "Rosero_First"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "MHD Ústí nad Orlicí"
+  agency_cs: "MHD Ústí nad Orlicí"
+  family_en: "Rošero First FCLLI"
+  family_cs: "Rošero First FCLLI"
+
+# Rošero-P First FCLLI midibus on the Iveco Daily. MHD Ústí nad Orlicí (line 705100,
+# not in IREDO), ČSAD Ústí nad Orlicí 2026: 80504 (2018) and 114960 (2023) white
+# with the dark-blue "Městská hromadná doprava" and the town arms over the side
+# windows (a dotted line here); 114240 (2023, ex MHD Říčany, since 9/2025) white.
+# Sprite: VTPsim's Rošero First (the IREDO white sheet without the KHK sticker,
+# vehicle-bus/iredo/rosero_first), the lettering by pk_town.py.
+# Regenerate with tools/busrender/pk_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Rosero_First"
+    display_id: "Rošero First FCLLI"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 290000
+      payload: 33
+      speed: 90
+      weight: 5
+      runningcost: 15
+      fixed_cost: 80
+      intro_year: 2018
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 132
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: mhdusti
+    name_en: "white, MHD Ústí nad Orlicí lettering · ČSAD Ústí nad Orlicí"
+    name_cs: "bílá s grafikou MHD Ústí nad Orlicí · ČSAD Ústí nad Orlicí"
+  - color: bila
+    name_en: "white · ČSAD Ústí nad Orlicí"
+    name_cs: "bílá · ČSAD Ústí nad Orlicí"

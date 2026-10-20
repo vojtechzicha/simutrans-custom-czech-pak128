@@ -1,0 +1,53 @@
+agency: IREDO
+type: "TEMSA_MD9_LE"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "IREDO"
+  agency_cs: "IREDO"
+  family_en: "TEMSA MD9 LE"
+  family_cs: "TEMSA MD9 LE"
+
+# TEMSA MD9 LE midibus, 9.3 m. MHD Chrudim, ARRIVA autobusy: 100901 (2021, since
+# 2/2023), white with the town's "MĚSTSKÁ AUTOBUSOVÁ DOPRAVA CHRUDIM" lettering over
+# the rear windows (a dotted line here).
+# Sprite: original box render (vojtechzicha): the TEMSA MD9 LE body of
+# tools/busrender/praha_small.py, white, the lettering by pk_town.py.
+# Regenerate with tools/busrender/pk_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "TEMSA_MD9_LE"
+    display_id: "TEMSA MD9 LE"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 420000
+      payload: 60
+      speed: 80
+      weight: 8
+      runningcost: 18
+      fixed_cost: 92
+      intro_year: 2021
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 160
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: chrudimbila
+    name_en: "MHD Chrudim white · ARRIVA autobusy"
+    name_cs: "MHD Chrudim, bílá · ARRIVA autobusy"

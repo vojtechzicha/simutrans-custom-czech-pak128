@@ -15,7 +15,8 @@ display:
 
 # Setra S 415 LE business low-entry interurban, 12.18 x 2.55 x 3.13 m, doors 1-2-0,
 # OM 936 260 kW. KHK 2026: BusLine KHK 4 (white, Hradec Králové), CDS Náchod's
-# two left in 2025.
+# two left in 2025. Pardubický kraj 2026: 52 white (UMBRELLA 32, CAR-TOUR 18, BD
+# Trans 2), no KHK sticker.
 # Sprite: original box-model render (vojtechzicha), model SetraS415LE in
 # tools/busrender/iredo_coachmodels.py; regenerate with
 # tools/busrender/iredo_coaches.py.
@@ -52,3 +53,6 @@ liveries:
   - color: bila
     name_en: "white · BusLine KHK"
     name_cs: "bílá · BusLine KHK"
+  - color: bilapk
+    name_en: "white, Pardubický kraj · UMBRELLA, CAR-TOUR, BD Trans"
+    name_cs: "bílá, Pardubický kraj · UMBRELLA, CAR-TOUR, BD Trans"

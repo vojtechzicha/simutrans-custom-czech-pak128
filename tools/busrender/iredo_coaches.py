@@ -30,11 +30,12 @@ for _k, _v in LIVERY.items():
 FAMILIES = {
     # ------------------------------------------------------------ Setra
     "setra_s_415_le_business": fam("SetraS415LE", "Setra_S_415_LE_business", "Setra S 415 LE business", BUS,
-        [("bila", "BusLine KHK")],
+        [("bila", "BusLine KHK"), ("bilapk", "UMBRELLA, CAR-TOUR, BD Trans")],
         fields(680000, 90, 100, 11, 260, 8, 2014),
         "Setra S 415 LE business low-entry interurban, 12.18 x 2.55 x 3.13 m, doors 1-2-0,\n"
         "OM 936 260 kW. KHK 2026: BusLine KHK 4 (white, Hradec Králové), CDS Náchod's\n"
-        "two left in 2025."),
+        "two left in 2025. Pardubický kraj 2026: 52 white (UMBRELLA 32, CAR-TOUR 18, BD\n"
+        "Trans 2), no KHK sticker."),
     "setra_s_418_le_business": fam("SetraS418LE", "Setra_S_418_LE_business", "Setra S 418 LE business", BUS,
         [("cds", "CDS Náchod")],
         fields(780000, 112, 100, 14, 290, 10, 2016),
@@ -74,10 +75,11 @@ FAMILIES = {
         "SOR ICN 12,3 low-entry interurban (new-generation SOR), 12.33 x 2.55 x 3.15 m,\n"
         "doors 1-2-0, FPT NEF 6.7 ~235 kW. KHK 2026: BusLine KHK 2 (2024, Hradec Králové)."),
     "sor_icn_10_5": fam("SorICN105", "SOR_ICN_10_5", "SOR ICN 10,5", BUS,
-        [("bila", "KAD")],
+        [("bila", "KAD"), ("bilapk", "BusLine Pardubicko, ZDAR")],
         fields(590000, 80, 100, 10, 210, 7, 2022),
         "SOR ICN 10,5 low-entry interurban, 10.6 m, doors 1-2-0. KHK 2026: KAD 2 (2023);\n"
-        "Transdev Čechy's 4 (2022) run for BusLine Pardubicko."),
+        "Transdev Čechy's 4 (2022) run for BusLine Pardubicko. Pardubický kraj 2026: 18\n"
+        "white without the KHK sticker (BusLine Pardubicko 10, ZDAR 8)."),
     "sor_icn_9_5": fam("SorICN95", "SOR_ICN_9_5", "SOR ICN 9,5", MIDI,
         [("cds", "CDS Náchod")],
         fields(540000, 73, 90, 9, 184, 7, 2023),

@@ -273,7 +273,122 @@ class BusLineLime(BusLineGreen):
     WHITE = (0x5E, 0x8E, 0x2A)     # dark green BusLine swoosh on lime
 
 
-LIVERIES = {c.slug: c for c in (Livery, Transdev, CDS, PTransport, DvurKralove, BusLineGreen, BusLineLime)}
+class BilaPK(Livery):
+    """Pardubický kraj white (BusLine Pardubicko, ARRIVA autobusy, ZDAR, UMBRELLA,
+    CAR-TOUR): plain white, no KHK sticker (the kraj's only mark is its small logo,
+    front lower left and rear lower right: one blue pixel each); on the SOR CN the
+    step under the raised rear windows is painted black ('černé zarovnání hrbu')"""
+    slug = "bilapk"
+    sticker = False
+    PK_BLUE = (0x00, 0x6B, 0xB6)
+
+    def side(self, bus, x, k, right):
+        if getattr(bus, "ROOF_STEP", None):
+            band = bus.band_at(x)
+            if band and bus.BAND[0][2] <= k < band[0]:
+                return BLACK
+        return None
+
+    def front(self, bus, v, k):
+        return self.PK_BLUE if k == 3 and 0.62 <= v < 0.80 else None
+
+    def rear(self, bus, v, k):
+        return self.PK_BLUE if k == 2 and -0.90 <= v < -0.72 else None
+
+
+class ArrivaTyrkys(Livery):
+    """ARRIVA Východní Čechy turquoise-cream (the pre-2022 scheme, SOR CN 10,5 of
+    2015-17 at Chrudim): turquoise body, cant and roof, a cream front mask that
+    wraps round the front corner to behind the front door, a thin yellow stripe
+    along the side at bumper height, no KHK sticker"""
+    slug = "arrivatyrkysova"
+    sticker = False
+    body = (0x2E, 0x9A, 0xA0)
+    roof = (0x48, 0xAC, 0xB2)
+    ac = (0x48, 0xAC, 0xB2)
+    seam = (0x26, 0x86, 0x8C)
+    CREAM = (0xE9, 0xE2, 0xCE)
+    YELLOW = (0xF2, 0xC2, 0x00)
+
+    def side(self, bus, x, k, right):
+        band = bus.band_at(x)
+        if band and k >= band[1]:
+            return None                                  # cant: body turquoise
+        if k == 1:
+            return self.YELLOW
+        if x < bus.DOORS[0][1] + 0.35 and k >= 2:
+            return self.CREAM                            # the cream front corner
+        return None
+
+    def front(self, bus, v, k):
+        return self.CREAM if k >= 2 else None
+
+    def rear(self, bus, v, k):
+        return None
+
+
+class ZdarBiloModra(Livery):
+    """ZDAR white-blue-red (the five 2015 SOR CN 12,3 at Polička): white, a red
+    stripe under the windows, the blue rear face and a blue sweep up the rear
+    corner, a red band under the rear window, white bumper, no KHK sticker"""
+    slug = "zdarbilomodra"
+    sticker = False
+    BLUE = (0x00, 0x38, 0x8A)
+    RED = (0xC8, 0x26, 0x2D)
+
+    def side(self, bus, x, k, right):
+        band = bus.band_at(x)
+        b0 = band[0] if band else bus.R_BAND0
+        L = bus.real_len
+        if x >= L - 0.55 - 0.10 * k and k >= 1:
+            return self.BLUE                             # the sweep up the rear corner
+        if k == b0 - 1:
+            return self.RED
+        return None
+
+    def rear(self, bus, v, k):
+        g0 = bus.REAR_GLASS[0]
+        if k == g0 - 1:
+            return self.RED
+        if 1 <= k < g0 - 1:
+            return self.BLUE
+        return None
+
+
+class Bors(Livery):
+    """BORS Břeclav yellow-blue on an ex-BORS SOR CN 12 outside MSK (no kraj ring):
+    royal blue skirt, amber belt, blue strip over the windows, yellow front mask
+    over a blue bumper"""
+    slug = "bors"
+    sticker = False
+    body = (0xE6, 0x99, 0x28)
+    roof = (0xEE, 0xEE, 0xEA)
+    ac = (0xEC, 0xEC, 0xE8)
+    seam = (0xC8, 0x82, 0x20)
+    bumper = (0x35, 0x51, 0x88)
+
+    def side(self, bus, x, k, right):
+        band = bus.band_at(x)
+        b0 = band[0] if band else bus.R_BAND0
+        if k <= 1:
+            return self.bumper
+        if k == getattr(bus, "RUB", None):
+            return None
+        if k < b0:
+            return self.body
+        if band and k >= band[1]:
+            return self.bumper
+        return None
+
+    def front(self, bus, v, k):
+        return self.bumper if k <= 1 else None
+
+    def rear(self, bus, v, k):
+        return self.bumper if k <= 2 else None
+
+
+LIVERIES = {c.slug: c for c in (Livery, Transdev, CDS, PTransport, DvurKralove, BusLineGreen, BusLineLime,
+                                BilaPK, ArrivaTyrkys, ZdarBiloModra, Bors)}
 
 
 # ====================================================================== body
@@ -440,7 +555,8 @@ class RegioBus(Coach):
         av = abs(v)
         k = self.row(z)
         g0, g1 = self.REAR_GLASS
-        if g0 <= k <= g1 and av < W2 - 0.22 and not self.KHK_STICKER:
+        sticker = self.KHK_STICKER and getattr(self.lv, "sticker", True)
+        if g0 <= k <= g1 and av < W2 - 0.22 and not sticker:
             return GLASS_HI if k == g1 else GLASS
         if g0 <= k <= g1 and av < W2 - 0.22:
             # the KHK sticker: a light panel over the upper rear window with

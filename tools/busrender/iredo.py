@@ -7,6 +7,12 @@ Without --yaml only the sheets are written; with --yaml the family.yaml files
 are (re)generated from FAMILIES too (review the diff).
 
 Bodies and liveries: iredo_models.py (coach pipeline, see its docstring).
+Pardubický kraj (2026-10-20): its regional buses (8 areas, BusLine Pardubicko,
+ARRIVA autobusy, ZDAR, UMBRELLA, CAR-TOUR) are in the same pak. The kraj sets no
+paint either; its white buses carry no KHK sticker, so they are the livery
+"bilapk" (plus Arriva's turquoise-cream, ZDAR's white-blue-red, BORS and the
+PID trikolóra on the older SOR CN 12).
+
 Packaging (user, 2026-10-04): agency IREDO -> VZ-IREDO-bus.pak, one object per
 type x livery shared by every operator that runs it; the operator appears only
 in the livery display name. The kraj has no uniform IREDO paint: each contract
@@ -34,7 +40,15 @@ LIVERY = {
     "buslinezelena": ("green", "zelená"),
     "dvurkralove": ("white-green, town photo wrap", "zeleno-bílá s fotografiemi města"),
     "buslinezlutozelena": ("yellow-green", "žlutozelená"),
+    # Pardubický kraj (2026-10-20): no KHK sticker
+    "bilapk": ("white, Pardubický kraj", "bílá, Pardubický kraj"),
+    "arrivatyrkysova": ("turquoise-cream", "tyrkysovo-krémová"),
+    "zdarbilomodra": ("white-blue-red", "bílo-modro-červená"),
+    "pidcervenomodrobila": ("PID red-blue-white", "PID červeno-modro-bílá"),
+    "bors": ("BORS yellow-blue", "BORS žluto-modrá"),
 }
+# yaml colour slug -> the iredo_models.LIVERIES key when they differ (registered on use)
+LIVERY_KEY = {"pidcervenomodrobila": "pid-b"}
 
 # size classes: default fields (scaled like the DPP / Praha families: 12 m =
 # length 8, ~10.5 m = 7, ~9.5 m = 7, ~8.5 m = 6, 13 m = 9, 14.5 m = 10)
@@ -70,17 +84,33 @@ MIDI = ("midibus", "midibus")
 FAMILIES = {
     # ------------------------------------------------------------ SOR
     "sor_cn_12_3": fam("SorCN", "SOR_CN_12_3", "SOR CN 12,3", BUS,
-        [("bila", "BusLine KHK, KAD"), ("transdev", "Transdev Čechy, KAD")],
+        [("bila", "BusLine KHK, KAD"), ("transdev", "Transdev Čechy, KAD"),
+         ("bilapk", "BusLine Pardubicko, ARRIVA autobusy, Hnát-BUS, BD Trans")],
         fields(620000, 90, 100, 11, 235, 8, 2020),
         "SOR CN 12,3 low-entry interurban, 12.3 m, doors 1-2-0, ~49 seats + standing,\n"
         "Cummins 6.7 l ~235 kW. KHK 2026: BusLine KHK 28 (white), Transdev Čechy 32\n"
-        "(white + red figure), KAD 3 (2 white, 1 ex-Transdev)."),
+        "(white + red figure), KAD 3 (2 white, 1 ex-Transdev). Pardubický kraj 2026: 54\n"
+        "(2021-22; BusLine Pardubicko 39, ARRIVA autobusy 9, Hnát-BUS 5, BD Trans 1),\n"
+        "white without the KHK sticker, the step under the raised rear windows black."),
+    "sor_cn_12": fam("SorCN", "SOR_CN_12", "SOR CN 12", BUS,
+        [("bilapk", "ZDAR, BusLine Pardubicko"), ("zdarbilomodra", "ZDAR"),
+         ("pidcervenomodrobila", "BusLine Pardubicko"), ("bors", "ZDAR, Zlatovánek")],
+        fields(600000, 90, 100, 11, 235, 8, 2013),
+        "SOR CN 12 of the older generation (2013-2021, including ZDAR's 2015-16 cars\n"
+        "badged CN 12.3), drawn on the CN 12,3 body. Pardubický kraj 2026: 15 white\n"
+        "(ZDAR 14, BusLine Pardubicko 1), 5 in ZDAR white-blue-red (Polička), 2 in the\n"
+        "PID trikolóra (BusLine Pardubicko, leased from 5/2026), 2 ex-BORS in the BORS\n"
+        "yellow-blue (ZDAR, Zlatovánek)."),
     "sor_cn_10_5": fam("SorCN105", "SOR_CN_10_5", "SOR CN 10,5", BUS,
         [("bila", "BusLine KHK, Transdev Čechy, KAD"), ("transdev", "Transdev Čechy"),
-         ("cds", "CDS Náchod"), ("buslinezlutozelena", "BusLine KHK")],
+         ("cds", "CDS Náchod"), ("buslinezlutozelena", "BusLine KHK"),
+         ("bilapk", "BusLine Pardubicko, ARRIVA autobusy, ZDAR"),
+         ("arrivatyrkysova", "ARRIVA autobusy")],
         fields(560000, 78, 100, 10, 210, 7, 2011),
         "SOR CN 10,5 low-entry interurban, 10.6 m. KHK 2026: BusLine KHK 19 (16 white,\n"
-        "3 yellow-green), Transdev Čechy 33 (31 with the figure), CDS Náchod 3, KAD 1."),
+        "3 yellow-green), Transdev Čechy 33 (31 with the figure), CDS Náchod 3, KAD 1.\n"
+        "Pardubický kraj 2026: 68 white (BusLine Pardubicko 29, ARRIVA autobusy 37, ZDAR\n"
+        "2), ARRIVA autobusy 3-5 in the old Arriva Východní Čechy turquoise-cream."),
     "sor_cn_9_5": fam("SorCN95", "SOR_CN_9_5", "SOR CN 9,5", MIDI,
         [("bila", "BusLine KHK"), ("transdev", "Transdev Čechy"), ("cds", "CDS Náchod")],
         fields(520000, 68, 90, 9, 180, 7, 2011),
@@ -94,21 +124,27 @@ FAMILIES = {
     # ------------------------------------------------------------ Iveco
     "crossway_le_line_12m": fam("CrosswayLELine", "Crossway_LE_Line_12M", "Iveco Crossway LE LINE 12M", BUS,
         [("bila", "BusLine KHK, Transdev Čechy, KAD"), ("transdev", "Transdev Čechy, KAD"),
-         ("cds", "CDS Náchod"), ("ptransport", "P-transport"), ("buslinezelena", "BusLine KHK")],
+         ("cds", "CDS Náchod"), ("ptransport", "P-transport"),
+         ("buslinezelena", "BusLine KHK, BusLine Pardubicko"),
+         ("bilapk", "ZDAR, VYDRUS, CAR-TOUR, Zlatovánek")],
         fields(640000, 92, 100, 11, 243, 8, 2014),
         "Iveco Crossway LE LINE 12M low-entry interurban (2013+ front), doors 2-2-0.\n"
         "KHK 2026: BusLine KHK 11 (6 white, 5 green), Transdev Čechy 21 (17 with the\n"
-        "figure), CDS Náchod 28, P-transport 6, KAD 4."),
+        "figure), CDS Náchod 28, P-transport 6, KAD 4. Pardubický kraj 2026: 19 white\n"
+        "(ZDAR 8, VYDRUS 8, CAR-TOUR 2, Zlatovánek 1); BusLine Pardubicko's ex-DÚK green one\n"
+        "is drawn as the BusLine green."),
     "crossway_le_line_10_8m": fam("CrosswayLELine108", "Crossway_LE_Line_10_8M", "Iveco Crossway LE LINE 10,8M", BUS,
-        [("bila", "BusLine KHK"), ("cds", "CDS Náchod"), ("ptransport", "P-transport")],
+        [("bila", "BusLine KHK"), ("cds", "CDS Náchod"), ("ptransport", "P-transport"),
+         ("bilapk", "ZDAR")],
         fields(590000, 80, 100, 10, 210, 7, 2014),
         "Iveco Crossway LE LINE 10,8M. KHK 2026: BusLine KHK 4, CDS Náchod 2,\n"
-        "P-transport 1."),
+        "P-transport 1. Pardubický kraj 2026: ZDAR 2 (white)."),
     "crossway_le_line_14_5m": fam("CrosswayLELine145", "Crossway_LE_Line_14_5M", "Iveco Crossway LE LINE 14,5M", BUS,
-        [("bila", "BusLine KHK"), ("transdev", "Transdev Čechy"), ("cds", "CDS Náchod")],
+        [("bila", "BusLine KHK"), ("transdev", "Transdev Čechy"), ("cds", "CDS Náchod"),
+         ("bilapk", "CAR-TOUR")],
         fields(720000, 110, 100, 14, 265, 10, 2018),
         "Iveco Crossway LE LINE 14,5M, three axles (tag axle). KHK 2026: BusLine KHK 3,\n"
-        "Transdev Čechy 3, CDS Náchod 1."),
+        "Transdev Čechy 3, CDS Náchod 1. Pardubický kraj 2026: CAR-TOUR 2 (white)."),
     "crossway_line_12m": fam("CrosswayLine", "Crossway_Line_12M", "Iveco Crossway LINE 12M", BUS,
         [("cds", "CDS Náchod"), ("ptransport", "P-transport"), ("bila", "KAD")],
         fields(600000, 80, 100, 11, 243, 8, 2015),
@@ -203,7 +239,10 @@ def main(argv):
         os.makedirs(os.path.join(d, "sprites"), exist_ok=True)
         rows_all = []
         for slug, _ in f["liveries"]:
-            rows = [row_for(cls, slug)]
+            key = LIVERY_KEY.get(slug, slug)
+            if key not in M.LIVERIES:
+                import pid                             # noqa: F401  (registers pid-a / pid-b)
+            rows = [row_for(cls, key)]
             rows_all += rows
             save_rows(rows, os.path.join(d, "sprites", f"{slug}.png"))
         if do_yaml:

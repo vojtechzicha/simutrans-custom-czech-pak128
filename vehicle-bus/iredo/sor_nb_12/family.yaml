@@ -1,0 +1,61 @@
+agency: IREDO
+type: "SOR_NB_12"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "IREDO"
+  agency_cs: "IREDO"
+  family_en: "SOR NB 12"
+  family_cs: "SOR NB 12"
+
+# SOR NB 12 low-floor city bus, doors 2-2-2. MHD Chrudim (lines 625001-625006,
+# integrated in IREDO), ARRIVA autobusy 2026: 64358 (2016) all red with the black
+# window band; 42079 (2014) white with black "MĚSTSKÁ AUTOBUSOVÁ DOPRAVA CHRUDIM"
+# over the windows (a dotted line here); 41028 (2014, since 6/2025) white with a
+# red stripe under the windows. No KHK sticker.
+# Sprite: VTPsim's SOR NB 12 (the white sheet of vehicle-bus/praha/sor_nb_12) repainted by
+# odis_town.repaint, decals by pk_town.py.
+# Regenerate with tools/busrender/pk_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_NB_12"
+    display_id: "SOR NB 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 560000
+      payload: 100
+      speed: 75
+      weight: 11
+      runningcost: 22
+      fixed_cost: 115
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 210
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: chrudimcervena
+    name_en: "MHD Chrudim red · ARRIVA autobusy"
+    name_cs: "MHD Chrudim, červená · ARRIVA autobusy"
+  - color: chrudimbila
+    name_en: "MHD Chrudim white · ARRIVA autobusy"
+    name_cs: "MHD Chrudim, bílá · ARRIVA autobusy"
+  - color: bilacervenypruh
+    name_en: "white with a red stripe · ARRIVA autobusy"
+    name_cs: "bílá s červeným pruhem · ARRIVA autobusy"
