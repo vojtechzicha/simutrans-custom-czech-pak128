@@ -19,7 +19,8 @@ display:
 # Sprite: TommPa9's sheet (frozen in tools/tramrender/src/dpo/) patched by
 # tools/tramrender/dpo_tatra.py: six window bays on the left side in the sw
 # view (he drew seven there; his w / s views and the real car have six,
-# photos 1106 and 1125), cab glass in plain colours, a white A/C pod at the
+# photos 1106 and 1125), cab glass in plain colours, a light-grey A/C pod (AC_PODS switch, pending
+# the owner's review) at the
 # front of the roof. Length 11 (was 12): the drawing is ~11 carunits over the
 # couplers, so a coupled pair meets in every view.
 

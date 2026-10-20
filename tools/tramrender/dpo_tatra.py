@@ -18,8 +18,9 @@ Shared conventions (photos on Commons, see the audit of 2026-10-19):
   specials one step (4D4D4D -> 4D4D4E, 57656F -> 57656E): identical by day,
   never lit; passenger glass keeps the specials. Headlights FFFF53 at the
   front, tail lights FF211D at the rear.
-* A/C pods are drawn by roof_pod, a small box rasteriser (white top, light
-  grey sides), not taken from a sheet.
+* A/C pods are drawn by roof_pod from small pixel templates (light grey top,
+  sides one step darker, 1 px high), not taken from a sheet. They are behind
+  the AC_PODS switch (--no-ac) until the owner has reviewed them.
 
 kt8d5r_n1 (one-way Ostrava cars 1500-1515; photos 1500, 1512, 1503-1505):
   single-arm instead of the diamond, A/C pod over the cab, FFFF52 -> FFFF53 in
@@ -75,9 +76,14 @@ FRAME = H("424242")
 BLACK = H("000000")
 SCREEN = H("6B6B6C")         # plain windscreen grey of the KT8 front
 FRAME_BLACK = H("1A1A1A")    # LED destination box
-AC_TOP = H("F2F2F2")         # white roof A/C pod
-AC_SIDE = H("C4C6C8")
-AC_SIDE_DARK = H("A4A6A8")
+AC_TOP = H("C8CCD0")         # roof A/C pod: light grey top,
+AC_SIDE = H("B0B4B8")        # sides one step darker
+AC_SIDE_DARK = H("A4A8AC")
+
+# Switch for the roof A/C pods (KT8 over the cab, T3R.P and T6A5 at the front of
+# the roof): the owner reviews roof additions before they ship. True = drawn
+# (shipped default for now); --no-ac on the command line leaves them out.
+AC_PODS = True
 
 # pantograph: the yellow single-arm of TommPa9's T6A5 sheet, the diamond of the KT8
 PANTO_YELLOW = [H(h) for h in ("C5C500", "CECE00", "D6D600", "E6E600", "EFEF00")]
@@ -218,56 +224,44 @@ def transplant(dst, src, m, dx, dy):
             dst[Y, X] = src[y, x]
 
 
-def _inside(px, py, poly):
-    """Point in convex polygon (any winding)."""
-    sgn = 0
-    n = len(poly)
-    for i in range(n):
-        x0, y0 = poly[i]
-        x1, y1 = poly[(i + 1) % n]
-        cr = (x1 - x0) * (py - y0) - (y1 - y0) * (px - x0)
-        if abs(cr) < 1e-9:
-            continue
-        s = 1 if cr > 0 else -1
-        if sgn == 0:
-            sgn = s
-        elif s != sgn:
-            return False
-    return True
+# A/C pods: crisp pixel boxes, 1 x 1 carunit, 1 px high, top light grey, the
+# sides one step darker. Templates per view family, anchored at the footprint
+# centre on the roof (template x, y of that centre given with each; the top
+# sits 1 px above the footprint).
+POD_DIAG = ("""
+..TTTT..
+TTTTTTTT
+LLTTTTRR
+..LLRR..
+""", 3.5, 2.0)                       # w n e s
+POD_SIDE = ("""
+TTTTTT
+TTTTTT
+LLLLLL
+""", 2.5, 2.5)                       # ne sw
+POD_END = ("""
+TTTTT
+TTTTT
+LLLLL
+""", 2.0, 2.0)                       # nw se
 
 
-def roof_pod(t, d, cx, cy, length=1.0, width=1.0, h=2, top=None, sides=None, protect=None):
-    """A box on the roof: footprint centred on screen point (cx, cy) of the roof
-    surface, `length` x `width` carunits, `h` px high; the top and the side faces
-    that face the viewer are filled at pixel centres. Pantograph pixels stay."""
-    top = top or AC_TOP
-    sides = sides or (AC_SIDE, AC_SIDE_DARK)
-    A = np.array(tk.PER_CU[d], float) * length / 2
-    B = np.array(tk.PER_CU[DIRS[(DIRS.index(d) + 2) % 8]], float) * width / 2
-    c = np.array([cx, cy], float)
-    foot = [c + A + B, c + A - B, c - A - B, c - A + B]
-    up = np.array([0.0, -h])
-    faces = []
-    for i in range(4):
-        p0, p1 = foot[i], foot[(i + 1) % 4]
-        mid = (p0 + p1) / 2 - c
-        if mid[1] > 0.01:                       # faces the viewer (screen down)
-            shade = sides[0] if mid[0] <= 0.01 else sides[1]
-            faces.append(([p0, p1, p1 + up, p0 + up], shade))
-    roof = [p + up for p in foot]
+def roof_pod(t, d, cx, cy, protect=None):
+    """Draw an A/C pod with its footprint centred on roof point (cx, cy) of tile t
+    in view d. Pixels for which protect(pixel) is true (the pantograph standing
+    in front of the pod) are kept."""
+    art, ax, ay = POD_DIAG if d in ("w", "n", "e", "s") else POD_SIDE if d in ("ne", "sw") else POD_END
+    ox, oy = int(round(cx - ax)), int(round(cy - ay))
     src = t.copy()
-    for y in range(max(0, int(cy) - 12), min(128, int(cy) + 12)):
-        for x in range(max(0, int(cx) - 12), min(128, int(cx) + 12)):
+    shade = {"T": AC_TOP, "L": AC_SIDE, "R": AC_SIDE_DARK}
+    for j, line in enumerate(art.strip("\n").split("\n")):
+        for i, ch in enumerate(line):
+            x, y = ox + i, oy + j
+            if ch == "." or not (0 <= x < 128 and 0 <= y < 128):
+                continue
             if protect is not None and protect(src[y, x]):
                 continue
-            px, py = x + 0.5, y + 0.5
-            if _inside(px, py, roof):
-                t[y, x] = top
-            else:
-                for poly, shade in faces:
-                    if _inside(px, py, poly):
-                        t[y, x] = shade
-                        break
+            t[y, x] = shade[ch]
 
 
 # ------------------------------------------------------------------ the single-arm pantograph
@@ -367,7 +361,7 @@ def kt8_blue():
         erase(t, m, ROOF)
         single_arm(t, col, *KT8_PANTO_SHIFT[col])
         plain_glass(t, KT8_CAB.get(col, []))
-    for col, (cx, cy) in KT8_POD.items():                   # white A/C pod over the cab
+    for col, (cx, cy) in KT8_POD.items() if AC_PODS else ():   # A/C pod over the cab
         roof_pod(tk.tile(sh, 0, col), DIRS[col], cx, cy, protect=tk.is_panto if col in (0, 1, 2) else None)
     recolor(tk.tile(sh, 0, 5), {H("FFFF52"): HEAD})        # front headlights that never lit
     kt8_rear_end(sh)
@@ -587,8 +581,9 @@ def build_t3rp():
         m = cmask(t, T3_PANTO) & boxmask(t.shape, T3_PANTO_BOX[c])
         erase(t, m, None)
         single_arm_at(t, c, [ROOF], 0.33)
-        x, y = roof_point(t, DIRS[c], [ROOF], 0.10, t6_base(c)[2])
-        roof_pod(t, DIRS[c], x, y, protect=tk.is_panto if c in (0, 1, 2) else None)
+        if AC_PODS:
+            x, y = roof_point(t, DIRS[c], [ROOF], 0.10, t6_base(c)[2])
+            roof_pod(t, DIRS[c], x, y, protect=tk.is_panto if c in (0, 1, 2) else None)
     t3_route_box(sh, wide=True)
     t3_shift(sh)
     return {"dpomodrozluta": sh}
@@ -643,8 +638,9 @@ def build_t6a5():
             t = tk.tile(sh, r, c)
             plain_glass(t, T6_CAB.get(c, []))
             # white A/C pod at the front of the roof (photos 1106, 1125)
-            x, y = roof_point(t, DIRS[c], [ROOF], 0.07, t6_base(c)[2])
-            roof_pod(t, DIRS[c], x, y, protect=tk.is_panto if c in (0, 1, 2) else None)
+            if AC_PODS:
+                x, y = roof_point(t, DIRS[c], [ROOF], 0.07, t6_base(c)[2])
+                roof_pod(t, DIRS[c], x, y, protect=tk.is_panto if c in (0, 1, 2) else None)
     return {"dpomodrozluta": sh}
 
 
@@ -719,7 +715,11 @@ def main():
     ap.add_argument("families", nargs="*", help="default: all of " + ", ".join(FAMILIES))
     ap.add_argument("--preview", help="directory for before/after and consist previews")
     ap.add_argument("--no-write", action="store_true")
+    ap.add_argument("--no-ac", action="store_true", help="leave out the roof A/C pods (AC_PODS = False)")
     a = ap.parse_args()
+    global AC_PODS
+    if a.no_ac:
+        AC_PODS = False
     for fam in a.families or list(FAMILIES):
         build, base, consists = FAMILIES[fam]
         sheets = build()

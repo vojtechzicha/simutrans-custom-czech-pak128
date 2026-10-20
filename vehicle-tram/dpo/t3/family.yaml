@@ -22,7 +22,8 @@ display:
 # separate family t3sucs.
 # Sprite: Lubak91's T3 sheet (frozen in tools/tramrender/src/dpo/) patched by
 # tools/tramrender/dpo_tatra.py: yellow single-arm pantograph (TommPa9's T6A5
-# one) about 1/3 back, white A/C box at the front of the roof (photos 983, 994),
+# one) about 1/3 back, light-grey A/C box at the front of the roof (photos 983, 994; AC_PODS switch,
+# pending the owner's review),
 # black LED destination panel, FFFF53 headlights, FF211D tail lights, plain cab
 # glass, no brown strip across the window tops; ne / sw moved onto the DPO front
 # anchor so a pair at length 11 meets.
