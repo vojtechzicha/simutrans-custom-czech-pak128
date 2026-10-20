@@ -31,8 +31,6 @@ T3R.PV / T3R.EV, the DPO 26Tr / 27Tr partial-trolleybus variants. Their
   They go into `VZ-ODIS-bus`.
 - [ ] ODIS one-offs left out: Z-Group's SOR CN 12 63-1401 in the BORS Břeclav
   yellow-blue, the two Transdev Slezsko SOR CNG 12 with a green CNG pod.
-- [ ] MHD Orlová: add the Dekstra LF 38 CNG 448 if it comes back from storage (out of
-  service since mid-2025).
 
 
 ## DPO follow-ups

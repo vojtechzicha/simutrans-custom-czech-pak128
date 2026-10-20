@@ -368,6 +368,23 @@ def havirov_decals(logo_r=(0.56, 0.71), slogan_r=(0.29, 0.44), logo_l=(0.40, 0.5
     return draw
 
 
+def skirt_decal(colour, z_top, base=None):
+    """decals(): the paint below z_top metres (side, front and rear faces) in
+    `colour`, shaded like the white it replaces (the 3ČSAD green skirt on
+    sheets drawn plain white)"""
+    def draw(o, paint, geo, d, r):
+        if base is not None:
+            o = base(o, paint, geo, d, r)
+        o = o.copy()
+        z = geo["z"]
+        for y, x in zip(*np.where(paint & (geo["face"] != 1) & (geo["face"] != 0))):
+            if float(z[y, x]) < z_top:
+                k = max(0.55, min(1.12, lum(o[y, x]) / lum(WHITE)))
+                o[y, x] = scaled(colour, k)
+        return o
+    return draw
+
+
 # ---------------------------------------------------------------- output
 def save_sheet(rows, path, allow=()):
     return K.save_sheet(rows, path, allow)
@@ -848,6 +865,12 @@ class BruCNG12(TownBus, M.SorCNG):
 
 
 class OrlCrossway108(TownBus, M.CrosswayLELine108):
+    DISP = K.LEDG
+
+
+class OrlIrisbus(TownBus, M.IrisbusCrosswayLE):
+    """Irisbus Crossway LE 12M (2012-2013), the Orlová stand-ins 393 / 401:
+    3ČSAD white-green, green LED displays"""
     DISP = K.LEDG
 
 
@@ -1349,6 +1372,31 @@ FAMILIES = {
              "501 and 505 in 2026: 3ČSAD white-green, the green sweeping up to the\n"
              "windows behind the front door, green LED displays.",
         sprite=RENDER_IR.format(cls="CrosswayLELine108")),
+    "mhd-orlova/irisbus_crossway_le_12m": dict(
+        agency=ORLOVA, type="Irisbus_Crossway_LE_12M",
+        name=("Irisbus Crossway LE 12M", "Irisbus Crossway LE 12M"), copyright="vojtechzicha",
+        vehicles=one("Irisbus_Crossway_LE_12M", "Crossway LE 12M", BUS,
+                     f_(600000, 92, 100, 11, 24, 122, 2012, 8, "diesel", 243, 54, retire=2050,
+                        smoke="Diesel_small")),
+        liveries=[("3csadbilozelena", *WG_NAME, model(OrlIrisbus, "3csadbilozelena"))],
+        note="Irisbus Crossway LE 12M (2012-2013, ex Transdev Střední Čechy). 393 and 401,\n"
+             "Karviná depot reserves that work Orlová lines 501-504 in 2025-2026 (393: 501 x18\n"
+             "in August 2026): 3ČSAD white-green without the kraj ring, the green rising to\n"
+             "the windows behind the front door, green LED displays.",
+        sprite=RENDER_IR.format(cls="IrisbusCrosswayLE")),
+    "mhd-orlova/dekstra_lf_38_cng": dict(
+        agency=ORLOVA, type="Dekstra_LF_38_CNG", name=("Dekstra LF 38 CNG", "Dekstra LF 38 CNG"),
+        copyright="VTPsim",
+        vehicles=one("Dekstra_LF_38_CNG", "Dekstra LF 38 CNG", MIDI,
+                     f_(300000, 40, 80, 5, 18, 85, 2020, 6, "diesel", 100, 55, retire=2050)),
+        liveries=[("3csadbilozelena", *WG_NAME, lambda: repaint(
+            load_rows(DEK_SRC), z_comett, {"white": ((0xF2, 0xF2, 0xF0), (0xF6, 0xF6, 0xF4))},
+            [[7.0, 7.5, 8.0]], skirt_decal(CSAD_GREEN, 1.0), None, None, disp(LEDW)))],
+        note="Dekstra LF 38 CNG (Iveco Daily 70C14 CNG), 7.7 m midibus. 448 (2020, ex ČSAD\n"
+             "Karviná), stored from mid-2025, back on lines 501 / 503 in October 2026: 3ČSAD\n"
+             "white-green (the lower third green, green bumper), white LED displays.",
+        sprite="the Tábor Dekstra LF 38 CNG sheet (VTPsim's art shortened), repainted by\n"
+               "odis_town.repaint with the green skirt of skirt_decal."),
     # ------------------------------------------------------------ Bruntál
     "mhd-bruntal/sor_cng_12": dict(
         agency=BRUNTAL, type="SOR_CNG_12", name=("SOR CNG 12", "SOR CNG 12"), copyright="vojtechzicha",

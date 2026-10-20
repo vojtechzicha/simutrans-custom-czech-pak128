@@ -503,23 +503,6 @@ def ring_decal(ring, axle, zc=1.40, base=None):
     return draw
 
 
-def skirt_decal(colour, z_top, base=None):
-    """decals(): the paint below z_top metres (side, front and rear faces) in
-    `colour`, shaded like the white it replaces (the 3ČSAD green skirt on
-    sheets drawn plain white)"""
-    def draw(o, paint, geo, d, r):
-        if base is not None:
-            o = base(o, paint, geo, d, r)
-        o = o.copy()
-        z = geo["z"]
-        for y, x in zip(*np.where(paint & (geo["face"] != 1) & (geo["face"] != 0))):
-            if float(z[y, x]) < z_top:
-                k = max(0.55, min(1.12, T.lum(o[y, x]) / T.lum(WHITE)))
-                o[y, x] = T.scaled(colour, k)
-        return o
-    return draw
-
-
 def odis_red_decal(logo_r=(0.24, 0.44), logo_l=(0.40, 0.60), base=None):
     """decals(): the ODIS scheme's white ornament line (every other column of
     the first row under the window band) and the big white ODIS logo two rows
@@ -545,6 +528,7 @@ def odis_red_decal(logo_r=(0.24, 0.44), logo_l=(0.40, 0.60), base=None):
     return draw
 
 
+skirt_decal = T.skirt_decal
 W_ZONES = {"white": ((0xEE, 0xEE, 0xEC), WHITE), "green": ((0xEE, 0xEE, 0xEC), WHITE)}
 WG_ZONES = {"white": ((0xEE, 0xEE, 0xEC), WHITE), "green": (CSAD_GREEN, CSAD_GREEN)}
 RED_ZONES = {"white": (ODIS_RED, ODIS_ROOF)}

@@ -316,7 +316,7 @@ Every ODIS town with MHD has its own `MHD<Town>` pak (user, 2026-10-20). The ODI
 - `MHDOrlova`: 3ČSAD white-green and the white Isuzu.
 - `MHDBruntal`: one SOR CNG 12 with the BRUNTÁL logo and the kraj ring in green.
 
-The scope is what each town runs in October 2026, including depot buses that work its lines every day (the Orlová Stratos 619 and Crossways 600 / 411). It leaves out stored buses, reserves and regional stand-ins. The old `CZ-ODIS-*` (VTPsim, `CZ-vehicle-bus.pak`) and `CZR-ODIS-*` objects stay installed. The green CZ-ODIS buses are the 3ČSAD white-green group scheme; the CZR "Red" ones are Transdev Morava regional and the "WhiteGray" ones the plain kraj regional scheme.
+The scope is what each town runs in October 2026, including depot buses that work its lines every day (the Orlová Stratos 619, Crossways 600 / 411 and the Irisbus Crossway LE 393 / 401). The Dekstra 448 came back from storage in October 2026. It leaves out stored buses, other reserves and regional stand-ins; a regional bus that works a town line is the town line's VZ-ODIS object. The old `CZ-ODIS-*` (VTPsim, `CZ-vehicle-bus.pak`) and `CZR-ODIS-*` objects stay installed. The green CZ-ODIS buses are the 3ČSAD white-green group scheme; the CZR "Red" ones are Transdev Morava regional and the "WhiteGray" ones the plain kraj regional scheme.
 
 `odis_town.py` picks the method per type:
 

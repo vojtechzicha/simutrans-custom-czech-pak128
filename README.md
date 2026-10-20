@@ -281,8 +281,9 @@ ComfortJet coaches are CZR art ported 1:1.
     - Karviná: SOR NS 12 and NS 12 electric in the city's white-black,
       Urbanway 12M CNG (3ČSAD white-green and white), Streetway 12M CNG and
       Citywide LF 12M CNG.
-    - Orlová: Urbanway 12M CNG, SOR BN 9,5, Stratos LF 38 CNG and Crossway LE
-      LINE 10,8M in 3ČSAD white-green, plus the white Isuzu NovoCiti Life.
+    - Orlová: Urbanway 12M CNG, SOR BN 9,5, Stratos LF 38 CNG, Dekstra LF 38
+      CNG, Crossway LE LINE 10,8M and Irisbus Crossway LE 12M in 3ČSAD
+      white-green, plus the white Isuzu NovoCiti Life.
     - Bruntál: the SOR CNG 12 in the Bruntál scheme.
   - Kladno, DPMLB Mladá Boleslav, Kolín, Příbram, Benešov and Tábor.
 
