@@ -81,8 +81,10 @@ BASE = dict(
     fairing=0.30,
 )
 VARIANTS = {
-    "fairings": dict(),
-    "plain": dict(roof_gear=[]),
+    "fairings": dict(),                               # dark equipment between the fairings + AC box
+    "soft": dict(gear_col=0x5E7880),                  # the same, equipment in a softer slate
+    "plain": dict(roof_gear=[]),                      # AC box only
+    "bare": dict(roof_gear=[], ac_box=None),          # nothing on the roof but the pantograph
 }
 
 
