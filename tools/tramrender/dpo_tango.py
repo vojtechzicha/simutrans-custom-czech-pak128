@@ -96,7 +96,7 @@ def params(name):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--variant", default="fairings", choices=sorted(VARIANTS))
+    ap.add_argument("--variant", default="soft", choices=sorted(VARIANTS))
     ap.add_argument("--out")
     ap.add_argument("--preview")
     a = ap.parse_args()
