@@ -1,0 +1,65 @@
+agency: ODIS
+type: "Crossway_LE_City_12M"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "ODIS"
+  agency_cs: "ODIS"
+  family_en: "Iveco Crossway LE CITY 12M"
+  family_cs: "Iveco Crossway LE CITY 12M"
+
+# Iveco Crossway LE CITY 12M NP (CNG, Natural Power; engine_type diesel, no
+# smoke; 2017-2019), doors 2-2-0, the long flat CNG fairing. Transdev Slezsko
+# 56: 32-1001 to 1007, 33-1001 to 1026 (Frýdek-Místek), 51-1001 to 1014
+# (Orlovsko), 52-1001 to 1009 (Karvinsko). 3ČSAD white-green (Transdev Slezsko,
+# the colours of ex ČSAD Havířov / Karviná / Frýdek-Místek; seznam-autobusu
+# "3ČSAD, bílo-zelená & logo dopravy Moravskoslezského kraje"): white, black
+# window band, green skirt with a dark pinstripe, green lower front and rear,
+# the kraj ring in greens. On this body the green reaches two thirds of the
+# lower side and rises to the windows behind the front door. Z-Group bus 11
+# (2018): Z-Group bus (ex ČSAD Vsetín; Kopřivnice, Opava and Vítkov depots):
+# white, black window band, the kraj ring in its own colours (grey, the red and
+# blue inner bands), navy fleet numbers.
+# Sprite: original box-model render (vojtechzicha): OCrosswayLECity of
+# tools/busrender/odis.py (on the CrosswayLELine body of
+# iredo_models.py) with the livery of odis.py.
+# Regenerate with tools/busrender/odis.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Crossway_LE_City_12M"
+    display_id: "Crossway LE CITY 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 660000
+      payload: 100
+      speed: 85
+      weight: 12
+      runningcost: 26
+      fixed_cost: 135
+      intro_year: 2017
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 243
+      gear: 54
+
+liveries:
+  - color: 3csadbilozelena
+    name_en: "3ČSAD white-green · Transdev Slezsko"
+    name_cs: "3ČSAD bílo-zelená · Transdev Slezsko"
+  - color: bila
+    name_en: "white · Z-Group bus"
+    name_cs: "bílá · Z-Group bus"

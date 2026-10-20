@@ -1,0 +1,57 @@
+agency: ODIS
+type: "Citywide_LE_13_7M_CNG"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "ODIS"
+  agency_cs: "ODIS"
+  family_en: "Scania Citywide LE 13,7M CNG"
+  family_cs: "Scania Citywide LE 13,7M CNG"
+
+# Scania Citywide LE 13,7M CNG (CNG; engine_type diesel, no smoke), tag axle,
+# doors 1-2-1. Transdev Slezsko 6: 24-0001 to 0006 (2020, Hlučínsko). seznam-
+# autobusu "bílá & logo dopravy Moravskoslezského kraje": white, black window
+# band, the kraj ring over the rear axle; Transdev Slezsko prints it green in
+# Havířovsko and salmon-red in Hlučínsko. The ring is printed mostly on the rear
+# side windows.
+# Sprite: VTPsim's pak128.cs Citywide LE 13,7M (CZ-ODIS-
+# ScaniaCitywideLE137M_White, frozen in tools/busrender/src/odis/)
+# ported by odis_town.port_native, its ring stand-in painted out, the
+# CNG pods, the kraj ring and the white LED displays added by odis.py.
+# Regenerate with tools/busrender/odis.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Citywide_LE_13_7M_CNG"
+    display_id: "Citywide LE 13,7M CNG"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 860000
+      payload: 110
+      speed: 85
+      weight: 13
+      runningcost: 32
+      fixed_cost: 165
+      intro_year: 2020
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 250
+      gear: 55
+
+liveries:
+  - color: bilacervenykruh
+    name_en: "white, red kraj ring · Transdev Slezsko"
+    name_cs: "bílá, červený krajský kruh · Transdev Slezsko"

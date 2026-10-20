@@ -1,0 +1,59 @@
+agency: ODIS
+type: "Citywide_Suburban_LE_15M_CNG"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "ODIS"
+  agency_cs: "ODIS"
+  family_en: "Scania Citywide Suburban LE 15M CNG"
+  family_cs: "Scania Citywide Suburban LE 15M CNG"
+
+# Scania Citywide Suburban LE 15M CNG (CNG; engine_type diesel, no smoke), three
+# axles. Transdev Slezsko 10: 42-0007, 0008 (2017), 51-0001 to 0004, 52-0001 to
+# 0004 (2018). 3ČSAD white-green (Transdev Slezsko, the colours of ex ČSAD
+# Havířov / Karviná / Frýdek-Místek; seznam-autobusu "3ČSAD, bílo-zelená & logo
+# dopravy Moravskoslezského kraje"): white, black window band, green skirt with
+# a dark pinstripe, green lower front and rear, the kraj ring in greens. The
+# ring sits on the rear panel behind the tandem.
+# Sprite: VTPsim's pak128.cs Citywide LE 15M suburban (CZ-ODIS-
+# ScaniaCitywideLE15M_Suburban-Green, frozen in
+# tools/busrender/src/odis/) ported by odis_town.port_native, its ring
+# stand-in painted out, the CNG pods, the kraj ring and the white LED
+# displays added by odis.py.
+# Regenerate with tools/busrender/odis.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Citywide_Suburban_LE_15M_CNG"
+    display_id: "Citywide Suburban LE 15M CNG"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 900000
+      payload: 120
+      speed: 90
+      weight: 14
+      runningcost: 34
+      fixed_cost: 170
+      intro_year: 2017
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 250
+      gear: 55
+
+liveries:
+  - color: 3csadbilozelena
+    name_en: "3ČSAD white-green · Transdev Slezsko"
+    name_cs: "3ČSAD bílo-zelená · Transdev Slezsko"

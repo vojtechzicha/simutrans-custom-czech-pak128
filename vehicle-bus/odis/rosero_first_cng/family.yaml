@@ -1,0 +1,55 @@
+agency: ODIS
+type: "Rosero_First_CNG"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "ODIS"
+  agency_cs: "ODIS"
+  family_en: "Rošero First FCLLI CNG"
+  family_cs: "Rošero First FCLLI CNG"
+
+# ROŠERO-P First FCLLI CNG (CNG; engine_type diesel, no smoke) on the Iveco
+# Daily. Transdev Slezsko 2: 74-4001, 4002 (Jablunkovsko-Třinecko, from
+# 12/2025). In the kraj's ODIS scheme ("schéma ODIS, červeno-černá", every new
+# contract from 12/2025): signal red with a black window band, the white folk-
+# ornament line under the windows, the big white ODIS logo, no ring.
+# Sprite: VTPsim's Rošero First (the IREDO white sheet, vehicle-
+# bus/iredo/rosero_first) repainted red by odis_town.repaint, the
+# ornament line, the ODIS logo and the CNG box added by odis.py.
+# Regenerate with tools/busrender/odis.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Rosero_First_CNG"
+    display_id: "Rošero First FCLLI CNG"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 400000
+      payload: 40
+      speed: 80
+      weight: 5
+      runningcost: 15
+      fixed_cost: 80
+      intro_year: 2025
+      intro_month: 10
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 125
+      gear: 50
+
+liveries:
+  - color: odiscervenocerna
+    name_en: "ODIS red-black · Transdev Slezsko"
+    name_cs: "ODIS červeno-černá · Transdev Slezsko"

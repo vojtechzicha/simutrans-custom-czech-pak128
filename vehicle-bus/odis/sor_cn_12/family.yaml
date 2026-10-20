@@ -1,0 +1,58 @@
+agency: ODIS
+type: "SOR_CN_12"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "ODIS"
+  agency_cs: "ODIS"
+  family_en: "SOR CN 12"
+  family_cs: "SOR CN 12"
+
+# SOR CN 12 low-entry interurban (2016-2018), doors 1-2. Transdev Morava 54:
+# 62-1001 to 1025 (Novojičínsko západ), 82-, 83-, 84-10xx (Krnovsko, Bruntálsko,
+# Rýmařovsko). Transdev Morava livery (seznam-autobusu: "bílá & červené logo
+# Transdev & logo dopravy Moravskoslezského kraje"): white, black window band,
+# the big red Transdev figure, the kraj ring in salmon and reds over the rear
+# axle. The step under the raised rear windows is painted black, so the band
+# reads as one stripe.
+# Sprite: original box-model render (vojtechzicha): OSorCN12 of
+# tools/busrender/odis.py (on the SorCN body of iredo_models.py) with
+# the livery of odis.py.
+# Regenerate with tools/busrender/odis.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_CN_12"
+    display_id: "CN 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 620000
+      payload: 90
+      speed: 100
+      weight: 11
+      runningcost: 25
+      fixed_cost: 127
+      intro_year: 2016
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 235
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: transdev
+    name_en: "white with the red figure · Transdev Morava"
+    name_cs: "bílá s červenou postavou · Transdev Morava"

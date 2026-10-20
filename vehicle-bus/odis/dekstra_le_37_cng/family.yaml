@@ -1,0 +1,58 @@
+agency: ODIS
+type: "Dekstra_LE_37_CNG"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "ODIS"
+  agency_cs: "ODIS"
+  family_en: "Dekstra LE 37 L CNG"
+  family_cs: "Dekstra LE 37 L CNG"
+
+# Dekstra LE 37 L CNG (CNG; engine_type diesel, no smoke), the Iveco Daily based
+# low-entry midibus with a low CNG box on the roof. Transdev Slezsko 7
+# (2018-2020): 33-4001 to 4003 (Frýdek-Místek), 52-3001 to 3004 (Karvinsko).
+# 3ČSAD white-green (Transdev Slezsko, the colours of ex ČSAD Havířov / Karviná
+# / Frýdek-Místek; seznam-autobusu "3ČSAD, bílo-zelená & logo dopravy
+# Moravskoslezského kraje"): white, black window band, green skirt with a dark
+# pinstripe, green lower front and rear, the kraj ring in greens. Here the lower
+# third is green.
+# Sprite: VTPsim's Dekstra LE 37 (the IREDO white sheet, vehicle-
+# bus/iredo/dekstra_le_37) repainted by odis_town.repaint, the green
+# skirt, the CNG box and the kraj ring added by odis.py.
+# Regenerate with tools/busrender/odis.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Dekstra_LE_37_CNG"
+    display_id: "Dekstra LE 37 L CNG"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 420000
+      payload: 45
+      speed: 80
+      weight: 6
+      runningcost: 16
+      fixed_cost: 85
+      intro_year: 2018
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 125
+      gear: 50
+
+liveries:
+  - color: 3csadbilozelena
+    name_en: "3ČSAD white-green · Transdev Slezsko"
+    name_cs: "3ČSAD bílo-zelená · Transdev Slezsko"

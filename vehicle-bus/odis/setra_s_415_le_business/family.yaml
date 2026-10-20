@@ -1,0 +1,56 @@
+agency: ODIS
+type: "Setra_S_415_LE_business"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "ODIS"
+  agency_cs: "ODIS"
+  family_en: "Setra S 415 LE business"
+  family_cs: "Setra S 415 LE business"
+
+# Setra S 415 LE business, doors 1-2-0. Z-Group bus 51 (2018, Kopřivnice:
+# Novojičínsko východ, the Kopřivnice town trips of line 653). Z-Group bus (ex
+# ČSAD Vsetín; Kopřivnice, Opava and Vítkov depots): white, black window band,
+# the kraj ring in its own colours (grey, the red and blue inner bands), navy
+# fleet numbers.
+# Sprite: original box-model render (vojtechzicha): OSetra of
+# tools/busrender/odis.py (on the SetraS415LE body of
+# iredo_coachmodels.py) with the livery of odis.py.
+# Regenerate with tools/busrender/odis.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Setra_S_415_LE_business"
+    display_id: "S 415 LE business"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 680000
+      payload: 90
+      speed: 100
+      weight: 11
+      runningcost: 27
+      fixed_cost: 139
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 260
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: bila
+    name_en: "white · Z-Group bus"
+    name_cs: "bílá · Z-Group bus"

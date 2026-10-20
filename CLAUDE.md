@@ -309,7 +309,7 @@ Each driver takes `[family …] [--yaml] [--preview DIR]`; `--yaml` regenerates 
 
 ### Moravskoslezský kraj (ODIS) town buses (`vehicle-bus/mhd-<town>/`)
 
-Every ODIS town with MHD has its own `MHD<Town>` pak (user, 2026-10-20). The ODIS regional pak, when it comes, holds only regional buses, never a town fleet. Ostrava (`DPOstrava`), Opava (`DPOpava`), Frýdek-Místek, Třinec, Český Těšín, Nový Jičín, Studénka and Krnov already had one. The four towns the region had folded in got theirs from `tools/busrender/odis_town.py`:
+Every ODIS town with MHD has its own `MHD<Town>` pak (user, 2026-10-20). The ODIS regional pak (`VZ-ODIS-bus`, next section) holds only regional buses, never a town fleet. Ostrava (`DPOstrava`), Opava (`DPOpava`), Frýdek-Místek, Třinec, Český Těšín, Nový Jičín, Studénka and Krnov already had one. The four towns the region had folded in got theirs from `tools/busrender/odis_town.py`:
 
 - `MHDHavirov`: the blue city scheme on everything except the three 2018 e-buses.
 - `MHDKarvina`: the white-black SOR NS 12, plus 3ČSAD white-green and white.
@@ -327,6 +327,30 @@ The scope is what each town runs in October 2026, including depot buses that wor
 - Same body and same paint as an existing family is a copy of its sheet: the F-M 3ČSAD Urbanway / Citywide (displays turned white LED) and the 2018 3ČSAD e-bus.
 
 Run `python tools/busrender/odis_town.py [family …] [--yaml] [--preview DIR]`. A run is byte-identical.
+
+### Moravskoslezský kraj (ODIS) regional buses (`vehicle-bus/odis/`)
+
+Agency `ODIS` builds `VZ-ODIS-bus.pak` with the kraj's regional buses only. As in IREDO there is one object per type × livery, and the operator appears only in the livery display name. The scope is the October 2026 fleet of the three contract operators: Transdev Morava, Transdev Slezsko and Z-Group bus. No other operator holds a kraj contract.
+
+The kraj sets no body colour, so each operator keeps its own scheme. Every scheme adds the kraj ring over the rear axle on both sides, in the operator's colours:
+
+- `transdev`: Transdev Morava, white with the big red figure and the ring in reds.
+- `3csadbilozelena`: Transdev Slezsko, the 3ČSAD white-green with the ring in greens.
+- `bila`: Z-Group bus, white with the ring in the kraj's grey, red and blue.
+- `bilazelenykruh` / `bilacervenykruh`: Transdev Slezsko's white buses, green ring in Havířovsko and red in Hlučínsko.
+- `odiscervenocerna`: the uniform red ODIS scheme of the contracts from 12/2025 (Jablunkovsko–Třinecko). It has no ring.
+
+`tools/busrender/odis.py` builds every sheet and imports `odis_town.py` for its repaint tools:
+
+- **The ring:** `Ring` follows the kraj design manual (three bands of twelve segments, open at the lower front). It is drawn 2.1 m across, centred 0.4 m behind the rear axle and 1.4 m up, and tinted on the glass.
+- **SOR CN / CNG / C / ICN, Crossway LE LINE / LE CITY, Setra S 415 LE:** the IREDO box models with the `Regio` mixin, which handles the ring on the glass, white LED displays and a second roof box (`REAR_AC`). Their CNG fairings follow the photos.
+  - The NP Crossways are CNG (Iveco's Natural Power) with a long flat fairing.
+  - The 2025 Crossway and the ICNG 12,3 get their own faces, `CrosswayFace2024` and `IcnFace2025`.
+- **Scania Citywide LE 12M / Suburban 12,6M / LE 13,7M / LE 15M / Suburban 15M:** VTPsim's ODIS sheets frozen in `tools/busrender/src/odis/`, ported by `port_native`. VTPsim's stand-in for the ring is painted out (`strip_marks`), then the sheet is repainted and gets its CNG pods and the ring (`ring_decal`).
+- **Dekstra LE 37 L CNG, Rošero First CNG, Urbanway 10,5M CNG:** repaints of the IREDO and MDPO sheets. The 3ČSAD skirt is painted by height (`skirt_decal`) and the red ODIS decals by `odis_red_decal`.
+- **MAN Lion's City Ü CNG:** `praha_man.OldGen` with two doors and the CNG roof.
+
+Run `python tools/busrender/odis.py [family …] [--yaml] [--preview DIR]`. A run is byte-identical.
 
 ## Multi-vehicle consists
 

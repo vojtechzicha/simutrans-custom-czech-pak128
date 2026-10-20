@@ -192,6 +192,20 @@ ComfortJet coaches are CZR art ported 1:1.
   `VZ-IREDO-bus.pak`. Towns outside IREDO have their own paks: Trutnov (Arriva
   blue with the mosaic: 26BB, NBG 18, NB 12 and reserves), Špindlerův Mlýn,
   Jičín, Nová Paka and Kostelec nad Orlicí.
+- **Moravskoslezský kraj (ODIS)**: the regional buses running in October 2026
+  (`VZ-ODIS-bus.pak`; the town fleets have their own paks, see below), each with
+  the kraj ring over the rear axle in its operator's colours:
+  - Transdev Morava, white with the red figure: SOR CN 12, CNG 12, CN 10,5,
+    CNG 10,5, CN 9,5, C 12, ICNG 12 and Iveco Crossway LE LINE 12M.
+  - Transdev Slezsko, 3ČSAD white-green: SOR CNG 12 and CNG 10,5, Crossway
+    LE CITY 12M NP, Scania Citywide LE 12M and Suburban LE 15M CNG, Dekstra LE 37
+    L CNG and Urbanway 10,5M CNG. White with the green or red ring: Crossway LE
+    LINE 12M NP and Citywide LE 15M / 13,7M CNG. The red ODIS scheme of the
+    contracts from 12/2025: SOR ICNG 12,3, Crossway LE LINE 12M NP (2025) and
+    Rošero First CNG.
+  - Z-Group bus, white: Setra S 415 LE business, SOR CNG 12 and CNG 10,5,
+    Crossway LE CITY 12M NP, Scania Citywide LE 12M and Suburban LE 12,6M CNG and
+    MAN Lion's City Ü CNG.
 - **DP hl. m. Prahy (DPP) and DP města Brna (DPMB)** — the complete active
   September 2026 bus, tram and trolleybus fleets of both cities as VZ families,
   replacing the upstream CZR/CZ Praha and Brno paks. Placeholder art was redrawn

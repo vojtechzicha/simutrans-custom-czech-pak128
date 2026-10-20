@@ -1,0 +1,75 @@
+agency: ODIS
+type: "SOR_CNG_12"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "ODIS"
+  agency_cs: "ODIS"
+  family_en: "SOR CNG 12"
+  family_cs: "SOR CNG 12"
+
+# SOR CNG 12 low-entry interurban (CNG; engine_type diesel, no smoke), the tank
+# fairing over the front half and the A/C box on the raised rear roof. Transdev
+# Morava 24 (2018-2019): 62-1101 to 1109, 24-1101 to 1115 (Hlučínsko, 555).
+# Transdev Morava livery (seznam-autobusu: "bílá & červené logo Transdev & logo
+# dopravy Moravskoslezského kraje"): white, black window band, the big red
+# Transdev figure, the kraj ring in salmon and reds over the rear axle. Transdev
+# Slezsko 82 (2014-2018; Havířov, Český Těšín, Karviná, Orlová, Frýdek-Místek):
+# 3ČSAD white-green (Transdev Slezsko, the colours of ex ČSAD Havířov / Karviná
+# / Frýdek-Místek; seznam-autobusu "3ČSAD, bílo-zelená & logo dopravy
+# Moravskoslezského kraje"): white, black window band, green skirt with a dark
+# pinstripe, green lower front and rear, the kraj ring in greens. Two 2014 cars
+# have a green CNG pod (not drawn). White with the green ring: Transdev Morava
+# 24-1120 (2015, ex MHD Bruntál, the BRUNTÁL emblem removed). Z-Group bus 62
+# (Novojičínsko východ, Opavsko, Vítkovsko): Z-Group bus (ex ČSAD Vsetín;
+# Kopřivnice, Opava and Vítkov depots): white, black window band, the kraj ring
+# in its own colours (grey, the red and blue inner bands), navy fleet numbers.
+# Sprite: original box-model render (vojtechzicha): OSorCNG12 of
+# tools/busrender/odis.py (on the SorCNG body of iredo_models.py) with
+# the livery of odis.py.
+# Regenerate with tools/busrender/odis.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_CNG_12"
+    display_id: "CNG 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 650000
+      payload: 90
+      speed: 90
+      weight: 12
+      runningcost: 26
+      fixed_cost: 132
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 213
+      gear: 54
+
+liveries:
+  - color: transdev
+    name_en: "white with the red figure · Transdev Morava"
+    name_cs: "bílá s červenou postavou · Transdev Morava"
+  - color: 3csadbilozelena
+    name_en: "3ČSAD white-green · Transdev Slezsko"
+    name_cs: "3ČSAD bílo-zelená · Transdev Slezsko"
+  - color: bilazelenykruh
+    name_en: "white, green kraj ring · Transdev Morava"
+    name_cs: "bílá, zelený krajský kruh · Transdev Morava"
+  - color: bila
+    name_en: "white · Z-Group bus"
+    name_cs: "bílá · Z-Group bus"

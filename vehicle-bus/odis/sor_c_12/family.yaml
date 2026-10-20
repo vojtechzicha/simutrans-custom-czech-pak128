@@ -1,0 +1,57 @@
+agency: ODIS
+type: "SOR_C_12"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "ODIS"
+  agency_cs: "ODIS"
+  family_en: "SOR C 12"
+  family_cs: "SOR C 12"
+
+# SOR C 12 high-floor interurban (2018), 11.82 m, doors 1-2. Transdev Morava 13:
+# 82-1201, 1202, 83-1201 to 1206, 84-1201 to 1205 (Bruntál areas), on regional
+# lines every day. Transdev Morava livery (seznam-autobusu: "bílá & červené logo
+# Transdev & logo dopravy Moravskoslezského kraje"): white, black window band,
+# the big red Transdev figure, the kraj ring in salmon and reds over the rear
+# axle.
+# Sprite: original box-model render (vojtechzicha): OSorC12 of
+# tools/busrender/odis.py (on the SorC105 body of iredo_models.py) with
+# the livery of odis.py.
+# Regenerate with tools/busrender/odis.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_C_12"
+    display_id: "C 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 600000
+      payload: 85
+      speed: 100
+      weight: 11
+      runningcost: 24
+      fixed_cost: 122
+      intro_year: 2018
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 235
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: transdev
+    name_en: "white with the red figure · Transdev Morava"
+    name_cs: "bílá s červenou postavou · Transdev Morava"

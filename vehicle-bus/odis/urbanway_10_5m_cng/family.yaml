@@ -1,0 +1,56 @@
+agency: ODIS
+type: "Urbanway_10_5M_CNG"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "ODIS"
+  agency_cs: "ODIS"
+  family_en: "Iveco Urbanway 10,5M CNG"
+  family_cs: "Iveco Urbanway 10,5M CNG"
+
+# Iveco Urbanway 10,5M CNG (CNG; engine_type diesel, no smoke), city body, doors
+# 2-2-0, ex Iveco demonstrator (2016). Transdev Slezsko 1: 73-0049
+# (Českotěšínsko). 3ČSAD white-green (Transdev Slezsko, the colours of ex ČSAD
+# Havířov / Karviná / Frýdek-Místek; seznam-autobusu "3ČSAD, bílo-zelená & logo
+# dopravy Moravskoslezského kraje"): white, black window band, green skirt with
+# a dark pinstripe, green lower front and rear, the kraj ring in greens.
+# Sprite: Lubak91's Urbanway 10,5M CNG (the MDPO sheet, vehicle-
+# bus/mdpo/urbanway_10_5m) repainted by odis_town.repaint (its red skirt
+# green), the kraj ring added by odis.py.
+# Regenerate with tools/busrender/odis.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Urbanway_10_5M_CNG"
+    display_id: "Urbanway 10,5M CNG"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 700000
+      payload: 80
+      speed: 80
+      weight: 11
+      runningcost: 27
+      fixed_cost: 140
+      intro_year: 2016
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 213
+      gear: 55
+
+liveries:
+  - color: 3csadbilozelena
+    name_en: "3ČSAD white-green · Transdev Slezsko"
+    name_cs: "3ČSAD bílo-zelená · Transdev Slezsko"

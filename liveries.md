@@ -394,3 +394,39 @@ White roof and roof edge, gloss black `#16171A` from the roof edge down to just 
 ## Bruntál bílá (`bruntalbila`) — MHD Bruntál
 
 Plain white. The kraj ring sits over the rear axle in greens (`#C6DA9A`, `#A8CB6E`, `#8DBE50`), see-through pale `#DAE8BC` on the glass, and only its rear arc shows below the windows. Behind the front axle is the BRUNTÁL logo: teal `#25695D`, green `#3AA235` and light-blue `#1BA0C4` bands, then navy `#27225F` lettering.
+
+---
+
+## ODIS regional schemes — Moravskoslezský kraj (`VZ-ODIS-bus`)
+
+The kraj sets no body colour for its regional contracts; each operator keeps its own scheme. Every bus carries the kraj's "základní grafický prvek" (the ring) on both sides over the rear axle, 1.5–2.3 m across, in colours that suit the scheme. Since 12/2025 new contracts get the uniform red ODIS scheme instead. Source of truth: `tools/busrender/odis.py`.
+
+**The ring** (kraj design manual ch. 7.2 / 8.1): up to three concentric bands of twelve 30° segments. On the buses the outer band is open at the lower front quadrant, the middle band runs from the lower rear over the top to the upper front, and the inner band covers the upper half. Drawn 2.1 m across, centred 0.4 m behind the rear axle and 1.4 m up; on the glass it is tinted towards the glass so the window band still reads. Two outer tones alternate per segment, standing in for the white dividing lines.
+
+| Colourway | Outer band | Middle | Inner | Used by |
+| --------- | ---------- | ------ | ----- | ------- |
+| kraj (manual) | `#B0B1B3` / `#9C9EA2` | `#C4241F` | `#084686` | Z-Group bus (`bila`) |
+| reds | `#E8B49C` / `#E0927C`, top segment `#D8473F` | `#D8473F` | `#9C3B3B` | Transdev Morava (`transdev`), Transdev Slezsko Hlučínsko (`bilacervenykruh`) |
+| greens | `#A8DA88` / `#7CC464` | `#22B14C` | `#1C8A3C` | Transdev Slezsko (`3csadbilozelena`, `bilazelenykruh`) |
+
+### Transdev Morava (`transdev`)
+
+White with a black window band and the big red Transdev figure `#D81E2C` (the IREDO `transdev` figure). On the door side it ends 0.4 m ahead of the middle door; on the other side it starts 1 m behind the front axle. On the 2018–19 SOR CN cars the step under the raised rear windows is painted black, so the band reads as one stripe.
+
+### 3ČSAD bílo-zelená (`3csadbilozelena`) — Transdev Slezsko
+
+The colours of the former ČSAD Havířov, Karviná and Frýdek-Místek: white body and roof, black window band, green skirt `#22B14C` up to row 2 (row 3 on the Crossway LE CITY, where the green also rises to the windows behind the front door) with a dark pinstripe `#2A2C2E` over it, green lower front and rear. The MHD sheets of Frýdek-Místek, Karviná and Orlová use the same green without the ring.
+
+### White with a coloured ring (`bila`, `bilazelenykruh`, `bilacervenykruh`)
+
+Plain white `#F4F4F2` with a black window band and the ring. Z-Group bus uses the kraj colourway (`bila`). Transdev Slezsko prints it green in Havířovsko (`bilazelenykruh`, also the ex-Bruntál Transdev Morava SOR CNG 12) and salmon-red in Hlučínsko (`bilacervenykruh`).
+
+### ODIS červeno-černá (`odiscervenocerna`) — the kraj scheme from 12/2025
+
+| Zone | RGB | Hex |
+| ---- | --- | --- |
+| Body, pods | `220, 6, 18` | #DC0612 |
+| Roof (lit from above) | `230, 38, 44` | #E6262C |
+| Ornament line, ODIS logo | `244, 244, 242` | #F4F4F2 |
+
+Black window band and a black band under the windscreen. The white folk-ornament line runs one row under the windows (dotted at this scale, broken by the doors), and the big white ODIS logo sits two rows lower: between the front axle and the middle door on the door side, at mid-length on the other side. No ring.

@@ -1,0 +1,56 @@
+agency: ODIS
+type: "SOR_CN_10_5"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "ODIS"
+  agency_cs: "ODIS"
+  family_en: "SOR CN 10,5"
+  family_cs: "SOR CN 10,5"
+
+# SOR CN 10,5 (2018-2019), 10.75 m. Transdev Morava 35: 82-, 83-, 84-20xx
+# (Bruntál areas), 64-2001 to 2003 (Bílovecko). Transdev Morava livery (seznam-
+# autobusu: "bílá & červené logo Transdev & logo dopravy Moravskoslezského
+# kraje"): white, black window band, the big red Transdev figure, the kraj ring
+# in salmon and reds over the rear axle.
+# Sprite: original box-model render (vojtechzicha): OSorCN105 of
+# tools/busrender/odis.py (on the SorCN105 body of iredo_models.py) with
+# the livery of odis.py.
+# Regenerate with tools/busrender/odis.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_CN_10_5"
+    display_id: "CN 10,5"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 560000
+      payload: 78
+      speed: 100
+      weight: 10
+      runningcost: 22
+      fixed_cost: 114
+      intro_year: 2018
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 210
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: transdev
+    name_en: "white with the red figure · Transdev Morava"
+    name_cs: "bílá s červenou postavou · Transdev Morava"

@@ -1,0 +1,59 @@
+agency: ODIS
+type: "Crossway_LE_Line_12M_NP"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "ODIS"
+  agency_cs: "ODIS"
+  family_en: "Iveco Crossway LE LINE 12M NP"
+  family_cs: "Iveco Crossway LE LINE 12M NP"
+
+# Iveco Crossway LE LINE 12M NP (CNG, Natural Power; engine_type diesel, no
+# smoke), single front door, the long flat CNG fairing. Transdev Slezsko 34
+# (2020): 42-1001 to 1023 (Havířovsko, green ring) and 24-1001 to 1011
+# (Hlučínsko, red ring); seznam-autobusu "bílá & logo dopravy Moravskoslezského
+# kraje": white, black window band, the kraj ring over the rear axle; Transdev
+# Slezsko prints it green in Havířovsko and salmon-red in Hlučínsko.
+# Sprite: original box-model render (vojtechzicha): OCrosswayLELineNP of
+# tools/busrender/odis.py (on the CrosswayLELine body of
+# iredo_models.py) with the livery of odis.py.
+# Regenerate with tools/busrender/odis.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Crossway_LE_Line_12M_NP"
+    display_id: "Crossway LE LINE 12M NP"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 680000
+      payload: 92
+      speed: 90
+      weight: 12
+      runningcost: 27
+      fixed_cost: 139
+      intro_year: 2020
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 243
+      gear: 54
+
+liveries:
+  - color: bilazelenykruh
+    name_en: "white, green kraj ring · Transdev Slezsko"
+    name_cs: "bílá, zelený krajský kruh · Transdev Slezsko"
+  - color: bilacervenykruh
+    name_en: "white, red kraj ring · Transdev Slezsko"
+    name_cs: "bílá, červený krajský kruh · Transdev Slezsko"

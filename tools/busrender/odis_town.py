@@ -1364,7 +1364,7 @@ FAMILIES = {
 }
 
 
-def yaml_text(f):
+def yaml_text(f, driver="odis_town.py"):
     ag, ag_en, ag_cs = f["agency"]
     L = [f"agency: {ag}",
          f'type: "{f["type"]}"',
@@ -1383,7 +1383,7 @@ def yaml_text(f):
          ""]
     L += ["# " + l for l in f["note"].split("\n")]
     L += [("# Sprite: " if i == 0 else "# ") + l for i, l in enumerate(f["sprite"].split("\n"))]
-    L += ["# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).", "", "vehicles:"]
+    L += [f"# Regenerate with tools/busrender/{driver} (family.yaml: --yaml).", "", "vehicles:"]
     for i, v in enumerate(f["vehicles"]):
         if i:
             L.append("")

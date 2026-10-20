@@ -1,0 +1,55 @@
+agency: ODIS
+type: "Lions_City_U_CNG"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "ODIS"
+  agency_cs: "ODIS"
+  family_en: "MAN Lion's City Ü CNG"
+  family_cs: "MAN Lion's City Ü CNG"
+
+# MAN NÜ 313 Lion's City Ü CNG (CNG; engine_type diesel, no smoke), the old
+# Lion's City body, two doors, the rounded CNG fairing over the front 45 % and
+# the A/C behind it. Z-Group bus 5 (2020): Z-Group bus (ex ČSAD Vsetín;
+# Kopřivnice, Opava and Vítkov depots): white, black window band, the kraj ring
+# in its own colours (grey, the red and blue inner bands), navy fleet numbers.
+# Sprite: original box-model render (vojtechzicha): praha_man.OldGen (the NL 283
+# body of tools/busrender/praha_man.py) with two doors and the CNG roof,
+# white, the kraj ring added by odis.py.
+# Regenerate with tools/busrender/odis.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Lions_City_U_CNG"
+    display_id: "Lion's City Ü CNG"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 760000
+      payload: 92
+      speed: 90
+      weight: 12
+      runningcost: 29
+      fixed_cost: 155
+      intro_year: 2020
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 228
+      gear: 55
+
+liveries:
+  - color: bila
+    name_en: "white · Z-Group bus"
+    name_cs: "bílá · Z-Group bus"
