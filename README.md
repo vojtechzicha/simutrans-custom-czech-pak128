@@ -198,8 +198,8 @@ ComfortJet coaches are CZR art ported 1:1.
   autobusy, ZDAR, UMBRELLA and CAR-TOUR (October 2026) in the same
   `VZ-IREDO-bus.pak`. They are white without the Královéhradecký sticker, on the SOR CN
   10,5 / 12 / 12,3, ICN 10,5, Crossway LE LINE 10,8M / 12M / 14,5M, Setra S 415 LE,
-  Rošero First, Dekstra LE 37 and NovoCiti Life, and CAR-TOUR's Citaro C2 LE Ü and
-  Setra S 419 UL. There are also Arriva's
+  Rošero First, Dekstra LE 37 and NovoCiti Life, and CAR-TOUR's Citaro C2 LE Ü,
+  Setra S 419 UL and white-orange Intouro. There are also Arriva's
   turquoise-cream CN 10,5, ZDAR's white-blue-red and the BORS and PID SOR CN 12.
   The integrated town lines of Chrudim (SOR NB 12 in three liveries, Urbanway 12M
   CNG, Conecto LF, TEMSA MD9 LE) and Přelouč (SOR BN 8,5) are in it too. Ústí nad
@@ -278,7 +278,7 @@ ComfortJet coaches are CZR art ported 1:1.
   Urbanway 12M CNG and Crossway LE LINE 13M; Setra S 510 / S 515 LE and S 419 UL;
   MAN Lion's Intercity LE 14, Lion's City 18C, Lion's City G and the electric Lion's
   City 10E; Mercedes-Benz
-  Citaro C2 GÜ and C2 K; Solaris Urbino 18 III and IV and 15 III LE; Scania
+  Citaro C2 GÜ, C2 K and Integro II L; Solaris Urbino 18 III and IV and 15 III LE; Scania
   Citywide LE 12M / 15M and Suburban LE 15M CNG; Rošero First XL, Dekstra LE 37
   (and L CNG), Stratos LE 37 and Irisbus Crossway LE 12,8M.
 - **Brno city lines, other operators (`VZ-Brno-bus.pak`)** — BDS-BUS on lines 48

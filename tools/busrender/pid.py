@@ -268,6 +268,7 @@ class _SetraS419UL(CM.SetraS418LE):
 PSetra515 = body("PSetra515", _SetraS515LE)
 PSetra510 = body("PSetra510", _SetraS510LE)
 PSetra419UL = body("PSetra419UL", _SetraS419UL)
+PIntegroL = body("PIntegroL", CM.MercedesIntegroL)
 
 
 def scania_port(name, Ls):
@@ -784,6 +785,12 @@ FAMILIES = dict([
         sprite="original box-model render (vojtechzicha): praha_man.LionsCity10E, the 12C body"
         " of tools/busrender/praha_man.py shortened to 10.575 m with the battery roof, PID"
         " grey-red."),
+    fam("integro_ii_l", "Integro_II_L", "Mercedes-Benz Integro II L", BUS,
+        f_(700000, 95, 100, 13, 27, 140, 2016, 9, "diesel", 290, 54, smoke=SMOKE),
+        [(A("Arriva Střední Čechy"), "pid-a")],
+        PIntegroL,
+        "Mercedes-Benz Integro II L high-floor intercity (13.1 m, tag axle, doors 1-2-0):"
+        " 2 buses (Arriva Střední Čechy, 2016; Arriva turquoise-cream until 5/2024) in " + GR),
     fam("citaro_c2_k", "Citaro_C2_K", "Mercedes-Benz Citaro C2 K", MIDI,
         f_(560000, 75, 80, 10, 20, 110, 2014, 7, "diesel", 220, 54, smoke=SMOKE),
         [(A("Lutan"), None)],

@@ -322,7 +322,7 @@ The kraj has no uniform IREDO paint. Each contract operator keeps its own scheme
 The art regenerates with:
 
 - `iredo.py` (models in `iredo_models.py`, on the RegioJet coach modules): the SOR CN / C and Crossway families. The SOR CN's signature (raised rear roof and window line, the middle door rising into it, rounded caps, hopper windows) is drawn exaggerated, as the user required, so it reads like the VTPsim hand art.
-- `iredo_coaches.py` (models in `iredo_coachmodels.py`): Setra S 415 / 418 LE, Evadys, Arway, Irizar i4, Axer and SOR ICN.
+- `iredo_coaches.py` (models in `iredo_coachmodels.py`): Setra S 415 / 418 LE, Evadys, Arway, Irizar i4, Axer, SOR ICN and the Mercedes-Benz Intouro / Integro II L (also used by pid.py).
 - `khk_small.py`: midibuses and vans, rendered on `praha_small.py` or repainted from VTPsim's sheets.
 - `khk_town.py`: the SOR EBN on the `dpmhk.py` bodies, and the Trutnov and Špindlerův Mlýn fleets.
 

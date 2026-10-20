@@ -1,0 +1,54 @@
+agency: PID
+type: "Integro_II_L"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Mercedes-Benz Integro II L"
+  family_cs: "Mercedes-Benz Integro II L"
+
+# Mercedes-Benz Integro II L high-floor intercity (13.1 m, tag axle, doors
+# 1-2-0): 2 buses (Arriva Střední Čechy, 2016; Arriva turquoise-cream until
+# 5/2024) in PID 2021 grey-red (pidsedocervena).
+# Sprite: original box-model render (vojtechzicha): MercedesIntegroL of
+# iredo_coachmodels.py painted in the PID liveries of
+# tools/busrender/pid.py.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Integro_II_L"
+    display_id: "Mercedes-Benz Integro II L"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 700000
+      payload: 95
+      speed: 100
+      weight: 13
+      runningcost: 27
+      fixed_cost: 140
+      intro_year: 2016
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 9
+      engine_type: diesel
+      power: 290
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Arriva Střední Čechy"
+    name_cs: "PID šedo-červená · Arriva Střední Čechy"

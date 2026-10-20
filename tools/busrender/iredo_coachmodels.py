@@ -786,3 +786,111 @@ class SorICN95(SorICN):
 class KarosaAxerTown(KarosaAxer):
     """The Axer on a town line outside IREDO (MHD Nová Paka): no kraj sticker."""
     KHK_STICKER = False
+
+
+# ====================================================================== Mercedes-Benz
+class CarTour(Livery):
+    """CAR-TOUR white-orange (Intouro II ME 75607, photo 362902): white body and
+    roof, a red-orange band under the windows over the whole length, the lower
+    body silver-grey, no KHK sticker"""
+    slug = "cartourbilooranzova"
+    sticker = False
+    RED = (0xA8, 0x34, 0x34)
+    LOW = (0xC4, 0xC6, 0xC8)
+
+    def side(self, bus, x, k, right):
+        band = bus.band_at(x)
+        b0 = band[0] if band else bus.R_BAND0
+        if b0 - 3 <= k < b0:
+            return self.RED
+        if 1 <= k < b0 - 3:
+            return self.LOW
+        return None
+
+
+M.LIVERIES[CarTour.slug] = CarTour
+
+
+class MercedesFace:
+    """Mercedes-Benz Intouro / Integro front: the big windscreen down to about
+    1.2 m with the display behind its top, a white face under it with the
+    chrome grille slats and the star, the headlamps in clusters at the corners."""
+
+    def front_face(self, v, av, k, d):
+        top = self.R_TOP
+        if k >= top:
+            return Sh(self.lv.roof)
+        if k == top - 1:
+            return Sh(self.lv.body)                      # thin cap over the glass
+        if k == top - 2:
+            if av > W2 - 0.07:
+                return BLACK
+            return LED if av < 0.95 else BLACK
+        if k >= 5:
+            if av > W2 - 0.07:
+                return BLACK
+            return SCREEN_HI if k == top - 3 else SCREEN
+        if k == 4:
+            return Sh(self.lv.body)
+        if k == 3:
+            if av > W2 - 0.45:
+                return HEAD
+            if av < 0.18:
+                return Sh(CHROME)                        # the star
+            if av < 0.75:
+                return Sh(SILVER)                        # grille slats
+            return Sh(self.lv.body)
+        if d is not None and k <= 2:
+            return Sh(d)
+        if k == 2:
+            return Sh(self.lv.body)
+        if k == 1:
+            return PLATE if av < 0.30 else Sh(self.lv.bumper or self.lv.body)
+        return Sh(self.lv.bumper or self.lv.seam)
+
+
+class MercedesIntouro(MercedesFace, CoachBus):
+    """Mercedes-Benz Intouro (ME, 12.14 m, 2006-2020), high-floor intercity,
+    doors 1-2-0 (single front door, double middle door ahead of the rear axle),
+    high window line with big panes, roof A/C over the middle. CAR-TOUR 75607
+    (photo 362902)."""
+    real_len = 12.14
+    axles = (2.62, 8.62)
+    R_TOP = 13
+    R_BAND0 = 7
+    BAND = ((0.0, 12.14, 7, 12),)
+    DOORS = ((0.30, 1.25, "hf"), (6.25, 7.45, "hf"))
+    WRAP_K0 = 6
+    REAR_GLASS = (8, 11)
+    AC = (4.2, 7.6)
+    AC_H = 0.18
+    HATCHES = (9.6,)
+
+    def pillars(self, right):
+        if right:
+            return (2.70, 4.50, 8.85, 10.55)
+        return (2.70, 4.50, 6.30, 8.10, 9.90, 11.20)
+
+    def markers(self):
+        return (2.4, self.axles[0] + 1.6, self.axles[1] - 1.5, self.real_len - 0.45)
+
+    def seams(self, right):
+        return (4.5, 9.9) if right else (4.5, 8.1, 9.9)
+
+
+class MercedesIntegroL(MercedesIntouro):
+    """Mercedes-Benz Integro II L (13.1 m, tag axle, 2013+), doors 1-2-0."""
+    real_len = 13.1
+    axles = (2.70, 8.95, 10.40)
+    BAND = ((0.0, 13.1, 7, 12),)
+    DOORS = ((0.30, 1.25, "hf"), (6.60, 7.80, "hf"))
+    AC = (4.6, 8.2)
+    HATCHES = (11.4,)
+
+    def pillars(self, right):
+        if right:
+            return (2.75, 4.70, 9.40, 11.10)
+        return (2.75, 4.70, 6.65, 8.60, 10.55, 12.0)
+
+    def seams(self, right):
+        return (4.7, 10.6) if right else (4.7, 8.6, 10.6)

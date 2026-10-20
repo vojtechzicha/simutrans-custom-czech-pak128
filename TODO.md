@@ -19,13 +19,13 @@ T3R.PV / T3R.EV. Their
 - [ ] ČD **690.0** battery units (Škoda 15Ev5, 15 units) when passenger service starts
   in early 2027 (S7 Ostrava – Český Těšín – Frýdek-Místek): the 690.2 green-blue-white
   scheme, 3 doors per side, roof battery boxes along both cars.
-- [ ] Pardubický kraj (IREDO): the one-off new bodies Mercedes-Benz Intouro II ME
-  (CAR-TOUR white-orange, 1) and Iveco Feniksbus Suburban P (BusLine, 1); the
+- [ ] Pardubický kraj (IREDO): the one-off new body Iveco Feniksbus Suburban P
+  (BusLine, 1); the
   subcontract stand-ins in other paint (Wrocław and brown SOR CN, Alto Adige and ICOM
   Crossways) are left out. CAR-TOUR's two Setra S 415 LE on BusLine KHK line 611109
   are the white `bilapk` object, which names CAR-TOUR.
-- [ ] **PID regional** (`VZ-PID-bus`): still missing the one-off bodies Integro II L
-  (2, Arriva Střední Čechy) and Scania Citywide II LE 12,1M (1, Lutan). The Vehixel vans and the trikolóra Rošero First are registered
+- [ ] **PID regional** (`VZ-PID-bus`): still missing the one-off Scania Citywide II
+  LE 12,1M (1, Lutan), the new-generation Citywide. The Vehixel vans and the trikolóra Rošero First are registered
   but were not seen in October 2026, so they get no object (research: session
   7bd4267d scratchpad research/pid_regional/).
 - [ ] Havířovsko III (kraj contract, Transdev Slezsko): 4 hydrogen SOR NSF 12 + 9

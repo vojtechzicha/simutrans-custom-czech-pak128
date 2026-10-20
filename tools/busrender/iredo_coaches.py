@@ -23,7 +23,7 @@ from rj_buscommon import save_rows, preview    # noqa: E402
 FAMDIR = I.FAMDIR
 
 # liveries this driver adds to iredo.LIVERY (paint name; operators per family)
-LIVERY = {}
+LIVERY = {"cartourbilooranzova": ("CAR-TOUR white-orange", "CAR-TOUR, bílo-oranžová")}
 for _k, _v in LIVERY.items():
     I.LIVERY.setdefault(_k, _v)
 
@@ -42,6 +42,13 @@ FAMILIES = {
         "Setra S 419 UL high-floor intercity, 14.0 m, three axles (tag axle), doors 1-1-0.\n"
         "Pardubický kraj 2026: CAR-TOUR 1 (2010, white, Holicko lines 650601 / 650603 /\n"
         "650609). The body is pid.py's (the PID grey-red S 419 UL is the VZ-PID object)."),
+    "mercedes_intouro": fam("MercedesIntouro", "Intouro_ME", "Mercedes-Benz Intouro ME", BUS,
+        [("cartourbilooranzova", "CAR-TOUR")],
+        fields(620000, 90, 100, 11, 260, 8, 2009),
+        "Mercedes-Benz Intouro ME high-floor intercity, 12.14 m, doors 1-2-0 (seznam-autobusu\n"
+        "lists it as Intouro II ME). Pardubický kraj 2026: CAR-TOUR 1 (2009, Holicko lines\n"
+        "650600 / 650608 / 650650), CAR-TOUR white with the red-orange band under the\n"
+        "windows and the silver-grey lower body since 7/2018."),
     "setra_s_418_le_business": fam("SetraS418LE", "Setra_S_418_LE_business", "Setra S 418 LE business", BUS,
         [("cds", "CDS Náchod")],
         fields(780000, 112, 100, 14, 290, 10, 2016),
