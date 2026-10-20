@@ -1,0 +1,56 @@
+agency: MHDKarvina
+type: "SOR_NS_12"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "MHD Karviná"
+  agency_cs: "MHD Karviná"
+  family_en: "SOR NS 12"
+  family_cs: "SOR NS 12"
+
+# SOR NS 12 diesel, the 2023 SOR face. Karviná MHD (Transdev Slezsko):
+# 50-1409 to 50-1414 (11/2023). The city's white-black scheme of the
+# 2024-2033 contract: white roof and roof edge, gloss black from the roof
+# down to the arch tops (windows, pillars and panels all black), white
+# skirt, white lower front with black lamp pods, white rear; the white
+# "karviná" wordmark on the black; white LED displays (photos seznam-autobusu).
+# Sprite: original box-model render (vojtechzicha): the SOR NS body of
+# tools/busrender/dpmhk.py painted by odis_town.OVeh.
+# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_NS_12"
+    display_id: "NS 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 700000
+      payload: 100
+      speed: 80
+      weight: 12
+      runningcost: 22
+      fixed_cost: 140
+      intro_year: 2023
+      intro_month: 11
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 210
+      gear: 53
+      smoke: Diesel_small
+
+liveries:
+  - color: karvinabilocerna
+    name_en: "Karviná white-black"
+    name_cs: "Karviná, bílo-černá"

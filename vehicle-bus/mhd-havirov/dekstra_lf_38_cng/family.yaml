@@ -1,0 +1,51 @@
+agency: MHDHavirov
+type: "Dekstra_LF_38_CNG"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "MHD Havířov"
+  agency_cs: "MHD Havířov"
+  family_en: "Dekstra LF 38 CNG"
+  family_cs: "Dekstra LF 38 CNG"
+
+# Dekstra LF 38 CNG (Iveco Daily 70C), 7.7 m midibus. Havířov MHD: 40-4001 to
+# 40-4005 (2017-2019), blue since 7-8/2023.
+# Sprite: the Tábor Dekstra LF 38 CNG sheet (VTPsim's art shortened), repainted
+# blue by odis_town.repaint.
+# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Dekstra_LF_38_CNG"
+    display_id: "Dekstra LF 38 CNG"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 300000
+      payload: 40
+      speed: 80
+      weight: 5
+      runningcost: 18
+      fixed_cost: 85
+      intro_year: 2017
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 100
+      gear: 55
+
+liveries:
+  - color: havirovmodra
+    name_en: "Havířov city blue"
+    name_cs: "modrá města Havířov"

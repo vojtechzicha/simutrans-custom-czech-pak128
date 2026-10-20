@@ -1,0 +1,51 @@
+agency: MHDKarvina
+type: "SOR_NS_12_electric"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "MHD Karviná"
+  agency_cs: "MHD Karviná"
+  family_en: "SOR NS 12 electric"
+  family_cs: "SOR NS 12 electric"
+
+# SOR NS 12 electric, the 2023 SOR face. Karviná MHD: 50-1216 and 50-1217
+# (1/2024), white-black like the diesels, white battery boxes on the roof.
+# Sprite: original box-model render (vojtechzicha): the SOR NS body of
+# tools/busrender/dpmhk.py painted by odis_town.OVeh.
+# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_NS_12_electric"
+    display_id: "NS 12 electric"
+    role_en: "electric bus"
+    role_cs: "elektrobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 950000
+      payload: 85
+      speed: 80
+      weight: 12
+      runningcost: 20
+      fixed_cost: 150
+      intro_year: 2024
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: battery
+      power: 160
+      gear: 53
+
+liveries:
+  - color: karvinabilocerna
+    name_en: "Karviná white-black"
+    name_cs: "Karviná, bílo-černá"

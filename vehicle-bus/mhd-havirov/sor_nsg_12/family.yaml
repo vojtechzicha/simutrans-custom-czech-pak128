@@ -1,0 +1,55 @@
+agency: MHDHavirov
+type: "SOR_NSG_12"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "MHD Havířov"
+  agency_cs: "MHD Havířov"
+  family_en: "SOR NSG 12"
+  family_cs: "SOR NSG 12"
+
+# SOR NSG 12 (CNG), the 2023 SOR face, doors 2-2-2. Havířov MHD: 40-1542, 1543
+# (4/2025) and 40-1544, 1545 (6/2026). Blue city scheme with the black cap
+# and lamp mask, the CNG fairing in the body blue; the white city logo (three linked arches) and the yellow "město pro
+# život" script on the lower side, the logo first reading left to right on
+# both sides
+# (photos Transdev Slezsko, dopravacek.eu).
+# Sprite: original box-model render (vojtechzicha): the SOR NS body of
+# tools/busrender/dpmhk.py painted by odis_town.OVeh.
+# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_NSG_12"
+    display_id: "NSG 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 800000
+      payload: 95
+      speed: 80
+      weight: 12
+      runningcost: 24
+      fixed_cost: 135
+      intro_year: 2025
+      intro_month: 4
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 213
+      gear: 53
+
+liveries:
+  - color: havirovmodra
+    name_en: "Havířov city blue"
+    name_cs: "modrá města Havířov"

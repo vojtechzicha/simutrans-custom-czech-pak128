@@ -1,0 +1,49 @@
+agency: MHDKarvina
+type: "Citywide_LF_12M_CNG"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "MHD Karviná"
+  agency_cs: "MHD Karviná"
+  family_en: "Scania Citywide LF 12M CNG"
+  family_cs: "Scania Citywide LF 12M CNG"
+
+# Scania Citywide LF 12M CNG. Karviná MHD: 50-1108 (2019), 3ČSAD white-green.
+# Sprite: the Frýdek-Místek Citywide LF 12M CNG sheet, white LED displays.
+# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Citywide_LF_12M_CNG"
+    display_id: "Citywide LF 12M CNG"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 800000
+      payload: 95
+      speed: 80
+      weight: 12
+      runningcost: 24
+      fixed_cost: 135
+      intro_year: 2019
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 206
+      gear: 55
+
+liveries:
+  - color: 3csadbilozelena
+    name_en: "3ČSAD white-green"
+    name_cs: "3ČSAD bílo-zelená"

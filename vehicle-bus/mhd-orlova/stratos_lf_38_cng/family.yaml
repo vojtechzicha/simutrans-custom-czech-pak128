@@ -1,0 +1,53 @@
+agency: MHDOrlova
+type: "Stratos_LF_38_CNG"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "MHD Orlová"
+  agency_cs: "MHD Orlová"
+  family_en: "SKD Stratos LF 38 CNG"
+  family_cs: "SKD Stratos LF 38 CNG"
+
+# SKD Stratos LF 38 CNG (Iveco Daily). 619 / 33-4051 (2014), an Orlová depot
+# bus that is the main bus of line 505 in 2026: 3ČSAD white-green, white roof
+# and CNG box, the two-tone green CNG roundel over the rear, amber LED.
+# Sprite: VTPsim's ODIS Stratos LF 38 (CZ-vehicle-bus.pak, frozen in
+# tools/busrender/src/odis/) ported, roof white, CNG box and roundel added
+# (odis_town.stratos_rows).
+# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Stratos_LF_38_CNG"
+    display_id: "Stratos LF 38 CNG"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 300000
+      payload: 40
+      speed: 80
+      weight: 5
+      runningcost: 18
+      fixed_cost: 85
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 100
+      gear: 55
+
+liveries:
+  - color: 3csadbilozelena
+    name_en: "3ČSAD white-green"
+    name_cs: "3ČSAD bílo-zelená"

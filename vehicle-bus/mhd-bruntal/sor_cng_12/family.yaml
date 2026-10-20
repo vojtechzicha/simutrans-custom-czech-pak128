@@ -1,0 +1,54 @@
+agency: MHDBruntal
+type: "SOR_CNG_12"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "MHD Bruntál"
+  agency_cs: "MHD Bruntál"
+  family_en: "SOR CNG 12"
+  family_cs: "SOR CNG 12"
+
+# SOR CNG 12 (2015, ex ČSAD Karviná). Bruntál MHD (Transdev Morava, lines 851,
+# 852): 83-1052 (9T6 8123), since 2/2021: white, the BRUNTÁL logo behind the
+# front axle, the kraj ring over the rear axle in greens, white LED displays
+# (photos vhdfoto, seznam-autobusu). Weekend and stand-in buses are Transdev
+# Morava regional SOR CN in the regional scheme: not drawn here.
+# Sprite: original box-model render (vojtechzicha): SorCNG of
+# tools/busrender/iredo_models.py with the livery of odis_town.py.
+# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_CNG_12"
+    display_id: "CNG 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 620000
+      payload: 90
+      speed: 90
+      weight: 11
+      runningcost: 25
+      fixed_cost: 127
+      intro_year: 2015
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 213
+      gear: 54
+
+liveries:
+  - color: bruntalbila
+    name_en: "Bruntál, white"
+    name_cs: "Bruntál, bílá"

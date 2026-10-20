@@ -1,0 +1,79 @@
+agency: MHDHavirov
+type: "SOR_NSG_18"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "MHD Havířov"
+  agency_cs: "MHD Havířov"
+  family_en: "SOR NSG 18"
+  family_cs: "SOR NSG 18"
+
+# SOR NSG 18 (CNG), the 2022 prototype, doors 2-2-2-2. Havířov MHD: 40-0204
+# (ex SOR Libchavy, since 7/2022), blue city scheme with the black SOR mask.
+# Fixed consist: front section A (8) + powered rear section B (6).
+# Sprite: original box-model render (vojtechzicha): the SOR NS body of
+# tools/busrender/dpmhk.py painted by odis_town.OVeh.
+# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_NSG_18-A"
+    display_id: "NSG 18"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["SOR_NSG_18-B"]
+    fields:
+      cost: 580000
+      payload: 90
+      speed: 80
+      weight: 10
+      runningcost: 16
+      fixed_cost: 80
+      intro_year: 2022
+      intro_month: 7
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+
+  - id: "SOR_NSG_18-B"
+    display_id: "NSG 18"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["SOR_NSG_18-A"]
+    next: []
+    fields:
+      cost: 420000
+      payload: 60
+      speed: 80
+      weight: 7
+      runningcost: 12
+      fixed_cost: 55
+      intro_year: 2022
+      intro_month: 7
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 265
+      gear: 62
+
+liveries:
+  - color: havirovmodra
+    name_en: "Havířov city blue"
+    name_cs: "modrá města Havířov"

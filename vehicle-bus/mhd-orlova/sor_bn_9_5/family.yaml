@@ -1,0 +1,52 @@
+agency: MHDOrlova
+type: "SOR_BN_9_5"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "MHD Orlová"
+  agency_cs: "MHD Orlová"
+  family_en: "SOR BN 9,5"
+  family_cs: "SOR BN 9,5"
+
+# SOR BN 9,5. Orlová MHD: 434 (2016), 3ČSAD white-green (tall green skirt),
+# white LED displays.
+# Sprite: VTPsim's ODIS SOR BN 9,5 (CZ-vehicle-bus.pak, already 3ČSAD white-green,
+# frozen in tools/busrender/src/odis/) ported by odis_town.port_native.
+# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_BN_9_5"
+    display_id: "BN 9,5"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 455000
+      payload: 74
+      speed: 80
+      weight: 8
+      runningcost: 22
+      fixed_cost: 120
+      intro_year: 2016
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 185
+      gear: 53
+      smoke: Diesel_small
+
+liveries:
+  - color: 3csadbilozelena
+    name_en: "3ČSAD white-green"
+    name_cs: "3ČSAD bílo-zelená"

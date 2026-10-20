@@ -1,0 +1,51 @@
+agency: MHDHavirov
+type: "SOR_NS_12_electric"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "MHD Havířov"
+  agency_cs: "MHD Havířov"
+  family_en: "SOR NS 12 electric"
+  family_cs: "SOR NS 12 electric"
+
+# SOR NS 12 electric (2018). Havířov MHD: 40-1222 to 40-1224, in the green
+# metallic e-bus scheme of the 3ČSAD group since new (no city logo).
+# Sprite: the Frýdek-Místek SOR NS 12 electric sheet (the same 2018 3ČSAD e-bus
+# order and scheme), copied unchanged.
+# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_NS_12_electric"
+    display_id: "NS 12 electric"
+    role_en: "electric bus"
+    role_cs: "elektrobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 950000
+      payload: 85
+      speed: 80
+      weight: 12
+      runningcost: 20
+      fixed_cost: 150
+      intro_year: 2018
+      intro_month: 5
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: battery
+      power: 160
+      gear: 53
+
+liveries:
+  - color: zelenametaliza
+    name_en: "metallic green"
+    name_cs: "zelená metalíza"

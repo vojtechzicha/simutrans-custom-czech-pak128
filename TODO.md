@@ -21,6 +21,16 @@ T3R.PV / T3R.EV, the DPO 26Tr / 27Tr partial-trolleybus variants. Their
 - [ ] ČD **690.0** battery units, when passenger service starts in 2027.
 - [ ] Pardubický kraj **IREDO** buses, into the same `VZ-IREDO-bus.pak`.
 - [ ] A **PID** package for the regional (non-city) lines around Prague.
+- [ ] An **ODIS** package for the Moravskoslezský kraj regional buses only (the
+  town fleets have their own `MHD<Town>` paks). It replaces the `CZ-ODIS-*` /
+  `CZR-ODIS-*` objects once the saves are migrated: Transdev Morava (white, big
+  red figure, red kraj ring), Transdev Slezsko (3ČSAD white-green / white with the
+  kraj logo), Z-Group bus (white, grey kraj ring) and the others.
+- [ ] Havířovsko III (kraj contract, Transdev Slezsko): 4 hydrogen + 9 CNG buses in
+  the red kraj livery from 12/2027 on the Havířov – Ostrava lines. They go into the
+  regional ODIS package.
+- [ ] MHD Orlová: add the Dekstra LF 38 CNG 448 if it comes back from storage (out of
+  service since mid-2025).
 
 
 ## DPO follow-ups

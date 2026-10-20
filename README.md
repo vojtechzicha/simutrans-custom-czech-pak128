@@ -257,6 +257,19 @@ ComfortJet coaches are CZR art ported 1:1.
     NS 12 electric; Škoda 26Tr, 32Tr and 36Tr trolleybuses.
   - Frýdek-Místek, Třinec, Český Těšín, Nový Jičín, Studénka, Krnov, Hranice
     and Přerov (contracted MHD, town or operator schemes).
+  - The rest of the ODIS region, so every Moravskoslezský kraj town with MHD
+    has its own pak (October 2026 rosters, `tools/busrender/odis_town.py`):
+    - Havířov, in the blue city scheme: Iveco Streetway 12M / 18M CNG,
+      Urbanway 12M CNG, Citelis 12M CNG, SOR NSG 12 / NSG 18 / NBG 18 /
+      BNG 10,5 / CNG 10,5, Scania Citywide LF 12M and LE 15M CNG, Dekstra
+      LF 38 CNG and Rošero First CNG. The 2018 SOR NS 12 electric is green
+      metallic.
+    - Karviná: SOR NS 12 and NS 12 electric in the city's white-black,
+      Urbanway 12M CNG (3ČSAD white-green and white), Streetway 12M CNG and
+      Citywide LF 12M CNG.
+    - Orlová: Urbanway 12M CNG, SOR BN 9,5, Stratos LF 38 CNG and Crossway LE
+      LINE 10,8M in 3ČSAD white-green, plus the white Isuzu NovoCiti Life.
+    - Bruntál: the SOR CNG 12 in the Bruntál scheme.
   - Kladno, DPMLB Mladá Boleslav, Kolín, Příbram, Benešov and Tábor.
 
 ### Stations, signals and industries

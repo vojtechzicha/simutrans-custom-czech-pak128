@@ -1,0 +1,51 @@
+agency: MHDHavirov
+type: "Rosero_First_CNG"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "MHD Havířov"
+  agency_cs: "MHD Havířov"
+  family_en: "Rošero-P First FCLLI CNG"
+  family_cs: "Rošero-P First FCLLI CNG"
+
+# Rošero-P First FCLLI CNG (Iveco Daily), 8 m midibus. Havířov MHD: 40-4006
+# (12/2025), blue from new.
+# Sprite: the Tábor Rošero First sheet (VTPsim's art shortened), repainted blue by
+# odis_town.repaint.
+# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Rosero_First_CNG"
+    display_id: "Rošero First CNG"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 245000
+      payload: 30
+      speed: 90
+      weight: 5
+      runningcost: 18
+      fixed_cost: 85
+      intro_year: 2025
+      intro_month: 12
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 100
+      gear: 55
+
+liveries:
+  - color: havirovmodra
+    name_en: "Havířov city blue"
+    name_cs: "modrá města Havířov"

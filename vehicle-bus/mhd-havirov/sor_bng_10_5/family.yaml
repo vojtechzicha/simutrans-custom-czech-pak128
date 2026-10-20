@@ -1,0 +1,51 @@
+agency: MHDHavirov
+type: "SOR_BNG_10_5"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "MHD Havířov"
+  agency_cs: "MHD Havířov"
+  family_en: "SOR BNG 10,5"
+  family_cs: "SOR BNG 10,5"
+
+# SOR BNG 10,5 (CNG), low floor. Havířov MHD: 40-2001 (2016), blue since
+# 7/2023, green LED displays (photo seznam-autobusu).
+# Sprite: original box-model render (vojtechzicha): SorCN105 (flat window line, CNG fairing) of
+# tools/busrender/iredo_models.py with the livery of odis_town.py.
+# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_BNG_10_5"
+    display_id: "BNG 10,5"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 560000
+      payload: 80
+      speed: 80
+      weight: 10
+      runningcost: 22
+      fixed_cost: 114
+      intro_year: 2016
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 213
+      gear: 54
+
+liveries:
+  - color: havirovmodra
+    name_en: "Havířov city blue"
+    name_cs: "modrá města Havířov"

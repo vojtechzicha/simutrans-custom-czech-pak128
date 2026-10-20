@@ -1,0 +1,53 @@
+agency: MHDHavirov
+type: "Citywide_LE_15M_CNG"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "MHD Havířov"
+  agency_cs: "MHD Havířov"
+  family_en: "Scania Citywide LE 15M CNG"
+  family_cs: "Scania Citywide LE 15M CNG"
+
+# Scania Citywide LE 15M CNG, three axles, doors 1-2-1. Havířov MHD: 40-0001
+# (2017) and 40-0002 (2019), blue since 11/2023. Length 10: the body is
+# drawn 15 m long like the native Citywide 15.
+# Sprite: VTPsim's ODIS Citywide LE 15M (CZ-vehicle-bus.pak, frozen in
+# tools/busrender/src/odis/) ported by odis_town.port_native (lit glass,
+# lane) and repainted blue, CNG fairing added.
+# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Citywide_LE_15M_CNG"
+    display_id: "Citywide LE 15M CNG"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 900000
+      payload: 120
+      speed: 80
+      weight: 14
+      runningcost: 28
+      fixed_cost: 160
+      intro_year: 2017
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 250
+      gear: 55
+
+liveries:
+  - color: havirovmodra
+    name_en: "Havířov city blue"
+    name_cs: "modrá města Havířov"

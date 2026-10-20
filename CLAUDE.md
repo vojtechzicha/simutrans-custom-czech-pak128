@@ -307,6 +307,27 @@ The art regenerates with:
 
 Each driver takes `[family …] [--yaml] [--preview DIR]`; `--yaml` regenerates the family.yaml files from the driver's tables.
 
+### Moravskoslezský kraj (ODIS) town buses (`vehicle-bus/mhd-<town>/`)
+
+Every ODIS town with MHD has its own `MHD<Town>` pak (user, 2026-10-20). The ODIS regional pak, when it comes, holds only regional buses, never a town fleet. Ostrava (`DPOstrava`), Opava (`DPOpava`), Frýdek-Místek, Třinec, Český Těšín, Nový Jičín, Studénka and Krnov already had one. The four towns the region had folded in got theirs from `tools/busrender/odis_town.py`:
+
+- `MHDHavirov`: the blue city scheme on everything except the three 2018 e-buses.
+- `MHDKarvina`: the white-black SOR NS 12, plus 3ČSAD white-green and white.
+- `MHDOrlova`: 3ČSAD white-green and the white Isuzu.
+- `MHDBruntal`: one SOR CNG 12 with the BRUNTÁL logo and the kraj ring in green.
+
+The scope is what each town runs in October 2026, including depot buses that work its lines every day (the Orlová Stratos 619 and Crossways 600 / 411). It leaves out stored buses, reserves and regional stand-ins. The old `CZ-ODIS-*` (VTPsim, `CZ-vehicle-bus.pak`) and `CZR-ODIS-*` objects stay installed. The green CZ-ODIS buses are the 3ČSAD white-green group scheme; the CZR "Red" ones are Transdev Morava regional and the "WhiteGray" ones the plain kraj regional scheme.
+
+`odis_town.py` picks the method per type:
+
+- The SOR NS 12 / NSG 12 / NSG 18 are painted on the `dpmhk.py` bodies by its `OVeh`. The cars from 2023 on get the 2023 SOR face.
+- The SOR CN (CNG 10,5, BNG 10,5, CNG 12) and the Crossway LE LINE 10,8M use the `iredo_models.py` classes, with liveries registered from the driver.
+- Every other type is a repo sheet repainted zone by zone (`repaint`). The fitted box splits roof from side, so the Havířov roof gets the lighter blue. Shading comes from each pixel's luminance over its zone median. Roof boxes are added with `add_pods`, and the city logo and slogan follow the window band line.
+- Types the repo had no body of are ported from VTPsim's ODIS sheets, frozen in `tools/busrender/src/odis/`: the Citelis, Citywide LE 15M, BN 9,5 and Stratos LF 38. `port_native` turns their glass into the lit specials (driver's glass plain) and moves every view onto the native lane by the length rule.
+- Same body and same paint as an existing family is a copy of its sheet: the F-M 3ČSAD Urbanway / Citywide (displays turned white LED) and the 2018 3ČSAD e-bus.
+
+Run `python tools/busrender/odis_town.py [family …] [--yaml] [--preview DIR]`. A run is byte-identical.
+
 ## Multi-vehicle consists
 
 This Simutrans build does **not** support `bidirectional=1` (auto-flip) or `can_lead_from_rear=1`. Don't emit them. Multi-vehicle consists are modelled by **separate vehicle definitions per consist position**, each with its own sprite row.

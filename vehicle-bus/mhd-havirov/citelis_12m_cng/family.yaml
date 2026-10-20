@@ -1,0 +1,52 @@
+agency: MHDHavirov
+type: "Citelis_12M_CNG"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "MHD Havířov"
+  agency_cs: "MHD Havířov"
+  family_en: "Irisbus Citelis 12M CNG"
+  family_cs: "Irisbus Citelis 12M CNG"
+
+# Irisbus Citelis 12M CNG. Havířov MHD: 40-1486 (2014), the last Citelis,
+# blue since 12/2025, green LED displays.
+# Sprite: VTPsim's ODIS Citelis 12 (CZ-vehicle-bus.pak, frozen in
+# tools/busrender/src/odis/) ported by odis_town.port_native and repainted
+# blue, CNG fairing added.
+# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Citelis_12M_CNG"
+    display_id: "Citelis 12M CNG"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 650000
+      payload: 100
+      speed: 80
+      weight: 11
+      runningcost: 24
+      fixed_cost: 123
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 213
+      gear: 55
+
+liveries:
+  - color: havirovmodra
+    name_en: "Havířov city blue"
+    name_cs: "modrá města Havířov"

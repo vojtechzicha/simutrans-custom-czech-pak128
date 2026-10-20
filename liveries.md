@@ -373,3 +373,24 @@ DPO's design manual gives the turquoise as Pantone 312 C / RAL 5012 (screen `#1D
 | Front mask  | `26, 28, 30`     | #1A1C1E |
 
 Since 2026-10-20 every DPO turquoise sheet (trams, buses and trolleybuses) uses this palette; the earlier dark teal roof `#007B94` is gone. The old blue-yellow scheme (`dpomodrozluta`) keeps its photographed roofs: medium blue on the Urbinos, white on the Trollino 12/15 and the SOR EBN 10.5.
+
+---
+
+## Havířov modrá (`havirovmodra`) — MHD Havířov, 2022+
+
+The city scheme of the 2024–2033 contract: one azure blue over the whole body, roof, A/C units and CNG fairings included. Black window band, black glazed doors. The white city logo (three linked arches over HAVÍŘOV) sits on the lower side behind the middle door on the door side and at mid-length on the other side, with the yellow script slogan "město pro život" after it, reading left to right. As with the DPO turquoise, the roof is drawn as a sunlit tint of the body colour. Source of truth: `tools/busrender/odis_town.py`.
+
+| Zone          | RGB              | Hex     |
+| ------------- | ---------------- | ------- |
+| Body          | `21, 133, 216`   | #1585D8 |
+| Roof          | `63, 168, 238`   | #3FA8EE |
+| Logo          | `246, 246, 246`  | #F6F6F6 |
+| Slogan        | `220, 203, 16`   | #DCCB10 |
+
+## Karviná bílo-černá (`karvinabilocerna`) — MHD Karviná SOR NS 12, 2023+
+
+White roof and roof edge, gloss black `#16171A` from the roof edge down to just below the wheel-arch tops (windows, pillars and panels all black), white skirt, white lower front with black LED lamp pods, white rear. The white "karviná" wordmark is on the black.
+
+## Bruntál bílá (`bruntalbila`) — MHD Bruntál
+
+Plain white. The kraj ring sits over the rear axle in greens (`#C6DA9A`, `#A8CB6E`, `#8DBE50`), see-through pale `#DAE8BC` on the glass, and only its rear arc shows below the windows. Behind the front axle is the BRUNTÁL logo: teal `#25695D`, green `#3AA235` and light-blue `#1BA0C4` bands, then navy `#27225F` lettering.

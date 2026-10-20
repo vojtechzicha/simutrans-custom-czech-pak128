@@ -1,0 +1,55 @@
+agency: MHDHavirov
+type: "Urbanway_12M_CNG"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: Lubak91
+
+display:
+  agency_en: "MHD Havířov"
+  agency_cs: "MHD Havířov"
+  family_en: "Iveco Urbanway 12M CNG"
+  family_cs: "Iveco Urbanway 12M CNG"
+
+# Iveco Urbanway 12M CNG, doors 2-2-2. Havířov MHD: 18 cars, 40-1001 (2015, ex
+# Iveco demonstrator) to 40-1019 (2021), incl. four ex Karviná (40-1004 - 1007,
+# since 11/2023); repainted from 3ČSAD white-green into the blue city scheme
+# 12/2023 - 12/2025. The white city logo (three linked arches) and the yellow "město pro
+# život" script on the lower side, the logo first reading left to right on
+# both sides.
+# Sprite: the Frýdek-Místek Urbanway 12M CNG sheet (Lubak91's body with the CNG
+# fairing), repainted blue by odis_town.repaint.
+# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Urbanway_12M_CNG"
+    display_id: "Urbanway 12M CNG"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 800000
+      payload: 95
+      speed: 80
+      weight: 12
+      runningcost: 24
+      fixed_cost: 135
+      intro_year: 2015
+      intro_month: 1
+      retire_year: 2050
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 213
+      gear: 56
+
+liveries:
+  - color: havirovmodra
+    name_en: "Havířov city blue"
+    name_cs: "modrá města Havířov"
