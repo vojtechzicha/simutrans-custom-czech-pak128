@@ -894,3 +894,74 @@ class MercedesIntegroL(MercedesIntouro):
 
     def seams(self, right):
         return (4.7, 10.6) if right else (4.7, 8.6, 10.6)
+
+
+# ====================================================================== Scania
+class ScaniaCW2Face:
+    """Scania Citywide (2019+ generation) front: the deep windscreen with the
+    display in its black top band, black A-pillars, a black band under the glass
+    with the chrome griffin badge, slim headlamps in the lower corners, light
+    lower front."""
+
+    def front_face(self, v, av, k, d):
+        top = self.R_TOP
+        if k >= top:
+            return Sh(self.lv.roof)
+        if k == top - 1:
+            if av > W2 - 0.08:
+                return BLACK
+            return LED if av < 0.95 else BLACK
+        if k >= 5:
+            if av > W2 - 0.08:
+                return BLACK
+            return SCREEN_HI if k >= top - 3 else SCREEN
+        if k == 4:
+            return Sh(CHROME) if av < 0.15 else BLACK     # griffin badge on the band
+        if k == 3:
+            if av > W2 - 0.45:
+                return HEAD
+            return Sh(d) if d is not None else Sh(self.lv.body)
+        if d is not None and k <= 2:
+            return Sh(d)
+        if k == 2:
+            return Sh(self.lv.body)
+        if k == 1:
+            return PLATE if av < 0.28 else Sh(self.lv.bumper or self.lv.body)
+        return Sh(self.lv.bumper or self.lv.seam)
+
+
+class ScaniaCitywide2LE(ScaniaCW2Face, CoachBus):
+    """Scania Citywide LE 12,1M (2019+ generation, "Citywide II"), low-entry,
+    doors 1-2-0 with the double middle door between the axles; deep glazing in
+    the low-floor part, the sill rising two rows behind the middle door, rounded
+    roof edge, the A/C pod over the front of the roof. Photos 354885, 402099,
+    424536 (Lutan 1842 / 1843, PID)."""
+    real_len = 12.1
+    axles = (2.70, 8.70)
+    R_TOP = 12
+    R_BAND0 = 5
+    BAND = ((0.0, 12.1, 4, 11),)
+    RISE = (7.90, 9.40)            # glazing sill rises from row 4 to row 6
+    DOORS = ((0.30, 1.25, "le"), (6.10, 7.30, "le"))
+    REAR_GLASS = (7, 10)
+    ROUND = 0.22
+    GLASS_HI_ROWS = 2
+    AC = (1.0, 3.8)
+    AC_H = 0.22
+    HATCHES = (5.2, 10.6)
+
+    def band_k0(self, x):
+        a, b = self.RISE
+        if x < a:
+            return 4
+        if x >= b:
+            return 6
+        return 4 + int(round(2 * (x - a) / (b - a)))
+
+    def pillars(self, right):
+        if right:
+            return (2.45, 4.25, 8.10, 9.70, 11.0)
+        return (2.45, 4.10, 5.75, 7.40, 9.05, 10.70)
+
+    def markers(self):
+        return (1.9, self.axles[0] + 1.6, self.axles[1] - 1.5, self.real_len - 0.45)

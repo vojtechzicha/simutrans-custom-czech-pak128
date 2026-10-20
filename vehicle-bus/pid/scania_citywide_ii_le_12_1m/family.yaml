@@ -1,0 +1,54 @@
+agency: PID
+type: "Citywide_II_LE_12_1M"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Scania Citywide II LE 12,1M"
+  family_cs: "Scania Citywide II LE 12,1M"
+
+# Scania Citywide LE 12,1M of the 2019+ generation (doors 1-2-0, 39 + 3 seats):
+# 1 bus (Lutan 1843, 2022) in PID 2021 grey-red (pidsedocervena). The older
+# VTPsim-based Citywide LE 12M is its own object.
+# Sprite: original box-model render (vojtechzicha): ScaniaCitywide2LE of
+# iredo_coachmodels.py painted in the PID liveries of
+# tools/busrender/pid.py.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Citywide_II_LE_12_1M"
+    display_id: "Scania Citywide II LE 12,1M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 780000
+      payload: 77
+      speed: 85
+      weight: 11
+      runningcost: 28
+      fixed_cost: 145
+      intro_year: 2022
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 235
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Lutan"
+    name_cs: "PID šedo-červená · Lutan"

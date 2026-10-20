@@ -24,10 +24,6 @@ T3R.PV / T3R.EV. Their
   subcontract stand-ins in other paint (Wrocław and brown SOR CN, Alto Adige and ICOM
   Crossways) are left out. CAR-TOUR's two Setra S 415 LE on BusLine KHK line 611109
   are the white `bilapk` object, which names CAR-TOUR.
-- [ ] **PID regional** (`VZ-PID-bus`): still missing the one-off Scania Citywide II
-  LE 12,1M (1, Lutan), the new-generation Citywide. The Vehixel vans and the trikolóra Rošero First are registered
-  but were not seen in October 2026, so they get no object (research: session
-  7bd4267d scratchpad research/pid_regional/).
 - [ ] Havířovsko III (kraj contract, Transdev Slezsko): 4 hydrogen SOR NSF 12 + 9
   CNG buses in the red ODIS scheme from 12/2027 on the Havířov – Ostrava lines.
   They go into `VZ-ODIS-bus` once the CNG type is known.
@@ -56,6 +52,8 @@ Not open work; listed so nobody adds them by accident.
 
 - Advertising and promo wraps on any vehicle, except the standing Fashion Arena
   livery of Prague line 238.
+- PID regional: the Vehixel vans (Lutan, Martin Uher) and the trikolóra Rošero First
+  (ČSAD Benešov) are registered but were not seen in service in October 2026.
 - ČD diesel units: delivery-state schemes of second-hand RS1s (NEB, BWEGT, OSB,
   BSB), the retro 854.021 / 1969 854.225 museum schemes, and ČD 812 (sold to AŽD
   in 2026).

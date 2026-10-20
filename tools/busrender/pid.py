@@ -269,6 +269,7 @@ PSetra515 = body("PSetra515", _SetraS515LE)
 PSetra510 = body("PSetra510", _SetraS510LE)
 PSetra419UL = body("PSetra419UL", _SetraS419UL)
 PIntegroL = body("PIntegroL", CM.MercedesIntegroL)
+PCitywide2LE = body("PCitywide2LE", CM.ScaniaCitywide2LE)
 
 
 def scania_port(name, Ls):
@@ -785,6 +786,13 @@ FAMILIES = dict([
         sprite="original box-model render (vojtechzicha): praha_man.LionsCity10E, the 12C body"
         " of tools/busrender/praha_man.py shortened to 10.575 m with the battery roof, PID"
         " grey-red."),
+    fam("scania_citywide_ii_le_12_1m", "Citywide_II_LE_12_1M", "Scania Citywide II LE 12,1M", BUS,
+        f_(780000, 77, 85, 11, 28, 145, 2022, 8, "diesel", 235, 55, smoke=SMOKE),
+        [(A("Lutan"), "pid-a")],
+        PCitywide2LE,
+        "Scania Citywide LE 12,1M of the 2019+ generation (doors 1-2-0, 39 + 3 seats): 1 bus"
+        " (Lutan 1843, 2022) in " + GR + " The older VTPsim-based Citywide LE 12M is its own"
+        " object."),
     fam("integro_ii_l", "Integro_II_L", "Mercedes-Benz Integro II L", BUS,
         f_(700000, 95, 100, 13, 27, 140, 2016, 9, "diesel", 290, 54, smoke=SMOKE),
         [(A("Arriva Střední Čechy"), "pid-a")],
