@@ -1,6 +1,6 @@
 agency: CeskeDrahy
 type: "848"
-copyright: Lubak91
+copyright: vojtechzicha
 
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -20,10 +20,12 @@ display:
 # power module, 120 km/h, axles 2'Bo'2'.
 #
 # Three sections like the real unit: two passenger end cars resting on the short
-# central power module (engine box + the powered bogie). Sprites: the pak128.CS
-# ZSSK 840 drawing (rail-psg mail/840_841/zssk_840_a/b/c), which is the same GTW 2/6
-# body; section lengths 8 + 2 + 8 as drawn. The only buildable consist is
-# front car + power module + rear car.
+# central power module (engine box + the powered bogie). Sprites: original box
+# render (vojtechzicha), the Arriva 848 GTW model of tools/railrender/gtw.py in
+# Najbrt 2, written by tools/railrender/cd_848.py (the owner's pick over the
+# repainted ZSSK 840 drawing, 2026-10-20); section lengths 8 + 3 + 8 as gtw.py
+# (the real joints). The only buildable consist is front car + power module +
+# rear car.
 
 vehicles:
   - id: "848-front"
@@ -74,7 +76,7 @@ vehicles:
       retire_month: 1
       waytype: track
       freight: Passagiere
-      length: 2
+      length: 3
       engine_type: diesel
       power: 550
       smoke: Diesel_small
@@ -119,4 +121,4 @@ liveries:
     # sapphire cap, sky-blue windscreen surround and lamp panel with the ČD logo,
     # sapphire stripe, white cheeks, black skirt with a yellow edge. The two 2026
     # promotional wraps (848.016 "Konicko", 848.026 "Jesenicko") are not modelled.
-    source: pak128.CS ZSSK 840 (GTW 2/6) body, repainted zone by zone from photos
+    source: original box render (gtw.py model, cd_848.py livery) from photos

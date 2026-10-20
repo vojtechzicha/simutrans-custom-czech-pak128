@@ -34,7 +34,6 @@ T3R.PV / T3R.EV. Their
 - [ ] GW Train Regio: further IDESKA repaints of the Šumava RS1s, 841 278 (TRD
   silver, at Hranice since April 2026, due for IDESKA), and whether 841 275 has the
   IDESKA decals yet (the drawing of `oranzovozelena` shows them).
-- [ ] The ČD 848 (Lubak91's ZSSK 840 art) looks unlike the Arriva 848 render.
 
 ## Build limitations
 

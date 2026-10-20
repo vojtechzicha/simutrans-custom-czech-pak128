@@ -1,19 +1,16 @@
-"""ČD 642 Desiro Classic (DÚK zeleno-bílá) and ČD 848 Stadler GTW 2/6 (Najbrt 2
-with Olomoucký kraj decals).
+"""ČD 642 Desiro Classic (DÚK zeleno-bílá).
 
-Upstream drawings (frozen in src/642_848/, the 1024-px sprite columns only):
-- 642: the pak128.CS DB Desiro sheets db_desiro_2.png / db_desiro.png (rail-psg
-  mail/), row 0 = 642a (cab ahead), row 1 = 642b (cab behind);
-- 848: the pak128.CS ZSSK 840 GTW drawings (rail-psg mail/840_841/:
-  zssk_840_a(_freight), zssk_840_b = power module, zssk_840_c(_freight)).
+Upstream drawings (frozen in src/642/, the 1024-px sprite columns only): the
+pak128.CS DB Desiro sheets db_desiro_2.png / db_desiro.png (rail-psg mail/),
+row 0 = 642a (cab ahead), row 1 = 642b (cab behind).
 
-The upstream liveries (DB red, ZSSK) do not follow the Czech schemes, so the
-pure views are zoned by hand-written geometry rules on the upstream colour
-classes; the diagonal views get their zones through warp.py. Liveries:
-642 dukzelenobila (the six ex-HLB units at Děčín), 848 najbrt2 (12 units for
-Olomoucký kraj).
+The upstream DB red does not follow the Czech scheme, so the pure views are
+zoned by hand-written geometry rules on the upstream colour classes; the
+diagonal views get their zones through warp.py. Livery: 642 dukzelenobila (the
+six ex-HLB units at Děčín). The ČD 848 GTW, painted here until 2026-10-20, is
+the gtw.py render now (tools/railrender/cd_848.py).
 
-  python tools/railpaint/cd_642_848.py [642] [848] [--preview DIR]
+  python tools/railpaint/cd_642.py [642] [--preview DIR]
 
 writes vehicle-rail/ceske-drahy/<family>/sprites/<livery>.png; --preview also
 writes zoomed previews and the zone false-colour maps into DIR.
@@ -27,11 +24,10 @@ sys.path.insert(0, HERE)
 import warp
 from body import Body, T, hexarr, lum, SIDE_COLS, END_COLS, DIAG_COLS
 from paint import paint, recolor_lum, add_marks, save_sheet, unspecial, shade, preview
-from palette import SAPPHIRE, SKY, N2_STRIPE, dk
 
 REPO = os.path.dirname(os.path.dirname(HERE))
 FAMDIR = os.path.join(REPO, "vehicle-rail", "ceske-drahy")
-SRC = os.path.join(HERE, "src", "642_848") + os.sep
+SRC = os.path.join(HERE, "src", "642") + os.sep
 
 SPC = {0x4d4d4d: 'g', 0x57656f: 'G', 0x6b6b6b: '6', 0x9b9b9b: '9', 0xb3b3b3: '3', 0xe3e3ff: 'e',
        0xffff53: 'Y', 0xff211d: 'T', 0x01dd01: 'E'}
@@ -328,259 +324,16 @@ def des_paint(row):
     return b, a
 
 
-
-# ---------------------------------------------------------------------------
-# ČD 848 Stadler GTW 2/6 (Najbrt 2 + Olomoucký kraj decals)
-# ---------------------------------------------------------------------------
-G840 = SRC
-GTW_TOP = 81          # first painted side row (white stripe) on every GTW body
-# end cars: pure side (col) -> (door x-range, cab at Right/Left); car c mirrors car a
-GTW_SIDE = {"a": {3: ((62, 65), "R"), 7: ((55, 58), "L")},
-            "c": {3: ((55, 58), "L"), 7: ((62, 65), "R")}}
-GTW_END = {"a": dict(cab=5, cab_top=86, joint=1, joint_top=82),
-           "c": dict(cab=1, cab_top=79, joint=5, joint_top=89),
-           "b": dict(cab=None, joint=None, top={1: 69, 5: 90})}
-GTW_CAB_D = 11        # side px from the nose that belong to the cab (sky surround)
-
-
-def gtw_side(car):
-    def f(b, col, top):
-        Z = b.Z
-        body, lab, K, U, x0, x1 = b.new(col)
-        c = b.cmap(col)
-        if car == "b":
-            door, cab = None, None
-        else:
-            door, cab = GTW_SIDE[car][col]
-        for y, x in zip(*np.where(body)):
-            k = y - top
-            K[y, x] = k
-            ch = c[y, x]
-            isdoor = door is not None and door[0] <= x <= door[1]
-            d = None if cab is None else ((x1 - x) if cab == "R" else (x - x0))
-            incab = d is not None and d <= GTW_CAB_D
-            if k < 0:
-                z = "ROOF"
-            elif ch in "YT":
-                z = "HEAD" if ch == "Y" else "TAIL"
-            elif ch == "e":
-                z = "HEAD"
-            elif ch in "EV" and 4 <= k <= 8:
-                z = "DISPLAY"
-            elif k <= 1:
-                z = "S_WHITE"
-            elif k <= 3:
-                z = "S_SKY"
-            elif k <= 8:
-                if car == "b":
-                    z = "S_PANEL"
-                elif isdoor:
-                    z = "GLASS" if ch in GLASSY and k >= 5 else "S_DOOR"
-                elif ch in GLASSY and k >= 5:
-                    z = "GLASS"
-                else:
-                    z = "S_SKY" if incab else "S_BAND"
-            elif k == 9:
-                z = "S_DOOR" if isdoor else "S_STRIPE"
-            elif k <= 11:
-                z = "S_DOOR" if isdoor else "S_LOW"
-            else:
-                z = "FIX"
-            lab[y, x] = Z[z]
-        return lab, K, U
-    return f
-
-
-def gtw_end(car):
-    e = GTW_END[car]
-
-    def f(b, col, top):
-        Z = b.Z
-        body, lab, K, U, x0, x1 = b.new(col)
-        c = b.cmap(col)
-        cab = col == e["cab"]
-        if car == "b":
-            top = e["top"][col]
-        else:
-            top = e["cab_top"] if cab else e["joint_top"]
-        for y, x in zip(*np.where(body)):
-            k = y - top
-            K[y, x] = k
-            ch = c[y, x]
-            edge = x <= x0 + 1 or x >= x1 - 1
-            if k < 0:
-                z = "ROOF"
-            elif not cab:
-                z = "E_BELLOWS" if k <= 9 else "FIX"
-            elif ch in "YTe":
-                z = "TAIL" if ch == "T" else "HEAD"
-            elif ch in "EV" and 2 <= k <= 3:
-                z = "DISPLAY"
-            elif k <= 1:
-                z = "E_CAP"
-            elif k <= 3:
-                z = "E_PILLAR" if edge else "E_GLASSBAND"
-            elif k <= 6:
-                z = "E_PILLAR" if edge else "WSCREEN"
-            elif k <= 9:
-                z = "E_LAMP"
-            elif k == 10:
-                z = "E_STRIPE"
-            elif k == 11:
-                z = "E_CHEEK" if edge else "E_RECESS"
-            elif k == 12:
-                z = "E_PLOUGH"
-            else:
-                z = "FIX"
-            lab[y, x] = Z[z]
-        return lab, K, U
-    return f
-
-
-GTW_ZONES = ["S_CABGLASS", "S_WHITE", "S_SKY", "S_BAND", "S_PANEL", "S_STRIPE", "S_LOW", "DISPLAY", "WSCREEN",
-             "E_BELLOWS", "E_CAP", "E_PILLAR", "E_GLASSBAND", "E_LAMP", "E_STRIPE", "E_CHEEK",
-             "E_RECESS", "E_PLOUGH"]
-
-
-def gtw_cfg(car):
-    refs = {"a": [(G840 + "zssk_840_a_freight.png", 0), (G840 + "zssk_840_a.png", 0)],
-            "b": [(G840 + "zssk_840_b.png", 0)],
-            "c": [(G840 + "zssk_840_c_freight.png", 0), (G840 + "zssk_840_c.png", 0)]}[car]
-    e = GTW_END[car]
-    end_top = e["top"] if car == "b" else {e["cab"]: e["cab_top"], e["joint"]: e["joint_top"]}
-    return dict(name=f"848{car}", refs=refs, base=0,
-                side_top={3: GTW_TOP, 7: GTW_TOP}, end_top=end_top,
-                side_rows=[], end_rows=[], extra_zones=GTW_ZONES,
-                side_fn=gtw_side(car), end_fn=gtw_end(car),
-                glass_extra=lambda t, col: np.isin(hexarr(t), [0x6B6B6B, 0xB3B3B3]).any(axis=0))
-
-
-N2_WHITE = (230, 233, 234)      # 848 white stripe + lower body (#E6E9EA)
-GTW_BAND = (30, 32, 40)         # flush black glazing band (#1E2028)
-GTW_PANEL = (46, 48, 54)        # power-module engine-room panel (#2E3036)
-GTW_RECESS = (30, 32, 35)
-GTW_YELLOW = (232, 176, 20)     # skirt bottom edge (#E8B014)
-OK_YELLOW = (246, 196, 30)      # Olomoucký kraj logo petals
-SLOGAN_BLUE = (44, 70, 124)     # dark-blue decal lettering on the white lower body
-OK_RED = (220, 50, 50)
-
-
-def flatten_shade(b, side_zones, end_zones, ref_zone):
-    """The upstream GTW livery does not follow the ČD zones (a navy stripe and
-    white upper side share one ČD band), so its per-pixel lighting would stripe
-    the new colours. Give those zones one face-level factor per tile: the side
-    factor from a zone that is one colour in the upstream art (ref_zone), the end
-    factor from the median over the end face."""
-    fac = shade(b)
-    Z = b.Z
-    for col in range(8):
-        sl = slice(col * 128, (col + 1) * 128)
-        lab, f = b.lab[:, sl], fac[:, sl]
-        ref = lab == Z[ref_zone]
-        fs = float(np.median(f[ref])) if ref.any() else 1.0
-        for zn in side_zones:
-            f[lab == Z[zn]] = fs
-        em = np.isin(lab, [Z[z] for z in end_zones])
-        if em.any():
-            f[em] = 1.0 if col in END_COLS else float(np.median(f[em]))
-    return fac
-
-
-# power module diagonal views: the vertical corner edge between side and end
-# face (side face on the left of it for w/e, on the right for n/s), read off
-# the upstream art; the warp is unreliable on a body this small
-GTW_MODULE_CORNER = {0: ("L", 47), 4: ("L", 71), 2: ("R", 79), 6: ("R", 55)}
-
-
-def gtw_module_diag(b):
-    """Re-zone the power module's diagonal views by geometry: K from the fitted
-    side shear, side/end split at the corner edge."""
-    Z = b.Z
-    for col, (side_at, xc) in GTW_MODULE_CORNER.items():
-        s, bx, by, _ = b.fits[col]["side"]
-        slope = warp.SIDE_SLOPE[col]
-        sl = slice(col * 128, (col + 1) * 128)
-        lab, K, face = b.lab[:, sl], b.K[:, sl], b.face[:, sl]
-        body = lab != Z["T"]
-        for y, x in zip(*np.where(body)):
-            k = int(round(y - slope * x + by)) - GTW_TOP
-            onside = x <= xc if side_at == "L" else x >= xc
-            if lab[y, x] in (Z["HEAD"], Z["TAIL"], Z["GLASS"]):
-                continue
-            if k < 0:
-                z, f = "ROOF", "R"
-            elif not onside:
-                z, f = ("E_BELLOWS" if k <= 11 else "FIX"), "E"
-            elif k <= 1:
-                z, f = "S_WHITE", "S"
-            elif k <= 3:
-                z, f = "S_SKY", "S"
-            elif k <= 8:
-                z, f = "S_PANEL", "S"
-            elif k == 9:
-                z, f = "S_STRIPE", "S"
-            elif k <= 11:
-                z, f = "S_LOW", "S"
-            else:
-                z, f = "FIX", ""
-            lab[y, x], K[y, x], face[y, x] = Z[z], k, f
-
-
-def gtw_paint(car):
-    b = RuleBody(gtw_cfg(car))
-    if car == "b":
-        gtw_module_diag(b)
-    else:
-        right = {"a": {3: True, 7: False}, "c": {3: False, 7: True}}[car]
-        D = b.dist_from(right)
-        b.lab[(b.lab == b.Z["GLASS"]) & (D <= GTW_CAB_D) & (b.face == "S")] = b.Z["S_CABGLASS"]
-    flatten_shade(b, ["S_SKY", "S_BAND", "S_STRIPE", "S_LOW", "S_DOOR", "S_PANEL"],
-                  ["E_CAP", "E_PILLAR", "E_GLASSBAND", "E_LAMP", "E_STRIPE", "E_CHEEK", "E_RECESS", "E_BELLOWS"],
-                  "S_WHITE")
-    spec = {
-        "S_CABGLASS": (CAB_GLASS, "flat"),
-        "S_WHITE": N2_WHITE, "S_SKY": SKY, "S_BAND": GTW_BAND, "S_PANEL": GTW_PANEL,
-        "S_STRIPE": SAPPHIRE, "S_LOW": N2_WHITE, "S_DOOR": SAPPHIRE,
-        "DISPLAY": (AMBER, "flat"), "HEAD": ((0xFF, 0xFF, 0x53), "flat"),
-        "WSCREEN": WSCREEN_TINT, "E_BELLOWS": BELLOWS,
-        "E_CAP": SAPPHIRE, "E_PILLAR": SKY, "E_GLASSBAND": GTW_BAND, "E_LAMP": SKY,
-        "E_STRIPE": SAPPHIRE, "E_CHEEK": N2_WHITE, "E_RECESS": GTW_RECESS,
-        "E_PLOUGH": (GTW_YELLOW, "flat"),
-    }
-    a = paint(b, spec)
-    # flush black glazing: every window in the darker lit-glass special
-    v = hexarr(a)
-    a[v == 0x57656F] = (0x4D, 0x4D, 0x4D)
-    a = recolor_lum(b, a, "ROOF", SAPPHIRE)
-    a = recolor_lum(b, a, "ROOF_EDGE", SAPPHIRE)
-    if car != "b":
-        # u from the rear: car a has its cab at the front, car c at the rear
-        L = 44.0
-        ur = (lambda d: 1 - d / L) if car == "a" else (lambda d: d / L)
-        # OLKRAJ.CZ flower under the cab window, "Jedeme v tom spolu…" between cab and door
-        side = [(ur(8), 0.02, 10, SAPPHIRE),
-                (ur(13.5), 0.08, 11, SLOGAN_BLUE)]
-        if car == "a":
-            side += [(ur(38), 0.02, 10, OK_YELLOW), (ur(39), 0.02, 10, OK_RED), (ur(39), 0.02, 11, SKY)]
-        else:
-            side += [(ur(38), 0.05, 10, SAPPHIRE)]                     # "ČD České dráhy"
-        a = add_marks(b, a, side=side, side_zones={"S_LOW"})
-        a = add_marks(b, a, end=[(0.5, 0.12, 8, N2_WHITE), (0.82, 0.12, 0, N2_WHITE)],
-                      end_zones={"E_LAMP", "E_CAP"})
-    return b, a
-
 def render(fam):
     """-> (sheet rows, bodies) of a family's only livery."""
     if fam == "642":
         res = [des_paint(r) for r in (0, 1)]
-    elif fam == "848":
-        res = [gtw_paint(car) for car in "abc"]
     else:
         raise KeyError(fam)
     return [a for _, a in res], [b for b, _ in res]
 
 
-LIVERY = {"642": "dukzelenobila", "848": "najbrt2"}
+LIVERY = {"642": "dukzelenobila"}
 
 
 def main(argv):
