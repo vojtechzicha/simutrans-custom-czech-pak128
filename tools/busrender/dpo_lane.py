@@ -19,9 +19,15 @@ which keeps the joints. Nothing moves sideways, so trolleybus poles stay on
 the wire. Shifts under 2 px are left alone; running the script again changes
 nothing.
 
+The Solaris families rendered by tools/busrender/dpo_solaris.py are skipped:
+the generator places them itself by the section rule (a section of yaml length
+L shifted (4 - L/2) carunits along travel from the native 12 m footprint),
+which the drawing-based measure here would read as 2-3 px off on the
+articulated and the raked Urbino IV bodies.
+
 usage: python tools/busrender/dpo_lane.py [--dry-run] [family ...]
-Run it after tools/busrender/dpo_derived.py, which builds two DPO sheets from
-others.
+Run it after tools/busrender/dpo_derived.py, which builds the SOR TNB 12 sheet
+from others.
 """
 import argparse
 import glob
@@ -73,11 +79,20 @@ def drawn_length(sheet, row):
     return sum(out) / 2
 
 
+def rendered():
+    """families that dpo_solaris.py renders on the lane itself"""
+    from dpo_solaris import FAMILIES
+    return {f.split("/")[-1] for f in FAMILIES}
+
+
 def families(names):
     out = []
+    skip = rendered()
     for root in ("vehicle-bus/dpo", "vehicle-trolleybus/dpo"):
         for fy in sorted(glob.glob(os.path.join(ROOT, root, "*", "family.yaml"))):
             fam = os.path.basename(os.path.dirname(fy))
+            if fam in skip:
+                continue
             if not names or fam in names:
                 out.append(fy)
     return out

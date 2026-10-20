@@ -1,11 +1,14 @@
 agency: DPOstrava
 type: "26TrSolaris_partial"
-# Sprites were extracted from the compiled upstream pak with their tile
-# placement baked in, so no extra shift (the default [0, 4] sank them 4 px).
+# Sprites are rendered on the native lane footprint (tools/busrender/
+# dpo_solaris.py), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: TommPa9
+copyright: vojtechzicha
+# Art: rendered by tools/busrender/dpo_solaris.py (2026-10-20), replacing
+# TommPa9's sheets: the 26Tr body with traction batteries (3731-3740):
+# a battery box on the shorter fairing, poles further forward, a second box at the rear.
 
 display:
   agency_en: "DPO"
@@ -15,8 +18,7 @@ display:
 
 # Partial-trolleybus variant of the standard 26Tr — same Solaris Trollino 12
 # body, fitted with a traction battery so the vehicle can leave the catenary
-# and run off-wire for a limited range. Sprites are reused from the pure 26Tr
-# family (same chassis & livery), only the powertrain spec differs.
+# and run off-wire for a limited range.
 
 vehicles:
   - id: "26TrSolaris_partial"

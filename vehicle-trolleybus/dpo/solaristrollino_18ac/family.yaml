@@ -1,11 +1,14 @@
 agency: DPOstrava
 type: "SolarisTrollino_18AC"
-# Sprites were extracted from the compiled upstream pak with their tile
-# placement baked in, so no extra shift (the default [0, 4] sank them 4 px).
+# Sprites are rendered on the native lane footprint (tools/busrender/
+# dpo_solaris.py), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: TommPa9
+copyright: vojtechzicha
+# Art: rendered by tools/busrender/dpo_solaris.py (2026-10-20), replacing
+# TommPa9's sheets: Trollino 18 (3801) in sections 8 + 6, blue roof (photo),
+# long fairing, yellow poles behind the joint, rack over the rear.
 
 display:
   agency_en: "DPO"
@@ -64,7 +67,7 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 6
       engine_type: electric
       power: 265
       gear: 61

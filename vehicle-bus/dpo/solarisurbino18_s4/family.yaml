@@ -1,11 +1,14 @@
 agency: DPOstrava
 type: "SolarisUrbino18_s4"
-# Sprites were extracted from the compiled upstream pak with their tile
-# placement baked in, so no extra shift (the default [0, 4] sank them 4 px).
+# Sprites are rendered on the native lane footprint (tools/busrender/
+# dpo_solaris.py), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: TommPa9
+copyright: vojtechzicha
+# Art: rendered by tools/busrender/dpo_solaris.py (2026-10-20), replacing
+# TommPa9's sheets: Urbino IV 18 m CNG in sections 8 + 6: gas fairing on the
+# front section, AC on the rear one, black frieze, engine tower at the rear left.
 
 display:
   agency_en: "DPO"
@@ -64,7 +67,7 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 6
       engine_type: diesel
       power: 283
       gear: 61

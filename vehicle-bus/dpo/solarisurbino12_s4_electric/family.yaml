@@ -1,11 +1,14 @@
 agency: DPOstrava
 type: "SolarisUrbino12_s4_electric"
-# The sheet keeps the tile placement of the DPO Urbino 12 IV sheet it is
-# derived from, so no extra shift (the default [0, 4] would sink it 4 px).
+# Sprites are rendered on the native lane footprint (tools/busrender/
+# dpo_solaris.py), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: TommPa9
+copyright: vojtechzicha
+# Art: rendered by tools/busrender/dpo_solaris.py (2026-10-20), replacing
+# TommPa9's sheets: Urbino IV 12 m electric: the battery fairing with the
+# OppCharge contact rails over the front axle, no engine tower.
 
 display:
   agency_en: "DPO"
@@ -23,12 +26,6 @@ display:
 # order for 2027-2028 (same type, larger batteries); not separate here.
 # Until now the e-buses were only covered by the diesel Urbino 12 IV object;
 # this is a new object, the diesel family is unchanged.
-# Sprite: TommPa9's DPO Urbino 12 IV sheet with the roof battery fairing
-# added by tools/busrender/dpo_derived.py: the long fairing from the front
-# dome to about 1 m before the tail, the black front part of its sides, the
-# white "ooo" e-mark near the rear and the OppCharge contact rails above the
-# front axle. No other body change: the diesel's rear has no exhaust or engine
-# tower in the drawing either.
 # Economy relative to the diesel Urbino 12 IV (cost 912 498, runningcost 31):
 # dearer to buy, cheaper to run, like the other VZ e-buses (Tábor Urbino 12
 # electric 1 000 000 / 20, DPO 36Tr partial trolleybus 1 075 000 / 19).

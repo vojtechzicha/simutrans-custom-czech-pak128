@@ -1,11 +1,14 @@
 agency: DPOstrava
 type: "27TrSolaris_partial"
-# Sprites were extracted from the compiled upstream pak with their tile
-# placement baked in, so no extra shift (the default [0, 4] sank them 4 px).
+# Sprites are rendered on the native lane footprint (tools/busrender/
+# dpo_solaris.py), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: TommPa9
+copyright: vojtechzicha
+# Art: rendered by tools/busrender/dpo_solaris.py (2026-10-20), replacing
+# TommPa9's sheets: the 2024 batch on the Urbino IV 18 m body, sections 8 + 6,
+# black frieze, grey battery boxes on the rear section, poles 1.2 m behind the joint.
 
 display:
   agency_en: "DPO"
@@ -13,11 +16,10 @@ display:
   family_en: "Škoda 27Tr Solaris (partial)"
   family_cs: "Škoda 27Tr Solaris (parciální)"
 
-# Partial-trolleybus variant of the articulated 27Tr — same Solaris Trollino
-# 18 body in two sections, fitted with a traction battery so the vehicle can
-# leave the catenary and run off-wire for a limited range. Sprites are reused
-# from the pure 27Tr family (same chassis & livery), only the powertrain spec
-# differs.
+# Partial-trolleybus variant of the articulated 27Tr in two sections, fitted
+# with a traction battery so the vehicle can leave the catenary and run
+# off-wire for a limited range. Drawn as the batch of 2024 on the Urbino IV
+# body (photo of 3814); intro_year 2015 is the upstream value.
 
 vehicles:
   - id: "27TrSolaris_partial"
@@ -64,7 +66,7 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 6
       engine_type: battery
       power: 265
       gear: 61
