@@ -21,6 +21,7 @@ display:
 # windscreen with the headlights in the white corners, a lower light-grey roof
 # unit set back from the cab edge; --variant B also rakes the windscreen and
 # frames the cab side window in blue). Middle section and rear end unchanged.
+# tools/tramrender/dpo_astra.py writes the patched Astra sheet and then runs it.
 
 vehicles:
   - id: "T2001_Trio"

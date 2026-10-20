@@ -16,6 +16,8 @@ display:
 # Auto-extracted from CZ-vehicle-tram.pak via tools/pak_extract.py families.
 # Numeric fields come from the upstream VHCL payload; service dates were
 # checked against the 2025–2026 DPO roster.
+# Sprite: TommPa9's sheet (frozen in tools/tramrender/src/dpo/) patched by
+# tools/tramrender/dpo_astra.py: dark grey roof boxes, cab glass in plain colours.
 
 vehicles:
   - id: "LTM1008_Astra"
