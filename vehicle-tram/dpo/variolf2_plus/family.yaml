@@ -16,6 +16,10 @@ display:
 # Auto-extracted from CZ-vehicle-tram.pak via tools/pak_extract.py families.
 # Numeric fields come from the upstream VHCL payload; service dates were
 # checked against the 2025–2026 DPO roster.
+# Sheet: tools/tramrender/dpo_vario.py paints 1411's livery (silver-champagne
+# upper body and roof, copper band under the windows, grey-silver skirt,
+# champagne cab with a dark lamp panel) on TommPa9's LF2 drawing. Regenerate,
+# never edit the PNG.
 
 vehicles:
   - id: "VarioLF2_Plus"

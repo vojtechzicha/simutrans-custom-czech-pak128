@@ -18,6 +18,9 @@ display:
 # Auto-extracted fields verified against real-world DPO service history.
 # Also stands for the VarioLF2R.S (1402, 1403, K2G rebuilds on the same body;
 # Škoda electrics and sliding vents are all that differ).
+# Sheets come from tools/tramrender/dpo_vario.py (TommPa9's blue-yellow drawing,
+# patched and painted from one zone map in both liveries). Regenerate, never
+# edit the PNGs.
 
 vehicles:
   - id: "A"

@@ -20,6 +20,9 @@ display:
 # (1358-1373) and the two T3R.EVN prototypes (1311, 1312): one VarCB3LF body
 # and Pelikán front, differing only in electrics, doors and vents, which do
 # not show at this scale; hence all four names in the display string.
+# Sheets come from tools/tramrender/dpo_vario.py: TommPa9's blue-yellow drawing
+# (frozen in tools/tramrender/src/dpo_vario/) patched and painted from one zone
+# map in both liveries; regenerate them, never edit the PNGs.
 
 vehicles:
   - id: "VarioLF"
@@ -44,7 +47,7 @@ vehicles:
       retire_month: 1
       waytype: schiene_tram
       freight: Passagiere
-      length: 12
+      length: 11               # drawn body 10.8 carunits: two coupled cars meet
       engine_type: electric
       power: 360
 

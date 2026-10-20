@@ -17,9 +17,11 @@ display:
 # Numeric fields come from the upstream VHCL payload; service dates were
 # checked against the 2025–2026 DPO roster.
 
-# Turquoise (DPO "modrá s bílým proužkem", the current scheme on all five LF3 cars):
-# the blue-yellow sheet recoloured pixel by pixel with the colour map of the
-# DPO Vario LF / LF2 sheets, which exist in both schemes (same drawing style).
+# Turquoise (DPO "modrá s bílým proužkem", the current scheme on all five LF3 cars)
+# and blue-yellow are both painted by tools/tramrender/dpo_vario.py from one zone
+# map of TommPa9's blue-yellow drawing (frozen in tools/tramrender/src/dpo_vario/):
+# white sill line, dark doors, black lamp mask, yellow pantograph; blue-yellow
+# gets its ochre half-discs. Regenerate, never edit the PNGs.
 
 vehicles:
   - id: "VarioLF3"
