@@ -804,6 +804,176 @@ def stretched(cls, length):
     return type(cls.__name__ + "_%d" % round(length * 100), (cls,), attrs)
 
 
+# ================================================================ articulated
+BELLOWS = {"top": 0x9C9FA4, "S": 0x8A8D92, "SE": 0x7F8287, "E": 0x74777C}   # dpmhk.py's
+RIB = 0x5E6166
+
+
+class Artic:
+    """Articulated body (mixin before the body class, see articulated()):
+    the geometry is given in real metres from the front and mapped piecewise-
+    linearly onto the drawn sections of CU carunits (MPU m each), so the real
+    joints land on the section boundaries. Each section is rendered on its own
+    (section_boxes) and placed by the section rule, its body centre (4 - l/2)
+    carunits ahead of the tile centre, as dpmhk.py does."""
+    BW = 0.60                 # drawn bellows length
+    LOGOS = []                # red "pid" letters on the grey (drawn m, both sides)
+    ROOF = []                 # roof parts (drawn m)
+
+    def __init__(self, view, livery="A", variant=None):
+        super().__init__(view, livery, variant)
+        self.roof_parts = [dict(p) for p in self.ROOF]
+
+    def near_joint(self, u, pad=0.0):
+        return any(abs(u - j) < self.BW / 2 + pad for j in self.JU)
+
+    def band_extra(self, face, u, h, pu, ph, right):
+        if self.near_joint(u, 0.22):
+            return rgb(BLACK)                          # the glazing ends ahead of the bellows
+        return super().band_extra(face, u, h, pu, ph, right)
+
+    def logos(self):
+        return self.LOGOS
+
+    def bellows_tex(self):
+        def t(face, a, b, pa, pb):
+            if face == "top":
+                return rgb(BELLOWS["top"])
+            if face in ("left", "right"):
+                j = min(self.JU, key=lambda q: abs(q - a))
+                k = (a - j) / 0.20
+                if abs(k - round(k)) < 0.25:
+                    return rgb(RIB)
+            return self.c(BELLOWS, face)
+        return t
+
+    def section_boxes(self, i):
+        n = len(self.CU)
+        U0, U1 = self.U[i], self.U[i + 1]
+        a = U0 + (self.BW / 2 if i > 0 else 0.0)
+        b = U1 - (self.BW / 2 if i < n - 1 else 0.0)
+        base = self.tex()
+
+        def t(face, x, y, px, py):
+            if (face == "front" and i > 0) or (face == "rear" and i < n - 1):
+                return self.c(BELLOWS, face)
+            return base(face, x, y, px, py)
+        body = Box(a, b, 0, self.W, 0, self.H, t)
+        faces = body.face_list(self.view)
+        bt = self.bellows_tex()
+        out = self.mirror_boxes() if (i == 0 and self.mirrors) else []
+        before, after = [], []
+        for lo, hi, end in ((U0, a, "front"), (b, U1, "rear")):
+            if hi - lo > 1e-6:
+                bx = Box(lo, hi, 0.10, self.W - 0.10, self.SKIRT, self.H - 0.10, bt)
+                (after if end in faces else before).append(bx)
+        out += before + [body] + after
+        for p in self.roof_parts:
+            u0, u1 = max(p["u0"], a), min(p["u1"], b)
+            if u1 - u0 < 0.05:
+                continue
+            q = dict(p, u0=u0, u1=u1)
+            ins = q.get("inset", 0.0)
+            out.append(Box(u0, u1, ins, self.W - ins, self.H + q["h0"], self.H + q["h1"], self.part_tex(q)))
+        return out
+
+
+class ArticNewGen(Artic, NewGen):
+    def lower_extra(self, face, u, h, pu, ph, right):
+        if self.liv == "A" and not self.is_red(u) and 0.72 <= h < 0.72 + ph and any_in(u, self.LOGOS):
+            return self.c(RED_A, face)                 # red "pid" lettering
+        return None
+
+
+class ArticOldGen(Artic, OldGen):
+    pass
+
+
+def articulated(name, base, real_len, joints, cu, **real):
+    """an Artic body class: `real` holds the body attributes in real metres from
+    the front (axles, doors_r, posts_r, posts_l, reds, hatches, LOGOS, sidedisp,
+    louvre, engine_r, ROOF as dicts with u0 / u1), mapped onto the drawn sections"""
+    U = [0.0]
+    for c in cu:
+        U.append(U[-1] + c * MPU)
+    R = [0.0] + list(joints) + [real_len]
+
+    def M(x):
+        for i in range(len(R) - 1):
+            if x <= R[i + 1] or i == len(R) - 2:
+                return U[i] + (x - R[i]) / (R[i + 1] - R[i]) * (U[i + 1] - U[i])
+    attrs = dict(L=U[-1], U=U, CU=list(cu), JU=U[1:-1])
+    for k, v in real.items():
+        if k in ("axles", "posts_r", "posts_l"):
+            attrs[k] = [M(x) for x in v]
+        elif k in ("doors_r", "reds", "hatches", "LOGOS"):
+            attrs[k] = [(M(x0), M(x1)) for x0, x1 in v]
+        elif k in ("sidedisp", "louvre", "engine_r"):
+            attrs[k] = (M(v[0]), M(v[1]))
+        elif k == "ROOF":
+            attrs[k] = [dict(p, u0=M(p["u0"]), u1=M(p["u1"])) for p in v]
+        else:
+            attrs[k] = v
+    return type(name, (base,), attrs)
+
+
+def build_artic_rows(cls, livery, variant=None):
+    """one row per section, each placed by the section rule (no lane
+    normalisation: centre() already sits on the native footprint)"""
+    rows = []
+    for i, l in enumerate(cls.CU):
+        mid = (cls.U[i] + cls.U[i + 1]) / 2
+        tiles = []
+        for d in DIRS:
+            v0 = View(d, MPU, KH, (0, 0))
+            o = centre(d) - v0.Au * (mid + MPU * (4 - l / 2.0)) - v0.Av * (cls.W / 2)
+            view = View(d, MPU, KH, tuple(o))
+            tiles.append(render(view, cls(view, livery, variant).section_boxes(i)))
+        rows.append(tiles)
+    return rows
+
+
+# MAN Lion's City 18C (NG 360 / A49, 2018+): 18.06 x 2.55 m, overhangs 2.775 /
+# 3.405 m, wheelbases 5.20 + 6.68 m (MAN 18 E data sheet, the same body),
+# doors 2-2-2-0 (PID: seznam-autobusu 1264), the joint 1.4 m behind the middle
+# axle (photo 1264). PID grey-red red columns round the three axles, the middle
+# one running into the bellows; the engine tower in the last left window bay.
+# Front section 7 + rear 6 carunits.
+LionsCity18C = articulated(
+    "LionsCity18C", ArticNewGen, 18.06, [9.35], [7, 6],
+    axles=[2.775, 7.975, 14.655],
+    doors_r=[(0.28, 1.55), (5.60, 6.85), (10.15, 11.40)],
+    posts_r=[3.05, 4.55, 8.05, 12.85, 14.35, 15.85, 17.25],
+    posts_l=[1.55, 3.05, 4.55, 6.05, 7.55, 10.95, 12.45, 13.95, 15.45, 16.35],
+    reds=[(1.55, 3.65), (7.05, 9.40), (13.65, 15.70)],
+    LOGOS=[(4.60, 5.30), (16.20, 16.90)],
+    sidedisp=(2.10, 3.30),
+    hatches=[(4.30, 4.85), (12.30, 12.85)],
+    louvre=(16.40, 17.75),
+    ROOF=[dict(kind="fair", u0=0.25, u1=8.70, inset=0.0, h0=0.0, h1=0.28),
+          dict(kind="ac", u0=5.70, u1=8.10, inset=0.45, h0=0.28, h1=0.42),
+          dict(kind="fair", u0=10.10, u1=14.20, inset=0.0, h0=0.0, h1=0.28),
+          dict(kind="ac", u0=11.40, u1=13.60, inset=0.45, h0=0.28, h1=0.42)])
+
+# MAN Lion's City G (NG 313 / NG 363, A23, 2004-2019 generation): 17.98 x 2.55 m,
+# overhangs 2.67 / 3.46 m, wheelbases 5.11 + 6.77 m (Lion's City G data sheet),
+# doors 2-2-2-0 (seznam-autobusu 1684), the joint 1.4 m behind the middle axle;
+# an A/C box on each section (photo 1684); red columns as on the 18C.
+LionsCityG = articulated(
+    "LionsCityG", ArticOldGen, 17.98, [9.15], [7, 6],
+    axles=[2.67, 7.78, 14.55],
+    doors_r=[(0.25, 1.50), (5.40, 6.65), (9.95, 11.20)],
+    posts_r=[2.90, 4.25, 7.95, 12.55, 13.90, 15.25, 16.60],
+    posts_l=[1.40, 2.90, 4.25, 5.60, 6.95, 8.30, 10.30, 11.65, 13.00, 14.35, 15.70, 17.05],
+    reds=[(1.50, 3.70), (6.95, 9.20), (13.55, 15.55)],
+    LOGOS=[(4.40, 5.10), (16.00, 16.70)],
+    sidedisp=(1.95, 3.10),
+    hatches=[(1.30, 1.85), (10.40, 10.95)],
+    engine_r=(16.95, 17.80),
+    ROOF=[dict(kind="ac", u0=3.60, u1=7.60, inset=0.30, h0=0.0, h1=0.22),
+          dict(kind="ac", u0=11.30, u1=13.70, inset=0.30, h0=0.0, h1=0.22)])
+
+
 MODELS = {"c12": NewGen, "hybrid": Hybrid, "ile": IntercityLE, "nl293": OldGen, "l": LionsCityL}
 
 

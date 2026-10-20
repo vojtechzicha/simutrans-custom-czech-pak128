@@ -1,0 +1,87 @@
+agency: PID
+type: "Urbino_18_III"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Solaris Urbino 18 III"
+  family_cs: "Solaris Urbino 18 III"
+
+# Solaris Urbino 18 III (diesel, doors 2-2-2-0), the DPO Urbino 18 III body: 9
+# buses (AD Střední Čechy, lines 375 / 377, 2013-2016) in the old PID red-blue-
+# white (pidcervenomodrobila). One (Martin Uher, 2018) in PID 2021 grey-red
+# (pidsedocervena).
+# Sprite: original box-model render (vojtechzicha): the Urbino III model of
+# tools/busrender/dpo_solaris.py painted by pid.PSolaris in the PID
+# liveries.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Urbino_18_III-A"
+    display_id: "Urbino 18 III"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["Urbino_18_III-B"]
+    fields:
+      cost: 560000
+      payload: 90
+      speed: 80
+      weight: 11
+      runningcost: 22
+      fixed_cost: 112
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 0
+      gear: 54
+
+  - id: "Urbino_18_III-B"
+    display_id: "Urbino 18 III"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["Urbino_18_III-A"]
+    next: []
+    fields:
+      cost: 420000
+      payload: 60
+      speed: 80
+      weight: 7
+      runningcost: 16
+      fixed_cost: 82
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 240
+      gear: 61
+      smoke: Diesel_small
+
+liveries:
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white · AD Střední Čechy"
+    name_cs: "PID červeno-modro-bílá · AD Střední Čechy"
+  - color: pidsedocervena
+    name_en: "PID grey-red · Martin Uher"
+    name_cs: "PID šedo-červená · Martin Uher"

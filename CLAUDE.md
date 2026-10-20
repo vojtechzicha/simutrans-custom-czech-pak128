@@ -300,7 +300,11 @@ Agency `PID` builds `VZ-PID-bus.pak` with the buses of the suburban and regional
 - `pidsedocervena`: grey body, a black glazing band up to the roof edge, and a red column behind the front axle and one over the rear axle (body `PID_COLS` overrides). Each column covers the lower body and the cant and crosses the roof as a band. A red block sits on the vehicle's left of the lower front and rear.
 - `pidcervenomodrobila`: blue roof and cant, white band, red lower body.
 
-The colours are those of praha.py "A" / "B". Run `python tools/busrender/pid.py [family …] [--yaml] [--preview DIR]`. Still to come (TODO): the articulated and other bodies the repo doesn't have.
+The colours are those of praha.py "A" / "B". The articulated types come from two more models:
+- `praha_man.py`'s `Artic` mixin draws the MAN Lion's City 18C (on the 12C body) and the Lion's City G (on the NL 293 body). Positions are given in real metres and mapped onto the drawn sections (7 + 6 carunits of `MPU` m). Each section is placed by the section rule and has its own bellows half (`build_artic_rows`).
+- `pid.PSolaris` is a subclass of `dpo_solaris.Solaris` that paints the DPO Urbino 18 III / IV models in both PID liveries ("pa" / "pb"). The DPO sheets stay untouched.
+
+Run `python tools/busrender/pid.py [family …] [--yaml] [--preview DIR]`. Still to come (TODO): the Citaro C2 GÜ and the other bodies the repo doesn't have.
 
 ### Královéhradecký kraj (`vehicle-bus/iredo/`, `vehicle-bus/mhd-<town>/`)
 

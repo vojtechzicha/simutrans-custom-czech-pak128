@@ -392,6 +392,139 @@ def man_intercity_le14():
     return [[np.array(t)[:, :, :3].copy() for t in row]]
 
 
+# ---------------------------------------------------------------------- Solaris
+def _solaris():
+    """PSolaris: dpo_solaris.Solaris (the DPO Urbino III / IV model, imported and
+    never edited) painted in the PID liveries, "pa" grey-red with the red columns
+    (spec key reds, real metres) on the lower body, the cant and across the roof,
+    "pb" trikolóra (blue roof and cant, black glazing band, white band, red lower
+    body). Colours of praha.py."""
+    import dpo_solaris as DS
+    import praha as PR
+    from dpmhk import inr, HW
+    sh = DS.sh
+
+    class PSolaris(DS.Solaris):
+        def setup_livery(self):
+            self.P = PR.PAL["A" if self.liv == "pa" else "B"]
+            P = self.P
+            blue = P.get("blue")
+            self.reds = [(self.M(a), self.M(b)) for a, b in self.sp.get("reds", [])]
+            self.BODY = P["body"]
+            self.ROOF = P["roof"]
+            self.EDGE = blue if self.liv == "pb" else P["body"]
+            self.SHOULDER = P["roof"]
+            self.FAIR_TOP = P["roof"]
+            self.FAIR_SIDE = blue if self.liv == "pb" else P["body"]
+
+        def red_at(self, u):
+            return self.liv == "pa" and any(a <= u < b for a, b in self.reds)
+
+        def tex_kit(self, p, u, k):
+            if k["kind"] in ("ac", "fair") and self.red_at(u):
+                if not (k["kind"] == "ac" and p.face == "top" and abs(p.t) < 0.20):
+                    return self.P["red"] if p.face == "top" else sh(self.P["red"], p.face, DS.POD)
+            return super().tex_kit(p, u, k)
+
+        def tex_roof(self, p, u):
+            c = super().tex_roof(p, u)
+            if c in (self.ROOF, self.SHOULDER) and self.red_at(u):
+                return self.P["red"]
+            return c
+
+        def cant(self, p, u, right):
+            f = p.face
+            if self.liv == "pb":
+                return sh(DS.MASK, f) if p.z < self.ZWIN1 + 0.25 else sh(self.P["blue"], f)
+            return sh(self.P["red"], f) if self.red_at(u) else sh(DS.MASK, f)
+
+        def lower(self, p, u, right):
+            f = p.face
+            if self.liv == "pb":
+                return sh(self.P["white"] if p.z >= PR.ZWHITE else self.P["red"], f)
+            return sh(self.P["red"] if self.red_at(u) else self.P["body"], f)
+
+        def tex_front(self, p, dz=0.0):
+            t, z = p.t, p.z + dz
+            f = "front"
+            a = abs(t)
+            P = self.P
+            if z < 1.30:
+                if inr(z, 0.55, 0.80) and a > HW - 0.46:
+                    return DS.HEADL if a < HW - 0.12 else sh(DS.SILVER, f)
+                if inr(z, 1.05, 1.30) and self.face in ("u3", "u2") and a < 0.62:
+                    return DS.MASK                      # the mask's "smile"
+                if self.liv == "pb":
+                    return sh(P["red"] if z < 0.62 else P["white"], f)
+                if z < 1.05 and -1.00 <= t < -0.16:
+                    return sh(P["red"], f)              # red block, vehicle's left
+                return sh(P["body"], f)
+            return super().tex_front(p, dz)
+
+        def tex_rear(self, p):
+            t, z = p.t, p.z
+            f = "rear"
+            a = abs(t)
+            P = self.P
+            if a > HW - 0.28 and inr(z, 0.55, 1.05):
+                return DS.TAILL
+            zg0 = 1.55 if self.sp["tower"] else 1.30
+            if z < zg0:
+                if self.liv == "pb":
+                    return sh(P["red"] if z < PR.ZWHITE else P["white"], f)
+                if z < 1.05 and -0.90 <= t < 0.0:
+                    return sh(P["red"], f)
+                return sh(P["body"], f)
+            return super().tex_rear(p)
+
+    return DS, PSolaris
+
+
+def solaris(model, key, reds, kit=None, **kw):
+    """rows of a dpo_solaris model in a PID livery ("pa" / "pb")"""
+    def build():
+        DS, PSolaris = _solaris()
+        sp = DS.mk(DS.MODELS[model], reds=reds, **kw)
+        if kit is not None:
+            sp["kit"] = kit
+        lens = [8, 6] if len(sp["cu"]) == 2 else sp["cu"]
+        m = PSolaris(sp, key, DS.OPTS)
+        rows = []
+        for i, l in enumerate(m.cu):
+            L = m.sec_len(i)
+            tiles = []
+            for d in DS.DIRS:
+                o = np.array(DS.H.origin_for(d)) + (4 - lens[i] / 2.0) * DS.H.PER_CU[d]
+                img, _ = DS.render(d, m.boxes(i), m.tex_for(i), L, o)
+                tiles.append(np.array(img)[:, :, :3].copy())
+            rows.append(tiles)
+        return rows
+    return build
+
+
+U18_REDS3 = [(1.65, 3.75), (6.85, 8.85), (13.55, 15.65)]
+U18_REDS4 = [(1.65, 3.75), (7.55, 9.65), (13.55, 15.65)]
+U18_DOORS3 = [(0.30, 1.58), (4.50, 5.80), (10.75, 12.05)]
+U18_DOORS4 = [(0.30, 1.58), (4.95, 6.25), (10.85, 12.15)]
+# AD Střední Čechy 8221 (photo): the blue AC pod over the cab, a second A/C box over the rear axle
+U18_KIT3 = [dict(a=0.85, b=2.45, h=0.26, hw=0.66, kind="ac"),
+            dict(a=14.00, b=15.80, h=0.26, hw=0.80, kind="ac")]
+# Urbino 18 IV diesel: the low A/C fairing on the front section, the A/C box on the rear one
+U18_KIT4 = [dict(a=2.30, b=6.20, h=0.30, hw=1.00, kind="fair", rf=1.00, rr=0.30),
+            dict(a=12.30, b=13.90, h=0.26, hw=0.85, kind="fair")]
+
+
+def man_artic(name, var=None):
+    """rows of an articulated praha_man body (LionsCity18C, LionsCityG) in the PID
+    grey-red, one row per section"""
+    def build():
+        import praha_man as PM
+        import numpy as np
+        rows = PM.build_artic_rows(getattr(PM, name), "A", getattr(PM, var) if var else None)
+        return [[np.array(t)[:, :, :3].copy() for t in r] for r in rows]
+    return build
+
+
 # ====================================================================== families
 f_ = T.f_
 PID = ("PID", "PID", "PID")
@@ -446,6 +579,14 @@ def city(folder, type_, name, vehicles, livs, note):
                                   sprite=flow("original box-model render (vojtechzicha): the dpmhk.py"
                                               " body painted by praha.py PVeh in the PID liveries, spec"
                                               " in tools/busrender/pid.py.", 70), allow=()))
+
+
+def man(folder, type_, name, vehicles, livs, note, sprite):
+    """an articulated MAN rendered by praha_man.py; livs: [(livery tuple, rows function)]"""
+    lv = [(slug, en, cs, fn) for (slug, en, cs), fn in livs]
+    return ("pid/" + folder, dict(agency=PID, type=type_, name=(name, name), copyright="vojtechzicha",
+                                  vehicles=vehicles, liveries=lv, note=flow(note),
+                                  sprite=flow(sprite, 70), allow=()))
 
 
 def sheet(folder, type_, name, role, flds, livs, note, sprite, copyright):
@@ -594,6 +735,50 @@ FAMILIES = dict([
         " The 12 m Lion's Intercity LE is the VZ-Praha object.",
         sprite="original box-model render (vojtechzicha): praha_man.IntercityLE of"
                " tools/busrender/praha_man.py stretched to 13.9 m, PID grey-red."),
+    man("solaris_urbino_18_iii", "Urbino_18_III", "Solaris Urbino 18 III",
+        T.artic("Urbino_18_III", "Urbino 18 III",
+                f_(560000, 90, 80, 11, 22, 112, 2013, 8, "diesel", 0, 54),
+                f_(420000, 60, 80, 7, 16, 82, 2013, 6, "diesel", 240, 61, smoke=SMOKE)),
+        [(B("AD Střední Čechy"), solaris("u18_3", "pb", U18_REDS3, U18_KIT3, doors=U18_DOORS3)),
+         (A("Martin Uher"), solaris("u18_3", "pa", U18_REDS3, U18_KIT3, doors=U18_DOORS3))],
+        "Solaris Urbino 18 III (diesel, doors 2-2-2-0), the DPO Urbino 18 III body: 9 buses"
+        " (AD Střední Čechy, lines 375 / 377, 2013-2016) in " + RBW + " One (Martin Uher,"
+        " 2018) in " + GR,
+        "original box-model render (vojtechzicha): the Urbino III model of"
+        " tools/busrender/dpo_solaris.py painted by pid.PSolaris in the PID liveries."),
+    man("solaris_urbino_18_iv", "Urbino_18_IV", "Solaris Urbino 18 IV",
+        T.artic("Urbino_18_IV", "Urbino 18 IV",
+                f_(620000, 90, 80, 11, 22, 115, 2018, 8, "diesel", 0, 54),
+                f_(460000, 60, 80, 7, 17, 85, 2018, 6, "diesel", 250, 61, smoke=SMOKE)),
+        [(A("ČSAD Střední Čechy, Martin Uher"), solaris("u18_4", "pa", U18_REDS4, U18_KIT4,
+                                                       doors=U18_DOORS4)),
+         (B("AD Střední Čechy"), solaris("u18_4", "pb", U18_REDS4, U18_KIT4, doors=U18_DOORS4))],
+        "Solaris Urbino 18 IV (diesel, doors 2-2-2-0), the DPO Urbino 18 IV body: 9 buses"
+        " (ČSAD Střední Čechy 6, Martin Uher 3, 2018-2022) in " + GR + " Three (AD Střední"
+        " Čechy, 2018) in " + RBW,
+        "original box-model render (vojtechzicha): the Urbino IV model of"
+        " tools/busrender/dpo_solaris.py painted by pid.PSolaris in the PID liveries."),
+    man("lions_city_18c", "Lions_City_18C", "MAN Lion's City 18C",
+        T.artic("Lions_City_18C", "Lion's City 18C",
+                f_(600000, 85, 80, 11, 22, 115, 2021, 7, "diesel", 0, 54, intro_month=3),
+                f_(480000, 70, 80, 7, 17, 88, 2021, 6, "diesel", 265, 61, intro_month=3, smoke=SMOKE)),
+        [(A("ČSAD Střední Čechy, Arriva City, Arriva Střední Čechy, POHL Kladno, Lamer, ČSAD"
+            " Polkost, AD Střední Čechy"), man_artic("LionsCity18C", "V12"))],
+        "MAN NG 360 Lion's City 18C, the 2018 generation articulated (18.06 m, doors 2-2-2-0),"
+        " the biggest PID articulated type: 78 buses (2021-2026) in " + GR + " Front section 7"
+        " + rear 6, the joint 1.4 m behind the middle axle.",
+        "original box-model render (vojtechzicha): praha_man.LionsCity18C, the 12C body of"
+        " tools/busrender/praha_man.py articulated (Artic), PID grey-red."),
+    man("lions_city_g", "Lions_City_G", "MAN Lion's City G",
+        T.artic("Lions_City_G", "Lion's City G",
+                f_(520000, 85, 80, 11, 21, 110, 2016, 7, "diesel", 0, 54),
+                f_(400000, 70, 80, 7, 16, 82, 2016, 6, "diesel", 265, 61, smoke=SMOKE)),
+        [(A("ČSAD Polkost, OAD Kolín, Martin Uher, Lamer"), man_artic("LionsCityG"))],
+        "MAN NG 363 Lion's City G, the 2004-2019 generation articulated (17.98 m, doors"
+        " 2-2-2-0): 19 buses (2016-2020) in " + GR + " (ČSAD Polkost's were red-blue-white"
+        " until 2024). Front section 7 + rear 6.",
+        "original box-model render (vojtechzicha): praha_man.LionsCityG, the NL 293 body of"
+        " tools/busrender/praha_man.py articulated (Artic), PID grey-red."),
     # ------------------------------------------------------------ dpmhk.py bodies (praha.py PVeh)
     city("sor_nb_18", "SOR_NB_18", "SOR NB 18",
          T.artic("SOR_NB_18", "NB 18",

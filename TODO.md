@@ -25,13 +25,10 @@ T3R.PV / T3R.EV. Their
   (Wrocław and brown SOR CN, Alto Adige and ICOM Crossways) are left out. Also:
   CAR-TOUR runs two Setra S 415 LE on BusLine KHK line 611109, which the KHK
   roster misses.
-- [ ] **PID regional** (`VZ-PID-bus`, 44 objects shipped 2026-10-20): still missing the
-  new bodies MAN Lion's City 18C (78 buses), MAN Lion's City G (19), Mercedes-Benz
-  Citaro C2 GÜ (17),
-  Integro II L, Citaro C2 K, Citywide II LE 12,1M, Vehixel vans; the Solaris Urbino 18
-  III / IV and 15 III in PID paint (dpo_solaris.py has only the DPO liveries); and
-  the trikolóra Rošero First (research: session 7bd4267d scratchpad
-  research/pid_regional/).
+- [ ] **PID regional** (`VZ-PID-bus`): still missing the new bodies Mercedes-Benz
+  Citaro C2 GÜ (17 buses), Integro II L, Citaro C2 K, Citywide II LE 12,1M and the
+  Vehixel vans; the Solaris Urbino 15 III LE (1, Lutan); and the trikolóra Rošero First
+  (research: session 7bd4267d scratchpad research/pid_regional/).
 - [ ] Havířovsko III (kraj contract, Transdev Slezsko): 4 hydrogen SOR NSF 12 + 9
   CNG buses in the red ODIS scheme from 12/2027 on the Havířov – Ostrava lines.
   They go into `VZ-ODIS-bus` once the CNG type is known.

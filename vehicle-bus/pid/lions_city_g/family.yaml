@@ -1,0 +1,83 @@
+agency: PID
+type: "Lions_City_G"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "MAN Lion's City G"
+  family_cs: "MAN Lion's City G"
+
+# MAN NG 363 Lion's City G, the 2004-2019 generation articulated (17.98 m, doors
+# 2-2-2-0): 19 buses (2016-2020) in PID 2021 grey-red (pidsedocervena). (ČSAD
+# Polkost's were red-blue-white until 2024). Front section 7 + rear 6.
+# Sprite: original box-model render (vojtechzicha): praha_man.LionsCityG, the NL
+# 293 body of tools/busrender/praha_man.py articulated (Artic), PID
+# grey-red.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Lions_City_G-A"
+    display_id: "Lion's City G"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["Lions_City_G-B"]
+    fields:
+      cost: 520000
+      payload: 85
+      speed: 80
+      weight: 11
+      runningcost: 21
+      fixed_cost: 110
+      intro_year: 2016
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 7
+      engine_type: diesel
+      power: 0
+      gear: 54
+
+  - id: "Lions_City_G-B"
+    display_id: "Lion's City G"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["Lions_City_G-A"]
+    next: []
+    fields:
+      cost: 400000
+      payload: 70
+      speed: 80
+      weight: 7
+      runningcost: 16
+      fixed_cost: 82
+      intro_year: 2016
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 265
+      gear: 61
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · ČSAD Polkost, OAD Kolín, Martin Uher, Lamer"
+    name_cs: "PID šedo-červená · ČSAD Polkost, OAD Kolín, Martin Uher, Lamer"

@@ -275,7 +275,8 @@ ComfortJet coaches are CZR art ported 1:1.
   12M and LE 10,8M / 12M; Setra S 415 / S 418 LE business; SOR CN 9,5 / 10,5 / 12 /
   12,3, CNG 12 / 12,3, ICN 10,5 / 12, C 9,5 / 10,5, NB 18, NBG 12 / 18; Iveco
   Urbanway 12M CNG and Crossway LE LINE 13M; Setra S 510 / S 515 LE and S 419 UL;
-  MAN Lion's Intercity LE 14; Scania
+  MAN Lion's Intercity LE 14, Lion's City 18C and Lion's City G; Solaris Urbino 18
+  III and IV; Scania
   Citywide LE 12M / 15M and Suburban LE 15M CNG; Rošero First XL, Dekstra LE 37
   (and L CNG), Stratos LE 37 and Irisbus Crossway LE 12,8M.
 - **Brno city lines, other operators (`VZ-Brno-bus.pak`)** — BDS-BUS on lines 48
