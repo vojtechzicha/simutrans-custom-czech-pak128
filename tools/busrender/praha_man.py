@@ -982,6 +982,7 @@ class CitaroC2(NewGen):
     star in the middle; black rear window band with vertical tail-light
     clusters; flat roof with A/C boxes; engine tower in the last left window
     bay. Used articulated (CitaroC2GU)."""
+    FRONT_RED = True              # the PID red block on the lower front
 
     def front_corner(self, face, u, h, pu, ph, right):
         if h >= self.band_bot(u, right):
@@ -1003,7 +1004,7 @@ class CitaroC2(NewGen):
                 return rgb(HEAD) if (v < pv or v > W - pv) else rgb(BLACK)
             if 0.80 <= h < 0.80 + ph and abs(v - W / 2) < 0.16:
                 return rgb(SEAM)                       # the star
-            if self.liv == "A" and v < W * 0.5 and h < 0.95:
+            if self.liv == "A" and self.FRONT_RED and v < W * 0.5 and h < 0.95:
                 return self.c(RED_A, face)             # red block, vehicle's left
             return self.c(GREY, face)
         if h >= self.H - ph:
@@ -1040,6 +1041,33 @@ class CitaroC2(NewGen):
 
 class ArticCitaro(ArticNewGen, CitaroC2):
     pass
+
+
+class CitaroC2LEU(CitaroC2):
+    """Mercedes-Benz Citaro C2 LE Ü, the low-entry interurban: 12.135 m, overhangs
+    2.805 / 3.485 m, wheelbase 5.845 m, doors 1-2-0, the window line raised
+    behind the middle door, an A/C box over the front half of the roof. Drawn
+    in "A" without columns; pk_town.py repaints it white."""
+    L = 12.135
+    axles = [2.805, 8.65]
+    doors_r = [(0.30, 1.18), (5.70, 6.95)]
+    posts_r = [2.70, 4.20, 8.25, 9.75, 11.10]
+    posts_l = [1.45, 2.95, 4.45, 5.95, 7.45, 8.95, 10.45]
+    reds = []
+    sidedisp = (1.35, 2.55)
+    hatches = [(9.40, 9.95)]
+    louvre = (10.95, 12.00)
+    FRONT_RED = False
+
+    def __init__(self, view, livery="A", variant=None):
+        super().__init__(view, livery, variant)
+        self.roof_parts = [dict(kind="ac", u0=3.40, u1=6.60, inset=0.30, h0=0.0, h1=0.28)]
+
+    def band_bot(self, u, right):
+        return 1.25 if u < 7.0 else 1.45
+
+    def lower_extra(self, face, u, h, pu, ph, right):
+        return None
 
 
 # Mercedes-Benz Citaro C2 GÜ (suburban articulated): 18.125 x 2.55 m, overhangs

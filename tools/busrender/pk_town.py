@@ -106,6 +106,14 @@ def temsa_white():
     return T.repaint(rows, z_light, W_ZONES, [[8.8, 9.3, 9.8]], cant_dots(BLACK, 0.45, 0.95))
 
 
+def citaro_le_white():
+    """the praha_man.py Citaro C2 LE Ü render repainted white"""
+    import praha_man as PM
+    row = PM.build_row(PM.CitaroC2LEU, "A", None, label="citaro_c2_le_u")
+    rows = [[np.array(t)[:, :, :3].copy() for t in row]]
+    return T.repaint(rows, z_light, W_ZONES, L12)
+
+
 def copy_rows(src):
     return lambda: T.load_rows(src)
 
@@ -180,6 +188,16 @@ FAMILIES = dict([
         "the rear windows (a dotted line here).",
         "original box render (vojtechzicha): the TEMSA MD9 LE body of\n"
         "tools/busrender/praha_small.py, white, the lettering by pk_town.py.", "vojtechzicha"),
+    # ------------------------------------------------------------ regional one-offs
+    fam("iredo/citaro_c2_le_u", IREDO, "Citaro_C2_LE_U", "Mercedes-Benz Citaro C2 LE Ü", BUS,
+        f_(640000, 90, 100, 11, 24, 120, 2017, 8, "diesel", 220, 54, smoke="Diesel_small"),
+        [("bilapk", "white, Pardubický kraj · CAR-TOUR", "bílá, Pardubický kraj · CAR-TOUR",
+          citaro_le_white)],
+        "Mercedes-Benz Citaro C2 LE Ü low-entry interurban, 12.1 m, doors 1-2-0.\n"
+        "Pardubický kraj 2026: CAR-TOUR 1 (2017, here since 1/2024, Holicko lines\n"
+        "650600 / 650601), kraj white, no KHK sticker.",
+        "original box render (vojtechzicha): praha_man.CitaroC2LEU of\n"
+        "tools/busrender/praha_man.py, repainted white by pk_town.py.", "vojtechzicha"),
     # ------------------------------------------------------------ MHD Přelouč (IREDO)
     fam("iredo/sor_bn_8_5", IREDO, "SOR_BN_8_5", "SOR BN 8,5", MIDI,
         f_(420000, 60, 75, 8, 17, 86, 2016, 8, "diesel", 160, 54, smoke="Diesel_small"),

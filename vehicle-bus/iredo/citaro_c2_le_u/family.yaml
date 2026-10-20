@@ -1,0 +1,53 @@
+agency: IREDO
+type: "Citaro_C2_LE_U"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "IREDO"
+  agency_cs: "IREDO"
+  family_en: "Mercedes-Benz Citaro C2 LE Ü"
+  family_cs: "Mercedes-Benz Citaro C2 LE Ü"
+
+# Mercedes-Benz Citaro C2 LE Ü low-entry interurban, 12.1 m, doors 1-2-0.
+# Pardubický kraj 2026: CAR-TOUR 1 (2017, here since 1/2024, Holicko lines
+# 650600 / 650601), kraj white, no KHK sticker.
+# Sprite: original box render (vojtechzicha): praha_man.CitaroC2LEU of
+# tools/busrender/praha_man.py, repainted white by pk_town.py.
+# Regenerate with tools/busrender/pk_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Citaro_C2_LE_U"
+    display_id: "Mercedes-Benz Citaro C2 LE Ü"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 640000
+      payload: 90
+      speed: 100
+      weight: 11
+      runningcost: 24
+      fixed_cost: 120
+      intro_year: 2017
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 220
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: bilapk
+    name_en: "white, Pardubický kraj · CAR-TOUR"
+    name_cs: "bílá, Pardubický kraj · CAR-TOUR"

@@ -313,6 +313,7 @@ The kraj's regional buses are named after the integrated system: agency `IREDO` 
 Pardubický kraj's IREDO buses are in the same pak (October 2026: 8 areas, 2022–2032 contracts).
 - Its white buses carry no KHK sticker, so they are the livery `bilapk`. A livery switches the sticker off with `sticker = False`, in both iredo_models and khk_small. The SOR CN roof step is painted black.
 - Further liveries: Arriva's turquoise-cream, ZDAR's white-blue-red, BORS, and the PID trikolóra on the older SOR CN 12.
+- CAR-TOUR's one-offs: the Setra S 419 UL is pid.py's body in `bilapk` (iredo_coaches.py falls back to pid.py for models it lacks), and the Citaro C2 LE Ü is `praha_man.CitaroC2LEU` repainted white by pk_town.py.
 - Its integrated town lines (Chrudim, Přelouč) are in VZ-IREDO too. Ústí nad Orlicí, Litomyšl and Polička have their own `MHD<Town>` paks, built by `tools/busrender/pk_town.py` from copies and repaints of repo sheets.
 
 The kraj has no uniform IREDO paint. Each contract operator keeps its own scheme: `bila` (BusLine KHK, KAD), `transdev` (white with the big red Transdev figure), `cds` (CDS Náchod yellow with the red CDS), `ptransport` (P-transport yellow-red), plus the legacy BusLine `buslinezelena` / `buslinezlutozelena`. Every IREDO bus carries the kraj sticker, drawn as a light panel over the upper rear window; town-pak buses don't. The scope is the vehicles each operator ran in October 2026. On seznam-autobusu.cz, count only operator periods that are open-ended ("od m/yyyy"): a vehicle in service elsewhere has already left.
