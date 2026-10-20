@@ -1,29 +1,26 @@
-"""DP Ostrava sheets derived from existing art (CANDIDATES, under review).
+"""DP Ostrava sheet derived from existing art: the SOR TNB 12.
 
-    python tools/busrender/dpo_derived.py [family ...] [--variant A|B] [--preview DIR]
+    python tools/busrender/dpo_derived.py [sor_tnb_12] [--variant A|B] [--preview DIR]
 
-Families (folder names):
-  solarisurbino12_s4_electric   vehicle-bus/dpo/: Solaris Urbino 12 IV electric
-      (DPO 5008-5031, 2022). TommPa9's DPO Urbino 12 IV sheet with the long
-      roof battery fairing added. Variant A: the plain fairing. Variant B: the
-      fairing with the black front part of its sides (the glazing band of the
-      DPO e-bus scheme sweeps up into it over the front door), the white "ooo"
-      e-mark near the rear and the OppCharge contact rails on the front roof.
   sor_tnb_12                    vehicle-trolleybus/dpo/: SOR TNB 12 prototype
       (DPO 3912, 2009/2011). VTPsim's SOR NB 12 body (the white Praha sheet)
-      moved onto the footprint of the DPO 26Tr sheet, given the white roof
-      container of the traction equipment with the poles of the 26Tr sheet
+      moved onto the footprint of TommPa9's DPO 26Tr sheet, given the white roof
+      container of the traction equipment with the poles of that 26Tr sheet
       (pixel for pixel, so they stay on the wire), the front roof A/C unit of
-      the bus removed. Variant A: the whole roof blue (seznam-autobusu: "bílá s
-      modrou střechou"). Variant B: only the cant rail and the front cap blue,
+      the bus removed. Variant A: the whole roof blue (seznam-autobusu: "bila s
+      modrou strechou"). Variant B: only the cant rail and the front cap blue,
       the roof white (what the side photos show from the ground).
 
-Shapes added to the hand-drawn sheets are boxes rendered with render.py in a
+TommPa9's DPO 26Tr and Urbino 12 IV sheets, which the TNB takes its footprint
+and poles from, are frozen in tools/busrender/src/ (dpo_tommpa9_*.png): the DPO
+Solaris families themselves are rendered by dpo_solaris.py since 2026-10-20.
+The Urbino 12 IV electric, derived here before, is part of dpo_solaris.py too.
+
+Shapes added to the hand-drawn sheet are boxes rendered with render.py in a
 frame fitted per view to the sprite silhouette (fit()), so they sit on the
-roof of the drawing in every view. The source sheets are read at run time;
-regenerate after changing them. Without --variant each family's chosen
-variant (VARIANT) is written to its sprites/ folder; --preview writes every
-variant and the reference sheets to DIR instead and leaves sprites/ alone.
+roof of the drawing in every view. Without --variant the chosen variant
+(VARIANT) is written to its sprites/ folder; --preview writes every variant and
+the reference sheets to DIR instead and leaves sprites/ alone.
 """
 import argparse
 import os
@@ -43,14 +40,13 @@ from rj_buscommon import SPECIAL                                        # noqa: 
 T = (231, 255, 255)
 MARK = (1, 2, 3)                      # body pixels of a render (occluder only)
 
-URBINO_SRC = "vehicle-bus/dpo/solarisurbino12_s4/sprites/dpotyrkysova.png"
-TR26_SRC = "vehicle-trolleybus/dpo/26trsolaris/sprites/dpotyrkysova.png"
+URBINO_SRC = "tools/busrender/src/dpo_tommpa9_urbino12iv.png"     # TommPa9, frozen 2026-10-20
+TR26_SRC = "tools/busrender/src/dpo_tommpa9_26tr.png"             # TommPa9, frozen 2026-10-20
 NB12_SRC = "vehicle-bus/praha/sor_nb_12/sprites/bila.png"
 
 # the chosen variant per family (what goes into sprites/)
-VARIANT = {"solarisurbino12_s4_electric": "B", "sor_tnb_12": "B"}
-OUT = {"solarisurbino12_s4_electric": "vehicle-bus/dpo/solarisurbino12_s4_electric/sprites/dpotyrkysova.png",
-       "sor_tnb_12": "vehicle-trolleybus/dpo/sor_tnb_12/sprites/bilamodrastrecha.png"}
+VARIANT = {"sor_tnb_12": "B"}
+OUT = {"sor_tnb_12": "vehicle-trolleybus/dpo/sor_tnb_12/sprites/bilamodrastrecha.png"}
 
 
 # ------------------------------------------------------------------ helpers
@@ -164,62 +160,6 @@ def paste(tile, img, mask):
     out = tile.copy()
     out[mask] = img[mask]
     return out
-
-
-# ------------------------------------------------- Urbino 12 IV electric
-U_BODY = (0x00, 0xAD, 0xD6)            # TommPa9's DPO turquoise (sides, roof rim)
-U_ROOF = (0x00, 0x7B, 0x94)            # roof
-U_END = (0x00, 0x96, 0xBA)             # fairing ends, a step darker than the sides
-U_TOP = (0x00, 0x8E, 0xAB)             # fairing top, between roof and sides
-U_STEP = (0x00, 0x5E, 0x72)            # dark step line at the foot of the fairing
-U_BLACK = (0x00, 0x00, 0x00)
-U_WHITE = (0xE6, 0xE6, 0xE6)
-U_RAIL = (0x84, 0x84, 0x84)
-U_RAIL_HI = (0xC5, 0xC5, 0xC5)
-
-FAIR_H = 0.45                          # 0.45 m = 1.8 px
-FAIR_IN = 0.25                         # inset from the body sides
-
-
-def urbino_tile(tile, d, variant):
-    f = fit(tile, d)
-    L, zr, hw = f.L, f.zr, f.hw
-    s0, s1 = 1.0, L - 0.6               # rear end ~1 m ahead of the tail, front at the dome
-    z1 = zr + FAIR_H
-    boxes = [Box("fair", s0, s1, -hw + FAIR_IN, hw - FAIR_IN, zr, z1)]
-    if variant == "B":
-        # OppCharge contact rails: four longitudinal bars above the front axle
-        for t in (-0.55, -0.2, 0.2, 0.55):
-            boxes.append(Box("rail", L - 3.4, L - 2.2, t - 0.07, t + 0.07, z1, z1 + 0.22))
-
-    def tex(p):
-        if p.box == "rail":
-            return U_RAIL_HI if p.face == "top" else U_RAIL
-        if p.face == "top":
-            return U_TOP
-        if p.face in ("front", "rear"):
-            return U_END
-        # side walls
-        if p.z < zr + 0.12:
-            return U_STEP
-        if variant == "B":
-            if p.s > L - 3.6 + (p.z - zr) * 1.5:        # black front part, slanting back
-                return U_BLACK
-            for sm in (1.9, 2.5, 3.1):                   # "ooo" e-mark
-                if p.line(0, sm) and p.z > zr + 0.15:
-                    return U_WHITE
-        return U_BODY
-    img, m = f.draw(boxes, tex)
-    return paste(tile, img, m), f
-
-
-def build_urbino(variant):
-    tiles = load_tiles(URBINO_SRC)
-    out, fits = [], []
-    for d, t in zip(DIRS, tiles):
-        o, f = urbino_tile(t, d, variant)
-        out.append(o); fits.append(f)
-    return [out], fits
 
 
 # ---------------------------------------------------------- SOR TNB 12
@@ -379,20 +319,15 @@ def preview(sheets, path, scale):
 
 
 def build(fam, variant):
-    if fam == "solarisurbino12_s4_electric":
-        rows, fits = build_urbino(variant)
-        info = [f"{f.d}: L={f.L} zr={f.zr} hw={f.hw} off=({f.dx},{f.dy}) iou={f.iou:.2f}" for f in fits]
-    else:
-        rows, fits, shifts = build_tnb(variant)
-        info = [f"{f.d}: body shift {s} L={f.L} zr={f.zr} hw={f.hw} off=({f.dx},{f.dy}) iou={f.iou:.2f}"
-                for f, s in zip(fits, shifts)]
+    rows, fits, shifts = build_tnb(variant)
+    info = [f"{f.d}: body shift {s} L={f.L} zr={f.zr} hw={f.hw} off=({f.dx},{f.dy}) iou={f.iou:.2f}"
+            for f, s in zip(fits, shifts)]
     a = sheet(rows)
     check_specials(a, f"{fam} {variant}")
     return a, info
 
 
-REF = {"solarisurbino12_s4_electric": [("Urbino 12 IV (diesel, DPO)", URBINO_SRC)],
-       "sor_tnb_12": [("SOR NB 12 white (Praha)", NB12_SRC), ("26Tr (DPO)", TR26_SRC)]}
+REF = {"sor_tnb_12": [("SOR NB 12 white (Praha)", NB12_SRC), ("26Tr (DPO)", TR26_SRC)]}
 
 
 def main():
