@@ -179,7 +179,7 @@ Every object's `copyright=` line carries the **original upstream credit first**,
 
 Convention: a vehicle's windows light up at night **only while passengers are aboard**.
 
-- Draw all window glass in the lit-at-night specials: `0x4D4D4D` (special 28, dark grey by day, warm yellow at night) for glass, `0x57656F` (special 16) for lighter glass/reflections. Headlights `0xFFFF53` and tail lights `0xFF211D` are always lit and unaffected.
+- Draw all window glass in the lit-at-night specials: `0x4D4D4D` (special 28, dark grey by day, warm yellow at night) for glass, `0x57656F` (special 16) for lighter glass/reflections. Headlights `0xFFFF53` and tail lights `0xFF211D` are always lit and unaffected. Cab and driver glass stays plain (a step off the specials, e.g. `0x4D4D4E`), so a driver's cab stays dark at night. The whole DPO fleet follows this since 2026-10-20; some older VZ buses still draw the windscreen lit.
 - Set `windows_lit_when_loaded: true` in `family.yaml` (every family does). The build then copies the sheet as the loaded image (`freightimage`, shown whenever at least one passenger is aboard) and writes a derived `<basename>-unlit.png` for `emptyimage`, where each lit-window special is swapped for a plain colour one step away (`0x4D4D4D` → `0x4D4D4E`, …). The two look identical by day; at night only a loaded vehicle's windows glow.
 - Needs Pillow at build time.
 
