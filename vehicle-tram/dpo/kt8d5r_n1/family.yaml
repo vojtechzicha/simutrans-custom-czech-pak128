@@ -17,9 +17,17 @@ display:
 # Numeric fields come from the upstream VHCL payload; service dates were
 # checked against the 2025–2026 DPO roster.
 
-# Turquoise (DPO "modrá s bílým proužkem", the current scheme on 1503-1505):
-# the blue-yellow sheet recoloured pixel by pixel with the colour map of the
-# DPO Vario LF / LF2 sheets, which exist in both schemes (same drawing style).
+# Sprites: TommPa9's blue-yellow sheet (frozen in tools/tramrender/src/dpo/),
+# patched by tools/tramrender/dpo_tatra.py to the one-way Ostrava cars: yellow
+# single-arm pantograph (his T6A5 one) about 1/3 back on the front section, a
+# white A/C pod over the cab, plain cab glass, lit FFFF53 headlights, and the
+# rear section's end redrawn as the saloon end (rear window, orange-over-red
+# lamps, bumper with reflectors, no headlights).
+# Turquoise (DPO "modrá s bílým proužkem", the current scheme on 1503-1505): a
+# zone-map repaint of the patched blue-yellow sheet in the palette of
+# tools/tramrender/dpo_palette.py: turquoise body, sunlit-tint roof, black
+# window band, cab mask and doors, one white line under the band that follows
+# the middle section's V-dip and runs across the front under the windscreen.
 
 vehicles:
   - id: "KT8D5R_N1"
