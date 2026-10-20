@@ -731,7 +731,9 @@ TRW = "trollino"     # old scheme on a Trollino 12 / 15: white or blue roof by O
 
 # family dir -> (yaml lengths per section, {livery colour: [(model, livery key), ...]})
 FAMILIES = {
-    "vehicle-bus/dpo/solarisurbino10_s3": ([7], {"dpomodrozluta": [("u10", OLD)]}),
+    # dpotyrkysova: no DPO Urbino 10 ever ran in turquoise and the owner dropped it
+    # (2026-10-19), but the saves still use the object; it stays until they are migrated
+    "vehicle-bus/dpo/solarisurbino10_s3": ([7], {"dpomodrozluta": [("u10", OLD)], "dpotyrkysova": [("u10", TQL)]}),
     "vehicle-bus/dpo/solarisurbino12_s3": ([8], {"dpomodrozluta": [("u12_3", OLD)]}),
     "vehicle-bus/dpo/solarisurbino12_s4": ([8], {"dpotyrkysova": [("u12_4", TQL)]}),
     "vehicle-bus/dpo/solarisurbino12_s4_electric": ([8], {"dpotyrkysova": [("u12_4e", TQL)]}),

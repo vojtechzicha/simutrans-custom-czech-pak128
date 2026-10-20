@@ -50,3 +50,8 @@ liveries:
   - color: dpomodrozluta
     name_en: "DPO blue-yellow"
     name_cs: "DPO modro-žlutá"
+  # Never ran in turquoise; the owner dropped it on 2026-10-19, but the saves
+  # still use this object (14 references), so it stays until they are migrated.
+  - color: dpotyrkysova
+    name_en: "DPO turquoise"
+    name_cs: "DPO tyrkysová"
