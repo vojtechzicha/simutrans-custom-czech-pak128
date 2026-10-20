@@ -1,0 +1,52 @@
+agency: PID
+type: "Dekstra_LE_37_CNG"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Dekstra LE 37 L CNG"
+  family_cs: "Dekstra LE 37 L CNG"
+
+# Dekstra LE 37 L CNG (CNG; engine_type diesel, no smoke), the low CNG box: 4
+# buses (2021-2022) in PID 2021 grey-red (pidsedocervena).
+# Sprite: VTPsim's Dekstra LE 37 (the IREDO white sheet) with the CNG box of
+# odis.py, repainted by odis_town.repaint, the PID columns by
+# pid.pid_decal.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Dekstra_LE_37_CNG"
+    display_id: "Dekstra LE 37 L CNG"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 420000
+      payload: 45
+      speed: 80
+      weight: 6
+      runningcost: 16
+      fixed_cost: 85
+      intro_year: 2021
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 125
+      gear: 50
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Kokořínský SOK, Lutan"
+    name_cs: "PID šedo-červená · Kokořínský SOK, Lutan"

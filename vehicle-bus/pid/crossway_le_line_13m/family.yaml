@@ -1,0 +1,52 @@
+agency: PID
+type: "Crossway_LE_Line_13M"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Iveco Crossway LE LINE 13M"
+  family_cs: "Iveco Crossway LE LINE 13M"
+
+# Iveco Crossway LE LINE 13M, tag axle: 2 buses (Arriva Střední Čechy, 2014) in
+# PID 2021 grey-red (pidsedocervena).
+# Sprite: original box-model render (vojtechzicha): CrosswayLELine of
+# iredo_models.py painted in the PID liveries of tools/busrender/pid.py.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Crossway_LE_Line_13M"
+    display_id: "Crossway LE LINE 13M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 660000
+      payload: 98
+      speed: 100
+      weight: 12
+      runningcost: 27
+      fixed_cost: 135
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 9
+      engine_type: diesel
+      power: 265
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Arriva Střední Čechy"
+    name_cs: "PID šedo-červená · Arriva Střední Čechy"

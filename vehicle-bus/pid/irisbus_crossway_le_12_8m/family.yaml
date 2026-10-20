@@ -1,0 +1,53 @@
+agency: PID
+type: "Irisbus_Crossway_LE_12_8M"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Irisbus Crossway LE 12,8M"
+  family_cs: "Irisbus Crossway LE 12,8M"
+
+# Irisbus Crossway LE 12,8M: 1 bus (Arriva Střední Čechy, 2013) in PID 2021
+# grey-red (pidsedocervena).
+# Sprite: the white Prague Crossway LE 12,8M sheet (vehicle-
+# bus/praha/crossway_le_12_8m) repainted by odis_town.repaint, the PID
+# columns by pid.pid_decal.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Irisbus_Crossway_LE_12_8M"
+    display_id: "Crossway LE 12,8M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 610000
+      payload: 98
+      speed: 100
+      weight: 12
+      runningcost: 25
+      fixed_cost: 125
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 9
+      engine_type: diesel
+      power: 243
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Arriva Střední Čechy"
+    name_cs: "PID šedo-červená · Arriva Střední Čechy"

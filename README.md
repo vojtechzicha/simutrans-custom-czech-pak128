@@ -272,7 +272,10 @@ ComfortJet coaches are CZR art ported 1:1.
   red-blue-white, for the types not already in `VZ-Praha`: Iveco Crossway LE LINE
   10,8M / 12M / 12M NP / 14,5M, LINE 12M, LE CITY 12M and 12M NP; Irisbus Crossway
   12M and LE 10,8M / 12M; Setra S 415 / S 418 LE business; SOR CN 9,5 / 10,5 / 12 /
-  12,3, CNG 12 / 12,3, ICN 10,5 / 12, C 9,5 / 10,5; MAN Lion's Intercity LE 14.
+  12,3, CNG 12 / 12,3, ICN 10,5 / 12, C 9,5 / 10,5, NB 18, NBG 12 / 18; Iveco
+  Urbanway 12M CNG and Crossway LE LINE 13M; MAN Lion's Intercity LE 14; Scania
+  Citywide LE 12M / 15M and Suburban LE 15M CNG; Rošero First XL, Dekstra LE 37
+  (and L CNG), Stratos LE 37 and Irisbus Crossway LE 12,8M.
 - **Brno city lines, other operators (`VZ-Brno-bus.pak`)** — BDS-BUS on lines 48
   and 74: MAN NL 283 Lion's City, Iveco Crossway LE City 12M and SOR CN 12 in
   the IDS JMK scheme, Iveco Urbanway 12M in white.

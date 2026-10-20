@@ -1,0 +1,53 @@
+agency: PID
+type: "Dekstra_LE_37"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Dekstra LE 37"
+  family_cs: "Dekstra LE 37"
+
+# Dekstra LE 37 midibus: 3 buses (2019-2020) in PID 2021 grey-red
+# (pidsedocervena).
+# Sprite: VTPsim's Dekstra LE 37 (the IREDO white sheet, vehicle-
+# bus/iredo/dekstra_le_37) repainted by odis_town.repaint, the PID
+# columns by pid.pid_decal.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Dekstra_LE_37"
+    display_id: "Dekstra LE 37"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 300000
+      payload: 37
+      speed: 90
+      weight: 5
+      runningcost: 15
+      fixed_cost: 80
+      intro_year: 2019
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 132
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Lamer, Lutan"
+    name_cs: "PID šedo-červená · Lamer, Lutan"

@@ -1,0 +1,56 @@
+agency: PID
+type: "Urbanway_12M_CNG"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Iveco Urbanway 12M CNG"
+  family_cs: "Iveco Urbanway 12M CNG"
+
+# Iveco Urbanway 12M CNG (CNG; engine_type diesel, no smoke), the CNG fairing
+# over the front two thirds: 9 buses (2018-2019) in the old PID red-blue-white
+# (pidcervenomodrobila). Two (ČSAD Střední Čechy, 2018) in PID 2021 grey-red
+# (pidsedocervena).
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py body painted by
+# praha.py PVeh in the PID liveries, spec in tools/busrender/pid.py.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Urbanway_12M_CNG"
+    display_id: "Urbanway 12M CNG"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 800000
+      payload: 95
+      speed: 80
+      weight: 12
+      runningcost: 24
+      fixed_cost: 135
+      intro_year: 2015
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 213
+      gear: 56
+
+liveries:
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white · AD Střední Čechy, Arriva City"
+    name_cs: "PID červeno-modro-bílá · AD Střední Čechy, Arriva City"
+  - color: pidsedocervena
+    name_en: "PID grey-red · ČSAD Střední Čechy"
+    name_cs: "PID šedo-červená · ČSAD Střední Čechy"

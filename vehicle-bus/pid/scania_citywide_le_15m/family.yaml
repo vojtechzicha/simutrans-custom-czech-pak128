@@ -1,0 +1,53 @@
+agency: PID
+type: "Citywide_LE_15M"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Scania Citywide LE 15M"
+  family_cs: "Scania Citywide LE 15M"
+
+# Scania Citywide LE 15M (diesel), three axles: 1 bus (Lutan, 2020) in PID 2021
+# grey-red (pidsedocervena).
+# Sprite: VTPsim's pak128.cs Citywide LE 15M (frozen in
+# tools/busrender/src/odis/) ported by odis_town.port_native, repainted,
+# the PID columns by pid.pid_decal.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Citywide_LE_15M"
+    display_id: "Citywide LE 15M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 880000
+      payload: 125
+      speed: 85
+      weight: 14
+      runningcost: 33
+      fixed_cost: 165
+      intro_year: 2020
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 250
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Lutan"
+    name_cs: "PID šedo-červená · Lutan"

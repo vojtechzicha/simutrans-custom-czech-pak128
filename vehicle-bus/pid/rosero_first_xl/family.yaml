@@ -1,0 +1,54 @@
+agency: PID
+type: "Rosero_First_XL"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Rošero First FCLLI XL"
+  family_cs: "Rošero First FCLLI XL"
+
+# ROŠERO-P First FCLLI XL low-entry midibus on the Iveco Daily (and one XL CNG):
+# 31 buses (2021-2026) in PID 2021 grey-red (pidsedocervena). Drawn on the FCLLI
+# sheet.
+# Sprite: VTPsim's Rošero First (the white Prague sheet, vehicle-
+# bus/praha/rosero_first) repainted by odis_town.repaint, the PID
+# columns by pid.pid_decal.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Rosero_First_XL"
+    display_id: "Rošero First FCLLI XL"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 300000
+      payload: 38
+      speed: 90
+      weight: 6
+      runningcost: 15
+      fixed_cost: 82
+      intro_year: 2021
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 132
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Arriva City, Arriva Střední Čechy, Arriva autobusy, ČSAD Benešov, Kokořínský SOK, ČSAD Polkost, Lextrans, ZDAR, Lutan"
+    name_cs: "PID šedo-červená · Arriva City, Arriva Střední Čechy, Arriva autobusy, ČSAD Benešov, Kokořínský SOK, ČSAD Polkost, Lextrans, ZDAR, Lutan"

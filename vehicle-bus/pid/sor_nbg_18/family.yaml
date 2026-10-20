@@ -1,0 +1,80 @@
+agency: PID
+type: "SOR_NBG_18"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "SOR NBG 18"
+  family_cs: "SOR NBG 18"
+
+# SOR NBG 18 (CNG; engine_type diesel, no smoke): 15 buses (Arriva City,
+# 2017-2020) in PID 2021 grey-red (pidsedocervena).
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py body painted by
+# praha.py PVeh in the PID liveries, spec in tools/busrender/pid.py.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_NBG_18-A"
+    display_id: "NBG 18"
+    role_en: "front section"
+    role_cs: "přední díl"
+    row: 0
+    head: true
+    tail: false
+    prev: []
+    next: ["SOR_NBG_18-B"]
+    fields:
+      cost: 600000
+      payload: 100
+      speed: 75
+      weight: 12
+      runningcost: 23
+      fixed_cost: 120
+      intro_year: 2017
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 9
+      engine_type: diesel
+      power: 0
+      gear: 54
+
+  - id: "SOR_NBG_18-B"
+    display_id: "NBG 18"
+    role_en: "rear section"
+    role_cs: "zadní díl"
+    row: 1
+    head: false
+    tail: true
+    prev: ["SOR_NBG_18-A"]
+    next: []
+    fields:
+      cost: 450000
+      payload: 60
+      speed: 75
+      weight: 8
+      runningcost: 17
+      fixed_cost: 86
+      intro_year: 2017
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 265
+      gear: 61
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Arriva City"
+    name_cs: "PID šedo-červená · Arriva City"
