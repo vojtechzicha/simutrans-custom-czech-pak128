@@ -190,6 +190,86 @@ class _CrosswayLELine13(M.CrosswayLELine):
 PCrosswayLELine13 = body("PCrosswayLELine13", _CrosswayLELine13)
 
 
+class Setra500Face:
+    """Setra MultiClass 500 LE front (S 510 / S 515 LE, 2021+): the windscreen
+    down to the lamps, a black band under it carrying the chrome SETRA letters,
+    slim LED lamps at its ends, body-coloured bumper"""
+
+    def front_face(self, v, av, k, d):
+        top = self.R_TOP
+        if k >= top:
+            return Sh(self.lv.roof)
+        if k == top - 1:
+            return Sh(self.lv.body)
+        if k == top - 2:
+            if av > W2 - 0.07:
+                return M.BLACK
+            return M.LED if av < 0.95 else M.BLACK
+        if k >= 4:
+            if av > W2 - 0.07:
+                return M.BLACK
+            return M.SCREEN_HI if k == top - 3 else M.SCREEN
+        if k == 3:
+            if av > W2 - 0.40:
+                return M.HEAD
+            return Sh(M.CHROME) if av < 0.55 else M.BLACK
+        if d is not None and k <= 2:
+            return Sh(d)
+        if k == 1:
+            return M.PLATE if av < 0.30 else Sh(self.lv.bumper or self.lv.body)
+        if k == 2:
+            return Sh(self.lv.body)
+        return Sh(self.lv.bumper or self.lv.seam)
+
+
+class _SetraS515LE(Setra500Face, CM.SetraS415LE):
+    """Setra S 515 LE (2024+), 12.2 m, doors 1-2-0, the 500 LE front"""
+    real_len = 12.2
+
+
+class _SetraS510LE(Setra500Face, CM.SetraS415LE):
+    """Setra S 510 LE, 10.9 m: the S 515 LE with the wheelbase shortened"""
+    real_len = 10.9
+    axles = (2.72, 7.60)
+    BAND = ((0.0, 10.9, 4, 11),)
+    RISE = (7.10, 8.70)
+    DOORS = ((0.30, 1.25, "le"), (5.85, 7.05, "le"))
+    AC = (3.8, 7.4)
+    HATCHES = (3.0, 9.2)
+
+    def pillars(self, right):
+        if right:
+            return (2.45, 3.95, 4.95, 8.70, 9.90)
+        return (2.45, 3.95, 5.45, 6.95, 8.45, 9.90)
+
+
+class _SetraS419UL(CM.SetraS418LE):
+    """Setra S 419 UL (high-floor intercity, 14.0 m, tag axle): the S 4xx face, a
+    level high window line, doors 1-1 (front door, middle door ahead of the drive
+    axle), no low-entry sweep"""
+    real_len = 14.0
+    axles = (2.72, 9.40, 10.85)
+    R_TOP = 13
+    BAND = ((0.0, 14.0, 7, 12),)
+    DOORS = ((0.30, 1.20, "hf"), (7.10, 8.00, "hf"))
+    REAR_GLASS = (8, 11)
+    AC = (4.8, 8.8)
+    HATCHES = (3.4, 12.2)
+
+    def band_k0(self, x):
+        return None
+
+    def pillars(self, right):
+        if right:
+            return (2.45, 4.05, 5.65, 8.05, 9.65, 11.25, 12.6)
+        return (2.45, 4.05, 5.65, 7.25, 8.85, 10.45, 12.05)
+
+
+PSetra515 = body("PSetra515", _SetraS515LE)
+PSetra510 = body("PSetra510", _SetraS510LE)
+PSetra419UL = body("PSetra419UL", _SetraS419UL)
+
+
 def scania_port(name, Ls):
     """a VTPsim Scania Citywide sheet ported and its ring stand-in painted out (odis.py)"""
     return lambda: O.strip_marks(T.port_native(name, Ls[0], T.LEDW, T.CSAD_GREEN)[0], Ls)
@@ -549,6 +629,23 @@ FAMILIES = dict([
         [(A("Arriva Střední Čechy"), "pid-a")],
         PCrosswayLELine13,
         "Iveco Crossway LE LINE 13M, tag axle: 2 buses (Arriva Střední Čechy, 2014) in " + GR),
+    fam("setra_s_515_le", "Setra_S_515_LE", "Setra S 515 LE", BUS,
+        f_(700000, 92, 100, 11, 28, 143, 2024, 8, "diesel", 260, 54, smoke=SMOKE),
+        [(A("ČSAD Benešov, UMBRELLA, ČSAD Slaný"), "pid-a")],
+        PSetra515,
+        "Setra S 515 LE (MultiClass 500 LE, 2024-2026), the new front with the black band"
+        " and chrome SETRA letters: 51 buses in " + GR),
+    fam("setra_s_510_le", "Setra_S_510_LE", "Setra S 510 LE", BUS,
+        f_(650000, 80, 100, 10, 26, 133, 2024, 7, "diesel", 250, 54, smoke=SMOKE),
+        [(A("UMBRELLA"), "pid-a")],
+        PSetra510,
+        "Setra S 510 LE, 10.9 m: 4 buses (UMBRELLA, 2024) in " + GR),
+    fam("setra_s_419_ul", "Setra_S_419_UL", "Setra S 419 UL", BUS,
+        f_(780000, 96, 100, 14, 31, 159, 2019, 9, "diesel", 300, 54, smoke=SMOKE),
+        [(A("Arriva Střední Čechy"), "pid-a")],
+        PSetra419UL,
+        "Setra S 419 UL high-floor intercity, 14 m, tag axle: 15 buses (Arriva Střední"
+        " Čechy, 2019) in " + GR),
     # ------------------------------------------------------------ repainted hand-drawn sheets
     sheet("rosero_first_xl", "Rosero_First_XL", "Rošero First FCLLI XL", MIDI,
           f_(300000, 38, 90, 6, 15, 82, 2021, 5, "diesel", 132, 54, smoke=SMOKE),
