@@ -1,10 +1,42 @@
 """DP Ostrava Tatra trams: TommPa9's / Lubak91's sheets patched to the cars as they run.
 
-    python tools/tramrender/dpo_tatra.py [family ...] [--preview DIR]
+    python tools/tramrender/dpo_tatra.py [family ...] [--preview DIR] [--no-write]
 
 Families: kt8d5r_n1, t3, t3sucs, t6a5 (default: all). The upstream sheets are
 frozen in tools/tramrender/src/dpo/ and every shipped sheet is generated from
-them here; change this script and regenerate, never edit the PNGs.
+them here; change this script and regenerate, never edit the PNGs. The owner
+prefers the hand-drawn look, so everything is a patch or a repaint of the
+drawings, never a render. --preview DIR writes before/after strips (1x and 4x
+on grass) and consist previews (tools/consist_preview.py).
+
+Shared conventions (photos on Commons, see the audit of 2026-10-19):
+* Pantograph: the yellow single-arm TommPa9 drew on the T6A5 front car is
+  pasted into the other sheets (knee forward, base about 1/3 back), placed by
+  fractions of the target roof (roof_point) at the T6A5's own place across
+  the roof. Erased diamonds are filled with the roof around them.
+* Cab glass (windscreen, driver's side window) moves off the lit-window
+  specials one step (4D4D4D -> 4D4D4E, 57656F -> 57656E): identical by day,
+  never lit; passenger glass keeps the specials. Headlights FFFF53 at the
+  front, tail lights FF211D at the rear.
+* A/C pods are drawn by roof_pod, a small box rasteriser (white top, light
+  grey sides), not taken from a sheet.
+
+kt8d5r_n1 (one-way Ostrava cars 1500-1515; photos 1500, 1512, 1503-1505):
+  single-arm instead of the diamond, A/C pod over the cab, FFFF52 -> FFFF53 in
+  front; the rear section's end, drawn as the front cab turned round, becomes
+  the saloon end (rear window, orange-over-red lamps, yellow bumper with red
+  reflectors, no headlights). Turquoise: a zone map of that sheet (kt8_turq):
+  roof 44C1E4, body 00ADD6 to the skirt, black window band (per column, from
+  the glass), one white line on the first row under it (so it dips with the
+  middle section's windows), black mask and doors, faces drawn out (se, nw).
+t3 / t3sucs (Lubak91): both get the brown 8C7B63 line over the window tops
+  turned into glass, FFFF53 headlights (se), FF211D under the rear orange
+  lamps, a black route box with a yellow LED, and ne / sw moved 10 / 7 px onto
+  the DPO front anchor (39T, KT8, Astra) so a pair at length 11 meets. t3 is
+  the T3R.P running in 2026 (single-arm, A/C box, wider LED panel; photos 983,
+  994); t3sucs keeps the diamond, recoloured yellow (photo 990).
+t6a5: six window bays on the left side in sw (TommPa9's w / s views and
+  photos 1106 / 1125 have six, his sw had seven), plain cab glass, A/C pod.
 """
 import argparse
 import os
@@ -40,10 +72,9 @@ BLUE = H("4284C5")
 WHITE = H("E6E6E6")
 YELLOW = H("FFCE08")
 FRAME = H("424242")
-BELLOWS = H("313131")
 BLACK = H("000000")
 SCREEN = H("6B6B6C")         # plain windscreen grey of the KT8 front
-LAMP_RIM = H("E6E6C5")
+FRAME_BLACK = H("1A1A1A")    # LED destination box
 AC_TOP = H("F2F2F2")         # white roof A/C pod
 AC_SIDE = H("C4C6C8")
 AC_SIDE_DARK = H("A4A6A8")
@@ -288,8 +319,8 @@ KT8_POD = {0: (48.8, 75.4), 1: (63.0, 68.0), 2: (78.2, 75.4), 3: (76.5, 82.5),
            4: (71.9, 87.9), 5: (63.0, 87.0), 6: (55.1, 87.9), 7: (43.5, 82.5)}
 
 # cab glass of the front section (driver): windscreen and cab side window per view
-KT8_CAB = {0: [(41, 74, 48, 86)], 2: [(78, 74, 87, 86)], 3: [(77, 80, 83, 93)], 4: [(68, 86, 78, 97)],
-           6: [(48, 86, 58, 97)], 7: [(37, 80, 43, 93)]}
+KT8_CAB = {0: [(41, 74, 48, 86)], 2: [(83, 74, 87, 86)], 3: [(77, 80, 83, 93)], 4: [(68, 86, 78, 97)],
+           6: [(48, 86, 59, 97)], 7: [(37, 80, 43, 93)]}
 
 KT8_LEGEND = {"R": ROOF, "b": BLUE, "w": WHITE, "y": YELLOW, "g": LIT, "h": LIT_HI, "d": FRAME,
               "o": INDICATOR, "T": TAIL, "r": REFLECTOR, "k": BLACK}
@@ -539,8 +570,6 @@ def t3_route_box(sh, wide):
         put(t, lit, YELLOW)
 
 
-FRAME_BLACK = H("1A1A1A")
-
 
 def t3_shift(sh):
     for c, (dx, dy) in T3_SHIFT.items():
@@ -573,6 +602,49 @@ def build_t3sucs():
         recolor(t, T3_DIAMOND_YELLOW, [box])
     t3_route_box(sh, wide=False)
     t3_shift(sh)
+    return {"dpomodrozluta": sh}
+
+
+# ------------------------------------------------------------------ Tatra T6A5 (TommPa9)
+# Both cars of a set are full single-ended trams (cab at the front, rear window).
+T6_CAB = {0: [(40, 66, 49, 86)], 2: [(81, 66, 88, 84)], 3: [(73, 78, 82, 95)], 4: [(65, 80, 80, 100)],
+          5: [(56, 84, 70, 100)], 6: [(47, 80, 61, 100)], 7: [(40, 78, 46, 93)]}
+# Left side seen square on (sw): TommPa9 drew 7 window bays between the cab
+# window and the rear corner pane, his w and s views have 6, and so does the
+# real car (photos 1106, 1125). Six bays over the same span in the proportions
+# of his w / s views (the last one narrower), 1-px pillars.
+T6_SW_SPAN = (48, 96)
+T6_SW_BAYS = [(48, 55), (57, 64), (66, 72), (74, 81), (83, 90), (92, 96)]
+
+
+def t6_left_side(t):
+    """Repaint the sw window band x 48..96 with six bays in TommPa9's pattern:
+    a light centre column in the upper two glass rows, a light row across the
+    middle, dark glass below, blue pillars."""
+    for x in range(T6_SW_SPAN[0], T6_SW_SPAN[1] + 1):
+        bay = next((b for b in T6_SW_BAYS if b[0] <= x <= b[1]), None)
+        if bay is None:
+            for y in range(86, 91):
+                t[y, x] = BLUE
+            continue
+        centre = (bay[0] + bay[1]) // 2
+        for y in (86, 87):
+            t[y, x] = LIT_HI if x == centre else LIT
+        t[88, x] = LIT_HI
+        for y in (89, 90):
+            t[y, x] = LIT
+
+
+def build_t6a5():
+    sh = load_src("t6a5_dpomodrozluta.png")
+    for r in (0, 1):
+        t6_left_side(tk.tile(sh, r, 7))
+        for c in range(8):
+            t = tk.tile(sh, r, c)
+            plain_glass(t, T6_CAB.get(c, []))
+            # white A/C pod at the front of the roof (photos 1106, 1125)
+            x, y = roof_point(t, DIRS[c], [ROOF], 0.07, t6_base(c)[2])
+            roof_pod(t, DIRS[c], x, y, protect=tk.is_panto if c in (0, 1, 2) else None)
     return {"dpomodrozluta": sh}
 
 
@@ -634,6 +706,7 @@ FAMILIES = {
     "kt8d5r_n1": (build_kt8, "kt8d5r_n1_dpomodrozluta.png", [((8, 5, 8), None)]),
     "t3": (build_t3rp, "t3_dpomodrozluta.png", [((11, 11), (0, 0))]),
     "t3sucs": (build_t3sucs, "t3_dpomodrozluta.png", [((11, 11), (0, 0))]),
+    "t6a5": (build_t6a5, "t6a5_dpomodrozluta.png", [((11, 11), (0, 1))]),
 }
 
 
