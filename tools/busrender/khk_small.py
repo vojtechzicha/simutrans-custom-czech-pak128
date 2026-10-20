@@ -732,6 +732,12 @@ class VWhiteTransdev(VLivery):
         return None
 
 
+class VWhitePK(VLivery):
+    """Pardubický kraj white on a van-based midibus (BusLine Pardubicko): plain
+    white, dark bumpers, no KHK sticker"""
+    bumper = DARK
+
+
 class Van(Bus):
     """praha_small.Bus with a livery object: van-derived minibus bodies
     (bonnet + raked windscreen), with a van rear (two doors) or a bus rear
@@ -870,6 +876,13 @@ STRATOS_L = dict(
     front="van", rear="bus", rear_glass=(1.50, 2.45), led_screen=True,
     zlamp=(0.84, 1.04), grille=(0.70, 0.62, 1.00), zbump=0.52,
 )
+# Iveco Feniksbus Suburban P (BusLine Pardubicko, 2017, 5L4 2685): the Stratos L
+# idea on the longer Daily 70C, about 8.0 x 2.2 x 2.9 m, wheelbase 4.70 m, doors
+# 1-1 (behind the cab and a single leaf ahead of the rear axle), bus rear with the
+# big rear window, a small A/C dome at the rear of the roof (photo
+# seznam-autobusu 450844).
+FENIKS = mk(STRATOS_L, L=8.00, axles=[0.95, 5.65], doors=[(1.45, 2.35), (4.45, 5.15)],
+            glass=(0.88, 7.80), pods=[(5.90, 7.10, 0.18, 0.70, "ac")])
 # Iveco Daily 50C13 minibus (L&Z Line, MHD Nova Paka, 2001, 9AT 4244): the
 # 1999-2006 Daily van with the raised roof, one folding door behind the cab,
 # van rear; about 7.0 x 2.0 x 2.75 m, wheelbase 3.95 m. Drawn 2.24 m wide.
@@ -913,7 +926,7 @@ class VanSliding(Van):
 
 
 VLIVERIES = {"cds": VCDS, "ptransport": VPTransport, "stribrnajicin": VSilverJicin,
-             "stribrna": VSilver, "bila": VWhiteTransdev}
+             "stribrna": VSilver, "bila": VWhiteTransdev, "bilapk": VWhitePK}
 
 
 def render_job(sp, cls=Van):
@@ -1038,6 +1051,18 @@ FAMILIES = {
              "fairing cut off and a rear roof A/C box, repainted by zone; the photo\n"
              "collage is reduced to colour fields (photos seznam-autobusu 340433,\n"
              "283082; khk_mhd/dvur_kralove)."),
+    "vehicle-bus/iredo/feniksbus_suburban_p": dict(
+        agency="IREDO", type="Feniksbus_Suburban_P", name="Iveco Feniksbus Suburban P", role=MIDI,
+        copyright=VZ, job=render_job(FENIKS),
+        liveries=[("bilapk", "BusLine Pardubicko")],
+        fields=fields(260000, 40, 90, 5, 132, 5, 2017, gear=64),
+        note="Iveco Feniksbus Suburban P, high-floor midibus on the Iveco Daily 70C, about\n"
+             "8.0 x 2.2 x 2.9 m, doors 1-1, Daily cab front, bus rear.\n"
+             "Pardubický kraj 2026: BusLine Pardubicko 1 (5L4 2685, 2017, Lanškroun since\n"
+             "9/2024, ex Jablonec and Česká Lípa), white.\n"
+             "Sprite: original box render (vojtechzicha), FENIKS in\n"
+             "tools/busrender/khk_small.py (the Stratos L body lengthened; photo\n"
+             "seznam-autobusu 450844)."),
     "vehicle-bus/mhd-jicin/mercus_sprinter": dict(
         agency="MHDJicin", type="Mercus_Sprinter", name="Mercus Mercedes-Benz Sprinter", role=MINI,
         copyright=VZ, job=render_job(MERCUS),

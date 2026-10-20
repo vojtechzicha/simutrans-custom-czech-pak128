@@ -19,11 +19,6 @@ T3R.PV / T3R.EV. Their
 - [ ] ČD **690.0** battery units (Škoda 15Ev5, 15 units) when passenger service starts
   in early 2027 (S7 Ostrava – Český Těšín – Frýdek-Místek): the 690.2 green-blue-white
   scheme, 3 doors per side, roof battery boxes along both cars.
-- [ ] Pardubický kraj (IREDO): the one-off new body Iveco Feniksbus Suburban P
-  (BusLine, 1); the
-  subcontract stand-ins in other paint (Wrocław and brown SOR CN, Alto Adige and ICOM
-  Crossways) are left out. CAR-TOUR's two Setra S 415 LE on BusLine KHK line 611109
-  are the white `bilapk` object, which names CAR-TOUR.
 - [ ] Havířovsko III (kraj contract, Transdev Slezsko): 4 hydrogen SOR NSF 12 + 9
   CNG buses in the red ODIS scheme from 12/2027 on the Havířov – Ostrava lines.
   They go into `VZ-ODIS-bus` once the CNG type is known.
@@ -52,6 +47,9 @@ Not open work; listed so nobody adds them by accident.
 
 - Advertising and promo wraps on any vehicle, except the standing Fashion Arena
   livery of Prague line 238.
+- Pardubický kraj: the subcontract stand-ins in other operators' paint (Wrocław and
+  brown SOR CN, Alto Adige and ICOM Crossways). CAR-TOUR's two Setra S 415 LE on
+  BusLine KHK line 611109 are the white `bilapk` object, which names CAR-TOUR.
 - PID regional: the Vehixel vans (Lutan, Martin Uher) and the trikolóra Rošero First
   (ČSAD Benešov) are registered but were not seen in service in October 2026.
 - ČD diesel units: delivery-state schemes of second-hand RS1s (NEB, BWEGT, OSB,

@@ -199,7 +199,7 @@ ComfortJet coaches are CZR art ported 1:1.
   `VZ-IREDO-bus.pak`. They are white without the Královéhradecký sticker, on the SOR CN
   10,5 / 12 / 12,3, ICN 10,5, Crossway LE LINE 10,8M / 12M / 14,5M, Setra S 415 LE,
   Rošero First, Dekstra LE 37 and NovoCiti Life, and CAR-TOUR's Citaro C2 LE Ü,
-  Setra S 419 UL and white-orange Intouro. There are also Arriva's
+  Setra S 419 UL and white-orange Intouro, and BusLine's Feniksbus Suburban P. There are also Arriva's
   turquoise-cream CN 10,5, ZDAR's white-blue-red and the BORS and PID SOR CN 12.
   The integrated town lines of Chrudim (SOR NB 12 in three liveries, Urbanway 12M
   CNG, Conecto LF, TEMSA MD9 LE) and Přelouč (SOR BN 8,5) are in it too. Ústí nad
