@@ -1,0 +1,52 @@
+agency: PID
+type: "SOR_CNG_12_3"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "SOR CNG 12,3"
+  family_cs: "SOR CNG 12,3"
+
+# SOR CNG 12,3 (CNG; engine_type diesel, no smoke): 11 buses (Arriva City,
+# 2015-2016) in PID 2021 grey-red (pidsedocervena). Drawn as the SOR CNG 12.
+# Sprite: original box-model render (vojtechzicha): SorCNG of iredo_models.py
+# (with the roof of odis.OSorCNG12) painted in the PID liveries of
+# tools/busrender/pid.py.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_CNG_12_3"
+    display_id: "SOR CNG 12,3"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 650000
+      payload: 90
+      speed: 90
+      weight: 12
+      runningcost: 26
+      fixed_cost: 132
+      intro_year: 2015
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 213
+      gear: 54
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Arriva City"
+    name_cs: "PID šedo-červená · Arriva City"

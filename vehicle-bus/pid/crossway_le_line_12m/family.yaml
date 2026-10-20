@@ -1,0 +1,57 @@
+agency: PID
+type: "Crossway_LE_Line_12M"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Iveco Crossway LE LINE 12M"
+  family_cs: "Iveco Crossway LE LINE 12M"
+
+# Iveco Crossway LE LINE 12M low-entry interurban, the biggest PID regional
+# type: 425 buses (2014-2026) in PID 2021 grey-red (pidsedocervena). One (Martin
+# Uher bus, 2015) in the old PID red-blue-white (pidcervenomodrobila). The
+# 2025-26 deliveries with the facelift front are drawn the same.
+# Sprite: original box-model render (vojtechzicha): CrosswayLELine of
+# iredo_models.py painted in the PID liveries of tools/busrender/pid.py.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Crossway_LE_Line_12M"
+    display_id: "Crossway LE LINE 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 640000
+      payload: 92
+      speed: 100
+      weight: 11
+      runningcost: 26
+      fixed_cost: 131
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 243
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Arriva Střední Čechy, Arriva City, ČSAD Střední Čechy, Arriva autobusy, ČSAD Polkost, OAD Kolín, Martin Uher, Transdev Střední Čechy, ZDAR and others"
+    name_cs: "PID šedo-červená · Arriva Střední Čechy, Arriva City, ČSAD Střední Čechy, Arriva autobusy, ČSAD Polkost, OAD Kolín, Martin Uher, Transdev Střední Čechy, ZDAR and others"
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white · Martin Uher bus"
+    name_cs: "PID červeno-modro-bílá · Martin Uher bus"

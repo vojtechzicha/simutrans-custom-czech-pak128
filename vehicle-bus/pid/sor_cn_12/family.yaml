@@ -1,0 +1,57 @@
+agency: PID
+type: "SOR_CN_12"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "SOR CN 12"
+  family_cs: "SOR CN 12"
+
+# SOR CN 12 low-entry interurban: 44 buses (2013-2021) in PID 2021 grey-red
+# (pidsedocervena). Two (OAD Kolín, 2014) in the old PID red-blue-white
+# (pidcervenomodrobila).
+# Sprite: original box-model render (vojtechzicha): SorCN of iredo_models.py
+# (with the roof of odis.OSorCN12) painted in the PID liveries of
+# tools/busrender/pid.py.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_CN_12"
+    display_id: "SOR CN 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 620000
+      payload: 90
+      speed: 100
+      weight: 11
+      runningcost: 25
+      fixed_cost: 127
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 235
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · OAD Kolín, AKV bus, ZDAR, Arriva Střední Čechy, Transdev Střední Čechy, Lutan"
+    name_cs: "PID šedo-červená · OAD Kolín, AKV bus, ZDAR, Arriva Střední Čechy, Transdev Střední Čechy, Lutan"
+  - color: pidcervenomodrobila
+    name_en: "PID red-blue-white · OAD Kolín"
+    name_cs: "PID červeno-modro-bílá · OAD Kolín"

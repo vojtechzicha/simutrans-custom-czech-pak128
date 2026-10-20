@@ -279,7 +279,7 @@ The DPO Tango NF2 comes from `dpo_tango.py`, another parameter set for `fieldtra
 
 ### Prague and Brno packages for other operators (`vehicle-bus/praha/`, `vehicle-bus/brno/`, `vehicle-water/praha/`)
 
-City vehicles of operators other than the city's transit company go into one package per city, not one per operator: agency `Praha` builds `VZ-Praha-bus.pak` and `VZ-Praha-water.pak`, and agency `Brno` builds `VZ-Brno-bus.pak`. `VZ-DPPraha-*` and `VZ-DPBrno-*` stay the transit company's own fleet, and regional PID lines get a separate package later. There is one object per type × livery, shared by every operator that runs it. The operator is never in `name=`; it appears only in the livery display name, e.g. `name_en: "PID red-blue-white · Arriva City, ABOUT ME"`.
+City vehicles of operators other than the city's transit company go into one package per city, not one per operator: agency `Praha` builds `VZ-Praha-bus.pak` and `VZ-Praha-water.pak`, and agency `Brno` builds `VZ-Brno-bus.pak`. `VZ-DPPraha-*` and `VZ-DPBrno-*` stay the transit company's own fleet, and the regional PID lines have their own package (next section). There is one object per type × livery, shared by every operator that runs it. The operator is never in `name=`; it appears only in the livery display name, e.g. `name_en: "PID red-blue-white · Arriva City, ABOUT ME"`.
 
 The scope is the vehicles seen on city lines (Prague 100–299 and the 900s), in every real livery, as agreed with the Prague and Brno timetable sessions. Advert wraps get no object, except the standing Fashion Arena livery of line 238. The PID schemes are operator-independent: `pidsedocervena` (grey with red columns, 2021+) and `pidcervenomodrobila` (the older red-blue-white) must read the same as on the DPP families.
 
@@ -291,6 +291,16 @@ Sheets that are repaints of upstream or VZ art are kept as PNGs, like the DPP re
 - `dpp_coaches.py` (on the RegioJet coach modules) draws DPP's Crossway PRO 10.8M / 12M and the Tourismo RHD / 15 RHD (length 10).
 
 The PID ferries (Naomi type for P1 / P5 / P6, Kazi type Baba for P2, Holka 2 for P4) come from `python tools/shiprender/praha_ferries.py [family …] [--preview DIR]` (models in `boatkit.py`). They sit on the water lane of the native small ferries (`fitlane.py` re-derives it from `src/`), with `image_offset: [0, 0]` and `length: 8`. Only the Naomi and Kazi wheelhouse glass lights up.
+
+### PID regional lines (`vehicle-bus/pid/`)
+
+Agency `PID` builds `VZ-PID-bus.pak` with the buses of the suburban and regional PID contracts (35 areas from 12/2024, 13 operators, about 1,530 buses; October 2026 rosters). It holds only the type × livery combinations that `VZ-Praha` / `VZ-DPPraha` don't already have, because the regional lines use those city objects as they are. 92 % of the fleet wears the PID 2021 grey-red, 6 % the old trikolóra; operators' own schemes and advert wraps get no object.
+
+`tools/busrender/pid.py` paints the IREDO coach-pipeline bodies (and the odis.py CNG roofs) with two liveries:
+- `pidsedocervena`: grey body, a black glazing band up to the roof edge, and a red column behind the front axle and one over the rear axle (body `PID_COLS` overrides). Each column covers the lower body and the cant and crosses the roof as a band. A red block sits on the vehicle's left of the lower front and rear.
+- `pidcervenomodrobila`: blue roof and cant, white band, red lower body.
+
+The colours are those of praha.py "A" / "B". Run `python tools/busrender/pid.py [family …] [--yaml] [--preview DIR]`. Still to come (TODO): the articulated and other bodies the repo doesn't have.
 
 ### Královéhradecký kraj (`vehicle-bus/iredo/`, `vehicle-bus/mhd-<town>/`)
 

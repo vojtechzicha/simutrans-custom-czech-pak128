@@ -1,0 +1,53 @@
+agency: PID
+type: "SOR_ICN_12"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "SOR ICN 12"
+  family_cs: "SOR ICN 12"
+
+# SOR ICN 12, flat roof and deep glazing: 49 buses (2023-2024) in PID 2021 grey-
+# red (pidsedocervena).
+# Sprite: original box-model render (vojtechzicha): SorICN of
+# iredo_coachmodels.py painted in the PID liveries of
+# tools/busrender/pid.py.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_ICN_12"
+    display_id: "SOR ICN 12"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 660000
+      payload: 90
+      speed: 100
+      weight: 11
+      runningcost: 26
+      fixed_cost: 135
+      intro_year: 2023
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 235
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · OAD Kolín, Arriva autobusy, Transdev Střední Čechy, AKV bus"
+    name_cs: "PID šedo-červená · OAD Kolín, Arriva autobusy, Transdev Střední Čechy, AKV bus"

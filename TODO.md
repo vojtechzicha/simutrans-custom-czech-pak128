@@ -17,7 +17,15 @@ T3R.PV / T3R.EV. Their
 - [ ] ČD **841.3** in Liberecký kraj colours, when the cars start in December 2026.
 - [ ] ČD **690.0** battery units, when passenger service starts in 2027.
 - [ ] Pardubický kraj **IREDO** buses, into the same `VZ-IREDO-bus.pak`.
-- [ ] A **PID** package for the regional (non-city) lines around Prague.
+- [ ] **PID regional** (`VZ-PID-bus`, phase 1 shipped 2026-10-20): still missing the
+  new bodies MAN Lion's City 18C (78 buses), Setra S 515 LE (51) / S 510 LE (4),
+  MAN Lion's City G (19), Mercedes-Benz Citaro C2 GÜ (17), Setra S 419 UL (15),
+  Integro II L, Citaro C2 K, Citywide II LE 12,1M, Vehixel vans; and PID repaints of
+  hand-drawn / other-renderer sheets: SOR NB 18 (44), NBG 12 (18), NBG 18 (15),
+  Urbanway 12M CNG, Solaris Urbino 18 III / IV and 15 III, Scania Citywide Suburban
+  LE 15M CNG / LE 12M / LE 15M, Rošero First FCLLI XL (30), Dekstra LE 37 (L CNG),
+  Stratos LE 37, Crossway LE LINE 13M, Irisbus Crossway LE 12,8M (research:
+  session 7bd4267d scratchpad research/pid_regional/).
 - [ ] Havířovsko III (kraj contract, Transdev Slezsko): 4 hydrogen SOR NSF 12 + 9
   CNG buses in the red ODIS scheme from 12/2027 on the Havířov – Ostrava lines.
   They go into `VZ-ODIS-bus` once the CNG type is known.

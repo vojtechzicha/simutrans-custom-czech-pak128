@@ -1,0 +1,53 @@
+agency: PID
+type: "Lions_Intercity_LE_14"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "MAN Lion's Intercity LE 14"
+  family_cs: "MAN Lion's Intercity LE 14"
+
+# MAN LEÜ 330 Lion's Intercity LE 14 (13.9 m): 4 buses (Lutan, 2024) in PID 2021
+# grey-red (pidsedocervena). The 12 m Lion's Intercity LE is the VZ-Praha
+# object.
+# Sprite: original box-model render (vojtechzicha): praha_man.IntercityLE of
+# tools/busrender/praha_man.py stretched to 13.9 m, PID grey-red.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Lions_Intercity_LE_14"
+    display_id: "Lion's Intercity LE 14"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 740000
+      payload: 104
+      speed: 100
+      weight: 13
+      runningcost: 29
+      fixed_cost: 151
+      intro_year: 2024
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 9
+      engine_type: diesel
+      power: 243
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Lutan"
+    name_cs: "PID šedo-červená · Lutan"

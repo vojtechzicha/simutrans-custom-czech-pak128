@@ -1,0 +1,52 @@
+agency: PID
+type: "Crossway_LE_Line_12M_NP"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Iveco Crossway LE LINE 12M NP"
+  family_cs: "Iveco Crossway LE LINE 12M NP"
+
+# Iveco Crossway LE LINE 12M NP (CNG; engine_type diesel, no smoke), the long
+# flat CNG fairing: 67 buses (2019-2020) in PID 2021 grey-red (pidsedocervena).
+# Sprite: original box-model render (vojtechzicha): CrosswayLELine of
+# iredo_models.py (with the roof of odis.OCrosswayLELineNP) painted in
+# the PID liveries of tools/busrender/pid.py.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Crossway_LE_Line_12M_NP"
+    display_id: "Crossway LE LINE 12M NP"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 680000
+      payload: 92
+      speed: 90
+      weight: 12
+      runningcost: 27
+      fixed_cost: 139
+      intro_year: 2019
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 243
+      gear: 54
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · ČSAD Střední Čechy, Ekoservis Transpeed"
+    name_cs: "PID šedo-červená · ČSAD Střední Čechy, Ekoservis Transpeed"

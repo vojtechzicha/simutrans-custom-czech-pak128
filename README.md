@@ -258,6 +258,12 @@ ComfortJet coaches are CZR art ported 1:1.
   white, Veolia red-grey, turquoise and the Fashion Arena scheme of line 238.
   The PID ferries are the Pražské Benátky Naomi boats (P1, P5, P6) and Baba
   (P2), and PPS's Holka 2 (P4).
+- **PID regional lines (`VZ-PID-bus.pak`)** — the buses of the suburban and
+  regional PID contracts around Prague (October 2026), in PID grey-red and the old
+  red-blue-white, for the types not already in `VZ-Praha`: Iveco Crossway LE LINE
+  10,8M / 12M / 12M NP / 14,5M, LINE 12M, LE CITY 12M and 12M NP; Irisbus Crossway
+  12M and LE 10,8M / 12M; Setra S 415 / S 418 LE business; SOR CN 9,5 / 10,5 / 12 /
+  12,3, CNG 12 / 12,3, ICN 10,5 / 12, C 9,5 / 10,5; MAN Lion's Intercity LE 14.
 - **Brno city lines, other operators (`VZ-Brno-bus.pak`)** — BDS-BUS on lines 48
   and 74: MAN NL 283 Lion's City, Iveco Crossway LE City 12M and SOR CN 12 in
   the IDS JMK scheme, Iveco Urbanway 12M in white.
