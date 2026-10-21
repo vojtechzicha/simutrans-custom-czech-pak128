@@ -17,7 +17,15 @@ display:
 # (2019): 64-0001 to 0004, 64-1001 to 1019 (Bílovecko). Transdev Morava livery
 # (seznam-autobusu: "bílá & červené logo Transdev & logo dopravy
 # Moravskoslezského kraje"): white, black window band, the big red Transdev
-# figure, the kraj ring in salmon and reds over the rear axle.
+# figure, the kraj ring in salmon and reds over the rear axle. Z-Group bus 6Z9
+# 6492 (2020, depot Kroměříž, seen on ODIS line 670 in 9/2026; seznam-autobusu
+# "Z-Group bus, bílá se zeleno-modrou grafikou" since 2/2021), doors 1-2-0,
+# amber displays: Z-Group's own Zlínský kraj scheme, no kraj ring. White, black
+# window band, a navy and a green hill just behind the front axle, the big
+# Z-Group emblem over the rear overhang (green circle from the roof edge to the
+# skirt, the navy tree on the glass, green and navy halves below), a green
+# swoosh and a navy panel low on the rear (photos of 6Z9 6480 / 6491 / 6492 and
+# 7Z6 4793, 2021-2024).
 # Sprite: original box-model render (vojtechzicha): OCrosswayLELine of
 # tools/busrender/odis.py (on the CrosswayLELine body of
 # iredo_models.py) with the livery of odis.py.
@@ -54,3 +62,6 @@ liveries:
   - color: transdev
     name_en: "white with the red figure · Transdev Morava"
     name_cs: "bílá s červenou postavou · Transdev Morava"
+  - color: bilazelenomodra
+    name_en: "white with green-blue graphic · Z-Group bus"
+    name_cs: "bílá se zeleno-modrou grafikou · Z-Group bus"

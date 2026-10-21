@@ -22,6 +22,9 @@ over the rear axle on both sides (ODIS technical standards 2018, příloha 1:
                     the ring in greys with the red and blue kraj colours
   3csadbilozelena   3ČSAD white-green (Transdev Slezsko, ex ČSAD Havířov /
                     Karviná / Frýdek-Místek): the ring in greens
+A Zlínský kraj bus seen on ODIS lines keeps its own scheme and gets no ring:
+  bilazelenomodra   Z-Group bus's Kroměříž cars: white, a navy and a green hill
+                    and the big Z-Group emblem in green and navy
 The ring is open at the lower front quadrant and printed over the glass too
 (drawn as a lighter tint there, so the window band still reads).
 
@@ -321,7 +324,94 @@ class OdisRed(M.Livery):
         return Sh(ODIS_RED)
 
 
-for _lv in (OdisTransdev, OdisBila, OdisBilaZel, OdisBilaCerv, OdisCsad, OdisCsadPod, OdisBors, OdisRed):
+ZG_GREEN = (0x4C, 0xB0, 0x5E)      # Z-Group green and navy (photos, white scaled to F2F2F0)
+ZG_NAVY = (0x2E, 0x32, 0x6E)
+
+
+class OdisZGroup(M.Livery):
+    """Z-Group bus's own scheme (bílá se zeleno-modrou grafikou, the Zlínský
+    kraj cars from 2021, no kraj ring): white, a navy and a green hill just
+    behind the front axle, the big Z-Group emblem over the rear overhang
+    (a green circle from the roof edge to the skirt, the navy tree in it over
+    the glass, green and navy halves under the windows split by a white
+    swoosh), a green swoosh and a navy panel at the lower right of the rear,
+    the small green emblem on the front. The decals are one picture applied
+    unmirrored, so in screen terms both sides look alike: navy hill left of
+    the green, the emblem's green half left of the navy."""
+    slug = "odis-zgroup"
+    EX = 1.30                      # emblem: centre behind the rear axle and radius (m)
+    EK, ER = 5.5, 6.0              # emblem centre row and radius in rows (row 0 to the cant)
+    HILLS = (3.20, 5.10)           # the hills between the front arch and the middle door (m)
+
+    def seen(self, bus, x, xc, right):
+        """x - xc as seen: + towards screen right (the rear on the left side)"""
+        return xc - x if right else x - xc
+
+    def emblem(self, dx, dz):
+        """the parts that are alike on both sides: the green circle and the
+        navy tree (its stem and two arms rising apart); None = not in it"""
+        r = math.hypot(dx, dz)
+        if r > 1.0:
+            return None
+        if r >= 0.80:
+            return ZG_GREEN
+        if dz >= -0.08:
+            ax = abs(dx)
+            if ax < 0.10 or abs(ax - (0.15 + 0.45 * dz)) < 0.14:
+                return ZG_NAVY
+        return None
+
+    def at(self, bus, x, k):
+        xc = bus.axles[-1] + self.EX
+        return (x - xc) / self.EX, (k + 0.5 - self.EK) / self.ER
+
+    def ring(self, bus, x, k):
+        """the emblem on the side glazing (Regio tints it towards the glass)"""
+        return self.emblem(*self.at(bus, x, k))
+
+    def hills(self, bus, x, k, right):
+        a, b = self.HILLS
+        if not a <= x < b:
+            return None
+        s = b - x if right else x - a
+        h = (k + 0.5) / sill(bus, x)              # height on the lower side, 0..1
+        g = 1 - ((s - 1.30) / 0.65) ** 2
+        if g > 0 and h < 0.48 * math.sqrt(g):
+            return ZG_GREEN
+        top = 0.80 * math.sin(math.pi / 2 * min(s / 0.95, 1.0)) if s < 0.95 \
+            else 0.80 - 1.25 * (s - 0.95)
+        return ZG_NAVY if h < top else None
+
+    def side(self, bus, x, k, right):
+        dx, dz = self.at(bus, x, k)
+        c = self.emblem(dx, dz)
+        if c is not None:
+            return c
+        if math.hypot(dx, dz) < 0.80 and k < sill(bus, x):
+            if right and x >= bus.real_len - 1.20 and 1 <= k <= 3:
+                return None                         # the engine grille stays on top
+            s = -dx if right else dx                # as seen
+            cut = -0.05 + 0.15 * (dz + 0.5)
+            if abs(s - cut) < 0.13:
+                return WHITE                        # the white swoosh
+            return ZG_GREEN if s < cut else ZG_NAVY
+        return self.hills(bus, x, k, right)
+
+    def front(self, bus, v, k):
+        return ZG_GREEN if k == 4 and abs(v) < 0.18 else None
+
+    def rear(self, bus, v, k):
+        if k == 5 and -0.35 <= v < 0.40:
+            return ZG_NAVY                          # Z-GROUP BUS
+        # the swoosh: its left edge and the navy panel's edge rise to the right
+        edge = {2: (0.0, 0.32), 3: (0.40, 0.56)}.get(k)
+        if edge and edge[0] <= v < W2 - 0.25:
+            return ZG_GREEN if v < edge[1] else ZG_NAVY
+        return None
+
+
+for _lv in (OdisTransdev, OdisBila, OdisBilaZel, OdisBilaCerv, OdisCsad, OdisCsadPod, OdisBors, OdisRed,
+            OdisZGroup):
     M.LIVERIES[_lv.slug] = _lv
 
 
@@ -419,6 +509,11 @@ class OCrosswayLELine(Regio, M.CrosswayLELine):
     A/C from 3 to 7 m"""
     DOORS = ((0.32, 1.10, "le"), (5.10, 6.30, "le"))
     AC = (3.0, 7.0)
+
+
+class OCrosswayLELineAmber(OCrosswayLELine):
+    """the Crossway LE LINE 12M with amber BUSE displays (Z-Group's Kroměříž cars)"""
+    DISP = M.LED
 
 
 class OCrosswayLELineNP(OCrosswayLELine):
@@ -706,6 +801,7 @@ WGP = ("3ČSAD white-green, green CNG box · Transdev Slezsko",
        "3ČSAD bílo-zelená, zelený CNG box · Transdev Slezsko")
 BORS = ("BORS yellow-blue · Z-Group bus", "BORS žluto-modrá · Z-Group bus")
 ZG = ("white · Z-Group bus", "bílá · Z-Group bus")
+ZGG = ("white with green-blue graphic · Z-Group bus", "bílá se zeleno-modrou grafikou · Z-Group bus")
 RENDER = ("original box-model render (vojtechzicha): {cls} of tools/busrender/odis.py\n"
           "(on the {base} body of {mod}) with the livery of odis.py.")
 
@@ -746,6 +842,13 @@ RED_NOTE = ("the kraj's ODIS scheme (\"schéma ODIS, červeno-černá\", every n
 ZG_NOTE = ("Z-Group bus (ex ČSAD Vsetín; Kopřivnice, Opava and Vítkov depots): white,"
            " black window band, the kraj ring in its own colours (grey, the red and blue"
            " inner bands), navy fleet numbers.")
+ZGG_NOTE = ("Z-Group bus 6Z9 6492 (2020, depot Kroměříž, seen on ODIS line 670 in 9/2026; seznam-autobusu"
+            " \"Z-Group bus, bílá se zeleno-modrou grafikou\" since 2/2021), doors 1-2-0, amber"
+            " displays: Z-Group's own Zlínský kraj scheme, no kraj ring. White, black window"
+            " band, a navy and a green hill just behind the front axle, the big Z-Group emblem"
+            " over the rear overhang (green circle from the roof edge to the skirt, the navy"
+            " tree on the glass, green and navy halves below), a green swoosh and a navy panel"
+            " low on the rear (photos of 6Z9 6480 / 6491 / 6492 and 7Z6 4793, 2021-2024).")
 TD_NOTE = ("Transdev Morava livery (seznam-autobusu: \"bílá & červené logo Transdev & logo\n"
            "dopravy Moravskoslezského kraje\"): white, black window band, the big red Transdev\n"
            "figure, the kraj ring in salmon and reds over the rear axle.")
@@ -819,9 +922,9 @@ FAMILIES = dict([
         one("Crossway_LE_Line_12M", "Crossway LE LINE 12M", BUS,
             f_(640000, 92, 100, 11, 26, 131, 2014, 8, "diesel", 243, 54, smoke="Diesel_small")),
         [("transdev", *TD, model(OCrosswayLELine, "odis-transdev")),
-],
+         ("bilazelenomodra", *ZGG, model(OCrosswayLELineAmber, "odis-zgroup"))],
         "Iveco Crossway LE LINE 12M (2013+ front), doors 2-2. Transdev Morava 23 (2019):\n"
-        "64-0001 to 0004, 64-1001 to 1019 (Bílovecko). " + TD_NOTE,
+        "64-0001 to 0004, 64-1001 to 1019 (Bílovecko). " + TD_NOTE + " " + ZGG_NOTE,
         rendered(OCrosswayLELine)),
     fam("sor_icng_12", "SOR_ICNG_12", "SOR ICNG 12",
         one("SOR_ICNG_12", "ICNG 12", BUS,
