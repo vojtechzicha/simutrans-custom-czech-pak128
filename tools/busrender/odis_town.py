@@ -22,6 +22,9 @@ Krnov already had one; this driver adds the four the region had folded in:
                LINE 10,8M that work lines 501/505 every day in 2026 included
   MHDBruntal   (vehicle-bus/mhd-bruntal/)   Transdev Morava: the one SOR CNG 12
                in the Bruntál scheme (the kraj ring in green, BRUNTÁL logo)
+and one bus to the Nový Jičín pak:
+  MHDNovyJicin (vehicle-bus/mhd-novy-jicin/) ARRIVA's reserve SOR BN 10,5 in the
+               red-black town scheme (the EBN 9,5 sheet there is a static PNG)
 Scope: the vehicles each town's MHD runs in October 2026 (seznam-autobusu
 periods "od m/yyyy", duty logs); stored, reserve and regional stand-in buses
 are left out. Same body + same paint as an existing sheet = a copy of that
@@ -83,6 +86,9 @@ HAV_YEL = (0xDC, 0xCB, 0x10)       # yellow script slogan "město pro život"
 CSAD_GREEN = (0x22, 0xB1, 0x4C)
 # Karviná white-black (2024-2033 contract)
 KAR_BLACK = (0x16, 0x17, 0x1A)
+# Nový Jičín red (the "červená metalíza" of the town's SOR EBN 9,5 sheet: sides, roof)
+NJ_RED = (0xA5, 0x1D, 0x24)
+NJ_ROOF = (0xB2, 0x26, 0x2D)
 
 
 def lum(c):
@@ -1064,6 +1070,25 @@ def isuzu_rows():
                    disp(PAPER))
 
 
+def front_mask(colour, z_bumper):
+    """decals(): the front face black (colour) above the bumper, so the lower
+    front reads as a black mask round the headlamps"""
+    def draw(o, paint, geo, d, r):
+        o = o.copy()
+        m = paint & (geo["face"] == 2) & (geo["z"] >= z_bumper)
+        o[m] = colour
+        return o
+    return draw
+
+
+def nj_bn_rows():
+    """Nový Jičín SOR BN 10,5 7577: the white Praha BN 10,5 sheet (VTPsim's
+    Příbram BN 10) in the town red, black front mask over a red bumper"""
+    return repaint(load_rows("vehicle-bus/praha/sor_bn_10_5/sprites/bila.png"), z_white,
+                   {"white": (NJ_RED, NJ_ROOF)}, [[11.0, 11.5, 12.0, 12.5]], front_mask(KAR_BLACK, 0.62),
+                   hubs=False)                      # its lower panel is too thin for the hub rule
+
+
 # ====================================================================== families
 def f_(cost, payload, speed, weight, run, fixed, intro, length, engine, power, gear,
        intro_month=1, retire=2060, smoke=None):
@@ -1072,6 +1097,7 @@ def f_(cost, payload, speed, weight, run, fixed, intro, length, engine, power, g
 
 
 HAVIROV = ("MHDHavirov", "MHD Havířov", "MHD Havířov")
+NOVYJICIN = ("MHDNovyJicin", "MHD Nový Jičín", "MHD Nový Jičín")
 KARVINA = ("MHDKarvina", "MHD Karviná", "MHD Karviná")
 ORLOVA = ("MHDOrlova", "MHD Orlová", "MHD Orlová")
 BRUNTAL = ("MHDBruntal", "MHD Bruntál", "MHD Bruntál")
@@ -1409,6 +1435,22 @@ FAMILIES = {
              "(photos vhdfoto, seznam-autobusu). Weekend and stand-in buses are Transdev\n"
              "Morava regional SOR CN in the regional scheme: not drawn here.",
         sprite=RENDER_IR.format(cls="SorCNG")),
+    # ------------------------------------------------------------ Nový Jičín
+    "mhd-novy-jicin/sor_bn_10_5": dict(
+        agency=NOVYJICIN, type="SOR_BN_10_5", name=("SOR BN 10.5", "SOR BN 10,5"), copyright="VTPsim",
+        vehicles=one("SOR_BN_10_5", "BN 10,5", BUS,
+                     f_(490000, 85, 90, 9, 24, 150, 2015, 8, "diesel", 185, 53, smoke="Diesel_small")),
+        liveries=[("cervenocerna", "red-black", "červeno-černá", nj_bn_rows)],
+        note="SOR BN 10,5, doors 1-2-1. ARRIVA autobusy 7577 (2TT 8558, built 2015; ex 5E6 6355\n"
+             "at Čáslav for MHD Kutná Hora), reserve bus for MHD Nový Jičín (lines 601-604)\n"
+             "since 7/2025, repainted red-black in 2025 (seznam-autobusu vuz/61645,\n"
+             "\"2025-dosud červeno-černá\"). UNVERIFIED LAYOUT: no photo after the repaint\n"
+             "exists, so the scheme is drawn as the town's EBN 9,5 red with a black window\n"
+             "band and a black front mask; correct it once a photo turns up. Its Thermo King\n"
+             "roof A/C (2025) is not drawn: no photo shows its shape.",
+        sprite="the white Praha SOR BN 10,5 sheet (VTPsim's pak128_czr Příbram SOR BN 10,\n"
+               "vehicle-bus/praha/sor_bn_10_5) repainted in the Nový Jičín red by\n"
+               "odis_town.repaint, the lower front black (odis_town.nj_bn_rows)."),
 }
 
 

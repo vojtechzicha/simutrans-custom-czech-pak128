@@ -1,0 +1,58 @@
+agency: MHDNovyJicin
+type: "SOR_BN_10_5"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+
+display:
+  agency_en: "MHD Nový Jičín"
+  agency_cs: "MHD Nový Jičín"
+  family_en: "SOR BN 10.5"
+  family_cs: "SOR BN 10,5"
+
+# SOR BN 10,5, doors 1-2-1. ARRIVA autobusy 7577 (2TT 8558, built 2015; ex 5E6 6355
+# at Čáslav for MHD Kutná Hora), reserve bus for MHD Nový Jičín (lines 601-604)
+# since 7/2025, repainted red-black in 2025 (seznam-autobusu vuz/61645,
+# "2025-dosud červeno-černá"). UNVERIFIED LAYOUT: no photo after the repaint
+# exists, so the scheme is drawn as the town's EBN 9,5 red with a black window
+# band and a black front mask; correct it once a photo turns up. Its Thermo King
+# roof A/C (2025) is not drawn: no photo shows its shape.
+# Sprite: the white Praha SOR BN 10,5 sheet (VTPsim's pak128_czr Příbram SOR BN 10,
+# vehicle-bus/praha/sor_bn_10_5) repainted in the Nový Jičín red by
+# odis_town.repaint, the lower front black (odis_town.nj_bn_rows).
+# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_BN_10_5"
+    display_id: "BN 10,5"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 490000
+      payload: 85
+      speed: 90
+      weight: 9
+      runningcost: 24
+      fixed_cost: 150
+      intro_year: 2015
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 185
+      gear: 53
+      smoke: Diesel_small
+
+liveries:
+  - color: cervenocerna
+    name_en: "red-black"
+    name_cs: "červeno-černá"
