@@ -15,6 +15,11 @@ display:
   family_cs: "Škoda 32Tr SOR"
 
 # Škoda 32Tr on the SOR NS 12 body, MDPO 314-328 (2018-2020).
+# - 32Tr_battery: 314-323 (2018) carry a Škoda TBS5.1 traction battery
+#   (seznam-autobusu "alternativní pohon: baterie") and run as engine_type
+#   battery, so they are not tied to the wire; cost / weight / payload deltas
+#   as on the DPMHK 30Tr_battery. Same art: the photos of 314 and of 326 (2020,
+#   no battery stated) show the same roof cover.
 
 vehicles:
   - id: "32Tr"
@@ -38,6 +43,31 @@ vehicles:
       retire_year: 2050
       waytype: road
       payload: 95
+      freight: Passagiere
+      retire_month: 1
+
+  - id: "32Tr_battery"
+    display_id: "32Tr"
+    role_en: "trolleybus with traction battery"
+    role_cs: "parciální trolejbus"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 1080000
+      speed: 65
+      power: 160
+      weight: 13
+      runningcost: 26
+      fixed_cost: 140
+      intro_year: 2018
+      engine_type: battery
+      intro_month: 1
+      retire_year: 2050
+      waytype: road
+      payload: 97
       freight: Passagiere
       retire_month: 1
 

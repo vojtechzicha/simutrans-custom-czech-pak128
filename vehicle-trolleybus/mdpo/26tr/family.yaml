@@ -15,6 +15,11 @@ display:
   family_cs: "Škoda 26Tr Solaris"
 
 # Škoda 26Tr on the Solaris Urbino III body, MDPO 303-313 (2010-2015).
+# - 26TrDG: 305 and 306 (2010) carry a Kirsch diesel generator set
+#   (seznam-autobusu vuz/9892, 9893 "alternativní pohon: dieselagregát Kirsch",
+#   no fitting date, so intro as the 26Tr) and run as engine_type diesel, so
+#   they are not tied to the wire; cost / weight / payload deltas as on the
+#   DPMHK 30TrDG. Same art: the set sits in the rear, nothing shows outside.
 
 vehicles:
   - id: "26Tr"
@@ -37,6 +42,31 @@ vehicles:
       waytype: road
       freight: Passagiere
       engine_type: electric
+      power: 160
+      gear: 58
+      retire_year: 2050
+      retire_month: 1
+
+  - id: "26TrDG"
+    role_en: "trolleybus with diesel generator"
+    role_cs: "trolejbus s dieselagregátem"
+    row: 0
+    head: true
+    tail: true
+    prev: []
+    next: []
+    fields:
+      cost: 933387
+      payload: 66
+      speed: 65
+      weight: 14
+      runningcost: 16
+      fixed_cost: 72
+      intro_year: 2010
+      intro_month: 1
+      waytype: road
+      freight: Passagiere
+      engine_type: diesel
       power: 160
       gear: 58
       retire_year: 2050
