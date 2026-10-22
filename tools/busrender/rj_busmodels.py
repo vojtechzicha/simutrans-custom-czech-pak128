@@ -59,6 +59,7 @@ def lerp(a, b, t):
 class Coach:
     """Common geometry/texture helpers. Subclasses set the specs and draw."""
     real_len = 15.0
+    W2 = W2                       # drawn half width (m)
     skibox = 0.0                  # real depth of a rear luggage box
     Z0 = 0.30
     axles = (3.0, 10.4, 11.8)

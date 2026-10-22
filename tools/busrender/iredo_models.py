@@ -22,7 +22,7 @@ import math
 
 from rj_vrender import Box, Sh, PXZ
 import rj_busmodels as C
-from rj_busmodels import Coach, lerp, W2
+from rj_busmodels import Coach, lerp
 
 # ------------------------------------------------------------------ palette
 GLASS = C.GLASS                   # special 28, lit when loaded
@@ -556,9 +556,9 @@ class RegioBus(Coach):
         k = self.row(z)
         g0, g1 = self.REAR_GLASS
         sticker = self.KHK_STICKER and getattr(self.lv, "sticker", True)
-        if g0 <= k <= g1 and av < W2 - 0.22 and not sticker:
+        if g0 <= k <= g1 and av < self.W2 - 0.22 and not sticker:
             return GLASS_HI if k == g1 else GLASS
-        if g0 <= k <= g1 and av < W2 - 0.22:
+        if g0 <= k <= g1 and av < self.W2 - 0.22:
             # the KHK sticker: a light panel over the upper rear window with
             # the red/blue chevron at the bus's left (viewer's right) and the
             # rear LED number on the other side
@@ -576,7 +576,7 @@ class RegioBus(Coach):
         d = self.lv.rear(self, v, k)
         if d is not None:
             return Sh(d)
-        if 1 <= k <= 3 and av > W2 - 0.22:
+        if 1 <= k <= 3 and av > self.W2 - 0.22:
             return TAIL
         if k == 1 and av < 0.28:
             return PLATE
@@ -625,41 +625,41 @@ class RegioBus(Coach):
             # corners and the roof edges read as curved
             c = r * 0.8
             boxes = [
-                Box(U(rl - c), U(c), -W2, W2, self.Z0, ztop, B),
-                Box(U(c), U(0.0), -W2 + r, W2 - r, self.Z0, ztop - PXZ, B),
-                Box(U(c), U(0.0), -W2 + 2 * r, W2 - 2 * r, ztop - PXZ, ztop, B),
-                Box(U(rl), U(rl - c), -W2 + r, W2 - r, self.Z0, ztop - PXZ, B),
-                Box(U(rl), U(rl - c), -W2 + 2 * r, W2 - 2 * r, ztop - PXZ, ztop, B),
-                Box(U(rl - c - 0.10), U(c + 0.10), -W2 + r, W2 - r, ztop, roof_z, B),
-                Box(U(rl - 0.5), U(0.5), -W2 + 0.35, W2 - 0.35, 0.0, self.Z0, self.const(UNDER)),
+                Box(U(rl - c), U(c), -self.W2, self.W2, self.Z0, ztop, B),
+                Box(U(c), U(0.0), -self.W2 + r, self.W2 - r, self.Z0, ztop - PXZ, B),
+                Box(U(c), U(0.0), -self.W2 + 2 * r, self.W2 - 2 * r, ztop - PXZ, ztop, B),
+                Box(U(rl), U(rl - c), -self.W2 + r, self.W2 - r, self.Z0, ztop - PXZ, B),
+                Box(U(rl), U(rl - c), -self.W2 + 2 * r, self.W2 - 2 * r, ztop - PXZ, ztop, B),
+                Box(U(rl - c - 0.10), U(c + 0.10), -self.W2 + r, self.W2 - r, ztop, roof_z, B),
+                Box(U(rl - 0.5), U(0.5), -self.W2 + 0.35, self.W2 - 0.35, 0.0, self.Z0, self.const(UNDER)),
             ]
         else:
             boxes = [
-                Box(U(rl - 0.08), U(0.08), -W2, W2, self.Z0, ztop, B),
-                Box(U(0.08), U(0.0), -W2 + 0.07, W2 - 0.07, self.Z0, ztop, B),
-                Box(U(rl), U(rl - 0.08), -W2 + 0.07, W2 - 0.07, self.Z0, ztop, B),
-                Box(U(rl - 0.10), U(0.10), -W2 + 0.03, W2 - 0.03, ztop, roof_z, B),
-                Box(U(rl - 0.5), U(0.5), -W2 + 0.35, W2 - 0.35, 0.0, self.Z0, self.const(UNDER)),
+                Box(U(rl - 0.08), U(0.08), -self.W2, self.W2, self.Z0, ztop, B),
+                Box(U(0.08), U(0.0), -self.W2 + 0.07, self.W2 - 0.07, self.Z0, ztop, B),
+                Box(U(rl), U(rl - 0.08), -self.W2 + 0.07, self.W2 - 0.07, self.Z0, ztop, B),
+                Box(U(rl - 0.10), U(0.10), -self.W2 + 0.03, self.W2 - 0.03, ztop, roof_z, B),
+                Box(U(rl - 0.5), U(0.5), -self.W2 + 0.35, self.W2 - 0.35, 0.0, self.Z0, self.const(UNDER)),
             ]
         if self.ROOF_STEP:
             xs, n = self.ROOF_STEP
             zs = self.zr(self.R_TOP + n)
             ri = self.ROUND or 0.03
-            boxes.append(Box(U(rl - (self.ROUND * 0.8 if self.ROUND else 0)), U(xs), -W2, W2, ztop, zs, self.mat_step))
-            boxes.append(Box(U(rl - 0.10 - ri), U(xs + 0.10), -W2 + ri, W2 - ri, zs, zs + 0.08, B))
+            boxes.append(Box(U(rl - (self.ROUND * 0.8 if self.ROUND else 0)), U(xs), -self.W2, self.W2, ztop, zs, self.mat_step))
+            boxes.append(Box(U(rl - 0.10 - ri), U(xs + 0.10), -self.W2 + ri, self.W2 - ri, zs, zs + 0.08, B))
             roof_z = max(roof_z, zs)
         if self.AC:
             a0, a1 = self.AC
             boxes.append(Box(U(a1), U(a0), -0.95, 0.95, ztop + 0.08,
                              ztop + 0.08 + self.AC_H, self.ac))
         for a in self.axles:
-            boxes.append(Box(U(a) - 0.5, U(a) + 0.5, -W2 + 0.07, W2 - 0.07, 0.0,
+            boxes.append(Box(U(a) - 0.5, U(a) + 0.5, -self.W2 + 0.07, self.W2 - 0.07, 0.0,
                              self.Z0 + 0.01, self.mat_tire))
         lines = []
         for s in (-1, 1):
-            p0 = (L - 0.10, s * (W2 - 0.25), ztop - 0.12)
-            p1 = (L + 0.30, s * (W2 + 0.12), ztop - 0.20)
-            p2 = (L + 0.32, s * (W2 + 0.16), ztop - 0.85)
+            p0 = (L - 0.10, s * (self.W2 - 0.25), ztop - 0.12)
+            p1 = (L + 0.30, s * (self.W2 + 0.12), ztop - 0.20)
+            p2 = (L + 0.32, s * (self.W2 + 0.16), ztop - 0.85)
             lines += [(p0, p1, MIRROR), (p1, p2, MIRROR)]
         return L, boxes, lines
 
@@ -674,21 +674,21 @@ class CrosswayFace:
         if k >= top:
             return Sh(self.lv.roof)
         if k == top - 1:
-            if av < W2 - 0.30:
+            if av < self.W2 - 0.30:
                 return LED if av < 0.9 else BLACK
             return BLACK
         if k >= 5:
-            if av > W2 - 0.07:
+            if av > self.W2 - 0.07:
                 return BLACK
             return SCREEN_HI if k == top - 2 else SCREEN
         if k == 4:
-            return BLACK if av > W2 - 0.07 else Sh(d or self.lv.body)
+            return BLACK if av > self.W2 - 0.07 else Sh(d or self.lv.body)
         if d is not None:
             return Sh(d)
         if k == 3:
             return Sh(GREY_LINE) if av < 1.05 else Sh(self.lv.body)
         if k == 2:
-            if av > W2 - 0.48:
+            if av > self.W2 - 0.48:
                 return HEAD
             return Sh(self.lv.body)
         if k == 1:
@@ -783,9 +783,9 @@ class IrisbusFace:
         if k >= top:
             return Sh(self.lv.roof)
         if k == top - 1:
-            return Sh(self.lv.body) if av > W2 - 0.25 else (LED if av < 0.9 else BLACK)
+            return Sh(self.lv.body) if av > self.W2 - 0.25 else (LED if av < 0.9 else BLACK)
         if k >= 5:
-            if av > W2 - 0.07:
+            if av > self.W2 - 0.07:
                 return BLACK
             return SCREEN_HI if k == top - 2 else SCREEN
         if k == 4:
@@ -795,7 +795,7 @@ class IrisbusFace:
         if k == 3:
             return Sh(self.lv.body)
         if k == 2:
-            if av > W2 - 0.50:
+            if av > self.W2 - 0.50:
                 return HEAD
             return Sh(GRILLE_DK)
         if k == 1:
@@ -875,20 +875,20 @@ class SorFace:
         if k >= top:
             return Sh(self.lv.roof)
         if k == top - 1:
-            if av < W2 - 0.30:
+            if av < self.W2 - 0.30:
                 return LED if av < 0.9 else BLACK
             return BLACK
         if k >= 4:
-            if av > W2 - 0.08:
+            if av > self.W2 - 0.08:
                 return BLACK
             return SCREEN_LHI if k >= top - 3 else SCREEN_L
         if k == 3:
-            return BLACK if av > W2 - 0.08 else Sh(d or self.lv.body)
+            return BLACK if av > self.W2 - 0.08 else Sh(d or self.lv.body)
         if d is not None:
             return Sh(d)
         if k == 2:
-            if av > W2 - 0.55:
-                return HEAD if av > W2 - 0.45 else BLACK
+            if av > self.W2 - 0.55:
+                return HEAD if av > self.W2 - 0.45 else BLACK
             return Sh(CHROME) if av < 0.12 else Sh(self.lv.body)
         if k == 1:
             return PLATE if av < 0.28 else Sh(self.lv.bumper or self.lv.body)

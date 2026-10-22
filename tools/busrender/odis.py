@@ -49,7 +49,6 @@ import iredo_models as M                                                # noqa: 
 import iredo_coachmodels as CM                                          # noqa: E402
 from rj_vrender import Sh, Box                                          # noqa: E402
 from rj_buses import row_for                                            # noqa: E402
-from rj_busmodels import W2                                             # noqa: E402
 
 K = T.K
 WHITE = T.WHITE
@@ -405,7 +404,7 @@ class OdisZGroup(M.Livery):
             return ZG_NAVY                          # Z-GROUP BUS
         # the swoosh: its left edge and the navy panel's edge rise to the right
         edge = {2: (0.0, 0.32), 3: (0.40, 0.56)}.get(k)
-        if edge and edge[0] <= v < W2 - 0.25:
+        if edge and edge[0] <= v < bus.W2 - 0.25:
             return ZG_GREEN if v < edge[1] else ZG_NAVY
         return None
 
@@ -543,17 +542,17 @@ class CrosswayFace2024:
         if k >= top:
             return Sh(self.lv.roof)
         if k == top - 1:
-            if av < W2 - 0.30:
+            if av < self.W2 - 0.30:
                 return M.LED if av < 0.9 else M.BLACK
             return M.BLACK
         if k >= 5:
-            if av > W2 - 0.07:
+            if av > self.W2 - 0.07:
                 return M.BLACK
             return M.SCREEN_HI if k == top - 2 else M.SCREEN
         if k == 4:
             return M.BLACK
         if k == 3:
-            return M.HEAD if av > W2 - 0.42 else Sh(self.lv.body)
+            return M.HEAD if av > self.W2 - 0.42 else Sh(self.lv.body)
         if k == 2:
             return Sh(M.CHROME) if av < 0.62 else Sh(self.lv.body)
         if k == 1:
@@ -581,17 +580,17 @@ class IcnFace2025:
         if k >= top:
             return Sh(self.lv.roof)
         if k == top - 1:
-            if av > W2 - 0.08:
+            if av > self.W2 - 0.08:
                 return M.BLACK
             return M.LED if av < 0.95 else M.BLACK
         if k >= 5:
-            if av > W2 - 0.08:
+            if av > self.W2 - 0.08:
                 return M.BLACK
             return M.SCREEN_LHI if k >= top - 3 else M.SCREEN_L
         if k == 4:
             return M.BLACK
-        if k in (2, 3) and av > W2 - 0.50:
-            return M.HEAD if (k == 3 and av < W2 - 0.12) else M.BLACK
+        if k in (2, 3) and av > self.W2 - 0.50:
+            return M.HEAD if (k == 3 and av < self.W2 - 0.12) else M.BLACK
         if k == 2 and av < 0.12:
             return Sh(M.CHROME)
         if k == 1:

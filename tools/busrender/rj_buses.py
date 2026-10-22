@@ -35,8 +35,8 @@ def calibration(m):
     """Whole-pixel shift per view that puts a plain single-deck box of the
     model's footprint onto the native median footprint."""
     L = m.L
-    ref = [Box(0.0, L, -C.W2, C.W2, m.Z0, 3.0, lambda *a: (0xFF, 0xB6, 0x12)),
-           Box(0.5, L - 0.6, -C.W2 + 0.35, C.W2 - 0.35, 0.0, m.Z0, lambda *a: (20, 20, 20))]
+    ref = [Box(0.0, L, -m.W2, m.W2, m.Z0, 3.0, lambda *a: (0xFF, 0xB6, 0x12)),
+           Box(0.5, L - 0.6, -m.W2 + 0.35, m.W2 - 0.35, 0.0, m.Z0, lambda *a: (20, 20, 20))]
     cal = {}
     for d in DIRS:
         X, Cc = metrics(render(ref, L, d), d)

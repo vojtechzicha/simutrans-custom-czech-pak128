@@ -49,7 +49,6 @@ from dpmhk import Veh, sh, inr, HW, PER_CU                              # noqa: 
 from render import render, Box, DIRS                                    # noqa: E402
 import iredo_models as M                                                # noqa: E402
 from rj_vrender import Sh                                               # noqa: E402
-from rj_busmodels import W2                                             # noqa: E402
 from rj_buses import row_for                                            # noqa: E402
 
 T = (231, 255, 255)
@@ -369,7 +368,7 @@ class TownRear:
     def rear(self, v, z):
         k = self.row(z)
         g0, g1 = self.REAR_GLASS
-        if g0 <= k <= g1 and abs(v) < W2 - 0.22:
+        if g0 <= k <= g1 and abs(v) < self.W2 - 0.22:
             if k == g1 and -1.05 <= v < -0.65:
                 return self.REAR_LED
             return M.GLASS

@@ -39,7 +39,6 @@ import iredo_models as M                                                # noqa: 
 import iredo_coachmodels as CM                                          # noqa: E402
 from rj_vrender import Sh                                               # noqa: E402
 from rj_buses import row_for                                            # noqa: E402
-from rj_busmodels import W2                                             # noqa: E402
 
 PID_GREY = (0xC6, 0xC8, 0xCB)
 PID_ROOF = (0xD2, 0xD4, 0xD7)
@@ -89,7 +88,7 @@ class PidA(M.Livery):
         return None
 
     def front(self, bus, v, k):
-        if k <= 3 and v < -0.15 and not (k == 2 and v < -W2 + 0.55):
+        if k <= 3 and v < -0.15 and not (k == 2 and v < -bus.W2 + 0.55):
             return PID_RED                              # red block on the vehicle's left
         return None
 
@@ -202,15 +201,15 @@ class Setra500Face:
         if k == top - 1:
             return Sh(self.lv.body)
         if k == top - 2:
-            if av > W2 - 0.07:
+            if av > self.W2 - 0.07:
                 return M.BLACK
             return M.LED if av < 0.95 else M.BLACK
         if k >= 4:
-            if av > W2 - 0.07:
+            if av > self.W2 - 0.07:
                 return M.BLACK
             return M.SCREEN_HI if k == top - 3 else M.SCREEN
         if k == 3:
-            if av > W2 - 0.40:
+            if av > self.W2 - 0.40:
                 return M.HEAD
             return Sh(M.CHROME) if av < 0.55 else M.BLACK
         if d is not None and k <= 2:

@@ -32,7 +32,7 @@ iredo_models.
 """
 from rj_vrender import Box, Sh, PXZ
 import rj_busmodels as C
-from rj_busmodels import lerp, W2
+from rj_busmodels import lerp
 import iredo_models as M
 from iredo_models import (RegioBus, Livery, GLASS, GLASS_HI, SCREEN, SCREEN_HI, BLACK,
                           PILLAR, HEAD, TAIL, PLATE, CHROME, GRILLE, GRILLE_DK,
@@ -109,7 +109,7 @@ class CoachBus(RegioBus):
         if self.FAIRING:
             x0, x1, inset, h = self.FAIRING
             z0 = self.zr(self.R_TOP) + 0.08
-            boxes.append(Box(self.U(x1), self.U(x0), -W2 + inset, W2 - inset, z0 - 0.02, z0 + h,
+            boxes.append(Box(self.U(x1), self.U(x0), -self.W2 + inset, self.W2 - inset, z0 - 0.02, z0 + h,
                              self.fairing))
         return L, boxes, lines
 
@@ -128,21 +128,21 @@ class SetraFace:
         if k == top - 1:
             return Sh(self.lv.body)                      # thin cap over the glass
         if k == top - 2:
-            if av > W2 - 0.07:
+            if av > self.W2 - 0.07:
                 return BLACK
             return LED if av < 0.95 else BLACK
         if k >= 5:
-            if av > W2 - 0.07:
+            if av > self.W2 - 0.07:
                 return BLACK
             return SCREEN_HI if k == top - 3 else SCREEN
         if k == 4:
-            if av > W2 - 0.45:
+            if av > self.W2 - 0.45:
                 return Sh(M.MARKER)                     # indicators over the lamps
             return BLACK                                  # black lower windscreen band
         if k == 3:
-            if av > W2 - 0.45:
+            if av > self.W2 - 0.45:
                 return HEAD
-            if av < W2 - 0.55:
+            if av < self.W2 - 0.55:
                 return Sh(SILVER)                         # the SETRA bar
             return Sh(self.lv.body)
         if d is not None and k <= 2:
@@ -225,17 +225,17 @@ class EvadysFace:
         if k >= top:
             return Sh(self.lv.roof)
         if k == top - 1:
-            if av > W2 - 0.07:
+            if av > self.W2 - 0.07:
                 return BLACK
             return LED if av < 0.95 else BLACK
         if k >= 6:
-            if av > W2 - 0.07:
+            if av > self.W2 - 0.07:
                 return BLACK
             return SCREEN_HI if k == top - 2 else SCREEN
         if k in (4, 5):
             return BLACK                                  # the black mask
         if k == 3:
-            if av > W2 - 0.50:
+            if av > self.W2 - 0.50:
                 return HEAD
             if av < 0.85:
                 return Sh(SILVER)                         # IVECO bar
@@ -243,7 +243,7 @@ class EvadysFace:
         if d is not None:
             return Sh(d)
         if k == 2:
-            if av > W2 - 0.50:
+            if av > self.W2 - 0.50:
                 return Sh(SILVER_DK)                      # lamp housings
             return Sh(self.lv.body)
         if k == 1:
@@ -301,16 +301,16 @@ class EvadysHFace:
         if k >= top:
             return Sh(self.lv.roof)
         if k == top - 1:
-            if av > W2 - 0.07:
+            if av > self.W2 - 0.07:
                 return BLACK
             return LED if av < 0.95 else BLACK
         if k >= 6:
-            if av > W2 - 0.07:
+            if av > self.W2 - 0.07:
                 return BLACK
             return SCREEN_HI if k == top - 2 else SCREEN
         if k == 5:
             return Sh(CHROME) if av < 0.40 else BLACK     # EVADYS badge on the band
-        if k in (1, 2) and W2 - 0.48 < av < W2 - 0.10:
+        if k in (1, 2) and self.W2 - 0.48 < av < self.W2 - 0.10:
             return HEAD                                   # round lamps
         if d is not None:
             return Sh(d)
@@ -369,11 +369,11 @@ class ArwayFace:
         if k >= top:
             return Sh(self.lv.roof)
         if k == top - 1:
-            if av > W2 - 0.20:
+            if av > self.W2 - 0.20:
                 return Sh(self.lv.body)
             return LED if av < 0.90 else BLACK
         if k >= 6:
-            if av > W2 - 0.07:
+            if av > self.W2 - 0.07:
                 return BLACK
             return SCREEN_HI if k == top - 2 else SCREEN
         if k == 5:
@@ -385,7 +385,7 @@ class ArwayFace:
         if k == 3:
             return Sh(CHROME) if av < 0.14 else Sh(self.lv.body)    # badge
         if k == 2:
-            if av > W2 - 0.55:
+            if av > self.W2 - 0.55:
                 return HEAD
             return Sh(GRILLE_DK) if av < 0.70 else Sh(self.lv.bumper or self.lv.body)
         if d is not None:
@@ -445,17 +445,17 @@ class AxerFace:
         if k >= top:
             return Sh(self.lv.roof)
         if k == top - 1:
-            if av > W2 - 0.22:
+            if av > self.W2 - 0.22:
                 return Sh(self.lv.body)
             return LED if av < 0.85 else BLACK
         if k >= 6:
-            if av > W2 - 0.10:
+            if av > self.W2 - 0.10:
                 return BLACK
             return SCREEN_HI if k == top - 2 else SCREEN
         if k == 5:
             return BLACK                                  # strip under the glass
         if k == 2:
-            if W2 - 0.62 < av < W2 - 0.12:
+            if self.W2 - 0.62 < av < self.W2 - 0.12:
                 return HEAD                               # twin round lamps
             return BLACK                                  # the black lamp band
         if d is not None:
@@ -512,16 +512,16 @@ class RecreoFace:
         if k >= top:
             return Sh(self.lv.roof)
         if k == top - 1:
-            return Sh(self.lv.body) if av > W2 - 0.12 else (LED if av < 0.85 else BLACK)
+            return Sh(self.lv.body) if av > self.W2 - 0.12 else (LED if av < 0.85 else BLACK)
         if k >= 5:
-            if av > W2 - 0.10:
+            if av > self.W2 - 0.10:
                 return BLACK
             return SCREEN_HI if k == top - 2 else SCREEN
         if k == 4:
             if av < 0.45 and int((v + 2) / 0.17) % 2:
                 return BLACK                              # IVECO letters
             return Sh(self.lv.body)
-        if k == 1 and av > W2 - 0.45:
+        if k == 1 and av > self.W2 - 0.45:
             return HEAD
         if d is not None:
             return Sh(d)
@@ -579,9 +579,9 @@ class I4Face:
         if k >= top:
             return Sh(self.lv.roof)
         if k == top - 1:
-            return Sh(self.lv.body) if av > W2 - 0.25 else (LED if av < 0.90 else BLACK)
+            return Sh(self.lv.body) if av > self.W2 - 0.25 else (LED if av < 0.90 else BLACK)
         if k >= 6:
-            if av > W2 - 0.07:
+            if av > self.W2 - 0.07:
                 return BLACK
             return SCREEN_HI if k == top - 2 else SCREEN
         if k == 5:
@@ -589,7 +589,7 @@ class I4Face:
         if k == 4:
             return Sh(CHROME) if av < 0.35 else BLACK     # Irizar line on the black
         if k == 3:
-            if av > W2 - 0.52:
+            if av > self.W2 - 0.52:
                 return HEAD
             return Sh(d) if d is not None else Sh(self.lv.body)
         if k == 2:
@@ -630,7 +630,7 @@ class IrizarI4(I4Face, CoachBus):
     def rear(self, v, z):
         av = abs(v)
         k = self.row(z)
-        if av > W2 - 0.28 and 1 <= k < self.R_TOP - 1:
+        if av > self.W2 - 0.28 and 1 <= k < self.R_TOP - 1:
             if k in (3, 4):
                 return TAIL
             if k == 6:
@@ -663,22 +663,22 @@ class IcnFace:
         if k >= top:
             return Sh(self.lv.roof)
         if k == top - 1:
-            if av > W2 - 0.08:
+            if av > self.W2 - 0.08:
                 return BLACK
             return LED if av < 0.95 else BLACK
         if k >= 5:
-            if av > W2 - 0.08:
+            if av > self.W2 - 0.08:
                 return BLACK
             return SCREEN_LHI if k >= top - 3 else SCREEN_L
         if k == 4:
             return BLACK                                  # foot of the black mask
         if k == 3:
-            if av > W2 - 0.60:
-                return Sh(SILVER) if av < W2 - 0.48 else HEAD   # pod rim + lamp
+            if av > self.W2 - 0.60:
+                return Sh(SILVER) if av < self.W2 - 0.48 else HEAD   # pod rim + lamp
             return Sh(SILVER)                             # the silver brow
         if k == 2:
-            if av > W2 - 0.55:
-                return Sh(SILVER) if av > W2 - 0.12 else HEAD
+            if av > self.W2 - 0.55:
+                return Sh(SILVER) if av > self.W2 - 0.12 else HEAD
             return Sh(d) if d is not None else Sh(self.lv.body)
         if d is not None:
             return Sh(d)
@@ -726,13 +726,13 @@ class SorICN(IcnFace, CoachBus):
         av = abs(v)
         k = self.row(z)
         g0, g1 = self.REAR_GLASS
-        if g0 <= k <= g1 and av < W2 - 0.22:
+        if g0 <= k <= g1 and av < self.W2 - 0.22:
             return super().rear(v, z)
         if k >= self.top_row(self.real_len - 0.1):
             return Sh(self.lv.roof)
-        if 2 <= k <= 5 and W2 - 0.20 < av < W2 - 0.06:
+        if 2 <= k <= 5 and self.W2 - 0.20 < av < self.W2 - 0.06:
             return TAIL                                   # slim vertical lamps
-        if k in (5, 6) and av < W2 - 0.38:
+        if k in (5, 6) and av < self.W2 - 0.38:
             return Sh(GRILLE) if k == 6 else Sh(GRILLE_DK)   # louvres
         if k == 2 and av < 0.30:
             return PLATE
@@ -823,17 +823,17 @@ class MercedesFace:
         if k == top - 1:
             return Sh(self.lv.body)                      # thin cap over the glass
         if k == top - 2:
-            if av > W2 - 0.07:
+            if av > self.W2 - 0.07:
                 return BLACK
             return LED if av < 0.95 else BLACK
         if k >= 5:
-            if av > W2 - 0.07:
+            if av > self.W2 - 0.07:
                 return BLACK
             return SCREEN_HI if k == top - 3 else SCREEN
         if k == 4:
             return Sh(self.lv.body)
         if k == 3:
-            if av > W2 - 0.45:
+            if av > self.W2 - 0.45:
                 return HEAD
             if av < 0.18:
                 return Sh(CHROME)                        # the star
@@ -908,17 +908,17 @@ class ScaniaCW2Face:
         if k >= top:
             return Sh(self.lv.roof)
         if k == top - 1:
-            if av > W2 - 0.08:
+            if av > self.W2 - 0.08:
                 return BLACK
             return LED if av < 0.95 else BLACK
         if k >= 5:
-            if av > W2 - 0.08:
+            if av > self.W2 - 0.08:
                 return BLACK
             return SCREEN_HI if k >= top - 3 else SCREEN
         if k == 4:
             return Sh(CHROME) if av < 0.15 else BLACK     # griffin badge on the band
         if k == 3:
-            if av > W2 - 0.45:
+            if av > self.W2 - 0.45:
                 return HEAD
             return Sh(d) if d is not None else Sh(self.lv.body)
         if d is not None and k <= 2:
