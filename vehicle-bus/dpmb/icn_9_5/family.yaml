@@ -24,9 +24,10 @@ display:
 # windscreen / display mask, white lower front with silver headlamp clusters
 # and a red bumper sweeping up at the corners; short white A/C pod ahead of
 # the rear axle; green LED displays.
-# Sprite: no upstream ICN exists; new 8-direction pixel render of the ICN body
-# (brochure floor plan + flat side photo of 7531) at the scale of the native
-# pak128 buses, same body as the DPP ICN 9,5.
+# Sprite: original box-model render (vojtechzicha) on the common SOR base
+# (iredo_models.SHAPE low, the owner's pick of 2026-10-24): SorICN95 in the
+# DPMB white-red, green LED displays; regenerate with
+# tools/busrender/sor_city.py.
 
 vehicles:
   - id: "ICN_9.5"

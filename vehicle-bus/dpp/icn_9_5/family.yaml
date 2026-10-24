@@ -27,10 +27,10 @@ display:
 # lower rear, dark rubbing strip on the grey panels, amber front / side / rear
 # displays. The light-grey A/C pod is drawn between the two roof bands so the
 # bands read solid at 1x (the real unit overlaps them slightly).
-# Sprite: no upstream ICN exists; new 8-direction pixel render of the ICN body
-# (brochure floor plan + flat side photos of 2080 / Brno 7531) at the scale
-# of the native pak128 buses (9.55 m = 40 px in the side views, next to 51 px
-# for the 12 m SOR NB 12 / NS 12), same body as the DPMB ICN 9,5.
+# Sprite: original box-model render (vojtechzicha) on the common SOR base
+# (iredo_models.SHAPE low, the owner's pick of 2026-10-24): SorICN95 in the
+# PID grey-red of pid.py (pid-a), amber LED displays; regenerate with
+# tools/busrender/sor_city.py.
 
 vehicles:
   - id: "ICN_9.5"

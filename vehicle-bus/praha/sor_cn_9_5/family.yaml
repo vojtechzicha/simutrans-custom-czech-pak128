@@ -3,7 +3,7 @@ type: "SOR_CN_9_5"
 image_offset: [0, 0]         # buses: sprites carry their own lane placement
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 display:
   agency_en: "Praha"
   agency_cs: "Praha"
@@ -25,14 +25,11 @@ display:
 # Livery 2, Stenbus 1700: turquoise all over incl. roof and front, a thin
 # yellow line low along both sides at the wheel-arch tops, none on the front
 # (photos of 1700 on X221, 01/2026, and at night, 2026).
-# Sprite: VTPsim's pak128_czr PID SOR CN 9,5, which is a byte copy of his
-# SOR BN 9,5; the front-section window sill raised one row so the white band
-# runs level all along as on the CN (the BN steps up behind the centre door),
-# blue repainted the PID ultramarine of the DPP BN 12, the black NB-style front
-# mask repainted white over red as on the DPP BN 12, glass converted to the
-# lit-window specials, the green-light displays made amber LED, lane placement
-# normalised to the native 12 m median. 38 px long in the side views, next to
-# 40 px for the DPP ICN 9,5 and 51 px for the 12 m buses.
+# Sprite: original box-model render (vojtechzicha) on the common SOR base
+# (iredo_models.SHAPE low, the owner's pick of 2026-10-24): SorCN95 in the PID
+# trikolóra of pid.py (pid-b) and in the Stenbus turquoise, amber LED
+# displays; length 7 like the other SOR CN 9,5 families; regenerate with
+# tools/busrender/sor_city.py.
 
 vehicles:
   - id: "SOR_CN_9_5"
@@ -55,7 +52,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 7
       engine_type: diesel
       power: 185
       gear: 53

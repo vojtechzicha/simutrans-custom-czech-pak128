@@ -3,7 +3,7 @@ type: "SOR_CN_12"
 image_offset: [0, 0]         # buses: sprites carry their own lane placement
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 display:
   agency_en: "Brno"
   agency_cs: "Brno"
@@ -22,12 +22,11 @@ display:
 # lower body; front: white mask under the windscreen, grey bumper with the
 # lamps; green LED destination displays (seznam-autobusu photo of 7J1 5363,
 # 2025). The red and grey are the ones of the pak128_czr IDS JMK buses.
-# Sprite: VTPsim's pak128_czr IREDO SOR CN 12 White (the cleaner of the two
-# upstream CN 12 sheets): roof light grey with red edge lines, lower body under the belt
-# line grey, the front roof hatch drawn as the white A/C box, the black
-# NB-style front mask white over a grey bumper, glass converted to the
-# lit-window specials, displays green LED (as the car; a plain colour, not the
-# light special), lane placement normalised.
+# Sprite: original box-model render (vojtechzicha) on the common SOR base
+# (iredo_models.SHAPE low, the owner's pick of 2026-10-24): SorCN (the CN 12,3
+# body, like every CN 12 of the repo) in the IDS JMK livery, red roof edges
+# and windscreen cap, green LED displays; regenerate with
+# tools/busrender/sor_city.py.
 
 vehicles:
   - id: "SOR_CN_12"
