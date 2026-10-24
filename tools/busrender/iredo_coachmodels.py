@@ -60,6 +60,13 @@ class CoachBus(RegioBus):
     FAIRING = None
     FAIRING_ROOF = False
 
+    def low(self):
+        """the low shape (SHAPES: the common width, the body on its wheels, the
+        roof): a coach keeps its own height, window line and roof details,
+        the A/C pod at most 0.24 m (owner, 2026-10-24: the coaches keep their
+        real heights)"""
+        return dict(AC_H=min(self.AC_H, 0.24))
+
     def band_k0(self, x):
         return None
 

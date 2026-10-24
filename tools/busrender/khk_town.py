@@ -372,7 +372,7 @@ class TownRear:
             if k == g1 and -1.05 <= v < -0.65:
                 return self.REAR_LED
             return M.GLASS
-        return M.RegioBus.rear(self, v, z)
+        return super().rear(v, z)
 
 
 class GreenLED(TownRear):

@@ -182,19 +182,26 @@ class CDS(Livery):
            "#...#.#.#..",
            "#...#.#...#",
            "###.##..##."]
+    # the same in three rows, for a lower panel that has no room for four
+    # (the Setra LE standing on its wheels, SKIRT)
+    TXT_S = ["###.##...##",
+             "#...#.#..#.",
+             "###.##..##."]
 
     def side(self, bus, x, k, right):
-        r = (bus.R_BAND0 - 2) - k
-        if not 0 <= r < len(self.TXT):
+        top = bus.R_BAND0 - 2
+        txt = self.TXT if top + 1 - len(self.TXT) >= bus.SKIRT else self.TXT_S
+        r = top - k
+        if not 0 <= r < len(txt):
             return None
         mid = (bus.axles[0] + bus.axles[1]) / 2
-        n = len(self.TXT[0])
+        n = len(txt[0])
         half = n * bus.pw() / 2
         if right:
             c = bus.colidx(x, mid + half, backwards=True)
         else:
             c = bus.colidx(x, mid - half)
-        if 0 <= c < n and self.TXT[r][c] == "#":
+        if 0 <= c < n and txt[r][c] == "#":
             return self.RED
         return None
 
@@ -780,6 +787,8 @@ class RegioBus(Coach):
 class CrosswayFace:
     """Iveco Crossway (2013+) front: deep windscreen with the destination
     display on top, body-coloured mask, grey IVECO bar, low headlights."""
+    WS = SCREEN                    # windscreen glass (the low shape takes the lighter SOR glass)
+    WS_HI = SCREEN_HI
 
     def front_face(self, v, av, k, d):
         top = self.R_TOP
@@ -792,7 +801,7 @@ class CrosswayFace:
         if k >= 5:
             if av > self.W2 - 0.07:
                 return BLACK
-            return SCREEN_HI if k == top - 2 else SCREEN
+            return self.WS_HI if k == top - 2 else self.WS
         if k == 4:
             return BLACK if av > self.W2 - 0.07 else Sh(d or self.lv.body)
         if d is not None:
@@ -819,6 +828,50 @@ class CrosswayLELine(CrosswayFace, RegioBus):
     BAND = ((0.0, 12.0, 6, 11),)
     AC = (2.4, 5.9)
     FIG_DX = 0.55
+    LOW_TOP = 12                   # low shape: wall top row (12 = 3.16 m as measured, 11 = 2.92 m like the SOR CN)
+
+    def low(self):
+        """the low shape: the side glazing from 1.73 m up to the roof edge (a
+        livery with a strip over the windows keeps one row of it) over five
+        rows of lower panel, as on the photos (glazing 1.6-3.0 m, roof edge
+        3.1 m) and the CZR / Lubak91 Crossways; two rows of the lighter glass
+        under the top frame; the lighter SOR windscreen glass; the rear window
+        high under the roof; the A/C pod at most 0.24 m"""
+        top = self.LOW_TOP
+        return dict(R_TOP=top, BAND=tuple((x0, x1, k0, top) for x0, x1, k0, k1 in self.BAND),
+                    REAR_GLASS=(top - 4, top - 2), GLASS_HI_ROWS=2, AC_H=min(self.AC_H, 0.24),
+                    WS=SCREEN_L, WS_HI=SCREEN_LHI)
+
+    def rear(self, v, z):
+        """in the low shape (LOW_REAR) the Crossway rear: the rear window under
+        the roof with the high brake lamps at its top corners, the plain engine
+        lid with its top seam, the tall tail-lamp clusters down the corners and
+        the plate in the bumper (photo of 6Z9 6480, the CZR / Lubak91 rears)"""
+        if not self.LOW_REAR:
+            return super().rear(v, z)
+        av = abs(v)
+        k = self.row(z)
+        top = self.top_row(self.real_len - 0.1)
+        if k >= top:
+            return Sh(self.lv.roof)
+        g0, g1 = self.REAR_GLASS
+        edge = av > self.W2 - 0.22
+        if k > g1:
+            return TAIL if edge else Sh(self.lv.body)       # high brake lamps over the window
+        if g0 <= k and not edge:
+            return super().rear(v, z)                       # the rear window (and the KHK sticker)
+        if self.SKIRT < k < g0 - 1 and edge:
+            return TAIL
+        if k <= self.SKIRT and av < 0.28:
+            return PLATE
+        d = self.lv.rear(self, v, k)
+        if d is not None:
+            return Sh(d)
+        if k <= self.SKIRT:
+            return Sh(self.lv.bumper or self.lv.body)
+        if k == g0 - 1:
+            return Sh(self.lv.seam)                         # top edge of the engine lid
+        return Sh(self.lv.body)
 
     def pillars(self, right):
         if right:
@@ -889,6 +942,8 @@ class IrisbusFace:
     """Irisbus Crossway (2006-2013) front: windscreen with a body-coloured
     cap and the display behind it, a black band with the headlamps across
     the lower front, a chrome Irisbus bar under the windscreen."""
+    WS = SCREEN
+    WS_HI = SCREEN_HI
 
     def front_face(self, v, av, k, d):
         top = self.R_TOP
@@ -899,7 +954,7 @@ class IrisbusFace:
         if k >= 5:
             if av > self.W2 - 0.07:
                 return BLACK
-            return SCREEN_HI if k == top - 2 else SCREEN
+            return self.WS_HI if k == top - 2 else self.WS
         if k == 4:
             return Sh(CHROME) if av < 0.55 else Sh(d or self.lv.body)
         if d is not None:

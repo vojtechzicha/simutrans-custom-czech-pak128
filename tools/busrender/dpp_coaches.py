@@ -37,6 +37,7 @@ from rj_busmodels import Coach, lerp, W2
 from rj_buscommon import save_rows, preview
 from rj_buses import calibration
 from rj_lane import shift_tile
+import iredo_models as M          # the low body shape (SHAPES / SHAPE) of the regional buses
 
 # ------------------------------------------------------------------ palette
 WHITE = (0xF2, 0xF2, 0xF0)        # body white (#F2F2F0, as the brief's 'bila')
@@ -93,15 +94,63 @@ class CrosswayPro(Coach):
     SWOOSH = (1.28, 2.55)             # band dips one row from the door back to here
     L_PLATE_X = 3.30                  # side L plate / DPP logo positions (right side)
     LOGO_X = 4.05
+    # the low body shape of the IREDO / ODIS / PID Crossways (iredo_models
+    # SHAPES, owner 2026-10-24) when iredo_models.SHAPE is 'low': 2.76 m wide,
+    # the body on its wheels, the glazing up to the roof edge, two rows of the
+    # lighter glass, the lighter windscreen and the Crossway rear
+    W2 = W2
+    SKIRT = 0
+    ROUND_WHEEL = False
+    UNDER_INSET = 0.35
+    POD_W2 = 0.95
+    LOW_REAR = False
+    GLASS_HI_ROWS = 1
+    WS, WS_HI = SCREEN, SCREEN_HI
+    TIRE_EDGE = M.RegioBus.TIRE_EDGE
 
+    def __init__(self, livery):
+        super().__init__(livery)
+        common = M.SHAPES[M.SHAPE[0]]
+        if common is not None:
+            for key in ("W2", "SKIRT", "ROUND_WHEEL", "UNDER_INSET", "hub_color", "POD_W2", "LOW_REAR"):
+                if key in common:
+                    setattr(self, key, common[key])
+            self.R_BAND1 = self.R_TOP
+            self.GLASS_HI_ROWS = 2
+            self.WS, self.WS_HI = M.SCREEN_L, M.SCREEN_LHI
 
     def glass(self, k):
-        """band glazing: black frame row on top, lighter reflection row below."""
+        """band glazing: black frame row on top, lighter reflection row(s) below."""
         if k == self.R_BAND1 - 1:
             return BLACK
-        if k == self.R_BAND1 - 2:
+        if self.R_BAND1 - 1 - self.GLASS_HI_ROWS <= k < self.R_BAND1 - 1:
             return GLASS_HI
         return GLASS
+
+    def wheel(self, u, z):
+        """the round wheel of the low shape (as iredo_models.RegioBus.wheel)"""
+        if not self.ROUND_WHEEL:
+            return super().wheel(u, z)
+        if z >= self.zr(self.arch_rows):
+            return None
+        R = self.wheel_r
+        for a in self.axles:
+            du = u - self.U(a)
+            if abs(du) < R + 0.30:
+                r = math.hypot(du, z - R)
+                if r < self.hub_r:
+                    return self.hub(z)
+                if r < R:
+                    return C.TIRE
+                if r < R + 0.20:
+                    return C.ARCH
+        return None
+
+    def mat_tire(self, face, u, v, z):
+        if not self.ROUND_WHEEL or face not in ("+v", "-v"):
+            return super().mat_tire(face, u, v, z)
+        w = self.wheel(u, z)
+        return self.TIRE_EDGE if w in (None, C.ARCH) else w
 
     # -------------------------------------------------------------- sides
     def side(self, u, z, right):
@@ -199,9 +248,11 @@ class CrosswayPro(Coach):
         if k >= self.R_BAND1:
             return Sh(WHITE)
         if k >= 5:
-            if av > W2 - 0.07:
+            if av > self.W2 - 0.07:
                 return BLACK
-            return SCREEN_HI if k == self.R_BAND1 - 1 else SCREEN
+            if self.SKIRT and k == self.R_BAND1 - 1:
+                return BLACK                               # the display band under the roof (low shape)
+            return self.WS_HI if k == self.R_BAND1 - (2 if self.SKIRT else 1) else self.WS
         if k == 4:
             if -0.62 <= v < -0.30:
                 return L_BLUE                              # L plate, driver's side
@@ -211,7 +262,7 @@ class CrosswayPro(Coach):
         if k == 3:
             return Sh(GREY_LINE) if av < 1.05 else Sh(WHITE)
         if k == 2:
-            if av > W2 - 0.48:
+            if av > self.W2 - 0.48:
                 return HEAD
             return Sh(WHITE)
         if k == 1:
@@ -221,9 +272,11 @@ class CrosswayPro(Coach):
     def rear(self, v, z):
         av = abs(v)
         k = self.row(z)
-        if 7 <= k <= 10 and av < W2 - 0.22:
+        if self.LOW_REAR:
+            return self.rear_low(v, av, k)
+        if 7 <= k <= 10 and av < self.W2 - 0.22:
             return GLASS_HI if k == 10 else GLASS
-        if 0 <= k <= 3 and av > W2 - 0.20:
+        if 0 <= k <= 3 and av > self.W2 - 0.20:
             return TAIL
         if k in (4, 5) and av < 0.20:
             return L_BLUE                                  # big L plate
@@ -231,6 +284,29 @@ class CrosswayPro(Coach):
             return PLATE
         if k == 0 and av < 0.9:
             return Sh(WHITE_SEAM)
+        return Sh(WHITE)
+
+    def rear_low(self, v, av, k):
+        """the Crossway rear of the low shape (iredo_models.CrosswayLELine.rear):
+        the rear window under the roof with the brake lamps over it, the tall
+        tail-lamp clusters down the corners, the big L plate on the engine lid,
+        the plate in the bumper"""
+        g0, g1 = self.R_TOP - 4, self.R_TOP - 2
+        edge = av > self.W2 - 0.22
+        if k > g1:
+            return TAIL if edge else Sh(WHITE)
+        if g0 <= k and not edge:
+            return GLASS_HI if k == g1 else GLASS
+        if self.SKIRT < k < g0 - 1 and edge:
+            return TAIL
+        if k in (4, 5) and av < 0.20:
+            return L_BLUE
+        if k <= self.SKIRT:
+            if av < 0.28:
+                return PLATE
+            return Sh(WHITE_SEAM) if av < 0.9 else Sh(WHITE)
+        if k == g0 - 1:
+            return Sh(WHITE_SEAM)                          # top edge of the engine lid
         return Sh(WHITE)
 
     def roof(self, u, v):
@@ -247,23 +323,27 @@ class CrosswayPro(Coach):
         U = self.U
         rl = self.real_len
         ztop = self.zr(self.R_TOP)
+        zb = self.zr(self.SKIRT)
         B = self.mat_body
+        W = self.W2
         boxes = [
-            Box(U(rl - 0.08), U(0.08), -W2, W2, self.Z0, ztop, B),
-            Box(U(0.08), U(0.0), -W2 + 0.07, W2 - 0.07, self.Z0, ztop, B),
-            Box(U(rl), U(rl - 0.08), -W2 + 0.07, W2 - 0.07, self.Z0, ztop, B),
-            Box(U(rl - 0.10), U(0.10), -W2 + 0.03, W2 - 0.03, ztop, self.ROOF, B),
-            Box(U(self.AC[1]), U(self.AC[0]), -0.95, 0.95, self.ROOF, self.AC_TOP, self.ac),
-            Box(U(rl - 0.5), U(0.5), -W2 + 0.35, W2 - 0.35, 0.0, self.Z0, self.const(UNDER)),
+            Box(U(rl - 0.08), U(0.08), -W, W, zb, ztop, B),
+            Box(U(0.08), U(0.0), -W + 0.07, W - 0.07, zb, ztop, B),
+            Box(U(rl), U(rl - 0.08), -W + 0.07, W - 0.07, zb, ztop, B),
+            Box(U(rl - 0.10), U(0.10), -W + 0.03, W - 0.03, ztop, self.ROOF, B),
+            Box(U(self.AC[1]), U(self.AC[0]), -self.POD_W2, self.POD_W2, self.ROOF, self.AC_TOP, self.ac),
         ]
+        if self.UNDER_INSET is not None:
+            ui = self.UNDER_INSET
+            boxes.append(Box(U(rl - 0.5), U(0.5), -W + ui, W - ui, 0.0, zb, self.const(UNDER)))
         for a in self.axles:
-            boxes.append(Box(U(a) - 0.5, U(a) + 0.5, -W2 + 0.07, W2 - 0.07, 0.0, self.Z0 + 0.01, self.mat_tire))
+            boxes.append(Box(U(a) - 0.5, U(a) + 0.5, -W + 0.07, W - 0.07, 0.0, zb + 0.01, self.mat_tire))
         # mirrors: arms from above the windscreen, heads hanging at the corners
         lines = []
         for s in (-1, 1):
-            p0 = (L - 0.10, s * (W2 - 0.25), 3.02)
-            p1 = (L + 0.30, s * (W2 + 0.12), 2.95)
-            p2 = (L + 0.32, s * (W2 + 0.16), 2.30)
+            p0 = (L - 0.10, s * (W - 0.25), 3.02)
+            p1 = (L + 0.30, s * (W + 0.12), 2.95)
+            p2 = (L + 0.32, s * (W + 0.16), 2.30)
             lines += [(p0, p1, MIRROR), (p1, p2, MIRROR)]
         return L, boxes, lines
 
@@ -312,6 +392,7 @@ class Tourismo(Coach):
     ROOF_INSET = 0.18
     DOOR_F = (0.32, 1.28)
     glass = CrosswayPro.glass
+    GLASS_HI_ROWS = 1                 # one lighter row under the black top (CrosswayPro.glass)
 
     # colours by livery ------------------------------------------------
     def body(self):

@@ -288,7 +288,7 @@ Sheets that are repaints of upstream or VZ art are kept as PNGs, like the DPP re
 - `praha.py` holds the PID liveries on the `dpmhk.py` bodies: SOR NS 12 / NS 18 / NC 18, the Urbanway 12M, the DPP NS 18 and the Brno Urbanway.
 - `praha_man.py` draws MAN Lion's City 12C (and EfficientHybrid), L (14.7 m, length 10), NL 293 / NL 283 (old generation) and Lion's Intercity LE 12.
 - `praha_small.py` draws BMC Neocity 8.5, BMC Procity 10.6, TEMSA MD9 LE and the Erduman Sprinter 519. `length` follows the DPP scale: 12 m = 8, about 9.5 m = 7, about 9 m = 6, 7.5 m = 5.
-- `dpp_coaches.py` (on the RegioJet coach modules) draws DPP's Crossway PRO 10.8M / 12M and the Tourismo RHD / 15 RHD (length 10).
+- `dpp_coaches.py` (on the RegioJet coach modules) draws DPP's Crossway PRO 10.8M / 12M and the Tourismo RHD / 15 RHD (length 10). The Crossway PROs follow `iredo_models.SHAPE` like the regional Crossways.
 
 The PID ferries (Naomi type for P1 / P5 / P6, Kazi type Baba for P2, Holka 2 for P4) come from `python tools/shiprender/praha_ferries.py [family …] [--preview DIR]` (models in `boatkit.py`). They sit on the water lane of the native small ferries (`fitlane.py` re-derives it from `src/`), with `image_offset: [0, 0]` and `length: 8`. Only the Naomi and Kazi wheelhouse glass lights up.
 
@@ -335,6 +335,8 @@ Every box body with a `low()` takes the body shape `iredo_models.SHAPE`, and so 
 - the SOR rear as photographed (`SOR_REAR "photo"`): rear window under the roof cap, red marker lamps at its corners, a louvre line, tall lamp clusters, the plate, the bumper.
 
 The owner turned down a raised body on bigger wheels with the rub strip (shape `raised`): the front wheel became a black block. The first draft (`low1`: grey roofs, a plain block rear) and the shape before 2026-10-22 (`orig`) also stay selectable. Use `odis.py --shape NAME [--out DIR]`, or set `iredo_models.SHAPE[0]` before running another driver. A body's `low()` returns its own rows (wall top, glazing, rear window) and can read the shape's common keys.
+
+The Iveco and coach bodies took the shape the same day. The Crossway family (`CrosswayLELine.low()`: every length and the Irisbus fronts) keeps its measured 3.16 m wall (`LOW_TOP` 12; 11 is the SOR height, turned down) with the glazing from 1.73 m up to the roof edge, two rows of the lighter glass, the lighter windscreen and its own rear (`CrosswayLELine.rear`: rear window under the roof, brake lamps over it, tall tail-lamp clusters down the corners, the plate in the bumper). Every other `CoachBus` (Setra S 4xx / 5xx LE, Evadys, Arway, Karosa Axer, Irizar i4, Mercedes Intouro / Integro II L, Scania Citywide II LE) takes the width, wheels and roof but keeps its own height and window line. The DPP Crossway PRO (`dpp_coaches.py`) reads the same `SHAPE`.
 
 ### Moravskoslezský kraj (ODIS) town buses (`vehicle-bus/mhd-<town>/`)
 

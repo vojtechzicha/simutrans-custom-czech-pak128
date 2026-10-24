@@ -559,7 +559,7 @@ class CrosswayFace2024:
         if k >= 5:
             if av > self.W2 - 0.07:
                 return M.BLACK
-            return M.SCREEN_HI if k == top - 2 else M.SCREEN
+            return self.WS_HI if k == top - 2 else self.WS            # CrosswayFace's glass
         if k == 4:
             return M.BLACK
         if k == 3:
