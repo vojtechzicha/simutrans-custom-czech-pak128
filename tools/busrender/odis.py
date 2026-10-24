@@ -2,9 +2,12 @@
 sheets and write the family.yaml of every vehicle-bus/odis/<family>.
 
     python tools/busrender/odis.py [family ...] [--yaml] [--preview DIR]
+                                   [--shape low|orig] [--out DIR]
 
 Without --yaml only the sheets are written; with --yaml the family.yaml files
-are (re)generated from FAMILIES too (review the diff).
+are (re)generated from FAMILIES too (review the diff). --shape picks the body
+shape (iredo_models.SHAPES; default iredo_models.SHAPE); --out DIR writes
+the sheets to DIR/<family>/ instead of the families' sprites/.
 
 Package (user, 2026-10-20): agency ODIS -> VZ-ODIS-bus.pak holds the
 regional buses only; every ODIS town with MHD has its own MHD<Town> pak
@@ -151,16 +154,12 @@ class OdisTransdev(KrajRing, M.Transdev):
     HUMP_BLACK = True
     W = 1.25                       # the figure's length along the side (m)
 
-    # the figure in five rows, for the lower panels under 7 rows (SOR CN, Crossway, ICN)
-    FIG_S = ["..##.#",
-             "##.##.",
-             "#.##..",
-             "#.#.#.",
-             "#.#..#"]
-
     def figure(self, bus, x, k, right):
+        """the figure placed for Transdev Morava; under 7 rows of lower panel
+        (SOR CN, Crossway, ICN) the five-row FIG_S, under 5 the four-row FIG_XS"""
         top = sill(bus, x) - 1
-        fig = self.FIG if top + 1 >= len(self.FIG) else self.FIG_S
+        rows = top + 1 - bus.SKIRT
+        fig = next(f for f in (self.FIG, self.FIG_S, self.FIG_XS) if rows >= len(f) or f is self.FIG_XS)
         r = top - k
         if not 0 <= r < len(fig):
             return None
@@ -258,6 +257,7 @@ class OdisBors(KrajRing, M.Livery):
     seam = (0xC8, 0x82, 0x20)
     bumper = BORS_BLUE
     RING = RING_PALE
+    cant = True                    # the blue strip over the windows
 
     def side(self, bus, x, k, right):
         c = self.ring(bus, x, k)
@@ -305,7 +305,7 @@ class OdisRed(M.Livery):
         b0 = sill(bus, x)
         if k == b0 - 1:
             return WHITE if bus.colidx(x, 0.0) % 2 == 0 else None
-        r = b0 - 3 - k
+        r = max(b0 - 3, bus.SKIRT + len(self.LOGO) - 1) - k     # on a low panel the logo moves up to the line
         if 0 <= r < len(self.LOGO):
             w = len(self.LOGO[0]) * bus.pw()
             xm = (bus.axles[0] + bus.DOORS[1][0]) / 2 if right else bus.real_len / 2
@@ -417,7 +417,9 @@ for _lv in (OdisTransdev, OdisBila, OdisBilaZel, OdisBilaCerv, OdisCsad, OdisCsa
 class Regio:
     """body mixin for the ODIS regional buses: no IREDO sticker, the ring
     continued over the side glazing as a tint, white LED displays (the
-    2016-2025 deliveries of all three operators)"""
+    2016-2025 deliveries of all three operators). The low shape
+    (iredo_models.SHAPES) applies to the bodies with a low(); the ODIS bodies
+    add their roof boxes to it."""
     KHK_STICKER = False
     DISP = LEDW
 
@@ -442,7 +444,7 @@ class Regio:
         if self.REAR_AC:
             x0, x1, h = self.REAR_AC
             z0 = self.zr(self.top_row(x0)) + 0.08
-            boxes.append(Box(self.U(x1), self.U(x0), -0.95, 0.95, z0, z0 + h, self.rear_ac))
+            boxes.append(Box(self.U(x1), self.U(x0), -self.POD_W2, self.POD_W2, z0, z0 + h, self.rear_ac))
         return L, boxes, lines
 
     def rear_ac(self, face, u, v, z):
@@ -467,6 +469,9 @@ class OSorCNG12(Regio, M.SorCNG):
     AC_H = 0.40
     REAR_AC = (7.4, 10.4, 0.20)
 
+    def low(self):
+        return dict(super().low(), REAR_AC=(7.4, 10.4, 0.12))
+
 
 class OSorCN105(Regio, M.SorCN105):
     """SOR CN 10,5 (2018-2019)"""
@@ -479,12 +484,18 @@ class OSorCNG105(Regio, M.SorCN105):
     REAR_AC = (6.6, 9.2, 0.20)
     HATCHES = (9.7,)
 
+    def low(self):
+        return dict(super().low(), REAR_AC=(6.6, 9.2, 0.12))
+
 
 class OSorCN95(Regio, M.SorCN95):
     """SOR CN 9,5 (2018-2019): the big square A/C box over the rear half"""
     AC = None
     REAR_AC = (5.6, 8.3, 0.30)
     HATCHES = (3.2,)
+
+    def low(self):
+        return dict(super().low(), REAR_AC=(5.6, 8.3, 0.18))
 
 
 class OSorC12(Regio, M.SorC105):
@@ -608,6 +619,9 @@ class OSorICNG105(Regio, IcnFace2025, CM.SorICN105):
     REAR_AC = (7.6, 9.9, 0.20)
     HATCHES = ()
 
+    def low(self):
+        return dict(super().low(), AC_H=0.28, REAR_AC=(7.6, 9.9, 0.12))
+
 
 class OSorICNG123(Regio, IcnFace2025, CM.SorICN):
     """SOR ICNG 12,3 (2025): the tall CNG pod over the front half, a low box
@@ -616,6 +630,9 @@ class OSorICNG123(Regio, IcnFace2025, CM.SorICN):
     AC_H = 0.42
     REAR_AC = (7.2, 10.6, 0.20)
     HATCHES = (11.2,)
+
+    def low(self):
+        return dict(super().low(), AC_H=0.28, REAR_AC=(7.2, 10.6, 0.12))
 
 
 class OSetra(Regio, CM.SetraS415LE):
@@ -630,6 +647,9 @@ class OSorICNG12(Regio, CM.SorICN):
     AC_H = 0.40
     REAR_AC = (7.4, 10.6, 0.22)
     HATCHES = (11.2,)
+
+    def low(self):
+        return dict(super().low(), AC_H=0.28, REAR_AC=(7.4, 10.6, 0.12))
 
     def __init__(self, livery):
         super().__init__(livery)
@@ -1120,23 +1140,32 @@ FAMILIES = dict([
 
 
 # ====================================================================== main
+def option(argv, name):
+    if name not in argv:
+        return None, argv
+    i = argv.index(name)
+    return argv[i + 1], argv[:i] + argv[i + 2:]
+
+
 def main(argv):
-    pv = None
-    if "--preview" in argv:
-        i = argv.index("--preview")
-        pv = argv[i + 1]
-        argv = argv[:i] + argv[i + 2:]
+    pv, argv = option(argv, "--preview")
+    if pv:
         os.makedirs(pv, exist_ok=True)
+    shape, argv = option(argv, "--shape")
+    if shape:
+        M.SHAPE[0] = shape
+    out, argv = option(argv, "--out")           # write the sheets there instead of sprites/
     do_yaml = "--yaml" in argv
     argv = [a for a in argv if a != "--yaml"]
     for key, f in FAMILIES.items():
         if argv and key not in argv and key.split("/")[-1] not in argv:
             continue
         d = os.path.join(REPO, "vehicle-bus", *key.split("/"))
-        os.makedirs(os.path.join(d, "sprites"), exist_ok=True)
+        sd = os.path.join(out, key.split("/")[-1]) if out else os.path.join(d, "sprites")
+        os.makedirs(sd, exist_ok=True)
         for slug, _, _, fn in f["liveries"]:
             rows = fn()
-            T.save_sheet(rows, os.path.join(d, "sprites", slug + ".png"), f.get("allow", ()))
+            T.save_sheet(rows, os.path.join(sd, slug + ".png"), f.get("allow", ()))
             if pv:
                 T.preview(rows, os.path.join(pv, f"{key.replace('/', '-')}-{slug}.png"))
             print(f"vehicle-bus/{key}/sprites/{slug}.png  rows={len(rows)}")

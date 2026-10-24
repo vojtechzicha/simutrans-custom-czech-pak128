@@ -53,6 +53,25 @@ def inside(x, a, b):
     return a <= x < b
 
 
+# Body shape of the bodies that have a low() (the SOR CN / C / LC and ICN so
+# far). The owner found the SORs "too tall and boxy at the bottom" next to the
+# CZR / VTPsim hand-drawn buses (2026-10-22):
+#   low   2.76 m wide (11-12 px end on, like the hand-drawn buses), the lowest
+#         body row left off so the bus stands on its wheels (dark, a grey hub,
+#         two rows below the body), the window band up to the roof edge (a
+#         livery with a coloured strip over the windows keeps one row of it),
+#         a one-row SOR hump without the rub strip, 1 px roof pods narrowed
+#         with the body (a livery's roof bands show beside them), a busier
+#         SOR rear (LOW_REAR) and white roofs drawn grey so the roof reads as a
+#         lid over the walls
+#   orig  the shape before 2026-10-22 (3.1 m wide, flat bottom, square black
+#         arches, a white strip over the windows, tall pods)
+SHAPES = {"low": dict(W2=1.38, SKIRT=1, ROUND_WHEEL=True, UNDER_INSET=None, hub_color=(0x5E, 0x60, 0x64),
+                     LOW_REAR=True, ROOF_GREY=(0xC6, 0xC8, 0xCA), POD_W2=0.80),
+          "orig": None}
+SHAPE = ["orig"]
+
+
 # ====================================================================== liveries
 class Livery:
     """Plain white (BusLine KHK, KAD and every other plain white bus)."""
@@ -91,11 +110,34 @@ class Transdev(Livery):
            "#.#...",
            "#..#..",
            "#...#."]
+    # the figure in five and in four rows, for lower panels shorter than FIG
+    FIG_S = ["..##.#",
+             "##.##.",
+             "#.##..",
+             "#.#.#.",
+             "#.#..#"]
+    FIG_XS = ["..##.#",
+              "##.##.",
+              "#.##..",
+              "#.#.#."]
+
+    def fig(self, bus, x):
+        """(top row, figure): under the glazing; on a body standing on its
+        wheels (SKIRT) the tallest figure that fits the panel"""
+        if not bus.SKIRT:
+            return bus.R_BAND0 - 1, self.FIG
+        band = bus.band_at(x)
+        top = (band[0] if band else bus.R_BAND0) - 1
+        rows = top + 1 - bus.SKIRT
+        for f in (self.FIG, self.FIG_S):
+            if rows >= len(f):
+                return top, f
+        return top, self.FIG_XS
 
     def side(self, bus, x, k, right):
-        k_top = bus.R_BAND0 - 1                    # just under the glazing
+        k_top, fig = self.fig(bus, x)
         r = k_top - k
-        if not 0 <= r < len(self.FIG):
+        if not 0 <= r < len(fig):
             return None
         x0 = bus.axles[0] + bus.FIG_DX            # left edge as seen
         if right:
@@ -104,7 +146,7 @@ class Transdev(Livery):
             c = bus.colidx(x, xs, backwards=True)
         else:
             c = bus.colidx(x, x0)
-        row = self.FIG[r]
+        row = fig[r]
         if 0 <= c < len(row) and row[c] == "#":
             return self.RED
         return None
@@ -211,7 +253,7 @@ class DvurKralove(Livery):
 
     def side(self, bus, x, k, right):
         b0 = bus.R_BAND0
-        if k == b0 - 1 or k == 0:
+        if k == b0 - 1 or k == bus.SKIRT:
             return self.GREEN
         u = x / bus.real_len
         if u < 0.30 or not 1 <= k < b0 - 1:
@@ -231,12 +273,12 @@ class DvurKralove(Livery):
         return P["bauble_hi"] if d and r % 2 else P["bauble"]
 
     def front(self, bus, v, k):
-        if k == 0 or (k == 4 and abs(v) > 0.95):
+        if k == bus.SKIRT or (k == 4 and abs(v) > 0.95):
             return self.GREEN
         return None
 
     def rear(self, bus, v, k):
-        if k == 0 or k == bus.R_BAND0 - 1:
+        if k == bus.SKIRT or k == bus.R_BAND0 - 1:
             return self.GREEN
         if 1 <= k < bus.R_BAND0 - 1 and k >= 3:
             return self.P["facade"] if int(v * 4) % 2 else self.P["sky"]
@@ -303,6 +345,7 @@ class ArrivaTyrkys(Livery):
     along the side at bumper height, no KHK sticker"""
     slug = "arrivatyrkysova"
     sticker = False
+    cant = True                    # a turquoise strip over the windows
     body = (0x2E, 0x9A, 0xA0)
     roof = (0x48, 0xAC, 0xB2)
     ac = (0x48, 0xAC, 0xB2)
@@ -361,6 +404,7 @@ class Bors(Livery):
     over a blue bumper"""
     slug = "bors"
     sticker = False
+    cant = True                    # the blue strip over the windows
     body = (0xE6, 0x99, 0x28)
     roof = (0xEE, 0xEE, 0xEA)
     ac = (0xEC, 0xEC, 0xE8)
@@ -416,10 +460,29 @@ class RegioBus(Coach):
     REAR_GLASS = (7, 10)           # rear window rows (k0, k1 inclusive)
     ENGINE_GRILLE = True
     KHK_STICKER = True             # the kraj sticker panel on the rear window (IREDO buses)
+    SKIRT = 0                      # body rows left off the bottom: the body stands on its wheels
+    ROUND_WHEEL = False            # round tyres in a rounded arch (else the square black arch)
+    UNDER_INSET = 0.35             # inset of the dark underbody box, None = no box
+    LOW_REAR = False               # the SOR rear of the low shape
+    ROOF_GREY = None               # a white livery roof drawn in this grey
+    POD_W2 = 0.95                  # half width of the roof A/C pod / CNG fairing (m)
 
     def __init__(self, livery):
         self.lv = LIVERIES[livery]()
         super().__init__(livery)
+        common = SHAPES[SHAPE[0]]
+        low = self.low() if common is not None else None
+        if low is not None:
+            for key, val in {**common, **low}.items():
+                setattr(self, key, val)
+            r = self.lv.roof
+            if self.ROOF_GREY and min(r) >= 0xE0 and max(r) - min(r) < 12:
+                self.lv.roof = self.ROOF_GREY
+
+    def low(self):
+        """this body's attributes in the low shape (merged over SHAPES),
+        None = the body keeps its one shape"""
+        return None
 
     # ---------------------------------------------------------- helpers
     def paint(self, c):
@@ -440,6 +503,8 @@ class RegioBus(Coach):
     def band_at(self, x):
         for x0, x1, k0, k1 in self.BAND:
             if x0 <= x < x1:
+                if self.SKIRT and getattr(self.lv, "cant", False):
+                    k1 = min(k1, self.top_row(x) - 1)   # the livery's strip over the windows stays
                 return k0, k1
         return None
 
@@ -586,6 +651,32 @@ class RegioBus(Coach):
             return Sh(self.lv.seam) if av < 1.0 else Sh(self.lv.body)
         return Sh(self.lv.body)
 
+    def wheel(self, u, z):
+        if not self.ROUND_WHEEL:
+            return super().wheel(u, z)
+        if z >= self.zr(self.arch_rows):
+            return None
+        R = self.wheel_r
+        for a in self.axles:
+            du = u - self.U(a)
+            if abs(du) < R + 0.30:
+                r = math.hypot(du, z - R)
+                if r < self.hub_r:
+                    return self.hub(z)
+                if r < R:
+                    return C.TIRE
+                if r < R + 0.20:
+                    return C.ARCH
+        return None
+
+    TIRE_EDGE = (0x30, 0x30, 0x32)  # round wheels: the tyre box's corners, so the wheel shows whole
+
+    def mat_tire(self, face, u, v, z):
+        if not self.ROUND_WHEEL or face not in ("+v", "-v"):
+            return super().mat_tire(face, u, v, z)
+        w = self.wheel(u, z)
+        return self.TIRE_EDGE if w in (None, C.ARCH) else w
+
     def roof(self, u, v):
         x = self.X(u)
         for h in self.HATCHES:
@@ -619,28 +710,30 @@ class RegioBus(Coach):
         ztop = self.zr(self.R_TOP)
         B = self.mat_body
         roof_z = ztop + 0.08
+        zb = self.zr(self.SKIRT)
         r = self.ROUND
         if r:
             # rounded body: the end caps and the roof slab are inset, so the
             # corners and the roof edges read as curved
             c = r * 0.8
             boxes = [
-                Box(U(rl - c), U(c), -self.W2, self.W2, self.Z0, ztop, B),
-                Box(U(c), U(0.0), -self.W2 + r, self.W2 - r, self.Z0, ztop - PXZ, B),
+                Box(U(rl - c), U(c), -self.W2, self.W2, zb, ztop, B),
+                Box(U(c), U(0.0), -self.W2 + r, self.W2 - r, zb, ztop - PXZ, B),
                 Box(U(c), U(0.0), -self.W2 + 2 * r, self.W2 - 2 * r, ztop - PXZ, ztop, B),
-                Box(U(rl), U(rl - c), -self.W2 + r, self.W2 - r, self.Z0, ztop - PXZ, B),
+                Box(U(rl), U(rl - c), -self.W2 + r, self.W2 - r, zb, ztop - PXZ, B),
                 Box(U(rl), U(rl - c), -self.W2 + 2 * r, self.W2 - 2 * r, ztop - PXZ, ztop, B),
                 Box(U(rl - c - 0.10), U(c + 0.10), -self.W2 + r, self.W2 - r, ztop, roof_z, B),
-                Box(U(rl - 0.5), U(0.5), -self.W2 + 0.35, self.W2 - 0.35, 0.0, self.Z0, self.const(UNDER)),
             ]
         else:
             boxes = [
-                Box(U(rl - 0.08), U(0.08), -self.W2, self.W2, self.Z0, ztop, B),
-                Box(U(0.08), U(0.0), -self.W2 + 0.07, self.W2 - 0.07, self.Z0, ztop, B),
-                Box(U(rl), U(rl - 0.08), -self.W2 + 0.07, self.W2 - 0.07, self.Z0, ztop, B),
+                Box(U(rl - 0.08), U(0.08), -self.W2, self.W2, zb, ztop, B),
+                Box(U(0.08), U(0.0), -self.W2 + 0.07, self.W2 - 0.07, zb, ztop, B),
+                Box(U(rl), U(rl - 0.08), -self.W2 + 0.07, self.W2 - 0.07, zb, ztop, B),
                 Box(U(rl - 0.10), U(0.10), -self.W2 + 0.03, self.W2 - 0.03, ztop, roof_z, B),
-                Box(U(rl - 0.5), U(0.5), -self.W2 + 0.35, self.W2 - 0.35, 0.0, self.Z0, self.const(UNDER)),
             ]
+        if self.UNDER_INSET is not None:
+            ui = self.UNDER_INSET
+            boxes.append(Box(U(rl - 0.5), U(0.5), -self.W2 + ui, self.W2 - ui, 0.0, zb, self.const(UNDER)))
         if self.ROOF_STEP:
             xs, n = self.ROOF_STEP
             zs = self.zr(self.R_TOP + n)
@@ -650,11 +743,11 @@ class RegioBus(Coach):
             roof_z = max(roof_z, zs)
         if self.AC:
             a0, a1 = self.AC
-            boxes.append(Box(U(a1), U(a0), -0.95, 0.95, ztop + 0.08,
+            boxes.append(Box(U(a1), U(a0), -self.POD_W2, self.POD_W2, ztop + 0.08,
                              ztop + 0.08 + self.AC_H, self.ac))
         for a in self.axles:
             boxes.append(Box(U(a) - 0.5, U(a) + 0.5, -self.W2 + 0.07, self.W2 - 0.07, 0.0,
-                             self.Z0 + 0.01, self.mat_tire))
+                             zb + 0.01, self.mat_tire))
         lines = []
         for s in (-1, 1):
             p0 = (L - 0.10, s * (self.W2 - 0.25), ztop - 0.12)
@@ -921,6 +1014,46 @@ class SorCN(SorFace, RegioBus):
     AC = (2.2, 5.6)
     FIG_DX = 0.50
 
+    def low(self):
+        """the low shape: wall top 2.92 m, the hump one row (the window line
+        still steps up two rows behind the middle door) and the window band
+        up to the roof edge, no rub strip, the fairing 1 px"""
+        top = 11
+        hump = 1 if self.ROOF_STEP else 0
+
+        def wall(x0):
+            return top + (hump if self.ROOF_STEP and x0 >= self.ROOF_STEP[0] else 0)
+        return dict(R_TOP=top, ROOF_STEP=(self.ROOF_STEP[0], 1) if self.ROOF_STEP else None,
+                    BAND=tuple((x0, x1, k0, wall(x0)) for x0, x1, k0, k1 in self.BAND),
+                    REAR_GLASS=(self.REAR_GLASS[0], top + hump - 1), DOOR_RAISE=min(self.DOOR_RAISE, 1),
+                    RUB=None, AC_H=min(self.AC_H, 0.24))
+
+    def rear(self, v, z):
+        """in the low shape (LOW_REAR) a black bumper with the plate, tall red
+        lamp clusters at the corners, the engine grille between them and the
+        rear window over the engine lid, so the rear does not read as a block"""
+        if not self.LOW_REAR:
+            return super().rear(v, z)
+        av = abs(v)
+        k = self.row(z)
+        if k >= self.top_row(self.real_len - 0.1):
+            return Sh(self.lv.roof)
+        g0, g1 = self.REAR_GLASS
+        if g0 <= k <= g1 and av < self.W2 - 0.22:
+            return super().rear(v, z)                       # the rear window (and the KHK sticker)
+        if 2 <= k <= 4 and av > self.W2 - 0.30:
+            return TAIL
+        if k <= 1:
+            if av < 0.28:
+                return PLATE
+            return Sh(self.lv.bumper) if self.lv.bumper else BLACK
+        d = self.lv.rear(self, v, k)
+        if d is not None:
+            return Sh(d)
+        if k == 3 and av < self.W2 - 0.45:
+            return Sh(GRILLE_DK)
+        return Sh(self.lv.body)
+
     def pillars(self, right):
         if right:
             return (2.40, 3.55, 4.85, 7.15, 8.55, 9.95, 11.30)
@@ -997,6 +1130,13 @@ class SorC105(SorCN):
     DOOR_RAISE = 0
     HATCHES = (3.6, 7.8)
     AC = None
+
+    def low(self):
+        """the low shape: wall top 3.16 m, the window band one row lower and up
+        to the roof edge, no rub strip"""
+        return dict(R_TOP=12, BAND=tuple((x0, x1, k0 - 1, 12) for x0, x1, k0, k1 in self.BAND),
+                    REAR_GLASS=(self.REAR_GLASS[0] - 1, self.REAR_GLASS[1] - 1), RUB=None,
+                    AC_H=min(self.AC_H, 0.24))
 
     def pillars(self, right):
         if right:

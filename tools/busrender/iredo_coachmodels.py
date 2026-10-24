@@ -711,6 +711,13 @@ class SorICN(IcnFace, CoachBus):
     AC_H = 0.22
     HATCHES = (3.6, 10.8)
 
+    def low(self):
+        """the low shape: wall top 2.92 m, the glazing from row 5 so four rows
+        of lower panel stay for the lettering and figures, one body-colour row
+        over it, no rub line"""
+        return dict(R_TOP=11, R_BAND0=6, BAND=tuple((x0, x1, 5, 10) for x0, x1, k0, k1 in self.BAND),
+                    REAR_GLASS=(self.REAR_GLASS[0], 9), RUB_ROW=None, AC_H=min(self.AC_H, 0.24))
+
     def deco(self, x, k, right):
         if k != self.RUB_ROW or x < 0.14 or x >= self.real_len - 0.10:
             return None
@@ -736,7 +743,7 @@ class SorICN(IcnFace, CoachBus):
             return Sh(GRILLE) if k == 6 else Sh(GRILLE_DK)   # louvres
         if k == 2 and av < 0.30:
             return PLATE
-        if k == 0:
+        if k == self.SKIRT:
             return Sh(self.lv.bumper or self.lv.seam)
         d = self.lv.rear(self, v, k)
         return Sh(d) if d is not None else Sh(self.lv.body)

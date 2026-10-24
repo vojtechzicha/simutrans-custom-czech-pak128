@@ -67,6 +67,7 @@ class PidA(M.Livery):
     roof = PID_ROOF
     ac = PID_ROOF
     seam = (0xB4, 0xB6, 0xBA)
+    cant = True                                         # the cant: black, red over a column
 
     @staticmethod
     def cols(bus):
@@ -105,6 +106,7 @@ class PidB(M.Livery):
     seam = (0xE0, 0xE0, 0xE0)
     bumper = TRI_RED
     TOP_RED = 2                                         # red up to row 2 (0.87 m)
+    cant = True                                         # the blue cant rail over the windows
 
     def side(self, bus, x, k, right):
         if k <= self.TOP_RED:
