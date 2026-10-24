@@ -5,8 +5,7 @@ type: "SOR_BN_12"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
-
+copyright: vojtechzicha
 display:
   agency_en: "DPP"
   agency_cs: "DPP"
@@ -23,13 +22,10 @@ display:
 # Second livery: DPP city scheme on 4507 (ex 3999, built 2012; photo 2020s):
 # white roof and body, black window band, white band, red lower body, black
 # windscreen and mask over a red lower front.
-# Sprite: VTPsim's CZR-Praha-SOR_BN_12; its mid-blue roof repainted the PID
-# ultramarine (sampled from photos of NB 12 3688, same scheme), the black front
-# mask it copied from the NB 12 City repainted white above the red lower front
-# (photos of 4539 and 3110), glass converted to the lit-window specials, the
-# displays (drawn with the green-light special) made amber, lane placement
-# normalised (the upstream sat up to 10 px off the native lane). The city
-# sheet repaints the PID sheet: blue roof white, the white front mask black.
+# Sprite: original box-model render (vojtechzicha) on the common SOR base (the
+# owner's pick of 2026-10-24): SorBN12 (doors 1-2-0) in the PID trikolóra of
+# pid.py and the DPP city scheme of tools/busrender/iredo_models.py; length 8;
+# regenerate with tools/busrender/sor_city.py.
 
 vehicles:
   - id: "BN_12"

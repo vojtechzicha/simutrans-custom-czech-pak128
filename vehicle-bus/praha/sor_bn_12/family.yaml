@@ -3,7 +3,7 @@ type: "SOR_BN_12"
 image_offset: [0, 0]         # buses: sprites carry their own lane placement
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 display:
   agency_en: "Praha"
   agency_cs: "Praha"
@@ -18,9 +18,10 @@ display:
 # Livery: Veolia red-grey: red roof and upper body down to below the windows,
 # black glazing, a dark belt line, silver-grey lower body; red front mask
 # round the windscreen, grey bumper with the lamps (photos of 1968, 2025-26).
-# Sprite: the DPP SOR BN 12 sheet (VTPsim's CZR-Praha art, lane normalised),
-# repainted: the PID blue roof and the white band red, the red lower body
-# silver-grey under a 1 px dark belt, the front mask red over a grey bumper.
+# Sprite: original box-model render (vojtechzicha) on the common SOR base (the
+# owner's pick of 2026-10-24): SorBN12 (doors 1-2-0) in the Veolia red-grey of
+# sor_city.py of tools/busrender/iredo_models.py; length 8; regenerate with
+# tools/busrender/sor_city.py.
 
 vehicles:
   - id: "BN_12"

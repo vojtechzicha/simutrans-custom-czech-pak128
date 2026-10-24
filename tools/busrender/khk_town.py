@@ -668,28 +668,10 @@ def red_to_white_map(rows):
     return out
 
 
-def red_to_white(rows):
-    m = red_to_white_map(rows)
-    known = list(m.items())
-
-    def rule(c):
-        if not is_red(c):
-            return None
-        if c in m:
-            return m[c]
-        r0, w0 = min(known, key=lambda kv: abs(int(kv[0][0]) - int(c[0])))
-        return safe(scaled(w0, c[0] / r0[0]))
-    return [[recolour(t, rule) for t in tiles] for tiles in rows]
-
-
-# SOR BN 8,5 (Trutnov 5E9 3012): plain white with the black SOR mask round the
-# windscreen (photo 442526); the DPP BN 8,5 sheet (VTPsim's BN 9,5 shortened)
-# with its red turned into the white of the same face
-BN85_SRC = "vehicle-bus/dpp/sor_bn_8_5/sprites/dppcervenobila.png"
-
-
-def rows_bn85():
-    return red_to_white(sheet_rows(load_sheet(BN85_SRC))[:1])
+class TrutBN85(M.SorBN85):
+    """SOR BN 8,5 (Trutnov 5E9 3012): plain white, the black SOR mask round the
+    windscreen (photo 442526), no KHK sticker, amber LED displays"""
+    KHK_STICKER = False
 
 
 # Iveco Crossway LE CITY 12M 1TI 2918: ex-Přerov, still in the plain Arriva
@@ -953,14 +935,15 @@ FAMILIES = {
         sprite="the Přerov sheet (Lubak91's art), the white swoosh cut down to the short\n"
                "Arriva wordmark and the displays amber (khk_town.rows_lecity)."),
     "mhd-trutnov/sor_bn_8_5": dict(
-        agency=TRUTNOV, type="SOR_BN_8_5", name=("SOR BN 8.5", "SOR BN 8,5"), copyright="VTPsim",
+        agency=TRUTNOV, type="SOR_BN_8_5", name=("SOR BN 8.5", "SOR BN 8,5"), copyright="vojtechzicha",
         vehicles=[dict(id="SOR_BN_8_5", display="BN 8,5", role=MIDI,
-                       fields=f_(400000, 60, 90, 7, 21, 140, 2010, 8, "diesel", 137, 53, smoke="Diesel_small"))],
-        liveries=[("bila", "white", "bílá", rows_bn85)],
+                       fields=f_(400000, 60, 90, 7, 21, 140, 2010, 6, "diesel", 137, 53, smoke="Diesel_small"))],
+        liveries=[("bila", "white", "bílá", lambda: [row_for(TrutBN85, "bila")])],
         note="SOR BN 8,5 midibus. Trutnov MHD: 5E9 3012 (2017), line 7 since 2/2025, plain\n"
              "white with a small Arriva logo (photo 442526).",
-        sprite="VTPsim's BN 9,5 shortened (the DPP BN 8,5 sheet), its red turned into the\n"
-               "white of the same face (khk_town.rows_bn85)."),
+        sprite="original box-model render (vojtechzicha): SorBN85 of\n"
+               "tools/busrender/iredo_models.py (the common SOR base of 2026-10-24), length 6\n"
+               "like every SOR of about 8.5 m."),
     "mhd-trutnov/crossway_pro_13m": dict(
         agency=TRUTNOV, type="Crossway_Pro_13M", name=("Iveco Crossway PRO 13M", "Iveco Crossway PRO 13M"),
         copyright="vojtechzicha",

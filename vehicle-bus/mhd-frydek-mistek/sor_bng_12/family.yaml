@@ -1,6 +1,6 @@
 agency: MHDFrydekMistek
 type: "SOR_BNG_12"
-copyright: VTPsim
+copyright: vojtechzicha
 # Sprites are placed in the tile to the native pak128.cs lane position (body
 # footprint matched to the median of native 12 m buses), so no extra shift.
 image_offset: [0, 0]
@@ -16,11 +16,10 @@ display:
 # SOR BNG 12 (CNG) low-entry bus with the raised rear floor, 11.79 m, 3 doors,
 # 607-609 (2015) on Frýdek-Místek MHD (Transdev Slezsko). Iveco Cursor 8 CNG
 # 213 kW, ~30 seated / ~95 total, ~9.5-10 t.
-# Sprite: VTPsim's ODIS SOR BNG 12 (CZ-vehicle-bus.pak), repainted in the
-# 3CSAD white-green scheme: white body and CNG pod, black window band, black
-# belt line, deep grass-green skirt rising at the rear, green front apron and
-# rear bumper, green logo marks; glazed doors down to the floor;
-# lane-normalised.
+# Sprite: original box-model render (vojtechzicha) on the common SOR base (the
+# owner's pick of 2026-10-24): SorBNG12 (doors 1-2-2, CNG fairing) in the
+# 3ČSAD white-green of odis_town.py of tools/busrender/iredo_models.py; length
+# 8; regenerate with tools/busrender/sor_city.py.
 
 vehicles:
   - id: "SOR_BNG_12"

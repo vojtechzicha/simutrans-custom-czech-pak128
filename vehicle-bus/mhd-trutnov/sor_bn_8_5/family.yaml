@@ -5,7 +5,7 @@ type: "SOR_BN_8_5"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 
 display:
   agency_en: "MHD Trutnov"
@@ -15,8 +15,9 @@ display:
 
 # SOR BN 8,5 midibus. Trutnov MHD: 5E9 3012 (2017), line 7 since 2/2025, plain
 # white with a small Arriva logo (photo 442526).
-# Sprite: VTPsim's BN 9,5 shortened (the DPP BN 8,5 sheet), its red turned into the
-# white of the same face (khk_town.rows_bn85).
+# Sprite: original box-model render (vojtechzicha): SorBN85 of
+# tools/busrender/iredo_models.py (the common SOR base of 2026-10-24), length 6
+# like every SOR of about 8.5 m.
 # Regenerate with tools/busrender/khk_town.py (family.yaml: --yaml).
 
 vehicles:
@@ -40,7 +41,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 6
       engine_type: diesel
       power: 137
       gear: 53

@@ -200,13 +200,13 @@ FAMILIES = dict([
         "tools/busrender/praha_man.py, repainted white by pk_town.py.", "vojtechzicha"),
     # ------------------------------------------------------------ MHD Přelouč (IREDO)
     fam("iredo/sor_bn_8_5", IREDO, "SOR_BN_8_5", "SOR BN 8,5", MIDI,
-        f_(420000, 60, 75, 8, 17, 86, 2016, 8, "diesel", 160, 54, smoke="Diesel_small"),
+        f_(420000, 60, 75, 8, 17, 86, 2016, 6, "diesel", 160, 54, smoke="Diesel_small"),
         [("bila", "white · ARRIVA autobusy (MHD Přelouč)", "bílá · ARRIVA autobusy (MHD Přelouč)",
           copy_rows("vehicle-bus/mhd-trutnov/sor_bn_8_5/sprites/bila.png"))],
         "SOR BN 8,5 low-floor midibus. MHD Přelouč (line 655101, integrated in IREDO),\n"
         "ARRIVA autobusy: 72237 (2017) and the ex-demonstrator 71754 (reserve), white.",
-        "VTPsim's SOR BN 8,5, the white Trutnov sheet as is\n"
-        "(vehicle-bus/mhd-trutnov/sor_bn_8_5).", "VTPsim"),
+        "the white Trutnov sheet as is (vehicle-bus/mhd-trutnov/sor_bn_8_5): SorBN85 of\n"
+        "tools/busrender/iredo_models.py on the common SOR base of 2026-10-24.", "vojtechzicha"),
     # ------------------------------------------------------------ own town paks
     fam("mhd-usti-nad-orlici/rosero_first", USTI, "Rosero_First", "Rošero First FCLLI", MIDI,
         f_(290000, 33, 90, 5, 15, 80, 2018, 5, "diesel", 132, 54, retire=2050, smoke="Diesel_small"),

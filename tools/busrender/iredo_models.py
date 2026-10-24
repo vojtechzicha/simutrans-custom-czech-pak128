@@ -1306,3 +1306,109 @@ class SorLC105(SorLC12):
         if right:
             return (2.40, 3.55, 5.60, 7.00, 8.40, 9.60)
         return (2.40, 3.75, 5.10, 6.45, 7.80, 9.20)
+
+
+# ---------------------------------------------------------------------- SOR BN
+# The city SORs of the CN family (owner, 2026-10-24: every SOR on the common
+# base). Same body as the CN: the single front door, a double centre door just
+# ahead of the rear axle, the floor, window line and roof stepping up behind it;
+# some have a rear door behind the rear axle. From the photos of the ČSAD Semily
+# BNG 12 METAN (right side), Arriva 9455 (BN 10,5) and the BN 9,5 / 8,5 notes,
+# and VTPsim's BN sheets (door positions).
+class SorBN12(SorCN):
+    """SOR BN 12 (11.79 m), doors 1-2-0 (DPP 4511-4560, ABOUT ME 1968/1969)"""
+    real_len = 11.79
+    axles = (2.58, 9.04)
+    DOORS = ((0.40, 1.35, "le"), (6.55, 7.85, "le"))
+    BAND = ((0.0, 7.85, 5, 11), (7.85, 11.79, 7, 13))
+    ROOF_STEP = (7.3, 2)
+    HATCHES = (5.4, 10.2)
+    AC = (2.2, 5.4)
+
+    def pillars(self, right):
+        if right:
+            return (2.40, 3.75, 5.15, 8.85, 10.40)
+        return (2.40, 3.75, 5.15, 6.55, 7.95, 9.35, 10.75)
+
+
+class SorBN12R(SorBN12):
+    """SOR BN 12 with the double rear door behind the rear axle (1-2-2:
+    Studénka 62-9904)"""
+    DOORS = SorBN12.DOORS + ((9.80, 10.90, "le"),)
+
+    def pillars(self, right):
+        if right:
+            return (2.40, 3.75, 5.15, 8.85, 11.20)
+        return super().pillars(right)
+
+
+class SorBNG12(SorBN12R):
+    """SOR BNG 12 (CNG): the 1-2-2 BN 12 with the CNG fairing over the front
+    roof (ČSAD Semily METAN, Frýdek-Místek 607-609)"""
+    AC = (0.9, 7.0)
+    AC_H = 0.34
+    HATCHES = (10.2,)
+
+
+class SorBN105(SorCN):
+    """SOR BN 10,5 (10.4 m), doors 1-2-1: the double centre door just ahead of
+    the rear axle, a single rear door behind it (Arriva 9455 / ABOUT ME 1958)"""
+    real_len = 10.4
+    axles = (2.50, 7.70)
+    DOORS = ((0.30, 1.20, "le"), (5.60, 6.80, "le"), (8.55, 9.35, "le"))
+    BAND = ((0.0, 6.80, 5, 11), (6.80, 10.4, 7, 13))
+    ROOF_STEP = (6.3, 2)
+    HATCHES = (4.9, 9.4)
+    AC = (2.0, 4.9)
+
+    def pillars(self, right):
+        if right:
+            return (2.40, 3.75, 5.10, 9.80)
+        return (2.40, 3.75, 5.10, 6.45, 7.80, 9.15)
+
+
+class SorBN95(SorCN):
+    """SOR BN 9,5 (9.6 m), doors 1-2-0: the double centre door just ahead of the
+    rear axle (Praha ABOUT ME / Arriva City / ČSAD SČ, DPMP 21-22, Orlová 434)"""
+    real_len = 9.6
+    axles = (2.45, 7.00)
+    DOORS = ((0.30, 1.20, "le"), (4.90, 6.10, "le"))
+    BAND = ((0.0, 6.10, 5, 11), (6.10, 9.6, 7, 13))
+    ROOF_STEP = (5.6, 2)
+    HATCHES = (4.4, 8.4)
+    AC = (2.0, 4.5)
+    FIG_DX = 0.40
+
+    def pillars(self, right):
+        if right:
+            return (2.40, 3.65, 7.95, 8.85)
+        return (2.40, 3.75, 5.10, 6.45, 7.85)
+
+
+class SorBN95R(SorBN95):
+    """SOR BN 9,5 with a single rear door behind the rear axle (1-2-1: Krnov
+    81-1005 / 81-1006, ex MHD Nitra)"""
+    DOORS = SorBN95.DOORS + ((7.85, 8.60, "le"),)
+
+    def pillars(self, right):
+        if right:
+            return (2.40, 3.65, 9.00)
+        return super().pillars(right)
+
+
+class SorBN85(SorBN95):
+    """SOR BN 8,5 (8.5 m), doors 1-2-0: the BN 9,5 with about 1.2 m less
+    wheelbase, one window bay between the front axle and the centre door"""
+    real_len = 8.5
+    axles = (2.30, 5.85)
+    DOORS = ((0.30, 1.20, "le"), (3.75, 4.95, "le"))
+    BAND = ((0.0, 4.95, 5, 11), (4.95, 8.5, 7, 13))
+    ROOF_STEP = (4.45, 2)
+    HATCHES = (3.3, 7.4)
+    AC = (1.8, 3.6)
+    FIG_DX = 0.35
+
+    def pillars(self, right):
+        if right:
+            return (2.30, 6.85, 7.75)
+        return (2.30, 3.65, 5.00, 6.35, 7.60)

@@ -5,7 +5,7 @@ type: "SOR_BN_10_5"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 
 display:
   agency_en: "MHD Nový Jičín"
@@ -20,9 +20,10 @@ display:
 # exists, so the scheme is drawn as the town's EBN 9,5 red with a black window
 # band and a black front mask; correct it once a photo turns up. Its Thermo King
 # roof A/C (2025) is not drawn: no photo shows its shape.
-# Sprite: the white Praha SOR BN 10,5 sheet (VTPsim's pak128_czr Příbram SOR BN 10,
-# vehicle-bus/praha/sor_bn_10_5) repainted in the Nový Jičín red by
-# odis_town.repaint, the lower front black (odis_town.nj_bn_rows).
+# Sprite: original box-model render (vojtechzicha): SorBN105 of
+# tools/busrender/iredo_models.py with the livery of odis_town.py.
+# The common SOR base of 2026-10-24; length 7 like every
+# SOR of about 10.5 m.
 # Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
 
 vehicles:
@@ -46,7 +47,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 7
       engine_type: diesel
       power: 185
       gear: 53

@@ -1,6 +1,6 @@
 agency: MHDKrnov
 type: "SOR_BN_9.5"
-copyright: VTPsim
+copyright: vojtechzicha
 # Sprites are placed in the tile to the native pak128.cs lane position (body
 # footprint matched to the median of native 12 m buses), so no extra shift.
 image_offset: [0, 0]
@@ -16,9 +16,10 @@ display:
 # SOR BN 9,5 low-entry midibus, 9.6 m, 3 doors (1-2-1). Two 2013-built cars
 # (81-1005, 81-1006, ex-MHD Nitra) run Krnov MHD for Transdev Morava since
 # 1/2023. Iveco Tector 185 kW, 23-28 seated + 48 standing, 7.6 t.
-# Sprite: VTPsim's SOR BN 9,5 (via the DPMP sheet), repainted in the Krnov
-# city scheme: white with a black belt line, golden-yellow + blue chevron
-# pairs and the navy "krnov" wordmark; white roof A/C units.
+# Sprite: original box-model render (vojtechzicha) on the common SOR base (the
+# owner's pick of 2026-10-24): SorBN95R (doors 1-2-1) in the Krnov white with
+# the belt line and chevron pairs of tools/busrender/iredo_models.py; length
+# 7; regenerate with tools/busrender/sor_city.py.
 
 vehicles:
   - id: "SOR_BN_9.5"

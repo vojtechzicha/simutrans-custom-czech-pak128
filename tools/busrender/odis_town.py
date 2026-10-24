@@ -912,6 +912,33 @@ class OrlIrisbus(TownBus, M.IrisbusCrosswayLE):
     DISP = K.LEDG
 
 
+class NjRed(M.Livery):
+    """Nový Jičín red on ARRIVA's BN 10,5 7577 (layout unverified, as the town's
+    EBN 9,5): red all over, the black mask round the headlamps over a red bumper"""
+    slug = "njcervenocerna"
+    sticker = False
+    body = NJ_RED
+    roof = NJ_ROOF
+    ac = NJ_ROOF
+    seam = (0x8A, 0x16, 0x1C)
+    bumper = NJ_RED
+
+    def front(self, bus, v, k):
+        return KAR_BLACK if 2 <= k <= 3 else None
+
+
+M.LIVERIES[NjRed.slug] = NjRed
+
+
+class OrlBN95(TownBus, M.SorBN95):
+    """SOR BN 9,5 (Orlová 434): 3ČSAD white-green, white LED displays"""
+
+
+class NjBN105(TownBus, M.SorBN105):
+    """SOR BN 10,5 (ARRIVA 7577): amber LED displays"""
+    DISP = M.LED
+
+
 class HavBNG105(TownBus, M.SorCN105):
     """SOR BNG 10,5 (2016): the low-floor SOR of the CN 10,5 family, no step in
     the window line or roof, CNG fairing over the front two thirds, green LEDs"""
@@ -932,7 +959,7 @@ FM = "vehicle-bus/mhd-frydek-mistek/"
 # src/odis/ as FM-<family>-3csadbilozelena.png: the Havířov, Karviná and
 # Orlová sheets read them, and --csad-static writes the F-M sheets from them
 # in CSAD["green"]
-FM_CSAD = ("crossway_le_city_12m", "scania_citywide_lf_12m_cng", "sor_bng_12", "urbanway_12m_cng")
+FM_CSAD = ("crossway_le_city_12m", "scania_citywide_lf_12m_cng", "urbanway_12m_cng")
 
 
 def fm_src(fam):
@@ -1134,36 +1161,12 @@ def stratos_rows():
                    [[7.0, 7.5, 8.0]], roundel, [[(0.32, 0.62, 0.24, 0.80)]], WHITE_POD)
 
 
-def bn95_rows():
-    rows, _ = port_native("CZ-ODIS-SOR_BN95-Green", [8.5, 9.0, 9.5], LEDW, CSAD["green"])
-    return rows
-
-
 def isuzu_rows():
     """Orlová Isuzu NovoCiti Life 996: the plain white Kolín car with the dark
     blue roof unit and a paper board instead of the LED display"""
     return repaint(load_rows(NOVO_SRC), z_white, {"white": ((0xF2, 0xF2, 0xF0), (0xF6, 0xF6, 0xF4))},
                    [[6.5, 7.0, 7.5]], None, [[(0.68, 0.92, 0.18, 0.70)]], (ISUZU_BLUE, (0x3A, 0x4A, 0x96)),
                    disp(PAPER))
-
-
-def front_mask(colour, z_bumper):
-    """decals(): the front face black (colour) above the bumper, so the lower
-    front reads as a black mask round the headlamps"""
-    def draw(o, paint, geo, d, r):
-        o = o.copy()
-        m = paint & (geo["face"] == 2) & (geo["z"] >= z_bumper)
-        o[m] = colour
-        return o
-    return draw
-
-
-def nj_bn_rows():
-    """Nový Jičín SOR BN 10,5 7577: the white Praha BN 10,5 sheet (VTPsim's
-    Příbram BN 10) in the town red, black front mask over a red bumper"""
-    return repaint(load_rows("vehicle-bus/praha/sor_bn_10_5/sprites/bila.png"), z_white,
-                   {"white": (NJ_RED, NJ_ROOF)}, [[11.0, 11.5, 12.0, 12.5]], front_mask(KAR_BLACK, 0.62),
-                   hubs=False)                      # its lower panel is too thin for the hub rule
 
 
 # ====================================================================== families
@@ -1431,15 +1434,14 @@ FAMILIES = {
              "(2017), 3ČSAD white-green with Transdev logos, white LED displays.",
         sprite="the Frýdek-Místek Urbanway 12M CNG sheet, white LED displays."),
     "mhd-orlova/sor_bn_9_5": dict(
-        agency=ORLOVA, type="SOR_BN_9_5", name=("SOR BN 9,5", "SOR BN 9,5"), copyright="VTPsim",
+        agency=ORLOVA, type="SOR_BN_9_5", name=("SOR BN 9,5", "SOR BN 9,5"), copyright="vojtechzicha",
         vehicles=one("SOR_BN_9_5", "BN 9,5", MIDI,
                      f_(455000, 74, 80, 8, 22, 120, 2016, 7, "diesel", 185, 53, retire=2050,
                         smoke="Diesel_small")),
-        liveries=[("3csadbilozelena", *WG_NAME, bn95_rows)],
+        liveries=[("3csadbilozelena", *WG_NAME, model(OrlBN95, "3csadbilozelena"))],
         note="SOR BN 9,5. Orlová MHD: 434 (2016), 3ČSAD white-green (tall green skirt),\n"
              "white LED displays.",
-        sprite="VTPsim's ODIS SOR BN 9,5 (CZ-vehicle-bus.pak, already 3ČSAD white-green,\n"
-               "frozen in tools/busrender/src/odis/) ported by odis_town.port_native."),
+        sprite=RENDER_IR.format(cls="SorBN95") + "\nThe common SOR base of 2026-10-24."),
     "mhd-orlova/novociti_life": dict(
         agency=ORLOVA, type="NovoCiti_Life", name=("Isuzu NovoCiti Life", "Isuzu NovoCiti Life"),
         copyright="VTPsim",
@@ -1514,10 +1516,10 @@ FAMILIES = {
         sprite=RENDER_IR.format(cls="SorCNG")),
     # ------------------------------------------------------------ Nový Jičín
     "mhd-novy-jicin/sor_bn_10_5": dict(
-        agency=NOVYJICIN, type="SOR_BN_10_5", name=("SOR BN 10.5", "SOR BN 10,5"), copyright="VTPsim",
+        agency=NOVYJICIN, type="SOR_BN_10_5", name=("SOR BN 10.5", "SOR BN 10,5"), copyright="vojtechzicha",
         vehicles=one("SOR_BN_10_5", "BN 10,5", BUS,
-                     f_(490000, 85, 90, 9, 24, 150, 2015, 8, "diesel", 185, 53, smoke="Diesel_small")),
-        liveries=[("cervenocerna", "red-black", "červeno-černá", nj_bn_rows)],
+                     f_(490000, 85, 90, 9, 24, 150, 2015, 7, "diesel", 185, 53, smoke="Diesel_small")),
+        liveries=[("cervenocerna", "red-black", "červeno-černá", model(NjBN105, "njcervenocerna"))],
         note="SOR BN 10,5, doors 1-2-1. ARRIVA autobusy 7577 (2TT 8558, built 2015; ex 5E6 6355\n"
              "at Čáslav for MHD Kutná Hora), reserve bus for MHD Nový Jičín (lines 601-604)\n"
              "since 7/2025, repainted red-black in 2025 (seznam-autobusu vuz/61645,\n"
@@ -1525,9 +1527,8 @@ FAMILIES = {
              "exists, so the scheme is drawn as the town's EBN 9,5 red with a black window\n"
              "band and a black front mask; correct it once a photo turns up. Its Thermo King\n"
              "roof A/C (2025) is not drawn: no photo shows its shape.",
-        sprite="the white Praha SOR BN 10,5 sheet (VTPsim's pak128_czr Příbram SOR BN 10,\n"
-               "vehicle-bus/praha/sor_bn_10_5) repainted in the Nový Jičín red by\n"
-               "odis_town.repaint, the lower front black (odis_town.nj_bn_rows)."),
+        sprite=RENDER_IR.format(cls="SorBN105") + "\nThe common SOR base of 2026-10-24; length 7 like every\n"
+               "SOR of about 10.5 m."),
 }
 
 

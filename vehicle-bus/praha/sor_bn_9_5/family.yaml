@@ -3,7 +3,7 @@ type: "SOR_BN_9_5"
 image_offset: [0, 0]         # buses: sprites carry their own lane placement
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 display:
   agency_en: "Praha"
   agency_cs: "Praha"
@@ -31,10 +31,10 @@ display:
 # the rear wheel centre .. door 2), continued above the windows and as bands
 # across the roof, red block on the vehicle's left of the lower front and of
 # the lower rear; colours of the DPP ICN 9,5.
-# Sprite: VTPsim's pak128_czr Praha SOR BN 9,5; blue repainted the PID
-# ultramarine of the DPP BN 12, the black NB-style front mask repainted white
-# over red as on the DPP BN 12, glass converted to the lit-window specials, the
-# green-light displays made amber LED, lane placement normalised.
+# Sprite: original box-model render (vojtechzicha) on the common SOR base (the
+# owner's pick of 2026-10-24): SorBN95 (doors 1-2-0) in the PID trikolóra and
+# grey-red of pid.py of tools/busrender/iredo_models.py; length 7; regenerate
+# with tools/busrender/sor_city.py.
 
 vehicles:
   - id: "SOR_BN_9_5"
@@ -57,7 +57,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 7
       engine_type: diesel
       power: 185
       gear: 53

@@ -5,7 +5,7 @@ type: "SOR_BN_8_5"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 
 display:
   agency_en: "IREDO"
@@ -15,8 +15,8 @@ display:
 
 # SOR BN 8,5 low-floor midibus. MHD Přelouč (line 655101, integrated in IREDO),
 # ARRIVA autobusy: 72237 (2017) and the ex-demonstrator 71754 (reserve), white.
-# Sprite: VTPsim's SOR BN 8,5, the white Trutnov sheet as is
-# (vehicle-bus/mhd-trutnov/sor_bn_8_5).
+# Sprite: the white Trutnov sheet as is (vehicle-bus/mhd-trutnov/sor_bn_8_5): SorBN85 of
+# tools/busrender/iredo_models.py on the common SOR base of 2026-10-24.
 # Regenerate with tools/busrender/pk_town.py (family.yaml: --yaml).
 
 vehicles:
@@ -40,7 +40,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 6
       engine_type: diesel
       power: 160
       gear: 54

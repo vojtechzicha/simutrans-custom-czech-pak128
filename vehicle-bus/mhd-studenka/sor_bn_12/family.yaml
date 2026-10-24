@@ -1,6 +1,6 @@
 agency: MHDStudenka
 type: "SOR_BN_12"
-copyright: VTPsim
+copyright: vojtechzicha
 # Sprites are placed in the tile to the native pak128.cs lane position (body
 # footprint matched to the median of native 12 m buses), so no extra shift.
 image_offset: [0, 0]
@@ -17,11 +17,10 @@ display:
 # (1-0-2-2). One 2013-built ex-demonstrator, 62-9904, on Studénka MHD
 # (Transdev Morava) since 12/2021. Iveco Tector 194 kW, ~30 seated + ~65
 # standing, ~8.8 t.
-# Sprite: VTPsim's SOR BN 12 (the diesel body without a CNG pod, via the
-# pak128_czr Praha object; identical to the body of VTPsim's ODIS SOR BNG 12),
-# repainted in Transdev white with the black belt line, the red Transdev
-# running figure between the front axle and the middle door, white roof A/C
-# units, glazed doors down to the floor; lane-normalised.
+# Sprite: original box-model render (vojtechzicha) on the common SOR base (the
+# owner's pick of 2026-10-24): SorBN12R (doors 1-2-2) in Transdev white with
+# the black belt line and the red figure of tools/busrender/iredo_models.py;
+# length 8; regenerate with tools/busrender/sor_city.py.
 
 vehicles:
   - id: "SOR_BN_12"

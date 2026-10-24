@@ -5,8 +5,7 @@ type: "BN_9.5"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
-
+copyright: vojtechzicha
 display:
   agency_en: "DPMP"
   agency_cs: "DPMP"
@@ -16,7 +15,10 @@ display:
 # SOR BN 9,5, 9.6 m midibus. DPMP bought two 2013-built cars (21, 22) from
 # SOR in 2023 for the bridge-replacement routes. White body with red roof
 # air-conditioning units. 23-28 seated / 48 standing, Iveco Tector 185 kW.
-# Sprite: the VTPsim SOR BN 9,5, repainted.
+# Sprite: original box-model render (vojtechzicha) on the common SOR base (the
+# owner's pick of 2026-10-24): SorBN95 (doors 1-2-0) in white with the two red
+# roof A/C units of tools/busrender/iredo_models.py; length 7; regenerate with
+# tools/busrender/sor_city.py.
 
 vehicles:
   - id: "BN_9.5"
