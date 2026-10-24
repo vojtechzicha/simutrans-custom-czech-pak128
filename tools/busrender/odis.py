@@ -723,9 +723,22 @@ def odis_red_decal(logo_r=(0.24, 0.44), logo_l=(0.40, 0.60), base=None):
 
 def csad_skirt(z_top, base=None):
     """decals(): the 3ČSAD green skirt below z_top metres on a sheet drawn
-    plain white (odis_town.skirt_decal in CSAD["green"], read when drawn)"""
+    plain white (odis_town.skirt_decal in CSAD["green"], read when drawn).
+    Paint just outside the fitted box (the sheet's lower edge and corners)
+    takes the height of the box pixel beside it or one or two rows above it."""
     def draw(o, paint, geo, d, r):
-        return T.skirt_decal(CSAD["green"], z_top, base)(o, paint, geo, d, r)
+        o = T.skirt_decal(CSAD["green"], z_top, base)(o, paint, geo, d, r)
+        face, z = geo["face"], geo["z"]
+        near = ((0, -1), (0, 1), (-1, 0), (-2, 0))
+        edge = [(y, x) for y, x in zip(*np.where(paint & (face == 0)))
+                if any(0 <= y + dy < 128 and 0 <= x + dx < 128 and face[y + dy, x + dx] > 1
+                       and float(z[y + dy, x + dx]) < z_top for dy, dx in near)]
+        if edge:
+            o = o.copy()
+            for y, x in edge:
+                k = max(0.55, min(1.12, T.lum(o[y, x]) / T.lum(WHITE)))
+                o[y, x] = T.scaled(CSAD["green"], k)
+        return o
     return draw
 
 
@@ -750,6 +763,8 @@ def close_door(f0, f1, donor, base=None):
             return o
         sill = min(glass)
         panel = [(zz, c) for zz, c in dn if zz < sill]
+        if not panel:
+            return o
         o = o.copy()
         for y, x in zip(*np.where(side & (frac >= f0) & (frac < f1))):
             zz = float(z[y, x])
