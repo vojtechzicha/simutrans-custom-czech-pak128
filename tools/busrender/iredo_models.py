@@ -55,21 +55,31 @@ def inside(x, a, b):
 
 # Body shape of the bodies that have a low() (the SOR CN / C / LC and ICN so
 # far). The owner found the SORs "too tall and boxy at the bottom" next to the
-# CZR / VTPsim hand-drawn buses (2026-10-22):
-#   low   2.76 m wide (11-12 px end on, like the hand-drawn buses), the lowest
-#         body row left off so the bus stands on its wheels (dark, a grey hub,
-#         two rows below the body), the window band up to the roof edge (a
-#         livery with a coloured strip over the windows keeps one row of it),
-#         a one-row SOR hump without the rub strip, 1 px roof pods narrowed
-#         with the body (a livery's roof bands show beside them), a busier
-#         SOR rear (LOW_REAR) and white roofs drawn grey so the roof reads as a
-#         lid over the walls
-#   orig  the shape before 2026-10-22 (3.1 m wide, flat bottom, square black
-#         arches, a white strip over the windows, tall pods)
-SHAPES = {"low": dict(W2=1.38, SKIRT=1, ROUND_WHEEL=True, UNDER_INSET=None, hub_color=(0x5E, 0x60, 0x64),
-                     LOW_REAR=True, ROOF_GREY=(0xC6, 0xC8, 0xCA), POD_W2=0.80),
+# CZR / VTPsim hand-drawn buses (2026-10-22); on the comparison page of
+# 2026-10-24 they kept the body on the ground and took the photo rear.
+#   low     2.76 m wide (11-12 px end on, like the hand-drawn buses), the
+#           lowest body row left off so the bus stands on its wheels (dark, a
+#           grey hub, two rows below the body), the window band up to the roof
+#           edge (a livery with a coloured strip over the windows keeps one row
+#           of it), a one-row SOR hump without the rub strip, 1 px roof pods
+#           narrowed with the body (a livery's roof bands show beside them),
+#           the SOR rear as photographed (SOR_REAR "photo") and the livery's own
+#           roof colour (white, like the hand-drawn buses)
+#   low1    the first draft of 2026-10-22: as low, but the plain "block" rear
+#           and white roofs drawn grey (ROOF_GREY)
+#   raised  low with the body raised one row (Z0) on 1.1 m wheels with a light
+#           hub and the rub strip kept (LOW_RUB); not taken (2026-10-24: the
+#           front wheel turns into a black block with the rub strip)
+#   orig    the shape before 2026-10-22 (3.1 m wide, flat bottom, square black
+#           arches, a white strip over the windows, tall pods)
+_LOW = dict(W2=1.38, SKIRT=1, ROUND_WHEEL=True, UNDER_INSET=None, hub_color=(0x5E, 0x60, 0x64),
+            LOW_REAR=True, POD_W2=0.80)
+SHAPES = {"low": dict(_LOW, SOR_REAR="photo", ROOF_GREY=None),
+          "low1": dict(_LOW, SOR_REAR="block", ROOF_GREY=(0xC6, 0xC8, 0xCA)),
+          "raised": dict(_LOW, Z0=0.538, wheel_r=0.55, hub_color=(0x9A, 0x9E, 0xA2), LOW_RUB=True,
+                         SOR_REAR="photo", ROOF_GREY=None),
           "orig": None}
-SHAPE = ["orig"]
+SHAPE = ["low"]
 
 
 # ====================================================================== liveries
@@ -393,7 +403,7 @@ class ZdarBiloModra(Livery):
         g0 = bus.REAR_GLASS[0]
         if k == g0 - 1:
             return self.RED
-        if 1 <= k < g0 - 1:
+        if bus.SKIRT + 1 <= k < g0 - 1:                 # over the white bumper
             return self.BLUE
         return None
 
@@ -466,18 +476,27 @@ class RegioBus(Coach):
     LOW_REAR = False               # the SOR rear of the low shape
     ROOF_GREY = None               # a white livery roof drawn in this grey
     POD_W2 = 0.95                  # half width of the roof A/C pod / CNG fairing (m)
+    LOW_RUB = False                # the low shape keeps the body's rub strip (RUB / RUB_ROW)
 
     def __init__(self, livery):
         self.lv = LIVERIES[livery]()
         super().__init__(livery)
         common = SHAPES[SHAPE[0]]
-        low = self.low() if common is not None else None
-        if low is not None:
-            for key, val in {**common, **low}.items():
-                setattr(self, key, val)
-            r = self.lv.roof
-            if self.ROOF_GREY and min(r) >= 0xE0 and max(r) - min(r) < 12:
-                self.lv.roof = self.ROOF_GREY
+        if common is None or self.low.__func__ is RegioBus.low:
+            return
+        # the common keys first, so a body's low() can read them (LOW_RUB, SOR_REAR)
+        for key, val in common.items():
+            setattr(self, key, val)
+        low = self.low()
+        if low is None:
+            for key in common:                      # the body keeps its one shape
+                delattr(self, key)
+            return
+        for key, val in low.items():
+            setattr(self, key, val)
+        r = self.lv.roof
+        if self.ROOF_GREY and min(r) >= 0xE0 and max(r) - min(r) < 12:
+            self.lv.roof = self.ROOF_GREY
 
     def low(self):
         """this body's attributes in the low shape (merged over SHAPES),
@@ -1023,17 +1042,24 @@ class SorCN(SorFace, RegioBus):
 
         def wall(x0):
             return top + (hump if self.ROOF_STEP and x0 >= self.ROOF_STEP[0] else 0)
+        kt = top + hump                                     # first roof row at the rear
+        glass = (kt - 5, kt - 2) if self.SOR_REAR == "photo" else (self.REAR_GLASS[0], kt - 1)
         return dict(R_TOP=top, ROOF_STEP=(self.ROOF_STEP[0], 1) if self.ROOF_STEP else None,
                     BAND=tuple((x0, x1, k0, wall(x0)) for x0, x1, k0, k1 in self.BAND),
-                    REAR_GLASS=(self.REAR_GLASS[0], top + hump - 1), DOOR_RAISE=min(self.DOOR_RAISE, 1),
-                    RUB=None, AC_H=min(self.AC_H, 0.24))
+                    REAR_GLASS=glass, DOOR_RAISE=min(self.DOOR_RAISE, 1),
+                    RUB=self.RUB if self.LOW_RUB else None, AC_H=min(self.AC_H, 0.24))
+
+    SOR_REAR = "photo"             # the rear of the low shape: "photo" or "block" (see rear())
+    SOR_BUMPER = "body"            # photo rear: "body" (the white moulding) or "dark"
 
     def rear(self, v, z):
-        """in the low shape (LOW_REAR) a black bumper with the plate, tall red
-        lamp clusters at the corners, the engine grille between them and the
-        rear window over the engine lid, so the rear does not read as a block"""
+        """in the low shape (LOW_REAR) SOR_REAR "photo" (rear_photo) or "block":
+        a black bumper with the plate, tall red lamp clusters at the corners,
+        the engine grille between them and the rear window over the engine lid"""
         if not self.LOW_REAR:
             return super().rear(v, z)
+        if self.SOR_REAR == "photo":
+            return self.rear_photo(v, z)
         av = abs(v)
         k = self.row(z)
         if k >= self.top_row(self.real_len - 0.1):
@@ -1052,6 +1078,39 @@ class SorCN(SorFace, RegioBus):
             return Sh(d)
         if k == 3 and av < self.W2 - 0.45:
             return Sh(GRILLE_DK)
+        return Sh(self.lv.body)
+
+    def rear_photo(self, v, z):
+        """the SOR CN / CNG rear as photographed (CN 8,5 at Transexpo 2009,
+        BusLine CNG 12 and CNG 10,5): the rear window just under the roof cap
+        (small red marker lamps at the cap's corners), the engine lid with a
+        louvre line, tall red lamp clusters at both corners, the plate low in
+        the middle and the bumper moulding at the bottom"""
+        av = abs(v)
+        k = self.row(z)
+        kt = self.top_row(self.real_len - 0.1)
+        if k >= kt:
+            return Sh(self.lv.roof)
+        edge = av > self.W2 - 0.22
+        if k == kt - 1 and edge:
+            return TAIL                                     # marker lamps at the roof cap's corners
+        g0, g1 = self.REAR_GLASS
+        if g0 <= k <= g1 and not edge:
+            return RegioBus.rear(self, v, z)                # the rear window (and the KHK sticker)
+        # lamps and plate over the paint, the livery's decals over the bare body
+        if self.SKIRT + 1 <= k <= g0 - 2 and av > self.W2 - 0.30:
+            return TAIL                                     # the lamp clusters
+        if k == self.SKIRT + 1 and av < 0.28:
+            return PLATE
+        d = self.lv.rear(self, v, k)
+        if d is not None:
+            return Sh(d)
+        if k == self.SKIRT:
+            if self.lv.bumper:
+                return Sh(self.lv.bumper)
+            return Sh(GRILLE_DK) if self.SOR_BUMPER == "dark" else Sh(self.lv.seam)
+        if k == g0 - 2 and av < self.W2 - 0.40:
+            return Sh(GRILLE_DK)                            # the engine lid louvres
         return Sh(self.lv.body)
 
     def pillars(self, right):
@@ -1134,8 +1193,9 @@ class SorC105(SorCN):
     def low(self):
         """the low shape: wall top 3.16 m, the window band one row lower and up
         to the roof edge, no rub strip"""
+        glass = (7, 10) if self.SOR_REAR == "photo" else (self.REAR_GLASS[0] - 1, self.REAR_GLASS[1] - 1)
         return dict(R_TOP=12, BAND=tuple((x0, x1, k0 - 1, 12) for x0, x1, k0, k1 in self.BAND),
-                    REAR_GLASS=(self.REAR_GLASS[0] - 1, self.REAR_GLASS[1] - 1), RUB=None,
+                    REAR_GLASS=glass, RUB=self.RUB if self.LOW_RUB else None,
                     AC_H=min(self.AC_H, 0.24))
 
     def pillars(self, right):

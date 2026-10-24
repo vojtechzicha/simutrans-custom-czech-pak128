@@ -328,6 +328,14 @@ The art regenerates with:
 
 Each driver takes `[family …] [--yaml] [--preview DIR]`; `--yaml` regenerates the family.yaml files from the driver's tables.
 
+Every box body with a `low()` takes the body shape `iredo_models.SHAPE`, and so do the drivers built on these models (pid.py, odis.py, odis_town.py). The default is `low`, the owner's pick of 2026-10-24 after the SORs read "too tall and boxy at the bottom" next to the CZR / VTPsim hand art:
+- 2.76 m wide, the lowest body row left off so the bus stands on its wheels (`SKIRT`);
+- the window band up to the roof edge, and a one-row SOR hump;
+- 1 px roof pods, and the livery's own (white) roof;
+- the SOR rear as photographed (`SOR_REAR "photo"`): rear window under the roof cap, red marker lamps at its corners, a louvre line, tall lamp clusters, the plate, the bumper.
+
+The owner turned down a raised body on bigger wheels with the rub strip (shape `raised`): the front wheel became a black block. The first draft (`low1`: grey roofs, a plain block rear) and the shape before 2026-10-22 (`orig`) also stay selectable. Use `odis.py --shape NAME [--out DIR]`, or set `iredo_models.SHAPE[0]` before running another driver. A body's `low()` returns its own rows (wall top, glazing, rear window) and can read the shape's common keys.
+
 ### Moravskoslezský kraj (ODIS) town buses (`vehicle-bus/mhd-<town>/`)
 
 Every ODIS town with MHD has its own `MHD<Town>` pak (user, 2026-10-20). The ODIS regional pak (`VZ-ODIS-bus`, next section) holds only regional buses, never a town fleet. Ostrava (`DPOstrava`), Opava (`DPOpava`), Frýdek-Místek, Třinec, Český Těšín, Nový Jičín, Studénka and Krnov already had one. The four towns the region had folded in got theirs from `tools/busrender/odis_town.py`:
@@ -347,6 +355,8 @@ The scope is what each town runs in October 2026, including depot buses that wor
 - Types the repo had no body of are ported from VTPsim's ODIS sheets, frozen in `tools/busrender/src/odis/`: the Citelis, Citywide LE 15M, BN 9,5 and Stratos LF 38. `port_native` turns their glass into the lit specials (driver's glass plain) and moves every view onto the native lane by the length rule.
 - Same body and same paint as an existing family is a copy of its sheet: the F-M 3ČSAD Urbanway / Citywide (displays turned white LED) and the 2018 3ČSAD e-bus.
 
+The 3ČSAD white-green is one paint in every package: `CsadWG` with the green `CSAD["green"]` 57A639, a yellow-green near RAL 6018. The owner picked it on 2026-10-24 over the emerald 22B14C, which read "too green". The white band from the skirt to the windows is never shorter than the green, because in the game the bus must read white and green. `CSAD_GREEN` (the emerald) is only the key that VTPsim's green is ported as before a repaint. The static Frýdek-Místek sheets take the green with `odis_town.py --csad-static` (in place, idempotent); run it before regenerating the Karviná and Orlová copies of them.
+
 Run `python tools/busrender/odis_town.py [family …] [--yaml] [--preview DIR]`. A run is byte-identical.
 
 ### Moravskoslezský kraj (ODIS) regional buses (`vehicle-bus/odis/`)
@@ -356,7 +366,7 @@ Agency `ODIS` builds `VZ-ODIS-bus.pak` with the kraj's regional buses only. As i
 The kraj sets no body colour, so each operator keeps its own scheme. Every scheme adds the kraj ring over the rear axle on both sides, in the operator's colours:
 
 - `transdev`: Transdev Morava, white with the big red figure and the ring in reds.
-- `3csadbilozelena`: Transdev Slezsko, the 3ČSAD white-green with the ring in greens.
+- `3csadbilozelena`: Transdev Slezsko, the 3ČSAD white-green (odis_town's `CsadWG`, see the town section) with the ring in greens. The unchosen greens stay available for previews: `--variant csad=B|C|old`.
 - `bila`: Z-Group bus, white with the ring in the kraj's grey, red and blue.
 - `bilazelenykruh` / `bilacervenykruh`: Transdev Slezsko's white buses, green ring in Havířovsko and red in Hlučínsko.
 - `odiscervenocerna`: the uniform red ODIS scheme of the contracts from 12/2025 (Jablunkovsko–Třinecko). It has no ring.

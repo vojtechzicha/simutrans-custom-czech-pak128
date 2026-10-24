@@ -716,7 +716,8 @@ class SorICN(IcnFace, CoachBus):
         of lower panel stay for the lettering and figures, one body-colour row
         over it, no rub line"""
         return dict(R_TOP=11, R_BAND0=6, BAND=tuple((x0, x1, 5, 10) for x0, x1, k0, k1 in self.BAND),
-                    REAR_GLASS=(self.REAR_GLASS[0], 9), RUB_ROW=None, AC_H=min(self.AC_H, 0.24))
+                    REAR_GLASS=(self.REAR_GLASS[0], 9), RUB_ROW=self.RUB_ROW if self.LOW_RUB else None,
+                    AC_H=min(self.AC_H, 0.24))
 
     def deco(self, x, k, right):
         if k != self.RUB_ROW or x < 0.14 or x >= self.real_len - 0.10:

@@ -2,7 +2,7 @@
 sheets and write the family.yaml of every vehicle-bus/odis/<family>.
 
     python tools/busrender/odis.py [family ...] [--yaml] [--preview DIR]
-                                   [--shape low|orig] [--out DIR]
+                                   [--shape low|low1|raised|orig] [--out DIR]
 
 Without --yaml only the sheets are written; with --yaml the family.yaml files
 are (re)generated from FAMILIES too (review the diff). --shape picks the body
