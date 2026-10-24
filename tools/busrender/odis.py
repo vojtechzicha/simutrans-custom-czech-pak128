@@ -2,12 +2,13 @@
 sheets and write the family.yaml of every vehicle-bus/odis/<family>.
 
     python tools/busrender/odis.py [family ...] [--yaml] [--preview DIR]
-                                   [--shape low|low1|raised|orig] [--out DIR]
+                                   [--shape low|low1|raised|orig] [--out DIR] [--variant csad=X]
 
 Without --yaml only the sheets are written; with --yaml the family.yaml files
 are (re)generated from FAMILIES too (review the diff). --shape picks the body
 shape (iredo_models.SHAPES; default iredo_models.SHAPE); --out DIR writes
-the sheets to DIR/<family>/ instead of the families' sprites/.
+the sheets to DIR/<family>/ instead of the families' sprites/; --variant
+csad=X picks the 3ČSAD colours (CSAD_VARIANTS).
 
 Package (user, 2026-10-20): agency ODIS -> VZ-ODIS-bus.pak holds the
 regional buses only; every ODIS town with MHD has its own MHD<Town> pak
@@ -55,12 +56,34 @@ from rj_buses import row_for                                            # noqa: 
 
 K = T.K
 WHITE = T.WHITE
-CSAD_GREEN = T.CSAD_GREEN
 LEDW, AMBER = T.LEDW, T.AMBER
 
 
 def mix(a, b, t):
     return tuple(int(round(x + (y - x) * t)) for x, y in zip(a, b))
+
+
+# 3ČSAD white-green (Transdev Slezsko): the paint is odis_town.CSAD, shared
+# with the town buses. It is a yellow-green near RAL 6018 (photos: 94CE57 in
+# sun to 20611F overcast, hue 90-115 degrees; VTPsim's CZ-ODIS sheets 6BBD29);
+# the emerald 22B14C before it read "too green" in the game (owner,
+# 2026-10-22). The owner picked A on 2026-10-24; the others stay for
+# previews (--variant csad=X):
+#   green  the skirt, the lower front and rear, the mid band of the ring
+#   line   the dark line on top of the skirt (None = none)
+#   ring   the ring's outer tones (two, alternating per segment) and inner band
+CSAD_PICK = "A"
+CSAD_VARIANTS = {
+    "A": dict(green=(0x57, 0xA6, 0x39), line=None,
+              ring=((0xB8, 0xDC, 0x98), (0x92, 0xC8, 0x70)), inner=(0x2F, 0x78, 0x24)),
+    "B": dict(green=(0x6B, 0xBD, 0x29), line=None,
+              ring=((0xC2, 0xE4, 0x9C), (0x9E, 0xD2, 0x6E)), inner=(0x3A, 0x84, 0x1C)),
+    "C": dict(green=(0x4C, 0xA2, 0x2E), line=None,
+              ring=((0xB4, 0xDA, 0x92), (0x8A, 0xC4, 0x68)), inner=(0x2A, 0x74, 0x22)),
+    "old": dict(green=T.CSAD_GREEN, line=(0x2A, 0x2C, 0x2E),
+                ring=((0xA8, 0xDA, 0x88), (0x7C, 0xC4, 0x64)), inner=(0x1C, 0x8A, 0x3C)),
+}
+CSAD = T.CSAD
 
 
 # ====================================================================== the kraj ring
@@ -102,7 +125,7 @@ class Ring:
 RING_KRAJ = Ring(((0xB0, 0xB1, 0xB3), (0x9C, 0x9E, 0xA2)), None, (0xC4, 0x24, 0x1F), (0x08, 0x46, 0x86))
 RING_TD = Ring(((0xE8, 0xB4, 0x9C), (0xE0, 0x92, 0x7C)), (0xD8, 0x47, 0x3F),
                (0xD8, 0x47, 0x3F), (0x9C, 0x3B, 0x3B))
-RING_GREEN = Ring(((0xA8, 0xDA, 0x88), (0x7C, 0xC4, 0x64)), None, CSAD_GREEN, (0x1C, 0x8A, 0x3C))
+RING_GREEN = Ring(CSAD_VARIANTS[CSAD_PICK]["ring"], None, CSAD["green"], CSAD_VARIANTS[CSAD_PICK]["inner"])
 # geometry (Transdev Morava photos): 2.0-2.2 m across, centred 0.3-0.5 m
 # behind the rear axle and about 1.4 m up, so its top is on the upper window
 # band and its bottom at the body's lower edge behind the wheel arch
@@ -201,42 +224,28 @@ class OdisBilaCerv(OdisBila):
 
 
 class OdisCsad(KrajRing, T.CsadWG):
-    """3ČSAD white-green (Transdev Slezsko) with the green ring. The green
-    skirt runs straight up to row CSAD_TOP (2 on the SOR CN, 3 on the taller
-    Crossway LE CITY green) with the dark pinstripe over it; on bodies with
-    CSAD_SWEEP it rises to the windows behind the front door."""
+    """3ČSAD white-green (Transdev Slezsko): odis_town's paint (green skirt,
+    white band at least as tall, green lower front and rear) with the green
+    kraj ring; the green rises to the windows behind the front door only on
+    bodies with CSAD_SWEEP (the Crossway LE CITY)"""
     slug = "odis-3csad"
     RING = RING_GREEN
-
-    def side(self, bus, x, k, right):
-        c = self.ring(bus, x, k)
-        b0 = sill(bus, x)
-        if c is not None and k < b0:
-            return c
-        top_g = getattr(bus, "CSAD_TOP", self.TOP)
-        top = top_g
-        if getattr(bus, "CSAD_SWEEP", False):
-            d1 = bus.DOORS[0][1]
-            if x < d1:
-                top = b0 - 1
-            elif x < d1 + 1.0:
-                top = top_g + int(round((b0 - 1 - top_g) * (1 - (x - d1) / 1.0)))
-        if k <= top:
-            return CSAD_GREEN
-        if k == top + 1 and top < b0 - 1:
-            return self.PIN
-        return None
+    SWEEP = False
 
 
 class OdisCsadPod(OdisCsad):
     """3ČSAD white-green with the bright green CNG pod of Transdev Slezsko's
-    two 2014 SOR CNG 12 (43-1101 / 43-1112, #223 / #222)"""
+    two 2014 SOR CNG 12 (43-1101 / 43-1112, #223 / #222): the skirt green
+    lightened, as the pod is lit from above"""
     slug = "odis-3csad-pod"
-    ac = (0x5C, 0xC4, 0x3E)
     rear_ac = (0xEE, 0xEE, 0xEC)
 
+    def __init__(self):
+        super().__init__()
+        self.ac = mix(CSAD["green"], (0xFF, 0xFF, 0xFF), 0.18)
+
     def ac_side(self):
-        return Sh((0x46, 0xA8, 0x30))
+        return Sh(CSAD["green"])
 
 
 BORS_YEL = (0xE6, 0x99, 0x28)
@@ -712,9 +721,60 @@ def odis_red_decal(logo_r=(0.24, 0.44), logo_l=(0.40, 0.60), base=None):
     return draw
 
 
-skirt_decal = T.skirt_decal
+def csad_skirt(z_top, base=None):
+    """decals(): the 3ČSAD green skirt below z_top metres on a sheet drawn
+    plain white (odis_town.skirt_decal in CSAD["green"], read when drawn)"""
+    def draw(o, paint, geo, d, r):
+        return T.skirt_decal(CSAD["green"], z_top, base)(o, paint, geo, d, r)
+    return draw
+
+
+def close_door(f0, f1, donor, base=None):
+    """decals(): close a door that the sheet has and the bus does not. On the
+    door side (face 4), every pixel between fractions f0 and f1 from the front
+    and below the glazing takes the pixel of the same height from the panel
+    at `donor` (fractions), so the door becomes a window over a body panel.
+    It marks those pixels as paint (`paint` in place), so the decals after it
+    paint them as body."""
+    def draw(o, paint, geo, d, r):
+        if base is not None:
+            o = base(o, paint, geo, d, r)
+        if d not in T.SIDE:
+            return o
+        face, frac, z = geo["face"], geo["frac"], geo["z"]
+        side = (face == 4) & ~T.is_bg(o)
+        dn = [(float(z[y, x]), tuple(int(v) for v in o[y, x]))
+              for y, x in zip(*np.where(side & (frac >= donor[0]) & (frac < donor[1])))]
+        glass = [zz for zz, c in dn if c in LIT]
+        if not glass:
+            return o
+        sill = min(glass)
+        panel = [(zz, c) for zz, c in dn if zz < sill]
+        o = o.copy()
+        for y, x in zip(*np.where(side & (frac >= f0) & (frac < f1))):
+            zz = float(z[y, x])
+            if zz >= sill:
+                continue
+            o[y, x] = min(panel, key=lambda t: abs(t[0] - zz))[1]
+            paint[y, x] = True
+        return o
+    return draw
+
+
 W_ZONES = {"white": ((0xEE, 0xEE, 0xEC), WHITE), "green": ((0xEE, 0xEE, 0xEC), WHITE)}
-WG_ZONES = {"white": ((0xEE, 0xEE, 0xEC), WHITE), "green": (CSAD_GREEN, CSAD_GREEN)}
+WG_ZONES = {"white": ((0xEE, 0xEE, 0xEC), WHITE), "green": (CSAD["green"], CSAD["green"])}
+
+
+def set_csad(name):
+    """switch the 3ČSAD colours (odis_town.CSAD, the ring, the repaint zones)
+    to variant `name` of CSAD_VARIANTS"""
+    v = CSAD_VARIANTS[name]
+    CSAD.update(green=v["green"], line=v["line"])
+    RING_GREEN.outer, RING_GREEN.mid, RING_GREEN.inner = v["ring"], v["green"], v["inner"]
+    WG_ZONES["green"] = (v["green"], v["green"])
+
+
+assert CSAD["green"] == CSAD_VARIANTS[CSAD_PICK]["green"], "odis_town.CSAD is not the pick"
 RED_ZONES = {"white": (ODIS_RED, ODIS_ROOF)}
 WHITE_POD = T.WHITE_POD
 RED_POD = (ODIS_RED, ODIS_ROOF)
@@ -751,9 +811,10 @@ def strip_marks(rows, Ls, zmin=0.95):
 
 def scania(name, Ls, zones, ring, axle, pods, display=LEDW):
     """a VTPsim Scania Citywide sheet (src/odis/) ported, its ring stand-in
-    painted out, repainted, the ring and the CNG pods added"""
+    painted out, repainted, the ring and the CNG pods added (VTPsim's green
+    is ported as odis_town's CSAD_GREEN, which the zones tell apart best)"""
     def build():
-        rows, _ = T.port_native(name, Ls[0], display, CSAD_GREEN)
+        rows, _ = T.port_native(name, Ls[0], display, T.CSAD_GREEN)
         rows = strip_marks(rows, Ls)
         return T.repaint(rows, T.z_white_green, zones, Ls, ring_decal(ring, axle), pods, WHITE_POD)
     return build
@@ -1099,7 +1160,7 @@ FAMILIES = dict([
         [("3csadbilozelena", *WG, lambda: T.repaint(
             T.load_rows("vehicle-bus/iredo/dekstra_le_37/sprites/bila.png"), T.z_white,
             {"white": ((0xEE, 0xEE, 0xEC), WHITE)}, [[7.0, 7.5, 8.0]],
-            ring_decal(RING_GREEN, 0.68, base=skirt_decal(CSAD_GREEN, 1.0)),
+            ring_decal(RING_GREEN, 0.68, base=csad_skirt(1.0)),
             [[(0.30, 0.70, 0.22, 0.80)]], WHITE_POD, T.disp(LEDW)))],
         "Dekstra LE 37 L CNG (CNG; engine_type diesel, no smoke), the Iveco Daily based"
         " low-entry midibus with a low CNG box on the roof. Transdev Slezsko 7 (2018-2020):"
@@ -1127,14 +1188,16 @@ FAMILIES = dict([
             f_(700000, 80, 80, 11, 27, 140, 2016, 7, "diesel", 213, 55)),
         [("3csadbilozelena", *WG, lambda: T.repaint(
             T.load_rows("vehicle-bus/mdpo/urbanway_10_5m/sprites/mdpobilocervena.png"), z_mdpo,
-            WG_ZONES, [[10.0, 10.5, 11.0]], ring_decal(RING_GREEN, 0.78), None, None,
-            lambda c: LEDW if T.hexc(c) in (0xF0A018, 0xF7A21B, 0x01DD01) else None))],
+            W_ZONES, [[10.0, 10.5, 11.0]],
+            ring_decal(RING_GREEN, 0.78, base=csad_skirt(0.70, base=close_door(0.752, 0.895, (0.57, 0.64)))),
+            None, None, lambda c: LEDW if T.hexc(c) in (0xF0A018, 0xF7A21B, 0x01DD01) else None))],
         "Iveco Urbanway 10,5M CNG (CNG; engine_type diesel, no smoke), city body, doors"
         " 2-2-0, ex Iveco demonstrator (2016). Transdev Slezsko 1: 73-0049"
         " (Českotěšínsko). " + WG_NOTE,
         "Lubak91's Urbanway 10,5M CNG (the MDPO sheet, vehicle-bus/mdpo/urbanway_10_5m)"
-        " repainted by odis_town.repaint (its red skirt green), the kraj ring added by"
-        " odis.py.",
+        " repainted white by odis_town.repaint, the rear door of that 2-2-2 car closed"
+        " into a window and panel, the 3ČSAD skirt painted below 0.7 m and the kraj"
+        " ring added by odis.py.",
         copyright="Lubak91"),
 ])
 
@@ -1155,6 +1218,12 @@ def main(argv):
     if shape:
         M.SHAPE[0] = shape
     out, argv = option(argv, "--out")           # write the sheets there instead of sprites/
+    variant, argv = option(argv, "--variant")   # e.g. csad=B
+    while variant:
+        key, val = variant.split("=")
+        assert key == "csad", variant
+        set_csad(val)
+        variant, argv = option(argv, "--variant")
     do_yaml = "--yaml" in argv
     argv = [a for a in argv if a != "--yaml"]
     for key, f in FAMILIES.items():

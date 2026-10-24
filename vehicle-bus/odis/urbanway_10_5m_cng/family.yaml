@@ -20,8 +20,9 @@ display:
 # dopravy Moravskoslezského kraje"): white, black window band, green skirt with
 # a dark pinstripe, green lower front and rear, the kraj ring in greens.
 # Sprite: Lubak91's Urbanway 10,5M CNG (the MDPO sheet, vehicle-
-# bus/mdpo/urbanway_10_5m) repainted by odis_town.repaint (its red skirt
-# green), the kraj ring added by odis.py.
+# bus/mdpo/urbanway_10_5m) repainted white by odis_town.repaint, the
+# rear door of that 2-2-2 car closed into a window and panel, the 3ČSAD
+# skirt painted below 0.7 m and the kraj ring added by odis.py.
 # Regenerate with tools/busrender/odis.py (family.yaml: --yaml).
 
 vehicles:

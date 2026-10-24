@@ -3,10 +3,13 @@ of their own: render or repaint the sprite sheets and write the family.yaml
 files.
 
     python tools/busrender/odis_town.py [family ...] [--yaml] [--preview DIR]
+    python tools/busrender/odis_town.py --csad-static
 
 Without --yaml only the sheets are written; with --yaml the family.yaml files
 are (re)generated from FAMILIES too (review the diff). A family is named by
 its folder (sor_nsg_12) or agency/folder (mhd-havirov/sor_nsg_12).
+--csad-static writes the static Frýdek-Místek 3ČSAD sheets (FM_CSAD) from
+their frozen sources in src/odis/, the green in CSAD["green"].
 
 Packages (user, 2026-10-20): every ODIS town with MHD gets its own
 MHD<Town> pak, and the ODIS pak (regional buses, later) holds no town bus.
@@ -45,6 +48,7 @@ Methods, picked per type:
     into the bus's own, and every view moved to the native lane by the length
     rule.
 """
+import colorsys
 import os
 import sys
 import math
@@ -82,8 +86,15 @@ HAV_BLUE = (0x15, 0x85, 0xD8)
 HAV_ROOF = (0x3F, 0xA8, 0xEE)
 HAV_LOGO = (0xF6, 0xF6, 0xF6)      # white city logo (three linked arches over HAVÍŘOV)
 HAV_YEL = (0xDC, 0xCB, 0x10)       # yellow script slogan "město pro život"
-# 3ČSAD white-green (the Frýdek-Místek Urbanway / Citywide sheets)
+# 3ČSAD white-green. CSAD_GREEN is the emerald of the CZR and Frýdek-Místek
+# sheets, kept as the key VTPsim's green (6BBD29) is ported as, which the zone
+# repaints tell apart best. The paint is CSAD["green"]: a yellow-green near
+# RAL 6018 (photos 94CE57 in sun to 20611F overcast), the owner's pick of
+# 2026-10-24 over the emerald, which read "too green"; odis.py --variant
+# csad=X switches it for previews. CSAD["line"]: the dark line over the skirt
+# (about 5 cm, a fifth of a pixel), None = left out.
 CSAD_GREEN = (0x22, 0xB1, 0x4C)
+CSAD = dict(green=(0x57, 0xA6, 0x39), line=None)
 # Karviná white-black (2024-2033 contract)
 KAR_BLACK = (0x16, 0x17, 0x1A)
 # Nový Jičín red (the "červená metalíza" of the town's SOR EBN 9,5 sheet: sides, roof)
@@ -755,40 +766,61 @@ class HavBlue(M.Livery):
 
 
 class CsadWG(M.Livery):
-    """3ČSAD white-green: white body and roof, green skirt up to row TOP with
-    a dark pinstripe on it; on a Crossway the green sweeps up to the windows
-    behind the front door; green front and rear bumpers."""
+    """3ČSAD white-green: white body and roof, the green skirt straight along
+    the side up to row TOP (a body's CSAD_TOP overrides it), the white band
+    from there to the windows at least as tall as the green (the owner,
+    2026-10-24: in the game the white was too small and the bus read green,
+    not white and green); with SWEEP (a body's CSAD_SWEEP overrides it) the
+    green rises to the windows behind the front door, as on the Crossways.
+    The lower front is green up to the headlamps (the lamps, the SOR badge
+    and the plate stay), the lower rear up to row 2 round the tail lamps."""
     slug = "3csadbilozelena"
     body = WHITE
     roof = (0xF2, 0xF2, 0xF0)
     ac = (0xEE, 0xEE, 0xEC)
     seam = (0xDA, 0xDB, 0xD9)
-    bumper = CSAD_GREEN
     TOP = 2
-    PIN = (0x2A, 0x2C, 0x2E)
+    SWEEP = True
+
+    def __init__(self):
+        self.bumper = CSAD["green"]
+
+    def top(self, bus, x, b0):
+        """the skirt's top row at x under glazing from row b0"""
+        top_g = getattr(bus, "CSAD_TOP", self.TOP)
+        top_g = min(top_g, bus.SKIRT - 1 + (b0 - bus.SKIRT) // 2)     # no more green rows than white
+        if getattr(bus, "CSAD_SWEEP", self.SWEEP):
+            d1 = bus.DOORS[0][1]
+            if x < d1:
+                return b0 - 1
+            if x < d1 + 1.0:
+                return top_g + int(round((b0 - 1 - top_g) * (1 - (x - d1) / 1.0)))
+        return top_g
 
     def side(self, bus, x, k, right):
         band = bus.band_at(x)
         b0 = band[0] if band else bus.R_BAND0
-        d1 = bus.DOORS[0][1]
-        rise = b0 - 1 - self.TOP
-        if x < d1:
-            top = b0 - 1
-        elif x < d1 + 1.0:
-            top = self.TOP + int(round(rise * (1 - (x - d1) / 1.0)))
-        else:
-            top = self.TOP
+        top = self.top(bus, x, b0)
         if k <= top:
-            return CSAD_GREEN
-        if k == top + 1 and top < b0 - 1:
-            return self.PIN
+            return CSAD["green"]
+        if k == top + 1 and top < b0 - 1 and CSAD["line"] is not None:
+            return CSAD["line"]
         return None
 
     def front(self, bus, v, k):
-        return CSAD_GREEN if k <= 1 else None
+        """the headlamp row between the lamps (rows 0-1 are the bumper)"""
+        av = abs(v)
+        badge, lamp = (0.12, 0.55) if isinstance(bus, M.SorFace) else (0.0, 0.48)
+        if k == 2 and badge <= av < bus.W2 - lamp:
+            return CSAD["green"]
+        return None
 
     def rear(self, bus, v, k):
-        return CSAD_GREEN if k <= 2 else None
+        """up to row 2, round the tail lamps and the plate"""
+        av = abs(v)
+        if k > 2 or (k >= 1 and av > bus.W2 - 0.22) or (k == 1 and av < 0.28):
+            return None
+        return CSAD["green"]
 
 
 class Bruntal(M.Livery):
@@ -896,8 +928,19 @@ class HavBNG105(TownBus, M.SorCN105):
 # ====================================================================== sheets
 L12 = [11.5, 12.0, 12.5]
 FM = "vehicle-bus/mhd-frydek-mistek/"
-UW_SRC = FM + "urbanway_12m_cng/sprites/3csadbilozelena.png"
-CW_SRC = FM + "scania_citywide_lf_12m_cng/sprites/3csadbilozelena.png"
+# the Frýdek-Místek 3ČSAD sheets as ported (the emerald green), frozen in
+# src/odis/ as FM-<family>-3csadbilozelena.png: the Havířov, Karviná and
+# Orlová sheets read them, and --csad-static writes the F-M sheets from them
+# in CSAD["green"]
+FM_CSAD = ("crossway_le_city_12m", "scania_citywide_lf_12m_cng", "sor_bng_12", "urbanway_12m_cng")
+
+
+def fm_src(fam):
+    return "FM-" + fam + "-3csadbilozelena.png"
+
+
+UW_SRC = fm_src("urbanway_12m_cng")
+CW_SRC = fm_src("scania_citywide_lf_12m_cng")
 CW_ALLOW = (0xC1B1D1, 0xE3E3FF)    # specials the Citywide source art already uses (lamp glass)
 NSE_SRC = FM + "sor_ns_12_electric/sprites/zelenametaliza.png"
 SW_SRC = "vehicle-bus/dpmp/streetway_12m/sprites/ivecopredvadeci.png"
@@ -1005,6 +1048,40 @@ def hav_native(name, Ls, display=LEDW, pods=None):
     return build
 
 
+def csad_px(c):
+    """recol rule: the emerald 3ČSAD green of a ported sheet (CSAD_GREEN and its
+    shades: hue from 112 degrees) into CSAD["green"] at the same luminance
+    ratio; specials and other colours stay"""
+    if hexc(c) in H.SPECIAL or z_white_green(c) != "green":
+        return None
+    if colorsys.rgb_to_hsv(*[v / 255 for v in c])[0] * 360 < 112:
+        return None
+    return scaled(CSAD["green"], lum(c) / lum(CSAD_GREEN))
+
+
+def recols(*rules):
+    """recol rule: the first of `rules` that changes the colour"""
+    def rule(c):
+        for r in rules:
+            n = r(c)
+            if n is not None:
+                return n
+        return None
+    return rule
+
+
+def write_fm_csad():
+    """the static Frýdek-Místek 3ČSAD sheets from their frozen sources, the
+    green in CSAD["green"]"""
+    for fam in FM_CSAD:
+        rows = [[K.recolour(t, csad_px) for t in tiles] for tiles in load_rows(fm_src(fam))]
+        a = np.array(Image.open(os.path.join(SRC, fm_src(fam))).convert("RGB")).reshape(-1, 3).astype(np.int64)
+        used = set(np.unique((a[:, 0] << 16) | (a[:, 1] << 8) | a[:, 2]).tolist())
+        rel = FM + fam + "/sprites/3csadbilozelena.png"
+        save_sheet(rows, os.path.join(REPO, *rel.split("/")), used & H.SPECIAL)
+        print(rel)
+
+
 def copy_rows(src, recol=None):
     """an existing sheet, only the display colour changed (or none)"""
     def build():
@@ -1031,7 +1108,7 @@ def stratos_rows():
     """Orlová Stratos LF 38 CNG 619: VTPsim's ODIS Stratos (3ČSAD white-green)
     ported, its grey roof white, the short CNG box added, the two-tone green
     CNG roundel over the rear of both sides, amber displays"""
-    rows, _ = port_native("CZ-ODIS-IvecoStratos_LF38-Green", [7.0, 7.5, 8.0], AMBER, CSAD_GREEN)
+    rows, _ = port_native("CZ-ODIS-IvecoStratos_LF38-Green", [7.0, 7.5, 8.0], AMBER, CSAD["green"])
 
     def zone(c):
         return "roof" if hexc(c) in (0xC5C5C5, 0xBDBDBD) else None
@@ -1045,7 +1122,7 @@ def stratos_rows():
             cols = decal_columns(panel, face, 0.78, 0.95)
             for i, x in enumerate(cols):
                 y = panel[x][0]
-                ring = (0x9B, 0xD2, 0x7A) if i in (0, len(cols) - 1) else CSAD_GREEN
+                ring = (0x9B, 0xD2, 0x7A) if i in (0, len(cols) - 1) else CSAD["green"]
                 put(o, paint, x, y, ring)
                 if 0 < i < len(cols) - 1:
                     put(o, paint, x, y + 1, (0x9B, 0xD2, 0x7A))
@@ -1058,7 +1135,7 @@ def stratos_rows():
 
 
 def bn95_rows():
-    rows, _ = port_native("CZ-ODIS-SOR_BN95-Green", [8.5, 9.0, 9.5], LEDW, CSAD_GREEN)
+    rows, _ = port_native("CZ-ODIS-SOR_BN95-Green", [8.5, 9.0, 9.5], LEDW, CSAD["green"])
     return rows
 
 
@@ -1317,7 +1394,7 @@ FAMILIES = {
         copyright="Lubak91",
         vehicles=one("Urbanway_12M_CNG", "Urbanway 12M CNG", BUS,
                      f_(800000, 95, 80, 12, 24, 135, 2017, 8, "diesel", 213, 56, intro_month=12, retire=2050)),
-        liveries=[("3csadbilozelena", *WG_NAME, copy_rows(UW_SRC, disp(LEDW))),
+        liveries=[("3csadbilozelena", *WG_NAME, copy_rows(UW_SRC, recols(disp(LEDW), csad_px))),
                   ("bila", *W_NAME, white_rows(UW_SRC, z_green, [L12]))],
         note="Iveco Urbanway 12M CNG. Karviná MHD: 50-1001 to 50-1005 (2017-2020) in 3ČSAD\n"
              "white-green, 50-1006 (2021) plain white with the factory black glazing\n"
@@ -1340,7 +1417,7 @@ FAMILIES = {
         name=("Scania Citywide LF 12M CNG", "Scania Citywide LF 12M CNG"), copyright="Lubak91",
         vehicles=one("Citywide_LF_12M_CNG", "Citywide LF 12M CNG", BUS,
                      f_(800000, 95, 80, 12, 24, 135, 2019, 8, "diesel", 206, 55, retire=2050)),
-        liveries=[("3csadbilozelena", *WG_NAME, copy_rows(CW_SRC, disp(LEDW)))],
+        liveries=[("3csadbilozelena", *WG_NAME, copy_rows(CW_SRC, recols(disp(LEDW), csad_px)))],
         note="Scania Citywide LF 12M CNG. Karviná MHD: 50-1108 (2019), 3ČSAD white-green.",
         sprite="the Frýdek-Místek Citywide LF 12M CNG sheet, white LED displays."),
     # ------------------------------------------------------------ Orlová
@@ -1349,7 +1426,7 @@ FAMILIES = {
         copyright="Lubak91",
         vehicles=one("Urbanway_12M_CNG", "Urbanway 12M CNG", BUS,
                      f_(800000, 95, 80, 12, 24, 135, 2017, 8, "diesel", 213, 56, retire=2050)),
-        liveries=[("3csadbilozelena", *WG_NAME, copy_rows(UW_SRC, disp(LEDW)))],
+        liveries=[("3csadbilozelena", *WG_NAME, copy_rows(UW_SRC, recols(disp(LEDW), csad_px)))],
         note="Iveco Urbanway 12M CNG. Orlová MHD (Transdev Slezsko): 50-1091 and 50-1092\n"
              "(2017), 3ČSAD white-green with Transdev logos, white LED displays.",
         sprite="the Frýdek-Místek Urbanway 12M CNG sheet, white LED displays."),
@@ -1417,7 +1494,7 @@ FAMILIES = {
                      f_(300000, 40, 80, 5, 18, 85, 2020, 6, "diesel", 100, 55, retire=2050)),
         liveries=[("3csadbilozelena", *WG_NAME, lambda: repaint(
             load_rows(DEK_SRC), z_comett, {"white": ((0xF2, 0xF2, 0xF0), (0xF6, 0xF6, 0xF4))},
-            [[7.0, 7.5, 8.0]], skirt_decal(CSAD_GREEN, 1.0), None, None, disp(LEDW)))],
+            [[7.0, 7.5, 8.0]], skirt_decal(CSAD["green"], 1.0), None, None, disp(LEDW)))],
         note="Dekstra LF 38 CNG (Iveco Daily 70C14 CNG), 7.7 m midibus. 448 (2020, ex ČSAD\n"
              "Karviná), stored from mid-2025, back on lines 501 / 503 in October 2026: 3ČSAD\n"
              "white-green (the lower third green, green bumper), white LED displays.",
@@ -1504,6 +1581,11 @@ def main(argv):
         pv = argv[i + 1]
         argv = argv[:i] + argv[i + 2:]
         os.makedirs(pv, exist_ok=True)
+    if "--csad-static" in argv:                 # the static Frýdek-Místek 3ČSAD sheets
+        argv = [a for a in argv if a != "--csad-static"]
+        write_fm_csad()
+        if not argv:
+            return
     do_yaml = "--yaml" in argv
     argv = [a for a in argv if a != "--yaml"]
     for key, f in FAMILIES.items():
