@@ -67,8 +67,21 @@ def inr(v, a, b):
 
 
 # ------------------------------------------------------------------ bodies
+# Body shape of the SOR city bodies (specs with sor=True: NS, NB, EBN and the
+# Skoda trolleybuses built on them). The owner asked on 2026-10-24 for every
+# SOR to take the common base of the SOR box bodies (iredo_models.SHAPE low):
+#   low   the body starts one pixel row (SKIRT, 0.25 m) higher so the bus stands
+#         on its wheels, and the black window band reaches the roof edge
+#   orig  the bodies before (body down to the floor height Z0, a body-colour
+#         strip over the window band)
+# Paint that marks the bottom of the body (skirt strips, door steps) is laid
+# from ZB, the body's lowest point.
+SOR_SHAPE = ["low"]
+SKIRT = 0.25
+
 # x = real metres from the front.  doors on the right (kerb) side.
 NS12 = dict(
+    sor=True,
     face="ns", rear="ns", real_len=12.0, joints=[], cu=[8],
     axles=[2.71, 8.64],
     doors=[(0.41, 1.75), (4.83, 6.16), (9.47, 10.80)],
@@ -77,6 +90,7 @@ NS12 = dict(
     cap=1.70, sidedisp=(3.05, 4.65), pods=[], mirrors=True,
 )
 NS18 = dict(
+    sor=True,
     face="ns", rear="ns", real_len=18.75, joints=[11.10], cu=[8, 6],
     axles=[2.70, 8.60, 15.35],
     doors=[(0.30, 1.60), (4.80, 6.10), (12.65, 13.95), (16.20, 17.50)],
@@ -87,6 +101,7 @@ NS18 = dict(
 # SOR NB 12 / TNB 12 (Skoda 30Tr): 4 doors, the last behind the rear axle
 L1A_DIAG = dict(xw_top=2.05, wy=0.60, gap=0.30, k=1.5, xh_top=3.00)
 NB12 = dict(
+    sor=True,
     face="nb", rear="nb", real_len=12.0, joints=[], cu=[8],
     axles=[2.75, 8.60],
     doors=[(0.30, 1.55), (4.15, 5.45), (6.70, 7.90), (9.25, 10.45)],
@@ -97,6 +112,7 @@ NB12 = dict(
 # SOR NB 18 / TNB 18 (Skoda 31Tr): long front section (~12.3 m, 3 doors), short
 # pusher-style rear section (2 doors, the last behind the rear axle)
 NB18 = dict(
+    sor=True,
     face="nb", rear="nb", real_len=18.75, joints=[12.30], cu=[9, 5],
     axles=[3.00, 10.55, 16.25],
     doors=[(0.30, 1.55), (4.60, 5.90), (7.60, 8.80), (13.10, 14.30), (16.95, 18.10)],
@@ -127,6 +143,7 @@ UW18 = dict(
 )
 # SOR EBN 9.5 (401) and EBN 11 (403): older SOR e-bus face (black mask, "smile")
 EBN95 = dict(
+    sor=True,
     face="ebn", rear="ns", real_len=9.5, joints=[], cu=[8],
     axles=[2.35, 7.05],
     doors=[(0.30, 1.50), (3.95, 5.20)],
@@ -135,6 +152,7 @@ EBN95 = dict(
     cap=0.40, sidedisp=(2.00, 3.40), pods=[], mirrors=True, diag=dict(L1A_DIAG, xw_top=1.75, k=1.2),
 )
 EBN11 = dict(
+    sor=True,
     face="ebn", rear="ns", real_len=11.1, joints=[], cu=[8],
     axles=[2.55, 8.05],
     doors=[(0.30, 1.55), (4.45, 5.75), (8.85, 10.10)],
@@ -166,6 +184,10 @@ class Veh:
         self.Rk = [0.0] + list(sp["joints"]) + [sp["real_len"]]
         for k in ("z0", "zr", "zwin0", "zwin1", "zband0", "zband1"):
             setattr(self, k.upper(), sp[k])
+        self.ZB = self.Z0                     # the body's lowest point
+        if sp.get("sor") and SOR_SHAPE[0] == "low":
+            self.ZB = self.Z0 + SKIRT
+            self.ZBAND1 = self.ZR
         M = self.M
         self.axles = [M(a) for a in sp["axles"]]
         self.doors = [(M(a), M(b)) for a, b in sp["doors"]]
@@ -225,13 +247,13 @@ class Veh:
         hb = self.BW / 2
         front_b = hb if i > 0 else 0.0
         rear_b = hb if i < len(self.cu) - 1 else 0.0
-        bx = [Box("body%d" % i, rear_b, L - front_b, -HW, HW, self.Z0, self.ZR)]
+        bx = [Box("body%d" % i, rear_b, L - front_b, -HW, HW, self.ZB, self.ZR)]
         if body_only:
             return bx
         if front_b:
-            bx.append(Box("bell_f", L - front_b, L, -HW + 0.06, HW - 0.06, self.Z0 + 0.04, self.ZR - 0.04))
+            bx.append(Box("bell_f", L - front_b, L, -HW + 0.06, HW - 0.06, self.ZB + 0.04, self.ZR - 0.04))
         if rear_b:
-            bx.append(Box("bell_r", 0.0, rear_b, -HW + 0.06, HW - 0.06, self.Z0 + 0.04, self.ZR - 0.04))
+            bx.append(Box("bell_r", 0.0, rear_b, -HW + 0.06, HW - 0.06, self.ZB + 0.04, self.ZR - 0.04))
         for k, (a, b, h, hw, kind) in enumerate(self.pods):
             a2, b2 = max(a, U0 + (hb if i > 0 else 0)), min(b, U1 - (hb if i < len(self.cu) - 1 else 0))
             if b2 > a2 + 0.05:
@@ -324,7 +346,7 @@ class Veh:
         k = (u - j) / 0.25
         if abs(k - round(k)) < 0.18 and abs(u - j) > 0.05:
             return sh(BELLOWS_D, f)
-        if p.z < self.Z0 + 0.18:
+        if p.z < self.ZB + 0.18:
             return sh(BELLOWS_D, f)
         return sh(BELLOWS, f)
 
@@ -404,12 +426,12 @@ class Veh:
             return FRAME
         if self.ln(p, U1, (d0 + d1) / 2):
             return HANDRAIL if (z > 0.60 and self.face in ("ns", "ebn")) else FRAME
-        if p.rng(2)[0] < self.Z0 + 0.14:
+        if p.rng(2)[0] < self.ZB + 0.14:
             return STEP
         if z >= self.ZWIN1 - 0.08:
             return FRAME
         kick = self.door_kick()
-        if kick and z < self.Z0 + 0.42:
+        if kick and z < self.ZB + 0.42:
             return sh(kick, p.face)
         return GLASS
 
@@ -553,7 +575,7 @@ class Veh:
             if u < self.M(dg["xw_top"] + dg["wy"] + dg["gap"] - back):
                 return RED
         eng = self.sp.get("engine")
-        if eng and self.M(eng[0]) <= u < self.M(eng[1]) and z > self.Z0 + 0.26:
+        if eng and self.M(eng[0]) <= u < self.M(eng[1]) and z > self.ZB + 0.26:
             return BLACK
         # pixel centres sit 0.25 m apart in z on every side face, so a band of
         # n * 0.25 m under the window band is exactly n pixel rows in every view
@@ -571,7 +593,7 @@ class Veh:
         fa = self.front_arch()
         xb = fa - 0.10                                    # black / red boundary
         zl = self.ZBAND0 - 0.25                           # yellow pinstripe (exactly 1 px row)
-        zs = self.Z0 + 0.26                               # top of the red skirt strip
+        zs = self.ZB + 0.26                               # top of the red skirt strip
         U1 = self.curU1
         if L == "L2":
             a, b = self.stripe
@@ -594,7 +616,7 @@ class Veh:
         """SOR demonstrator paint of the EBN 11: green nose and skirt, light-green
         belt line, white side panels"""
         z = p.z
-        if u < self.front_arch() - 0.10 or z < self.Z0 + 0.25:
+        if u < self.front_arch() - 0.10 or z < self.ZB + 0.25:
             return GREENM
         if z >= self.ZBAND0 - 0.25:
             return GREENL

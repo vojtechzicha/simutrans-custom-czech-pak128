@@ -129,6 +129,7 @@ EBN_ROOF = (0xEC, 0xEC, 0xEA)
 EBN_LOUVRE = (0xC4, 0xC6, 0xC8)
 
 EBN105 = dict(
+    sor=True,
     face="ebn105", rear="ebn105", real_len=10.37, joints=[], cu=[8],
     axles=[2.35, 8.67],
     doors=[(0.30, 1.50), (4.40, 5.60), (6.85, 8.05)],
@@ -209,7 +210,7 @@ class Ebn105(Veh):
             return FRAME
         if self.ln(p, U1, (d0 + d1) / 2):
             return FRAME
-        if p.rng(2)[0] < self.Z0 + 0.14:
+        if p.rng(2)[0] < self.ZB + 0.14:
             return H.STEP
         if z >= self.ZWIN1 - 0.08:
             return FRAME

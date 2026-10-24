@@ -85,6 +85,7 @@ PUW12W = mk(UW12, pods=[(1.40, 4.60, 0.24, 0.85, "ac")], led=(0x62, 0xD6, 0x4A),
 # left rear corner. Door / joint positions measured by projective fit on the
 # Autotec 2010 side photo and on Arriva 9930.
 NC18 = dict(
+    sor=True,
     face="nc", rear="nc", real_len=18.75, joints=[11.10], cu=[8, 6],
     axles=[2.47, 8.65, 15.22],
     doors=[(0.32, 1.57), (6.35, 7.65), (12.30, 13.60)],
@@ -236,14 +237,14 @@ class PVeh(Veh):
         if L == "C" and self.face == "ns":
             xb = self.front_arch() - 0.10             # black ahead of the front arch, red skirt
             if u < xb:
-                return sh(self.P["red"] if z < self.Z0 + 0.26 else BLACK, f)
+                return sh(self.P["red"] if z < self.ZB + 0.26 else BLACK, f)
         if L in ("B", "C"):
             return sh(self.P["white"] if z >= ZWHITE else self.P["red"], f)
         vt = self.vent
         if vt and vt[0] <= u < vt[1] and not right and inr(z, 0.50, 0.95):
             k = int(math.floor((z - 0.50) / 0.25))
             return sh(LOUVRE, f) if k % 2 == 0 else sh((0x8A, 0x8C, 0x90), f)
-        if z < self.Z0 + 0.10:
+        if z < self.ZB + 0.10:
             return sh(LIP, f)
         return sh(self.P["body"], f)
 
