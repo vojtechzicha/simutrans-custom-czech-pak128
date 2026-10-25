@@ -1,9 +1,9 @@
 agency: MHDFrydekMistek
 type: "SOR_NS_12_electric"
-copyright: VTPsim
+copyright: vojtechzicha
 
-# The source sprites carry the upstream lane placement (their dats use no
-# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -16,6 +16,9 @@ display:
 
 # SOR NS 12 electric: 644-645 (2018, dark green metallic e-bus scheme) and
 # 723-734 (2024, Frýdek-Místek city wrap - second livery).
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NS 12 body
+# on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
+# with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "SOR_NS_12_electric"
@@ -51,8 +54,7 @@ liveries:
   # 2024 batch 723-734: white roof with battery fairings and a black front
   # visor, flush black glazed side, white body with a blue speckled skyline
   # strip in the lower half (from the front axle back), black upper front mask
-  # with white lower bumper, white rear. Painted on the zelenametaliza sheet,
-  # identical geometry and placement.
+  # with white lower bumper, white rear.
   - color: frydekmistekpolep
     name_en: "Frýdek-Místek city wrap"
     name_cs: "polep města Frýdek-Místek"

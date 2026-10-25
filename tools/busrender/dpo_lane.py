@@ -26,8 +26,6 @@ which the drawing-based measure here would read as 2-3 px off on the
 articulated and the raked Urbino IV bodies.
 
 usage: python tools/busrender/dpo_lane.py [--dry-run] [family ...]
-Run it after tools/busrender/dpo_derived.py, which builds the SOR TNB 12 sheet
-from others.
 """
 import argparse
 import glob
@@ -48,7 +46,7 @@ DIRS = ["w", "nw", "n", "ne", "e", "se", "s", "sw"]
 STEP = {"w": (-4, -2), "e": (4, 2), "n": (4, -2), "s": (-4, 2),
         "ne": (5.66, 0), "sw": (-5.66, 0), "nw": (0, -2.83), "se": (0, 2.83)}
 MIN_SHIFT = 2
-REF = os.path.join(ROOT, "vehicle-bus/dpp/sor_nb_12/sprites/pidsedocervena.png")
+REF = os.path.join(ROOT, "tools/busrender/src/sor_nb_12-lane-ref.png")   # VTPsim's DPP NB 12, native-placed
 
 
 def body_mask(tile):

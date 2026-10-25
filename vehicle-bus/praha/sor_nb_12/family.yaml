@@ -3,7 +3,7 @@ type: "SOR_NB_12"
 image_offset: [0, 0]         # buses: sprites carry their own lane placement
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 display:
   agency_en: "Praha"
   agency_cs: "Praha"
@@ -24,11 +24,12 @@ display:
 # white = plain white with black glazing (photo of 1481); city = white roof and
 # body, black window band, red lower body (photos of 1478 next to DPP 4072,
 # 1740).
-# Sprite: the DPP NB 12 sheets (VTPsim's pak128_czr Praha NB 12, repainted and
-# lane-normalised in the DPP family, with the roof A/C unit behind the front
-# roof edge that every photographed car carries: blue on the trikolóra cars as
-# on 9120, white on the others), copied 1:1; the white livery is the city
-# sheet with its red turned into the white of the same face.
+# Every livery has the roof A/C unit behind the front roof edge that every
+# photographed car carries: blue on the trikolóra cars as on 9120, white on
+# the others.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NB 12 body
+# on the common SOR base, painted by tools/busrender/praha.py PVeh. Regenerate
+# with tools/busrender/praha.py.
 
 vehicles:
   - id: "NB_12"

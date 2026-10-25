@@ -1,10 +1,10 @@
 agency: DPMostLitvinov
 type: "SOR_NB_18"
-copyright: VTPsim
+copyright: vojtechzicha
 
-# Sprites carry their own tile placement (VTPsim's NB 18 sits on the native
-# pak128.cs lane; the articulated normaliser applied no shift), so no extra
-# makeobj offset.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses, each section placed by the section rule), so
+# no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -19,19 +19,17 @@ display:
 # 2009-11, transferred 7/2024 - 9/2026). Two-section fixed consist: front
 # section A (driver's cab, 3 doors) + powered rear section B (pusher, Iveco
 # Cursor F2B 243 kW, 2 doors); both halves required.
-# Repainted from VTPsim's CZR-Praha-SOR_NB_18[1]/[2] in the DPmML
-# white-yellow-red scheme as worn by the repainted ex-Prague cars: white roof
-# with a white A/C unit behind the front, black window band, black sill, white
-# belt, yellow lower sides; ex-Prague front kept (black band under the
-# windscreen, white stripe, red lower front); yellow upper rear framing the
-# rear window, red bumper; silver bellows; amber destination displays.
+# Livery: the DPmML white with the yellow skirt line as worn by the repainted
+# ex-Prague cars, a white A/C unit behind the front, red bumpers, green LED
+# displays.
 # Data: 18.75 m, ~150 passengers split 90/60, 243 kW, 80 km/h, ~15 t.
 # Second livery: car 189 (ex-DPP 6668, built 2011, in Most since 12 Sep 2026)
-# still in the DPP city red-white: the DPP family's dppcervenobila sheet (the
-# same VTPsim art at the same placement as the Most sheet), with the two white
-# roof A/C units flanking the bellows as on 6668 (photo 2026) and the Prague
-# amber displays. The joint closes with lengths 8 + 8 as with the DPP 8 + 6:
-# the gap is set by the front section's length only.
+# still in the DPP city red-white, with the two white roof A/C units flanking
+# the bellows as on 6668 (photo 2026) and the Prague amber displays.
+# Sections 9 + 5 carunits as the DPMHK NB 18 (joint at the real 12.3 m).
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NB 18 body
+# on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
+# with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "SOR_NB_18-A"
@@ -56,7 +54,7 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 9
       engine_type: diesel
 
   - id: "SOR_NB_18-B"
@@ -81,7 +79,7 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 5
       engine_type: diesel
       power: 243
       gear: 62

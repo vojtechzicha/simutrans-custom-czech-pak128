@@ -1,11 +1,12 @@
 agency: MHDHavirov
 type: "SOR_NBG_18"
 # Sprites carry their own lane placement (body footprint on the median of
-# native pak128.cs 12 m buses), so no extra shift.
+# native pak128.cs 12 m buses, each section placed by the section rule), so
+# no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 
 display:
   agency_en: "MHD Havířov"
@@ -15,9 +16,11 @@ display:
 
 # SOR NBG 18 (CNG), articulated, pusher. Havířov MHD: 40-0103 (2020), blue
 # since 5/2023. Fixed consist: front section A + powered rear section B.
-# Sprite: VTPsim's NB 18 body with the CNG fairing (the Kladno NBG 18 sheet),
-# repainted blue by odis_town.repaint.
-# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+# City blue with the white logo and the yellow "město pro život" script,
+# CNG fairings on both sections. Sections 9 + 5 carunits as the DPMHK NB 18.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NB 18 body
+# on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
+# with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "SOR_NBG_18-A"
@@ -42,7 +45,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 9
       engine_type: diesel
 
   - id: "SOR_NBG_18-B"
@@ -67,7 +70,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 5
       engine_type: diesel
       power: 213
       gear: 62

@@ -1,11 +1,11 @@
 agency: DPOstrava
 type: "SOR_TNB_12"
-# The body sits on the footprint of the DPO 26Tr sheet (whose poles it
-# carries), so no extra shift (the default [0, 4] would sink it 4 px).
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim, TommPa9
+copyright: vojtechzicha
 
 display:
   agency_en: "DPO"
@@ -26,17 +26,10 @@ display:
 # Livery (seznam-autobusu: "bílá s modrou střechou", from new to today): white
 # body, black glazing band and front mask, light blue cant rail and front cap
 # (variant B, picked 2026-10-10: the roof itself stays white); the gold swirl and the "SOR Trolejbus" lettering are not drawn.
-# Sprite: VTPsim's SOR NB 12 (the white Praha sheet) moved onto the DPO 26Tr
-# footprint, its front roof A/C unit removed, the cant rail painted blue, the white
-# roof container of the traction equipment with the louvred resistor box ahead
-# of it added, and the 26Tr poles (TommPa9) set pixel for pixel at the rear
-# end of the container: tools/busrender/dpo_derived.py. That sheet is frozen in
-# tools/busrender/src/dpo/ and patched by tools/busrender/dpo_other.py
-# (dpo_other_patch.py, from photos of 3912): the blue cant rail on both roof
-# edges in the end views, the black band under the side windows cut back to
-# the window frame except where it dips at the front, plain (unlit) windscreen
-# and driver's window, and light grey poles aimed at the wires of dpmhk.py in
-# place of the 26Tr ones.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Škoda 30Tr
+# body on the common SOR base (the SOR NB 12 trolleybus body with its roof
+# equipment and poles), painted by tools/busrender/sor_town.py. Regenerate with
+# tools/busrender/sor_town.py.
 # Economy like the 26Tr (same motor), a little cheaper as an old prototype.
 
 vehicles:

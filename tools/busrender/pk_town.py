@@ -25,8 +25,6 @@ import odis_town as T                                                   # noqa: 
 
 WHITE = (0xF2, 0xF2, 0xF0)
 WHITE_TOP = (0xF6, 0xF6, 0xF4)
-CHR_RED = (0xD2, 0x1E, 0x24)        # MHD Chrudim red (the 2016 SOR NB 12)
-CHR_RED_TOP = (0xDC, 0x34, 0x38)
 STRIPE_RED = (0xC8, 0x14, 0x1E)     # Arriva's "white with a red stripe"
 LIT_RED = (0xC8, 0x32, 0x3A)        # the Litomyšl wrap's lower band
 NAVY = (0x1E, 0x2E, 0x6E)           # MHD Ústí nad Orlicí lettering
@@ -122,7 +120,6 @@ def repaint(src, zones, Ls, decals=None, zone_of=z_light, recol=None):
     return lambda: T.repaint(T.load_rows(src), zone_of, zones, Ls, decals, None, None, recol)
 
 
-NB12 = "vehicle-bus/praha/sor_nb_12/sprites/bila.png"
 L12 = [[11.5, 12.0, 12.5]]
 
 # ====================================================================== families
@@ -143,22 +140,6 @@ def fam(key, agency, type_, name, role, flds, livs, note, sprite, copyright):
 
 FAMILIES = dict([
     # ------------------------------------------------------------ MHD Chrudim (IREDO)
-    fam("iredo/sor_nb_12", IREDO, "SOR_NB_12", "SOR NB 12", BUS,
-        f_(560000, 100, 75, 11, 22, 115, 2014, 8, "diesel", 210, 54, smoke="Diesel_small"),
-        [("chrudimcervena", "MHD Chrudim red · ARRIVA autobusy", "MHD Chrudim, červená · ARRIVA autobusy",
-          repaint(NB12, {"white": (CHR_RED, CHR_RED_TOP)}, L12)),
-         ("chrudimbila", "MHD Chrudim white · ARRIVA autobusy", "MHD Chrudim, bílá · ARRIVA autobusy",
-          repaint(NB12, W_ZONES, L12, cant_dots(BLACK, 0.20, 0.90))),
-         ("bilacervenypruh", "white with a red stripe · ARRIVA autobusy",
-          "bílá s červeným pruhem · ARRIVA autobusy",
-          repaint(NB12, W_ZONES, L12, stripe_decal(STRIPE_RED, zmin=0.5)))],
-        "SOR NB 12 low-floor city bus, doors 2-2-2. MHD Chrudim (lines 625001-625006,\n"
-        "integrated in IREDO), ARRIVA autobusy 2026: 64358 (2016) all red with the black\n"
-        "window band; 42079 (2014) white with black \"MĚSTSKÁ AUTOBUSOVÁ DOPRAVA CHRUDIM\"\n"
-        "over the windows (a dotted line here); 41028 (2014, since 6/2025) white with a\n"
-        "red stripe under the windows. No KHK sticker.",
-        "VTPsim's SOR NB 12 (the white sheet of vehicle-bus/praha/sor_nb_12) repainted by\n"
-        "odis_town.repaint, decals by pk_town.py.", "VTPsim"),
     fam("iredo/urbanway_12m_cng", IREDO, "Urbanway_12M_CNG", "Iveco Urbanway 12M CNG", BUS,
         f_(800000, 95, 80, 12, 24, 135, 2016, 8, "diesel", 213, 56, retire=2050),
         [("kladnobilocervena", "MAD Kladno white-red · ARRIVA autobusy (MHD Chrudim)",

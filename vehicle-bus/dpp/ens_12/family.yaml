@@ -1,7 +1,7 @@
 agency: DPPraha
 type: "ENS_12"
-# Sprites are drawn at the native pak128.cs lane position (body footprint on
-# the median of native 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -23,8 +23,9 @@ display:
 # across the grey battery fairings, red block on the lower front, yellow door
 # steps. Replaces the upstream CZR-Praha-SorNS12 placeholder (old PID livery,
 # no roof batteries).
-# Sprite: original 8-direction render of the NS 12 body (no upstream pixels;
-# sized and lane-placed like the native pak128 12 m buses, e.g. CZR SOR NB 12).
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NS 12 body
+# on the common SOR base, painted by tools/busrender/praha.py PVeh. Regenerate
+# with tools/busrender/praha.py.
 # Roof: Škoda single-arm 2-pole charging pantograph (charges under a short
 # trolley-wire section fed from the tram network) centred on the rear edge of
 # the black front cap, drawn folded as in service: base frame, lower arm

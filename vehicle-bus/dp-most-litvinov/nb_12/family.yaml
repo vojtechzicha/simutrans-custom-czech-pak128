@@ -1,9 +1,9 @@
 agency: DPMostLitvinov
 type: "NB_12"
-copyright: VTPsim
+copyright: vojtechzicha
 
-# The source sprites carry the upstream lane placement (their dats use no
-# offset), so no extra shift; the default [0, 4] sank them 4 px.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -17,16 +17,15 @@ display:
 # SOR NB 12 City — 12-metre rigid diesel city bus from SOR Libchavy, 51 units
 # (45 new-built 2012–2017 + 6 ex-DP Praha); replaces the former `nbg_12`
 # family (Most never ran the CNG NBG 12).
-# Source PNG uses cols 1–8 (col 0 stacked extras dropped); the roof fairing of
-# the upstream sheet was replaced with the plain NB 12 roof (from VTPsim's
-# Praha SOR_NB_12, same geometry) plus a small white A/C unit behind the
-# front, matching the SOR NB 18. Placement and glass unchanged. The source dat
-# had no `length` (engine default 8, which the sprite is drawn for).
+# Livery: DPmML white with the yellow skirt line and a red bumper, a small
+# white A/C unit behind the front, green LED displays.
 # Second livery: car 83 (ex-DPP 3574, built 2009, in Most since 10/2024) in the
 # DPP city red-white (Most colours 2024-26, back in the city scheme since
-# 2026): the DPP family's dppcervenobila sheet (the same VTPsim art at the
-# same placement), with its white roof A/C unit behind the front, the
-# displays green LED as on 83 in Most (photos 2025).
+# 2026), with its white roof A/C unit behind the front and the displays green
+# LED as on 83 in Most (photos 2025).
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NB 12 body
+# on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
+# with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "NB_12"

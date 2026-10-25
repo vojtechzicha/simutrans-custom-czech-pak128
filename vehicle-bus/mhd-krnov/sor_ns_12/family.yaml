@@ -1,9 +1,9 @@
 agency: MHDKrnov
 type: "SOR_NS_12"
-copyright: VTPsim
+copyright: vojtechzicha
 
-# Sprites are placed in the tile to the native pak128.cs lane position (body
-# footprint matched to the median of native 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -16,15 +16,12 @@ display:
 
 # SOR NS 12 (diesel), 81-1001 (2022, in service 1/2023, Transdev Morava).
 # 12 m, 3 doors, 33 + 68 = 101, FPT Tector 7 210 kW, 80 km/h, 10.5-11 t.
-# Sprite: VTPsim's SOR NS 12 body (pak128_czr Frýdek-Místek NS 12 / NSG 12)
-# without the battery/CNG pods (roof A/C unit only), repainted in the Krnov
-# city scheme: white body, black window band, golden-yellow + blue chevron
-# pairs on the lower body and the windows, navy "krnov" wordmark behind the
-# front axle; SOR black "smile" front mask with silver strip. Lane placement
-# normalised.
-
-# Body edits on every view: window band deepened from 5 to 7 rows (real NS 12
-# glazing), door leaves in lighter glass, amber front/side/rear displays.
+# Krnov city scheme: white body, A/C units on the roof, black window band and
+# belt line, golden-yellow + blue chevron pairs on the lower body; SOR black
+# "smile" front mask with silver strip; amber displays.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NS 12 body
+# on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
+# with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "SOR_NS_12"

@@ -1,9 +1,9 @@
 agency: DPMostLitvinov
 type: "SOR_NS_12"
-copyright: VTPsim
+copyright: vojtechzicha
 
-# Sprites carry their own tile placement (normalised to the native pak128.cs
-# 12 m bus lane position), so no extra makeobj offset.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -15,11 +15,13 @@ display:
   family_cs: "SOR NS 12"
 
 # SOR NS 12 (diesel), 20 units: 54–58 (2019), 59, 70–72 (2020), 73–76 (2021),
-# 79–81 (2022), 48, 49, 53, 82 (2023). Repainted from VTPsim's SOR NS 12
-# electric (pak128_czr FrydekMistek) in the DPmML white-yellow-red scheme:
-# white roof with two A/C pods, black window band, white belt, yellow lower
-# sides with a dark bottom trim; black front mask outlined in yellow with a red
-# apron between the headlights; yellow upper rear, white middle, red bumper.
+# 79–81 (2022), 48, 49, 53, 82 (2023). DPmML white-yellow-red scheme: white
+# roof with two A/C pods, black window band, yellow lower sides with a dark
+# bottom trim; black front mask outlined in yellow with a red apron between the
+# headlights; yellow upper rear, white middle, red bumper; green LED displays.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NS 12 body
+# on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
+# with tools/busrender/sor_town.py.
 # Data: 12 m, ~95 passengers, Tector 7 210 kW, 80 km/h, ~11 t (type values).
 
 vehicles:

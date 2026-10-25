@@ -416,7 +416,7 @@ def preview(rows, path, z=4):
 STEP = {"w": (-4, -2), "e": (4, 2), "n": (4, -2), "s": (-4, 2),
         "ne": (5.66, 0), "sw": (-5.66, 0), "nw": (0, -2.83), "se": (0, 2.83)}
 SLOPE = {"w": 0.5, "e": 0.5, "n": -0.5, "s": -0.5, "ne": 0.0, "sw": 0.0}
-NB12_REF = "vehicle-bus/dpp/sor_nb_12/sprites/pidsedocervena.png"     # a native-placed 12 m bus
+NB12_REF = "tools/busrender/src/sor_nb_12-lane-ref.png"     # a native-placed 12 m bus (VTPsim's DPP NB 12)
 
 
 def body_extent(tile):
@@ -969,10 +969,8 @@ def fm_src(fam):
 UW_SRC = fm_src("urbanway_12m_cng")
 CW_SRC = fm_src("scania_citywide_lf_12m_cng")
 CW_ALLOW = (0xC1B1D1, 0xE3E3FF)    # specials the Citywide source art already uses (lamp glass)
-NSE_SRC = FM + "sor_ns_12_electric/sprites/zelenametaliza.png"
 SW_SRC = "vehicle-bus/dpmp/streetway_12m/sprites/ivecopredvadeci.png"
 SW18_SRC = "vehicle-bus/dpp/streetway_18m/sprites/pidsedocervena.png"
-NBG18_SRC = "vehicle-bus/mhd-kladno/sor_nbg_18/sprites/kladnobilocervena.png"
 DEK_SRC = "vehicle-bus/mhd-tabor/dekstra_lf_38_cng/sprites/comettbila.png"
 ROS_SRC = "vehicle-bus/mhd-tabor/rosero_first/sprites/comettbila.png"
 NOVO_SRC = "vehicle-bus/mhd-kolin/novociti_life/sprites/bila.png"
@@ -1274,17 +1272,6 @@ FAMILIES = {
              "since 12/2023 and 11/2024.",
         sprite="the Frýdek-Místek Citywide LF 12M CNG sheet, repainted blue by\n"
                "odis_town.repaint."),
-    "mhd-havirov/sor_nbg_18": dict(
-        agency=HAVIROV, type="SOR_NBG_18", name=("SOR NBG 18", "SOR NBG 18"), copyright="VTPsim",
-        vehicles=artic("SOR_NBG_18", "SOR NBG 18",
-                       f_(540000, 90, 80, 9, 25, 128, 2020, 8, "diesel", None, None, retire=2050),
-                       f_(390000, 60, 80, 8, 11, 56, 2020, 8, "diesel", 213, 62, retire=2050)),
-        liveries=[("havirovmodra", *HAV_NAME,
-                   hav_rows(NBG18_SRC, z_red_white, [[10.5, 11.0, 11.5], [7.5, 8.0, 8.5]]))],
-        note="SOR NBG 18 (CNG), articulated, pusher. Havířov MHD: 40-0103 (2020), blue\n"
-             "since 5/2023. Fixed consist: front section A + powered rear section B.",
-        sprite="VTPsim's NB 18 body with the CNG fairing (the Kladno NBG 18 sheet),\n"
-               "repainted blue by odis_town.repaint."),
     "mhd-havirov/sor_nsg_18": dict(
         agency=HAVIROV, type="SOR_NSG_18", name=("SOR NSG 18", "SOR NSG 18"), copyright="vojtechzicha",
         vehicles=artic("SOR_NSG_18", "NSG 18",
@@ -1359,16 +1346,6 @@ FAMILIES = {
              "(12/2025), blue from new.",
         sprite="the Tábor Rošero First sheet (VTPsim's art shortened), repainted blue by\n"
                "odis_town.repaint."),
-    "mhd-havirov/sor_ns_12_electric": dict(
-        agency=HAVIROV, type="SOR_NS_12_electric", name=("SOR NS 12 electric", "SOR NS 12 electric"),
-        copyright="VTPsim",
-        vehicles=one("SOR_NS_12_electric", "NS 12 electric", EBUS,
-                     f_(950000, 85, 80, 12, 20, 150, 2018, 8, "battery", 160, 53, intro_month=5, retire=2050)),
-        liveries=[("zelenametaliza", "metallic green", "zelená metalíza", copy_rows(NSE_SRC))],
-        note="SOR NS 12 electric (2018). Havířov MHD: 40-1222 to 40-1224, in the green\n"
-             "metallic e-bus scheme of the 3ČSAD group since new (no city logo).",
-        sprite="the Frýdek-Místek SOR NS 12 electric sheet (the same 2018 3ČSAD e-bus\n"
-               "order and scheme), copied unchanged."),
     # ------------------------------------------------------------ Karviná
     "mhd-karvina/sor_ns_12": dict(
         agency=KARVINA, type="SOR_NS_12", name=("SOR NS 12", "SOR NS 12"), copyright="vojtechzicha",

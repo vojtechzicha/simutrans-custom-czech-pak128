@@ -1,11 +1,12 @@
 agency: MHDTrutnov
 type: "SOR_NBG_18"
 # Sprites carry their own lane placement (body footprint on the median of
-# native pak128.cs 12 m buses), so no extra shift.
+# native pak128.cs 12 m buses, each section placed by the section rule), so
+# no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 
 display:
   agency_en: "MHD Trutnov"
@@ -16,11 +17,12 @@ display:
 # SOR NBG 18 (CNG), 18.75 m, 4 doors, pusher (Iveco Cursor 8 CNG 213 kW).
 # Trutnov MHD: 6E1 3718-3720, 3 cars (2018). Fixed consist: front section A +
 # powered rear section B. CNG: engine_type diesel (upstream convention), no smoke.
-# Sprite: VTPsim's NB 18 body as repainted for the Kladno NBG 18 (CNG tank fairing),
-# white and red turned Arriva light blue by khk_town.rows_nbg18, the black
-# band under the windscreen kept, pixel mosaic on the rear half of the front
-# section and on the rear section, TRUTNOV logo on both (photos 398768, 442882).
-# Regenerate with tools/busrender/khk_town.py (family.yaml: --yaml).
+# Trutnov MHD light blue with the coloured dots low on the sides (photos
+# 398768, 442882), CNG fairings on both sections. Sections 9 + 5 carunits as
+# the DPMHK NB 18.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NB 18 body
+# on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
+# with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "SOR_NBG_18-A"
@@ -45,7 +47,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 9
       engine_type: diesel
 
   - id: "SOR_NBG_18-B"
@@ -70,7 +72,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 5
       engine_type: diesel
       power: 213
       gear: 62

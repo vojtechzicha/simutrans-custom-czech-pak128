@@ -1,11 +1,11 @@
 agency: DPBrno
 type: "SOR_NBG_12"
-# Sprites are placed in the tile to the native pak128.cs lane position (the
-# upstream Brno NBG 12 already sits on the native 12 m bus median).
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 
 display:
   agency_en: "DPMB"
@@ -22,9 +22,9 @@ display:
 # white band and a red apron; a tall rounded white CNG tank fairing over the
 # front-middle roof with the A/C unit ahead of it (2014 batch; the 2018 cars
 # have the fairing further forward and the A/C behind it); green LED displays.
-# Sprite: VTPsim's CZR-Brno-SOR_NBG_12 (upstream cols 1-8): its 1-px roof
-# block redrawn as a 2-px fairing plus the A/C unit, near-black roof hatches
-# lightened, glass moved to the lit-window specials, green displays.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NB 12 body
+# on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
+# with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "SOR_NBG_12"

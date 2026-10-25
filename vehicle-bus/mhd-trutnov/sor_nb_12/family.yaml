@@ -5,7 +5,7 @@ type: "SOR_NB_12"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 
 display:
   agency_en: "MHD Trutnov"
@@ -15,8 +15,10 @@ display:
 
 # SOR NB 12 City, 12.18 m, 4 doors. Trutnov MHD: 8T9 2189 (2013, ex MHD Třinec,
 # in Trutnov since 11/2022, repainted in the Trutnov scheme; photo 415210).
-# Sprite: VTPsim's NB 12 (the DPP city sheet), repainted by khk_town.rows_nb12.
-# Regenerate with tools/busrender/khk_town.py (family.yaml: --yaml).
+# Trutnov MHD light blue with the coloured dots low on the sides.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NB 12 body
+# on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
+# with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "SOR_NB_12"

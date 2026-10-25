@@ -1,10 +1,10 @@
 agency: DPMostLitvinov
 type: "SOR_NS_18"
-copyright: VTPsim
+copyright: vojtechzicha
 
-# Sprites carry their own tile placement (VTPsim's NB 18 geometry sits on the
-# native pak128.cs lane; the articulated normaliser applied no shift), so no
-# extra makeobj offset.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses, each section placed by the section rule), so
+# no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -18,14 +18,14 @@ display:
 # SOR NS 18 (diesel), 1 unit: 97 (delivered 2022, in service 5 Jan 2023).
 # Two-section fixed consist: front section A + powered rear section B
 # (pusher, 243 kW); both halves required; 4 doors (2 per section).
-# Built on VTPsim's SOR NB 18 articulated geometry (CZR-Praha-SOR_NB_18) with
-# NS styling redrawn: black front mask and black visor over the front roof
-# dome, yellow stripe up both A-pillars and along the lower mask edge, red
-# apron between the headlights, black bumper; black band above flush
-# single-pane side glazing; the front section's third door removed. DPmML
-# white-yellow-red scheme: white roof with A/C units, black window band,
-# black sill, white belt, three rows of yellow; yellow upper rear framing the
-# rear window, red bumper; silver bellows; amber destination displays.
+# DPmML white-yellow-red scheme as on the NS 12: white roof with an A/C unit
+# on each section, black window band, yellow lower sides with a dark bottom
+# trim; black front mask outlined in yellow with a red apron between the
+# headlights; yellow upper rear, red bumper; green LED displays.
+# Sections 8 + 6 carunits as the DPMHK NS 18 (joint at the real 11.1 m).
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NS 18 body
+# on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
+# with tools/busrender/sor_town.py.
 # Data: 18.75 m, 47 + 124 = 171 passengers split 103/68, 243 kW, 80 km/h,
 # ~17 t (type values).
 
@@ -77,7 +77,7 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 6
       engine_type: diesel
       power: 243
       gear: 62

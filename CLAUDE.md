@@ -253,6 +253,8 @@ The DPMHK Hradec Králové families (`vehicle-bus/dpmhk/`, `vehicle-trolleybus/d
 
 The SOR city bodies take the common SOR base too (owner, 2026-10-24). These are the specs with `sor=True`: NS, NB, EBN, the Praha NC 18, the DPO EBN 10,5 and the Škoda 30Tr–33Tr built on them. `dpmhk.SOR_SHAPE` (`low`, or `orig` for the bodies before) starts the body one pixel row higher (`SKIRT`), so the bus stands on its wheels, and runs the black window band to the roof edge. Paint that marks the bottom of the body (skirt strips, door steps) is laid from `ZB`, the body's lowest point, not from `Z0`.
 
+Every SOR NS / NB / NBG / EBN town family and the trolleybuses on those bodies come from `tools/busrender/sor_town.py`: Kladno, Most, DPMB, DPMO, MDPO, Frýdek-Místek, Havířov, Krnov, Třinec, Trutnov, Chrudim (`iredo/sor_nb_12`), Hranice, Nový Jičín, Přerov and the DPO TNB 12. It paints the `dpmhk.py` bodies from one palette per town (`TOWNS`: body, roof, lower body, skirt, front and rear colours, decals). The town bodies set `winrise` 0.25, so the window line sits one pixel row higher than on the DPMHK and PID buses (owner's pick B, 2026-10-24); without it the town liveries' bands came out too thin. The windscreen and the driver's window are plain glass, dark at night. Articulated sections follow the bodies: NS 18 8 + 6, NB 18 9 + 5 carunits. The yamls are hand-written. Run `python tools/busrender/sor_town.py [family …] [--preview DIR]`.
+
 The RegioJet coach buses (`vehicle-bus/regiojet/`) come from `tools/busrender/rj_buses.py`. It uses its own vectorised copy of the DP Ostrava bus raycaster (`rj_vrender.py`), with the models in `rj_busmodels.py` and lane placement in `rj_lane.py`. The long coaches are drawn about 1.08 × their real length, like the native Citywide 15 and the upstream Irizar. The per-view shift is measured on a plain box of the model's footprint and then applied to the model, so a longer body extends along the lane and never sideways.
 
 The DP Ostrava buses and trolleybuses are all generated:
@@ -261,11 +263,11 @@ The DP Ostrava buses and trolleybuses are all generated:
 - **All the others** come from `python tools/busrender/dpo_other.py [family …] [--preview DIR] [--variant ekova=B|ebn=B]`.
   - The Ekova Electron 12 and the SOR EBN 10.5 are rendered as subclasses of the `dpmhk.py` body (`dpo_other_bodies.py`); variant A of each ships.
   - The Dekstra LE 37 and the Rošero First are VTPsim's LE 37 art from the Prague package, repainted zone by zone in DPO turquoise (`dpo_other_rebase.py`).
-  - The Urbis DD, 21Tr, 36Tr and SOR TNB 12 are patched (`dpo_other_patch.py`) from frozen copies in `tools/busrender/src/dpo/`, so a run is byte-identical.
-  - The TNB's base there is itself built by `tools/busrender/dpo_derived.py`, from VTPsim's SOR NB 12 and TommPa9's frozen 26Tr / Urbino 12 IV sheets. Run `dpo_derived.py`, then `dpo_other.py sor_tnb_12`.
+  - The Urbis DD, 21Tr and 36Tr are patched (`dpo_other_patch.py`) from frozen copies in `tools/busrender/src/dpo/`, so a run is byte-identical.
+  - The SOR TNB 12 comes from `sor_town.py` (above).
   - A box frame fitted to each frozen sheet gives the side faces their u/z coordinates. The trolley poles are re-drawn in their photographed colours and aimed at the `dpmhk.py` wires, which match the pak128.cs `elec_trolleybus_plain_2000` wire in the straight views.
 
-`tools/busrender/dpo_lane.py` moves a sheet along the road only (no sideways move, so poles stay on the wire) to the native 12 m position by the length rule. Both generators apply that position themselves, so `dpo_lane.py --dry-run` reports every DPO sheet "ok". Turquoise sheets use `tools/tramrender/dpo_palette.py`: body `00ADD6`, roof `44C1E4`, plain cab glass.
+`tools/busrender/dpo_lane.py` moves a sheet along the road only (no sideways move, so poles stay on the wire) to the native 12 m position by the length rule. It and `odis_town.port_native` measure against VTPsim's native-placed DPP NB 12, frozen in `tools/busrender/src/sor_nb_12-lane-ref.png`. Both generators apply that position themselves, so `dpo_lane.py --dry-run` reports every DPO sheet "ok". Turquoise sheets use `tools/tramrender/dpo_palette.py`: body `00ADD6`, roof `44C1E4`, plain cab glass.
 
 ### Rendered tram sprites (`tools/tramrender/`)
 
@@ -287,7 +289,7 @@ The scope is the vehicles seen on city lines (Prague 100–299 and the 900s), in
 
 Sheets that are repaints of upstream or VZ art are kept as PNGs, like the DPP repaints. The rendered ones regenerate with `python tools/busrender/<driver>.py [family …] [--preview DIR]`:
 
-- `praha.py` holds the PID liveries on the `dpmhk.py` bodies: SOR NS 12 / NS 18 / NC 18, the Urbanway 12M, the DPP NS 18 and the Brno Urbanway.
+- `praha.py` holds the PID liveries on the `dpmhk.py` bodies: SOR NS 12 / NS 18 / NC 18, the Urbanway 12M, the DPP NS 18 and the Brno Urbanway. It also draws the DPP SOR NB 12 / NB 18, ENS 12 and TNS 12 / TNS 18 and the Praha NB 12 on the same bodies, with the town `winrise`.
 - `praha_man.py` draws MAN Lion's City 12C (and EfficientHybrid), L (14.7 m, length 10), NL 293 / NL 283 (old generation) and Lion's Intercity LE 12.
 - `praha_small.py` draws BMC Neocity 8.5, BMC Procity 10.6, TEMSA MD9 LE and the Erduman Sprinter 519. `length` follows the DPP scale: 12 m = 8, about 9.5 m = 7, about 9 m = 6, 7.5 m = 5.
 - `dpp_coaches.py` (on the RegioJet coach modules) draws DPP's Crossway PRO 10.8M / 12M and the Tourismo RHD / 15 RHD (length 10). The Crossway PROs follow `iredo_models.SHAPE` like the regional Crossways.
@@ -327,7 +329,7 @@ The art regenerates with:
 - `iredo.py` (models in `iredo_models.py`, on the RegioJet coach modules): the SOR CN / C and Crossway families. The SOR CN's signature (raised rear roof and window line, the middle door rising into it, rounded caps, hopper windows) is drawn exaggerated, as the user required, so it reads like the VTPsim hand art.
 - `iredo_coaches.py` (models in `iredo_coachmodels.py`): Setra S 415 / 418 LE, Evadys, Arway, Irizar i4, Axer, SOR ICN, the Mercedes-Benz Intouro / Integro II L and the Scania Citywide II LE (the last two also used by pid.py).
 - `khk_small.py`: midibuses and vans, rendered on `praha_small.py` or repainted from VTPsim's sheets.
-- `khk_town.py`: the SOR EBN on the `dpmhk.py` bodies, and the Trutnov and Špindlerův Mlýn fleets.
+- `khk_town.py`: the SOR EBN on the `dpmhk.py` bodies, and the Trutnov and Špindlerův Mlýn fleets (Trutnov's SOR NB 12 / NBG 18 come from `sor_town.py`).
 
 Each driver takes `[family …] [--yaml] [--preview DIR]`; `--yaml` regenerates the family.yaml files from the driver's tables.
 

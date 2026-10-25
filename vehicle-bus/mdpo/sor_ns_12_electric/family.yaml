@@ -1,9 +1,9 @@
 agency: DPOpava
 type: "SOR_NS_12_electric"
-copyright: VTPsim
+copyright: vojtechzicha
 
-# Sprites are placed in the tile to the native pak128.cs lane position (body
-# footprint matched to the median of native 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -17,15 +17,13 @@ display:
 # SOR NS 12 electric (from 2025 marketed as ENS 12), MDPO 401-408 (2026).
 # 12 m, 3 doors, ~30 + 62 = 92 total, 160 kW class, 411 kWh roof battery,
 # 80 km/h, ~13 t.
-# Sprite: VTPsim's SOR NS 12 body (pak128_czr Frýdek-Místek NS 12 electric),
-# repainted in the 2026 e-bus scheme: white/silver-white body with no red skirt
-# or roof band, black window band, roof battery and A/C pods, a thin red ribbon
-# curling over the roof edge, down onto the front wheel arch and into one loop
-# over the middle section; white SOR electric front mask with black glass.
-# Lane placement normalised.
-
-# Body edits on every view: window band deepened from 5 to 7 rows (real NS 12
-# glazing), door leaves in lighter glass, amber front/side/rear displays.
+# The 2026 e-bus scheme: white body with no red skirt or roof band, black
+# window band, roof battery and A/C pods, a thin red ribbon from the front
+# wheel arch up to the roof edge, down over the middle section and up again
+# towards the rear; white SOR electric front with black glass.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NS 12 body
+# on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
+# with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "SOR_NS_12_electric"

@@ -1,8 +1,8 @@
 agency: MHDHranice
 type: "SOR_EBN_9.5"
-copyright: Lubak91
-# Sprites are placed in the tile to the native pak128.cs lane position (body
-# footprint matched to the median of native 12 m buses), so no extra shift.
+copyright: vojtechzicha
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -16,12 +16,12 @@ display:
 # SOR EBN 9,5 battery bus, 9.79 m, 2 doors (1-2), 6 units on Hranice MHD
 # (Transdev Slezsko, ex-3CSAD) since 10/2017. 26+2 seated + 43 standing,
 # 9.05-9.65 t, depot charging, ~250 km per charge.
-# Sprite: Lubak91's Kladno SOR EBN 11,1 (pak128_czr) cut by one window bay to
-# the two-door 9,5 m body, repainted in the Hranice e-bus scheme: metallic
-# apple green with a white belt stripe, green roof-edge band, light grey roof
-# with white battery/A-C pods, black window band with white landmark line-art
-# on the rear windows, black "smile" front mask with a white strip, black
-# rear window framed in white; lane-normalised.
+# Hranice e-bus scheme: apple-green lower body with the white town marks
+# behind the front axle, white cant, light grey roof with the battery pods,
+# black window band, black "smile" front mask, black rear window.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR EBN 9,5
+# body on the common SOR base, painted by tools/busrender/sor_town.py.
+# Regenerate with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "SOR_EBN_9.5"

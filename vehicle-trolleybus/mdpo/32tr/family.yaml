@@ -1,9 +1,9 @@
 agency: DPOpava
 type: "32Tr"
-copyright: P4T SK1LL3R
+copyright: vojtechzicha
 
-# The source sprites carry the upstream lane placement (their dats use no
-# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -14,7 +14,13 @@ display:
   family_en: "Škoda 32Tr SOR"
   family_cs: "Škoda 32Tr SOR"
 
-# Škoda 32Tr on the SOR NS 12 body, MDPO 314-328 (2018-2020).
+# Škoda 32Tr on the SOR NS 12 body, MDPO 314-328 (2018-2020). MDPO white-red
+# as on the NSG 12: the red roof edge sweeping down the A-pillar, the straight
+# red skirt; black mask, white strip, red apron.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Škoda 32Tr
+# body on the common SOR base (the DPMHK 32Tr model with its roof equipment and
+# poles), painted by tools/busrender/sor_town.py. Regenerate with
+# tools/busrender/sor_town.py.
 # - 32Tr_battery: 314-323 (2018) carry a Škoda TBS5.1 traction battery
 #   (seznam-autobusu "alternativní pohon: baterie") and run as engine_type
 #   battery, so they are not tied to the wire; cost / weight / payload deltas

@@ -1,9 +1,9 @@
 agency: MHDKladno
 type: "SOR_NS_12_electric"
-copyright: VTPsim
+copyright: vojtechzicha
 
-# Sprites carry their own tile placement (normalised to the native pak128.cs
-# 12 m bus lane position), so no extra makeobj offset.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -14,13 +14,15 @@ display:
   family_en: "SOR NS 12 electric"
   family_cs: "SOR NS 12 electric"
 
-# SOR NS 12 electric, 8 units (51–58, in service 7/2024). Repainted from
-# VTPsim's SOR NS 12 electric (pak128_czr FrydekMistek) in the "Městská
-# doprava Kladno" scheme: white roof with a long battery fairing and a black
+# SOR NS 12 electric, 8 units (51–58, in service 7/2024). "Městská doprava
+# Kladno" scheme: white roof with a long battery fairing and a black
 # front visor, black window band, bold red lower band straight under the
 # windows, white skirt strip, dark bottom edge; black front mask with red
 # headlight corners; black upper rear and bumper, white middle.
 # Data: 12 m, 34 + 72 = 106 passengers, 160 kW, 274 kWh, 80 km/h, 12.35 t.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NS 12 body
+# on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
+# with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "SOR_NS_12_electric"

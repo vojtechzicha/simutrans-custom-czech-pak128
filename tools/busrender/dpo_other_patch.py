@@ -1,5 +1,5 @@
 """Patches on frozen DP Ostrava sheets (tools/busrender/src/dpo/): the Unvi
-Urbis DD, the Skoda 21Tr, the Temsa-bodied Skoda 36Tr and the SOR TNB 12.
+Urbis DD, the Skoda 21Tr and the Temsa-bodied Skoda 36Tr.
 
 Every patch works on the frozen sheet with a box frame fitted to its
 silhouette (dpo_otherkit.Frame, per-view origin offsets found by a silhouette
@@ -12,7 +12,7 @@ import numpy as np
 
 from render import Box, render, DIRS, HEAD, P
 import dpo_otherkit as K
-from dpo_otherkit import Frame, T, hexv, rgb, is_bg
+from dpo_otherkit import Frame, T, rgb, is_bg
 
 # ------------------------------------------------------------------ frames
 # fitted with a silhouette search (L, W, z0, zt; origin offset per view on a
@@ -27,9 +27,6 @@ F_21TR = Frame(11.0, 2.5, 0.0, 3.0, {
 F_36TR = Frame(12.0, 2.7, 0.25, 3.5, {
     "w": (0.0, 1.0), "nw": (0.0, 0.5), "n": (0.0, 0.0), "ne": (-0.5, -1.0),
     "e": (0.0, -1.0), "se": (0.0, 1.0), "s": (0.0, 0.0), "sw": (-0.5, -1.0)})
-F_TNB = Frame(12.2, 2.62, 0.25, 2.9, {
-    "w": (-0.5, 0.5), "nw": (-0.5, -2.0), "n": (0.5, -0.5), "ne": (1.0, -1.0),
-    "e": (0.5, -1.0), "se": (0.5, 1.0), "s": (0.0, -1.0), "sw": (0.5, -1.0)})
 
 RIGHT_VIEWS = ("n", "ne", "e")          # views that show the right (door) side
 LEFT_VIEWS = ("s", "sw", "w")
@@ -70,8 +67,6 @@ def repole(tile, d, frame, u_base, z_base, half, cols, keep=None):
 
 
 POLES_36TR = dict(pole_col=(0x22, 0x24, 0x26), base_col=(0x10, 0x10, 0x12), tip_col=(0x10, 0x10, 0x12))
-POLES_TNB = dict(pole_col=(0xC8, 0xCC, 0xD0), base_col=(0x50, 0x54, 0x58), tip_col=(0x30, 0x32, 0x34),
-                 dark_frac=0.18, dark_col=(0x50, 0x54, 0x58))
 POLES_21TR = dict(pole_col=(0xD8, 0xA8, 0x28), base_col=(0x1C, 0x1C, 0x1E), tip_col=(0x1C, 0x1C, 0x1E),
                   dark_frac=0.22, dark_col=(0x1C, 0x1C, 0x1E))
 
@@ -98,87 +93,6 @@ def patch_36tr(rows):
         new = repole(new, d, F_36TR, 5.4, F_36TR.zt + 0.10, 0.30, POLES_36TR)
         out.append(new)
     return [out]
-
-
-# ------------------------------------------------------------------ shared
-def plain_cab(tile, d, frame, drv=(0.0, 1.6), inset=0.06, zmin=0.9):
-    """windscreen and driver's window in plain (non-lit) glass: the lit-glass
-    specials on the front end, and on the left side ahead of drv[1]"""
-    out = tile.copy()
-    v = vals(tile)
-    lit = (v == 0x4D4D4D) | (v == 0x57656F)
-    r = frame.face_tz(d, "front")
-    m = np.zeros((128, 128), bool)
-    if r is not None:
-        t, z = r
-        m |= (np.abs(t) < frame.W / 2 - inset) & (z > frame.z0) & (z < frame.zt + 0.3)
-    r = frame.face_uz(d, "left")
-    if r is not None:
-        u, z = r
-        m |= (u >= drv[0] - 0.3) & (u < drv[1]) & (z > zmin) & (z < frame.zt)
-    out[m & lit] = K.CAB
-    return out
-
-
-# ------------------------------------------------------------------ SOR TNB 12
-TNB_BLUE = (0x28, 0x8C, 0xD2)
-TNB_GLASS = {0x4D4D4D, 0x57656F}
-TNB_DARK = {0x191919, 0x393939, 0x232323, 0x2E2E2E, 0x202020}
-
-
-def tnb_band(tile, d):
-    """the black band under the side windows: the window frame row stays; the
-    rows below it turn white except at the front, where the band dips (full
-    depth to just behind door 1 / the driver's window, one row less up to the
-    front wheel arch)"""
-    out = tile.copy()
-    v = vals(tile)
-    light = (np.min(tile, axis=2) >= 0xC8) & ~is_bg(tile)
-    for side, (u, z, m) in side_masks(F_TNB, d, margin=0.0).items():
-        cols = {}
-        for x in range(128):
-            col = [y for y in range(128) if m[y, x]]
-            if not col:
-                continue
-            # the white body under the windows: the first light pixel below a
-            # dark run, in the lower half of the side
-            for k in range(col[0] + 3, min(col[-1] + 2, 128)):
-                if light[k, x] and v[k - 1, x] in TNB_DARK and z[k, x] < 1.4:
-                    break
-            else:
-                continue
-            run = 0
-            while v[k - 1 - run, x] in TNB_DARK:
-                run += 1
-            glass = v[k - 1 - run, x] in TNB_GLASS
-            cols[x] = (k, run if glass else None)
-        known = [x for x, (_, dp) in cols.items() if dp]
-        if not known:
-            continue
-        for x, (k, dp) in cols.items():
-            if not dp:                    # window pillar: the band depth of the nearest window
-                dp = cols[min(known, key=lambda q: (abs(q - x), q))][1]
-            uu = u[k, x]
-            keep = dp if uu < 1.85 else (2 if uu < 2.25 else 1)
-            for y in range(k - max(0, dp - keep), k):
-                out[y, x] = tile[k, x]
-    return out
-
-
-def tnb_roof_edges(tile, d):
-    """end views: the blue cant rail on both roof edges (it was drawn on one)"""
-    if d not in ("nw", "se"):
-        return tile
-    out = tile.copy()
-    v = vals(tile)
-    for y in range(128):
-        xs = np.where(~is_bg(tile[y]))[0]
-        if len(xs) < 6:
-            continue
-        xl, xr = xs.min(), xs.max()
-        if v[y, xr] == hexv(TNB_BLUE) and v[y, xl] != hexv(TNB_BLUE):
-            out[y, xl] = TNB_BLUE
-    return out
 
 
 # ------------------------------------------------------------------ Skoda 21Tr
@@ -447,16 +361,3 @@ def t21_ends(tile, d):
                 out[y, x] = rgb(blue)
             y += 1
     return out
-
-
-def patch_tnb(rows):
-    out = []
-    for i, d in enumerate(DIRS):
-        t = rows[0][i]
-        t, _ = K.erase_poles(t)
-        t = tnb_roof_edges(t, d)
-        t = tnb_band(t, d)
-        t = plain_cab(t, d, F_TNB, drv=(0.0, 1.6))
-        t = K.draw_poles(t, d, F_TNB, 9.3, F_TNB.zt + 0.40, 0.30, **POLES_TNB)
-        out.append(t)
-    return [out]

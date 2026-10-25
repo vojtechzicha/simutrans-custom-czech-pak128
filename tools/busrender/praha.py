@@ -27,7 +27,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import dpmhk as H                                                    # noqa: E402
-from dpmhk import Veh, mk, sh, inr, HW, KCU, PER_CU, NS12, NS18, UW12   # noqa: E402
+from dpmhk import Veh, mk, sh, inr, HW, KCU, PER_CU, NS12, NS18, NB12, NB18, UW12   # noqa: E402
 from render import render, DIRS                                     # noqa: E402
 
 BLACK, FRAME, GLASS, GLASS2 = H.BLACK, H.FRAME, H.GLASS, H.GLASS2
@@ -339,6 +339,31 @@ class PVeh(Veh):
             if z >= 2.72:
                 return sh(P.get("blue", P["white"]), f)
             return sh(P["white"], f)
+        if self.face == "nb":                              # SOR NB 12 / 18 City
+            if z < 0.34:
+                return BLACK
+            if a > HW - 0.36 and inr(z, 0.58, 0.82):
+                return HEADL if a < HW - 0.10 else sh(SILVER, f)
+            if L == "A":                                   # grey, the red block on the vehicle's left
+                if z < 1.00:
+                    return sh(P["red"] if -1.00 <= t < -0.16 else P["body"], f)
+            elif L == "W":
+                if z < 1.12:
+                    return sh(P["white"], f)
+            else:                                          # red bumper; white (B) / black (C) mask
+                if z < 0.70:
+                    return sh(P["red"], f)
+                if z < 1.12:
+                    return sh(P["white"], f) if L == "B" else BLACK
+            if a > HW - 0.08:
+                return BLACK if L in ("A", "C") else sh(P["white"], f)
+            if inr(z, 2.36, 2.62) and a < 1.00:
+                return self.DISP
+            if inr(z, 1.16, 2.70) and a < HW - 0.12:
+                return GLASS
+            if L == "B" and z >= 2.72:
+                return sh(P["blue"], f)
+            return BLACK if L in ("A", "C") else sh(P["white"], f)
         if self.face == "nc":                              # SOR NB-style face in white (9930)
             nose = self.sp.get("nose", 1.00)
             if z < 0.28:
@@ -406,6 +431,31 @@ class PVeh(Veh):
             if L == "A":
                 return BLACK if z < 2.80 else sh(P["body"], f)
             return sh(P["white"], f)
+        if st == "nb":                                     # SOR NB 12 / 18 City
+            if z < 0.30:
+                return BLACK
+            if a > HW - 0.26 and inr(z, 0.70, 1.30):
+                return TAILL
+            low = P["body"] if L == "A" else P["white"]
+            if z < 0.64:
+                if L == "A":
+                    return sh(P["red"] if -0.95 <= t < -0.15 else low, f)
+                return sh(P["red"] if P["red"] else low, f)
+            if z < 1.36:
+                if L == "A" and abs(t) < 0.20:
+                    return sh(P["red"], f)                 # the central red stripe (scheme A)
+                return sh(low, f)
+            if z < 1.74:
+                if a < HW - 0.25 and int((z - 1.36) / 0.09) % 2 == 1:
+                    return sh((0xC8, 0xCA, 0xCC), f)       # the louvred panel
+                return sh(low, f)
+            if inr(z, 2.36, 2.58) and inr(t, 0.25, 0.80):
+                return self.DISP
+            if inr(z, 1.78, 2.62) and a < HW - 0.22:
+                return GLASS
+            if L == "B":
+                return sh(P["blue"], f)
+            return BLACK if L in ("A", "C") else sh(low, f)
         if st == "nc":                                     # NC 18 rear (Autotec / Hrncire photos)
             if z < 0.28:
                 return sh(LIP, f)
@@ -434,13 +484,41 @@ def build(sp, livery):
             if not m.single:
                 o = o + (4 - l / 2.0) * PER_CU[d]
             img, _ = render(d, m.boxes(i), m.tex_for(i), L, o)
+            if m.poles:
+                pb = m.M(m.poles[0])
+                if m.U[i] <= pb < m.U[i + 1]:
+                    H.draw_poles(img, d, L, o, m.U[i + 1] - pb, m.roof_top(pb) + 0.16, m.poles[1], H.TIP)
             tiles.append(img)
         rows.append(tiles)
     return rows
 
 
 A, B, C, W = "pidsedocervena", "pidcervenomodrobila", "dppcervenobila", "bila"
-KEY = {A: "A", B: "B", C: "C", W: "W"}
+MC = "mestskacervenobila"
+KEY = {A: "A", B: "B", C: "C", W: "W", MC: "C"}
+
+# The DPP / Praha SOR NB, ENS and TNS families on the town bodies (the window
+# line one row higher, sor_town.WINRISE; owner, 2026-10-25)
+WR = 0.25
+# SOR NB 12 City: the A/C unit just behind the front roof edge (every photo);
+# scheme A with the red blocks between doors 1-2 and 3-4 (3694)
+DNB12 = mk(NB12, winrise=WR, pods=[(0.80, 2.00, 0.22, 0.80, "ac")])
+DNB12A = mk(DNB12, reds=[(1.55, 4.15), (7.90, 9.25)])
+# SOR NB 18 City: two white A/C units flanking the bellows (5017, 5073)
+DNB18 = mk(NB18, winrise=WR, pods=[(10.40, 11.80, 0.22, 0.80, "ac"), (12.80, 14.00, 0.22, 0.80, "ac")])
+# SOR ENS 12 (DPP 3015-3032): grey battery fairings along the roof, the black
+# cap, red columns over both wheel arches; the folded charging pantograph as a
+# dark box on the rear edge of the cap
+DENS12 = mk(NS12, winrise=WR, cap=1.20,
+            pods=[(1.25, 1.95, 0.30, 0.45, "dark"), (2.10, 11.60, 0.26, 1.05, "fair")],
+            reds=[(1.75, 3.75), (7.60, 9.47)], tower=True)
+# SOR TNS 12 (DPP 511-514): equipment fairing, poles
+DTNS12 = mk(NS12, winrise=WR, cap=1.20, pods=[(1.80, 7.20, 0.26, 1.00, "fair")],
+            reds=[(1.75, 3.75), (7.60, 9.47)], poles=(7.60, 0.30))
+# SOR TNS 18 (DPP 101-115): red panels behind doors 1 and 2 and round the rear
+# arch, the fairing over the front section, poles on the front of the rear section
+DTNS18 = mk(NS18, winrise=WR, cap=1.20, pods=[(1.80, 10.30, 0.26, 1.00, "fair")],
+            reds=[(1.60, 3.75), (6.10, 7.80), (14.40, 16.20)], poles=(12.40, 0.30))
 
 # family dir -> {livery colour: [model spec, ...] in sprite-row order}
 FAMILIES = {
@@ -449,6 +527,12 @@ FAMILIES = {
     "vehicle-bus/praha/urbanway_12m": {B: [PUW12B], A: [PUW12A]},
     "vehicle-bus/praha/sor_nc_18": {W: [NC18]},
     "vehicle-bus/dpp/sor_ns_18": {C: [DNS18]},
+    "vehicle-bus/dpp/sor_nb_12": {C: [DNB12], B: [DNB12], A: [DNB12A]},
+    "vehicle-bus/dpp/sor_nb_18": {C: [DNB18]},
+    "vehicle-bus/praha/sor_nb_12": {B: [DNB12], W: [DNB12], MC: [DNB12]},
+    "vehicle-bus/dpp/ens_12": {A: [DENS12]},
+    "vehicle-trolleybus/dpp/tns_12": {A: [DTNS12]},
+    "vehicle-trolleybus/dpp/tns_18": {A: [DTNS18]},
     "vehicle-bus/brno/urbanway_12m": {W: [PUW12W]},
 }
 

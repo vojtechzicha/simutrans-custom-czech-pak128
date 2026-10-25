@@ -1,11 +1,11 @@
 agency: DPPraha
 type: "SOR_NB_12"
-# Sprites carry their own lane placement (body footprint matched to the
-# median of native pak128.cs 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 
 display:
   agency_en: "DPP"
@@ -31,14 +31,11 @@ display:
 # and between doors 3 and 4 (over the rear axle), continued above the windows
 # and across the roof, red lower front on the vehicle's left, central red
 # stripe on the rear; light-grey roof A/C unit behind the front roof edge.
-# Sprites: VTPsim's CZR-Praha-SOR_NB_12 (already white-roofed) and
-# CZR-Praha-SOR_NB_12_PR (its mid-blue roof repainted the PID ultramarine
-# sampled from photos of 3688), glass converted to the lit-window specials,
-# the displays (drawn with the red-light special) made amber; the roof A/C
-# unit just behind the front roof edge added (white on the city cars as on
-# 4072, painted roof blue on 3687 / 3688, light grey on 3694). The scheme A
-# sheet is the city sheet repainted zone by zone (white and red to RAL 7038
-# grey and RAL 3020 red as on the DPP Streetway / ICN sheets).
+# Every livery has the roof A/C unit just behind the front roof edge (white on
+# the city cars as on 4072, roof blue on 3687 / 3688, light grey on 3694).
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NB 12 body
+# on the common SOR base, painted by tools/busrender/praha.py PVeh. Regenerate
+# with tools/busrender/praha.py.
 
 vehicles:
   - id: "NB_12"

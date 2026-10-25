@@ -1,10 +1,10 @@
 agency: MHDKladno
 type: "SOR_NBG_18"
-copyright: VTPsim
+copyright: vojtechzicha
 
-# Sprites carry their own tile placement (VTPsim's NB 18 sits on the native
-# pak128.cs lane; the articulated normaliser applied no shift), so no extra
-# makeobj offset.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses, each section placed by the section rule), so
+# no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -20,13 +20,14 @@ display:
 # consist: front section A + powered rear section B (pusher, Iveco Cursor 8
 # CNG 213 kW); both halves required. Doors 2-0-2-2-0 (front door, one before
 # the joint, one behind it).
-# Repainted from VTPsim's CZR-Praha-SOR_NB_18[1]/[2] in the "Městská doprava
-# Kladno" scheme: white roof with an A/C unit behind the front, a raised CNG
-# tank fairing over the rear half of the front section and an A/C unit on the
-# rear section; black window band and sill, bold red lower band, white skirt;
-# white front with black band under the windscreen and red corners; white rear
-# with red bumper; silver bellows; amber destination displays; doors 2 and 5
-# of the base turned into window bays.
+# "Městská doprava Kladno" scheme: white roof with an A/C unit behind the
+# front, a raised CNG tank fairing over the rear half of the front section and
+# an A/C unit on the rear section; black window band, bold red lower band,
+# white skirt; amber destination displays. Sections 9 + 5 carunits as the
+# DPMHK NB 18 (joint at the real 12.3 m).
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NB 18 body
+# on the common SOR base with Kladno's doors, painted by
+# tools/busrender/sor_town.py. Regenerate with tools/busrender/sor_town.py.
 # CNG: engine_type diesel (upstream convention), no smoke.
 # Data: 18.75 m, ~150 passengers split 90/60, 213 kW, 80 km/h, ~17 t.
 
@@ -53,7 +54,7 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 9
       engine_type: diesel
 
   - id: "SOR_NBG_18-B"
@@ -78,7 +79,7 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 5
       engine_type: diesel
       power: 213
       gear: 62

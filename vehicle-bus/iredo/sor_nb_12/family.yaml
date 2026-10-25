@@ -5,7 +5,7 @@ type: "SOR_NB_12"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 
 display:
   agency_en: "IREDO"
@@ -18,9 +18,11 @@ display:
 # window band; 42079 (2014) white with black "MĚSTSKÁ AUTOBUSOVÁ DOPRAVA CHRUDIM"
 # over the windows (a dotted line here); 41028 (2014, since 6/2025) white with a
 # red stripe under the windows. No KHK sticker.
-# Sprite: VTPsim's SOR NB 12 (the white sheet of vehicle-bus/praha/sor_nb_12) repainted by
-# odis_town.repaint, decals by pk_town.py.
-# Regenerate with tools/busrender/pk_town.py (family.yaml: --yaml).
+# The base's window band reaches the roof edge, so 42079's lettering is not
+# drawn.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NB 12 body
+# on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
+# with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "SOR_NB_12"

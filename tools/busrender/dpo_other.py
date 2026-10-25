@@ -12,7 +12,6 @@ sheets.
   bus/dpo/scaniaunviurbisdd  Unvi Urbis DD (7991-7992): patched
   trolleybus/dpo/21tr        Skoda 21Tr: patched
   trolleybus/dpo/36trsolaris Skoda 36Tr (Temsa): patched
-  trolleybus/dpo/sor_tnb_12  SOR TNB 12 (3912): patched (dpo_other_patch.py)
 
 The patched and re-based sheets start from frozen copies in
 tools/busrender/src/dpo/ (the sheets as they were, and the two Prague sheets),
@@ -65,8 +64,6 @@ FAMILIES = {
     "vehicle-trolleybus/dpo/21tr": ("dpomodrozluta", from_src("21tr-dpomodrozluta.png", PT.patch_21tr), None, True),
     "vehicle-trolleybus/dpo/36trsolaris": ("dpotyrkysova",
                                            from_src("36trsolaris-dpotyrkysova.png", PT.patch_36tr), None, True),
-    "vehicle-trolleybus/dpo/sor_tnb_12": ("bilamodrastrecha",
-                                          from_src("sor_tnb_12-bilamodrastrecha.png", PT.patch_tnb), None, True),
 }
 
 

@@ -75,7 +75,10 @@ def inr(v, a, b):
 #   orig  the bodies before (body down to the floor height Z0, a body-colour
 #         strip over the window band)
 # Paint that marks the bottom of the body (skirt strips, door steps) is laid
-# from ZB, the body's lowest point.
+# from ZB, the body's lowest point. A spec's winrise (m) lifts the window band
+# with the low shape: the town fleets (sor_town.py) take one row (0.25 m) so a
+# town's lower bands keep two rows under the tall city glazing (owner,
+# 2026-10-25).
 SOR_SHAPE = ["low"]
 SKIRT = 0.25
 
@@ -188,6 +191,8 @@ class Veh:
         if sp.get("sor") and SOR_SHAPE[0] == "low":
             self.ZB = self.Z0 + SKIRT
             self.ZBAND1 = self.ZR
+            self.ZBAND0 += sp.get("winrise", 0.0)
+            self.ZWIN0 += sp.get("winrise", 0.0)
         M = self.M
         self.axles = [M(a) for a in sp["axles"]]
         self.doors = [(M(a), M(b)) for a, b in sp["doors"]]

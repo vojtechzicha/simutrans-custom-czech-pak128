@@ -1,7 +1,7 @@
 agency: DPBrno
 type: "SOR_NS_12"
-# Sprites are drawn at the native pak128.cs lane position (body footprint on
-# the median of native 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -23,9 +23,9 @@ display:
 # swoosh up the front corners; black front mask above a white "smile" line and
 # a red apron; green LED displays; one A/C unit on the roof 0.47-0.66 of the
 # length from the front.
-# Sprite: new 8-direction render of the NS 12 body — the same body model as
-# the DPMB TNS 12 trolleybus — replacing VTPsim's CZR-Brno-SOR-NS12, a generic
-# NB-style body with a grey roof and a shallow window band.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NS 12 body
+# on the common SOR base (the same body as the DPMB TNS 12), painted by
+# tools/busrender/sor_town.py. Regenerate with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "SOR_NS_12"

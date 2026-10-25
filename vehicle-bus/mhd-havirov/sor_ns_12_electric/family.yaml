@@ -5,7 +5,7 @@ type: "SOR_NS_12_electric"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 
 display:
   agency_en: "MHD Havířov"
@@ -15,9 +15,11 @@ display:
 
 # SOR NS 12 electric (2018). Havířov MHD: 40-1222 to 40-1224, in the green
 # metallic e-bus scheme of the 3ČSAD group since new (no city logo).
-# Sprite: the Frýdek-Místek SOR NS 12 electric sheet (the same 2018 3ČSAD e-bus
-# order and scheme), copied unchanged.
-# Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
+# The same body and paint as the Frýdek-Místek 2018 cars (the same 3ČSAD
+# e-bus order).
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NS 12 body
+# on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
+# with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "SOR_NS_12_electric"

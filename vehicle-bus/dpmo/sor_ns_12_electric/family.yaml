@@ -1,9 +1,9 @@
 agency: DPOlomouc
 type: "SOR_NS_12_electric"
-copyright: VTPsim
+copyright: vojtechzicha
 
-# Sprites are placed in the tile to the native pak128.cs lane position (body
-# footprint matched to the median of native 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -16,15 +16,12 @@ display:
 
 # SOR NS 12 electric, DPMO 501 (12 m, 3 doors 2-2-2, 33 seats / ~85 total,
 # 160 kW asynchronous motor, roof NMC battery, 80 km/h, 12.35 t).
-# Sprite: VTPsim's SOR NS 12 body (pak128_czr Frýdek-Místek NS 12 electric /
-# NSG 12), repainted in the DPMO scheme: white roof with battery and A/C pods,
-# black window band outlined in red (the line runs round the A-pillar and
-# around the black front section to the front wheel), white band, red stripe
-# arching over the wheels, navy skirt; black front mask with red logo, silver
-# strip and navy bumper. Lane placement normalised.
-
-# Body edits on every view: window band deepened from 5 to 7 rows (real NS 12
-# glazing), door leaves in lighter glass, amber front/side/rear displays.
+# DPMO scheme: white roof with battery and A/C pods, black window band, red
+# A-pillar trim round the black front section, white band, red stripe over the
+# navy skirt; black front mask, silver strip and navy bumper.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NS 12 body
+# on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
+# with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "SOR_NS_12_electric"

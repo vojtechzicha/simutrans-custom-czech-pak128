@@ -1,8 +1,8 @@
 agency: MHDPrerov
 type: "SOR_EBN_11.1"
-copyright: Lubak91
-# Sprites are placed in the tile to the native pak128.cs lane position (body
-# footprint matched to the median of native 12 m buses), so no extra shift.
+copyright: vojtechzicha
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -16,10 +16,12 @@ display:
 # SOR EBN 11,1 battery bus, 11.1 m, 2 units (01 built 2016, 02 built 2017,
 # ex-SOR demonstrators) on Přerov MHD since 5/2022. TAM 1052 120 kW, 172 kWh,
 # 28 seated + 54 standing, 9.7-10.5 t.
-# Sprite: Lubak91's Kladno SOR EBN 11,1 (pak128_czr), repainted in Arriva blue
-# (blue roof and battery pods, black window band, white swoosh over the front
-# wheel arch, black "smile" front mask with a silver strip, black rear window
-# with a silver frame) and lane-normalised.
+# Arriva blue: blue roof and battery pods, black window band, the short white
+# swoosh at the front wheel arch, black "smile" front mask with a silver
+# strip, black rear window.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR EBN 11
+# body on the common SOR base at 11.1 m, painted by
+# tools/busrender/sor_town.py. Regenerate with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "SOR_EBN_11.1"

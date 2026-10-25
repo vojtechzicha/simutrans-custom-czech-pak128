@@ -5,7 +5,7 @@ repaint the sprite sheets and write the family.yaml files.
 
 Without --yaml only the sheets are written; with --yaml the family.yaml files
 are (re)generated from FAMILIES too (review the diff). A family is named by
-its folder (sor_ebn_9_5) or agency/folder (mhd-trutnov/sor_nbg_18).
+its folder (sor_ebn_9_5) or agency/folder (mhd-trutnov/sor_bn_8_5).
 
 Packages (user, 2026-10-04):
   IREDO (vehicle-bus/iredo/)  the town MHDs integrated in IREDO: Náchod, Rychnov
@@ -610,33 +610,6 @@ def rows_26bb():
     return trutnov_rows(src, paint_urbino, [dict(L=[11.5, 12.0, 12.5], mosaic=(0.45, 0.98), logo=(0.30, 0.40))])
 
 
-# SOR NBG 18 / NB 12 / BN 8,5: VTPsim's pak128_czr SOR art (white body and roof,
-# red lower body); white and red are the paint, the bellows greys stay
-def paint_vtpsim(c):
-    r, g, b = (int(v) for v in c)
-    if r > 0x90 and g < 0x30 and b < 0x30:
-        return min(1.0, r / 0xD5)                      # red (D50B15 = the lit side)
-    if neutral(c, 0xC0):
-        return (r + g + b) / 3 / 255.0
-    return None
-
-
-NBG18_SRC = "vehicle-bus/mhd-kladno/sor_nbg_18/sprites/kladnobilocervena.png"
-NB12_SRC = "vehicle-bus/dpp/sor_nb_12/sprites/dppcervenobila.png"
-
-
-def rows_nbg18():
-    src = sheet_rows(load_sheet(NBG18_SRC))[:2]
-    return trutnov_rows(src, paint_vtpsim, [
-        dict(L=[10.5, 11.0, 11.5], mosaic=(0.55, 0.98), logo=(0.28, 0.38)),
-        dict(L=[7.5, 8.0, 8.5], mosaic=(0.30, 0.98), logo=(0.06, 0.22))])
-
-
-def rows_nb12():
-    src = sheet_rows(load_sheet(NB12_SRC))[:1]
-    return trutnov_rows(src, paint_vtpsim, [dict(L=[11.5, 12.0, 12.5], mosaic=(0.45, 0.98), logo=(0.30, 0.40))])
-
-
 def is_red(c):
     r, g, b = (int(v) for v in c)
     return r > 0x90 and g < 0x40 and b < 0x40
@@ -897,31 +870,6 @@ FAMILIES = {
                "Urbino III of the Třinec 26BB lacks), repainted by khk_town.rows_26bb: COMETT\n"
                "white and the chequered patch Arriva light blue, pixel mosaic and white\n"
                "TRUTNOV MHD logo (photos 232403, 414852)."),
-    "mhd-trutnov/sor_nbg_18": dict(
-        agency=TRUTNOV, type="SOR_NBG_18", name=("SOR NBG 18", "SOR NBG 18"), copyright="VTPsim",
-        vehicles=[dict(id="SOR_NBG_18-A", display="SOR NBG 18", role=("front section", "přední díl"), row=0,
-                       head=True, tail=False, next=["SOR_NBG_18-B"],
-                       fields=dict(f_(540000, 90, 80, 9, 25, 128, 2018, 8, "diesel", None, None, retire=2050))),
-                  dict(id="SOR_NBG_18-B", display="SOR NBG 18", role=("rear section", "zadní díl"), row=1,
-                       head=False, tail=True, prev=["SOR_NBG_18-A"],
-                       fields=f_(390000, 60, 80, 8, 11, 56, 2018, 8, "diesel", 213, 62, retire=2050))],
-        liveries=[("trutnovmhd", TU_NAME[0], TU_NAME[1], rows_nbg18)],
-        note="SOR NBG 18 (CNG), 18.75 m, 4 doors, pusher (Iveco Cursor 8 CNG 213 kW).\n"
-             "Trutnov MHD: 6E1 3718-3720, 3 cars (2018). Fixed consist: front section A +\n"
-             "powered rear section B. CNG: engine_type diesel (upstream convention), no smoke.",
-        sprite="VTPsim's NB 18 body as repainted for the Kladno NBG 18 (CNG tank fairing),\n"
-               "white and red turned Arriva light blue by khk_town.rows_nbg18, the black\n"
-               "band under the windscreen kept, pixel mosaic on the rear half of the front\n"
-               "section and on the rear section, TRUTNOV logo on both (photos 398768, 442882)."),
-    "mhd-trutnov/sor_nb_12": dict(
-        agency=TRUTNOV, type="SOR_NB_12", name=("SOR NB 12 City", "SOR NB 12 City"), copyright="VTPsim",
-        vehicles=[dict(id="SOR_NB_12", display="NB 12", role=BUS,
-                       fields=f_(604804, 88, 80, 11, 25, 128, 2009, 8, "diesel", 210, 54, intro_month=8,
-                                 smoke="Diesel_small"))],
-        liveries=[("trutnovmhd", TU_NAME[0], TU_NAME[1], rows_nb12)],
-        note="SOR NB 12 City, 12.18 m, 4 doors. Trutnov MHD: 8T9 2189 (2013, ex MHD Třinec,\n"
-             "in Trutnov since 11/2022, repainted in the Trutnov scheme; photo 415210).",
-        sprite="VTPsim's NB 12 (the DPP city sheet), repainted by khk_town.rows_nb12."),
     "mhd-trutnov/crossway_le_city_12m": dict(
         agency=TRUTNOV, type="Crossway_LE_City_12M",
         name=("Iveco Crossway LE City 12M", "Iveco Crossway LE City 12M"), copyright="Lubak91",
