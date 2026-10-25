@@ -17,8 +17,9 @@ display:
 # SOR NBG 18 (CNG), 18.75 m, 4 doors, pusher (Iveco Cursor 8 CNG 213 kW).
 # Trutnov MHD: 6E1 3718-3720, 3 cars (2018). Fixed consist: front section A +
 # powered rear section B. CNG: engine_type diesel (upstream convention), no smoke.
-# Trutnov MHD light blue with the coloured dots low on the sides (photos
-# 398768, 442882), CNG fairings on both sections. Sections 9 + 5 carunits as
+# Trutnov MHD light blue with the mosaic along the lower edge of the window
+# band and the white TRUTNOV MHD logo on both sections (photos 398768, 442882),
+# CNG fairings on both sections. Sections 9 + 5 carunits as
 # the DPMHK NB 18.
 # Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NB 18 body
 # on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate

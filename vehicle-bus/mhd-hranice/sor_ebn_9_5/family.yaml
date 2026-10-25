@@ -16,9 +16,10 @@ display:
 # SOR EBN 9,5 battery bus, 9.79 m, 2 doors (1-2), 6 units on Hranice MHD
 # (Transdev Slezsko, ex-3CSAD) since 10/2017. 26+2 seated + 43 standing,
 # 9.05-9.65 t, depot charging, ~250 km per charge.
-# Hranice e-bus scheme: apple-green lower body with the white town marks
-# behind the front axle, white cant, light grey roof with the battery pods,
-# black window band, black "smile" front mask, black rear window.
+# Hranice e-bus scheme: apple-green lower body under a white belt line, the
+# green top row of the side, white line-art of town landmarks on the rear
+# windows, light grey roof with the battery pods, black window band, black
+# "smile" front mask, black rear window.
 # Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR EBN 9,5
 # body on the common SOR base, painted by tools/busrender/sor_town.py.
 # Regenerate with tools/busrender/sor_town.py.

@@ -15,7 +15,9 @@ display:
 
 # SOR NB 12 City, 12.18 m, 4 doors. Trutnov MHD: 8T9 2189 (2013, ex MHD Třinec,
 # in Trutnov since 11/2022, repainted in the Trutnov scheme; photo 415210).
-# Trutnov MHD light blue with the coloured dots low on the sides.
+# Trutnov MHD light blue with a scattered mosaic of small orange, magenta,
+# yellow and blue blocks along the lower edge of the window band, denser towards
+# the rear, and the white TRUTNOV MHD logo behind the front axle.
 # Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NB 12 body
 # on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
 # with tools/busrender/sor_town.py.

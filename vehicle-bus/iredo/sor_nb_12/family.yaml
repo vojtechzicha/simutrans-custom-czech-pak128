@@ -18,8 +18,8 @@ display:
 # window band; 42079 (2014) white with black "MĚSTSKÁ AUTOBUSOVÁ DOPRAVA CHRUDIM"
 # over the windows (a dotted line here); 41028 (2014, since 6/2025) white with a
 # red stripe under the windows. No KHK sticker.
-# The base's window band reaches the roof edge, so 42079's lettering is not
-# drawn.
+# 42079's lettering sits on a white strip over the window band; 41028's red
+# stripe is the two rows right under it.
 # Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NB 12 body
 # on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
 # with tools/busrender/sor_town.py.

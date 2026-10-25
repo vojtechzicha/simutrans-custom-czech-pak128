@@ -24,6 +24,8 @@ dpmhk.SHADE factors):
                    lamp surrounds of the NS / EBN), trim (A-pillars)
     rear           bumper, panel (between the lamps), upper (round the rear
                    window)
+    cant           colour of the top row of the side under the roof edge
+                   (default: the black window band runs up to it)
     decal          optional f(veh, p, u, right) -> colour or None on the
                    lower body (logos, chevrons)
     overlay        the same over the whole side, glass included (the Opava
@@ -68,11 +70,14 @@ FM_SKY = (0x8E, 0xC3, 0xE6)        # the Frýdek-Místek wrap: light blue
 FM_BLUE = (0x3C, 0x7F, 0xB0)
 FM_NSG_GREY = (0xC3, 0xC3, 0xC3)
 FM_NSG_SKY = (0x99, 0xD9, 0xEA)
+FM_NSG_LINE = (0x39, 0x39, 0x3A)
+FM_GREY = (0x8C, 0x8C, 0x8D)
 HAV_BLUE = (0x3F, 0xA8, 0xEE)      # Havířov city blue (as the VTPsim / odis_town sheets)
 HAV_BLUE_DK = (0x15, 0x85, 0xD8)
 HAV_YEL = (0xF6, 0xD0, 0x2A)
 KRNOV_YEL = (0xF2, 0xB7, 0x05)
 KRNOV_BLUE = (0x2A, 0x5A, 0xA8)
+KRNOV_NAVY = (0x1C, 0x26, 0x52)
 TRINEC_LIME = (0xB5, 0xE6, 0x1D)
 TRUT_CYAN = (0x30, 0xBE, 0xEA)
 CHR_RED = (0xDC, 0x34, 0x38)
@@ -85,19 +90,70 @@ DPO_BLUE = (0x28, 0x8C, 0xD2)
 LIGHT_GREY = (0xD8, 0xD8, 0xD8)
 
 
-def chevrons(marks):
-    """Krnov: golden-yellow + blue chevron pairs on the second lower-body row"""
-    def draw(v, p, u, right):
-        if int((p.z - v.ZB) / 0.25) != 1:
-            return None
-        for m in marks:
-            d = u - v.M(m)
-            if 0.0 <= d < 0.20:
-                return KRNOV_BLUE
-            if 0.20 <= d < 0.40:
-                return KRNOV_YEL
+CW = 0.2355        # one pixel along the body in the ne / sw views, metres
+
+
+def _hash(*v):
+    h = 2166136261
+    for x in v:
+        h = ((h ^ (int(x) & 0xFFFFFFFF)) * 16777619) & 0xFFFFFFFF
+    return h
+
+
+def lower_row(v, p):
+    """0 = the body row right under the window band, 1 the next one down, -1
+    the lowest row of the band"""
+    return math.floor((v.ZBAND0 - p.z) / 0.25)
+
+
+def glass_row(v, p):
+    """0 = the lowest glass row of the window band, counting up"""
+    return math.floor((p.z - v.ZWIN0) / 0.25)
+
+
+def from_rear(v, u):
+    """whole pixels from the rear end of the body"""
+    return int((v.U[-1] - u) / CW)
+
+
+def section_of(v, u):
+    """(section index, fraction along that section from its front)"""
+    for k in range(len(v.U) - 1):
+        if u < v.U[k + 1] or k == len(v.U) - 2:
+            return k, (u - v.U[k]) / (v.U[k + 1] - v.U[k])
+
+
+# Krnov (from the old VTPsim-based sheet): golden-yellow + blue chevron pairs,
+# three rows tall, pointing to the rear (yellow ahead of blue), in the lower
+# window band and on the lower body, and the navy "krnov" wordmark behind the
+# front axle; metres from the front, per side
+KRNOV_MARKS = {
+    True: dict(band=(3.5, 7.8), lower=(4.5,), word=3.1),         # door side
+    False: dict(band=(7.8,), lower=(0.3, 5.2), word=2.4),
+}
+KRNOV_WORD = ["#.##.#", "######"]
+
+
+def krnov(v, p, u, right):
+    if right and v.door_at(u):
         return None
-    return draw
+    m = KRNOV_MARKS[right]
+    rows = ((glass_row(v, p), 2, m["band"]), (lower_row(v, p) - 1, 0, m["lower"]))
+    for r, top, marks in rows:
+        k = top - r if top else r            # 0 = the chevron's top row
+        if not 0 <= k <= 2:
+            continue
+        for a in marks:
+            c = math.floor((u - v.M(a)) / CW) - (1 if k == 1 else 0)
+            if c == 0:
+                return KRNOV_YEL
+            if c == 2:
+                return KRNOV_BLUE
+    r = lower_row(v, p) - 1
+    c = math.floor((u - v.M(m["word"])) / CW)
+    if 0 <= r < len(KRNOV_WORD) and 0 <= c < len(KRNOV_WORD[0]) and KRNOV_WORD[r][c] == "#":
+        return KRNOV_NAVY
+    return None
 
 
 def mdpo_ribbon(v, p, u, right):
@@ -125,13 +181,36 @@ def havirov_logo(v, p, u, right):
     return None
 
 
-def trutnov_dots(v, p, u, right):
-    """Trutnov MHD: the coloured dots low on the cyan sides"""
-    if int((p.z - v.ZB) / 0.25) != 1:
+# Trutnov MHD (photos seznam-autobusu 398768, 415210, 442882; the old
+# khk_town sheets): a scattered mosaic of small blocks straddling the lower edge
+# of the window band, denser towards the rear, and the white TRUTNOV MHD logo
+# behind the front axle; per section (mosaic span, logo span) as fractions
+MOSAIC = [(0xF3, 0x8B, 0x1F), (0xE0, 0x2E, 0x8C), (0xFF, 0xD2, 0x1E), (0x1E, 0x50, 0xA8),
+          (0x9C, 0xE4, 0xFA)]
+TRUT_SPANS = {1: [((0.45, 0.98), (0.30, 0.40))],
+              2: [((0.55, 0.98), (0.28, 0.38)), ((0.30, 0.98), (0.06, 0.22))]}
+
+
+def trutnov(v, p, u, right):
+    if right and v.door_at(u):
         return None
-    i = int(u / 0.45)
-    if (u / 0.45) % 1.0 < 0.5 and i % 3 == 0:
-        return ((0xF4, 0xC8, 0x10), (0xE2, 0x3A, 0x2A), (0xF2, 0x8A, 0x20))[(i // 3) % 3]
+    k, f = section_of(v, u)
+    mos, logo = TRUT_SPANS[len(v.U) - 1][k]
+    r = lower_row(v, p)
+    cell = int(u / CW)
+    if mos[0] <= f <= mos[1]:
+        t = (f - mos[0]) / (mos[1] - mos[0])
+        h = _hash(k, cell, right)
+        if (h % 1000) / 1000.0 < 0.28 + 0.62 * t:
+            rows = {0}
+            if (h >> 14) % 2:
+                rows.add(-1)                       # the block reaches up into the band
+            elif (h >> 15) % 3 == 0:
+                rows.add(1)
+            if r in rows:
+                return MOSAIC[(h >> 10) % len(MOSAIC)]
+    if logo[0] <= f <= logo[1] and (r == 1 or (r == 2 and cell % 2 == 0)):
+        return WHITE
     return None
 
 
@@ -145,26 +224,69 @@ def arriva_swoosh(v, p, u, right):
     return None
 
 
-def hranice_marks(v, p, u, right):
-    """Hranice: the white town marks on the green behind the front axle"""
-    a = v.M(3.0)
-    if inr(u, a, a + 1.2) and int((p.z - v.ZB) / 0.25) == 1:
-        return WHITE if int((u - a) / 0.30) % 2 == 0 else None
+# Hranice: the white line-art of town landmarks on the rear windows (the old
+# Lubak91-based sheet), pixels from the rear, rows from the top of the glass
+HRANICE_ART = ["............#.",
+               ".#....##....#.",
+               ".#...#..#...#.",
+               "###..####..###"]
+
+
+def hranice(v, p, u, right):
+    k = 3 - glass_row(v, p)
+    c = from_rear(v, u) - 3
+    if 0 <= k < 4 and 0 <= c < len(HRANICE_ART[0]) and HRANICE_ART[k][c] == "#":
+        return WHITE
     return None
 
 
-def fm_wave(crest, light):
-    """the Frýdek-Místek wrap: light-blue waves over the lower body under a
-    darker crest"""
-    def draw(v, p, u, right):
-        h = 0.35 + 0.18 * math.sin(u * 1.3)
-        z = p.z - v.ZB
-        if z < h - 0.12:
-            return light
-        if z < h:
-            return crest
+def nj_marks(v, p, u, right):
+    """Nový Jičín: the white lettering on the rear quarter of the window band
+    (a bar and a dash, as on the old Lubak91-based sheet)"""
+    k = glass_row(v, p)
+    c = from_rear(v, u)
+    if (c == 3 and 1 <= k <= 3) or (6 <= c <= 8 and k == 2):
+        return WHITE
+    return None
+
+
+CHR_TEXT = "MĚSTSKÁ AUTOBUSOVÁ DOPRAVA CHRUDIM"
+
+
+def chr_lettering(v, p, u, right):
+    """Chrudim 42079: "MĚSTSKÁ AUTOBUSOVÁ DOPRAVA CHRUDIM" in black on the
+    white strip over the windows, a dotted line at this scale (0.2-0.9 of the
+    length, gaps at the word breaks)"""
+    if p.z < v.ZR - 0.25:
         return None
-    return draw
+    L = v.U[-1]
+    f = u / L
+    if not 0.2 <= f < 0.9:
+        return None
+    cell = int(u / CW)
+    ch = CHR_TEXT[int((f - 0.2) / 0.7 * len(CHR_TEXT))]
+    return BLACK if ch != " " and cell % 2 == 0 else None
+
+
+def fm_speckle(v, p, u, right):
+    """the Frýdek-Místek city wrap on the NS 12 electric (VTPsim's sheet): a
+    speckled skyline of light blue, blue and grey over the lower body from
+    behind the front door back, denser towards the bottom, under one white row"""
+    r = lower_row(v, p)
+    if u < 1.4 or r < 1:
+        return None
+    h = _hash(int(u / CW), r, right)
+    if (h % 1000) / 1000.0 >= (0.15, 0.40, 0.75, 0.85, 0.90)[min(r, 5) - 1]:
+        return None
+    return (FM_SKY, FM_SKY, FM_BLUE, FM_GREY, FM_SKY, FM_BLUE, BLACK)[(h >> 10) % 7]
+
+
+def fm_nsg_line(v, p, u, right):
+    """the same wrap on the grey NSG 12: the light-blue lower body with a dark
+    line in the middle of it over the front half"""
+    if lower_row(v, p) == 2 and 1.4 <= u < 5.9:
+        return FM_NSG_LINE
+    return None
 
 
 TOWNS = {
@@ -197,10 +319,11 @@ TOWNS = {
     "dpmb": dict(body=WHITE, roof=(0xF2, 0xF2, 0xF0), lower=WHITE, skirt=(0.30, DPMB_RED), disp=LEDG,
                  front=dict(bumper=DPMB_RED, chin=WHITE, mask=BLACK, band=WHITE, corner=SILVER, trim=DPMB_RED),
                  rear=dict(bumper=DPMB_RED, panel=WHITE, upper=BLACK)),
-    # DPMO: white, the red stripe over the navy skirt, the red line round the
-    # black front section; black front mask, navy bumper
+    # DPMO: white, the window band outlined in red (the top row of the side
+    # and a line under the windows), the red stripe over the navy skirt, the
+    # red line round the black front section; black front mask, navy bumper
     "dpmo": dict(body=WHITE, roof=ROOFW, lower=WHITE, skirt=(0.25, DPMO_NAVY), stripe=(0.25, 0.50, DPMO_RED),
-                 disp=LEDG,
+                 cant=DPMO_RED, sill=DPMO_RED, disp=LEDG,
                  front=dict(bumper=DPMO_NAVY, chin=BLACK, mask=BLACK, corner=SILVER, trim=DPMO_RED),
                  rear=dict(bumper=DPMO_NAVY, panel=WHITE, upper=BLACK)),
     # MDPO Opava white-red: the red roof edge sweeping down the A-pillar, the
@@ -216,50 +339,54 @@ TOWNS = {
     "zelenametaliza": dict(body=FM_GREEN, roof=FM_GREEN_ROOF, lower=FM_GREEN, disp=AMBER,
                            front=dict(bumper=FM_GREEN, chin=FM_GREEN, mask=FM_GREEN, corner=SILVER, trim=FM_GREEN),
                            rear=dict(bumper=FM_GREEN, panel=FM_GREEN, upper=BLACK)),
-    # the Frýdek-Místek city wrap: white with the light-blue waves (NS 12 e)
-    "fm_polep": dict(body=WHITE, roof=(0xDA, 0xDA, 0xDA), lower=WHITE, decal=fm_wave(FM_BLUE, FM_SKY), disp=AMBER,
+    # the Frýdek-Místek city wrap: white with the speckled skyline (NS 12 e)
+    "fm_polep": dict(body=WHITE, roof=(0xDA, 0xDA, 0xDA), lower=WHITE, decal=fm_speckle, disp=AMBER,
                      front=dict(bumper=WHITE, chin=WHITE, mask=WHITE, corner=SILVER, trim=BLACK),
                      rear=dict(bumper=FM_SKY, panel=WHITE, upper=BLACK)),
-    # the same wrap on the grey NSG 12
-    "fm_polep_nsg": dict(body=FM_NSG_GREY, roof=FM_NSG_GREY, lower=FM_NSG_GREY,
-                         decal=fm_wave(FM_NSG_SKY, FM_NSG_SKY), disp=AMBER,
+    # the same wrap on the grey NSG 12: the light-blue lower body
+    "fm_polep_nsg": dict(body=FM_NSG_GREY, roof=FM_NSG_GREY, lower=FM_NSG_SKY,
+                         decal=fm_nsg_line, disp=AMBER,
                          front=dict(bumper=FM_NSG_SKY, chin=FM_NSG_GREY, mask=FM_NSG_GREY, corner=SILVER,
                                     trim=BLACK),
-                         rear=dict(bumper=FM_NSG_SKY, panel=FM_NSG_GREY, upper=BLACK)),
+                         rear=dict(bumper=FM_NSG_SKY, panel=FM_NSG_SKY, upper=BLACK)),
     # Havířov city blue with the logo and slogan (NBG 18)
     "havirov": dict(body=HAV_BLUE, roof=HAV_BLUE, pod=HAV_BLUE, lower=HAV_BLUE_DK, decal=havirov_logo,
                     disp=(0xEC, 0xEE, 0xE4),
                     front=dict(bumper=HAV_BLUE_DK, chin=HAV_BLUE, mask=HAV_BLUE, trim=HAV_BLUE),
                     rear=dict(bumper=HAV_BLUE_DK, panel=HAV_BLUE, upper=HAV_BLUE)),
-    # Krnov city white: the black belt line and the chevron pairs
-    "krnov": dict(body=WHITE, roof=ROOFW, lower=WHITE, sill=BLACK, decal=chevrons((2.4, 4.0, 7.4, 10.6)),
+    # Krnov city white: the black belt line, the chevron pairs and the wordmark
+    "krnov": dict(body=WHITE, roof=ROOFW, lower=WHITE, sill=BLACK, overlay=krnov,
                   disp=AMBER,
                   front=dict(bumper=BLACK, chin=BLACK, mask=WHITE, corner=SILVER, trim=BLACK),
                   rear=dict(bumper=BLACK, panel=WHITE, upper=BLACK)),
-    # Třinec white-green: the lime skirt and roof unit, lime front corners
+    # Třinec white-green: the lime skirt and roof unit, lime front corners,
+    # lime upper rear and bumper
     "trinec": dict(body=WHITE, roof=ROOFW, pod=TRINEC_LIME, lower=WHITE, skirt=(0.25, TRINEC_LIME), disp=AMBER,
                    front=dict(bumper=TRINEC_LIME, chin=BLACK, mask=WHITE, corner=TRINEC_LIME, trim=TRINEC_LIME),
-                   rear=dict(bumper=TRINEC_LIME, panel=WHITE, upper=BLACK)),
-    # Trutnov MHD cyan with the coloured dots
-    "trutnov": dict(body=TRUT_CYAN, roof=TRUT_CYAN, lower=TRUT_CYAN, decal=trutnov_dots, disp=AMBER,
+                   rear=dict(bumper=TRINEC_LIME, panel=WHITE, upper=TRINEC_LIME)),
+    # Trutnov MHD light blue with the mosaic and the TRUTNOV MHD logo
+    "trutnov": dict(body=TRUT_CYAN, roof=TRUT_CYAN, lower=TRUT_CYAN, overlay=trutnov, disp=AMBER,
                     front=dict(bumper=TRUT_CYAN, chin=TRUT_CYAN, mask=TRUT_CYAN, trim=TRUT_CYAN),
                     rear=dict(bumper=TRUT_CYAN, panel=TRUT_CYAN, upper=TRUT_CYAN)),
-    # MHD Chrudim (ARRIVA): all red / white / white with the red stripe
+    # MHD Chrudim (ARRIVA): all red / white with the lettering on a white strip
+    # over the windows / white with the red stripe right under the windows
     "chrudim_red": dict(body=CHR_RED, roof=CHR_RED, lower=CHR_RED, disp=AMBER,
                         front=dict(bumper=CHR_RED, chin=WHITE, mask=WHITE, trim=CHR_RED),
                         rear=dict(bumper=CHR_RED, panel=CHR_RED, upper=CHR_RED)),
-    "chrudim_white": dict(body=WHITE, roof=ROOFW, lower=WHITE, disp=AMBER,
+    "chrudim_white": dict(body=WHITE, roof=ROOFW, lower=WHITE, cant=WHITE, overlay=chr_lettering, disp=AMBER,
                           front=dict(bumper=DPP_RED, chin=WHITE, mask=WHITE, trim=WHITE),
                           rear=dict(bumper=DPP_RED, panel=WHITE, upper=WHITE)),
-    "chrudim_pruh": dict(body=WHITE, roof=ROOFW, lower=WHITE, skirt=(0.25, CHR_RED), disp=AMBER,
+    "chrudim_pruh": dict(body=WHITE, roof=ROOFW, lower=WHITE, stripe=(0.40, 0.90, CHR_RED), disp=AMBER,
                          front=dict(bumper=DPP_RED, chin=WHITE, mask=WHITE, trim=WHITE),
                          rear=dict(bumper=DPP_RED, panel=WHITE, upper=WHITE)),
-    # MHD Hranice green: white upper, the green lower body with the town marks
-    "hranice": dict(body=WHITE, roof=(0xE2, 0xE2, 0xE2), lower=HRAN_GREEN, decal=hranice_marks, disp=AMBER,
+    # MHD Hranice: apple green with the white belt line under the windows, the
+    # green top row of the side and the landmark line-art on the rear windows
+    "hranice": dict(body=WHITE, roof=(0xE2, 0xE2, 0xE2), lower=HRAN_GREEN, cant=HRAN_GREEN, sill=WHITE,
+                    overlay=hranice, disp=AMBER,
                     front=dict(bumper=HRAN_GREEN, chin=BLACK, mask=HRAN_GREEN, corner=SILVER, trim=BLACK),
                     rear=dict(bumper=HRAN_GREEN, panel=WHITE, upper=BLACK)),
-    # Nový Jičín red metallic
-    "nj": dict(body=NJ_RED, roof=NJ_ROOF, lower=NJ_RED, disp=AMBER,
+    # Nový Jičín red metallic, the white lettering on the rear windows
+    "nj": dict(body=NJ_RED, roof=NJ_ROOF, lower=NJ_RED, overlay=nj_marks, disp=AMBER,
                front=dict(bumper=NJ_RED, chin=BLACK, mask=NJ_RED, corner=SILVER, trim=NJ_RED),
                rear=dict(bumper=NJ_RED, panel=NJ_RED, upper=BLACK)),
     # Arriva blue (Přerov) with the white swoosh at the rear
@@ -327,6 +454,8 @@ class TVeh(Veh):
     def cant(self, p, u):
         if self.face in ("ns", "ebn") and u < self.cap:
             return BLACK
+        if self.P.get("cant") and p.z >= self.ZR - 0.25:
+            return sh(self.P["cant"], p.face)
         if p.z < self.ZBAND1:
             return sh(BLACK, p.face)
         return sh(self.P["body"], p.face)
@@ -499,7 +628,7 @@ KL_EBN11 = town(H.EBN11, real_len=11.1,
 AC = "ac"
 FAIR = "fair"
 # DP Most a Litvínova: NS 12 / 18 with two A/C units; NB 12 / 18 with the small
-# white A/C unit behind the front (and one behind the joint)
+# white A/C unit behind the front
 MOST_NS12 = town(H.NS12, pods=[(1.80, 3.60, 0.22, 0.80, AC), (8.00, 9.40, 0.22, 0.80, AC)])
 MOST_NS18 = town(H.NS18, pods=[(1.80, 3.60, 0.22, 0.80, AC), (12.20, 13.80, 0.20, 0.75, AC)])
 MOST_NB12 = town(H.NB12, pods=[(0.80, 2.00, 0.22, 0.80, AC)])

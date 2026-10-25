@@ -16,8 +16,9 @@ display:
 # SOR EBN 9,5 battery bus, 9.79 m, 2 doors (1-2), 3 units (01-03) on Nový
 # Jičín MHD (Arriva) since 10-12/2017. 20-29 seated + 43 standing, TAM
 # 120 kW, 9.05-9.65 t, ~150 km per charge.
-# Dark red metallic (roof and pods too) with a black window band, black
-# "smile" front mask with a silver strip, black rear window.
+# Dark red metallic (roof and pods too) with a black window band carrying
+# white lettering on the rear windows, black "smile" front mask with a silver
+# strip, black rear window.
 # Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR EBN 9,5
 # body on the common SOR base, painted by tools/busrender/sor_town.py.
 # Regenerate with tools/busrender/sor_town.py.
