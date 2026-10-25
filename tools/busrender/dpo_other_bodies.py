@@ -148,6 +148,7 @@ EBN_B = mk(EBN105, sweep=(0.10, 2.35))
 
 
 class Ebn105(Veh):
+    FACE_SPLIT = {}
     def setup_livery(self):
         self.ROOF = EBN_ROOF
         self.TRIM = EBN_BLUE

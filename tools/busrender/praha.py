@@ -115,6 +115,9 @@ NC_VARIANTS = {
 
 # ------------------------------------------------------------------ vehicle
 class PVeh(Veh):
+    # fronts on the base: the NS black bumper and apron, the NB bumper and lamps
+    # keep their rows, the windscreen / mask gives one up (dpmhk.Veh.face_split)
+    FACE_SPLIT = {("front", "ns"): 1.06, ("front", "nb"): 0.82}
     def setup_livery(self):
         sp = self.sp
         self.P = PAL[self.liv]

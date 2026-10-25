@@ -518,6 +518,7 @@ OPAL = {
 
 
 class OVeh(Veh):
+    FACE_SPLIT = {}            # its faces lost nothing distinct on the base
     def setup_livery(self):
         self.P = OPAL[self.liv]
         self.ROOF = self.P["roof"]

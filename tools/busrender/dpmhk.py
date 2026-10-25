@@ -16,7 +16,7 @@ usage: python tools/busrender/dpmhk.py [family ...]   regenerate the sheets
 import os, sys, math
 import numpy as np
 from PIL import Image
-from render import Box, render, project, DIRS, HEAD, P
+from render import Box, render, project, DIRS, HEAD, P, Px
 
 KCU = 4.0 / 3.0                 # render metres per carunit
 W = 2.62                        # 2.55 m real; renders to the 11 px / 8 px widths of native buses
@@ -321,10 +321,30 @@ class Veh:
                 return self.tex_roof(p, u)
             if f in ("left", "right"):
                 return self.tex_side(p, u, U1)
+            dz = self.ZB - self.Z0
+            if dz > 0:
+                top = self.face_split(f)
+                if top is not None and p.z < top + dz:
+                    p = lowered(p, dz)
             if f == "front":
                 return self.tex_front(p) if i == 0 else sh(BELLOWS_D, f)
             return self.tex_rear(p) if i == last else sh(BELLOWS_D, f)
         return tex
+
+    # The SOR base (SOR_SHAPE "low") starts the body one row (SKIRT) higher.
+    # On the sides that row is simply gone; on a front or rear the bottom
+    # holds face-only parts (bumper, apron, lamps), so the face below
+    # face_split() + SKIRT is painted as it was one row lower and the row it
+    # gives up is the one above that height (plain panel, mask or windscreen).
+    # Livery bands that run on round the corners keep their heights.
+    FACE_SPLIT = {("front", "nb"): 0.82, ("front", "ebn"): 1.10,
+                  ("rear", "ns"): 0.62, ("rear", "nb"): 0.64}
+
+    def face_split(self, kind):
+        """height (before the base) up to which the bottom of this face is
+        kept whole, or None"""
+        style = self.face if kind == "front" else self.rearstyle
+        return self.FACE_SPLIT.get((kind, style))
 
     def ln(self, p, U1, u, w=0.0):
         """pixel crosses the line u = const (u in drawn metres from the front)"""
@@ -811,6 +831,13 @@ def on_wire(view, x, y, k):
     if kind == "y":
         return y in sets[k]
     return x in sets[k]
+
+
+def lowered(p, dz):
+    """the pixel p with its face coordinates dz metres lower"""
+    def low(c):
+        return (c[0], c[1], c[2] - dz)
+    return Px(p.face, p.box, low(p.c), (low(p.h[0]), low(p.h[1])), (low(p.v[0]), low(p.v[1])), p.view)
 
 
 def bresenham(x0, y0, x1, y1):

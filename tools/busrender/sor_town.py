@@ -442,6 +442,9 @@ TOWNS["most_dpp18"] = dict(TOWNS["most_dpp"], disp=AMBER)
 # ====================================================================== body
 class TVeh(Veh):
     """an SOR city body of dpmhk.py in a town palette (TOWNS)"""
+    # fronts keep their bumper, apron and lamps (dpmhk.Veh.face_split); the
+    # rears paint their two bumper rows over ZB themselves
+    FACE_SPLIT = {("front", "ns"): 1.14, ("front", "ebn"): 1.14, ("front", "nb"): 0.82}
 
     def setup_livery(self):
         self.P = TOWNS[self.liv]

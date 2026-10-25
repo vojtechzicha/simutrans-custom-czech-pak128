@@ -89,6 +89,12 @@ TD_FIG = ["#..#",
 
 
 class KVeh(Veh):
+    def face_split(self, kind):
+        """on the base the EBN bumper, smile / logo mask and the black rear
+        bumper keep their rows; the windscreen or the rear panel gives one up"""
+        if kind == "front":
+            return 1.14 if self.newface else 1.10
+        return 0.42
     def setup_livery(self):
         self.P = KPAL[self.liv]
         self.ROOF = self.P["roof"]
