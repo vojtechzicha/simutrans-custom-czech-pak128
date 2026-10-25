@@ -473,6 +473,9 @@ def set_option(family_yamls: list[Path], key: str, default):
 # seasons on one sheet: row = season * 4 + layout, column = tile y * w + x of
 # that layout, where the odd layouts swap the object's dims. makeobj keys tile
 # images as backimage[layout][y][x][height][phase][season].
+# An object with `front` (a port with an animated sign, tools/factory_extract.py)
+# also has front images below: row = 8 + (season * 4 + layout) * tiles + tile,
+# column = animation phase, drawn `front.offset` px up-left of their place.
 INDUSTRY_LAYOUTS = 4
 INDUSTRY_SEASONS = 2
 
@@ -493,7 +496,7 @@ def industry_goods(spec: dict, obj: dict) -> list[dict]:
     return spec["goods"][obj.get("goods", spec["classes"][obj["class"]]["goods"])]
 
 
-def emit_industry_dat(spec: dict, obj: dict) -> str:
+def emit_industry_dat(spec: dict, obj: dict, cells: set[tuple[int, int]]) -> str:
     bn = industry_basename(spec, obj)
     credit = spec.get("copyright")
     lines = [
@@ -519,6 +522,20 @@ def emit_industry_dat(spec: dict, obj: dict) -> str:
             for y in range(h):
                 for x in range(w):
                     lines.append(f"backimage[{layout}][{y}][{x}][0][0][{season}]={bn}.{row}.{y * w + x}")
+    if "front" in obj:
+        ox, oy = obj["front"]["offset"]
+        tiles = x_dim * y_dim
+        for season in range(INDUSTRY_SEASONS):
+            for layout in range(INDUSTRY_LAYOUTS):
+                w, h = (x_dim, y_dim) if layout % 2 == 0 else (y_dim, x_dim)
+                for y in range(h):
+                    for x in range(w):
+                        row = 2 * INDUSTRY_LAYOUTS + (season * INDUSTRY_LAYOUTS + layout) * tiles + y * w + x
+                        phase = 0
+                        while (row, phase) in cells:
+                            lines.append(f"frontimage[{layout}][{y}][{x}][0][{phase}][{season}]="
+                                         f"{bn}.{row}.{phase},{ox},{oy}")
+                            phase += 1
     return "\n".join(lines) + "\n"
 
 
@@ -547,7 +564,8 @@ def stage_industry_set(industry_yaml: Path, out_dir: Path,
             fail += 1
             continue
         shutil.copy2(png_src, out_dir / f"{bn}.png")
-        (out_dir / f"{bn}.dat").write_text(emit_industry_dat(spec, obj), encoding="utf-8")
+        cells = nonempty_cells(png_src) if "front" in obj else set()
+        (out_dir / f"{bn}.dat").write_text(emit_industry_dat(spec, obj, cells), encoding="utf-8")
         for lang in TAB_LANGS:
             tab_lines[lang].extend(emit_industry_tab_entries(spec, obj, lang))
         ok += 1

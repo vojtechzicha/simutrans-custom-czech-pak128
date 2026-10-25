@@ -1,0 +1,34 @@
+# Restaurants as city consumer industries (dist/VZ-Restaurants-city.pak).
+# Simutrans Fried Chicken is Sarlock's pak128.cs factory ported 1:1 (art and
+# goods), with the passenger and mail demand of a 1x2 VZ supermarket instead of
+# its own 50 / 10. The sheet was extracted with
+#   python tools/factory_extract.py factories.pak Simutrans_Fried_Chicken \
+#       industry-city/restaurace/sprites/simutrans_fried_chicken.png --front-offset 16 -16
+# Its turning bucket sign is the front images, one column per phase.
+group: Restaurants
+copyright: Sarlock
+
+defaults:
+  location: city
+  electricity_amount: 0
+  electricity_boost: 0
+  mapcolor: 140
+
+goods:
+  fried_chicken:
+    - {good: meat, capacity: 40, suppliers: 0, factor: 100}
+
+classes:
+  fast_food:                      # productivity and range as upstream: each save keeps its
+    goods: fried_chicken          # factories' production base, and demand scales with it
+    fields: {productivity: 15, range: 10, passenger_demand: 3, passenger_boost: 100, mail_demand: 1, mail_boost: 100}
+
+objects:
+  - id: SimutransFriedChicken
+    sprite: simutrans_fried_chicken
+    dims: [1, 2]
+    class: fast_food
+    front: {offset: [16, -16]}
+    fields: {distributionweight: 2, intro_year: 1990}
+    name_en: "Simutrans Fried Chicken (VZ)"
+    name_cs: "Simutrans Fried Chicken (VZ)"
