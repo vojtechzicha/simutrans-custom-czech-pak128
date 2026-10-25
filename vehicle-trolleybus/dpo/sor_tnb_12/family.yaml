@@ -25,7 +25,9 @@ display:
 # standing = 95, Pragoimex asynchronous motor 175 kW, 65 km/h, 10.2 t.
 # Livery (seznam-autobusu: "bílá s modrou střechou", from new to today): white
 # body, black glazing band and front mask, light blue cant rail and front cap
-# (variant B, picked 2026-10-10: the roof itself stays white); the gold swirl and the "SOR Trolejbus" lettering are not drawn.
+# (variant B, picked 2026-10-10: the roof itself stays white); light grey
+# poles with a dark base (photos of 3912). The gold swirl and the "SOR
+# Trolejbus" lettering are not drawn.
 # Sprite: original box-model render (vojtechzicha): the dpmhk.py Škoda 30Tr
 # body on the common SOR base (the SOR NB 12 trolleybus body with its roof
 # equipment and poles), painted by tools/busrender/sor_town.py. Regenerate with

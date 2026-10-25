@@ -16,7 +16,8 @@ display:
 
 # Škoda 32Tr on the SOR NS 12 body, MDPO 314-328 (2018-2020). MDPO white-red
 # as on the NSG 12: the red roof edge sweeping down the A-pillar, the straight
-# red skirt; black mask, white strip, red apron.
+# red skirt; black mask, white strip, red apron; yellow sleeves on the upper
+# pole ends (as on P4T SK1LL3R's sheet).
 # Sprite: original box-model render (vojtechzicha): the dpmhk.py Škoda 32Tr
 # body on the common SOR base (the DPMHK 32Tr model with its roof equipment and
 # poles), painted by tools/busrender/sor_town.py. Regenerate with

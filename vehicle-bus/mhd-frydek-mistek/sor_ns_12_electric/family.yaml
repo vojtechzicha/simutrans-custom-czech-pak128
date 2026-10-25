@@ -14,8 +14,10 @@ display:
   family_en: "SOR NS 12 electric"
   family_cs: "SOR NS 12 electric"
 
-# SOR NS 12 electric: 644-645 (2018, dark green metallic e-bus scheme) and
-# 723-734 (2024, Frýdek-Místek city wrap - second livery).
+# SOR NS 12 electric: 644-645 (2018, dark green metallic e-bus scheme: dark
+# green upper body and roof, bright green lower body with a dark line, bright
+# green rear over a dark green bumper) and 723-734 (2024, Frýdek-Místek city
+# wrap - second livery).
 # Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NS 12 body
 # on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
 # with tools/busrender/sor_town.py.

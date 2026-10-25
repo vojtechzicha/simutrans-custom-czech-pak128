@@ -18,9 +18,10 @@ display:
 # 12 m, 3 doors, ~30 + 62 = 92 total, 160 kW class, 411 kWh roof battery,
 # 80 km/h, ~13 t.
 # The 2026 e-bus scheme: white body with no red skirt or roof band, black
-# window band, roof battery and A/C pods, a thin red ribbon from the front
-# wheel arch up to the roof edge, down over the middle section and up again
-# towards the rear; white SOR electric front with black glass.
+# window band, roof battery and A/C pods, a thin red ribbon falling from the
+# roof edge over door 2 to the front wheel arch, running back under the
+# windows with one oval loop up into the windows over the middle section and
+# rising at the rear; white SOR electric front with black glass.
 # Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NS 12 body
 # on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
 # with tools/busrender/sor_town.py.

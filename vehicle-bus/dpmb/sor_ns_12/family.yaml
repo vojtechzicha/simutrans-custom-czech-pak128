@@ -21,8 +21,8 @@ display:
 # white body and roof, black window band, white belt, red skirt; a black cap
 # wraps the windscreen and the front roof edge, framed by the red-and-white
 # swoosh up the front corners; black front mask above a white "smile" line and
-# a red apron; green LED displays; one A/C unit on the roof 0.47-0.66 of the
-# length from the front.
+# a red apron; the black rear over the red bumper; green LED displays; one A/C
+# unit on the roof 0.47-0.66 of the length from the front.
 # Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NS 12 body
 # on the common SOR base (the same body as the DPMB TNS 12), painted by
 # tools/busrender/sor_town.py. Regenerate with tools/busrender/sor_town.py.

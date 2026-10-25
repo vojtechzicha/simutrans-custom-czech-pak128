@@ -28,7 +28,7 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import dpmhk as H                                                    # noqa: E402
 from dpmhk import Veh, mk, sh, inr, HW, KCU, PER_CU, NS12, NS18, NB12, NB18, UW12   # noqa: E402
-from render import render, DIRS                                     # noqa: E402
+from render import render, project, DIRS                            # noqa: E402
 
 BLACK, FRAME, GLASS, GLASS2 = H.BLACK, H.FRAME, H.GLASS, H.GLASS2
 HEADL, TAILL, AMBER, SILVER = H.HEADL, H.TAILL, H.AMBER, H.SILVER
@@ -473,6 +473,38 @@ class PVeh(Veh):
 
 
 # ------------------------------------------------------------------ build
+PANTO = (0x1C, 0x1C, 0x20)
+PANTO_SHOE = (0xB0, 0xB4, 0xBA)
+
+
+def draw_panto(img, view, L, origin, m, u0):
+    """the ENS 12's charging pantograph folded down (the running position, as
+    drawn on 25 Sep 2026 from depot photos), 1 px lines: the dark base frame on
+    the roof from u0, the lower arm forward from its hinge to the knee over the
+    cap, the upper arm back to the collector head, a cross bar with a light
+    contact shoe at each end"""
+    r = m.roof_top(u0 + 0.30)
+
+    def pt(u, t, z):
+        x, y = project(view, L, origin, L - u, t, z)
+        return int(math.floor(x)), int(math.floor(y))
+
+    def line(a, b, col):
+        for x, y in H.bresenham(*pt(*a), *pt(*b)):
+            if 0 <= x < 128 and 0 <= y < 128:
+                img[y, x] = col
+
+    f0, f1, w = u0, u0 + 0.60, 0.35
+    for a, b in (((f0, -w), (f1, -w)), ((f0, w), (f1, w)), ((f0, -w), (f0, w)), ((f1, -w), (f1, w))):
+        line((a[0], a[1], r + 0.08), (b[0], b[1], r + 0.08), PANTO)
+    hinge, knee, head = (f1 - 0.05, 0.0, r + 0.16), (u0 - 0.30, 0.0, r + 0.36), (u0 + 1.15, 0.0, r + 0.42)
+    line(hinge, knee, PANTO)
+    line(knee, head, PANTO)
+    line((head[0], -0.75, head[2]), (head[0], 0.75, head[2]), PANTO)
+    for t in (-0.75, 0.75):
+        line((head[0] - 0.15, t, head[2] + 0.02), (head[0] + 0.15, t, head[2] + 0.02), PANTO_SHOE)
+
+
 def build(sp, livery):
     m = PVeh(sp, livery)
     rows = []
@@ -488,6 +520,8 @@ def build(sp, livery):
                 pb = m.M(m.poles[0])
                 if m.U[i] <= pb < m.U[i + 1]:
                     H.draw_poles(img, d, L, o, m.U[i + 1] - pb, m.roof_top(pb) + 0.16, m.poles[1], H.TIP)
+            if sp.get("panto") and i == 0:
+                draw_panto(img, d, L, o, m, sp["panto"])
             tiles.append(img)
         rows.append(tiles)
     return rows
@@ -507,11 +541,11 @@ DNB12A = mk(DNB12, reds=[(1.55, 4.15), (7.90, 9.25)])
 # SOR NB 18 City: two white A/C units flanking the bellows (5017, 5073)
 DNB18 = mk(NB18, winrise=WR, pods=[(10.40, 11.80, 0.22, 0.80, "ac"), (12.80, 14.00, 0.22, 0.80, "ac")])
 # SOR ENS 12 (DPP 3015-3032): grey battery fairings along the roof, the black
-# cap, red columns over both wheel arches; the folded charging pantograph as a
-# dark box on the rear edge of the cap
+# cap, red columns over both wheel arches; the Škoda single-arm charging
+# pantograph folded on the rear edge of the cap (panto, drawn by draw_panto)
 DENS12 = mk(NS12, winrise=WR, cap=1.20,
-            pods=[(1.25, 1.95, 0.30, 0.45, "dark"), (2.10, 11.60, 0.26, 1.05, "fair")],
-            reds=[(1.75, 3.75), (7.60, 9.47)], tower=True)
+            pods=[(2.10, 11.60, 0.26, 1.05, "fair")],
+            reds=[(1.75, 3.75), (7.60, 9.47)], tower=True, panto=1.30)
 # SOR TNS 12 (DPP 511-514): equipment fairing, poles
 DTNS12 = mk(NS12, winrise=WR, cap=1.20, pods=[(1.80, 7.20, 0.26, 1.00, "fair")],
             reds=[(1.75, 3.75), (7.60, 9.47)], poles=(7.60, 0.30))

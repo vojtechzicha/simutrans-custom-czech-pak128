@@ -30,6 +30,8 @@ dpmhk.SHADE factors):
                    lower body (logos, chevrons)
     overlay        the same over the whole side, glass included (the Opava
                    ribbon)
+    poles          trolley pole colours: pole, tip, and (fraction, colour)
+                   for the upper sleeve and the lower base (default dpmhk's)
 Heights are real metres above the road; with the base the body starts at ZB
 (Z0 + SKIRT), so a band below ZB is not drawn.
 """
@@ -66,6 +68,8 @@ DPMO_RED = (0xD5, 0x1A, 0x1F)
 MDPO_RED = (0xC8, 0x10, 0x1C)
 FM_GREEN = (0x17, 0x7B, 0x35)      # zelená metalíza (F-M / Havířov e-buses)
 FM_GREEN_ROOF = (0x22, 0x8E, 0x45)
+FM_GREEN_LOW = (0x22, 0xB1, 0x4C)  # its bright green lower body (VTPsim's sheet)
+FM_GREEN_DK = (0x10, 0x52, 0x24)
 FM_SKY = (0x8E, 0xC3, 0xE6)        # the Frýdek-Místek wrap: light blue
 FM_BLUE = (0x3C, 0x7F, 0xB0)
 FM_NSG_GREY = (0xC3, 0xC3, 0xC3)
@@ -156,17 +160,34 @@ def krnov(v, p, u, right):
     return None
 
 
+def seg_px(u, z, a, b):
+    """distance in pixels (CW along the body, 0.25 m up) from (u, z) to the
+    segment a-b"""
+    ux, uz = (u - a[0]) / CW, (z - a[1]) / 0.25
+    vx, vz = (b[0] - a[0]) / CW, (b[1] - a[1]) / 0.25
+    t = max(0.0, min(1.0, (ux * vx + uz * vz) / max(1e-9, vx * vx + vz * vz)))
+    return math.hypot(ux - t * vx, uz - t * vz)
+
+
 def mdpo_ribbon(v, p, u, right):
-    """Opava 2026 e-bus: a thin red ribbon from the front wheel arch rising
-    over the window band to the roof edge, down again over the middle section
-    and up towards the rear (an overlay, over the glass too)"""
+    """Opava 2026 e-bus (VTPsim-based sheet, photos): a thin red ribbon from
+    the roof edge over the second door falling steeply forward to the front
+    wheel arch, then back along the body just under the windows with one oval
+    loop up into the windows over the middle section, rising at the rear (an
+    overlay, over the glass too)"""
     L = v.U[-1]
-    if u < 0.4 or u > L - 0.6:
-        return None
-    t = (u - 0.4) / (L - 1.0)
-    lo, hi = v.ZB + 0.20, v.ZR - 0.20
-    z = lo + (hi - lo) * (0.5 - 0.5 * math.cos(t * math.pi * 3.0))
-    return MDPO_RED if abs(p.z - z) < 0.10 else None
+    zl = v.ZBAND0 - 0.30                       # the line under the windows
+    segs = [((v.M(3.8), v.ZR), (v.M(2.1), zl)),
+            ((v.M(2.1), zl), (L - 1.0, zl)),
+            ((L - 1.0, zl), (L - 0.25, v.ZBAND0 + 0.55))]
+    if any(seg_px(u, p.z, a, b) < 0.6 for a, b in segs):
+        return MDPO_RED
+    uc, zc = v.M(4.9), (zl + v.ZWIN1 - 0.20) / 2      # the loop
+    au, az = 0.75, (v.ZWIN1 - 0.20 - zl) / 2
+    r = math.hypot((u - uc) / au, (p.z - zc) / az)
+    if abs(r - 1.0) * min(au / CW, az / 0.25) < 0.6:
+        return MDPO_RED
+    return None
 
 
 def havirov_logo(v, p, u, right):
@@ -281,12 +302,14 @@ def fm_speckle(v, p, u, right):
     return (FM_SKY, FM_SKY, FM_BLUE, FM_GREY, FM_SKY, FM_BLUE, BLACK)[(h >> 10) % 7]
 
 
-def fm_nsg_line(v, p, u, right):
-    """the same wrap on the grey NSG 12: the light-blue lower body with a dark
-    line in the middle of it over the front half"""
-    if lower_row(v, p) == 2 and 1.4 <= u < 5.9:
-        return FM_NSG_LINE
-    return None
+def dark_line(u0, u1):
+    """a dark line along the middle of the lower body from u0 to u1 (VTPsim's
+    F-M sheets: the NSG 12 wrap, the green e-bus)"""
+    def draw(v, p, u, right):
+        if lower_row(v, p) == 2 and u0 <= u < u1:
+            return FM_NSG_LINE
+        return None
+    return draw
 
 
 TOWNS = {
@@ -304,10 +327,12 @@ TOWNS = {
     "most_ns": dict(body=WHITE, roof=ROOFW, lower=MOST_YEL, skirt=(0.12, (0x30, 0x30, 0x30)), disp=LEDG,
                     front=dict(bumper=DPP_RED, chin=DPP_RED, mask=WHITE, corner=MOST_YEL, trim=MOST_YEL),
                     rear=dict(bumper=DPP_RED, panel=WHITE, upper=MOST_YEL)),
-    # its NB 12 / 18: white with the yellow skirt line, red bumper, white mask
+    # its NB 12 / 18: white with the yellow skirt line; the ex-Prague front
+    # (red lower front, the black band under the windscreen with yellow
+    # corners), the yellow upper rear framing the rear window, red bumpers
     "most_nb": dict(body=WHITE, roof=ROOFW, lower=WHITE, skirt=(0.25, MOST_YEL), disp=LEDG,
-                    front=dict(bumper=DPP_RED, chin=WHITE, mask=WHITE, trim=WHITE),
-                    rear=dict(bumper=DPP_RED, panel=WHITE, upper=WHITE)),
+                    front=dict(bumper=DPP_RED, band=DPP_RED, mask=BLACK, corner=MOST_YEL, trim=WHITE),
+                    rear=dict(bumper=DPP_RED, panel=WHITE, upper=MOST_YEL)),
     # the DPP city red-white of the ex-DPP NB 12 83 in Most (green LED); the
     # NB 18 189 (ex-DPP 6668) keeps the Prague amber displays (most_dpp18)
     "most_dpp": dict(body=WHITE, roof=(0xFF, 0xFF, 0xFF), lower=WHITE, bands=[(0.87, DPP_RED)], disp=LEDG,
@@ -319,6 +344,13 @@ TOWNS = {
     "dpmb": dict(body=WHITE, roof=(0xF2, 0xF2, 0xF0), lower=WHITE, skirt=(0.30, DPMB_RED), disp=LEDG,
                  front=dict(bumper=DPMB_RED, chin=WHITE, mask=BLACK, band=WHITE, corner=SILVER, trim=DPMB_RED),
                  rear=dict(bumper=DPMB_RED, panel=WHITE, upper=BLACK)),
+    # its NS 12 and TNS 12 (the earlier VZ render, DPMB drawing sor-ns.png): the
+    # red apron with white lamp corners, the black rear over the red bumper,
+    # yellow sleeves on the upper pole ends (photos of 3065, 3068)
+    "dpmb_ns": dict(body=WHITE, roof=(0xF2, 0xF2, 0xF0), lower=WHITE, skirt=(0.30, DPMB_RED), disp=LEDG,
+                    front=dict(bumper=DPMB_RED, chin=DPMB_RED, mask=BLACK, corner=WHITE, trim=DPMB_RED),
+                    rear=dict(bumper=DPMB_RED, panel=BLACK, upper=BLACK),
+                    poles=dict(pole=H.POLE, tip=H.TIP, sleeve=(0.35, H.TIP))),
     # DPMO: white, the window band outlined in red (the top row of the side
     # and a line under the windows), the red stripe over the navy skirt, the
     # red line round the black front section; black front mask, navy bumper
@@ -329,23 +361,27 @@ TOWNS = {
     # MDPO Opava white-red: the red roof edge sweeping down the A-pillar, the
     # straight red skirt; black mask, white strip, red apron
     "mdpo": dict(body=WHITE, roof=ROOFW, roofedge=MDPO_RED, lower=WHITE, skirt=(0.30, MDPO_RED), disp=LEDG,
+                 poles=dict(pole=H.POLE, tip=H.TIP, sleeve=(0.55, H.TIP)),       # 32Tr: P4T's sheet
                  front=dict(bumper=MDPO_RED, chin=WHITE, mask=BLACK, band=WHITE, corner=SILVER, trim=MDPO_RED),
                  rear=dict(bumper=MDPO_RED, panel=WHITE, upper=BLACK)),
     # MDPO 2026 e-bus: white, no red skirt, the thin red ribbon; white front
     "mdpo_e": dict(body=WHITE, roof=ROOFW, lower=WHITE, overlay=mdpo_ribbon, disp=LEDG,
                    front=dict(bumper=LIGHT_GREY, chin=WHITE, mask=WHITE, corner=SILVER, trim=WHITE),
                    rear=dict(bumper=LIGHT_GREY, panel=WHITE, upper=BLACK)),
-    # green metallic (F-M and Havířov e-buses of 2018)
-    "zelenametaliza": dict(body=FM_GREEN, roof=FM_GREEN_ROOF, lower=FM_GREEN, disp=AMBER,
+    # green metallic (F-M and Havířov e-buses of 2018): dark green upper body,
+    # the bright green lower body with a dark line, bright green rear over a
+    # dark green bumper
+    "zelenametaliza": dict(body=FM_GREEN, roof=FM_GREEN_ROOF, lower=FM_GREEN_LOW, decal=dark_line(1.4, 8.7),
+                           disp=AMBER,
                            front=dict(bumper=FM_GREEN, chin=FM_GREEN, mask=FM_GREEN, corner=SILVER, trim=FM_GREEN),
-                           rear=dict(bumper=FM_GREEN, panel=FM_GREEN, upper=BLACK)),
+                           rear=dict(bumper=FM_GREEN_DK, panel=FM_GREEN_LOW, upper=BLACK)),
     # the Frýdek-Místek city wrap: white with the speckled skyline (NS 12 e)
     "fm_polep": dict(body=WHITE, roof=(0xDA, 0xDA, 0xDA), lower=WHITE, decal=fm_speckle, disp=AMBER,
                      front=dict(bumper=WHITE, chin=WHITE, mask=WHITE, corner=SILVER, trim=BLACK),
                      rear=dict(bumper=FM_SKY, panel=WHITE, upper=BLACK)),
     # the same wrap on the grey NSG 12: the light-blue lower body
     "fm_polep_nsg": dict(body=FM_NSG_GREY, roof=FM_NSG_GREY, lower=FM_NSG_SKY,
-                         decal=fm_nsg_line, disp=AMBER,
+                         decal=dark_line(1.4, 5.9), disp=AMBER,
                          front=dict(bumper=FM_NSG_SKY, chin=FM_NSG_GREY, mask=FM_NSG_GREY, corner=SILVER,
                                     trim=BLACK),
                          rear=dict(bumper=FM_NSG_SKY, panel=FM_NSG_SKY, upper=BLACK)),
@@ -395,6 +431,8 @@ TOWNS = {
                    rear=dict(bumper=ARRIVA_BLUE, panel=ARRIVA_BLUE, upper=BLACK)),
     # DPO TNB 12: white, the blue roof edge and front band
     "dpo_tnb": dict(body=WHITE, roof=ROOFW, roofedge=DPO_BLUE, lower=WHITE, disp=AMBER,
+                    # light grey poles with a dark base (photos of 3912)
+                    poles=dict(pole=(0xC8, 0xCC, 0xD0), tip=(0x30, 0x32, 0x34), base=(0.18, (0x50, 0x54, 0x58))),
                     front=dict(bumper=LIGHT_GREY, chin=WHITE, mask=WHITE, band=DPO_BLUE, trim=DPO_BLUE),
                     rear=dict(bumper=LIGHT_GREY, panel=WHITE, upper=DPO_BLUE)),
 }
@@ -553,7 +591,7 @@ class TVeh(Veh):
                 return BLACK
             if a > HW - 0.26 and inr(z, 0.70, 1.30):
                 return TAILL
-            if z < 0.64:
+            if z < max(0.64, self.ZB + 0.40):        # two rows over the raised body bottom
                 return sh(R["bumper"], f)
             if z < 1.74:
                 if inr(z, 1.36, 1.74) and a < HW - 0.25 and int((z - 1.36) / 0.09) % 2 == 1:
@@ -566,7 +604,7 @@ class TVeh(Veh):
             return sh(R["upper"], f)
         if a > HW - 0.26 and inr(z, 0.55, 1.35):
             return TAILL
-        if z < 0.45:
+        if z < max(0.45, self.ZB + 0.40):
             return sh(R["bumper"], f)
         if z >= self.ZBAND0 + 0.20:
             if inr(z, 2.42, 2.62) and inr(t, 0.30, 0.80):
@@ -575,6 +613,25 @@ class TVeh(Veh):
                 return GLASS
             return sh(R["upper"], f)
         return sh(R["panel"], f)
+
+
+def draw_poles(img, view, L, origin, bs, bz, bt, cols):
+    """dpmhk.draw_poles in a palette's colours: the pole, an upper sleeve and
+    a lower base as fractions of its length, the tip"""
+    for base, tip in H.pole_tips(view, L, origin, bs, bz, bt):
+        if tip is None:
+            continue
+        pts = list(H.bresenham(int(math.floor(base[0])), int(math.floor(base[1])), tip[2], tip[3]))
+        n = len(pts)
+        for i, (x, y) in enumerate(pts):
+            c = cols["pole"]
+            if "sleeve" in cols and i >= n * (1.0 - cols["sleeve"][0]):
+                c = cols["sleeve"][1]
+            elif "base" in cols and i < n * cols["base"][0]:
+                c = cols["base"][1]
+            if 0 <= x < 128 and 0 <= y < 128:
+                img[y, x] = c
+        img[tip[3], tip[2]] = cols["tip"]
 
 
 def build(sp, livery):
@@ -594,7 +651,10 @@ def build(sp, livery):
                 pb = m.M(m.poles[0])
                 if m.U[i] <= pb < m.U[i + 1]:
                     s = m.U[i + 1] - pb
-                    H.draw_poles(img, d, L, o, s, m.roof_top(pb) + 0.16, m.poles[1], H.TIP)
+                    if "poles" in m.P:
+                        draw_poles(img, d, L, o, s, m.roof_top(pb) + 0.16, m.poles[1], m.P["poles"])
+                    else:
+                        H.draw_poles(img, d, L, o, s, m.roof_top(pb) + 0.16, m.poles[1], H.TIP)
             tiles.append(img)
         rows.append(tiles)
     return rows
@@ -679,9 +739,9 @@ FAMILIES = {
                                            "prahacervenobila": [(MOST_NB12, "most_dpp")]},
     "vehicle-bus/dp-most-litvinov/sor_nb_18": {"mostzlutocervena": [(MOST_NB18, "most_nb")],
                                                "prahacervenobila": [(MOST_NB18_DPP, "most_dpp18")]},
-    "vehicle-bus/dpmb/sor_ns_12": {"dpmbbilocervena": [(DPMB_NS12, "dpmb")]},
+    "vehicle-bus/dpmb/sor_ns_12": {"dpmbbilocervena": [(DPMB_NS12, "dpmb_ns")]},
     "vehicle-bus/dpmb/sor_nbg_12": {"dpmbbilocervena": [(DPMB_NBG12, "dpmb")]},
-    "vehicle-trolleybus/dpmb/tns_12": {"dpmbbilocervena": [(DPMB_TNS12, "dpmb")]},
+    "vehicle-trolleybus/dpmb/tns_12": {"dpmbbilocervena": [(DPMB_TNS12, "dpmb_ns")]},
     "vehicle-bus/dpmo/sor_ns_12_electric": {"dpmobilomodrocervena": [(DPMO_NS12E, "dpmo")]},
     "vehicle-bus/mdpo/sor_ns_12_electric": {"mdpobilagrafika": [(MDPO_NS12E, "mdpo_e")]},
     "vehicle-bus/mdpo/sor_nsg_12": {"mdpobilocervena": [(MDPO_NSG12, "mdpo")]},
