@@ -264,7 +264,7 @@ def chr_lettering(v, p, u, right):
     if not 0.2 <= f < 0.9:
         return None
     cell = int(u / CW)
-    ch = CHR_TEXT[int((f - 0.2) / 0.7 * len(CHR_TEXT))]
+    ch = CHR_TEXT[min(len(CHR_TEXT) - 1, int((f - 0.2) / 0.7 * len(CHR_TEXT)))]
     return BLACK if ch != " " and cell % 2 == 0 else None
 
 
