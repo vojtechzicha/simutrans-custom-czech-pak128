@@ -312,8 +312,8 @@ def dark_line(u0, u1):
     return draw
 
 
-LIB_RED = (0xD2, 0x14, 0x2A)       # DPMLB Liberec red (Lubak91's sheet)
-LIB_BLUE = (0x23, 0x3C, 0x8C)      # its blue skirt line
+MB_RED = (0xD2, 0x14, 0x2A)        # DPMLB Mladá Boleslav red (Lubak91's sheet)
+MB_BLUE = (0x23, 0x3C, 0x8C)       # its blue skirt line
 CSAD_GREEN = (0x57, 0xA6, 0x39)    # the 3ČSAD green (odis_town CSAD["green"])
 DPMP_RED = (0xD2, 0x1E, 0x2B)      # DPMP Pardubice red of the 32Tr (photos of 429 / 464)
 DPMP_WINE = (0xA3, 0x1A, 0x2E)     # the darker wine red of the 30Tr scheme (photos of 333, 412, 415)
@@ -460,9 +460,9 @@ TOWNS = {
     "dpmb_uw": dict(body=WHITE, roof=(0xF2, 0xF2, 0xF0), lower=WHITE, skirt=(0.50, DPMB_RED), disp=LEDG,
                     front=dict(bumper=DPMB_RED, mask=WHITE),
                     rear=dict(bumper=DPMB_RED, panel=WHITE, upper=WHITE)),
-    "dpmlb_uw": dict(body=WHITE, roof=LIB_RED, pod=LIB_RED, cant=LIB_RED, lower=WHITE, skirt=(0.25, LIB_BLUE),
-                     disp=AMBER, front=dict(bumper=LIB_BLUE, mask=WHITE),
-                     rear=dict(bumper=LIB_BLUE, panel=WHITE, upper=LIB_RED)),
+    "dpmlb_uw": dict(body=WHITE, roof=MB_RED, pod=MB_RED, cant=MB_RED, lower=WHITE, skirt=(0.25, MB_BLUE),
+                     disp=AMBER, front=dict(bumper=MB_BLUE, mask=WHITE),
+                     rear=dict(bumper=MB_BLUE, panel=WHITE, upper=MB_RED)),
     "dpmp_uw": dict(body=WHITE, roof=ROOFW, lower=WHITE, cant=DPMP_RED, skirt=(0.50, DPMP_RED), disp=AMBER,
                     front=dict(bumper=DPMP_RED, mask=WHITE),
                     rear=dict(bumper=DPMP_RED, panel=WHITE, upper=WHITE)),
