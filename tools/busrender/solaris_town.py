@@ -33,8 +33,8 @@ class SVeh(DS.Solaris):
         self.ROOF = P["roof"]
         self.EDGE = P["body"]                          # the roof cap; a red top row is cant()
         self.SHOULDER = P["roof"]
-        self.FAIR_TOP = P.get("pod", P["roof"])
-        self.FAIR_SIDE = P["body"]
+        self.FAIR_TOP = P["roof"]                     # roof equipment in roof colour (a palette's
+        self.FAIR_SIDE = P["body"]                    # "pod" colours the SOR bodies' boxes only)
 
     @property
     def old(self):
@@ -49,6 +49,15 @@ class SVeh(DS.Solaris):
             return disp if c == DS.AMBER else c
         return paint
 
+    def tex_side(self, p, u, U1):
+        c = super().tex_side(p, u, U1)
+        ov = self.P.get("overlay")
+        if ov and c is not None:
+            o = ov(self, p, u, p.face == "right")
+            if o is not None:
+                return sh(o, p.face)
+        return c
+
     def cant(self, p, u, right):
         if self.face == "u4":
             return super().cant(p, u, right)
@@ -60,6 +69,11 @@ class SVeh(DS.Solaris):
         """sor_town.TVeh.lower's bands from the body's bottom Z0"""
         z = p.z
         P = self.P
+        dec = P.get("decal")
+        if dec:
+            c = dec(self, p, u, right)
+            if c is not None:
+                return c
         if P.get("sill") and z >= self.ZWIN0 - 0.33:
             return P["sill"]
         sk = P.get("skirt")
@@ -82,12 +96,19 @@ class SVeh(DS.Solaris):
         return super().tex_rear(p)
 
 
+# the Škoda Perun 26BB HE on the Urbino 12 III body: no engine tower, the A/C
+# pod over the cab and the battery fairing along the middle of the roof
+MODELS = dict(DS.MODELS, perun3=DS.mk(DS.MODELS["u12_3"], tower=False,
+                                       kit=[dict(a=0.85, b=2.45, h=0.26, hw=0.66, kind="ac"),
+                                            dict(a=3.00, b=10.60, h=0.30, hw=1.00, kind="fair", rf=0.4, rr=0.4)]))
+
+
 def build(model, liv, lens):
     if liv.startswith("pid:"):                  # pid.py's PID grey-red / trikolóra painter
         import pid
         key, reds = PID[model]
         return pid.solaris(model, liv[4:], reds, lens=lens)()
-    sp = DS.MODELS[model]
+    sp = MODELS[model]
     m = SVeh(sp, liv, DS.OPTS)
     rows = []
     for i, l in enumerate(m.cu):
@@ -123,6 +144,7 @@ FAMILIES = {
     "vehicle-bus/mhd-tabor/solaris_urbino_12_electric": ([8], {"comettbila": [("u12_4e", "tabor_uw")]}),
     "vehicle-bus/dpp/urbino_10_5": ([7], {"dppcervenobila": [("u10", "most_dpp18")],
                                           "pidsedocervena": [("u10", "pid:pa")]}),
+    "vehicle-bus/mhd-trinec/perun_26bb_he": ([8], {"trinecbilozelena": [("perun3", "trinec")]}),
     "vehicle-bus/mhd-tabor/solaris_urbino_18_iii_cng": ([8, 6], {"comettbila": [("u18_3cng", "tabor_uw")]}),
 }
 

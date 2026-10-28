@@ -594,27 +594,14 @@ def trutnov_rows(src_rows, paint_fn, sections):
     return rows
 
 
-# Škoda Perun 26BB HE (Solaris Urbino 12 IV body): TommPa9's Urbino 12 IV
-# electric of the Tábor family (roof battery fairing), its COMETT white and the
-# orange/black chequered patch on the ends turned Arriva blue
-# (frozen in src/: the Tábor family itself is a solaris_town.py render since 2026-10-28)
-URBINO_SRC = "tools/busrender/src/khk_urbino12e_tommpa9.png"
-
-
-def paint_urbino(c):
-    h = (int(c[0]) << 16) | (int(c[1]) << 8) | int(c[2])
-    if h in (0xF55F1B, 0x141414):
-        return 0.88                                    # the COMETT patch on front and rear
-    if h == 0xC5C5C5:
-        return None                                    # wheel hubs
-    if neutral(c, 0xB0):
-        return (int(c[0]) + int(c[1]) + int(c[2])) / 3 / 255.0
-    return None
-
-
-def rows_26bb():
-    src = sheet_rows(load_sheet(URBINO_SRC))[:1]
-    return trutnov_rows(src, paint_urbino, [dict(L=[11.5, 12.0, 12.5], mosaic=(0.45, 0.98), logo=(0.30, 0.40))])
+# Škoda Perun 26BB HE (Solaris Urbino 12 IV body): since 2026-10-28 the
+# solaris_town.py render in the Trutnov palette (a repaint of TommPa9's Tábor
+# Urbino before)
+def rows_perun():
+    """the Perun 26BB on solaris_town.py's Urbino 12 IV electric in the Trutnov
+    palette (imported on use, like crossway_town)"""
+    import solaris_town
+    return solaris_town.build("u12_4e", "trutnov", [8])
 
 
 def is_red(c):
@@ -839,18 +826,16 @@ FAMILIES = {
     # ------------------------------------------------------------ Trutnov
     "mhd-trutnov/perun_26bb_he": dict(
         agency=TRUTNOV, type="Perun_26BB_HE", name=("Škoda Perun 26BB HE", "Škoda Perun 26BB HE"),
-        copyright="TommPa9",
+        copyright="vojtechzicha",
         vehicles=[dict(id="Perun_26BB_HE", display="26BB HE", role=EBUS,
                        fields=f_(1000000, 85, 80, 12, 20, 150, 2018, 8, "battery", 160, 54, intro_month=12,
                                  retire=2050))],
-        liveries=[("trutnovmhd", TU_NAME[0], TU_NAME[1], rows_26bb)],
+        liveries=[("trutnovmhd", TU_NAME[0], TU_NAME[1], rows_perun)],
         note="Škoda Perun 26BB HE battery bus (Solaris Urbino 12 IV body), 12 m, 3 doors.\n"
              "Trutnov MHD (ARRIVA autobusy): 6E1 8260-8263, 4 cars, in service since 2/2019.",
-        sprite="TommPa9's Solaris Urbino 12 IV electric (the Tábor sheet, roof battery\n"
-               "fairing; it has the Urbino IV rear window line, which the smaller VTPsim\n"
-               "Urbino III of the Třinec 26BB lacks), repainted by khk_town.rows_26bb: COMETT\n"
-               "white and the chequered patch Arriva light blue, pixel mosaic and white\n"
-               "TRUTNOV MHD logo (photos 232403, 414852)."),
+        sprite="original box-model render (vojtechzicha): the dpo_solaris.py Urbino 12 IV\n"
+               "electric body in sor_town.py's trutnov palette (solaris_town.py; until\n"
+               "2026-10-28 a repaint of TommPa9's Tábor sheet)."),
     "mhd-trutnov/crossway_le_city_12m": dict(
         agency=TRUTNOV, type="Crossway_LE_City_12M",
         name=("Iveco Crossway LE City 12M", "Iveco Crossway LE City 12M"), copyright="vojtechzicha",

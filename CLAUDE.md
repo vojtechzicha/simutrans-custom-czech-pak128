@@ -349,7 +349,7 @@ The Iveco and coach bodies took the shape the same day. The Crossway family (`Cr
 
 ### Solaris town fleets (`tools/busrender/solaris_town.py`)
 
-Since 2026-10-28 the TommPa9 Škoda 26Tr (Brno, Pardubice, Opava) and 27Tr (Brno) and Solaris Urbino 18 (Brno, Olomouc, Tábor), Urbino 12 III / IV (Olomouc, Tábor) and Urbino 10,5 (DPP; its PID grey-red through pid.solaris) sheets are rendered on the `dpo_solaris.py` bodies instead (owner: one drawing per bus type, every 18 m articulated bus at 8 + 6 carunits). `SVeh` paints the Solaris model from sor_town.py's town palettes (`TOWNS`). Run `python tools/busrender/solaris_town.py [family …] [--preview DIR]`; the yamls are hand-written.
+Since 2026-10-28 the TommPa9 Škoda 26Tr (Brno, Pardubice, Opava) and 27Tr (Brno) and Solaris Urbino 18 (Brno, Olomouc, Tábor), Urbino 12 III / IV (Olomouc, Tábor), Urbino 10,5 (DPP; its PID grey-red through pid.solaris) and the Škoda Perun 26BB HE (Třinec; Trutnov through khk_town.py) sheets are rendered on the `dpo_solaris.py` bodies instead (owner: one drawing per bus type, every 18 m articulated bus at 8 + 6 carunits). `SVeh` paints the Solaris model from sor_town.py's town palettes (`TOWNS`). Run `python tools/busrender/solaris_town.py [family …] [--preview DIR]`; the yamls are hand-written.
 
 ### Crossway LE town fleets (`tools/busrender/crossway_town.py`)
 

@@ -1,9 +1,9 @@
 agency: MHDTrinec
 type: "Perun_26BB_HE"
-copyright: VTPsim
+copyright: vojtechzicha
 
-# The source sprites carry the upstream lane placement (their dats use no
-# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -15,6 +15,10 @@ display:
   family_cs: "Škoda Perun 26BB HE"
 
 # Škoda Perun 26BB HE battery bus (Solaris Urbino III body), 10 units (2016).
+# Sprite: original box-model render (vojtechzicha): the dpo_solaris.py Urbino
+# 12 III body with the Perun battery fairing in the trinec palette painted by
+# tools/busrender/solaris_town.py (until 2026-10-28 the hand-drawn upstream
+# sheet). Regenerate with tools/busrender/solaris_town.py.
 
 vehicles:
   - id: "Perun_26BB_HE"
