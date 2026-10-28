@@ -28,6 +28,7 @@ vehicles:
     prev: []
     next: ["Urbino_18_III_CNG-B"]
     fields:
+      length: 8
       cost: 500000
       payload: 91
       speed: 80
@@ -51,6 +52,7 @@ vehicles:
     prev: ["Urbino_18_III_CNG-A"]
     next: []
     fields:
+      length: 8
       cost: 432603
       payload: 59
       speed: 80

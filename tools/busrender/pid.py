@@ -298,15 +298,18 @@ def praha_rows(spec_fn, key):
 def _nb18():
     import dpmhk as H
     # SOR NB 18 (Arriva City / Arriva Střední Čechy): red columns round the three axles
-    # (photo 9932), A/C units between the roof bands
-    return H.mk(H.NB18, pods=[(3.6, 6.0, 0.24, 0.85, "ac"), (12.9, 14.4, 0.22, 0.80, "ac")],
+    # (photo 9932), A/C units between the roof bands; 3 doors, 2-2-0 + 2-0: the
+    # front, one ahead of the middle axle, one ahead of the rear axle (9939, 9951)
+    return H.mk(H.NB18, doors=[(0.30, 1.55), (7.60, 8.80), (13.10, 14.30)],
+                pods=[(3.6, 6.0, 0.24, 0.85, "ac"), (12.9, 14.4, 0.22, 0.80, "ac")],
                 reds=[(1.8, 3.9), (9.4, 11.3), (14.6, 16.4)], tower=True)
 
 
 def _nbg12():
     import dpmhk as H
-    # SOR NBG 12 (Arriva City 2017): the CNG fairing over the front two thirds
-    return H.mk(H.NB12, pods=[(1.6, 7.6, 0.36, 1.00, "body")], reds=[(1.6, 3.7), (7.7, 9.5)])
+    # SOR NBG 12 (Arriva 2017, 8880-8897): the CNG fairing over the front two
+    # thirds; 2 doors, 2-0-2-0: the front and one ahead of the rear axle (8895, 8880)
+    return H.mk(H.NB12, doors=[(0.30, 1.55), (6.70, 7.90)], pods=[(1.6, 7.6, 0.36, 1.00, "body")], reds=[(1.6, 3.7), (7.7, 9.5)])
 
 
 def _nbg18():

@@ -38,6 +38,7 @@ vehicles:
     prev: []
     next: []
     fields:
+      length: 8
       cost: 950000
       speed: 65
       power: 160
@@ -63,6 +64,7 @@ vehicles:
     prev: []
     next: []
     fields:
+      length: 8
       cost: 1080000
       speed: 65
       power: 160

@@ -31,6 +31,7 @@ vehicles:
     prev: []
     next: []
     fields:
+      length: 8
       cost: 833387
       payload: 95
       speed: 65
@@ -56,6 +57,7 @@ vehicles:
     prev: []
     next: []
     fields:
+      length: 8
       cost: 933387
       payload: 66
       speed: 65

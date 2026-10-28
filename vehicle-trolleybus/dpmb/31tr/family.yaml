@@ -1,11 +1,11 @@
 agency: DPBrno
 type: "31Tr"
-# Sprites are placed in the tile to the native pak128.cs lane position (body
-# footprint matched to the median of native 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 
 display:
   agency_en: "DPMB"
@@ -18,11 +18,10 @@ display:
 # 18.75 m, 17.7 t, 148 total (DPMB), 250 kW, 65 km/h. DPMB white-red (DPMB
 # drawing tr31.png): white body and roof, tall black window band, thin white
 # belt, red skirt, black front mask, grey bellows, light-grey poles on the
-# front of the rear section.
-# Sprite: VTPsim's CZR-Brno-Skoda_31Tr + 31Tr-B (pak128_czr vehicles-bus/
-# Brno): glass converted to the lit-window specials, DPMB red; lane
-# placement already on the native median. Sections keep the upstream 8 + 8
-# spacing the art was drawn for (joints checked in all 8 directions).
+# front of the rear section. Sprite: original box-model render (vojtechzicha):
+# the dpmhk.py Skoda 31Tr body (SOR NB 18, sections 9 + 5) on the common SOR
+# base, painted by tools/busrender/sor_town.py (until 2026-10-28 VTPsim's hand
+# art). Regenerate with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "31Tr"
@@ -46,7 +45,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 9
       engine_type: electric
 
   - id: "31Tr-B"
@@ -71,7 +70,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 5
       engine_type: electric
       power: 250
       gear: 62

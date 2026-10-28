@@ -312,6 +312,18 @@ def dark_line(u0, u1):
     return draw
 
 
+DPMP_RED = (0xD2, 0x1E, 0x2B)      # DPMP Pardubice red of the 32Tr (photos of 429 / 464)
+DPMP_WINE = (0xA3, 0x1A, 0x2E)     # the darker wine red of the 30Tr scheme (photos of 333, 412, 415)
+
+
+def dpmp_panel(v, p, u, right):
+    """the DPMP 32Tr: the big red lower panel from behind the front axle to the
+    rear axle, from a white bottom row up to the windows (photos of 429, 464)"""
+    if v.M(3.30) <= u < v.M(9.20) and v.ZB + 0.25 <= p.z < v.ZBAND0:
+        return DPMP_RED
+    return None
+
+
 TOWNS = {
     # Městská doprava Kladno: white, the black sill under the window band, a bold
     # red band straight under it, a white skirt strip; black front mask with red
@@ -429,6 +441,17 @@ TOWNS = {
     "arriva": dict(body=ARRIVA_BLUE, roof=ARRIVA_ROOF, lower=ARRIVA_BLUE, decal=arriva_swoosh, disp=AMBER,
                    front=dict(bumper=ARRIVA_BLUE, chin=BLACK, mask=ARRIVA_BLUE, corner=SILVER, trim=ARRIVA_BLUE),
                    rear=dict(bumper=ARRIVA_BLUE, panel=ARRIVA_BLUE, upper=BLACK)),
+    # DPMP Pardubice white-red: the red top row of the side under the roof
+    # edge, the black window band; the 30Tr (NB) in the older wine red: the
+    # stripe low on the white lower body, the black windscreen over a white
+    # mask with the wine band; the 32Tr (NS) with the big red lower panel,
+    # black front mask
+    "dpmp_nb": dict(body=WHITE, roof=ROOFW, lower=WHITE, cant=DPMP_WINE, stripe=(0.25, 0.50, DPMP_WINE),
+                    disp=AMBER, front=dict(bumper=WHITE, chin=WHITE, mask=WHITE, band=DPMP_WINE, trim=WHITE),
+                    rear=dict(bumper=DPMP_RED, panel=WHITE, upper=BLACK)),
+    "dpmp_ns": dict(body=WHITE, roof=ROOFW, lower=WHITE, cant=DPMP_RED, decal=dpmp_panel, disp=AMBER,
+                    front=dict(bumper=DPMP_RED, chin=DPMP_RED, mask=BLACK, corner=WHITE, trim=DPMP_RED),
+                    rear=dict(bumper=DPMP_RED, panel=BLACK, upper=BLACK)),
     # DPO TNB 12: white, the blue roof edge and front band
     "dpo_tnb": dict(body=WHITE, roof=ROOFW, roofedge=DPO_BLUE, lower=WHITE, disp=AMBER,
                     # light grey poles with a dark base (photos of 3912)
@@ -494,6 +517,9 @@ class TVeh(Veh):
 
     def cant_painted(self):
         return bool(self.P.get("cant"))
+
+    def roof_edge_painted(self):
+        return bool(self.P.get("roofedge"))
 
     def cant(self, p, u):
         if self.face in ("ns", "ebn") and u < self.cap:
@@ -700,7 +726,7 @@ MOST_NB18_DPP = mk(H.NB18, pods=[(10.40, 11.80, 0.22, 0.80, AC), (12.80, 14.00, 
 # CNG fairing over the front-middle roof and the A/C unit ahead of it; TNS 12
 # with the plain roof pod and the poles
 DPMB_NS12 = mk(H.NS12, pods=[(5.60, 7.90, 0.24, 0.85, AC)])
-DPMB_NBG12 = mk(H.NB12, pods=[(1.40, 2.40, 0.22, 0.80, AC), (2.60, 8.00, 0.36, 1.00, FAIR)])
+DPMB_NBG12 = mk(H.NB12_3D, pods=[(1.40, 2.40, 0.22, 0.80, AC), (2.60, 8.00, 0.36, 1.00, FAIR)])
 DPMB_TNS12 = mk(H.NS12, pods=[(1.80, 7.20, 0.26, 1.00, FAIR)], poles=(7.60, 0.30))
 # DPMO 501: the battery and A/C pods
 DPMO_NS12E = mk(H.NS12, pods=[(1.70, 8.00, 0.26, 1.05, FAIR), (8.40, 9.80, 0.22, 0.80, AC)])
@@ -720,13 +746,20 @@ TRI_NS12 = mk(H.NS12, pods=[(3.00, 5.00, 0.24, 0.85, AC)])
 # Trutnov NB 12 / NBG 18, Chrudim NB 12
 TRU_NB12 = mk(H.NB12, pods=[(0.80, 2.00, 0.22, 0.80, AC)])
 TRU_NBG18 = mk(H.NB18, pods=[(1.80, 10.00, 0.36, 1.00, FAIR), (13.00, 15.60, 0.30, 0.95, FAIR)])
-CHR_NB12 = mk(H.NB12, pods=[(0.80, 2.00, 0.22, 0.80, AC)])
+CHR_NB12 = mk(H.NB12_3D, pods=[(0.80, 2.00, 0.22, 0.80, AC)])
 # the Lubak91 EBN towns: the EBN 9,5 and 11,1 battery fairings
 EBN95 = mk(H.MODELS["ebn95"])
 PRE_EBN11 = mk(H.EBN11, real_len=11.1,
                pods=[(1.20, 3.60, 0.30, 0.95, FAIR), (4.20, 6.60, 0.30, 0.95, FAIR), (7.20, 9.60, 0.30, 0.95, FAIR)])
 # DPO SOR TNB 12: the Škoda 30Tr body (TNB 12) with its fairing, poles and rack
 DPO_TNB12 = mk(H.MODELS["30tr"])
+# the SOR trolleybuses that were VTPsim's hand art until 2026-10-28, now on the
+# bodies of their buses: DPMB 31Tr (NB 18) and 32Tr (NS 12, as the TNS 12),
+# DPMP 30Tr (NB 12) and 32Tr (NS 12)
+DPMB_31TR = mk(H.MODELS["31tr"])
+DPMB_32TR = DPMB_TNS12
+DPMP_30TR = mk(H.MODELS["30tr"])
+DPMP_32TR = mk(H.MODELS["32tr"])
 
 # family (path under the repo) -> {livery colour: [(spec, palette), ...] in row order}
 FAMILIES = {
@@ -763,6 +796,10 @@ FAMILIES = {
     "vehicle-bus/mhd-novy-jicin/sor_ebn_9_5": {"cervenametaliza": [(EBN95, "nj")]},
     "vehicle-bus/mhd-prerov/sor_ebn_11_1": {"arrivamodra": [(PRE_EBN11, "arriva")]},
     "vehicle-trolleybus/dpo/sor_tnb_12": {"bilamodrastrecha": [(DPO_TNB12, "dpo_tnb")]},
+    "vehicle-trolleybus/dpmb/31tr": {"dpmbbilocervena": [(DPMB_31TR, "dpmb")]},
+    "vehicle-trolleybus/dpmb/32tr": {"dpmbbilocervena": [(DPMB_32TR, "dpmb_ns")]},
+    "vehicle-trolleybus/dpmp/30tr": {"dpmpbilocervena": [(DPMP_30TR, "dpmp_nb")]},
+    "vehicle-trolleybus/dpmp/32tr": {"dpmpbilocervena": [(DPMP_32TR, "dpmp_ns")]},
 }
 
 

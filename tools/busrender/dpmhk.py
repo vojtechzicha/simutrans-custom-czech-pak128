@@ -94,13 +94,17 @@ WINRISE = 0.25
 # runs up over the lower ledge and the destination display sits on the
 # recessed middle step (NB_FRONT_Z), as on the real bus where the glass curves
 # up into the dome. The owner picked bold (2026-10-28, page of variants box /
-# dome / shoulder / bold); the others stay selectable.
+# dome / shoulder / bold); the others stay selectable. edge paints the top row
+# of the side in roof colour; bold leaves the black band up to the roof edge
+# (window line B, 2026-10-28) unless the livery paints a roof edge of its own.
+# The NB keeps its low sill (winrise 0): the raised one with the rounded edge
+# left it two rows less glass than VTPsim's NB and the real bus.
 NB_SHAPE = ["bold"]
 NB_SHAPES = {
     "box": dict(steps=[], shoulder=False),
     "dome": dict(steps=[(0.25, 0.45)], shoulder=False),
     "shoulder": dict(steps=[(0.25, 0.45)], shoulder=True),
-    "bold": dict(steps=[(0.25, 0.80), (0.50, 0.30)], shoulder=True),
+    "bold": dict(steps=[(0.25, 0.80), (0.50, 0.30)], shoulder=True, edge=False),
 }
 SHOULDER_W = 0.25                  # m of roof width on each side drawn as the shoulder
 SHOULDER_K = 0.88                  # its shade against the roof top
@@ -129,7 +133,7 @@ NS18 = dict(
 # SOR NB 12 / TNB 12 (Skoda 30Tr): 4 doors, the last behind the rear axle
 L1A_DIAG = dict(xw_top=2.05, wy=0.60, gap=0.30, k=1.5, xh_top=3.00)
 NB12 = dict(
-    sor=True, nb=True,
+    sor=True, nb=True, winrise=0.0,
     face="nb", rear="nb", real_len=12.0, joints=[], cu=[8],
     axles=[2.75, 8.60],
     doors=[(0.30, 1.55), (4.15, 5.45), (6.70, 7.90), (9.25, 10.45)],
@@ -137,10 +141,13 @@ NB12 = dict(
     z0=0.24, zr=3.00, zwin0=1.22, zwin1=2.46, zband0=1.14, zband1=2.74,
     cap=0.0, sidedisp=(2.10, 3.60), pods=[], mirrors=True, diag=L1A_DIAG,
 )
+# the 3-door NB 12 (2-2-2: DPMB, Chrudim): no door between the middle and the
+# rear one (Brno 7030)
+NB12_3D = dict(NB12, doors=[(0.30, 1.55), (4.15, 5.45), (9.25, 10.45)])
 # SOR NB 18 / TNB 18 (Skoda 31Tr): long front section (~12.3 m, 3 doors), short
 # pusher-style rear section (2 doors, the last behind the rear axle)
 NB18 = dict(
-    sor=True, nb=True,
+    sor=True, nb=True, winrise=0.0,
     face="nb", rear="nb", real_len=18.75, joints=[12.30], cu=[9, 5],
     axles=[3.00, 10.55, 16.25],
     doors=[(0.30, 1.55), (4.60, 5.90), (7.60, 8.80), (13.10, 14.30), (16.95, 18.10)],
@@ -376,6 +383,10 @@ class Veh:
         """the livery paints the top row of the side itself (sor_town's cant)"""
         return False
 
+    def roof_edge_painted(self):
+        """the livery has a roof edge of its own colour (sor_town's roofedge)"""
+        return False
+
     def roof_top(self, u):
         top = self.ZR
         for a, b, h, hw, kind in self.pods:
@@ -419,7 +430,8 @@ class Veh:
                     p = lowered(p, p.z - z)
             if f in ("left", "right"):
                 c = self.tex_side(p, u, U1)
-                if self.nbshape["shoulder"] and p.z >= self.ZR - 0.25 and not self.cant_painted() \
+                if self.nbshape["shoulder"] and (self.nbshape.get("edge", True) or self.roof_edge_painted()) \
+                        and p.z >= self.ZR - 0.25 and not self.cant_painted() \
                         and c in (sh(BLACK, f), BLACK, FRAME):
                     c = sh(self.tex_roof(p, u), f)       # the black band stops under the rounded edge
                 return c

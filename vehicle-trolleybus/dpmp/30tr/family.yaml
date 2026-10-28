@@ -1,11 +1,11 @@
 agency: DPPardubice
 type: "30Tr"
-# Sprites are placed in the tile to the native pak128.cs lane position (body
-# footprint matched to the median of native 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 
 display:
   agency_en: "DPMP"
@@ -14,10 +14,11 @@ display:
   family_cs: "Škoda 30Tr SOR"
 
 # Škoda 30Tr SOR, 12.2 m trolleybus on the SOR NB 12 body. DPMP runs 22
-# (333-335 from 2016, 410-424 and the battery-equipped 480-483 from 2018).
-# 104 passengers, Škoda 4ML 3444 K/4 160 kW, 70 km/h. Sprite: VTPsim's
-# Škoda 32Tr (SOR body, poles, roof equipment) with the front redrawn in the
-# white NB 12 style and the DPMP white-red (NRP) scheme.
+# (333-335 from 2016, 410-424 and the battery-equipped 480-483 from 2018). 104
+# passengers, Škoda 4ML 3444 K/4 160 kW, 70 km/h. Sprite: original box-model
+# render (vojtechzicha): the dpmhk.py Skoda 30Tr body (SOR NB 12) on the
+# common SOR base, painted by tools/busrender/sor_town.py (until 2026-10-28
+# VTPsim's hand art). Regenerate with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "30Tr"

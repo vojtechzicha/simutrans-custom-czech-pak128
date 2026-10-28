@@ -40,7 +40,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 6
+      length: 5
       engine_type: diesel
       power: 100
       gear: 55

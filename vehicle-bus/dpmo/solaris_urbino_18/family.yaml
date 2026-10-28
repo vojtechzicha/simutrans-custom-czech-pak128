@@ -28,6 +28,7 @@ vehicles:
     prev: []
     next: ["Urbino_18-B"]
     fields:
+      length: 8
       cost: 500000
       payload: 90
       speed: 80
@@ -51,6 +52,7 @@ vehicles:
     prev: ["Urbino_18-A"]
     next: []
     fields:
+      length: 8
       cost: 432603
       payload: 58
       speed: 80
