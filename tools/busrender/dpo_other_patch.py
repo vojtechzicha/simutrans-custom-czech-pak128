@@ -1,5 +1,6 @@
 """Patches on frozen DP Ostrava sheets (tools/busrender/src/dpo/): the Unvi
-Urbis DD, the Skoda 21Tr and the Temsa-bodied Skoda 36Tr.
+Urbis DD and the Skoda 21Tr (the Skoda 36Tr is rendered on the dpmhk.py Temsa
+body by sor_town.py since 2026-10-28).
 
 Every patch works on the frozen sheet with a box frame fitted to its
 silhouette (dpo_otherkit.Frame, per-view origin offsets found by a silhouette
@@ -24,9 +25,6 @@ F_URBIS = Frame(12.0, 2.7, 0.2, 4.25, {
 F_21TR = Frame(11.0, 2.5, 0.0, 3.0, {
     "w": (-1.0, -2.0), "nw": (-0.5, -3.0), "n": (2.0, -3.0), "ne": (1.5, -2.0),
     "e": (1.0, -1.0), "se": (0.5, 0.0), "s": (-2.0, 0.0), "sw": (-2.5, -2.0)})
-F_36TR = Frame(12.0, 2.7, 0.25, 3.5, {
-    "w": (0.0, 1.0), "nw": (0.0, 0.5), "n": (0.0, 0.0), "ne": (-0.5, -1.0),
-    "e": (0.0, -1.0), "se": (0.0, 1.0), "s": (0.0, 0.0), "sw": (-0.5, -1.0)})
 
 RIGHT_VIEWS = ("n", "ne", "e")          # views that show the right (door) side
 LEFT_VIEWS = ("s", "sw", "w")
@@ -66,33 +64,8 @@ def repole(tile, d, frame, u_base, z_base, half, cols, keep=None):
     return K.draw_poles(t, d, frame, u_base, z_base, half, **cols)
 
 
-POLES_36TR = dict(pole_col=(0x22, 0x24, 0x26), base_col=(0x10, 0x10, 0x12), tip_col=(0x10, 0x10, 0x12))
 POLES_21TR = dict(pole_col=(0xD8, 0xA8, 0x28), base_col=(0x1C, 0x1C, 0x1E), tip_col=(0x1C, 0x1C, 0x1E),
                   dark_frac=0.22, dark_col=(0x1C, 0x1C, 0x1E))
-
-
-# ------------------------------------------------------------------ 36Tr
-GLAZ_36 = {0x57656F, 0x4D4D4D, 0x1E1E1E}
-LINE_36 = (0xC4, 0xCA, 0xCF)
-
-
-def patch_36tr(rows):
-    """light grey line under the glazing on both sides in every view; black
-    poles aimed at the wire"""
-    out = []
-    for i, d in enumerate(DIRS):
-        t = rows[0][i]
-        sm = side_masks(F_36TR, d, margin=0.15)
-        v = vals(t)
-        new = t.copy()
-        for side, (u, z, m) in sm.items():
-            for x in range(128):
-                for y in range(127):
-                    if v[y, x] in GLAZ_36 and v[y + 1, x] == 0x00ADD6 and (m[y + 1, x] or m[y, x]):
-                        new[y + 1, x] = LINE_36
-        new = repole(new, d, F_36TR, 5.4, F_36TR.zt + 0.10, 0.30, POLES_36TR)
-        out.append(new)
-    return [out]
 
 
 # ------------------------------------------------------------------ Skoda 21Tr

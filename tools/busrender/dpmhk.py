@@ -224,6 +224,33 @@ CIT18_ = dict(
     CIT12_, real_len=17.8, joints=[9.90], cu=[8, 6], axles=[2.71, 8.065, 14.64],
     doors=[(0.30, 1.85), (5.00, 6.55), (11.50, 12.90), (15.80, 17.10)], cit_grille=(15.65, 17.70),
 )
+# Temsa Avenue Electron 12 (Škoda E'City 36BB, Škoda 36Tr T'City): a body of
+# its own (until 2026-10-28 drawn three ways), from photos of DPP 3001-3014 /
+# 509, Arad CTP 461: 12.02 m, wheelbase 5.805 m (front axle 3.05 m back, from
+# the straight side photo 660439), doors 2-2-2 with the middle one just ahead
+# of the rear axle and the rear one behind it; the black glazing band up to
+# the flush light roof band (tm_fair) that runs the whole length; the black
+# dome over the cab; the deep windscreen in a black surround with the display
+# in the black band over it; the lower front with a black lip under the glass and
+# the headlamps in slanted black pods at the corners; the rear with the big
+# black window panel wrapping down the corners over the lower panel and the
+# slim lamp strips over the bumper.
+TM12 = dict(
+    face="tm", rear="tm", tm=True, real_len=12.02, joints=[], cu=[8],
+    axles=[3.05, 8.855],
+    doors=[(0.25, 1.65), (5.65, 6.95), (9.85, 11.15)],
+    drv=(0.30, 1.65),
+    z0=0.30, zr=3.05, zwin0=1.28, zwin1=2.62, zband0=1.20, zband1=3.05,
+    cap=0.0, sidedisp=(1.90, 3.20), pods=[], mirrors=True, diag=dict(L1A_DIAG, xw_top=1.95),
+    tm_cap=1.45,
+)
+TM_FAIR = [(0.0, 11.95, 0.32, HW - 0.04, "fair")]
+# the E'City's charging pantograph folded down on the roof: the grey arm lying
+# backwards from its hinge on the black cap, the dark collector head across
+# the roof behind it (photo seznam-autobusu 353480)
+TM_PANTO = [(0.90, 2.70, 0.40, 0.06, "arm"), (2.55, 2.75, 0.44, 0.75, "head")]
+PANTO_ARM = (0x9A, 0x9E, 0xA2)
+PANTO_HEAD = (0x30, 0x32, 0x34)
 CIT_AC = [(0.70, 1.70, 0.18, 0.75, "ac")]
 CIT_CNG = [(0.70, 1.70, 0.18, 0.75, "ac"), (2.90, 10.70, 0.42, 1.15, "fair")]
 SW12_DIESEL = [(0.50, 5.50, 0.18, 0.90, "ac"), (7.10, 11.45, 0.22, 1.00, "dark")]
@@ -449,9 +476,74 @@ class Veh:
             return AMBER
         if role == "stripe":
             return None
+        if role in ("cap", "corner"):
+            return BLACK
         if role == "bumper" and self.liv in ("L1a", "L1b", "L2"):
             return RED
         return WHITE
+
+    # ---------------- Temsa Avenue Electron -------------------------------
+    def tm_side(self, p, u, c):
+        """the black of the rear panel wrapping round the rear corner"""
+        if u >= self.U[-1] - 0.12 and inr(p.z, 0.62, self.ZBAND0):
+            return sh(self.sw_paint("corner", 0.0), p.face)
+        return c
+
+    def tm_front(self, p):
+        t, z = p.t, p.z
+        f = "front"
+        a = abs(t)
+        if z < 0.30:
+            return BLACK
+        if a > HW - 0.50 and z < 0.80 + 0.22 * (a - (HW - 0.50)) / 0.50 and z >= 0.55:
+            if inr(z, 0.62, 0.78) and HW - 0.42 < a < HW - 0.12:
+                return HEADL                            # the headlamps in their slanted pods
+            return BLACK
+        if z < 0.55:
+            return sh(self.sw_paint("bumper", t), f)
+        if z < 1.12:
+            if z >= 1.04:
+                return BLACK                            # the black lip under the windscreen
+            stripe = self.sw_paint("stripe", t)
+            if stripe is not None and inr(z, 0.62, 0.80):
+                return sh(stripe, f)
+            return sh(self.sw_paint("band", t), f)
+        if a > HW - 0.10:
+            return BLACK                                # the A-pillars
+        if z < 2.62:
+            return CAB_GLASS
+        if inr(z, 2.70, 2.94) and a < 1.00:
+            return self.sw_paint("disp", t)
+        if z < 3.05:
+            return BLACK
+        return sh(self.sw_paint("cap", t), f)
+
+    def tm_rear(self, p):
+        t, z = p.t, p.z
+        f = "rear"
+        a = abs(t)
+        if z < 0.30:
+            return BLACK
+        if inr(z, 0.42, 0.56) and HW - 0.95 < a < HW - 0.22:
+            return TAILL                                # the slim lamp strips
+        if inr(z, 0.38, 0.54) and a < 0.30:
+            return sh((0xE8, 0xE8, 0xE6), f)            # plate
+        if z < 0.62:
+            return sh(self.sw_paint("bumper", t), f)
+        if a > HW - 0.14 and z < 3.00:
+            return sh(self.sw_paint("corner", t), f)    # the black wrapping down the corners
+        top = 1.95 - 0.30 * (a / HW) ** 2
+        if z < top:
+            return sh(self.sw_paint("panel", t), f)
+        if z < 3.00:
+            if a > HW - 0.32 and inr(z, 2.80, 2.92):
+                return TAILL                            # the marker lamps
+            if inr(z, 2.62, 2.84) and inr(t, 0.30, 0.95):
+                return self.sw_paint("disp", t)
+            if inr(z, 2.15, 2.88) and a < HW - 0.22:
+                return GLASS
+            return BLACK
+        return sh(self.sw_paint("upper", t), f)
 
     # ---------------- Irisbus Citelis --------------------------------------
     def cit_side(self, p, u, c):
@@ -622,6 +714,12 @@ class Veh:
                 return sh(RACK, p.face)
             if b == "mirror":
                 return sh(FRAME, p.face)
+            if b.startswith("pod") and self.pods[int(b[3:])][4] in ("arm", "head"):
+                c = PANTO_ARM if self.pods[int(b[3:])][4] == "arm" else PANTO_HEAD
+                return c if p.face == "top" else sh(c, p.face)     # a folded charging pantograph
+            if self.sp.get("tm") and u < self.sp["tm_cap"] and (b.startswith("pod") or p.face == "top"):
+                c = self.sw_paint("cap", 0.0)                  # the Temsa's dome over the cab
+                return c if p.face == "top" else sh(c, p.face)
             if b.startswith("pod"):
                 return self.tex_pod(p, u, int(b[3:]))
             f = p.face
@@ -647,6 +745,8 @@ class Veh:
                     c = self.sw_side(p, u, c)
                 if self.sp.get("cit"):
                     c = self.cit_side(p, u, c)
+                if self.sp.get("tm"):
+                    c = self.tm_side(p, u, c)
                 return c
             dz = self.ZB - self.Z0
             if dz > 0:
@@ -985,6 +1085,8 @@ class Veh:
             return self.sw_front(p)
         if face == "cit":
             return self.cit_front(p)
+        if face == "tm":
+            return self.tm_front(p)
         if face == "ns":
             if z < 0.44:
                 return BLACK
@@ -1098,6 +1200,8 @@ class Veh:
             return self.sw_rear(p)
         if st == "cit":
             return self.cit_rear(p)
+        if st == "tm":
+            return self.tm_rear(p)
         if st == "ns":
             if a > HW - 0.26 and inr(z, 0.55, 1.35):
                 return TAILL

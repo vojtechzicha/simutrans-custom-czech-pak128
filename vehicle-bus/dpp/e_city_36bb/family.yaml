@@ -30,9 +30,11 @@ display:
 # axles (behind door 1 / from door 3 forward) repeated as red bands over the
 # roof fairing; grey rear roof cap, black rear window area with an amber route
 # number, grey lower rear with the red block on the left, tail-lamp bar.
-# Sprite: new 8-direction box render (no upstream art exists for this body),
-# dimensions and panel positions measured from photos (seznam-autobusu 340997,
-# 356084, 450903, 353480; Wikimedia "Škoda 36BB E City").
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Temsa Avenue
+# Electron body (TM12, shared with the 36Tr since 2026-10-28; axles and doors
+# from busphoto 660439) in praha.py's PID grey-red, with the folded
+# pantograph (photos seznam-autobusu 340997, 356084, 450903, 353480; busphoto
+# 425471, 660377). Regenerate with tools/busrender/praha.py.
 
 vehicles:
   - id: "E_City_36BB"

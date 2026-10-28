@@ -258,6 +258,10 @@ class PVeh(Veh):
         P = self.P
         if role == "disp":
             return self.DISP
+        if role in ("cap", "corner"):
+            return BLACK
+        if role == "upper":
+            return P["roof"]
         if self.liv == "A":
             return P["red"] if t < -0.10 else P["body"]
         if self.liv == "B":
@@ -269,6 +273,8 @@ class PVeh(Veh):
             return self.sw_front(p)
         if self.face == "cit":
             return self.cit_front(p)
+        if self.face == "tm":
+            return self.tm_front(p)
         t, z = p.t, p.z
         f = "front"
         a = abs(t)
@@ -409,6 +415,8 @@ class PVeh(Veh):
             return self.sw_rear(p)
         if self.rearstyle == "cit":
             return self.cit_rear(p)
+        if self.rearstyle == "tm":
+            return self.tm_rear(p)
         t, z = p.t, p.z
         f = "rear"
         a = abs(t)
@@ -542,7 +550,12 @@ def build(sp, livery):
             if m.poles:
                 pb = m.M(m.poles[0])
                 if m.U[i] <= pb < m.U[i + 1]:
-                    H.draw_poles(img, d, L, o, m.U[i + 1] - pb, m.roof_top(pb) + 0.16, m.poles[1], H.TIP)
+                    if sp.get("polecols"):
+                        import sor_town
+                        sor_town.draw_poles(img, d, L, o, m.U[i + 1] - pb, m.roof_top(pb) + 0.16, m.poles[1],
+                                            sp["polecols"])
+                    else:
+                        H.draw_poles(img, d, L, o, m.U[i + 1] - pb, m.roof_top(pb) + 0.16, m.poles[1], H.TIP)
             if sp.get("panto") and i == 0:
                 draw_panto(img, d, L, o, m, sp["panto"])
             tiles.append(img)
@@ -582,6 +595,16 @@ DTNS18 = mk(NS18, cap=1.20, pods=[(1.80, 10.30, 0.26, 1.00, "fair")],
 # ends (photos of 4161, 4179, 5123)
 DSW12 = mk(H.SW12, pods=H.SW12_DIESEL, reds=[(1.80, 3.80), (7.70, 9.50)])
 DSW18 = mk(H.SW18, pods=H.SW18_DIESEL, reds=[(1.80, 3.90), (7.80, 9.70), (14.40, 16.40)])
+# the Temsa Avenue Electron body (dpmhk TM12): the DPP E'City 36BB 3001-3014
+# and the Škoda 36Tr 509, the red PID columns round the front axle and over
+# the rear axle on the lower body and the roof band (photos 660439, 959161);
+# the 36Tr's poles hinged above door 2, silver-grey with a black hinge end and
+# a yellow upper quarter
+DTM_REDS = [(2.30, 4.40), (7.80, 9.90)]
+DECITY = mk(H.TM12, pods=H.TM_FAIR + H.TM_PANTO, reds=DTM_REDS)      # with the folded pantograph
+D36TR = mk(H.TM12, pods=H.TM_FAIR, reds=DTM_REDS, poles=(6.30, 0.30),
+           polecols=dict(pole=(0xB4, 0xB8, 0xBC), tip=(0x30, 0x32, 0x34), sleeve=(0.25, (0xF2, 0xC8, 0x00)),
+                         base=(0.12, (0x26, 0x26, 0x2A))))
 # the DPP Urbanway 18M Hybrid: the battery / A/C pod on the front section, a low
 # box and the tall A/C unit at the rear end on the rear section (Commons, 5518)
 DUW18H = mk(H.MODELS["uw18h"], reds=[(1.85, 3.70), (6.00, 9.90), (13.90, 15.55)],
@@ -603,6 +626,8 @@ FAMILIES = {
     "vehicle-trolleybus/dpp/tns_18": {A: [DTNS18]},
     "vehicle-bus/brno/urbanway_12m": {W: [PUW12W]},
     "vehicle-bus/dpp/urbanway_18m_hybrid": {A: [DUW18H]},
+    "vehicle-bus/dpp/e_city_36bb": {A: [DECITY]},
+    "vehicle-trolleybus/dpp/36tr": {A: [D36TR]},
     "vehicle-bus/dpp/streetway_12m": {A: [DSW12]},
     "vehicle-bus/praha/streetway_12m": {A: [DSW12]},
     "vehicle-bus/dpp/streetway_18m": {A: [DSW18]},

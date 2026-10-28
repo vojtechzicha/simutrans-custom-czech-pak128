@@ -28,9 +28,11 @@ display:
 # roof fairing, grey rear cap, black rear window, red block on the lower rear;
 # trolley poles hinged above door 2: silver-grey with a black hinge end and a
 # yellow insulated upper quarter (photos; not black as the research notes say).
-# Sprite: new 8-direction box render of the Temsa body (shared geometry with the
-# E'City 36BB family), placed from the pure side view seznam-autobusu 443343;
-# pole tips aimed at the pak128.cs wire of the vehicle's own lane.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Temsa Avenue
+# Electron body (TM12, shared with the E'City 36BB and the Opava / Ostrava
+# 36Tr since 2026-10-28) in praha.py's PID grey-red; pole tips aimed at the
+# pak128.cs wire of the vehicle's own lane. Regenerate with
+# tools/busrender/praha.py.
 
 vehicles:
   - id: "36Tr"

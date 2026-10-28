@@ -18,9 +18,12 @@ display:
 # pure trolleybus without traction battery. 12.02 m, 3 doors (2-2-2), 32+2
 # seats + 51 standing = 85, ~160 kW, 65 km/h. MDPO scheme: white roof with a
 # black cap over the cab, red cant-rail band, black glazing, white waist, red
-# skirt rising in a wave over each wheel arch, red front apron. Sprite: the
-# body re-rendered on the geometry of TommPa9's Opava 26Tr (same placement,
-# wheels positions and trolley poles).
+# skirt rising in a wave over each wheel arch, the white panel round the
+# headlamps over the red apron, white rear corners; light grey poles with dark
+# heads (transphoto.org 1829256, 1832169, 1832173, 1855652, 2123863).
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Temsa Avenue
+# Electron body (TM12, since 2026-10-28) in sor_town.py's mdpo_tm palette.
+# Regenerate with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "36Tr"

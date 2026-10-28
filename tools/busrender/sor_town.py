@@ -331,6 +331,14 @@ DPMP_WINE = (0xA3, 0x1A, 0x2E)     # the darker wine red of the 30Tr scheme (pho
 DEMO_ORANGE_DK = (0xB8, 0x48, 0x14)
 
 
+def mdpo_wave(v, p, u, right):
+    """MDPO on the 36Tr: the red skirt rising in a wave over each wheel arch"""
+    bump = max(max(0.0, 1.0 - abs(u - a) / 1.40) for a in v.axles)
+    if p.z < v.ZB + 0.42 + 0.45 * bump:
+        return MDPO_RED
+    return None
+
+
 def karvina_script(v, p, u, right):
     """the black "karviná" script on the lower body between the middle and the
     rear door, two rows tall"""
@@ -564,6 +572,36 @@ TOWNS = {
                     rear=dict(bumper=LIGHT_GREY, panel=WHITE, upper=DPO_BLUE)),
 }
 TOWNS["most_dpp18"] = dict(TOWNS["most_dpp"], disp=AMBER)
+# the Temsa Avenue Electron 36Tr (dpmhk TM12), checked against transphoto.org
+# photos 1829256, 1832169, 1832173, 1855652, 2123863 (Opava) and 1724715,
+# 1724941, 1770934 (Ostrava). MDPO 329-331: white with the black dome over the
+# cab, the red band at the top of the side, the black glazing, the red skirt
+# rising over the wheel arches, the white panel round the headlamps over the
+# red apron, white rear corners; light grey poles with dark heads
+TOWNS["mdpo_tm"] = dict(body=WHITE, roof=ROOFW, pod_side=MDPO_RED, lower=WHITE, decal=mdpo_wave, disp=LEDG,
+                        poles=dict(pole=(0xB8, 0xBC, 0xC0), tip=(0x26, 0x26, 0x2A), sleeve=(0.12, (0x30, 0x32, 0x34)),
+                                   base=(0.10, (0x50, 0x54, 0x58))),
+                        front=dict(bumper=MDPO_RED, band=WHITE),
+                        rear=dict(bumper=MDPO_RED, panel=WHITE, upper=ROOFW, corner=WHITE))
+# DPO 3741-3758: the DPO turquoise (tramrender/dpo_palette.py), the turquoise
+# cap over the cab, the light grey line under the glazing and the light grey
+# band between the headlamps, the white "ooo" mark on the roof band behind the
+# cab, turquoise rear corners over the black bumper, black poles
+DPO_TQ = (0x00, 0xAD, 0xD6)
+DPO_TQ_ROOF = (0x44, 0xC1, 0xE4)
+DPO_GREY = (0xD6, 0xD8, 0xDA)
+
+
+def dpo_ooo(v, u, z):
+    """the three white rings of the DPO mark on the roof band behind the cab"""
+    a = v.M(1.70)
+    return inr(u, a, a + 5 * CW) and int((u - a) / CW) % 2 == 0
+
+
+TOWNS["dpo_tm"] = dict(body=DPO_TQ, roof=DPO_TQ_ROOF, lower=DPO_TQ, sill=DPO_GREY, disp=AMBER, pod_mark=dpo_ooo,
+                       poles=dict(pole=(0x26, 0x26, 0x2A), tip=(0x40, 0x40, 0x44)),
+                       front=dict(bumper=DPO_TQ, band=DPO_TQ, stripe=DPO_GREY, cap=DPO_TQ_ROOF),
+                       rear=dict(bumper=(0x26, 0x26, 0x28), panel=DPO_TQ, upper=DPO_TQ_ROOF, corner=DPO_TQ))
 # (details checked against photos and the old sheets, 2026-10-28)
 # the DPMB 31Tr: light grey poles (DPMB drawing tr31)
 TOWNS["dpmb_31tr"] = dict(TOWNS["dpmb"], poles=dict(pole=(0xA4, 0xA8, 0xAC), tip=(0x30, 0x32, 0x34),
@@ -607,6 +645,11 @@ class TVeh(Veh):
         c = self.P.get("pod", self.ROOF)
         if self.pods[k][4] == "ac":
             c = self.P.get("pod_ac", c)
+        mark = self.P.get("pod_mark")
+        if mark and f in ("left", "right") and self.pods[k][4] == "fair" and mark(self, u, p.z):
+            return sh(WHITE, f)
+        if f != "top" and self.pods[k][4] == "fair" and self.P.get("pod_side"):
+            return sh(self.P["pod_side"], f)
         if self.pods[k][4] == "ac" and f == "top" and abs(p.t) < 0.25:
             return tuple(int(v * 0.86) for v in c)          # condenser grille
         if self.pods[k][4] == "dark":
@@ -678,7 +721,11 @@ class TVeh(Veh):
             return self.P["rear"]["panel"]
         if role == "upper":
             return self.P["rear"].get("upper", self.P["rear"]["panel"])
+        if role == "corner":
+            return self.P["rear"].get("corner", BLACK)
         F = self.P["front"]
+        if role == "cap":
+            return F.get("cap", BLACK)
         if role == "stripe":
             return F.get("stripe")
         return F["bumper"] if role == "bumper" else F.get("band", F.get("mask", self.P["body"]))
@@ -688,6 +735,8 @@ class TVeh(Veh):
             return self.sw_front(p)
         if self.face == "cit":
             return self.cit_front(p)
+        if self.face == "tm":
+            return self.tm_front(p)
         t, z = p.t, p.z
         f = "front"
         a = abs(t)
@@ -789,6 +838,8 @@ class TVeh(Veh):
             return self.sw_rear(p)
         if self.rearstyle == "cit":
             return self.cit_rear(p)
+        if self.rearstyle == "tm":
+            return self.tm_rear(p)
         t, z = p.t, p.z
         f = "rear"
         a = abs(t)
@@ -978,6 +1029,7 @@ SW18_CNG = mk(H.SW18, pods=[(0.20, 6.00, 0.33, 1.00, "fair"), (12.40, 15.60, 0.3
 # Citelis body of dpmhk.py (CIT12_ / CIT18_), not the Urbanway's
 CIT12 = mk(H.CIT12_, pods=H.CIT_AC)
 CIT12_CNG = mk(H.CIT12_, pods=H.CIT_CNG)
+TM36TR = mk(H.TM12, pods=H.TM_FAIR, poles=(6.30, 0.30))
 UW105 = mk(H.UW12, real_len=10.5, axles=[2.70, 7.40], doors=[(0.32, 1.55), (4.10, 5.40), (7.95, 9.10)],
            engine=(9.20, 10.35), sidedisp=(2.60, 3.90), cu=[7],
            pods=[(2.00, 4.20, 0.24, 0.85, AC), (9.30, 10.40, 0.20, 0.85, "dark")])
@@ -1038,6 +1090,8 @@ FAMILIES = {
     "vehicle-bus/dpmb/urbanway_18m_cng": {"dpmbbilocervena": [(UW18_CNG_, "dpmb_uw")]},
     "vehicle-bus/mhd-tabor/urbanway_18m_cng": {"comettbila": [(UW18_CNG_, "tabor_uwc")]},
     "vehicle-trolleybus/dpmb/31tr": {"dpmbbilocervena": [(DPMB_31TR, "dpmb_31tr")]},
+    "vehicle-trolleybus/mdpo/36tr": {"mdpobilocervena": [(TM36TR, "mdpo_tm")]},
+    "vehicle-trolleybus/dpo/36trsolaris": {"dpotyrkysova": [(TM36TR, "dpo_tm")]},
     "vehicle-trolleybus/dpmb/32tr": {"dpmbbilocervena": [(DPMB_32TR, "dpmb_32tr")]},
     "vehicle-trolleybus/dpmp/30tr": {"dpmpbilocervena": [(DPMP_30TR, "dpmp_nb")]},
     "vehicle-trolleybus/dpmp/32tr": {"dpmpbilocervena": [(DPMP_32TR, "dpmp_ns")]},

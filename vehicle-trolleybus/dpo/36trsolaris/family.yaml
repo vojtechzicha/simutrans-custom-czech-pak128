@@ -17,15 +17,14 @@ display:
 # Škoda 36Tr with the Temsa body (not Solaris): 18 cars 3741-3758 delivered
 # 2023, all with traction batteries for off-wire running. The object ids keep
 # the historical "36TrSolaris" token so existing saves still load.
-# Sprite drawn from scratch from photos of 3742/3746/3748/3758 (box model in
-# the pak128 projection, native 12 m bus proportions): tall black glazing band,
-# light grey line under it, three double doors on the right, full-length roof
-# fairing with the white "ooo" mark, black front "smile" band with the lamps.
-# The body sits on the footprint of the other DPO trolleybus sheets. Patched
-# by tools/busrender/dpo_other.py (dpo_other_patch.py) on the frozen sheet in
-# tools/busrender/src/dpo/: the light grey line under the glazing on both
-# sides in every view, and black poles (as on the photos) aimed at the wires
-# of dpmhk.py; the poles transplanted from the 26Tr sheet are gone.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Temsa Avenue
+# Electron body (TM12, since 2026-10-28; until then a patched sheet of its
+# own) in sor_town.py's dpo_tm palette: the DPO turquoise with the turquoise
+# cap over the cab, the tall black glazing band with the light grey line under
+# it, the full-length roof band with the white "ooo" mark, the light grey band
+# between the headlamps, turquoise rear corners over the black bumper, black
+# poles (transphoto.org 1724715, 1724941, 1770934 and the earlier photos of
+# 3742 / 3746 / 3748 / 3758). Regenerate with tools/busrender/sor_town.py.
 #
 # engine_type=battery models the off-wire capability; in pak128.cs this means
 # the vehicle can operate on roads without overhead lines.
