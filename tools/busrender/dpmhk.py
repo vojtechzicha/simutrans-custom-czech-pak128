@@ -75,12 +75,37 @@ def inr(v, a, b):
 #   orig  the bodies before (body down to the floor height Z0, a body-colour
 #         strip over the window band)
 # Paint that marks the bottom of the body (skirt strips, door steps) is laid
-# from ZB, the body's lowest point. A spec's winrise (m) lifts the window band
-# with the low shape: the town fleets (sor_town.py) take one row (0.25 m) so a
-# town's lower bands keep two rows under the tall city glazing (owner,
-# 2026-10-25).
+# from ZB, the body's lowest point. With the low shape the window band of every
+# SOR body sits WINRISE (one row, 0.25 m) higher, so a livery's lower bands keep
+# two rows under the tall city glazing: the owner's pick for the town fleets of
+# 2026-10-25, given to every SOR bus and trolleybus on 2026-10-28 so the same
+# body has one window line in every pak. A spec's winrise overrides it.
 SOR_SHAPE = ["low"]
 SKIRT = 0.25
+WINRISE = 0.25
+
+# Roof of the SOR NB 12 / NB 18 City (specs with nb=True) on the base. The box
+# read like an Urbanway (owner, 2026-10-28); the NB's roof is rounded off at
+# both ends over the deep windscreen and the rear cap. A shape's steps are
+# (drop, setback) pairs: the body above ZR - drop stops setback metres short of
+# the front of the leading section and the rear of the last one. shoulder
+# paints the outer strip of the roof and the top row of the side as the rounded
+# roof edge (roof colour, a step darker). On a two-step front the windscreen
+# runs up over the lower ledge and the destination display sits on the
+# recessed middle step (NB_FRONT_Z), as on the real bus where the glass curves
+# up into the dome. The owner picked bold (2026-10-28, page of variants box /
+# dome / shoulder / bold); the others stay selectable.
+NB_SHAPE = ["bold"]
+NB_SHAPES = {
+    "box": dict(steps=[], shoulder=False),
+    "dome": dict(steps=[(0.25, 0.45)], shoulder=False),
+    "shoulder": dict(steps=[(0.25, 0.45)], shoulder=True),
+    "bold": dict(steps=[(0.25, 0.80), (0.50, 0.30)], shoulder=True),
+}
+SHOULDER_W = 0.25                  # m of roof width on each side drawn as the shoulder
+SHOULDER_K = 0.88                  # its shade against the roof top
+NB_DISP = 2.36                     # bottom of the destination display on every NB front
+NB_FRONT_Z = (2.20, 2.49)          # heights painted on a two-step front: windscreen, display
 
 # x = real metres from the front.  doors on the right (kerb) side.
 NS12 = dict(
@@ -104,7 +129,7 @@ NS18 = dict(
 # SOR NB 12 / TNB 12 (Skoda 30Tr): 4 doors, the last behind the rear axle
 L1A_DIAG = dict(xw_top=2.05, wy=0.60, gap=0.30, k=1.5, xh_top=3.00)
 NB12 = dict(
-    sor=True,
+    sor=True, nb=True,
     face="nb", rear="nb", real_len=12.0, joints=[], cu=[8],
     axles=[2.75, 8.60],
     doors=[(0.30, 1.55), (4.15, 5.45), (6.70, 7.90), (9.25, 10.45)],
@@ -115,7 +140,7 @@ NB12 = dict(
 # SOR NB 18 / TNB 18 (Skoda 31Tr): long front section (~12.3 m, 3 doors), short
 # pusher-style rear section (2 doors, the last behind the rear axle)
 NB18 = dict(
-    sor=True,
+    sor=True, nb=True,
     face="nb", rear="nb", real_len=18.75, joints=[12.30], cu=[9, 5],
     axles=[3.00, 10.55, 16.25],
     doors=[(0.30, 1.55), (4.60, 5.90), (7.60, 8.80), (13.10, 14.30), (16.95, 18.10)],
@@ -188,11 +213,14 @@ class Veh:
         for k in ("z0", "zr", "zwin0", "zwin1", "zband0", "zband1"):
             setattr(self, k.upper(), sp[k])
         self.ZB = self.Z0                     # the body's lowest point
+        self.nbshape = NB_SHAPES["box"]
         if sp.get("sor") and SOR_SHAPE[0] == "low":
             self.ZB = self.Z0 + SKIRT
             self.ZBAND1 = self.ZR
-            self.ZBAND0 += sp.get("winrise", 0.0)
-            self.ZWIN0 += sp.get("winrise", 0.0)
+            self.ZBAND0 += sp.get("winrise", WINRISE)
+            self.ZWIN0 += sp.get("winrise", WINRISE)
+            if sp.get("nb"):
+                self.nbshape = NB_SHAPES[NB_SHAPE[0]]
         M = self.M
         self.axles = [M(a) for a in sp["axles"]]
         self.doors = [(M(a), M(b)) for a, b in sp["doors"]]
@@ -252,15 +280,17 @@ class Veh:
         hb = self.BW / 2
         front_b = hb if i > 0 else 0.0
         rear_b = hb if i < len(self.cu) - 1 else 0.0
-        bx = [Box("body%d" % i, rear_b, L - front_b, -HW, HW, self.ZB, self.ZR)]
+        bx = self.body_boxes(i, rear_b, L - front_b)
         if body_only:
             return bx
         if front_b:
             bx.append(Box("bell_f", L - front_b, L, -HW + 0.06, HW - 0.06, self.ZB + 0.04, self.ZR - 0.04))
         if rear_b:
             bx.append(Box("bell_r", 0.0, rear_b, -HW + 0.06, HW - 0.06, self.ZB + 0.04, self.ZR - 0.04))
+        steps = self.nbshape["steps"]
+        top_back = min(steps)[1] if steps else 0.0       # roof boxes stay on the rounded NB roof
         for k, (a, b, h, hw, kind) in enumerate(self.pods):
-            a2, b2 = max(a, U0 + (hb if i > 0 else 0)), min(b, U1 - (hb if i < len(self.cu) - 1 else 0))
+            a2, b2 = max(a, U0 + (hb if i > 0 else top_back)), min(b, U1 - (hb if i < len(self.cu) - 1 else top_back))
             if b2 > a2 + 0.05:
                 bx.append(Box("pod%d" % k, s_of(b2), s_of(a2), -hw, hw, self.ZR, self.ZR + h))
         if self.rack:
@@ -287,6 +317,64 @@ class Veh:
                 bx.append(Box("mirror", L - 0.10, L + 0.22, t0, t1, 2.05, 2.65,
                               faces={"front", "right", "left", "top"}))
         return bx
+
+    def body_boxes(self, i, s0, s1):
+        """the body of section i from s0 to s1; the NB roof steps back at the
+        front of the leading section and the rear of the last (NB_SHAPE)"""
+        front = i == 0
+        rear = i == len(self.cu) - 1
+        bx = []
+        z0, back = self.ZB, 0.0
+        for drop, dl in sorted(self.nbshape["steps"], reverse=True):
+            bx.append(Box("body%d" % i, s0 + (back if rear else 0.0), s1 - (back if front else 0.0),
+                          -HW, HW, z0, self.ZR - drop))
+            z0, back = self.ZR - drop, dl
+        bx.append(Box("body%d" % i, s0 + (back if rear else 0.0), s1 - (back if front else 0.0),
+                      -HW, HW, z0, self.ZR))
+        return bx
+
+    def ledge(self, p, u, i):
+        """colour of a step ledge of the rounded NB roof ends (None elsewhere):
+        that of the end face right above it, so the windscreen and the rear
+        window run on up into the dome instead of being cut by roof-coloured
+        lines"""
+        steps = self.nbshape["steps"]
+        if not steps or p.z > self.ZR - 0.01:
+            return None
+        drops = sorted(d for d, _ in steps)
+        k = min(range(len(drops)), key=lambda j: abs(self.ZR - drops[j] - p.z))
+        z = self.ZR - (drops[k] + (drops[k - 1] if k else 0.0)) / 2
+        back = max(dl for _, dl in steps) + 0.01
+        if i == 0 and u - self.U[0] < back:
+            face = "front"
+            if k == len(drops) - 1 and k and abs(p.t) <= HW - SHOULDER_W:
+                z = NB_FRONT_Z[0]                  # the windscreen curving up
+            elif k == len(drops) - 1 and k:
+                z = self.ZR - drops[0] / 2         # the dome's corners
+        elif i == len(self.cu) - 1 and self.U[i + 1] - u < back:
+            face = "rear"
+        else:
+            return None
+        c = (p.s, p.t, z)
+        q = Px(face, p.box, c, (c, c), (c, c), p.view)
+        return self.tex_front(q) if face == "front" else self.tex_rear(q)
+
+    def front_z(self, z):
+        """height at which a pixel of the leading front is painted: on a
+        two-step NB front the display moves up onto the middle step and the
+        windscreen fills the top of the main face"""
+        drops = sorted(d for d, _ in self.nbshape["steps"])
+        if len(drops) < 2:
+            return z
+        if z < self.ZR - drops[-1]:
+            return NB_FRONT_Z[0] if z >= NB_DISP else z
+        if z < self.ZR - drops[0]:
+            return NB_FRONT_Z[1]
+        return z
+
+    def cant_painted(self):
+        """the livery paints the top row of the side itself (sor_town's cant)"""
+        return False
 
     def roof_top(self, u):
         top = self.ZR
@@ -318,9 +406,23 @@ class Veh:
                 return self.tex_pod(p, u, int(b[3:]))
             f = p.face
             if f == "top":
-                return self.tex_roof(p, u)
+                c = self.ledge(p, u, i)
+                if c is not None:
+                    return c
+                c = self.tex_roof(p, u)
+                if self.nbshape["shoulder"] and abs(p.t) > HW - SHOULDER_W:
+                    c = tuple(int(round(v * SHOULDER_K)) for v in c)
+                return c
+            if f == "front" and i == 0:
+                z = self.front_z(p.z)
+                if z != p.z:
+                    p = lowered(p, p.z - z)
             if f in ("left", "right"):
-                return self.tex_side(p, u, U1)
+                c = self.tex_side(p, u, U1)
+                if self.nbshape["shoulder"] and p.z >= self.ZR - 0.25 and not self.cant_painted() \
+                        and c in (sh(BLACK, f), BLACK, FRAME):
+                    c = sh(self.tex_roof(p, u), f)       # the black band stops under the rounded edge
+                return c
             dz = self.ZB - self.Z0
             if dz > 0:
                 top = self.face_split(f)

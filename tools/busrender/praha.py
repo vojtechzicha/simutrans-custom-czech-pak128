@@ -534,27 +534,24 @@ A, B, C, W = "pidsedocervena", "pidcervenomodrobila", "dppcervenobila", "bila"
 MC = "mestskacervenobila"
 KEY = {A: "A", B: "B", C: "C", W: "W", MC: "C"}
 
-# The DPP / Praha SOR NB, ENS and TNS families on the town bodies (the window
-# line one row higher, sor_town.WINRISE; owner, 2026-10-25)
-WR = 0.25
 # SOR NB 12 City: the A/C unit just behind the front roof edge (every photo);
 # scheme A with the red blocks between doors 1-2 and 3-4 (3694)
-DNB12 = mk(NB12, winrise=WR, pods=[(0.80, 2.00, 0.22, 0.80, "ac")])
+DNB12 = mk(NB12, pods=[(0.80, 2.00, 0.22, 0.80, "ac")])
 DNB12A = mk(DNB12, reds=[(1.55, 4.15), (7.90, 9.25)])
 # SOR NB 18 City: two white A/C units flanking the bellows (5017, 5073)
-DNB18 = mk(NB18, winrise=WR, pods=[(10.40, 11.80, 0.22, 0.80, "ac"), (12.80, 14.00, 0.22, 0.80, "ac")])
+DNB18 = mk(NB18, pods=[(10.40, 11.80, 0.22, 0.80, "ac"), (12.80, 14.00, 0.22, 0.80, "ac")])
 # SOR ENS 12 (DPP 3015-3032): grey battery fairings along the roof, the black
 # cap, red columns over both wheel arches; the Škoda single-arm charging
 # pantograph folded on the rear edge of the cap (panto, drawn by draw_panto)
-DENS12 = mk(NS12, winrise=WR, cap=1.20,
+DENS12 = mk(NS12, cap=1.20,
             pods=[(2.10, 11.60, 0.26, 1.05, "fair")],
             reds=[(1.75, 3.75), (7.60, 9.47)], tower=True, panto=1.30)
 # SOR TNS 12 (DPP 511-514): equipment fairing, poles
-DTNS12 = mk(NS12, winrise=WR, cap=1.20, pods=[(1.80, 7.20, 0.26, 1.00, "fair")],
+DTNS12 = mk(NS12, cap=1.20, pods=[(1.80, 7.20, 0.26, 1.00, "fair")],
             reds=[(1.75, 3.75), (7.60, 9.47)], poles=(7.60, 0.30))
 # SOR TNS 18 (DPP 101-115): red panels behind doors 1 and 2 and round the rear
 # arch, the fairing over the front section, poles on the front of the rear section
-DTNS18 = mk(NS18, winrise=WR, cap=1.20, pods=[(1.80, 10.30, 0.26, 1.00, "fair")],
+DTNS18 = mk(NS18, cap=1.20, pods=[(1.80, 10.30, 0.26, 1.00, "fair")],
             reds=[(1.60, 3.75), (6.10, 7.80), (14.40, 16.20)], poles=(12.40, 0.30))
 
 # family dir -> {livery colour: [model spec, ...] in sprite-row order}

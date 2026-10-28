@@ -492,6 +492,9 @@ class TVeh(Veh):
                 return SCREEN_HI
         return c
 
+    def cant_painted(self):
+        return bool(self.P.get("cant"))
+
     def cant(self, p, u):
         if self.face in ("ns", "ebn") and u < self.cap:
             return BLACK
@@ -664,26 +667,21 @@ def build(sp, livery):
 
 
 # ====================================================================== bodies
-WINRISE = 0.25     # the town window line one row higher (owner, 2026-10-25)
-
-
-def town(base, **kw):
-    """a town body: base spec with the raised window line"""
-    return mk(base, winrise=WINRISE, **kw)
+# (every SOR body has the raised window line, dpmhk.WINRISE)
 
 
 # SOR NS 12 electric (Kladno 51-58): the long battery fairing
-KL_NS12E = town(H.NS12, pods=[(1.70, 11.75, 0.26, 1.10, "fair")])
+KL_NS12E = mk(H.NS12, pods=[(1.70, 11.75, 0.26, 1.10, "fair")])
 # SOR NS 18 electric (Kladno 59-66): low battery fairings along both sections
-KL_NS18E = town(H.NS18, pods=[(1.70, 10.40, 0.22, 1.05, "fair"), (12.0, 18.20, 0.22, 1.05, "fair")])
+KL_NS18E = mk(H.NS18, pods=[(1.70, 10.40, 0.22, 1.05, "fair"), (12.0, 18.20, 0.22, 1.05, "fair")])
 # SOR NBG 18 (Kladno 44-47): doors 2-0-2-2-0 (front, before the joint, behind
 # it), an A/C unit behind the front, the CNG fairing over the rear half of the
 # front section, an A/C unit on the rear section
-KL_NBG18 = town(H.NB18, doors=[(0.30, 1.55), (9.80, 11.00), (13.10, 14.30)],
+KL_NBG18 = mk(H.NB18, doors=[(0.30, 1.55), (9.80, 11.00), (13.10, 14.30)],
               pods=[(1.20, 2.60, 0.22, 0.80, "ac"), (5.80, 11.60, 0.34, 1.00, "fair"),
                     (14.80, 16.20, 0.22, 0.80, "ac")])
 # SOR EBN 11,1 (Kladno): the battery fairings of the EBN 11
-KL_EBN11 = town(H.EBN11, real_len=11.1,
+KL_EBN11 = mk(H.EBN11, real_len=11.1,
               pods=[(1.20, 3.60, 0.30, 0.95, "fair"), (4.20, 6.60, 0.30, 0.95, "fair"),
                     (7.20, 9.60, 0.30, 0.95, "fair")])
 
@@ -692,43 +690,43 @@ AC = "ac"
 FAIR = "fair"
 # DP Most a Litvínova: NS 12 / 18 with two A/C units; NB 12 / 18 with the small
 # white A/C unit behind the front
-MOST_NS12 = town(H.NS12, pods=[(1.80, 3.60, 0.22, 0.80, AC), (8.00, 9.40, 0.22, 0.80, AC)])
-MOST_NS18 = town(H.NS18, pods=[(1.80, 3.60, 0.22, 0.80, AC), (12.20, 13.80, 0.20, 0.75, AC)])
-MOST_NB12 = town(H.NB12, pods=[(0.80, 2.00, 0.22, 0.80, AC)])
-MOST_NB18 = town(H.NB18, pods=[(0.80, 2.00, 0.22, 0.80, AC)])
+MOST_NS12 = mk(H.NS12, pods=[(1.80, 3.60, 0.22, 0.80, AC), (8.00, 9.40, 0.22, 0.80, AC)])
+MOST_NS18 = mk(H.NS18, pods=[(1.80, 3.60, 0.22, 0.80, AC), (12.20, 13.80, 0.20, 0.75, AC)])
+MOST_NB12 = mk(H.NB12, pods=[(0.80, 2.00, 0.22, 0.80, AC)])
+MOST_NB18 = mk(H.NB18, pods=[(0.80, 2.00, 0.22, 0.80, AC)])
 # car 189 (ex-DPP 6668): the two A/C units of the DPP NB 18 flanking the bellows
-MOST_NB18_DPP = town(H.NB18, pods=[(10.40, 11.80, 0.22, 0.80, AC), (12.80, 14.00, 0.22, 0.80, AC)])
+MOST_NB18_DPP = mk(H.NB18, pods=[(10.40, 11.80, 0.22, 0.80, AC), (12.80, 14.00, 0.22, 0.80, AC)])
 # DPMB: NS 12 with one A/C unit at 0.47-0.66 of the length; NBG 12 with the tall
 # CNG fairing over the front-middle roof and the A/C unit ahead of it; TNS 12
 # with the plain roof pod and the poles
-DPMB_NS12 = town(H.NS12, pods=[(5.60, 7.90, 0.24, 0.85, AC)])
-DPMB_NBG12 = town(H.NB12, pods=[(1.40, 2.40, 0.22, 0.80, AC), (2.60, 8.00, 0.36, 1.00, FAIR)])
-DPMB_TNS12 = town(H.NS12, pods=[(1.80, 7.20, 0.26, 1.00, FAIR)], poles=(7.60, 0.30))
+DPMB_NS12 = mk(H.NS12, pods=[(5.60, 7.90, 0.24, 0.85, AC)])
+DPMB_NBG12 = mk(H.NB12, pods=[(1.40, 2.40, 0.22, 0.80, AC), (2.60, 8.00, 0.36, 1.00, FAIR)])
+DPMB_TNS12 = mk(H.NS12, pods=[(1.80, 7.20, 0.26, 1.00, FAIR)], poles=(7.60, 0.30))
 # DPMO 501: the battery and A/C pods
-DPMO_NS12E = town(H.NS12, pods=[(1.70, 8.00, 0.26, 1.05, FAIR), (8.40, 9.80, 0.22, 0.80, AC)])
+DPMO_NS12E = mk(H.NS12, pods=[(1.70, 8.00, 0.26, 1.05, FAIR), (8.40, 9.80, 0.22, 0.80, AC)])
 # MDPO Opava: the NS 12 electric's battery and A/C pods, the NSG 12's big CNG
 # fairing and A/C unit, the Škoda 32Tr (dpmhk.py's model, poles)
-MDPO_NS12E = town(H.NS12, pods=[(1.70, 8.60, 0.28, 1.05, FAIR), (9.00, 10.20, 0.22, 0.80, AC)])
-MDPO_NSG12 = town(H.NS12, pods=[(1.60, 7.40, 0.36, 1.00, FAIR), (8.00, 9.20, 0.22, 0.80, AC)])
-MDPO_32TR = town(H.MODELS["32tr"])
+MDPO_NS12E = mk(H.NS12, pods=[(1.70, 8.60, 0.28, 1.05, FAIR), (9.00, 10.20, 0.22, 0.80, AC)])
+MDPO_NSG12 = mk(H.NS12, pods=[(1.60, 7.40, 0.36, 1.00, FAIR), (8.00, 9.20, 0.22, 0.80, AC)])
+MDPO_32TR = mk(H.MODELS["32tr"])
 # Frýdek-Místek / Havířov: the NS 12 electric's long battery fairing, the NSG 12
 # CNG fairing and A/C unit; the Havířov NBG 18 fairings
-FM_NS12E = town(H.NS12, pods=[(1.70, 11.75, 0.26, 1.10, FAIR)])
-FM_NSG12 = town(H.NS12, pods=[(1.60, 7.40, 0.36, 1.00, FAIR), (8.00, 9.20, 0.22, 0.80, AC)])
-HAV_NBG18 = town(H.NB18, pods=[(1.80, 10.00, 0.36, 1.00, FAIR), (13.00, 15.60, 0.30, 0.95, FAIR)])
+FM_NS12E = mk(H.NS12, pods=[(1.70, 11.75, 0.26, 1.10, FAIR)])
+FM_NSG12 = mk(H.NS12, pods=[(1.60, 7.40, 0.36, 1.00, FAIR), (8.00, 9.20, 0.22, 0.80, AC)])
+HAV_NBG18 = mk(H.NB18, pods=[(1.80, 10.00, 0.36, 1.00, FAIR), (13.00, 15.60, 0.30, 0.95, FAIR)])
 # Krnov and Třinec NS 12
-KRN_NS12 = town(H.NS12, pods=[(1.80, 3.60, 0.22, 0.80, AC), (8.00, 9.40, 0.22, 0.80, AC)])
-TRI_NS12 = town(H.NS12, pods=[(3.00, 5.00, 0.24, 0.85, AC)])
+KRN_NS12 = mk(H.NS12, pods=[(1.80, 3.60, 0.22, 0.80, AC), (8.00, 9.40, 0.22, 0.80, AC)])
+TRI_NS12 = mk(H.NS12, pods=[(3.00, 5.00, 0.24, 0.85, AC)])
 # Trutnov NB 12 / NBG 18, Chrudim NB 12
-TRU_NB12 = town(H.NB12, pods=[(0.80, 2.00, 0.22, 0.80, AC)])
-TRU_NBG18 = town(H.NB18, pods=[(1.80, 10.00, 0.36, 1.00, FAIR), (13.00, 15.60, 0.30, 0.95, FAIR)])
-CHR_NB12 = town(H.NB12, pods=[(0.80, 2.00, 0.22, 0.80, AC)])
+TRU_NB12 = mk(H.NB12, pods=[(0.80, 2.00, 0.22, 0.80, AC)])
+TRU_NBG18 = mk(H.NB18, pods=[(1.80, 10.00, 0.36, 1.00, FAIR), (13.00, 15.60, 0.30, 0.95, FAIR)])
+CHR_NB12 = mk(H.NB12, pods=[(0.80, 2.00, 0.22, 0.80, AC)])
 # the Lubak91 EBN towns: the EBN 9,5 and 11,1 battery fairings
-EBN95 = town(H.MODELS["ebn95"])
-PRE_EBN11 = town(H.EBN11, real_len=11.1,
-                 pods=[(1.20, 3.60, 0.30, 0.95, FAIR), (4.20, 6.60, 0.30, 0.95, FAIR), (7.20, 9.60, 0.30, 0.95, FAIR)])
+EBN95 = mk(H.MODELS["ebn95"])
+PRE_EBN11 = mk(H.EBN11, real_len=11.1,
+               pods=[(1.20, 3.60, 0.30, 0.95, FAIR), (4.20, 6.60, 0.30, 0.95, FAIR), (7.20, 9.60, 0.30, 0.95, FAIR)])
 # DPO SOR TNB 12: the Škoda 30Tr body (TNB 12) with its fairing, poles and rack
-DPO_TNB12 = town(H.MODELS["30tr"])
+DPO_TNB12 = mk(H.MODELS["30tr"])
 
 # family (path under the repo) -> {livery colour: [(spec, palette), ...] in row order}
 FAMILIES = {
