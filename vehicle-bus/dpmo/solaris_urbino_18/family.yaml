@@ -1,9 +1,9 @@
 agency: DPOlomouc
 type: "Urbino_18"
-copyright: TommPa9
+copyright: vojtechzicha
 
-# The source sprites carry the upstream lane placement (their dats use no
-# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -16,6 +16,10 @@ display:
 
 # Solaris Urbino 18 (third generation), DPMO 406-415 (2007-2014). Pusher: the
 # engine sits in the rear section, the front section is unpowered.
+# Sprite: original box-model render (vojtechzicha): the dpo_solaris.py Urbino
+# 18 III body (sections 8 + 6) in the DPMO palette painted by
+# tools/busrender/solaris_town.py (until 2026-10-28 the hand-drawn upstream
+# sheet). Regenerate with tools/busrender/solaris_town.py.
 
 vehicles:
   - id: "Urbino_18-A"
@@ -52,7 +56,7 @@ vehicles:
     prev: ["Urbino_18-A"]
     next: []
     fields:
-      length: 8
+      length: 6
       cost: 432603
       payload: 58
       speed: 80

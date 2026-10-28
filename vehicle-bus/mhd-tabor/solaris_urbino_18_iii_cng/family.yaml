@@ -1,6 +1,6 @@
 agency: MHDTabor
 type: "Urbino_18_III_CNG"
-copyright: TommPa9
+copyright: vojtechzicha
 
 image_offset: [0, 0]            # sprites carry their own tile placement
 windows_lit_when_loaded: true   # empty image = unlit glass, loaded image = lit glass
@@ -13,9 +13,10 @@ display:
 
 # Solaris Urbino 18 III CNG (doors 2-2-2-2), Tábor #63 (2016) - the last one in
 # MHD service (#84 and #22 stood down 5/2025 and 1/2026), being phased out.
-# Sprite: TommPa9's Urbino 18 III sections (the DPMO sheet) recoloured COMETT
-# white with CNG tank fairings on the roof of both sections next to the joint.
-# Pusher: the engine sits in the rear section, the front section is unpowered.
+# Sprite: original box-model render (vojtechzicha): the dpo_solaris.py Urbino
+# 18 III CNG body (sections 8 + 6) painted by tools/busrender/solaris_town.py
+# (until 2026-10-28 the hand-drawn upstream sheet). Regenerate with
+# tools/busrender/solaris_town.py.
 
 vehicles:
   - id: "Urbino_18_III_CNG-A"
@@ -52,7 +53,7 @@ vehicles:
     prev: ["Urbino_18_III_CNG-A"]
     next: []
     fields:
-      length: 8
+      length: 6
       cost: 432603
       payload: 59
       speed: 80

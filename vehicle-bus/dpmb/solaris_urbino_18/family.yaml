@@ -1,13 +1,12 @@
 agency: DPBrno
 type: "Solaris_Urbino_18"
-# Sprites carry their own placement: both sections re-placed for lengths 7 + 5
-# (the front section's nose at the convoy anchor like a native 12 m bus, the
-# rear section meeting it at the joint), lane matched to the native 12 m bus
-# median.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses, each section placed by the section rule for
+# 8 + 6), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: TommPa9
+copyright: vojtechzicha
 
 display:
   agency_en: "DPMB"
@@ -27,11 +26,10 @@ display:
 # window band, white belt, red skirt, black windscreen over a white front
 # panel and red bumper, grey bellows; green LED displays. The IV's red
 # wheel-arch sweeps are not drawn (one sprite for both generations).
-# Sprite: TommPa9's CZR-Brno-Solaris_Urbino_18-A/-B (Solaris_Urbino_18.png rows
-# 7/8, cols 1-8): grey roof painted white, the black joint caps turned into a
-# ribbed grey bellows block, roof A/C drawn on, glass moved to the lit-window
-# specials, green displays; re-placed from the upstream 8 + 8 lengths (a
-# 24 m convoy) to the real 7 + 5 (18 m).
+# Sprite: original box-model render (vojtechzicha): the dpo_solaris.py Urbino
+# 18 III body (sections 8 + 6) in the DPMB palette painted by
+# tools/busrender/solaris_town.py (until 2026-10-28 the hand-drawn upstream
+# sheet). Regenerate with tools/busrender/solaris_town.py.
 
 vehicles:
   - id: "Urbino_18-A"
@@ -56,7 +54,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 7
+      length: 8
 
   - id: "Urbino_18-B"
     display_id: "Urbino 18"
@@ -80,7 +78,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 5
+      length: 6
       engine_type: diesel
       power: 231
       gear: 62

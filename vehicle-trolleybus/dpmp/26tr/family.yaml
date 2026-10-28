@@ -1,11 +1,11 @@
 agency: DPPardubice
 type: "26Tr"
-# Sprites are placed in the tile to the native pak128.cs lane position (body
-# footprint matched to the median of native 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: TommPa9
+copyright: vojtechzicha
 
 display:
   agency_en: "DPMP"
@@ -15,8 +15,10 @@ display:
 
 # Škoda 26Tr Solaris, 12 m trolleybus on the Solaris Urbino III body. DPMP
 # runs 9 (323, 325-332; 2012-2014). 34 seated / 68 standing (102), Škoda
-# 4ML 3444 K/4 160 kW, 65 km/h. Sprite: the TommPa9 26Tr, repainted to the
-# DPMP white-red (NRP) scheme.
+# 4ML 3444 K/4 160 kW, 65 km/h. Sprite: original box-model render
+# (vojtechzicha): the dpo_solaris.py Škoda 26Tr body in the DPMP palette
+# painted by tools/busrender/solaris_town.py (until 2026-10-28 the hand-drawn
+# upstream sheet). Regenerate with tools/busrender/solaris_town.py.
 
 vehicles:
   - id: "26Tr"

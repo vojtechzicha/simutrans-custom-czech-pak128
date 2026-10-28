@@ -1,9 +1,9 @@
 agency: DPOpava
 type: "26Tr"
-copyright: TommPa9
+copyright: vojtechzicha
 
-# The source sprites carry the upstream lane placement (their dats use no
-# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -20,6 +20,10 @@ display:
 #   no fitting date, so intro as the 26Tr) and run as engine_type diesel, so
 #   they are not tied to the wire; cost / weight / payload deltas as on the
 #   DPMHK 30TrDG. Same art: the set sits in the rear, nothing shows outside.
+# Sprite: original box-model render (vojtechzicha): the dpo_solaris.py Škoda
+# 26Tr body in the MDPO palette painted by tools/busrender/solaris_town.py
+# (until 2026-10-28 the hand-drawn upstream sheet). Regenerate with
+# tools/busrender/solaris_town.py.
 
 vehicles:
   - id: "26Tr"

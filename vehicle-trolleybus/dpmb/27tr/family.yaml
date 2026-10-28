@@ -1,11 +1,11 @@
 agency: DPBrno
 type: "27Tr"
-# Sprites are placed in the tile to the native pak128.cs lane position (body
-# footprint matched to the median of native 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: TommPa9
+copyright: vojtechzicha
 
 display:
   agency_en: "DPMB"
@@ -21,11 +21,10 @@ display:
 # (split by a white diagonal stripe) and over the rear section except next
 # to the joint, white belt, red skirt with red wheel-arch panels, poles on
 # the front of the rear section; green destination displays (lit).
-# Sprite: TommPa9's CZR-Brno-Skoda_27Tr + 27Tr-B (pak128_czr vehicles-bus/
-# Brno): glass converted to the lit-window specials, roof lightened, DPMB
-# red, the Urbino IV black roof-edge zones and red wheel arches painted in;
-# lane placement already on the native median. Sections keep the upstream
-# 8 + 8 spacing the art was drawn for (joints checked in all 8 directions).
+# Sprite: original box-model render (vojtechzicha): the dpo_solaris.py Škoda
+# 27Tr body (sections 8 + 6) in the DPMB palette painted by
+# tools/busrender/solaris_town.py (until 2026-10-28 the hand-drawn upstream
+# sheet). Regenerate with tools/busrender/solaris_town.py.
 
 vehicles:
   - id: "27Tr"
@@ -74,7 +73,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 6
       engine_type: electric
       power: 260
       gear: 62

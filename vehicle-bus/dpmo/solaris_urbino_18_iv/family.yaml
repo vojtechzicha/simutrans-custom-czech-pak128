@@ -1,6 +1,6 @@
 agency: DPOlomouc
 type: "Urbino_18_IV"
-copyright: TommPa9
+copyright: vojtechzicha
 
 image_offset: [0, 0]            # sprites carry their own tile placement
 windows_lit_when_loaded: true   # empty image = unlit glass, loaded image = lit glass
@@ -12,10 +12,10 @@ display:
   family_cs: "Solaris Urbino 18 IV"
 
 # Solaris Urbino 18 IV, DPMO 416-428 (2016-2022, 424-428 facelift). Sprite:
-# TommPa9's Urbino 18 IV sections (DPO sheet) repainted to the DPMO Gen IV
-# variant of the white-blue-red scheme. Pusher: the engine (DAF MX-11, 240 kW)
-# sits in the rear section, the front section is unpowered. Capacity ~145,
-# split between the sections like the base object.
+# original box-model render (vojtechzicha): the dpo_solaris.py Urbino 18 IV
+# body (sections 8 + 6) in the DPMO palette painted by
+# tools/busrender/solaris_town.py (until 2026-10-28 the hand-drawn upstream
+# sheet). Regenerate with tools/busrender/solaris_town.py.
 
 vehicles:
   - id: "Urbino_18_IV-A"
@@ -64,7 +64,7 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 8
+      length: 6
       engine_type: diesel
       power: 240
       gear: 61
