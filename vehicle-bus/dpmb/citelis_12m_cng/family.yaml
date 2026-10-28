@@ -13,18 +13,16 @@ display:
   family_en: "Irisbus Citelis 12M CNG"
   family_cs: "Irisbus Citelis 12M CNG"
 
-# Irisbus Citelis 12M CNG, DPMB Brno 7008II-7010II and 7012II (4 active of
-# 6 delivered in 2014; 7007II stored). 11.99 x 2.50 m, 12.21 t, capacity
-# 89, Iveco Cursor 8 CNG 213 kW, 80 km/h (dpmb.cz). 3 double doors.
-# Livery: DPMB white-red city scheme after the DPMB side drawing
-# citelis-cng.png: white body and roof, black window band, red skirt, lime
-# LED displays. The white CNG tank fairing covers the rear half of the roof
-# (drawing and rear photo of 7009; the research note "front two-thirds" is
-# wrong), with the Autoclima A/C unit at the front of the roof.
-# Sprite: original box-model render (vojtechzicha): the dpmhk.py Urbanway 12M
-# body with the Citelis face and CNG fairing in the dpmb_uw palette painted by
-# tools/busrender/sor_town.py (until 2026-10-28 the hand-drawn upstream
-# sheet). Regenerate with tools/busrender/sor_town.py.
+# Irisbus Citelis 12M CNG, DPMB Brno 7008II-7010II and 7012II (4 active of 6
+# delivered in 2014; 7007II stored). 11.99 x 2.50 m, 12.21 t, capacity 89,
+# Iveco Cursor 8 CNG 213 kW, 80 km/h (dpmb.cz). 3 double doors. Livery: DPMB
+# white-red city scheme after the DPMB side drawing citelis-cng.png: white
+# body and roof, black window band, red skirt, lime LED displays. The white
+# CNG tank fairing covers the rear half of the roof (drawing and rear photo of
+# 7009; the research note "front two-thirds" is wrong), with the Autoclima A/C
+# unit at the front of the roof. Sprite: original box-model render
+# (vojtechzicha): the dpmhk.py Irisbus Citelis 12M body with the CNG fairing
+# in the dpmb_uw palette. Regenerate with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "Citelis_12M_CNG"

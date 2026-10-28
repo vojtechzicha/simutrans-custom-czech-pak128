@@ -157,24 +157,27 @@ NB18 = dict(
 )
 # Iveco Urbanway 12M: 3 doors, the rear one behind the rear axle, then the black
 # engine-bay panel
+# (axles and doors as published for the Citelis / Urbanway 12M body: 2.71 m
+# front overhang, 6.12 m wheelbase; owner, 2026-10-28)
 UW12 = dict(
     face="uw1", rear="uw", real_len=12.0, joints=[], cu=[8],
-    axles=[2.70, 8.55],
-    doors=[(0.32, 1.55), (5.00, 6.30), (9.28, 10.55)],
-    drv=(0.35, 1.55),
+    axles=[2.71, 8.83],
+    doors=[(0.30, 1.85), (5.00, 6.55), (9.60, 11.10)],
+    drv=(0.35, 1.85),
     z0=0.24, zr=3.00, zwin0=1.20, zwin1=2.45, zband0=1.12, zband1=2.80,
     cap=0.0, sidedisp=(3.10, 4.70), pods=[], mirrors=True, diag=dict(L1A_DIAG, xw_top=1.95),
-    engine=(10.62, 11.85),
+    engine=(11.15, 11.90),
 )
 # Iveco Urbanway 18M / Irisbus Citelis 18M: 4 doors (2 per section)
+# (17.91 m, wheelbases 5.355 + 6.675 m, the joint 1.8 m behind the middle axle)
 UW18 = dict(
-    face="uw2", rear="uw", real_len=18.0, joints=[10.40], cu=[8, 6],
-    axles=[2.70, 8.55, 14.85],
-    doors=[(0.32, 1.55), (4.70, 6.00), (11.60, 12.90), (15.55, 16.80)],
-    drv=(0.35, 1.55),
+    face="uw2", rear="uw", real_len=17.91, joints=[9.90], cu=[8, 6],
+    axles=[2.71, 8.065, 14.74],
+    doors=[(0.30, 1.85), (4.70, 6.00), (11.60, 12.90), (15.55, 16.80)],
+    drv=(0.35, 1.85),
     z0=0.24, zr=3.00, zwin0=1.20, zwin1=2.45, zband0=1.12, zband1=2.80,
     cap=0.0, sidedisp=(3.10, 4.40), pods=[], mirrors=True, diag=dict(L1A_DIAG, xw_top=1.95),
-    engine=(16.90, 17.85),
+    engine=(16.95, 17.85),
 )
 # Iveco Streetway 12M / 18M (built in Turkey on the Otokar Kent C): a body of
 # its own, not the Urbanway's (owner, 2026-10-28: "similar but different").
@@ -198,6 +201,31 @@ SW18 = dict(
     SW12, real_len=18.45, joints=[10.10], cu=[8, 6], axles=[2.80, 8.70, 15.44],
     doors=[(0.25, 1.75), (6.00, 7.30), (12.50, 14.10), (16.50, 17.90)], sw_grille=(16.95, 18.15),
 )
+# Irisbus Citelis 12M / 18M (Karosa Vysoké Mýto 2005-2013, the Urbanway's
+# predecessor): a body of its own (owner, 2026-10-28), from photos of DPMHK
+# 152 / 234 / 236, Most 117-119 / 98, MDPO 150-161, DPMP 183 / 209-213,
+# Havířov 1481: the roof edge at 2.85 m with a white rim over the black band;
+# the flat-topped windscreen framed by body-colour pillars, the display in its
+# black top band, the plain nose with the big silver teardrop headlamps; the
+# body-colour panel behind the rear door (no black engine panel); on the off
+# side the low louvre grille behind the rear wheel and the angled louvre panel
+# at the rear corner; the full-width rear window under a black strip, the
+# small red corner marker lamps, the lamp row and the off-side louvre stack.
+CIT12_ = dict(
+    face="cit", rear="cit", cit=True, real_len=12.0, joints=[], cu=[8],
+    axles=[2.71, 8.83],
+    doors=[(0.30, 1.85), (5.00, 6.55), (9.60, 11.10)],
+    drv=(0.35, 1.85),
+    z0=0.30, zr=2.85, zwin0=1.36, zwin1=2.30, zband0=1.30, zband1=2.78,
+    cap=0.0, sidedisp=(2.00, 3.40), pods=[], mirrors=True, diag=dict(L1A_DIAG, xw_top=1.95),
+    cit_grille=(9.80, 11.90),
+)
+CIT18_ = dict(
+    CIT12_, real_len=17.8, joints=[9.90], cu=[8, 6], axles=[2.71, 8.065, 14.64],
+    doors=[(0.30, 1.85), (5.00, 6.55), (11.50, 12.90), (15.80, 17.10)], cit_grille=(15.65, 17.70),
+)
+CIT_AC = [(0.70, 1.70, 0.18, 0.75, "ac")]
+CIT_CNG = [(0.70, 1.70, 0.18, 0.75, "ac"), (2.90, 10.70, 0.42, 1.15, "fair")]
 SW12_DIESEL = [(0.50, 5.50, 0.18, 0.90, "ac"), (7.10, 11.45, 0.22, 1.00, "dark")]
 SW18_DIESEL = [(0.50, 5.50, 0.18, 0.90, "ac"), (10.70, 12.20, 0.20, 0.85, "ac"), (13.30, 18.00, 0.22, 1.00, "dark")]
 SW_CNG = [(0.20, 6.00, 0.33, 1.00, "fair")]
@@ -413,9 +441,94 @@ class Veh:
 
     # ---------------- Iveco Streetway ------------------------------------
     def sw_paint(self, role, t):
-        """Streetway face colours (top-face values): bumper, band (the white band
-        over the lamp strip), panel (the lower rear), disp"""
-        return AMBER if role == "disp" else WHITE
+        """Streetway and Citelis face colours (top-face values): bumper, band
+        (the Streetway's band over the lamp strip, the Citelis nose), panel (the
+        lower rear), upper (the Citelis rear round its window), stripe (a
+        livery's stripe across the Citelis nose, None = none), disp"""
+        if role == "disp":
+            return AMBER
+        if role == "stripe":
+            return None
+        if role == "bumper" and self.liv in ("L1a", "L1b", "L2"):
+            return RED
+        return WHITE
+
+    # ---------------- Irisbus Citelis --------------------------------------
+    def cit_side(self, p, u, c):
+        """the off-side louvres: the low grille behind the rear wheel and the
+        angled panel at the rear corner"""
+        f, z = p.face, p.z
+        if f != "left":
+            return c
+        a, b = self.M(self.sp["cit_grille"][0]), self.M(self.sp["cit_grille"][1])
+        if a <= u < b and inr(z, self.ZB + 0.02, 0.85):
+            return sh(SW_LOUVRE, f) if int((u - a) / 0.25) % 2 == 0 else sh(self.sw_paint("panel", 0.0), f)
+        end = self.U[-1]
+        if u >= end - 0.65 and inr(z, 1.00, 2.15) and z < self.ZBAND0 + (u - (end - 0.65)) * 1.5:
+            return sh(SW_LOUVRE, f) if int((z - 1.00) / 0.12) % 2 == 0 else FRAME
+        return c
+
+    def cit_front(self, p):
+        t, z = p.t, p.z
+        f = "front"
+        a = abs(t)
+        body = self.sw_paint("band", t)
+        if z < 0.29:
+            return BLACK
+        if z < 0.75:
+            if inr(z, 0.36, 0.46) and HW - 0.45 < a < HW - 0.20:
+                return sh(SILVER, f)                    # the round fog lamps
+            return sh(self.sw_paint("bumper", t), f)
+        lamp_top = 0.95 + 0.17 * max(0.0, a - (HW - 0.55)) / 0.55
+        if a > HW - 0.55 and z < min(1.12, lamp_top):  # the teardrop headlamp pods
+            if inr(z, 0.72, 0.92) and HW - 0.45 < a < HW - 0.12:
+                return HEADL
+            return sh(SILVER, f)
+        if z < 1.15:
+            if inr(z, 1.08, 1.14) and a < HW - 0.60:
+                return BLACK                            # the slot under the glass
+            stripe = self.sw_paint("stripe", t)
+            if stripe is not None and inr(z, 0.76, 0.98):
+                return sh(stripe, f)                    # a livery stripe between the lamps
+            return sh(body, f)
+        if a > HW - 0.10:
+            return sh(body, f)                          # the body-colour corner pillars
+        if z < 2.36:
+            return CAB_GLASS
+        if z < 2.80:
+            if inr(z, 2.46, 2.70) and a < 0.95:
+                return self.sw_paint("disp", t)
+            return BLACK
+        return sh(body, f)                              # the thin roof cap
+
+    def cit_rear(self, p):
+        t, z = p.t, p.z
+        f = "rear"
+        a = abs(t)
+        panel = self.sw_paint("panel", t)
+        if z < 0.27:
+            return BLACK
+        if z < 0.72:
+            return sh(self.sw_paint("bumper", t), f)
+        if z < 0.90:                                    # the lamp row and the plate
+            if a > HW - 0.62 and int((a - (HW - 0.62)) / 0.18) % 2 == 0:
+                return TAILL
+            if a < 0.28:
+                return sh((0xE8, 0xE8, 0xE6), f)
+            return BLACK
+        if a > HW - 0.15 and inr(z, 2.45, 2.60):
+            return TAILL                                # the corner marker lamps
+        if z < 2.10:
+            if t < -0.10 and a > HW - 0.62 and inr(z, 1.00, 2.10):
+                return sh(SW_LOUVRE, f) if int((z - 1.00) / 0.10) % 2 == 0 else BLACK
+            return sh(panel, f)
+        if z < 2.30:
+            return BLACK                                # the "irisbus" strip
+        if z < 2.80 and a < HW - 0.15:
+            if inr(z, 2.55, 2.75) and inr(t, 0.30, 0.90):
+                return self.sw_paint("disp", t)
+            return GLASS
+        return sh(self.sw_paint("upper", t), f)         # the corner pillars and the cap
 
     def sw_side(self, p, u, c):
         """the off-side front sweep and rear louvre grille, the white rear
@@ -532,6 +645,8 @@ class Veh:
                     c = sh(self.tex_roof(p, u), f)       # the black band stops under the rounded edge
                 if self.sp.get("sw"):
                     c = self.sw_side(p, u, c)
+                if self.sp.get("cit"):
+                    c = self.cit_side(p, u, c)
                 return c
             dz = self.ZB - self.Z0
             if dz > 0:
@@ -868,6 +983,8 @@ class Veh:
         L = self.liv
         if face == "sw":
             return self.sw_front(p)
+        if face == "cit":
+            return self.cit_front(p)
         if face == "ns":
             if z < 0.44:
                 return BLACK
@@ -979,6 +1096,8 @@ class Veh:
         L = self.liv
         if st == "sw":
             return self.sw_rear(p)
+        if st == "cit":
+            return self.cit_rear(p)
         if st == "ns":
             if a > HW - 0.26 and inr(z, 0.55, 1.35):
                 return TAILL
@@ -1186,7 +1305,8 @@ MODELS = {
     "uw12h": mk(UW12, face="uw2", pods=[(1.40, 3.80, 0.26, 0.95, "fair"), (6.80, 8.60, 0.24, 0.85, "ac")]),
     "uw18h": mk(UW18, pods=[(1.40, 3.80, 0.26, 0.95, "fair"), (6.40, 8.20, 0.24, 0.85, "ac"),
                             (11.80, 13.40, 0.24, 0.85, "ac")]),
-    "cit18": mk(UW18, face="uw1", pods=[(2.00, 4.20, 0.24, 0.85, "ac"), (11.80, 13.40, 0.24, 0.85, "ac")]),
+    # Irisbus Citelis 18M (DPMHK 224, 231-236; its own body since 2026-10-28)
+    "cit18": mk(CIT18_, pods=CIT_AC),
     "ebn95": mk(EBN95, pods=[(1.00, 3.60, 0.28, 0.95, "fair"), (5.40, 8.60, 0.28, 0.95, "fair")]),
     "ebn11": mk(EBN11, pods=[(1.20, 3.60, 0.30, 0.95, "fair"), (4.20, 6.60, 0.30, 0.95, "fair"),
                              (7.20, 9.60, 0.30, 0.95, "fair")]),

@@ -1205,7 +1205,7 @@ FAMILIES = dict([
             T.load_rows("vehicle-bus/mdpo/urbanway_10_5m/sprites/mdpobilocervena.png"), z_mdpo,
             W_ZONES, [[10.0, 10.5, 11.0]],
             ring_decal(RING_GREEN, 0.78, base=csad_skirt(0.70, base=close_door(0.752, 0.895, (0.57, 0.64)))),
-            [[(0.15, 0.80, 0.34, 1.00)]], T.WHITE_POD, lambda c: LEDW if T.hexc(c) in (0xF0A018, 0xF7A21B, 0x01DD01) else None))],
+            [[(0.15, 0.80, 0.34, 1.00)]], T.WHITE_POD, lambda c: LEDW if T.hexc(c) in (0xF0A018, 0xF7A21B, 0x01DD01, 0x62D64A) else None))],
         "Iveco Urbanway 10,5M CNG (CNG; engine_type diesel, no smoke), city body, doors"
         " 2-2-0, ex Iveco demonstrator (2016). Transdev Slezsko 1: 73-0049"
         " (Českotěšínsko). " + WG_NOTE,

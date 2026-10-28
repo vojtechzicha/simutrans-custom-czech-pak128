@@ -17,7 +17,7 @@ display:
 # Iveco Urbanway 18M CNG articulated, 6 units on Tábor MHD. Front section
 # unpowered, engine in the rear section.
 # Sprite: original box-model render (vojtechzicha): the dpmhk.py Iveco
-# Urbanway 18M CNG body (sections 8 + 6) in the town palette tabor_uw painted
+# Urbanway 18M CNG body (sections 8 + 6) in the town palette tabor_uwc painted
 # by tools/busrender/sor_town.py (until 2026-10-28 the hand-drawn upstream
 # sheet). Regenerate with tools/busrender/sor_town.py.
 

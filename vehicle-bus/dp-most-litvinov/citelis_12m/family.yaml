@@ -18,10 +18,9 @@ display:
 # cols 1–8 (col 0 was a stacked-extras column); the source .dat had its last
 # emptyimage entry truncated to `.0.obj` due to a copy/paste bug — the build
 # input PNG here drops col 0 so we can use the canonical row.col 0–7 indexing.
-# Sprite: original box-model render (vojtechzicha): the dpmhk.py Urbanway 12M
-# body with the Citelis face in the most_uw palette painted by
-# tools/busrender/sor_town.py (until 2026-10-28 the hand-drawn upstream
-# sheet). Regenerate with tools/busrender/sor_town.py.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Irisbus
+# Citelis 12M body (its own since 2026-10-28) in the most_cit palette.
+# Regenerate with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "Citelis_12M"

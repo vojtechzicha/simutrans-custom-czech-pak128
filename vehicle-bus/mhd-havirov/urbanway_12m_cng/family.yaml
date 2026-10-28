@@ -19,9 +19,9 @@ display:
 # 12/2023 - 12/2025. The white city logo (three linked arches) and the yellow "město pro
 # život" script on the lower side, the logo first reading left to right on
 # both sides.
-# Sprite: the Frýdek-Místek Urbanway 12M CNG sheet (the dpmhk.py Urbanway body
-# rendered by sor_town.py, with the CNG fairing), repainted blue by
-# odis_town.repaint.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Urbanway body in
+# sor_town.py's havirov palette, with the CNG fairing (until 2026-10-28 the
+# Frýdek-Místek sheet repainted blue).
 # Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
 
 vehicles:

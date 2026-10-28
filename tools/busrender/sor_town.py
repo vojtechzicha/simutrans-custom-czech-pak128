@@ -21,7 +21,12 @@ dpmhk.SHADE factors):
     disp           destination display colour
     front          face colours: bumper (lowest), chin (between the lamps),
                    mask (the white / coloured nose of the NB), corner (the
-                   lamp surrounds of the NS / EBN), trim (A-pillars)
+                   lamp surrounds of the NS / EBN / Urbanway), trim (A-pillars);
+                   on the Urbanway also nose (under the windscreen, default
+                   mask), bumper_mid (the bumper between the lamps), stripe (a
+                   stripe across the nose; on the Citelis between the lamps)
+    pod_ac         colour of the A/C units only (default pod)
+    rear_band      a hatched band under the Streetway rear window
     rear           bumper, panel (between the lamps), upper (round the rear
                    window)
     cant           colour of the top row of the side under the roof edge
@@ -191,14 +196,16 @@ def mdpo_ribbon(v, p, u, right):
 
 
 def havirov_logo(v, p, u, right):
-    """Havířov: the white three-arch logo, then the yellow "město pro život"
-    script on the lower body behind the front door"""
+    """Havířov: the white three-arch logo and the smaller yellow "město pro
+    život" script on the lower body behind the front door, the logo first as
+    read from left to right on both sides (on the door side the front is on
+    the right, so the script is ahead of the logo there)"""
     a = v.M(2.0)
-    if inr(u, a, a + 0.9) and v.ZB + 0.15 <= p.z < v.ZBAND0 - 0.05:
-        return WHITE if int((u - a) / 0.30) % 3 != 2 else None
-    b = a + 1.1
-    if inr(u, b, b + 2.4) and v.ZB + 0.30 <= p.z < v.ZBAND0 - 0.05:
-        return HAV_YEL if int((u - b) / 0.30) % 4 != 3 else None
+    logo, script = (a + 1.65, a) if right else (a, a + 1.45)
+    if inr(u, logo, logo + 1.20) and v.ZB + 0.15 <= p.z < v.ZBAND0 - 0.05:
+        return WHITE if int((u - logo) / 0.30) % 4 != 3 else None
+    if inr(u, script, script + 1.40) and v.ZB + 0.35 <= p.z < v.ZBAND0 - 0.10:
+        return HAV_YEL if int((u - script) / 0.24) % 3 != 2 else None
     return None
 
 
@@ -316,18 +323,36 @@ MB_RED = (0xD2, 0x14, 0x2A)        # DPMLB Mladá Boleslav red (Lubak91's sheet)
 MB_BLUE = (0x23, 0x3C, 0x8C)       # its blue skirt line
 CSAD_GREEN = (0x57, 0xA6, 0x39)    # the 3ČSAD green (odis_town CSAD["green"])
 DEMO_ORANGE = (0xE8, 0x6A, 0x20)   # the Iveco demonstrator's swoosh (DPMP 199)
+COMETT_ORANGE = (0xF5, 0x60, 0x1C) # the COMETT Tábor orange
 DPMP_RED = (0xD2, 0x1E, 0x2B)      # DPMP Pardubice red of the 32Tr (photos of 429 / 464)
 DPMP_WINE = (0xA3, 0x1A, 0x2E)     # the darker wine red of the 30Tr scheme (photos of 333, 412, 415)
 
 
+DEMO_ORANGE_DK = (0xB8, 0x48, 0x14)
+
+
+def karvina_script(v, p, u, right):
+    """the black "karviná" script on the lower body between the middle and the
+    rear door, two rows tall"""
+    a = v.M(7.40)
+    if inr(u, a, a + 1.20) and v.ZBAND0 - 0.60 <= p.z < v.ZBAND0 - 0.10:
+        return BLACK if int((u - a) / CW) % 3 != 1 else None
+    return None
+
+
 def demo_swoosh(v, p, u, right):
-    """the Iveco Streetway demonstrator (DPMP 199): an orange V on the white
-    lower body, from the front corner down to the middle and up to the rear"""
-    span = v.U[-1]
-    k = abs(u - span * 0.55) / (span * 0.55)                 # 1 at the ends, 0 in the middle
-    zl = v.ZB + 0.30 + k * (v.ZBAND0 - v.ZB - 0.45)
-    if zl <= p.z < zl + 0.25:
-        return DEMO_ORANGE
+    """the Iveco Streetway demonstrator (DPMP 199, photos 444067 / 444068): a
+    hatched orange band along the bottom of the black glazing from 5 m back,
+    rising to the roof edge at 9.5-10.5 m and widening to 0.9 m, then along
+    the top to the rear"""
+    x = v.X(u) if hasattr(v, "X") else u
+    z = p.z
+    if x < 5.0:
+        return None
+    t = min(1.0, max(0.0, (x - 9.2) / 1.4))
+    lo = v.ZWIN0 + t * (v.ZR - 0.90 - v.ZWIN0)
+    if lo <= z < lo + 0.25 + t * 0.65 and z < v.ZR:
+        return DEMO_ORANGE if int(u / CW) % 2 == 0 else DEMO_ORANGE_DK
     return None
 
 
@@ -418,7 +443,7 @@ TOWNS = {
                     front=dict(bumper=HAV_BLUE_DK, chin=HAV_BLUE, mask=HAV_BLUE, trim=HAV_BLUE),
                     rear=dict(bumper=HAV_BLUE_DK, panel=HAV_BLUE, upper=HAV_BLUE)),
     # Krnov city white: the black belt line, the chevron pairs and the wordmark
-    "krnov": dict(body=WHITE, roof=ROOFW, lower=WHITE, sill=BLACK, overlay=krnov,
+    "krnov": dict(body=WHITE, roof=ROOFW, lower=WHITE, sill=BLACK, overlay=krnov, rear_word=KRNOV_NAVY,
                   disp=AMBER,
                   front=dict(bumper=BLACK, chin=BLACK, mask=WHITE, corner=SILVER, trim=BLACK),
                   rear=dict(bumper=BLACK, panel=WHITE, upper=BLACK)),
@@ -472,28 +497,53 @@ TOWNS = {
     "dpmb_uw": dict(body=WHITE, roof=(0xF2, 0xF2, 0xF0), lower=WHITE, skirt=(0.50, DPMB_RED), disp=LEDG,
                     front=dict(bumper=DPMB_RED, mask=WHITE),
                     rear=dict(bumper=DPMB_RED, panel=WHITE, upper=WHITE)),
-    "dpmlb_uw": dict(body=WHITE, roof=MB_RED, pod=MB_RED, cant=MB_RED, lower=WHITE, skirt=(0.25, MB_BLUE),
-                     disp=AMBER, front=dict(bumper=MB_BLUE, mask=WHITE),
+    # (details checked against photos and the old sheets, 2026-10-28)
+    # DPMLB: the red roof, a white row over the windows, a thin white line under
+    # them over the red band and the navy skirt; the red nose over the navy
+    # bumper; the white Autoclima unit (photos of 3573, 3574)
+    "dpmlb_uw": dict(body=WHITE, roof=MB_RED, pod=MB_RED, pod_ac=WHITE, cant=WHITE, lower=WHITE,
+                     skirt=(0.40, MB_BLUE), bands=[(0.98, MB_RED)],
+                     disp=AMBER, front=dict(bumper=MB_BLUE, mask=WHITE, nose=MB_RED),
                      rear=dict(bumper=MB_BLUE, panel=WHITE, upper=MB_RED)),
-    "dpmp_uw": dict(body=WHITE, roof=ROOFW, lower=WHITE, cant=DPMP_RED, skirt=(0.50, DPMP_RED), disp=AMBER,
-                    front=dict(bumper=DPMP_RED, mask=WHITE),
+    # DPMP: the red row under the roof edge, the red band on the lower side over
+    # a white row, the red stripe across the nose over a light bumper (photos of
+    # 210, 225)
+    "dpmp_uw": dict(body=WHITE, roof=ROOFW, lower=WHITE, cant=DPMP_RED, stripe=(0.35, 0.62, DPMP_RED),
+                    disp=AMBER, front=dict(bumper=LIGHT_GREY, mask=WHITE, stripe=DPMP_RED),
                     rear=dict(bumper=DPMP_RED, panel=WHITE, upper=WHITE)),
-    "kladno_uw": dict(body=WHITE, roof=ROOFW, lower=WHITE, stripe=(0.25, 0.50, KLADNO_RED), disp=AMBER,
+    # Kladno: the red stripe two rows tall over a white row (the old sheet)
+    "kladno_uw": dict(body=WHITE, roof=ROOFW, lower=WHITE, stripe=(0.25, 0.75, KLADNO_RED), disp=AMBER,
                       front=dict(bumper=KLADNO_RED, mask=WHITE),
                       rear=dict(bumper=KLADNO_RED, panel=WHITE, upper=WHITE)),
+    # MDPO: the red lower body up to the wheel-arch tops with a white waist
+    # (photos of 150, 166, 171, 176): two of the Urbanway's three rows, three of
+    # the Citelis's four
     "mdpo_uw": dict(body=WHITE, roof=ROOFW, lower=WHITE, skirt=(0.50, MDPO_RED), disp=LEDG,
                     front=dict(bumper=MDPO_RED, mask=WHITE),
                     rear=dict(bumper=MDPO_RED, panel=WHITE, upper=WHITE)),
-    "fm_uw": dict(body=WHITE, roof=ROOFW, lower=WHITE, skirt=(0.25, CSAD_GREEN), disp=AMBER,
-                  front=dict(bumper=CSAD_GREEN, mask=WHITE),
+    # 3ČSAD (F-M, Karviná, Orlová): green round the headlamps, white LED
+    # displays (photos of 278, 441); the green skirt stays one row, as the
+    # Urbanway's lower body has three and the white must not be the shorter
+    "fm_uw": dict(body=WHITE, roof=ROOFW, lower=WHITE, skirt=(0.25, CSAD_GREEN), disp=(0xEC, 0xEE, 0xE4),
+                  front=dict(bumper=CSAD_GREEN, mask=WHITE, corner=CSAD_GREEN),
                   rear=dict(bumper=CSAD_GREEN, panel=WHITE, upper=WHITE)),
-    "most_uw": dict(body=WHITE, roof=ROOFW, lower=WHITE, skirt=(0.25, MOST_YEL), disp=LEDG,
-                    front=dict(bumper=DPP_RED, mask=WHITE),
+    # DP Most a Litvínova: the yellow lower body to the wheel-arch tops; the
+    # Urbanway 18M (99) with yellow round the headlamps and up the A-pillars,
+    # red bumper corners; the Citelis (98, 117, 118) with the whole nose, the
+    # roof cap and the upper rear yellow (photos 564272, 671573, 671576, 998073)
+    "most_uw": dict(body=WHITE, roof=ROOFW, lower=WHITE, skirt=(0.50, MOST_YEL), disp=LEDG,
+                    front=dict(bumper=DPP_RED, bumper_mid=WHITE, mask=WHITE, corner=MOST_YEL, trim=MOST_YEL),
                     rear=dict(bumper=DPP_RED, panel=WHITE, upper=WHITE)),
-    "demo_sw": dict(body=WHITE, roof=ROOFW, lower=WHITE, decal=demo_swoosh, disp=AMBER,
+    "most_cit": dict(body=WHITE, roof=ROOFW, lower=WHITE, skirt=(0.55, MOST_YEL), disp=LEDG,
+                     front=dict(bumper=DPP_RED, mask=MOST_YEL),
+                     rear=dict(bumper=DPP_RED, panel=WHITE, upper=MOST_YEL)),
+    "demo_sw": dict(body=WHITE, roof=ROOFW, lower=WHITE, overlay=demo_swoosh, disp=AMBER,
+                    rear_band=DEMO_ORANGE,
                     front=dict(bumper=WHITE, band=WHITE),
                     rear=dict(bumper=WHITE, panel=WHITE, upper=BLACK)),
-    "karvina_sw": dict(body=WHITE, roof=ROOFW, lower=WHITE, disp=(0xEC, 0xEE, 0xE4),
+    # Karviná (Transdev): the black "karviná" script between the middle and the
+    # rear door (busphoto 939659)
+    "karvina_sw": dict(body=WHITE, roof=ROOFW, lower=WHITE, disp=(0xEC, 0xEE, 0xE4), decal=karvina_script,
                        front=dict(bumper=WHITE, band=WHITE),
                        rear=dict(bumper=WHITE, panel=WHITE, upper=BLACK)),
     # DPMO green e-bus scheme (the Urbino 12 "zelena")
@@ -514,6 +564,19 @@ TOWNS = {
                     rear=dict(bumper=LIGHT_GREY, panel=WHITE, upper=DPO_BLUE)),
 }
 TOWNS["most_dpp18"] = dict(TOWNS["most_dpp"], disp=AMBER)
+# (details checked against photos and the old sheets, 2026-10-28)
+# the DPMB 31Tr: light grey poles (DPMB drawing tr31)
+TOWNS["dpmb_31tr"] = dict(TOWNS["dpmb"], poles=dict(pole=(0xA4, 0xA8, 0xAC), tip=(0x30, 0x32, 0x34),
+                                                    base=(0.15, (0x50, 0x54, 0x58))))
+# the DPMB 32Tr: the red lower body about 0.6 m tall (Commons 32Tr 3322)
+TOWNS["dpmb_32tr"] = dict(TOWNS["dpmb_ns"], skirt=(0.60, DPMB_RED))
+# the Tábor COMETT Urbanways: the black and orange COMETT swoosh across the
+# nose under the wordmark (busphoto 359840, 459229)
+TOWNS["tabor_uwc"] = dict(TOWNS["tabor_uw"], front=dict(
+    TOWNS["tabor_uw"]["front"], stripe=lambda t: BLACK if t < 0 else COMETT_ORANGE))
+# the Havířov Citelis 40-1486: green LED displays (photo 296515)
+TOWNS["havirov_cit"] = dict(TOWNS["havirov"], disp=LEDG)
+TOWNS["mdpo_cit"] = dict(TOWNS["mdpo_uw"], skirt=(0.70, MDPO_RED))
 
 
 # ====================================================================== body
@@ -542,6 +605,8 @@ class TVeh(Veh):
     def tex_pod(self, p, u, k):
         f = p.face
         c = self.P.get("pod", self.ROOF)
+        if self.pods[k][4] == "ac":
+            c = self.P.get("pod_ac", c)
         if self.pods[k][4] == "ac" and f == "top" and abs(p.t) < 0.25:
             return tuple(int(v * 0.86) for v in c)          # condenser grille
         if self.pods[k][4] == "dark":
@@ -611,12 +676,18 @@ class TVeh(Veh):
             return self.P["disp"]
         if role == "panel":
             return self.P["rear"]["panel"]
+        if role == "upper":
+            return self.P["rear"].get("upper", self.P["rear"]["panel"])
         F = self.P["front"]
+        if role == "stripe":
+            return F.get("stripe")
         return F["bumper"] if role == "bumper" else F.get("band", F.get("mask", self.P["body"]))
 
     def tex_front(self, p):
         if self.face == "sw":
             return self.sw_front(p)
+        if self.face == "cit":
+            return self.cit_front(p)
         t, z = p.t, p.z
         f = "front"
         a = abs(t)
@@ -647,14 +718,21 @@ class TVeh(Veh):
             if z < 0.32:
                 return BLACK
             if a > HW - 0.44 and inr(z, 0.66, 0.86):
-                return HEADL if a < HW - 0.12 else sh(SILVER, f)
+                return HEADL if a < HW - 0.12 else sh(F.get("corner", SILVER), f)
             up = 0.62 + (0.30 if self.face == "uw1" and a > HW - 0.45 else 0.0)
             if z < up:
+                if F.get("bumper_mid") and a < HW - 0.45:
+                    return sh(F["bumper_mid"], f)
                 return sh(F["bumper"], f)
             if z < 1.14:
+                if F.get("stripe") and inr(z, 0.92, 1.06) and a < HW - 0.08:
+                    s = F["stripe"]
+                    return sh(s(t) if callable(s) else s, f)
                 if inr(z, 0.92, 1.06) and a < 0.80:
                     return sh(F.get("band", SILVER), f)
-                return sh(F["mask"], f)
+                if F.get("corner") and a > HW - 0.44 and z < 0.94:
+                    return sh(F["corner"], f)           # the lamp surrounds
+                return sh(F.get("nose", F["mask"]), f)
             if a > HW - 0.08:
                 return sh(F.get("trim", F["mask"]), f)
             if inr(z, 2.40, 2.66) and a < 1.00:
@@ -700,7 +778,17 @@ class TVeh(Veh):
     # rear ----------------------------------------------------------------
     def tex_rear(self, p):
         if self.rearstyle == "sw":
+            rb = self.P.get("rear_band")
+            if rb and inr(p.z, 1.60, 1.84) and abs(p.t) < HW - 0.20:
+                return sh(rb if int((p.t + HW) / 0.18) % 2 == 0 else DEMO_ORANGE_DK, "rear")
+            rw = self.P.get("rear_word")
+            if rw and inr(p.z, 0.80, 1.30) and inr(p.t, -0.60, 0.60):
+                col, row = int((p.t + 0.60) / 0.20), int((1.30 - p.z) / 0.25)
+                if KRNOV_WORD[row][col] == "#":
+                    return sh(rw, "rear")                   # the wordmark on the lower rear panel
             return self.sw_rear(p)
+        if self.rearstyle == "cit":
+            return self.cit_rear(p)
         t, z = p.t, p.z
         f = "rear"
         a = abs(t)
@@ -865,29 +953,34 @@ DPMP_32TR = mk(H.MODELS["32tr"])
 # Iveco Urbanway 12M / 10,5M town fleets on the dpmhk.py body (Lubak91's
 # sheets until 2026-10-28): the A/C unit on the diesels, the CNG fairing over
 # the front two thirds on the CNG cars
-UW_AC = [(2.20, 4.60, 0.24, 0.85, AC)]
-UW_CNG = [(1.60, 8.60, 0.36, 1.00, FAIR)]
+# and the dark box over the rear end of the roof on every one (photos of Opava
+# 166 / 176, Orlová 441, Kladno 8732)
+UW_REAR = (10.70, 11.85, 0.20, 0.85, "dark")
+UW_AC = [(2.20, 4.60, 0.24, 0.85, AC), UW_REAR]
+UW_CNG = [(1.60, 8.60, 0.36, 1.00, FAIR), UW_REAR]
 UW12 = mk(H.UW12, pods=UW_AC)
 UW12_CNG = mk(H.UW12, pods=UW_CNG)
 # the 10,5M: 2.70 m front overhang, 4.70 m wheelbase, doors 2-2-2 with the
 # rear one behind the rear axle, then the engine bay
 # the Urbanway 18M / Citelis 18M (sections 8 + 6): an A/C unit on each section,
 # or the CNG fairing over the front section
-UW18_AC = [(2.00, 4.20, 0.24, 0.85, AC), (11.80, 13.40, 0.24, 0.85, AC)]
-UW18_CNG = [(1.40, 9.60, 0.36, 1.00, FAIR), (11.80, 13.40, 0.24, 0.85, AC)]
+UW18_REAR = (16.60, 17.75, 0.20, 0.85, "dark")
+UW18_AC = [(2.00, 4.20, 0.24, 0.85, AC), (11.80, 13.40, 0.24, 0.85, AC), UW18_REAR]
+UW18_CNG = [(1.40, 9.60, 0.36, 1.00, FAIR), (11.80, 13.40, 0.24, 0.85, AC), UW18_REAR]
 UW18 = mk(H.UW18, pods=UW18_AC)
 UW18_CNG_ = mk(H.UW18, pods=UW18_CNG)
-CIT18 = mk(H.UW18, face="uw1", pods=UW18_AC)
+CIT18 = mk(H.CIT18_, pods=H.CIT_AC)
 # Iveco Streetway 12M / 18M (its own dpmhk.py body)
 SW12 = mk(H.SW12, pods=H.SW12_DIESEL)
 SW12_CNG = mk(H.SW12, pods=H.SW_CNG)
 SW18_CNG = mk(H.SW18, pods=[(0.20, 6.00, 0.33, 1.00, "fair"), (12.40, 15.60, 0.30, 0.95, "fair")])
-# Irisbus Citelis 12M (TommPa9 / Lubak91 / VTPsim until 2026-10-28): the
-# Urbanway body with the older uw1 face
-CIT12 = mk(H.UW12, face="uw1", pods=UW_AC)
-CIT12_CNG = mk(H.UW12, face="uw1", pods=UW_CNG)
+# Irisbus Citelis 12M / 18M (TommPa9 / Lubak91 / VTPsim until 2026-10-28): the
+# Citelis body of dpmhk.py (CIT12_ / CIT18_), not the Urbanway's
+CIT12 = mk(H.CIT12_, pods=H.CIT_AC)
+CIT12_CNG = mk(H.CIT12_, pods=H.CIT_CNG)
 UW105 = mk(H.UW12, real_len=10.5, axles=[2.70, 7.40], doors=[(0.32, 1.55), (4.10, 5.40), (7.95, 9.10)],
-           engine=(9.20, 10.35), sidedisp=(2.60, 3.90), cu=[7], pods=[(2.00, 4.20, 0.24, 0.85, AC)])
+           engine=(9.20, 10.35), sidedisp=(2.60, 3.90), cu=[7],
+           pods=[(2.00, 4.20, 0.24, 0.85, AC), (9.30, 10.40, 0.20, 0.85, "dark")])
 
 # family (path under the repo) -> {livery colour: [(spec, palette), ...] in row order}
 FAMILIES = {
@@ -932,20 +1025,20 @@ FAMILIES = {
     "vehicle-bus/mdpo/urbanway_12m": {"mdpobilocervena": [(UW12, "mdpo_uw")]},
     "vehicle-bus/mdpo/urbanway_10_5m": {"mdpobilocervena": [(UW105, "mdpo_uw")]},
     "vehicle-bus/mhd-frydek-mistek/urbanway_12m_cng": {"3csadbilozelena": [(UW12_CNG, "fm_uw")]},
-    "vehicle-bus/mhd-tabor/urbanway_12m_cng": {"comettbila": [(UW12_CNG, "tabor_uw")]},
+    "vehicle-bus/mhd-tabor/urbanway_12m_cng": {"comettbila": [(UW12_CNG, "tabor_uwc")]},
     "vehicle-bus/mhd-trinec/urbanway_12m": {"trinecbilozelena": [(UW12, "trinec_uw")]},
-    "vehicle-bus/dp-most-litvinov/citelis_12m": {"mostzlutocervena": [(CIT12, "most_uw")]},
+    "vehicle-bus/dp-most-litvinov/citelis_12m": {"mostzlutocervena": [(CIT12, "most_cit")]},
     "vehicle-bus/dpmb/citelis_12m_cng": {"dpmbbilocervena": [(CIT12_CNG, "dpmb_uw")]},
     "vehicle-bus/dpmp/citelis_12m": {"dpmpbilocervena": [(CIT12, "dpmp_uw"), (CIT12_CNG, "dpmp_uw")]},
-    "vehicle-bus/mdpo/citelis_12m": {"mdpobilocervena": [(CIT12, "mdpo_uw")]},
+    "vehicle-bus/mdpo/citelis_12m": {"mdpobilocervena": [(CIT12, "mdpo_cit")]},
     "vehicle-bus/dpmp/streetway_12m": {"ivecopredvadeci": [(SW12, "demo_sw")]},
     "vehicle-bus/mhd-krnov/streetway_12m": {"krnovbila": [(SW12, "krnov")]},
     "vehicle-bus/dp-most-litvinov/urbanway_18m": {"mostzlutocervena": [(UW18, "most_uw")]},
-    "vehicle-bus/dp-most-litvinov/citelis_18m": {"mostzlutocervena": [(CIT18, "most_uw")]},
+    "vehicle-bus/dp-most-litvinov/citelis_18m": {"mostzlutocervena": [(CIT18, "most_cit")]},
     "vehicle-bus/dpmb/urbanway_18m_cng": {"dpmbbilocervena": [(UW18_CNG_, "dpmb_uw")]},
-    "vehicle-bus/mhd-tabor/urbanway_18m_cng": {"comettbila": [(UW18_CNG_, "tabor_uw")]},
-    "vehicle-trolleybus/dpmb/31tr": {"dpmbbilocervena": [(DPMB_31TR, "dpmb")]},
-    "vehicle-trolleybus/dpmb/32tr": {"dpmbbilocervena": [(DPMB_32TR, "dpmb_ns")]},
+    "vehicle-bus/mhd-tabor/urbanway_18m_cng": {"comettbila": [(UW18_CNG_, "tabor_uwc")]},
+    "vehicle-trolleybus/dpmb/31tr": {"dpmbbilocervena": [(DPMB_31TR, "dpmb_31tr")]},
+    "vehicle-trolleybus/dpmb/32tr": {"dpmbbilocervena": [(DPMB_32TR, "dpmb_32tr")]},
     "vehicle-trolleybus/dpmp/30tr": {"dpmpbilocervena": [(DPMP_30TR, "dpmp_nb")]},
     "vehicle-trolleybus/dpmp/32tr": {"dpmpbilocervena": [(DPMP_32TR, "dpmp_ns")]},
 }

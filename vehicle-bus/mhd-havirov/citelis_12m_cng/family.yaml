@@ -15,8 +15,8 @@ display:
 
 # Irisbus Citelis 12M CNG. Havířov MHD: 40-1486 (2014), the last Citelis,
 # blue since 12/2025, green LED displays.
-# Sprite: original box-model render (vojtechzicha): the dpmhk.py Urbanway body with
-# the Citelis face in sor_town.py's havirov palette, with the CNG fairing
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Irisbus Citelis
+# 12M body in sor_town.py's havirov palette, with the CNG fairing
 # (VTPsim's ODIS Citelis until 2026-10-28).
 # Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
 

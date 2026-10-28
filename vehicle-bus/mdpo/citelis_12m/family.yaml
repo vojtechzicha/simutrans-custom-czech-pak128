@@ -13,12 +13,10 @@ display:
   family_en: "Irisbus Citelis 12M"
   family_cs: "Irisbus Citelis 12M"
 
-# Irisbus Citelis 12M, MDPO 148-161 (2011-2012), 12 in service (2026).
-# Diesel Iveco Cursor 8 EEV ~213 kW, ~30 seated / ~70 standing, ~11 t.
-# Sprite: original box-model render (vojtechzicha): the dpmhk.py Urbanway 12M
-# body with the Citelis face in the mdpo_uw palette painted by
-# tools/busrender/sor_town.py (until 2026-10-28 the hand-drawn upstream
-# sheet). Regenerate with tools/busrender/sor_town.py.
+# Irisbus Citelis 12M, MDPO 148-161 (2011-2012), 12 in service (2026). Diesel
+# Iveco Cursor 8 EEV ~213 kW, ~30 seated / ~70 standing, ~11 t. Sprite:
+# original box-model render (vojtechzicha): the dpmhk.py Irisbus Citelis 12M
+# body in the mdpo_cit palette. Regenerate with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "Citelis_12M"

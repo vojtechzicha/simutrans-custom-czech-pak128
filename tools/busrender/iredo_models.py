@@ -659,7 +659,7 @@ class RegioBus(Coach):
                 if k == g1 - 1 and 0.55 <= v < 0.95:
                     return KHK_BLUE
                 if -1.05 <= v < -0.65:
-                    return LED if k == g1 else BLACK
+                    return getattr(self.lv, "disp", LED) if k == g1 else BLACK
                 return KHK_PANEL
             return GLASS
         if k >= self.top_row(self.real_len - 0.1):
@@ -796,7 +796,7 @@ class CrosswayFace:
             return Sh(self.lv.roof)
         if k == top - 1:
             if av < self.W2 - 0.30:
-                return LED if av < 0.9 else BLACK
+                return getattr(self.lv, "disp", LED) if av < 0.9 else BLACK
             return BLACK
         if k >= 5:
             if av > self.W2 - 0.07:
@@ -950,7 +950,8 @@ class IrisbusFace:
         if k >= top:
             return Sh(self.lv.roof)
         if k == top - 1:
-            return Sh(self.lv.body) if av > self.W2 - 0.25 else (LED if av < 0.9 else BLACK)
+            return Sh(self.lv.body) if av > self.W2 - 0.25 else (
+                getattr(self.lv, "disp", LED) if av < 0.9 else BLACK)
         if k >= 5:
             if av > self.W2 - 0.07:
                 return BLACK
@@ -1076,7 +1077,7 @@ class SorFace:
             return Sh(self.lv.roof)
         if k == top - 1:
             if av < self.W2 - 0.30:
-                return LED if av < 0.9 else BLACK
+                return getattr(self.lv, "disp", LED) if av < 0.9 else BLACK
             return BLACK
         if k >= 4:
             if av > self.W2 - 0.08:

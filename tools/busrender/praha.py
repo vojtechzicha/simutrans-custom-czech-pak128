@@ -72,12 +72,12 @@ DNS18 = mk(NS18, pods=[(1.80, 3.60, 0.22, 0.80, "ac"), (5.20, 7.20, 0.14, 0.70, 
 # (2024 face; 5 of the 8 grey-red cars): red columns from photos of 8136 / 8139
 PUW12B = mk(UW12, pods=[(2.20, 4.60, 0.24, 0.85, "ac")])
 PUW12A = mk(UW12, face="uw2", pods=[(2.20, 4.60, 0.24, 0.85, "ac")],
-            reds=[(1.85, 4.10), (7.40, 9.55)])
+            reds=[(1.85, 4.10), (7.75, 9.60)])
 # BDS-BUS 6J2 3507 (Brno lines 48 / 74; 2019, ex MHD Moravsky Krumlov): plain
 # white, 2013 face, 2-2-2 doors, green LED displays (as the DPMB families), the
 # engine-bay grille low in the left rear corner
 PUW12W = mk(UW12, pods=[(1.40, 4.60, 0.24, 0.85, "ac")], led=(0x62, 0xD6, 0x4A),
-            vent=(10.85, 11.55, "l"))
+            vent=(11.15, 11.85, "l"))
 
 # SOR NC 18 (NEW body): 18.75 x 2.55 x 2.90 m, wheelbase 6.18 + 6.57 m, overhangs
 # 2.47 / 3.53 m (SOR data via cs.wikipedia), 3 double doors (2 in the front
@@ -267,6 +267,8 @@ class PVeh(Veh):
     def tex_front(self, p):
         if self.face == "sw":
             return self.sw_front(p)
+        if self.face == "cit":
+            return self.cit_front(p)
         t, z = p.t, p.z
         f = "front"
         a = abs(t)
@@ -405,6 +407,8 @@ class PVeh(Veh):
     def tex_rear(self, p):
         if self.rearstyle == "sw":
             return self.sw_rear(p)
+        if self.rearstyle == "cit":
+            return self.cit_rear(p)
         t, z = p.t, p.z
         f = "rear"
         a = abs(t)
@@ -578,7 +582,11 @@ DTNS18 = mk(NS18, cap=1.20, pods=[(1.80, 10.30, 0.26, 1.00, "fair")],
 # ends (photos of 4161, 4179, 5123)
 DSW12 = mk(H.SW12, pods=H.SW12_DIESEL, reds=[(1.80, 3.80), (7.70, 9.50)])
 DSW18 = mk(H.SW18, pods=H.SW18_DIESEL, reds=[(1.80, 3.90), (7.80, 9.70), (14.40, 16.40)])
-DUW18H = mk(H.MODELS["uw18h"], reds=[(1.55, 3.70), (6.00, 10.40), (13.90, 15.55)])
+# the DPP Urbanway 18M Hybrid: the battery / A/C pod on the front section, a low
+# box and the tall A/C unit at the rear end on the rear section (Commons, 5518)
+DUW18H = mk(H.MODELS["uw18h"], reds=[(1.85, 3.70), (6.00, 9.90), (13.90, 15.55)],
+            pods=[(1.40, 3.80, 0.30, 0.95, "fair"), (6.40, 8.20, 0.26, 0.85, "ac"),
+                  (12.00, 13.60, 0.16, 0.85, "fair"), (16.10, 17.70, 0.32, 0.90, "ac")])
 
 # family dir -> {livery colour: [model spec, ...] in sprite-row order}
 FAMILIES = {

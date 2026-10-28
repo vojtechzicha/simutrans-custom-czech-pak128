@@ -13,15 +13,13 @@ display:
   family_en: "Irisbus Citelis 12M"
   family_cs: "Irisbus Citelis 12M"
 
-# Irisbus Citelis 12M. DPMP runs 3 diesel cars (183, 186, 194) and 16 CNG
-# cars (207–229) as of 2026 (dpmp.cz / trolejbus.cz). The CNG version is
-# visually distinct by its roof tank fairing, so it is its own vehicle and
-# sprite row. Capacity 28–32 seated / 65 standing; diesel Iveco Cursor 8
-# 180 kW, CNG Cursor 8 CNG 200 kW. Sprite: original box-model render
-# (vojtechzicha): the dpmhk.py Urbanway 12M body with the Citelis face (diesel
-# and CNG) in the dpmp_uw palette painted by tools/busrender/sor_town.py
-# (until 2026-10-28 the hand-drawn upstream sheet). Regenerate with
-# tools/busrender/sor_town.py.
+# Irisbus Citelis 12M. DPMP runs 3 diesel cars (183, 186, 194) and 16 CNG cars
+# (207–229) as of 2026 (dpmp.cz / trolejbus.cz). The CNG version is visually
+# distinct by its roof tank fairing, so it is its own vehicle and sprite row.
+# Capacity 28–32 seated / 65 standing; diesel Iveco Cursor 8 180 kW, CNG
+# Cursor 8 CNG 200 kW. Sprite: original box-model render (vojtechzicha): the
+# dpmhk.py Irisbus Citelis 12M body (diesel, and CNG with the long fairing) in
+# the dpmp_uw palette. Regenerate with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "Citelis_12M"

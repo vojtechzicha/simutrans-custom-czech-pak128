@@ -1205,14 +1205,14 @@ FAMILIES = {
         copyright="vojtechzicha",
         vehicles=one("Urbanway_12M_CNG", "Urbanway 12M CNG", BUS,
                      f_(800000, 95, 80, 12, 24, 135, 2015, 8, "diesel", 213, 56, retire=2050)),
-        liveries=[("havirovmodra", *HAV_NAME, hav_rows(UW_SRC, z_white_green, [L12]))],
+        liveries=[("havirovmodra", *HAV_NAME, town_rows("UW12_CNG", "havirov"))],
         note="Iveco Urbanway 12M CNG, doors 2-2-2. Havířov MHD: 18 cars, 40-1001 (2015, ex\n"
              "Iveco demonstrator) to 40-1019 (2021), incl. four ex Karviná (40-1004 - 1007,\n"
              "since 11/2023); repainted from 3ČSAD white-green into the blue city scheme\n"
              "12/2023 - 12/2025. " + HAV_DECALS[0].upper() + HAV_DECALS[1:] + ".",
-        sprite="the Frýdek-Místek Urbanway 12M CNG sheet (the dpmhk.py Urbanway body\n"
-               "rendered by sor_town.py, with the CNG fairing), repainted blue by\n"
-               "odis_town.repaint."),
+        sprite="original box-model render (vojtechzicha): the dpmhk.py Urbanway body in\n"
+               "sor_town.py's havirov palette, with the CNG fairing (until 2026-10-28 the\n"
+               "Frýdek-Místek sheet repainted blue)."),
     "mhd-havirov/sor_nsg_12": dict(
         agency=HAVIROV, type="SOR_NSG_12", name=("SOR NSG 12", "SOR NSG 12"), copyright="vojtechzicha",
         vehicles=one("SOR_NSG_12", "NSG 12", BUS,
@@ -1276,11 +1276,11 @@ FAMILIES = {
         copyright="vojtechzicha",
         vehicles=one("Citelis_12M_CNG", "Citelis 12M CNG", BUS,
                      f_(650000, 100, 80, 11, 24, 123, 2014, 8, "diesel", 213, 55, retire=2050)),
-        liveries=[("havirovmodra", *HAV_NAME, town_rows("CIT12_CNG", "havirov"))],
+        liveries=[("havirovmodra", *HAV_NAME, town_rows("CIT12_CNG", "havirov_cit"))],
         note="Irisbus Citelis 12M CNG. Havířov MHD: 40-1486 (2014), the last Citelis,\n"
              "blue since 12/2025, green LED displays.",
-        sprite="original box-model render (vojtechzicha): the dpmhk.py Urbanway body with\n"
-               "the Citelis face in sor_town.py's havirov palette, with the CNG fairing\n"
+        sprite="original box-model render (vojtechzicha): the dpmhk.py Irisbus Citelis\n"
+               "12M body in sor_town.py's havirov palette, with the CNG fairing\n"
                "(VTPsim's ODIS Citelis until 2026-10-28)."),
     "mhd-havirov/sor_bng_10_5": dict(
         agency=HAVIROV, type="SOR_BNG_10_5", name=("SOR BNG 10,5", "SOR BNG 10,5"), copyright="vojtechzicha",

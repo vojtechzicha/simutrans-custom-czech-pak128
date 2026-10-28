@@ -15,13 +15,12 @@ display:
   family_cs: "Irisbus Citelis 18M"
 
 # Irisbus Citelis 18M, 1 unit (#98, 6U1 7219; built 2010, ex-DP Chomutov–
-# Jirkov, in Most since 8/2022). Cursor 8 213 kW in the rear (pusher)
-# section, ~150 passengers, 17.3 t, 4 doors. Two-section fixed consist:
-# front section A + powered rear section B, both required. Sprite: original
-# box-model render (vojtechzicha): the dpmhk.py Urbanway 18M body with the
-# Citelis face (sections 8 + 6) in the town palette most_uw painted by
-# tools/busrender/sor_town.py (until 2026-10-28 the hand-drawn upstream
-# sheet). Regenerate with tools/busrender/sor_town.py.
+# Jirkov, in Most since 8/2022). Cursor 8 213 kW in the rear (pusher) section,
+# ~150 passengers, 17.3 t, 4 doors. Two-section fixed consist: front section A
+# + powered rear section B, both required. Sprite: original box-model render
+# (vojtechzicha): the dpmhk.py Irisbus Citelis 18M body (its own since
+# 2026-10-28, sections 8 + 6) in the most_cit palette. Regenerate with
+# tools/busrender/sor_town.py.
 
 vehicles:
   - id: "Citelis_18M-A"

@@ -17,12 +17,13 @@ display:
 # cars, 232 and 234-236, still on the books in Sep 2026 while the Urbanway 18M
 # Hybrids 253-256 replace them (220-231 and 273-275 left 2023-8/2026), so the
 # type retires in 2027. Iveco Cursor 8 213 kW Euro 5 EEV driving the rear axle
-# (pusher), Voith D854.5, 4 double doors, ~150 passengers.
-# Livery: DPMHK classic red-yellow-white: white front with a red bumper, black
-# window band, broad yellow band over red, white panel and yellow/red
-# diagonals on the left front corner; rear white/yellow/red.
-# Sprite: new 8-direction box render (the Urbanway 18M body with the
-# first-generation Citelis/Urbanway face; 8 + 6 carunit sections).
+# (pusher), Voith D854.5, 4 double doors, ~150 passengers. Livery: DPMHK
+# classic red-yellow-white: white front with a red bumper, black window band,
+# broad yellow band over red, white panel and yellow/red diagonals on the left
+# front corner; rear white/yellow/red. Sprite: original box-model render
+# (vojtechzicha): the dpmhk.py Irisbus Citelis 18M body (its own since
+# 2026-10-28, sections 8 + 6) in the DPMHK livery. Regenerate with
+# tools/busrender/dpmhk.py.
 
 vehicles:
   - id: "Citelis_18M-A"

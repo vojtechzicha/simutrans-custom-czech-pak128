@@ -16,7 +16,7 @@ display:
 
 # Iveco Urbanway 12M CNG, 12 units on Tábor MHD (COMETT PLUS).
 # Sprite: original box-model render (vojtechzicha): the dpmhk.py Iveco
-# Urbanway 12M body in the town palette tabor_uw of
+# Urbanway 12M body in the town palette tabor_uwc of
 # tools/busrender/sor_town.py (until 2026-10-28 Lubak91's sheet). Regenerate
 # with tools/busrender/sor_town.py.
 
