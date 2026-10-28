@@ -160,6 +160,7 @@ PCrosswayLECity12 = body("PCrosswayLECity12", M.CrosswayLECity12)
 PIrisbusCrosswayLE = body("PIrisbusCrosswayLE", M.IrisbusCrosswayLE)
 PIrisbusCrosswayLE108 = body("PIrisbusCrosswayLE108", M.IrisbusCrosswayLE108)
 PIrisbusCrossway = body("PIrisbusCrossway", M.IrisbusCrossway)
+PIrisbusCrosswayLE128 = body("PIrisbusCrosswayLE128", M.IrisbusCrosswayLE128)
 PSetra415 = body("PSetra415", CM.SetraS415LE)
 PSetra418 = body("PSetra418", CM.SetraS418LE)
 PSorCN12 = body("PSorCN12", O.OSorCN12)
@@ -922,14 +923,11 @@ FAMILIES = dict([
           " ones are the VZ-Praha object.",
           "VTPsim's Stratos LE 37 (the Prague sheet, vehicle-bus/praha/stratos_le_37)"
           " repainted by odis_town.repaint, the PID columns by pid.pid_decal.", "VTPsim"),
-    sheet("irisbus_crossway_le_12_8m", "Irisbus_Crossway_LE_12_8M", "Irisbus Crossway LE 12,8M", BUS,
-          f_(610000, 98, 100, 12, 25, 125, 2013, 9, "diesel", 243, 54, smoke=SMOKE),
-          [(A("Arriva Střední Čechy"),
-            pid_repaint("vehicle-bus/praha/crossway_le_12_8m/sprites/bila.png", [[12.0, 12.8, 13.5]],
-                        [(0.20, 0.33), (0.66, 0.80)], (1.15, 2.50)))],
-          "Irisbus Crossway LE 12,8M: 1 bus (Arriva Střední Čechy, 2013) in " + GR,
-          "the white Prague Crossway LE 12,8M sheet (vehicle-bus/praha/crossway_le_12_8m)"
-          " repainted by odis_town.repaint, the PID columns by pid.pid_decal.", "vojtechzicha"),
+    fam("irisbus_crossway_le_12_8m", "Irisbus_Crossway_LE_12_8M", "Irisbus Crossway LE 12,8M", BUS,
+        f_(610000, 98, 100, 12, 25, 125, 2013, 9, "diesel", 243, 54, smoke=SMOKE),
+        [(A("Arriva Střední Čechy"), "pid-a")],
+        PIrisbusCrosswayLE128,
+        "Irisbus Crossway LE 12,8M: 1 bus (Arriva Střední Čechy, 2013) in " + GR),
     sheet("dekstra_le_37", "Dekstra_LE_37", "Dekstra LE 37", MIDI,
           f_(300000, 37, 90, 5, 15, 80, 2019, 5, "diesel", 132, 54, smoke=SMOKE),
           [(A("Lamer, Lutan"),

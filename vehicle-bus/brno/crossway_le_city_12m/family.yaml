@@ -3,7 +3,7 @@ type: "Crossway_LE_City_12M"
 image_offset: [0, 0]         # buses: sprites carry their own lane placement
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 display:
   agency_en: "Brno"
   agency_cs: "Brno"
@@ -20,10 +20,10 @@ display:
 # silver-grey lower body; white front panel under the windscreen with a grey
 # lower front from the headlamps down; white rear with a grey bumper; white
 # A/C unit on the front half of the roof; green LED displays.
-# Sprite: the DPMP Crossway LE City 12M diesel sheet (Lubak91 body, lane
-# placement already normalised), repainted by zone on a box model of the body,
-# the single rear door widened to a double one, displays green
-# (agents/misc/p_clc.py in the session scratchpad).
+# Sprite: original box-model render (vojtechzicha): the iredo_models.py
+# Crossway LE CITY 12M body painted by tools/busrender/crossway_town.py (until
+# 2026-10-28 the hand-drawn upstream sheet). Regenerate with
+# tools/busrender/crossway_town.py.
 
 vehicles:
   - id: "Crossway_LE_City_12M"

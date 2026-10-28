@@ -3,7 +3,7 @@ type: "Crossway_LE_12M"
 image_offset: [0, 0]         # buses: sprites carry their own lane placement
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 display:
   agency_en: "Praha"
   agency_cs: "Praha"
@@ -18,11 +18,10 @@ display:
 # under the windows down to the wheel-arch tops, red lower body; white front
 # panel under the windscreen, red lower front and bumper. Unlike the DPP
 # Crossways, 1748 has no red sill stripe under the windows / windscreen.
-# Sprite: Lubak91's upstream Crossway LE 12M and LE 12.8M are the same drawing
-# (identical silhouettes, same doors), so this is the DPP Crossway LE 12,8M
-# sheet (already repainted and lane-normalised) with the sill stripe returned
-# to the upstream window-band pixels (agents/misc/cw12.py in the session
-# scratchpad).
+# Sprite: original box-model render (vojtechzicha): the iredo_models.py
+# Irisbus Crossway LE 12M body painted by tools/busrender/crossway_town.py
+# (until 2026-10-28 the hand-drawn upstream sheet). Regenerate with
+# tools/busrender/crossway_town.py.
 
 vehicles:
   - id: "Crossway_LE_12M"

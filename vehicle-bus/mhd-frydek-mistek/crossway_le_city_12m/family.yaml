@@ -1,9 +1,9 @@
 agency: MHDFrydekMistek
 type: "Crossway_LE_City_12M"
-copyright: Lubak91
+copyright: vojtechzicha
 
-# Sprites are placed in the tile to the native pak128.cs lane position (body
-# footprint matched to the median of native 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -16,10 +16,10 @@ display:
 
 # Iveco Crossway LE City 12M (doors 2-2-1), 3 units on MHD F-M: 594 (2013)
 # and 597, 598 (2014). Cursor 8 243 kW (2013/EEV rating, not confirmed for
-# these cars), ~100 passengers. Sprite: Lubak91's Brno Crossway LE City 12M,
-# repainted to the 3ČSAD white-green scheme (white belt, deep green skirt
-# rising ahead of the front wheel and at the rear corner, white front panel,
-# green bumpers).
+# these cars), ~100 passengers. Sprite: original box-model render
+# (vojtechzicha): the iredo_models.py Crossway LE CITY 12M body painted by
+# tools/busrender/crossway_town.py (until 2026-10-28 the hand-drawn upstream
+# sheet). Regenerate with tools/busrender/crossway_town.py.
 
 vehicles:
   - id: "Crossway_LE_City_12M"

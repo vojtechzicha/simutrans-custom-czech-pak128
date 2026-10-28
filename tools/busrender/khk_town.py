@@ -653,39 +653,6 @@ class TrutBN85(M.SorBN85):
     KHK_STICKER = False
 
 
-# Iveco Crossway LE CITY 12M 1TI 2918: ex-Přerov, still in the plain Arriva
-# blue (photo 449877): the Přerov sheet (Lubak91) with the white swoosh cut
-# down to the short white Arriva wordmark and the green Přerov displays amber
-LECITY_SRC = "vehicle-bus/mhd-prerov/crossway_le_city_12m/sprites/arrivamodra.png"
-
-
-def rows_lecity():
-    out = []
-    for tiles in sheet_rows(load_sheet(LECITY_SRC))[:1]:
-        row = []
-        for t in tiles:
-            t = t.copy()
-            sw = np.all(t == (0xF6, 0xF6, 0xF6), axis=2)
-            ys, xs = np.where(sw)
-            if len(ys):
-                order = np.argsort(ys)
-                keep = set(order[len(order) // 2 - 1: len(order) // 2 + 1].tolist()) if len(order) > 2 else set()
-                for i in range(len(ys)):
-                    if i in keep:
-                        continue
-                    y, x = ys[i], xs[i]
-                    for dx in (-1, 1, -2, 2):
-                        if 0 <= x + dx < 128:
-                            n = tuple(int(v) for v in t[y, x + dx])
-                            if n != T and n[2] > n[0] + 0x40 and not sw[y, x + dx]:
-                                t[y, x] = n
-                                break
-            t[np.all(t == (0x01, 0xDD, 0x01), axis=2)] = H.AMBER
-            row.append(t)
-        out.append(row)
-    return out
-
-
 # Scania Citywide LF 12M BEV (KAD EL3 84BE, Vrchlabí): black from the roof
 # edge down to the wheel-arch tops, white skirt band, white roof and roof
 # equipment; black front down to the headlamps over a white bumper (photos
@@ -819,6 +786,13 @@ RENDER_CW = ("original box-model render (vojtechzicha): {cls} of\n"
 TU_NAME = ("MHD Trutnov light blue", "MHD Trutnov světle modrá")
 TD_NAME = ("white-black with the red figure · Transdev Čechy", "bílo-černá s červenou postavou · Transdev Čechy")
 
+
+def arriva_blue():
+    """crossway_town.py's Arriva blue, registered on use (importing it at the top
+    would close the odis_town -> khk_town -> crossway_town -> odis import loop)"""
+    import crossway_town                                     # noqa: F401
+    return "t-arriva"
+
 FAMILIES = {
     # ------------------------------------------------------------ IREDO
     "iredo/sor_ebn_9_5": dict(
@@ -878,16 +852,18 @@ FAMILIES = {
                "TRUTNOV MHD logo (photos 232403, 414852)."),
     "mhd-trutnov/crossway_le_city_12m": dict(
         agency=TRUTNOV, type="Crossway_LE_City_12M",
-        name=("Iveco Crossway LE City 12M", "Iveco Crossway LE City 12M"), copyright="Lubak91",
+        name=("Iveco Crossway LE City 12M", "Iveco Crossway LE City 12M"), copyright="vojtechzicha",
         vehicles=[dict(id="Crossway_LE_City_12M", display="Crossway LE City 12M", role=BUS,
                        fields=f_(800000, 95, 80, 12, 26, 135, 2017, 8, "diesel", 243, 56, retire=2050,
                                  smoke="Diesel_small"))],
-        liveries=[("arrivamodra", "Arriva light blue", "Arriva světle modrá", rows_lecity)],
+        liveries=[("arrivamodra", "Arriva light blue", "Arriva světle modrá",
+                   lambda: [row_for(M.CrosswayLECity12, arriva_blue())])],
         note="Iveco Crossway LE City 12M, 3 doors. Trutnov MHD reserve: 1TI 2918 (2017, ex\n"
              "MHD Přerov, in Trutnov since 3/2025), plain Arriva light blue without the\n"
              "Trutnov graphics (photo 449877).",
-        sprite="the Přerov sheet (Lubak91's art), the white swoosh cut down to the short\n"
-               "Arriva wordmark and the displays amber (khk_town.rows_lecity)."),
+        sprite="original box-model render (vojtechzicha): CrosswayLECity12 of\n"
+               "tools/busrender/iredo_models.py in crossway_town.py's Arriva blue (Lubak91's\n"
+               "Přerov sheet until 2026-10-28)."),
     "mhd-trutnov/sor_bn_8_5": dict(
         agency=TRUTNOV, type="SOR_BN_8_5", name=("SOR BN 8.5", "SOR BN 8,5"), copyright="vojtechzicha",
         vehicles=[dict(id="SOR_BN_8_5", display="BN 8,5", role=MIDI,

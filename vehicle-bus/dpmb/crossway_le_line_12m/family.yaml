@@ -1,11 +1,11 @@
 agency: DPBrno
 type: "Crossway_LE_Line_12M"
-# Sprites are placed in the tile to the native pak128.cs lane position (body
-# footprint matched to the median of native 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 
 display:
   agency_en: "DPMB"
@@ -22,12 +22,10 @@ display:
 # whole side, white belt, red skirt; black windscreen above a red band, white
 # front panel, red bumper; a low A/C unit over the front-middle roof; green
 # LED displays.
-# Sprite: Lubak91's CZR-Brno-IVECO_Crossway_LE_LINE_12M (upstream cols 1-8),
-# lane placement normalised (it sat 3-12 px off the native lane), the red
-# line under the windows and the red band under the windscreen taken over
-# from the pixel-identical Crossway LE City drawing (the upstream LINE had
-# neither), roof A/C drawn on, glass moved to the lit-window specials, green
-# displays.
+# Sprite: original box-model render (vojtechzicha): the iredo_models.py
+# Crossway LE LINE 12M body painted by tools/busrender/crossway_town.py (until
+# 2026-10-28 the hand-drawn upstream sheet). Regenerate with
+# tools/busrender/crossway_town.py.
 
 vehicles:
   - id: "Crossway_LE_Line_12M"

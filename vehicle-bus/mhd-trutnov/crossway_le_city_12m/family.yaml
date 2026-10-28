@@ -5,7 +5,7 @@ type: "Crossway_LE_City_12M"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 
 display:
   agency_en: "MHD Trutnov"
@@ -16,8 +16,9 @@ display:
 # Iveco Crossway LE City 12M, 3 doors. Trutnov MHD reserve: 1TI 2918 (2017, ex
 # MHD Přerov, in Trutnov since 3/2025), plain Arriva light blue without the
 # Trutnov graphics (photo 449877).
-# Sprite: the Přerov sheet (Lubak91's art), the white swoosh cut down to the short
-# Arriva wordmark and the displays amber (khk_town.rows_lecity).
+# Sprite: original box-model render (vojtechzicha): CrosswayLECity12 of
+# tools/busrender/iredo_models.py in crossway_town.py's Arriva blue (Lubak91's
+# Přerov sheet until 2026-10-28).
 # Regenerate with tools/busrender/khk_town.py (family.yaml: --yaml).
 
 vehicles:

@@ -1,9 +1,9 @@
 agency: MHDTabor
 type: "Crossway_LE_City_12M_CNG"
-copyright: Lubak91
+copyright: vojtechzicha
 
-# The source sprites carry the upstream lane placement (their dats use no
-# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -15,6 +15,10 @@ display:
   family_cs: "Iveco Crossway LE City 12M CNG"
 
 # Iveco Crossway LE City 12M CNG, 1 unit on Tábor MHD.
+# Sprite: original box-model render (vojtechzicha): the odis.py Crossway LE
+# CITY CNG body painted by tools/busrender/crossway_town.py (until 2026-10-28
+# the hand-drawn upstream sheet). Regenerate with
+# tools/busrender/crossway_town.py.
 
 vehicles:
   - id: "Crossway_LE_City_12M_CNG"

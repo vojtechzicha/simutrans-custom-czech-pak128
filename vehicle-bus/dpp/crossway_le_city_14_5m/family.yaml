@@ -5,7 +5,7 @@ type: "Crossway_LE_City_14_5M"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 
 display:
   agency_en: "DPP"
@@ -26,10 +26,10 @@ display:
 # over the front axle and behind door 2 over the tandem (skirt to window line,
 # resuming above the windows and crossing the roof), red block on the
 # vehicle's left of the lower front and lower rear.
-# Sprite: replaces the upstream CZR-Praha-IVECO_Crossway_LE_City_14M (Lubak91;
-# a 2-axle copy of the Brno object). Box-model render with the geometry of
-# the DPMB Crossway LE 14,5M side drawing (axles 2.64/9.52/11.05 m from the
-# front), same projection and PID palette as the DPP Streetway set.
+# Sprite: original box-model render (vojtechzicha): the iredo_models.py
+# Crossway LE CITY 14,5M body (doors 2-2-1) painted by
+# tools/busrender/crossway_town.py (until 2026-10-28 the hand-drawn upstream
+# sheet). Regenerate with tools/busrender/crossway_town.py.
 
 vehicles:
   - id: "Crossway_LE_City_14_5M"

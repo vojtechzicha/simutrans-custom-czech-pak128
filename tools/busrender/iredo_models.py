@@ -1026,6 +1026,39 @@ class CrosswayLECity108(CrosswayLELine108):
     """Iveco Crossway LE CITY 10,8M: two double doors (2-2-0)."""
 
 
+# Crossway variants of the town fleets (crossway_town.py) and the PID 12,8M
+class CrosswayLECity145(CrosswayLELine145):
+    """Crossway LE CITY 14,5M: doors 2-2-1, the single rear door behind the
+    tag axle (DPMB, DPP)."""
+    DOORS = ((0.32, 1.32, "le"), (6.40, 7.60, "le"), (12.70, 13.45, "le"))
+
+
+class CrosswayLECity108x3(CrosswayLECity108):
+    """the Český Těšín LE CITY 10,8M demonstrator: three double doors, the
+    rear one behind the rear axle"""
+    DOORS = ((0.32, 1.32, "le"), (4.40, 5.60, "le"), (8.65, 9.85, "le"))
+
+
+class CrosswayLECity12Hybrid(CrosswayLECity12):
+    """the DPMP LE CITY 12M hybrid (69): the battery box over the middle roof"""
+    AC = (2.5, 8.6)
+
+
+class IrisbusCrosswayLE128(IrisbusFace, CrosswayLELine):
+    """Irisbus Crossway LE 12,8M (DPP, Praha): the LE body one bay longer,
+    three double doors with the rear one behind the rear axle"""
+    real_len = 12.8
+    axles = (2.65, 9.10)
+    DOORS = ((0.32, 1.32, "le"), (5.10, 6.30, "le"), (10.50, 11.70, "le"))
+    BAND = ((0.0, 12.8, 6, 11),)
+    AC = (2.5, 6.0)
+
+    def pillars(self, right):
+        if right:
+            return (2.62, 4.10, 6.85, 8.35, 9.85)
+        return (2.62, 4.10, 5.60, 7.10, 8.60, 10.10, 11.55)
+
+
 class CrosswayPro13(CrosswayLine13):
     """Iveco Crossway PRO 13M: the LINE 13M body (tag axle) with the PRO's
     high window line; drawn as the LINE 13M with fixed windows."""

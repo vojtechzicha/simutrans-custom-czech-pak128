@@ -960,7 +960,7 @@ FM = "vehicle-bus/mhd-frydek-mistek/"
 # src/odis/ as FM-<family>-3csadbilozelena.png: the Havířov, Karviná and
 # Orlová sheets read them, and --csad-static writes the F-M sheets from them
 # in CSAD["green"]
-FM_CSAD = ("crossway_le_city_12m", "scania_citywide_lf_12m_cng")
+FM_CSAD = ("scania_citywide_lf_12m_cng",)       # the Crossway and Urbanway are renders now
 
 
 def fm_src(fam):

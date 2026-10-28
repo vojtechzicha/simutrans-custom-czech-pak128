@@ -3,7 +3,7 @@ type: "Crossway_LE_12_8M"
 image_offset: [0, 0]         # buses: sprites carry their own lane placement
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 display:
   agency_en: "Praha"
   agency_cs: "Praha"
@@ -20,10 +20,10 @@ display:
 # windscreen, white middle, red lower front wrapping round the corners; rear:
 # blue above the rear window, white, red lower third (photos of 1477 and 1488,
 # 2020-2026). White: plain white, black glazing (photo of 9411).
-# Sprite: the DPP Crossway LE 12,8M sheet (Lubak91's CZR-Praha art, lane
-# normalised), repainted: roof and rear cap PID ultramarine, the DPP red sill
-# stripe under the windows white; for the white car all red turned into the
-# white of the same face.
+# Sprite: original box-model render (vojtechzicha): the iredo_models.py
+# Irisbus Crossway LE 12,8M body painted by tools/busrender/crossway_town.py
+# (until 2026-10-28 the hand-drawn upstream sheet). Regenerate with
+# tools/busrender/crossway_town.py.
 
 vehicles:
   - id: "Crossway_LE_12_8M"

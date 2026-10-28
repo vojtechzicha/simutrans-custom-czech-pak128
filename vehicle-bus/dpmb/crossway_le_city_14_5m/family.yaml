@@ -5,7 +5,7 @@ type: "Crossway_LE_City_14_5M"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 
 display:
   agency_en: "DPMB"
@@ -24,10 +24,10 @@ display:
 # (1.18 m in the low-entry front, 1.48 m over the raised rear), a red stripe
 # filling that step behind door 2 (curving down to nothing at door 2), white
 # belt, red skirt up to 0.65 m; white front and rear with a red bumper.
-# Sprite: replaces the upstream CZR-Brno-IVECO_Crossway_LE_City_14M
-# (Lubak91; a 2-axle body with non-darkening glass). Same box-model render as
-# the DPP Crossway LE City 14,5M family (axles 2.64/9.52/11.05 m from the
-# front), repainted to the DPMB drawing.
+# Sprite: original box-model render (vojtechzicha): the iredo_models.py
+# Crossway LE CITY 14,5M body (doors 2-2-1) painted by
+# tools/busrender/crossway_town.py (until 2026-10-28 the hand-drawn upstream
+# sheet). Regenerate with tools/busrender/crossway_town.py.
 
 vehicles:
   - id: "Crossway_LE_City_14_5M"

@@ -1,9 +1,9 @@
 agency: MHDCeskyTesin
 type: "Crossway_LE_City_10_8M"
-copyright: Lubak91
+copyright: vojtechzicha
 
-# Sprites are placed in the tile to the native pak128.cs lane position (body
-# footprint matched to the median of native 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -16,11 +16,11 @@ display:
 
 # Iveco Crossway LE City 10,8M, 1 unit on MHD Český Těšín (1TC 7145,
 # ex-demonstrator built 2015, in Český Těšín since 12/2016). Tector 7 Euro 6
-# 210 kW, 3 doors, ~80 passengers (estimate), ~10 t. Sprite: Lubak91's Brno
-# Crossway LE City 12M shortened by one window bay between the axles in all
-# 8 directions. Paint follows the 2024 photos of this bus: white roof, black
-# window band, thin yellow/grey dash strip under the windows, white lower body
-# (the yellow roof + dashed skirt of the town scheme is on the Scanias only).
+# 210 kW, 3 doors, ~80 passengers (estimate), ~10 t. Sprite: original box-
+# model render (vojtechzicha): the iredo_models.py Crossway LE CITY 10,8M body
+# with three doors painted by tools/busrender/crossway_town.py (until
+# 2026-10-28 the hand-drawn upstream sheet). Regenerate with
+# tools/busrender/crossway_town.py.
 
 vehicles:
   - id: "Crossway_LE_City_10_8M"

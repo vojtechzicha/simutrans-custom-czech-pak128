@@ -1,9 +1,9 @@
 agency: MHDPrerov
 type: "Crossway_LE_City_12M"
-copyright: Lubak91
+copyright: vojtechzicha
 
-# Sprites are placed in the tile to the native pak128.cs lane position (body
-# footprint matched to the median of native 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -15,10 +15,10 @@ display:
   family_cs: "Iveco Crossway LE City 12M"
 
 # Iveco Crossway LE City 12M, 20 units (2017, 2022, 2023) on Přerov MHD.
-# Sprite: Lubak91's Crossway LE City 12M (the body of the upstream CZR-Prerov
-# object, taken from the shaded Brno original), repainted in uniform Arriva
-# blue from roof to sill with 2-3 tones, black window band, a thin white
-# swoosh rising from the sill behind the front wheel arch; displays amber.
+# Sprite: original box-model render (vojtechzicha): the iredo_models.py
+# Crossway LE CITY 12M body painted by tools/busrender/crossway_town.py (until
+# 2026-10-28 the hand-drawn upstream sheet). Regenerate with
+# tools/busrender/crossway_town.py.
 
 vehicles:
   - id: "Crossway_LE_City_12M"

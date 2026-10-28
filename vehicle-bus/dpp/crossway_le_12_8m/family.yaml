@@ -5,7 +5,7 @@ type: "Crossway_LE_12_8M"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 
 display:
   agency_en: "DPP"
@@ -21,11 +21,10 @@ display:
 # Livery: DPP classic city scheme as painted on the Crossways: white body and
 # roof, black window band, a red stripe directly under the windows and the
 # windscreen, white band, red lower body from the wheel-arch tops, red bumper.
-# Sprite: Lubak91's CZR-Praha-IVECO_Crossway_LE_12.8M; its blue roof (not on
-# the DPP cars) repainted white, the red sill stripe added, glass converted to
-# the lit-window specials, displays amber, lane placement normalised. Upstream
-# weight (18 t) and price (almost three NB 12) were wrong; now scaled from the
-# NB 12. Length 8: the body is drawn as long as the 12 m NB 12.
+# Sprite: original box-model render (vojtechzicha): the iredo_models.py
+# Irisbus Crossway LE 12,8M body painted by tools/busrender/crossway_town.py
+# (until 2026-10-28 the hand-drawn upstream sheet). Regenerate with
+# tools/busrender/crossway_town.py.
 
 vehicles:
   - id: "Crossway_LE_12_8M"

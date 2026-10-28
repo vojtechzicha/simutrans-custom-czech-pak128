@@ -15,9 +15,8 @@ display:
 
 # Irisbus Crossway LE 12,8M: 1 bus (Arriva Střední Čechy, 2013) in PID 2021
 # grey-red (pidsedocervena).
-# Sprite: the white Prague Crossway LE 12,8M sheet (vehicle-
-# bus/praha/crossway_le_12_8m) repainted by odis_town.repaint, the PID
-# columns by pid.pid_decal.
+# Sprite: original box-model render (vojtechzicha): IrisbusCrosswayLE128 of
+# iredo_models.py painted in the PID liveries of tools/busrender/pid.py.
 # Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
 
 vehicles:
