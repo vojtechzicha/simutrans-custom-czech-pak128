@@ -3,7 +3,7 @@ type: "Streetway_12M"
 image_offset: [0, 0]         # buses: sprites carry their own lane placement
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 display:
   agency_en: "Praha"
   agency_cs: "Praha"
@@ -17,8 +17,10 @@ display:
 # the fleet.
 # Livery: PID scheme A with the original front, exactly as on DPP 4101-4183
 # (photos of 8103 and 8107).
-# Sprite: the DPP Streetway 12M sheet (box render of the Kent C body at the
-# scale and lane of the DPMP Streetway), copied 1:1.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Iveco
+# Streetway 12M body in PID šedo-červená painted by tools/busrender/praha.py
+# (until 2026-10-28 the hand-drawn upstream sheet). Regenerate with
+# tools/busrender/praha.py.
 
 vehicles:
   - id: "Streetway_12M"

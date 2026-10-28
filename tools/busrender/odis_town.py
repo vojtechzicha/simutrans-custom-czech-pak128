@@ -972,8 +972,6 @@ def fm_src(fam):
 UW_SRC = FM + "urbanway_12m_cng/sprites/3csadbilozelena.png"
 CW_SRC = fm_src("scania_citywide_lf_12m_cng")
 CW_ALLOW = (0xC1B1D1, 0xE3E3FF)    # specials the Citywide source art already uses (lamp glass)
-SW_SRC = "vehicle-bus/dpmp/streetway_12m/sprites/ivecopredvadeci.png"
-SW18_SRC = "vehicle-bus/dpp/streetway_18m/sprites/pidsedocervena.png"
 DEK_SRC = "vehicle-bus/mhd-tabor/dekstra_lf_38_cng/sprites/comettbila.png"
 ROS_SRC = "vehicle-bus/mhd-tabor/rosero_first/sprites/comettbila.png"
 NOVO_SRC = "vehicle-bus/mhd-kolin/novociti_life/sprites/bila.png"
@@ -1000,38 +998,13 @@ def z_white(c):
     return "white" if z_white_green(c) == "white" else None
 
 
-SWOOSH = {0xE86A20, 0xC81E14, 0xD50B15, 0xC00A13, 0xAC0911}
-
-
-def streetway_src():
-    """the DPMP Streetway sheet with the demonstrator's red-orange swoosh (which
-    crosses the windows) painted out; the lone orange side markers stay"""
-    def deco(t, y, x):
-        h = hexc(t[y, x])
-        if h in SWOOSH:
-            return True
-        if h == 0xFF8040:
-            n = [hexc(t[yy, xx]) for yy in range(max(0, y - 1), min(128, y + 2))
-                 for xx in range(max(0, x - 1), min(128, x + 2)) if (yy, xx) != (y, x)]
-            return any(v in SWOOSH or v == 0xFF8040 for v in n)
-        return False
-    return inpaint(load_rows(SW_SRC), deco)
-
-
-def z_streetway(c):
-    return z_white(c)
-
-
-def z_pid(c):
-    """DPP PID grey-red (Streetway 18M): the light greys and the reds are paint"""
-    if hexc(c) in H.SPECIAL:
-        return None
-    r, g, b = c
-    if neutral(c, 0xB0, tol=16):
-        return "white"
-    if r > g + 0x60 and r > b + 0x60:
-        return "red"
-    return None
+def sw_rows(spec, palette):
+    """the Iveco Streetway of dpmhk.py in a sor_town.py palette (the town
+    Streetways since 2026-10-28)"""
+    def build():
+        import sor_town as ST
+        return [[np.array(t)[:, :, :3].copy() for t in r] for r in ST.build(getattr(ST, spec), palette)]
+    return build
 
 
 def z_red_white(c):
@@ -1214,20 +1187,19 @@ FAMILIES = {
     # ------------------------------------------------------------ Havířov
     "mhd-havirov/streetway_12m_cng": dict(
         agency=HAVIROV, type="Streetway_12M_CNG", name=("Iveco Streetway 12M CNG", "Iveco Streetway 12M CNG"),
-        copyright="Lubak91",
+        copyright="vojtechzicha",
         vehicles=one("Streetway_12M_CNG", "Streetway 12M CNG", BUS,
                      f_(750000, 85, 80, 12, 24, 135, 2023, 8, "diesel", 243, 55, intro_month=6, retire=2050)),
-        liveries=[("havirovmodra", *HAV_NAME,
-                   hav_rows(streetway_src, z_streetway, [L12], [[(0.10, 0.60, 0.32, 1.05)]]))],
+        liveries=[("havirovmodra", *HAV_NAME, sw_rows("SW12_CNG", "havirov"))],
         note="Iveco Streetway 12M CNG (bioCNG, built in Turkey), doors 2-2-2. Havířov MHD\n"
              "(Transdev Slezsko): 40-1325 to 40-1341, 17 cars (6/2023 - 12/2024), bought\n"
              "for the 2024-2033 city contract. Blue city scheme from new; " + HAV_DECALS + ";\n"
              "white LED displays (photos zdopravy.cz, seznam-autobusu). The big white\n"
              "Transdev figure on the rear corners is left out (only noise at 1x). CNG:\n"
              "engine_type diesel, no smoke.",
-        sprite="Lubak91's Streetway body (the DPMP demonstrator sheet, its swoosh painted\n"
-               "out), repainted blue by odis_town.repaint with the CNG fairing added over\n"
-               "the middle of the roof."),
+        sprite="original box-model render (vojtechzicha): the Iveco Streetway body of\n"
+               "tools/busrender/dpmhk.py in a sor_town.py palette (havirov), with the CNG\n"
+               "fairing (Lubak91's Streetway sheets until 2026-10-28)."),
     "mhd-havirov/urbanway_12m_cng": dict(
         agency=HAVIROV, type="Urbanway_12M_CNG", name=("Iveco Urbanway 12M CNG", "Iveco Urbanway 12M CNG"),
         copyright="vojtechzicha",
@@ -1288,19 +1260,17 @@ FAMILIES = {
         sprite=RENDER_NS),
     "mhd-havirov/streetway_18m_cng": dict(
         agency=HAVIROV, type="Streetway_18M_CNG", name=("Iveco Streetway 18M CNG", "Iveco Streetway 18M CNG"),
-        copyright="Lubak91",
+        copyright="vojtechzicha",
         vehicles=artic("Streetway_18M_CNG", "Streetway 18M CNG",
                        f_(520000, 90, 90, 10, 25, 128, 2022, 8, "diesel", None, None, retire=2050),
                        f_(380000, 61, 90, 8, 11, 56, 2022, 6, "diesel", 265, 62, retire=2050)),
-        liveries=[("havirovmodra", *HAV_NAME,
-                   hav_rows(SW18_SRC, z_pid, [[11.0, 11.5, 12.0], [7.0, 7.5, 8.0]],
-                            [[(0.14, 0.90, 0.30, 1.05)], [(0.10, 0.45, 0.22, 0.90)]],
-                            recol=disp(LEDW, (0xF7A21B,))))],
+        liveries=[("havirovmodra", *HAV_NAME, sw_rows("SW18_CNG", "havirov"))],
         note="Iveco Streetway 18M CNG, articulated, doors 2-2-2-2. Havířov MHD: 40-0305\n"
              "(2022, ex Iveco demonstrator, since 9/2023), blue. Fixed consist: front\n"
              "section A (8) + powered rear section B (6), as the DPP Streetway 18M.",
-        sprite="Lubak91's Streetway 18M (the DPP sheet), repainted blue by\n"
-               "odis_town.repaint with the CNG fairings added."),
+        sprite="original box-model render (vojtechzicha): the Iveco Streetway body of\n"
+               "tools/busrender/dpmhk.py in a sor_town.py palette (havirov), with the CNG\n"
+               "fairings, sections 8 + 6 (Lubak91's Streetway sheets until 2026-10-28)."),
     "mhd-havirov/citelis_12m_cng": dict(
         agency=HAVIROV, type="Citelis_12M_CNG", name=("Irisbus Citelis 12M CNG", "Irisbus Citelis 12M CNG"),
         copyright="VTPsim",
@@ -1387,14 +1357,15 @@ FAMILIES = {
                "unchanged except the white LED displays, and with the green turned white for 50-1006."),
     "mhd-karvina/streetway_12m_cng": dict(
         agency=KARVINA, type="Streetway_12M_CNG", name=("Iveco Streetway 12M CNG", "Iveco Streetway 12M CNG"),
-        copyright="Lubak91",
+        copyright="vojtechzicha",
         vehicles=one("Streetway_12M_CNG", "Streetway 12M CNG", BUS,
                      f_(750000, 85, 80, 12, 24, 135, 2023, 8, "diesel", 243, 55, intro_month=10, retire=2050)),
-        liveries=[("bila", *W_NAME, white_rows(streetway_src, z_streetway, [L12], [[(0.10, 0.60, 0.32, 1.05)]]))],
+        liveries=[("bila", *W_NAME, sw_rows("SW12_CNG", "karvina_sw"))],
         note="Iveco Streetway 12M CNG (bioCNG). Karviná MHD: 50-1307 (10/2023), plain white\n"
              "with the factory black glazing, Transdev and \"karviná\" logos.",
-        sprite="Lubak91's Streetway body (the DPMP sheet), its swoosh painted out and\n"
-               "the CNG fairing added by odis_town.repaint."),
+        sprite="original box-model render (vojtechzicha): the Iveco Streetway body of\n"
+               "tools/busrender/dpmhk.py in a sor_town.py palette (karvina_sw), with the CNG\n"
+               "fairing (Lubak91's Streetway sheets until 2026-10-28)."),
     "mhd-karvina/scania_citywide_lf_12m_cng": dict(
         allow=CW_ALLOW,
         agency=KARVINA, type="Citywide_LF_12M_CNG",

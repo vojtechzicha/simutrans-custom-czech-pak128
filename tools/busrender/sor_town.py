@@ -315,8 +315,20 @@ def dark_line(u0, u1):
 MB_RED = (0xD2, 0x14, 0x2A)        # DPMLB Mladá Boleslav red (Lubak91's sheet)
 MB_BLUE = (0x23, 0x3C, 0x8C)       # its blue skirt line
 CSAD_GREEN = (0x57, 0xA6, 0x39)    # the 3ČSAD green (odis_town CSAD["green"])
+DEMO_ORANGE = (0xE8, 0x6A, 0x20)   # the Iveco demonstrator's swoosh (DPMP 199)
 DPMP_RED = (0xD2, 0x1E, 0x2B)      # DPMP Pardubice red of the 32Tr (photos of 429 / 464)
 DPMP_WINE = (0xA3, 0x1A, 0x2E)     # the darker wine red of the 30Tr scheme (photos of 333, 412, 415)
+
+
+def demo_swoosh(v, p, u, right):
+    """the Iveco Streetway demonstrator (DPMP 199): an orange V on the white
+    lower body, from the front corner down to the middle and up to the rear"""
+    span = v.U[-1]
+    k = abs(u - span * 0.55) / (span * 0.55)                 # 1 at the ends, 0 in the middle
+    zl = v.ZB + 0.30 + k * (v.ZBAND0 - v.ZB - 0.45)
+    if zl <= p.z < zl + 0.25:
+        return DEMO_ORANGE
+    return None
 
 
 def dpmp_panel(v, p, u, right):
@@ -478,6 +490,12 @@ TOWNS = {
     "most_uw": dict(body=WHITE, roof=ROOFW, lower=WHITE, skirt=(0.25, MOST_YEL), disp=LEDG,
                     front=dict(bumper=DPP_RED, mask=WHITE),
                     rear=dict(bumper=DPP_RED, panel=WHITE, upper=WHITE)),
+    "demo_sw": dict(body=WHITE, roof=ROOFW, lower=WHITE, decal=demo_swoosh, disp=AMBER,
+                    front=dict(bumper=WHITE, band=WHITE),
+                    rear=dict(bumper=WHITE, panel=WHITE, upper=BLACK)),
+    "karvina_sw": dict(body=WHITE, roof=ROOFW, lower=WHITE, disp=(0xEC, 0xEE, 0xE4),
+                       front=dict(bumper=WHITE, band=WHITE),
+                       rear=dict(bumper=WHITE, panel=WHITE, upper=BLACK)),
     "tabor_uw": dict(body=WHITE, roof=ROOFW, lower=WHITE, disp=AMBER,
                      front=dict(bumper=LIGHT_GREY, mask=WHITE),
                      rear=dict(bumper=LIGHT_GREY, panel=WHITE, upper=WHITE)),
@@ -584,7 +602,17 @@ class TVeh(Veh):
         return sh(P.get("lower", P["body"]), f)
 
     # front ---------------------------------------------------------------
+    def sw_paint(self, role, t):
+        if role == "disp":
+            return self.P["disp"]
+        if role == "panel":
+            return self.P["rear"]["panel"]
+        F = self.P["front"]
+        return F["bumper"] if role == "bumper" else F.get("band", F.get("mask", self.P["body"]))
+
     def tex_front(self, p):
+        if self.face == "sw":
+            return self.sw_front(p)
         t, z = p.t, p.z
         f = "front"
         a = abs(t)
@@ -667,6 +695,8 @@ class TVeh(Veh):
 
     # rear ----------------------------------------------------------------
     def tex_rear(self, p):
+        if self.rearstyle == "sw":
+            return self.sw_rear(p)
         t, z = p.t, p.z
         f = "rear"
         a = abs(t)
@@ -844,6 +874,10 @@ UW18_CNG = [(1.40, 9.60, 0.36, 1.00, FAIR), (11.80, 13.40, 0.24, 0.85, AC)]
 UW18 = mk(H.UW18, pods=UW18_AC)
 UW18_CNG_ = mk(H.UW18, pods=UW18_CNG)
 CIT18 = mk(H.UW18, face="uw1", pods=UW18_AC)
+# Iveco Streetway 12M / 18M (its own dpmhk.py body)
+SW12 = mk(H.SW12, pods=H.SW12_DIESEL)
+SW12_CNG = mk(H.SW12, pods=H.SW_CNG)
+SW18_CNG = mk(H.SW18, pods=[(0.20, 6.00, 0.33, 1.00, "fair"), (12.40, 15.60, 0.30, 0.95, "fair")])
 UW105 = mk(H.UW12, real_len=10.5, axles=[2.70, 7.40], doors=[(0.32, 1.55), (4.10, 5.40), (7.95, 9.10)],
            engine=(9.20, 10.35), sidedisp=(2.60, 3.90), cu=[7], pods=[(2.00, 4.20, 0.24, 0.85, AC)])
 
@@ -892,6 +926,8 @@ FAMILIES = {
     "vehicle-bus/mhd-frydek-mistek/urbanway_12m_cng": {"3csadbilozelena": [(UW12_CNG, "fm_uw")]},
     "vehicle-bus/mhd-tabor/urbanway_12m_cng": {"comettbila": [(UW12_CNG, "tabor_uw")]},
     "vehicle-bus/mhd-trinec/urbanway_12m": {"trinecbilozelena": [(UW12, "trinec_uw")]},
+    "vehicle-bus/dpmp/streetway_12m": {"ivecopredvadeci": [(SW12, "demo_sw")]},
+    "vehicle-bus/mhd-krnov/streetway_12m": {"krnovbila": [(SW12, "krnov")]},
     "vehicle-bus/dp-most-litvinov/urbanway_18m": {"mostzlutocervena": [(UW18, "most_uw")]},
     "vehicle-bus/dp-most-litvinov/citelis_18m": {"mostzlutocervena": [(CIT18, "most_uw")]},
     "vehicle-bus/dpmb/urbanway_18m_cng": {"dpmbbilocervena": [(UW18_CNG_, "dpmb_uw")]},

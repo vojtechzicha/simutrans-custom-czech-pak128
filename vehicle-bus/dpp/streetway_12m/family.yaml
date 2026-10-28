@@ -5,7 +5,7 @@ type: "Streetway_12M"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 
 display:
   agency_en: "DPP"
@@ -24,10 +24,10 @@ display:
 # lower front and lower rear, small red "pid" lettering on the grey panels.
 # Drawn with the original front (4101-~4183); the 2025 cars 4184-4200 have
 # the black-band ADAS front (not modelled).
-# Sprite: pixel-rendered box model of the Kent C body (overhangs 2.70 / 3.40 m,
-# wheelbase 5.90 m, doors and columns placed from photos) at the scale and
-# per-direction lane placement of the repo's DPMP Streetway 12M (the Lubak91
-# Urbanway body reworked); amber front / side / rear displays, roof A/C pod.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Iveco
+# Streetway 12M body in PID šedo-červená painted by tools/busrender/praha.py
+# (until 2026-10-28 the hand-drawn upstream sheet). Regenerate with
+# tools/busrender/praha.py.
 
 vehicles:
   - id: "Streetway_12M"

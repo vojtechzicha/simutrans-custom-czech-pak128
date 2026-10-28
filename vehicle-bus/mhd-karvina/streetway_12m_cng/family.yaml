@@ -5,7 +5,7 @@ type: "Streetway_12M_CNG"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 
 display:
   agency_en: "MHD Karviná"
@@ -15,8 +15,9 @@ display:
 
 # Iveco Streetway 12M CNG (bioCNG). Karviná MHD: 50-1307 (10/2023), plain white
 # with the factory black glazing, Transdev and "karviná" logos.
-# Sprite: Lubak91's Streetway body (the DPMP sheet), its swoosh painted out and
-# the CNG fairing added by odis_town.repaint.
+# Sprite: original box-model render (vojtechzicha): the Iveco Streetway body of
+# tools/busrender/dpmhk.py in a sor_town.py palette (karvina_sw), with the CNG
+# fairing (Lubak91's Streetway sheets until 2026-10-28).
 # Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
 
 vehicles:

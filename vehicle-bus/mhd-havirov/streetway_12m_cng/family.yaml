@@ -5,7 +5,7 @@ type: "Streetway_12M_CNG"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 
 display:
   agency_en: "MHD Havířov"
@@ -21,9 +21,9 @@ display:
 # white LED displays (photos zdopravy.cz, seznam-autobusu). The big white
 # Transdev figure on the rear corners is left out (only noise at 1x). CNG:
 # engine_type diesel, no smoke.
-# Sprite: Lubak91's Streetway body (the DPMP demonstrator sheet, its swoosh painted
-# out), repainted blue by odis_town.repaint with the CNG fairing added over
-# the middle of the roof.
+# Sprite: original box-model render (vojtechzicha): the Iveco Streetway body of
+# tools/busrender/dpmhk.py in a sor_town.py palette (havirov), with the CNG
+# fairing (Lubak91's Streetway sheets until 2026-10-28).
 # Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
 
 vehicles:

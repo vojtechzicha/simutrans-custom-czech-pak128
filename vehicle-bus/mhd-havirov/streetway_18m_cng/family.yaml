@@ -5,7 +5,7 @@ type: "Streetway_18M_CNG"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 
 display:
   agency_en: "MHD Havířov"
@@ -16,8 +16,9 @@ display:
 # Iveco Streetway 18M CNG, articulated, doors 2-2-2-2. Havířov MHD: 40-0305
 # (2022, ex Iveco demonstrator, since 9/2023), blue. Fixed consist: front
 # section A (8) + powered rear section B (6), as the DPP Streetway 18M.
-# Sprite: Lubak91's Streetway 18M (the DPP sheet), repainted blue by
-# odis_town.repaint with the CNG fairings added.
+# Sprite: original box-model render (vojtechzicha): the Iveco Streetway body of
+# tools/busrender/dpmhk.py in a sor_town.py palette (havirov), with the CNG
+# fairings, sections 8 + 6 (Lubak91's Streetway sheets until 2026-10-28).
 # Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
 
 vehicles:

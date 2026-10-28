@@ -176,6 +176,34 @@ UW18 = dict(
     cap=0.0, sidedisp=(3.10, 4.40), pods=[], mirrors=True, diag=dict(L1A_DIAG, xw_top=1.95),
     engine=(16.90, 17.85),
 )
+# Iveco Streetway 12M / 18M (built in Turkey on the Otokar Kent C): a body of
+# its own, not the Urbanway's (owner, 2026-10-28: "similar but different").
+# From 38 photos (DPP 41xx / 51xx, Havířov, Karviná, the Pardubice
+# demonstrator): the sill at 1.35 m and the black band up to the roof edge;
+# on the off side the black sweeping down to 1.0 m at the front corner and a
+# louvre grille in the band at the rear; white rear corner pillars; the arched
+# all-black windscreen with the display in its top band over a black lamp
+# strip; the black upper rear with the window on the right half and the
+# grille on the left; a long dark roof box over the rear on the diesels.
+SW12 = dict(
+    face="sw", rear="sw", sw=True, real_len=12.0, joints=[], cu=[8],
+    axles=[2.69, 8.59],
+    doors=[(0.25, 1.75), (4.90, 6.30), (9.60, 10.95)],
+    drv=(0.30, 1.75),
+    z0=0.26, zr=3.00, zwin0=1.42, zwin1=2.45, zband0=1.35, zband1=3.00,
+    cap=0.0, sidedisp=(1.20, 2.10), pods=[], mirrors=True, diag=dict(L1A_DIAG, xw_top=1.95),
+    sw_grille=(10.50, 11.70),
+)
+SW18 = dict(
+    SW12, real_len=18.45, joints=[10.10], cu=[8, 6], axles=[2.80, 8.70, 15.44],
+    doors=[(0.25, 1.75), (6.00, 7.30), (12.50, 14.10), (16.50, 17.90)], sw_grille=(16.95, 18.15),
+)
+SW12_DIESEL = [(0.50, 5.50, 0.18, 0.90, "ac"), (7.10, 11.45, 0.22, 1.00, "dark")]
+SW18_DIESEL = [(0.50, 5.50, 0.18, 0.90, "ac"), (10.70, 12.20, 0.20, 0.85, "ac"), (13.30, 18.00, 0.22, 1.00, "dark")]
+SW_CNG = [(0.20, 6.00, 0.33, 1.00, "fair")]
+CAB_GLASS = (0x4D, 0x4D, 0x4E)     # windscreen: a step off the lit special, dark at night
+SW_LOUVRE = (0x3A, 0x3C, 0x40)
+
 # SOR EBN 9.5 (401) and EBN 11 (403): older SOR e-bus face (black mask, "smile")
 EBN95 = dict(
     sor=True,
@@ -383,6 +411,74 @@ class Veh:
         """the livery paints the top row of the side itself (sor_town's cant)"""
         return False
 
+    # ---------------- Iveco Streetway ------------------------------------
+    def sw_paint(self, role, t):
+        """Streetway face colours (top-face values): bumper, band (the white band
+        over the lamp strip), panel (the lower rear), disp"""
+        return AMBER if role == "disp" else WHITE
+
+    def sw_side(self, p, u, c):
+        """the off-side front sweep and rear louvre grille, the white rear
+        corner pillars"""
+        f, z = p.face, p.z
+        if f == "left":
+            if u < 1.80:
+                zb = 1.00 + (self.ZBAND0 - 1.00) * u / 1.80
+                if zb <= z < self.ZBAND0:
+                    return sh(BLACK, f)
+            a, b = self.M(self.sp["sw_grille"][0]), self.M(self.sp["sw_grille"][1])
+            if a <= u < b and self.ZWIN0 <= z < self.ZWIN1:
+                return sh(SW_LOUVRE, f) if int((u - a) / 0.25) % 2 == 0 else FRAME
+        if u >= self.U[-1] - 0.20 and z >= self.ZBAND0:
+            return self.lower(lowered(p, z - (self.ZBAND0 - 0.30)), u, f == "right")
+        return c
+
+    def sw_front(self, p):
+        t, z = p.t, p.z
+        f = "front"
+        a = abs(t)
+        if z < 0.30:
+            return BLACK
+        if z < 0.60:
+            return sh(self.sw_paint("bumper", t), f)
+        if z < 0.78:                                     # the black lamp strip
+            if inr(z, 0.64, 0.76) and HW - 0.50 < a < HW - 0.08 and int((a - (HW - 0.50)) / 0.14) % 2 == 0:
+                return HEADL
+            return BLACK
+        if z < 1.00:
+            return sh(self.sw_paint("band", t), f)
+        if z < 1.20 or a > HW - 0.10:
+            return BLACK
+        if z < 2.70:
+            return CAB_GLASS
+        if inr(z, 2.76, 2.96) and a < 0.95:
+            return self.sw_paint("disp", t)
+        return BLACK
+
+    def sw_rear(self, p):
+        t, z = p.t, p.z
+        f = "rear"
+        a = abs(t)
+        if z < 0.35:
+            return BLACK
+        if a > HW - 0.20 and z >= 1.60:
+            return sh(self.sw_paint("panel", t), f)      # the white corner pillars
+        if z < 1.60:
+            if a > HW - 0.26 and inr(z, 0.75, 1.45):
+                return TAILL
+            if a < 0.30 and inr(z, 0.56, 0.70):
+                return sh((0xE8, 0xE8, 0xE6), f)        # plate
+            return sh(self.sw_paint("panel", t), f)
+        if inr(z, 1.62, 1.74) and a < 0.50:
+            return sh(SILVER, f)                         # IVECO on the black lip
+        if t > 0.10 and inr(z, 1.85, 2.72) and a < HW - 0.25:
+            if inr(z, 2.55, 2.72) and t > 0.45:
+                return self.sw_paint("disp", t)
+            return GLASS
+        if t < -0.10 and inr(z, 1.85, 2.75) and a < HW - 0.25:
+            return sh(SW_LOUVRE, f) if int((z - 1.85) / 0.08) % 2 == 0 else BLACK
+        return BLACK
+
     def roof_edge_painted(self):
         """the livery has a roof edge of its own colour (sor_town's roofedge)"""
         return False
@@ -434,6 +530,8 @@ class Veh:
                         and p.z >= self.ZR - 0.25 and not self.cant_painted() \
                         and c in (sh(BLACK, f), BLACK, FRAME):
                     c = sh(self.tex_roof(p, u), f)       # the black band stops under the rounded edge
+                if self.sp.get("sw"):
+                    c = self.sw_side(p, u, c)
                 return c
             dz = self.ZB - self.Z0
             if dz > 0:
@@ -768,6 +866,8 @@ class Veh:
         a = abs(t)
         face = self.face
         L = self.liv
+        if face == "sw":
+            return self.sw_front(p)
         if face == "ns":
             if z < 0.44:
                 return BLACK
@@ -877,6 +977,8 @@ class Veh:
         a = abs(t)
         st = self.rearstyle
         L = self.liv
+        if st == "sw":
+            return self.sw_rear(p)
         if st == "ns":
             if a > HW - 0.26 and inr(z, 0.55, 1.35):
                 return TAILL

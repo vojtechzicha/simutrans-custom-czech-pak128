@@ -252,7 +252,21 @@ class PVeh(Veh):
         return sh(self.P["body"], f)
 
     # front ---------------------------------------------------------------
+    def sw_paint(self, role, t):
+        """the Streetway faces: A grey with the red block on the vehicle's left
+        half of the front and rear; B the trikolóra's white over the red"""
+        P = self.P
+        if role == "disp":
+            return self.DISP
+        if self.liv == "A":
+            return P["red"] if t < -0.10 else P["body"]
+        if self.liv == "B":
+            return P["red"] if role == "bumper" else P["white"]
+        return P["body"]
+
     def tex_front(self, p):
+        if self.face == "sw":
+            return self.sw_front(p)
         t, z = p.t, p.z
         f = "front"
         a = abs(t)
@@ -389,6 +403,8 @@ class PVeh(Veh):
 
     # rear ----------------------------------------------------------------
     def tex_rear(self, p):
+        if self.rearstyle == "sw":
+            return self.sw_rear(p)
         t, z = p.t, p.z
         f = "rear"
         a = abs(t)
@@ -557,6 +573,11 @@ DTNS18 = mk(NS18, cap=1.20, pods=[(1.80, 10.30, 0.26, 1.00, "fair")],
 # DPP Urbanway 18M Hybrid (sections 8 + 6, Lubak91's sheet until 2026-10-28):
 # red panels behind door 1 over the front axle, from door 2 to the joint and
 # over the rear axle
+# Iveco Streetway 12M / 18M in PID grey-red (own dpmhk.py body since
+# 2026-10-28): red columns over the axles, starting where the off-side sweep
+# ends (photos of 4161, 4179, 5123)
+DSW12 = mk(H.SW12, pods=H.SW12_DIESEL, reds=[(1.80, 3.80), (7.70, 9.50)])
+DSW18 = mk(H.SW18, pods=H.SW18_DIESEL, reds=[(1.80, 3.90), (7.80, 9.70), (14.40, 16.40)])
 DUW18H = mk(H.MODELS["uw18h"], reds=[(1.55, 3.70), (6.00, 10.40), (13.90, 15.55)])
 
 # family dir -> {livery colour: [model spec, ...] in sprite-row order}
@@ -574,6 +595,9 @@ FAMILIES = {
     "vehicle-trolleybus/dpp/tns_18": {A: [DTNS18]},
     "vehicle-bus/brno/urbanway_12m": {W: [PUW12W]},
     "vehicle-bus/dpp/urbanway_18m_hybrid": {A: [DUW18H]},
+    "vehicle-bus/dpp/streetway_12m": {A: [DSW12]},
+    "vehicle-bus/praha/streetway_12m": {A: [DSW12]},
+    "vehicle-bus/dpp/streetway_18m": {A: [DSW18]},
 }
 
 
