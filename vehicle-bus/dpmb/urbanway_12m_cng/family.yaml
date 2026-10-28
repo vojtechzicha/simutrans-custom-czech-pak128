@@ -1,11 +1,11 @@
 agency: DPBrno
 type: "Urbanway_12M_CNG"
-# Sprites are placed in the tile to the native pak128.cs lane position (the
-# upstream Brno Urbanway 12M already sits on the native 12 m bus median).
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 
 display:
   agency_en: "DPMB"
@@ -21,8 +21,10 @@ display:
 # Unlike the 13 diesel cars (7672-7686) they carry a long white CNG tank
 # fairing over the rear half of the roof (DPMB drawing: ~0.48-0.86 of the
 # length from the front) plus the front roof A/C unit.
-# Sprite: Lubak91's CZR-Brno-IVECO_Urbanway_12M (upstream cols 1-8), glass
-# moved to the lit-window specials, roof tank fairing and A/C drawn on.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Iveco
+# Urbanway 12M body in the town palette dpmb_uw of tools/busrender/sor_town.py
+# (until 2026-10-28 Lubak91's sheet). Regenerate with
+# tools/busrender/sor_town.py.
 
 vehicles:
   - id: "Urbanway_12M_CNG"

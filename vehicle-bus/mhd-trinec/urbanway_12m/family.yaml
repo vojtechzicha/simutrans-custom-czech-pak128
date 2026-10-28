@@ -1,9 +1,9 @@
 agency: MHDTrinec
 type: "Urbanway_12M"
-copyright: Lubak91
+copyright: vojtechzicha
 
-# Sprites are placed in the tile to the native pak128.cs lane position (body
-# footprint matched to the median of native 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -16,10 +16,10 @@ display:
 
 # Iveco Urbanway 12M diesel, 1 unit on MHD Třinec (Arriva 71-1201, 1TD 1303;
 # ex-demonstrator built 2016, in Třinec since 2022). Tector 7 Euro 6 210 kW,
-# 3 double doors, ~100 passengers, ~11.5 t. Sprite: Lubak91's Brno Urbanway
-# 12M (plain diesel roof), repainted to the "Třinec city" white/lime scheme:
-# lime roof-edge line, lime sill with lime wheel-arch outlines, lime front
-# roof cap and bumper corners, lime rear pillars.
+# 3 double doors, ~100 passengers, ~11.5 t. Sprite: original box-model render
+# (vojtechzicha): the dpmhk.py Iveco Urbanway 12M body in the town palette
+# trinec_uw of tools/busrender/sor_town.py (until 2026-10-28 Lubak91's sheet).
+# Regenerate with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "Urbanway_12M"

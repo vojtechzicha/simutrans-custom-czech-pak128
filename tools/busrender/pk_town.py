@@ -148,8 +148,8 @@ FAMILIES = dict([
         "Iveco Urbanway 12M CNG (CNG: engine_type diesel, no smoke), doors 2-2-2. MHD\n"
         "Chrudim, ARRIVA autobusy: 64676 and 64677 (2016, ex MAD Kladno, here since\n"
         "2-3/2025), still in the MAD Kladno white with the red stripe.",
-        "Lubak91's Urbanway 12M CNG, the MHD Kladno sheet as is\n"
-        "(vehicle-bus/mhd-kladno/urbanway_12m_cng).", "Lubak91"),
+        "the MHD Kladno sheet as is (vehicle-bus/mhd-kladno/urbanway_12m_cng: the\n"
+        "dpmhk.py Urbanway 12M body rendered by sor_town.py).", "vojtechzicha"),
     fam("iredo/conecto_lf", IREDO, "Conecto_LF", "Mercedes-Benz Conecto LF", BUS,
         f_(600000, 100, 75, 11, 23, 118, 2016, 8, "diesel", 220, 54, smoke="Diesel_small"),
         [("bilacervenypruh", "white with a red stripe · ARRIVA autobusy (MHD Chrudim)",

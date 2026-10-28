@@ -5,7 +5,7 @@ type: "Urbanway_12M_CNG"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 
 display:
   agency_en: "IREDO"
@@ -16,8 +16,8 @@ display:
 # Iveco Urbanway 12M CNG (CNG: engine_type diesel, no smoke), doors 2-2-2. MHD
 # Chrudim, ARRIVA autobusy: 64676 and 64677 (2016, ex MAD Kladno, here since
 # 2-3/2025), still in the MAD Kladno white with the red stripe.
-# Sprite: Lubak91's Urbanway 12M CNG, the MHD Kladno sheet as is
-# (vehicle-bus/mhd-kladno/urbanway_12m_cng).
+# Sprite: the MHD Kladno sheet as is (vehicle-bus/mhd-kladno/urbanway_12m_cng: the
+# dpmhk.py Urbanway 12M body rendered by sor_town.py).
 # Regenerate with tools/busrender/pk_town.py (family.yaml: --yaml).
 
 vehicles:

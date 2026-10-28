@@ -1,9 +1,9 @@
 agency: DPOpava
 type: "Urbanway_10_5M"
-copyright: Lubak91
+copyright: vojtechzicha
 
-# Sprites are placed in the tile to the native pak128.cs lane position (body
-# footprint matched to the median of native 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -15,9 +15,10 @@ display:
   family_cs: "Iveco Urbanway 10,5M CNG"
 
 # Iveco Urbanway 10,5M CNG, MDPO 162-167 (2015).
-# Sprite: Lubak91's Opava Urbanway 10,5M CNG, repainted to the full MDPO
-# white-red scheme (red lower body from the wheel-arch tops to the sill, red
-# front apron and rear bumper, narrow white waist; displays amber).
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Iveco
+# Urbanway 10,5M body in the town palette mdpo_uw of
+# tools/busrender/sor_town.py (until 2026-10-28 Lubak91's sheet). Regenerate
+# with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "Urbanway_10_5M"

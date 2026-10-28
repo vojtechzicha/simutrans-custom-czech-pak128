@@ -1,9 +1,9 @@
 agency: MHDFrydekMistek
 type: "Urbanway_12M_CNG"
-copyright: Lubak91
+copyright: vojtechzicha
 
-# The source sprites carry the upstream lane placement (their dats use no
-# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -18,6 +18,10 @@ display:
 # Sheet: Lubak91's Iveco Urbanway 12M body (Brno) with the Opava CNG roof
 # fairing, repainted in 3ČSAD white-green. (The upstream CZR-FrydekMistek
 # "Urbanway12M_CNG" sprite is actually a Crossway LE City body and is not used.)
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Iveco
+# Urbanway 12M body in the town palette fm_uw of tools/busrender/sor_town.py
+# (until 2026-10-28 Lubak91's sheet). Regenerate with
+# tools/busrender/sor_town.py.
 
 vehicles:
   - id: "Urbanway_12M_CNG"

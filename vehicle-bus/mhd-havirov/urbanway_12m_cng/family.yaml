@@ -5,7 +5,7 @@ type: "Urbanway_12M_CNG"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 
 display:
   agency_en: "MHD Havířov"
@@ -19,8 +19,9 @@ display:
 # 12/2023 - 12/2025. The white city logo (three linked arches) and the yellow "město pro
 # život" script on the lower side, the logo first reading left to right on
 # both sides.
-# Sprite: the Frýdek-Místek Urbanway 12M CNG sheet (Lubak91's body with the CNG
-# fairing), repainted blue by odis_town.repaint.
+# Sprite: the Frýdek-Místek Urbanway 12M CNG sheet (the dpmhk.py Urbanway body
+# rendered by sor_town.py, with the CNG fairing), repainted blue by
+# odis_town.repaint.
 # Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
 
 vehicles:

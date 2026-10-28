@@ -1,11 +1,11 @@
 agency: DPPardubice
 type: "Urbanway_12M"
-# Sprites are placed in the tile to the native pak128.cs lane position (body
-# footprint matched to the median of native 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 
 display:
   agency_en: "DPMP"
@@ -15,9 +15,10 @@ display:
 
 # Iveco Urbanway 12M — the largest DPMP bus type: 29 diesel cars (100–122,
 # 187–193; 2016–2026) and 4 CNG cars (222–225; 2020–2021). Diesel Cursor 9
-# 228 kW, CNG Cursor 8 CNG 213 kW. Sprite: Lubak91's Urbanway 12M,
-# repainted to the DPMP white-red (NRP) scheme; the CNG version carries the
-# roof tank fairing.
+# 228 kW, CNG Cursor 8 CNG 213 kW. Sprite: original box-model render
+# (vojtechzicha): the dpmhk.py Iveco Urbanway 12M body in the town palette
+# dpmp_uw of tools/busrender/sor_town.py (until 2026-10-28 Lubak91's sheet).
+# Regenerate with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "Urbanway_12M"

@@ -5,7 +5,7 @@ type: "Urbanway_12M_CNG"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 
 display:
   agency_en: "MHD Karviná"
@@ -16,8 +16,8 @@ display:
 # Iveco Urbanway 12M CNG. Karviná MHD: 50-1001 to 50-1005 (2017-2020) in 3ČSAD
 # white-green, 50-1006 (2021) plain white with the factory black glazing
 # since 7/2024; Transdev and "karviná" logos, white LED displays.
-# Sprite: the Frýdek-Místek Urbanway 12M CNG sheet (Lubak91's body): unchanged
-# except the white LED displays, and with the green turned white for 50-1006.
+# Sprite: the Frýdek-Místek Urbanway 12M CNG sheet (the dpmhk.py body by sor_town.py):
+# unchanged except the white LED displays, and with the green turned white for 50-1006.
 # Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
 
 vehicles:

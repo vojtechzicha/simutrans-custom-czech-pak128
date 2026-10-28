@@ -960,14 +960,16 @@ FM = "vehicle-bus/mhd-frydek-mistek/"
 # src/odis/ as FM-<family>-3csadbilozelena.png: the Havířov, Karviná and
 # Orlová sheets read them, and --csad-static writes the F-M sheets from them
 # in CSAD["green"]
-FM_CSAD = ("crossway_le_city_12m", "scania_citywide_lf_12m_cng", "urbanway_12m_cng")
+FM_CSAD = ("crossway_le_city_12m", "scania_citywide_lf_12m_cng")
 
 
 def fm_src(fam):
     return "FM-" + fam + "-3csadbilozelena.png"
 
 
-UW_SRC = fm_src("urbanway_12m_cng")
+# the F-M Urbanway 12M CNG is a sor_town.py render of the dpmhk.py body since
+# 2026-10-28 (Lubak91's sheet before); the Havířov, Karviná and Orlová ones follow it
+UW_SRC = FM + "urbanway_12m_cng/sprites/3csadbilozelena.png"
 CW_SRC = fm_src("scania_citywide_lf_12m_cng")
 CW_ALLOW = (0xC1B1D1, 0xE3E3FF)    # specials the Citywide source art already uses (lamp glass)
 SW_SRC = "vehicle-bus/dpmp/streetway_12m/sprites/ivecopredvadeci.png"
@@ -1228,7 +1230,7 @@ FAMILIES = {
                "the middle of the roof."),
     "mhd-havirov/urbanway_12m_cng": dict(
         agency=HAVIROV, type="Urbanway_12M_CNG", name=("Iveco Urbanway 12M CNG", "Iveco Urbanway 12M CNG"),
-        copyright="Lubak91",
+        copyright="vojtechzicha",
         vehicles=one("Urbanway_12M_CNG", "Urbanway 12M CNG", BUS,
                      f_(800000, 95, 80, 12, 24, 135, 2015, 8, "diesel", 213, 56, retire=2050)),
         liveries=[("havirovmodra", *HAV_NAME, hav_rows(UW_SRC, z_white_green, [L12]))],
@@ -1236,8 +1238,9 @@ FAMILIES = {
              "Iveco demonstrator) to 40-1019 (2021), incl. four ex Karviná (40-1004 - 1007,\n"
              "since 11/2023); repainted from 3ČSAD white-green into the blue city scheme\n"
              "12/2023 - 12/2025. " + HAV_DECALS[0].upper() + HAV_DECALS[1:] + ".",
-        sprite="the Frýdek-Místek Urbanway 12M CNG sheet (Lubak91's body with the CNG\n"
-               "fairing), repainted blue by odis_town.repaint."),
+        sprite="the Frýdek-Místek Urbanway 12M CNG sheet (the dpmhk.py Urbanway body\n"
+               "rendered by sor_town.py, with the CNG fairing), repainted blue by\n"
+               "odis_town.repaint."),
     "mhd-havirov/sor_nsg_12": dict(
         agency=HAVIROV, type="SOR_NSG_12", name=("SOR NSG 12", "SOR NSG 12"), copyright="vojtechzicha",
         vehicles=one("SOR_NSG_12", "NSG 12", BUS,
@@ -1372,7 +1375,7 @@ FAMILIES = {
         sprite=RENDER_NS),
     "mhd-karvina/urbanway_12m_cng": dict(
         agency=KARVINA, type="Urbanway_12M_CNG", name=("Iveco Urbanway 12M CNG", "Iveco Urbanway 12M CNG"),
-        copyright="Lubak91",
+        copyright="vojtechzicha",
         vehicles=one("Urbanway_12M_CNG", "Urbanway 12M CNG", BUS,
                      f_(800000, 95, 80, 12, 24, 135, 2017, 8, "diesel", 213, 56, intro_month=12, retire=2050)),
         liveries=[("3csadbilozelena", *WG_NAME, copy_rows(UW_SRC, recols(disp(LEDW), csad_px))),
@@ -1380,8 +1383,8 @@ FAMILIES = {
         note="Iveco Urbanway 12M CNG. Karviná MHD: 50-1001 to 50-1005 (2017-2020) in 3ČSAD\n"
              "white-green, 50-1006 (2021) plain white with the factory black glazing\n"
              "since 7/2024; Transdev and \"karviná\" logos, white LED displays.",
-        sprite="the Frýdek-Místek Urbanway 12M CNG sheet (Lubak91's body): unchanged\n"
-               "except the white LED displays, and with the green turned white for 50-1006."),
+        sprite="the Frýdek-Místek Urbanway 12M CNG sheet (the dpmhk.py body by sor_town.py):\n"
+               "unchanged except the white LED displays, and with the green turned white for 50-1006."),
     "mhd-karvina/streetway_12m_cng": dict(
         agency=KARVINA, type="Streetway_12M_CNG", name=("Iveco Streetway 12M CNG", "Iveco Streetway 12M CNG"),
         copyright="Lubak91",
@@ -1404,7 +1407,7 @@ FAMILIES = {
     # ------------------------------------------------------------ Orlová
     "mhd-orlova/urbanway_12m_cng": dict(
         agency=ORLOVA, type="Urbanway_12M_CNG", name=("Iveco Urbanway 12M CNG", "Iveco Urbanway 12M CNG"),
-        copyright="Lubak91",
+        copyright="vojtechzicha",
         vehicles=one("Urbanway_12M_CNG", "Urbanway 12M CNG", BUS,
                      f_(800000, 95, 80, 12, 24, 135, 2017, 8, "diesel", 213, 56, retire=2050)),
         liveries=[("3csadbilozelena", *WG_NAME, copy_rows(UW_SRC, recols(disp(LEDW), csad_px)))],

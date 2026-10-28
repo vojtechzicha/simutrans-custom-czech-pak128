@@ -1205,15 +1205,15 @@ FAMILIES = dict([
             T.load_rows("vehicle-bus/mdpo/urbanway_10_5m/sprites/mdpobilocervena.png"), z_mdpo,
             W_ZONES, [[10.0, 10.5, 11.0]],
             ring_decal(RING_GREEN, 0.78, base=csad_skirt(0.70, base=close_door(0.752, 0.895, (0.57, 0.64)))),
-            None, None, lambda c: LEDW if T.hexc(c) in (0xF0A018, 0xF7A21B, 0x01DD01) else None))],
+            [[(0.15, 0.80, 0.34, 1.00)]], T.WHITE_POD, lambda c: LEDW if T.hexc(c) in (0xF0A018, 0xF7A21B, 0x01DD01) else None))],
         "Iveco Urbanway 10,5M CNG (CNG; engine_type diesel, no smoke), city body, doors"
         " 2-2-0, ex Iveco demonstrator (2016). Transdev Slezsko 1: 73-0049"
         " (Českotěšínsko). " + WG_NOTE,
-        "Lubak91's Urbanway 10,5M CNG (the MDPO sheet, vehicle-bus/mdpo/urbanway_10_5m)"
-        " repainted white by odis_town.repaint, the rear door of that 2-2-2 car closed"
-        " into a window and panel, the 3ČSAD skirt painted below 0.7 m and the kraj"
-        " ring added by odis.py.",
-        copyright="Lubak91"),
+        "The MDPO Urbanway 10,5M render (vehicle-bus/mdpo/urbanway_10_5m, the dpmhk.py"
+        " body by sor_town.py) repainted white by odis_town.repaint, the rear door of"
+        " that 2-2-2 car closed into a window and panel, the CNG fairing, the 3ČSAD"
+        " skirt painted below 0.7 m and the kraj ring added by odis.py.",
+        copyright="vojtechzicha"),
 ])
 
 
