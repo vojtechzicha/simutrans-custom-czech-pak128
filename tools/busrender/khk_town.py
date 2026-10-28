@@ -484,25 +484,10 @@ def safe(c):
     return c
 
 
-# ---------------------------------------------------------------- Trutnov MHD
-# Arriva light blue over the whole body, roof and roof fairings (the Arriva blue
-# of the Přerov Crossway sheet), the black glazing band of the source art kept,
-# a scattered mosaic of small vertical blocks (orange, magenta, yellow, dark
-# and pale blue) straddling the lower edge of the band, denser towards the
-# rear, and the white TRUTNOV MHD logo on the blue behind the front axle
-# (photos seznam-autobusu 232403, 398768, 414852, 415210, 442882).
-TU_BLUE = (0x30, 0xBE, 0xEA)
-TU_WHITE = (0xF4, 0xF6, 0xF8)
-MOSAIC = [(0xF3, 0x8B, 0x1F), (0xE0, 0x2E, 0x8C), (0xFF, 0xD2, 0x1E), (0x1E, 0x50, 0xA8),
-          (0x9C, 0xE4, 0xFA)]
+# ---------------------------------------------------------------- band edge
+# (the Trutnov MHD scheme with its mosaic and logo is sor_town.py's "trutnov"
+# palette since 2026-10-28)
 SLOPE = {"w": 0.5, "e": 0.5, "n": -0.5, "s": -0.5, "ne": 0.0, "sw": 0.0}
-
-
-def _hash(*v):
-    h = 2166136261
-    for x in v:
-        h = ((h ^ (int(x) & 0xFFFFFFFF)) * 16777619) & 0xFFFFFFFF
-    return h
 
 
 def band_line(tile, paint, geo, d):
@@ -525,73 +510,6 @@ def band_line(tile, paint, geo, d):
     cs = [round(y - k * x) for x, y in found.items()]
     mode = max(set(cs), key=cs.count)
     return {x: y for x, y in found.items() if abs(y - (mode + k * x)) <= 1.0}
-
-
-def trutnov_decals(tile, paint, geo, d, mosaic=(0.45, 1.0), logo=None, seed=0):
-    out = tile.copy()
-    line = band_line(tile, paint, geo, d)
-    frac = geo["frac"]
-    for x, y in line.items():
-        f = float(frac[y + 1, x])
-        if mosaic and mosaic[0] <= f <= mosaic[1]:
-            t = (f - mosaic[0]) / max(1e-6, mosaic[1] - mosaic[0])
-            h = _hash(seed, x, DIRS.index(d))
-            if (h % 1000) / 1000.0 < 0.28 + 0.62 * t:
-                c = MOSAIC[(h >> 10) % len(MOSAIC)]
-                ys = [y + 1]
-                if (h >> 14) % 2:
-                    ys.append(y)                       # the block reaches up into the band
-                elif (h >> 15) % 3 == 0:
-                    ys.append(y + 2)
-                for yy in ys:
-                    if 0 <= yy < 128 and (paint[yy, x] or yy == y):
-                        out[yy, x] = c
-        if logo and logo[0] <= f <= logo[1]:
-            for yy, every in ((y + 2, 1), (y + 3, 2)):
-                if yy < 128 and paint[yy, x] and (every == 1 or x % 2 == 0):
-                    out[yy, x] = TU_WHITE
-    return out
-
-
-def blue_rule(paint_fn, base=TU_BLUE):
-    """rule for recolour(): paint_fn(colour) -> shade factor (or None = keep)"""
-    def rule(c):
-        k = paint_fn(c)
-        if k is None:
-            return None
-        return safe(scaled(base, k))
-    return rule
-
-
-def paint_mask(tile, paint_fn):
-    m = np.zeros(tile.shape[:2], bool)
-    cache = {}
-    for y in range(128):
-        for x in range(128):
-            c = tuple(int(v) for v in tile[y, x])
-            if c == T:
-                continue
-            if c not in cache:
-                cache[c] = paint_fn(c) is not None
-            m[y, x] = cache[c]
-    return m
-
-
-def trutnov_rows(src_rows, paint_fn, sections):
-    """sections: per sprite row dict(L=[fit lengths], mosaic=(f0, f1) or None,
-    logo=(f0, f1) or None)"""
-    rows = []
-    for r, (tiles, sec) in enumerate(zip(src_rows, sections)):
-        out = []
-        for d, t in zip(DIRS, tiles):
-            paint = paint_mask(t, paint_fn)
-            b = recolour(t, blue_rule(paint_fn))
-            if d in SLOPE:
-                geo = fit_box(t, d, sec["L"])
-                b = trutnov_decals(b, paint, geo, d, sec.get("mosaic"), sec.get("logo"), seed=r)
-            out.append(b)
-        rows.append(out)
-    return rows
 
 
 # Škoda Perun 26BB HE (Solaris Urbino 12 IV body): since 2026-10-28 the
