@@ -1,10 +1,9 @@
 agency: DPMostLitvinov
 type: "Citelis_18M"
-copyright: Lubak91
+copyright: vojtechzicha
 
-# Sprites are placed in the tile to the native pak128.cs lane position
-# (lateral only; one common shift per direction for both sections so the
-# joint stays aligned), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -18,11 +17,11 @@ display:
 # Irisbus Citelis 18M, 1 unit (#98, 6U1 7219; built 2010, ex-DP Chomutov–
 # Jirkov, in Most since 8/2022). Cursor 8 213 kW in the rear (pusher)
 # section, ~150 passengers, 17.3 t, 4 doors. Two-section fixed consist:
-# front section A + powered rear section B, both required. Sprite: built on
-# Lubak91's DPmML Urbanway 18M sections (body, doors, section lengths and
-# joint kept), with Citelis-style ends in the DPmML Citelis 12M colours
-# (yellow front with white line and red bumper, yellow roof cap, yellow rear
-# with red bumper), a silver-grey bellows block and a roof A/C unit.
+# front section A + powered rear section B, both required. Sprite: original
+# box-model render (vojtechzicha): the dpmhk.py Urbanway 18M body with the
+# Citelis face (sections 8 + 6) in the town palette most_uw painted by
+# tools/busrender/sor_town.py (until 2026-10-28 the hand-drawn upstream
+# sheet). Regenerate with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "Citelis_18M-A"
@@ -47,7 +46,7 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 7
+      length: 8
       engine_type: diesel
 
   - id: "Citelis_18M-B"
@@ -72,7 +71,7 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 5
+      length: 6
       engine_type: diesel
       power: 213
       gear: 67

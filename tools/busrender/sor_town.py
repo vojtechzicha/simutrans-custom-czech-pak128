@@ -475,6 +475,9 @@ TOWNS = {
     "fm_uw": dict(body=WHITE, roof=ROOFW, lower=WHITE, skirt=(0.25, CSAD_GREEN), disp=AMBER,
                   front=dict(bumper=CSAD_GREEN, mask=WHITE),
                   rear=dict(bumper=CSAD_GREEN, panel=WHITE, upper=WHITE)),
+    "most_uw": dict(body=WHITE, roof=ROOFW, lower=WHITE, skirt=(0.25, MOST_YEL), disp=LEDG,
+                    front=dict(bumper=DPP_RED, mask=WHITE),
+                    rear=dict(bumper=DPP_RED, panel=WHITE, upper=WHITE)),
     "tabor_uw": dict(body=WHITE, roof=ROOFW, lower=WHITE, disp=AMBER,
                      front=dict(bumper=LIGHT_GREY, mask=WHITE),
                      rear=dict(bumper=LIGHT_GREY, panel=WHITE, upper=WHITE)),
@@ -834,6 +837,13 @@ UW12 = mk(H.UW12, pods=UW_AC)
 UW12_CNG = mk(H.UW12, pods=UW_CNG)
 # the 10,5M: 2.70 m front overhang, 4.70 m wheelbase, doors 2-2-2 with the
 # rear one behind the rear axle, then the engine bay
+# the Urbanway 18M / Citelis 18M (sections 8 + 6): an A/C unit on each section,
+# or the CNG fairing over the front section
+UW18_AC = [(2.00, 4.20, 0.24, 0.85, AC), (11.80, 13.40, 0.24, 0.85, AC)]
+UW18_CNG = [(1.40, 9.60, 0.36, 1.00, FAIR), (11.80, 13.40, 0.24, 0.85, AC)]
+UW18 = mk(H.UW18, pods=UW18_AC)
+UW18_CNG_ = mk(H.UW18, pods=UW18_CNG)
+CIT18 = mk(H.UW18, face="uw1", pods=UW18_AC)
 UW105 = mk(H.UW12, real_len=10.5, axles=[2.70, 7.40], doors=[(0.32, 1.55), (4.10, 5.40), (7.95, 9.10)],
            engine=(9.20, 10.35), sidedisp=(2.60, 3.90), cu=[7], pods=[(2.00, 4.20, 0.24, 0.85, AC)])
 
@@ -882,6 +892,10 @@ FAMILIES = {
     "vehicle-bus/mhd-frydek-mistek/urbanway_12m_cng": {"3csadbilozelena": [(UW12_CNG, "fm_uw")]},
     "vehicle-bus/mhd-tabor/urbanway_12m_cng": {"comettbila": [(UW12_CNG, "tabor_uw")]},
     "vehicle-bus/mhd-trinec/urbanway_12m": {"trinecbilozelena": [(UW12, "trinec_uw")]},
+    "vehicle-bus/dp-most-litvinov/urbanway_18m": {"mostzlutocervena": [(UW18, "most_uw")]},
+    "vehicle-bus/dp-most-litvinov/citelis_18m": {"mostzlutocervena": [(CIT18, "most_uw")]},
+    "vehicle-bus/dpmb/urbanway_18m_cng": {"dpmbbilocervena": [(UW18_CNG_, "dpmb_uw")]},
+    "vehicle-bus/mhd-tabor/urbanway_18m_cng": {"comettbila": [(UW18_CNG_, "tabor_uw")]},
     "vehicle-trolleybus/dpmb/31tr": {"dpmbbilocervena": [(DPMB_31TR, "dpmb")]},
     "vehicle-trolleybus/dpmb/32tr": {"dpmbbilocervena": [(DPMB_32TR, "dpmb_ns")]},
     "vehicle-trolleybus/dpmp/30tr": {"dpmpbilocervena": [(DPMP_30TR, "dpmp_nb")]},

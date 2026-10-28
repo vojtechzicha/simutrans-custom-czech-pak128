@@ -554,6 +554,11 @@ DTNS12 = mk(NS12, cap=1.20, pods=[(1.80, 7.20, 0.26, 1.00, "fair")],
 DTNS18 = mk(NS18, cap=1.20, pods=[(1.80, 10.30, 0.26, 1.00, "fair")],
             reds=[(1.60, 3.75), (6.10, 7.80), (14.40, 16.20)], poles=(12.40, 0.30))
 
+# DPP Urbanway 18M Hybrid (sections 8 + 6, Lubak91's sheet until 2026-10-28):
+# red panels behind door 1 over the front axle, from door 2 to the joint and
+# over the rear axle
+DUW18H = mk(H.MODELS["uw18h"], reds=[(1.55, 3.70), (6.00, 10.40), (13.90, 15.55)])
+
 # family dir -> {livery colour: [model spec, ...] in sprite-row order}
 FAMILIES = {
     "vehicle-bus/praha/sor_ns_12": {A: [PNS12], B: [PNS12]},
@@ -568,6 +573,7 @@ FAMILIES = {
     "vehicle-trolleybus/dpp/tns_12": {A: [DTNS12]},
     "vehicle-trolleybus/dpp/tns_18": {A: [DTNS18]},
     "vehicle-bus/brno/urbanway_12m": {W: [PUW12W]},
+    "vehicle-bus/dpp/urbanway_18m_hybrid": {A: [DUW18H]},
 }
 
 

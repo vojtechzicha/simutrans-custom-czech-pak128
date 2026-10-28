@@ -1,12 +1,11 @@
 agency: DPBrno
 type: "Urbanway_18M_CNG"
-# Sprites are placed in the tile to the native pak128.cs lane position: the
-# upstream 18M art sat 1-4 px off the lane, so both sections were shifted by
-# the same per-view amount (joint unchanged) onto the Urbanway 12M footprint.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 
 display:
   agency_en: "DPMB"
@@ -25,9 +24,10 @@ display:
 # section) plus low A/C / tank boxes; the diesel-era upstream art had a flat
 # roof. Two-section fixed consist: front section A (unpowered) + powered rear
 # section B (engine tower at the rear).
-# Sprite: Lubak91's CZR-Brno-Iveco-Urbanway-18M-A/-B (Iveco-Urbnaway-18M-*.png,
-# cols 1-8) merged to rows 0/1; glass moved to the lit-window specials, the
-# photo-textured bellows repainted as a clean grey block, roof equipment drawn.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Iveco
+# Urbanway 18M CNG body (sections 8 + 6) in the town palette dpmb_uw painted
+# by tools/busrender/sor_town.py (until 2026-10-28 the hand-drawn upstream
+# sheet). Regenerate with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "Urbanway_18M_CNG-A"
@@ -52,7 +52,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 7
+      length: 8
       engine_type: diesel
 
   - id: "Urbanway_18M_CNG-B"
@@ -77,7 +77,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 5
+      length: 6
       engine_type: diesel
       power: 243
       gear: 67

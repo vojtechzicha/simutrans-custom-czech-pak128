@@ -1,9 +1,9 @@
 agency: MHDTabor
 type: "Urbanway_18M_CNG"
-copyright: Lubak91
+copyright: vojtechzicha
 
-# The source sprites carry the upstream lane placement (their dats use no
-# offset), so no extra shift; the default [0, 4] would sink them 4 px.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -16,6 +16,10 @@ display:
 
 # Iveco Urbanway 18M CNG articulated, 6 units on Tábor MHD. Front section
 # unpowered, engine in the rear section.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Iveco
+# Urbanway 18M CNG body (sections 8 + 6) in the town palette tabor_uw painted
+# by tools/busrender/sor_town.py (until 2026-10-28 the hand-drawn upstream
+# sheet). Regenerate with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "Urbanway_18M_CNG-A"
@@ -35,7 +39,7 @@ vehicles:
       speed: 80
       cost: 500000
       weight: 10
-      length: 7
+      length: 8
       runningcost: 20
       fixed_cost: 102
       intro_year: 2015
@@ -60,7 +64,7 @@ vehicles:
       speed: 80
       cost: 477785
       weight: 8
-      length: 5
+      length: 6
       runningcost: 14
       fixed_cost: 72
       intro_year: 2015

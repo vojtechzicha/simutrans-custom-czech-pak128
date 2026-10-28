@@ -1,12 +1,11 @@
 agency: DPPraha
 type: "Urbanway_18M_Hybrid"
-# Sprites are placed in the tile to the native pak128.cs lane position: the
-# upstream 18M art sat 1-4 px off the lane, so both sections were shifted by
-# the same per-view amount (joint unchanged) onto the Urbanway 12M footprint.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: Lubak91
+copyright: vojtechzicha
 
 display:
   agency_en: "DPP"
@@ -29,9 +28,10 @@ display:
 # transverse roof bands; rear black upper, grey lower with a red block on the
 # vehicle's left; amber LED displays. Roof: battery / A-C pod on the front
 # section, low box plus A-C unit on the rear section.
-# Sprite: Lubak91's CZR-Brno-Iveco-Urbanway-18M-A/-B (same Urbanway body;
-# Iveco-Urbnaway-18M-*.png cols 1-8) merged to rows 0/1 and fully repainted;
-# glass on the lit-window specials, bellows as a clean dark-grey block.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Iveco
+# Urbanway 18M Hybrid body (sections 8 + 6) in PID šedo-červená painted by
+# tools/busrender/praha.py (until 2026-10-28 the hand-drawn upstream sheet).
+# Regenerate with tools/busrender/praha.py.
 
 vehicles:
   - id: "Urbanway_18M_Hybrid-A"
@@ -56,7 +56,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 7
+      length: 8
       engine_type: diesel
 
   - id: "Urbanway_18M_Hybrid-B"
@@ -81,7 +81,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 5
+      length: 6
       engine_type: diesel
       power: 265
       gear: 67

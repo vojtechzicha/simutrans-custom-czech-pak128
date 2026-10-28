@@ -1,9 +1,9 @@
 agency: DPMostLitvinov
 type: "Urbanway_18M"
-copyright: Lubak91
+copyright: vojtechzicha
 
-# The source sprites carry the upstream lane placement (their dats use no
-# offset), so no extra shift; the default [0, 4] sank them 4 px.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
@@ -22,6 +22,10 @@ display:
 # the original `Urbnaway` typo) at 1152×128 each, using cols 1–8 with col 0
 # as the stacked-extras column. The build input PNG here merges them into a
 # single 1024×256 sheet: row 0 = A (front), row 1 = B (rear).
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Iveco
+# Urbanway 18M body (sections 8 + 6) in the town palette most_uw painted by
+# tools/busrender/sor_town.py (until 2026-10-28 the hand-drawn upstream
+# sheet). Regenerate with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "Urbanway_18M-A"
@@ -46,7 +50,7 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 7
+      length: 8
       engine_type: diesel
 
   - id: "Urbanway_18M-B"
@@ -71,7 +75,7 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 5
+      length: 6
       engine_type: diesel
       power: 213
       gear: 67
