@@ -5,7 +5,7 @@ type: "Urbino_10_5"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: TommPa9
+copyright: vojtechzicha
 
 display:
   agency_en: "DPP"
@@ -26,10 +26,10 @@ display:
 # - pidsedocervena, PID scheme A: grey body and roof, red columns over both
 #   wheel arches (skirt to window line, crossing the roof), black glazing
 #   band, red block on the vehicle's left of the lower front and rear.
-# Sprite: replaces the upstream CZR-Praha-Solaris_Urbino_10 (TommPa9; PID
-# batch in player-colour paint, non-darkening glass). Box-model render with
-# the upstream's size and the Solaris Urbino IV layout, same projection as
-# the DPP Streetway set. Both liveries share the 2020 intro date.
+# Sprite: original box-model render (vojtechzicha): the dpo_solaris.py Urbino
+# 10 body in the DPP city red-white and PID grey-red painted by
+# tools/busrender/solaris_town.py (until 2026-10-28 the hand-drawn upstream
+# sheet). Regenerate with tools/busrender/solaris_town.py.
 
 vehicles:
   - id: "Urbino_10_5"

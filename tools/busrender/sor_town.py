@@ -496,6 +496,10 @@ TOWNS = {
     "karvina_sw": dict(body=WHITE, roof=ROOFW, lower=WHITE, disp=(0xEC, 0xEE, 0xE4),
                        front=dict(bumper=WHITE, band=WHITE),
                        rear=dict(bumper=WHITE, panel=WHITE, upper=BLACK)),
+    # DPMO green e-bus scheme (the Urbino 12 "zelena")
+    "dpmo_green": dict(body=(0x6E, 0xC0, 0x2E), roof=(0x7C, 0xCC, 0x3A), lower=(0x6E, 0xC0, 0x2E), disp=LEDG,
+                       front=dict(bumper=(0x5A, 0xA0, 0x24), mask=(0x6E, 0xC0, 0x2E)),
+                       rear=dict(bumper=(0x5A, 0xA0, 0x24), panel=(0x6E, 0xC0, 0x2E), upper=BLACK)),
     "tabor_uw": dict(body=WHITE, roof=ROOFW, lower=WHITE, disp=AMBER,
                      front=dict(bumper=LIGHT_GREY, mask=WHITE),
                      rear=dict(bumper=LIGHT_GREY, panel=WHITE, upper=WHITE)),
@@ -878,6 +882,10 @@ CIT18 = mk(H.UW18, face="uw1", pods=UW18_AC)
 SW12 = mk(H.SW12, pods=H.SW12_DIESEL)
 SW12_CNG = mk(H.SW12, pods=H.SW_CNG)
 SW18_CNG = mk(H.SW18, pods=[(0.20, 6.00, 0.33, 1.00, "fair"), (12.40, 15.60, 0.30, 0.95, "fair")])
+# Irisbus Citelis 12M (TommPa9 / Lubak91 / VTPsim until 2026-10-28): the
+# Urbanway body with the older uw1 face
+CIT12 = mk(H.UW12, face="uw1", pods=UW_AC)
+CIT12_CNG = mk(H.UW12, face="uw1", pods=UW_CNG)
 UW105 = mk(H.UW12, real_len=10.5, axles=[2.70, 7.40], doors=[(0.32, 1.55), (4.10, 5.40), (7.95, 9.10)],
            engine=(9.20, 10.35), sidedisp=(2.60, 3.90), cu=[7], pods=[(2.00, 4.20, 0.24, 0.85, AC)])
 
@@ -926,6 +934,10 @@ FAMILIES = {
     "vehicle-bus/mhd-frydek-mistek/urbanway_12m_cng": {"3csadbilozelena": [(UW12_CNG, "fm_uw")]},
     "vehicle-bus/mhd-tabor/urbanway_12m_cng": {"comettbila": [(UW12_CNG, "tabor_uw")]},
     "vehicle-bus/mhd-trinec/urbanway_12m": {"trinecbilozelena": [(UW12, "trinec_uw")]},
+    "vehicle-bus/dp-most-litvinov/citelis_12m": {"mostzlutocervena": [(CIT12, "most_uw")]},
+    "vehicle-bus/dpmb/citelis_12m_cng": {"dpmbbilocervena": [(CIT12_CNG, "dpmb_uw")]},
+    "vehicle-bus/dpmp/citelis_12m": {"dpmpbilocervena": [(CIT12, "dpmp_uw"), (CIT12_CNG, "dpmp_uw")]},
+    "vehicle-bus/mdpo/citelis_12m": {"mdpobilocervena": [(CIT12, "mdpo_uw")]},
     "vehicle-bus/dpmp/streetway_12m": {"ivecopredvadeci": [(SW12, "demo_sw")]},
     "vehicle-bus/mhd-krnov/streetway_12m": {"krnovbila": [(SW12, "krnov")]},
     "vehicle-bus/dp-most-litvinov/urbanway_18m": {"mostzlutocervena": [(UW18, "most_uw")]},

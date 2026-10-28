@@ -998,9 +998,9 @@ def z_white(c):
     return "white" if z_white_green(c) == "white" else None
 
 
-def sw_rows(spec, palette):
-    """the Iveco Streetway of dpmhk.py in a sor_town.py palette (the town
-    Streetways since 2026-10-28)"""
+def town_rows(spec, palette):
+    """a sor_town.py body spec in one of its palettes (the town Streetways and
+    the Havířov Citelis since 2026-10-28)"""
     def build():
         import sor_town as ST
         return [[np.array(t)[:, :, :3].copy() for t in r] for r in ST.build(getattr(ST, spec), palette)]
@@ -1190,7 +1190,7 @@ FAMILIES = {
         copyright="vojtechzicha",
         vehicles=one("Streetway_12M_CNG", "Streetway 12M CNG", BUS,
                      f_(750000, 85, 80, 12, 24, 135, 2023, 8, "diesel", 243, 55, intro_month=6, retire=2050)),
-        liveries=[("havirovmodra", *HAV_NAME, sw_rows("SW12_CNG", "havirov"))],
+        liveries=[("havirovmodra", *HAV_NAME, town_rows("SW12_CNG", "havirov"))],
         note="Iveco Streetway 12M CNG (bioCNG, built in Turkey), doors 2-2-2. Havířov MHD\n"
              "(Transdev Slezsko): 40-1325 to 40-1341, 17 cars (6/2023 - 12/2024), bought\n"
              "for the 2024-2033 city contract. Blue city scheme from new; " + HAV_DECALS + ";\n"
@@ -1264,7 +1264,7 @@ FAMILIES = {
         vehicles=artic("Streetway_18M_CNG", "Streetway 18M CNG",
                        f_(520000, 90, 90, 10, 25, 128, 2022, 8, "diesel", None, None, retire=2050),
                        f_(380000, 61, 90, 8, 11, 56, 2022, 6, "diesel", 265, 62, retire=2050)),
-        liveries=[("havirovmodra", *HAV_NAME, sw_rows("SW18_CNG", "havirov"))],
+        liveries=[("havirovmodra", *HAV_NAME, town_rows("SW18_CNG", "havirov"))],
         note="Iveco Streetway 18M CNG, articulated, doors 2-2-2-2. Havířov MHD: 40-0305\n"
              "(2022, ex Iveco demonstrator, since 9/2023), blue. Fixed consist: front\n"
              "section A (8) + powered rear section B (6), as the DPP Streetway 18M.",
@@ -1273,17 +1273,15 @@ FAMILIES = {
                "fairings, sections 8 + 6 (Lubak91's Streetway sheets until 2026-10-28)."),
     "mhd-havirov/citelis_12m_cng": dict(
         agency=HAVIROV, type="Citelis_12M_CNG", name=("Irisbus Citelis 12M CNG", "Irisbus Citelis 12M CNG"),
-        copyright="VTPsim",
+        copyright="vojtechzicha",
         vehicles=one("Citelis_12M_CNG", "Citelis 12M CNG", BUS,
                      f_(650000, 100, 80, 11, 24, 123, 2014, 8, "diesel", 213, 55, retire=2050)),
-        liveries=[("havirovmodra", *HAV_NAME,
-                   hav_native("CZ-ODIS-Irisbus_Citelis12-Green", [[11.0, 11.5, 12.0]], K.LEDG,
-                              [[(0.12, 0.62, 0.30, 1.0)]]))],
+        liveries=[("havirovmodra", *HAV_NAME, town_rows("CIT12_CNG", "havirov"))],
         note="Irisbus Citelis 12M CNG. Havířov MHD: 40-1486 (2014), the last Citelis,\n"
              "blue since 12/2025, green LED displays.",
-        sprite="VTPsim's ODIS Citelis 12 (CZ-vehicle-bus.pak, frozen in\n"
-               "tools/busrender/src/odis/) ported by odis_town.port_native and repainted\n"
-               "blue, CNG fairing added."),
+        sprite="original box-model render (vojtechzicha): the dpmhk.py Urbanway body with\n"
+               "the Citelis face in sor_town.py's havirov palette, with the CNG fairing\n"
+               "(VTPsim's ODIS Citelis until 2026-10-28)."),
     "mhd-havirov/sor_bng_10_5": dict(
         agency=HAVIROV, type="SOR_BNG_10_5", name=("SOR BNG 10,5", "SOR BNG 10,5"), copyright="vojtechzicha",
         vehicles=one("SOR_BNG_10_5", "BNG 10,5", BUS,
@@ -1360,7 +1358,7 @@ FAMILIES = {
         copyright="vojtechzicha",
         vehicles=one("Streetway_12M_CNG", "Streetway 12M CNG", BUS,
                      f_(750000, 85, 80, 12, 24, 135, 2023, 8, "diesel", 243, 55, intro_month=10, retire=2050)),
-        liveries=[("bila", *W_NAME, sw_rows("SW12_CNG", "karvina_sw"))],
+        liveries=[("bila", *W_NAME, town_rows("SW12_CNG", "karvina_sw"))],
         note="Iveco Streetway 12M CNG (bioCNG). Karviná MHD: 50-1307 (10/2023), plain white\n"
              "with the factory black glazing, Transdev and \"karviná\" logos.",
         sprite="original box-model render (vojtechzicha): the Iveco Streetway body of\n"

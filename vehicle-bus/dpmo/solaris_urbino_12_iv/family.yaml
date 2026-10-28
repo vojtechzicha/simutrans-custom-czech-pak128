@@ -1,6 +1,6 @@
 agency: DPOlomouc
 type: "Urbino_12_IV"
-copyright: TommPa9
+copyright: vojtechzicha
 
 image_offset: [0, 0]            # sprites carry their own tile placement
 windows_lit_when_loaded: true   # empty image = unlit glass, loaded image = lit glass
@@ -12,9 +12,10 @@ display:
   family_cs: "Solaris Urbino 12 IV"
 
 # Solaris Urbino 12 IV, DPMO 645-666 (2016-2022, 662-666 facelift). Sprite:
-# TommPa9's Urbino 12 IV body (DPO sheet) repainted to the DPMO Gen IV variant
-# of the white-blue-red scheme (white fairing with navy ends, black window
-# band, red-framed white lower panel, navy skirt), normalised to the lane.
+# original box-model render (vojtechzicha): the dpo_solaris.py Urbino 12 IV
+# body in the DPMO palette painted by tools/busrender/solaris_town.py (until
+# 2026-10-28 the hand-drawn upstream sheet). Regenerate with
+# tools/busrender/solaris_town.py.
 
 vehicles:
   - id: "Urbino_12_IV"

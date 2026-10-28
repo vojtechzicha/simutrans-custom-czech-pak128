@@ -5,7 +5,7 @@ type: "Citelis_12M_CNG"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: VTPsim
+copyright: vojtechzicha
 
 display:
   agency_en: "MHD Havířov"
@@ -15,9 +15,9 @@ display:
 
 # Irisbus Citelis 12M CNG. Havířov MHD: 40-1486 (2014), the last Citelis,
 # blue since 12/2025, green LED displays.
-# Sprite: VTPsim's ODIS Citelis 12 (CZ-vehicle-bus.pak, frozen in
-# tools/busrender/src/odis/) ported by odis_town.port_native and repainted
-# blue, CNG fairing added.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Urbanway body with
+# the Citelis face in sor_town.py's havirov palette, with the CNG fairing
+# (VTPsim's ODIS Citelis until 2026-10-28).
 # Regenerate with tools/busrender/odis_town.py (family.yaml: --yaml).
 
 vehicles:

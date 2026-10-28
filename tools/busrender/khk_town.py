@@ -597,7 +597,8 @@ def trutnov_rows(src_rows, paint_fn, sections):
 # Škoda Perun 26BB HE (Solaris Urbino 12 IV body): TommPa9's Urbino 12 IV
 # electric of the Tábor family (roof battery fairing), its COMETT white and the
 # orange/black chequered patch on the ends turned Arriva blue
-URBINO_SRC = "vehicle-bus/mhd-tabor/solaris_urbino_12_electric/sprites/comettbila.png"
+# (frozen in src/: the Tábor family itself is a solaris_town.py render since 2026-10-28)
+URBINO_SRC = "tools/busrender/src/khk_urbino12e_tommpa9.png"
 
 
 def paint_urbino(c):

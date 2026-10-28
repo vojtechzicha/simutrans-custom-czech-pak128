@@ -1,11 +1,11 @@
 agency: DPPardubice
 type: "Citelis_12M"
-# Sprites are placed in the tile to the native pak128.cs lane position (body
-# footprint matched to the median of native 12 m buses), so no extra shift.
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: TommPa9
+copyright: vojtechzicha
 
 display:
   agency_en: "DPMP"
@@ -17,9 +17,11 @@ display:
 # cars (207–229) as of 2026 (dpmp.cz / trolejbus.cz). The CNG version is
 # visually distinct by its roof tank fairing, so it is its own vehicle and
 # sprite row. Capacity 28–32 seated / 65 standing; diesel Iveco Cursor 8
-# 180 kW, CNG Cursor 8 CNG 200 kW. Sprite: TommPa9's Praha Citelis 12M,
-# repainted to the DPMP white-red (NRP) scheme; the CNG row adds the raised
-# roof tank fairing over the front ~60 % of the roof.
+# 180 kW, CNG Cursor 8 CNG 200 kW. Sprite: original box-model render
+# (vojtechzicha): the dpmhk.py Urbanway 12M body with the Citelis face (diesel
+# and CNG) in the dpmp_uw palette painted by tools/busrender/sor_town.py
+# (until 2026-10-28 the hand-drawn upstream sheet). Regenerate with
+# tools/busrender/sor_town.py.
 
 vehicles:
   - id: "Citelis_12M"

@@ -5,7 +5,7 @@ type: "Citelis_12M_CNG"
 image_offset: [0, 0]
 # Windows light up at night only while passengers are aboard.
 windows_lit_when_loaded: true
-copyright: TommPa9
+copyright: vojtechzicha
 
 display:
   agency_en: "DPMB"
@@ -21,9 +21,10 @@ display:
 # LED displays. The white CNG tank fairing covers the rear half of the roof
 # (drawing and rear photo of 7009; the research note "front two-thirds" is
 # wrong), with the Autoclima A/C unit at the front of the roof.
-# Sprite: replaces the upstream CZR-Brno-Irisbus_Citelis_12M (blank sw
-# direction, flat roof). Box-model render calibrated to the repo's DPMP
-# Citelis 12M (TommPa9 body), same projection as the DPP/DPMB bus renders.
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py Urbanway 12M
+# body with the Citelis face and CNG fairing in the dpmb_uw palette painted by
+# tools/busrender/sor_town.py (until 2026-10-28 the hand-drawn upstream
+# sheet). Regenerate with tools/busrender/sor_town.py.
 
 vehicles:
   - id: "Citelis_12M_CNG"

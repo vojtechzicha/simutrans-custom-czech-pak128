@@ -83,6 +83,10 @@ class SVeh(DS.Solaris):
 
 
 def build(model, liv, lens):
+    if liv.startswith("pid:"):                  # pid.py's PID grey-red / trikolóra painter
+        import pid
+        key, reds = PID[model]
+        return pid.solaris(model, liv[4:], reds, lens=lens)()
     sp = DS.MODELS[model]
     m = SVeh(sp, liv, DS.OPTS)
     rows = []
@@ -101,6 +105,9 @@ def build(model, liv, lens):
     return rows
 
 
+# the PID columns per model for "pid:pa" / "pid:pb" (pid.solaris)
+PID = {"u10": ("pa", [(1.60, 3.50), (6.50, 8.30)])}
+
 # family -> (yaml lengths per section, {livery colour: [(model, town palette), ...]})
 FAMILIES = {
     "vehicle-trolleybus/dpmb/26tr": ([8], {"dpmbbilocervena": [("26tr", "dpmb_uw")]}),
@@ -110,6 +117,12 @@ FAMILIES = {
     "vehicle-bus/dpmb/solaris_urbino_18": ([8, 6], {"dpmbbilocervena": [("u18_3", "dpmb_uw")]}),
     "vehicle-bus/dpmo/solaris_urbino_18": ([8, 6], {"dpmobilomodrocervena": [("u18_3", "dpmo")]}),
     "vehicle-bus/dpmo/solaris_urbino_18_iv": ([8, 6], {"dpmobilomodrocervena": [("u18_4", "dpmo")]}),
+    "vehicle-bus/dpmo/solaris_urbino_12": ([8], {"dpmobilomodrocervena": [("u12_3", "dpmo")],
+                                                 "zelena": [("u12_3", "dpmo_green")]}),
+    "vehicle-bus/dpmo/solaris_urbino_12_iv": ([8], {"dpmobilomodrocervena": [("u12_4", "dpmo")]}),
+    "vehicle-bus/mhd-tabor/solaris_urbino_12_electric": ([8], {"comettbila": [("u12_4e", "tabor_uw")]}),
+    "vehicle-bus/dpp/urbino_10_5": ([7], {"dppcervenobila": [("u10", "most_dpp18")],
+                                          "pidsedocervena": [("u10", "pid:pa")]}),
     "vehicle-bus/mhd-tabor/solaris_urbino_18_iii_cng": ([8, 6], {"comettbila": [("u18_3cng", "tabor_uw")]}),
 }
 

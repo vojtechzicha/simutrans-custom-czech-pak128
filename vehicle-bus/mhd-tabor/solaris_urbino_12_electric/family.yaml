@@ -1,6 +1,6 @@
 agency: MHDTabor
 type: "Urbino_12_electric"
-copyright: TommPa9
+copyright: vojtechzicha
 
 image_offset: [0, 0]            # sprites carry their own tile placement
 windows_lit_when_loaded: true   # empty image = unlit glass, loaded image = lit glass
@@ -13,9 +13,10 @@ display:
 
 # Solaris Urbino 12 electric (4th generation, doors 2-2-2), 10 units on Tábor
 # MHD (E30-E37 2024-25, E50-E51 2025), depot charging (no pantograph).
-# Sprite: TommPa9's Urbino 12 IV body (DPO sheet) repainted COMETT white with
-# the black front visor, the roof battery fairing and the orange/black COMETT
-# chequered patch at the lower right of front and rear.
+# Sprite: original box-model render (vojtechzicha): the dpo_solaris.py Urbino
+# 12 IV electric body in the tabor_uw palette painted by
+# tools/busrender/solaris_town.py (until 2026-10-28 the hand-drawn upstream
+# sheet). Regenerate with tools/busrender/solaris_town.py.
 
 vehicles:
   - id: "Urbino_12_electric"
