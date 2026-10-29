@@ -204,6 +204,13 @@ class PVeh(Veh):
     def door_kick(self):
         return None
 
+    def nb_corner(self):
+        """the NB's rear corner panel in the colour round the rear window (the
+        trikolóra keeps its blue rear)"""
+        if self.liv == "B":
+            return None
+        return self.P["body"] if self.liv == "A" else self.P["white"]
+
     def tex_door(self, p, u, U1, d):
         c = Veh.tex_door(self, p, u, U1, d)
         if c == H.HANDRAIL and self.liv == "A":
@@ -482,11 +489,11 @@ class PVeh(Veh):
                 return sh(low, f)
             if inr(z, 2.36, 2.58) and inr(t, 0.25, 0.80):
                 return self.DISP
-            if inr(z, 1.78, 2.62) and a < HW - 0.22:
+            if self.nb_rear_glass(t, z):
                 return GLASS
             if L == "B":
                 return sh(P["blue"], f)
-            return BLACK if L in ("A", "C") else sh(low, f)
+            return sh(low, f)                              # the body colour round the rear window
         if st == "nc":                                     # NC 18 rear (Autotec / Hrncire photos)
             if z < 0.28:
                 return sh(LIP, f)

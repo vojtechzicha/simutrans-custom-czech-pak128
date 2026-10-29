@@ -680,6 +680,12 @@ class TVeh(Veh):
     def cant_painted(self):
         return bool(self.P.get("cant"))
 
+    def nb_corner(self):
+        """the NB's rear corner panel in the colour round the rear window,
+        unless the livery's rear is black"""
+        up = self.P["rear"].get("upper")
+        return None if up in (None, BLACK) else up
+
     def roof_edge_painted(self):
         return bool(self.P.get("roofedge"))
 
@@ -858,7 +864,7 @@ class TVeh(Veh):
                 return sh(R["panel"], f)
             if inr(z, 2.36, 2.58) and inr(t, 0.25, 0.80):
                 return disp
-            if inr(z, 1.78, 2.62) and a < HW - 0.22:
+            if self.nb_rear_glass(t, z):
                 return GLASS
             return sh(R["upper"], f)
         if self.rearstyle == "uw":

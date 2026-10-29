@@ -466,6 +466,29 @@ class Veh:
         """the livery paints the top row of the side itself (sor_town's cant)"""
         return False
 
+    # ---------------- SOR NB rear corner ----------------------------------
+    # The NB's side glazing stops short of the rear: a body-colour panel at the
+    # rear corner, as on the photos (DPP 6608, 6609) and VTPsim's hand-drawn NB
+    # 12 / 18, so the rear reads rounded and the last door stands apart from it
+    NB_CORNER = 0.55
+
+    def nb_corner(self):
+        """colour of the NB's rear corner panel, None = the band runs round
+        the corner (a livery with a black rear)"""
+        return None
+
+    def nb_side(self, p, u, c):
+        col = self.nb_corner()
+        if col is not None and u >= self.U[-1] - self.NB_CORNER and self.ZBAND0 <= p.z < self.ZR:
+            return sh(col, p.face)
+        return c
+
+    @staticmethod
+    def nb_rear_glass(t, z):
+        """the NB rear window, its upper corners rounded off"""
+        a = abs(t)
+        return inr(z, 1.78, 2.62) and a < HW - 0.22 and not (a > HW - 0.42 and z >= 2.50)
+
     # ---------------- Iveco Streetway ------------------------------------
     def sw_paint(self, role, t):
         """Streetway and Citelis face colours (top-face values): bumper, band
@@ -747,6 +770,8 @@ class Veh:
                     c = self.cit_side(p, u, c)
                 if self.sp.get("tm"):
                     c = self.tm_side(p, u, c)
+                if self.sp.get("nb"):
+                    c = self.nb_side(p, u, c)
                 return c
             dz = self.ZB - self.Z0
             if dz > 0:
