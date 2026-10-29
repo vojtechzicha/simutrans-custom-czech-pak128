@@ -19,7 +19,7 @@ display:
 # drawing tr31.png): white body and roof, tall black window band, thin white
 # belt, red skirt, black front mask, grey bellows, light-grey poles on the
 # front of the rear section. Sprite: original box-model render (vojtechzicha):
-# the dpmhk.py Skoda 31Tr body (SOR NB 18, sections 9 + 5) on the common SOR
+# the dpmhk.py Skoda 31Tr body (SOR NB 18, sections 8 + 6) on the common SOR
 # base, painted by tools/busrender/sor_town.py (until 2026-10-28 VTPsim's hand
 # art). Regenerate with tools/busrender/sor_town.py.
 
@@ -45,7 +45,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 9
+      length: 8
       engine_type: electric
 
   - id: "31Tr-B"
@@ -70,7 +70,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 5
+      length: 6
       engine_type: electric
       power: 250
       gear: 62

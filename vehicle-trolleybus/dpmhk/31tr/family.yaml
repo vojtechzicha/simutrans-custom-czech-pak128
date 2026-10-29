@@ -21,10 +21,11 @@ display:
 # Livery: DPMHK classic red-yellow-white, as on the 30Tr (white front and roof,
 # black window band, yellow band over red, white panel and yellow/red
 # diagonals on the left front corner). 63 and 66 carry full-body adverts.
-# Sprite: new 8-direction box render, 9 + 5 carunit sections matching the real
-# joint position; AC unit at the front of the roof, equipment fairing ahead of
-# the joint, poles on the front of the rear section with the silver retriever
-# rack behind them, aimed at the pak128.cs wire of the vehicle's own lane.
+# Sprite: new 8-direction box render, 8 + 6 carunit sections (the joint at the
+# real 12.3 m drawn at 8 carunits, 2026-10-29); AC unit at the front of the
+# roof, equipment fairing ahead of the joint, poles on the front of the rear
+# section with the silver retriever rack behind them, aimed at the pak128.cs
+# wire of the vehicle's own lane.
 
 vehicles:
   - id: "31Tr-A"
@@ -49,7 +50,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 9
+      length: 8
       engine_type: electric
 
   - id: "31Tr-B"
@@ -74,7 +75,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 5
+      length: 6
       engine_type: electric
       power: 250
       gear: 62

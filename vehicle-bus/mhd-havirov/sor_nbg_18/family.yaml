@@ -17,7 +17,7 @@ display:
 # SOR NBG 18 (CNG), articulated, pusher. Havířov MHD: 40-0103 (2020), blue
 # since 5/2023. Fixed consist: front section A + powered rear section B.
 # City blue with the white logo and the yellow "město pro život" script,
-# CNG fairings on both sections. Sections 9 + 5 carunits as the DPMHK NB 18.
+# CNG fairings on both sections. Sections 8 + 6 carunits as the DPMHK NB 18.
 # Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NB 18 body
 # on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
 # with tools/busrender/sor_town.py.
@@ -45,7 +45,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 9
+      length: 8
       engine_type: diesel
 
   - id: "SOR_NBG_18-B"
@@ -70,7 +70,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 5
+      length: 6
       engine_type: diesel
       power: 213
       gear: 62

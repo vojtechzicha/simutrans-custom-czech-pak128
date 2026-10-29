@@ -22,7 +22,7 @@ display:
 # Livery: DPP classic city scheme (B) as on the NB 12: white body and roof,
 # black window band, narrow white band, red lower body, black upper front,
 # grey bellows; amber displays (front, door-1 side, rear).
-# Sections 9 + 5 carunits as the DPMHK NB 18 (joint at the real 12.3 m). Two
+# Sections 8 + 6 carunits as the DPMHK NB 18 (joint at the real 12.3 m). Two
 # white roof A/C units, one on the rear half of the front section and one on
 # the front half of the rear section, flanking the bellows (photos of 5017,
 # 5073, 5093).
@@ -53,7 +53,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 9
+      length: 8
       engine_type: diesel
 
   - id: "NB_18-B"
@@ -78,7 +78,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 5
+      length: 6
       engine_type: diesel
       power: 243
       gear: 62

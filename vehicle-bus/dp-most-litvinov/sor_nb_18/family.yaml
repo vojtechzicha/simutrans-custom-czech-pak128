@@ -27,7 +27,7 @@ display:
 # Second livery: car 189 (ex-DPP 6668, built 2011, in Most since 12 Sep 2026)
 # still in the DPP city red-white, with the two white roof A/C units flanking
 # the bellows as on 6668 (photo 2026) and the Prague amber displays.
-# Sections 9 + 5 carunits as the DPMHK NB 18 (joint at the real 12.3 m).
+# Sections 8 + 6 carunits as the DPMHK NB 18 (joint at the real 12.3 m).
 # Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NB 18 body
 # on the common SOR base, painted by tools/busrender/sor_town.py. Regenerate
 # with tools/busrender/sor_town.py.
@@ -55,7 +55,7 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 9
+      length: 8
       engine_type: diesel
 
   - id: "SOR_NB_18-B"
@@ -80,7 +80,7 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 5
+      length: 6
       engine_type: diesel
       power: 243
       gear: 62

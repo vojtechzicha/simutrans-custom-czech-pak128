@@ -42,7 +42,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 9
+      length: 8
       engine_type: diesel
       power: 0
       gear: 54
@@ -69,7 +69,7 @@ vehicles:
       retire_month: 12
       waytype: road
       freight: Passagiere
-      length: 5
+      length: 6
       engine_type: diesel
       power: 265
       gear: 61

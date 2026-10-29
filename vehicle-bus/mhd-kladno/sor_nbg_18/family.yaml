@@ -23,7 +23,7 @@ display:
 # "Městská doprava Kladno" scheme: white roof with an A/C unit behind the
 # front, a raised CNG tank fairing over the rear half of the front section and
 # an A/C unit on the rear section; black window band, bold red lower band,
-# white skirt; amber destination displays. Sections 9 + 5 carunits as the
+# white skirt; amber destination displays. Sections 8 + 6 carunits as the
 # DPMHK NB 18 (joint at the real 12.3 m).
 # Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NB 18 body
 # on the common SOR base with Kladno's doors, painted by
@@ -54,7 +54,7 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 9
+      length: 8
       engine_type: diesel
 
   - id: "SOR_NBG_18-B"
@@ -79,7 +79,7 @@ vehicles:
       retire_month: 1
       waytype: road
       freight: Passagiere
-      length: 5
+      length: 6
       engine_type: diesel
       power: 213
       gear: 62

@@ -145,10 +145,13 @@ NB12 = dict(
 # rear one (Brno 7030)
 NB12_3D = dict(NB12, doors=[(0.30, 1.55), (4.15, 5.45), (9.25, 10.45)])
 # SOR NB 18 / TNB 18 (Skoda 31Tr): long front section (~12.3 m, 3 doors), short
-# pusher-style rear section (2 doors, the last behind the rear axle)
+# pusher-style rear section (2 doors, the last behind the rear axle). Drawn at
+# 8 + 6 carunits like every other articulated bus: with a 9-carunit front
+# section the rear section's anchor fell on the tile before a stop and was
+# drawn turned on a curve (owner's screenshots, 2026-10-29)
 NB18 = dict(
     sor=True, nb=True, winrise=0.0,
-    face="nb", rear="nb", real_len=18.75, joints=[12.30], cu=[9, 5],
+    face="nb", rear="nb", real_len=18.75, joints=[12.30], cu=[8, 6],
     axles=[3.00, 10.55, 16.25],
     doors=[(0.30, 1.55), (4.60, 5.90), (7.60, 8.80), (13.10, 14.30), (16.95, 18.10)],
     drv=(0.35, 1.55),
