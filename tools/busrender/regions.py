@@ -291,7 +291,8 @@ FAMILIES = {
         fields(650000, 88, 100, 12, 265, 9, 2018),
         "Iveco Crossway LINE 13M high-floor interurban, tag axle, doors 1-2-0. On PID\n"
         "lines (Mladoboleslavsko, Mělnicko) 2026: BusLine LK 270 (2025, photo\n"
-        "seznam-autobusu 433880) and ČSAD Liberec, white with the IDOL logos."),
+        "seznam-autobusu 433880), white with the IDOL logos. The live map also gave a\n"
+        "ČSAD Liberec LINE 13M (11695), not found in the register (inferred)."),
     "idol/crossway_pro_12m": fam(IDOL, CrosswayPro12, "Crossway_Pro_12M", "Iveco Crossway PRO 12M", BUS,
         [("idol", "BusLine LK, ČSAD Liberec")],
         fields(640000, 80, 100, 11, 265, 8, 2015),
