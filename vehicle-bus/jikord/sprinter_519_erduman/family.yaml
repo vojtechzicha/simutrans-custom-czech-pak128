@@ -1,0 +1,51 @@
+agency: JIKORD
+type: "Sprinter_519_Erduman"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+display:
+  agency_en: "IDESKA"
+  agency_cs: "IDESKA"
+  family_en: "Erduman Mercedes-Benz Sprinter 519 CDI"
+  family_cs: "Erduman Mercedes-Benz Sprinter 519 CDI"
+
+# Erduman (Seyyah) low-floor city minibus on the Mercedes-Benz Sprinter 519 CDI,
+# about 7.4 m, doors 1-2, 20+3 seats + 7 standing. On PID lines (Příbramsko)
+# 2026: ČSAD AUTOBUSY České Budějovice 17212 (2024, Strakonice), plain white
+# (photo seznam-autobusu 426561). The PID grey-red ones are the VZ-Praha object.
+# Sprite: original box render, tools/busrender/praha_small.py (SPRINTER_W), the
+# Erduman Sprinter model at real length on the native 12 m lane footprint;
+# regenerate with python tools/busrender/praha_small.py sprinter_519_erduman.
+
+vehicles:
+  - id: "Sprinter_519_Erduman"
+    display_id: "Sprinter 519 CDI"
+    role_en: "minibus"
+    role_cs: "minibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 190000
+      payload: 30
+      speed: 100
+      weight: 4
+      runningcost: 12
+      fixed_cost: 70
+      intro_year: 2024
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 140
+      gear: 64
+      smoke: Diesel_small
+
+liveries:
+  - color: bila
+    name_en: "white · ČSAD AUTOBUSY České Budějovice"
+    name_cs: "bílá · ČSAD AUTOBUSY České Budějovice"

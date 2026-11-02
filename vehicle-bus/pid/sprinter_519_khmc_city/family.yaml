@@ -1,0 +1,51 @@
+agency: PID
+type: "Sprinter_519_KHMC_City"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "KHMC Mercedes-Benz Sprinter 519 CDI City"
+  family_cs: "KHMC Mercedes-Benz Sprinter 519 CDI City"
+
+# KHMC Mercedes-Benz Sprinter 519 CDI City (W906), about 7.7 m. On PID lines
+# (Mělnicko) 2026: Kokořínský SOK 1358 / 1359 (2018) in PID grey-red (the
+# register's current paint; photos seznam-autobusu 266172 / 276086 show the
+# earlier trikolóra). Drawn on the KHMC 2024 body (SPR_KHMC_CITY).
+# Sprite: original box render, tools/busrender/praha_small.py (SPR_KHMC_CITY), the
+# Erduman Sprinter model at real length on the native 12 m lane footprint;
+# regenerate with python tools/busrender/praha_small.py sprinter_519_khmc_city.
+
+vehicles:
+  - id: "Sprinter_519_KHMC_City"
+    display_id: "Sprinter 519 CDI City"
+    role_en: "minibus"
+    role_cs: "minibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 180000
+      payload: 24
+      speed: 100
+      weight: 4
+      runningcost: 11
+      fixed_cost: 67
+      intro_year: 2018
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 140
+      gear: 64
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Kokořínský SOK"
+    name_cs: "PID šedo-červená · Kokořínský SOK"

@@ -1,0 +1,51 @@
+agency: PID
+type: "Sprinter_519_KHMC"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "KHMC Mercedes-Benz Sprinter 519 CDI"
+  family_cs: "KHMC Mercedes-Benz Sprinter 519 CDI"
+
+# KHMC low-floor city minibus on the Mercedes-Benz Sprinter 519 CDI (W907), about
+# 7.7 m, doors 1-2 (the folding door behind the front axle), 15+3+1 seats + 7
+# standing. On PID lines (Mladoboleslavsko) 2026: Lutan 1817 (2024, Benátecká
+# Vrutice) in PID grey-red (photos seznam-autobusu 439986, 413332).
+# Sprite: original box render, tools/busrender/praha_small.py (SPR_KHMC), the
+# Erduman Sprinter model at real length on the native 12 m lane footprint;
+# regenerate with python tools/busrender/praha_small.py sprinter_519_khmc.
+
+vehicles:
+  - id: "Sprinter_519_KHMC"
+    display_id: "Sprinter 519 CDI"
+    role_en: "minibus"
+    role_cs: "minibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 200000
+      payload: 26
+      speed: 100
+      weight: 4
+      runningcost: 12
+      fixed_cost: 74
+      intro_year: 2024
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 140
+      gear: 64
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Lutan"
+    name_cs: "PID šedo-červená · Lutan"

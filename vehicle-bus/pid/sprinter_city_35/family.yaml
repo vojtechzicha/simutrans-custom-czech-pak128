@@ -1,0 +1,50 @@
+agency: PID
+type: "Sprinter_City_35"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Mercedes-Benz Sprinter II City 35"
+  family_cs: "Mercedes-Benz Sprinter II City 35"
+
+# Mercedes-Benz Sprinter II City 35 (W906) city minibus, about 7.7 m, the door
+# behind the front axle. On PID lines (Praha-západ) 2026: Martin Uher 1105 (2017)
+# in PID grey-red (photos seznam-autobusu 391129, 367748; earlier trikolóra).
+# Sprite: original box render, tools/busrender/praha_small.py (SPR_CITY35), the
+# Erduman Sprinter model at real length on the native 12 m lane footprint;
+# regenerate with python tools/busrender/praha_small.py sprinter_city_35.
+
+vehicles:
+  - id: "Sprinter_City_35"
+    display_id: "Sprinter City 35"
+    role_en: "minibus"
+    role_cs: "minibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 170000
+      payload: 24
+      speed: 100
+      weight: 4
+      runningcost: 11
+      fixed_cost: 63
+      intro_year: 2017
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 120
+      gear: 64
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Martin Uher"
+    name_cs: "PID šedo-červená · Martin Uher"

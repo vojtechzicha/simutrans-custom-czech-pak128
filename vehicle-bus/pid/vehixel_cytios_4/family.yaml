@@ -1,0 +1,50 @@
+agency: PID
+type: "Vehixel_Cytios_4"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Irisbus Vehixel Cytios 4"
+  family_cs: "Irisbus Vehixel Cytios 4"
+
+# Irisbus Vehixel Cytios 4 low-floor minibus on the Iveco Daily 65C, about 7.6 m,
+# the short steep Daily bonnet. On PID lines (Praha-západ) 2026: Martin Uher 1107
+# (2012) in PID grey-red (photos seznam-autobusu 428239, 398388).
+# Sprite: original box render, tools/busrender/praha_small.py (CYTIOS), the
+# Erduman Sprinter model at real length on the native 12 m lane footprint;
+# regenerate with python tools/busrender/praha_small.py vehixel_cytios_4.
+
+vehicles:
+  - id: "Vehixel_Cytios_4"
+    display_id: "Cytios 4"
+    role_en: "minibus"
+    role_cs: "minibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 160000
+      payload: 24
+      speed: 100
+      weight: 4
+      runningcost: 10
+      fixed_cost: 59
+      intro_year: 2012
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 5
+      engine_type: diesel
+      power: 125
+      gear: 64
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · Martin Uher"
+    name_cs: "PID šedo-červená · Martin Uher"

@@ -318,6 +318,10 @@ The colours are those of praha.py "A" / "B". The articulated types come from two
 
 Run `python tools/busrender/pid.py [family …] [--yaml] [--preview DIR]`. Still to come (TODO): the one-off bodies the repo doesn't have.
 
+### Neighbouring regions on PID lines (`vehicle-bus/idol/`, `vehicle-bus/jikord/`, `vehicle-bus/duk/`)
+
+Some buses on the Středočeský PID lines belong to operators of the neighbouring regions and wear their region's or their own paint. They go into one pak per region (owner, 2026-11-02): agency `IDOL` → `VZ-IDOL-bus` (Liberecký kraj, white with the red IDOL logos), `JIKORD` → `VZ-JIKORD-bus` (Jihočeský kraj: the IDESKA petrol green and the older ČSAD AUTOBUSY ČB white "busem"), and `DUK` → `VZ-DUK-bus` (Ústecký kraj, DÚK green). A plain white bus uses the existing white object (VZ-IREDO / VZ-DPPraha), and a PID grey-red one uses the VZ-PID object. `tools/busrender/regions.py [family …] [--yaml] [--preview DIR]` renders them on the iredo_models / iredo_coachmodels bodies, and adds the Crossway LINE 10,8M, Evadys 13M, Intouro III L and Otokar Vectio U LE bodies. The white JIKORD Erduman Sprinter comes from `praha_small.py` (`SPRINTER_W`). The scope is what the PID live map showed on 2026-11-02, with each paint checked on seznam-autobusu.cz.
+
 ### Královéhradecký kraj (`vehicle-bus/iredo/`, `vehicle-bus/mhd-<town>/`)
 
 The kraj's regional buses are named after the integrated system: agency `IREDO` builds `VZ-IREDO-bus.pak`, which also holds the town lines integrated in IREDO (Náchod, Rychnov nad Kněžnou, Týniště, Vrchlabí, Dvůr Králové). Town systems outside IREDO get their own `MHD<Town>` pak (Trutnov, Špindlerův Mlýn, Jičín, Nová Paka, Kostelec nad Orlicí). As in Prague, there is one object per type × livery and the operator appears only in the livery display name.

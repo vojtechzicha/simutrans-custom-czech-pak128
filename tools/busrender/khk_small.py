@@ -491,6 +491,39 @@ class DvurKralove(RLivery):
         return None
 
 
+class RRicany(RLivery):
+    """MHD Říčany (ČSAD Benešov, NovoCiti Life Class II facelift 30001-30009,
+    since 9/2025; photos seznam-autobusu 429107, 431788): white roof and
+    upper body, the black glasshouse, a bright green lower body under a white
+    band that sweeps from the front wheel up to the windows, green front under
+    the black windscreen mask with a silver bar at the bumper, the rear white
+    over a green bumper. Not in IREDO / outside KHK: no kraj sticker."""
+    body = WHITE
+    sticker = False
+    GREEN = (0x5C, 0xC8, 0x46)
+
+    def side(self, px):
+        n = px.nrows
+        if px.rk < 1:
+            return None                             # above the windows: white
+        # the white band: one row under the windows over the rear part, sweeping
+        # down to the skirt ahead of the front wheel
+        if px.u >= 0.30:
+            return None if px.rk == 1 else self.GREEN
+        drop = int(round((0.30 - px.u) / 0.30 * (n - 1)))
+        return None if px.rk == 1 + drop else self.GREEN
+
+    def front(self, px):
+        if px.h >= 0.92:
+            return SILVER
+        if px.h >= 0.55:
+            return self.GREEN
+        return None
+
+    def rear(self, px):
+        return self.GREEN if px.h >= 0.85 else None
+
+
 def repaint(tiles, spec, liv, ref=0xEE, roof_k=1.05, ac=None, sticker=True, pods=True):
     """repaint a base row; ac = (u0, u1) draws a flat roof A/C box; pods: the
     grey roof pixels of the base are a roof pod (else only roof lines)"""
@@ -609,7 +642,8 @@ NOVO_SPEC = {
 }
 
 RLIVERIES = {"bila": RBila, "transdev": RTransdev, "cds": RCDS, "ptransport": RPTransport,
-             "bilocerna": RBiloCerna, "dvurkralove": DvurKralove, "bilapk": RBilaPK}
+             "bilocerna": RBiloCerna, "dvurkralove": DvurKralove, "bilapk": RBilaPK,
+             "ricanyzelena": RRicany}
 
 
 def repaint_job(base, spec, ac=None, sticker=True, pods=True):
@@ -968,6 +1002,7 @@ LIVNAME = {
     "stribrnajicin": ("silver, Jičín logo", "stříbrná s logem Jičína"),
     "stribrna": ("silver-grey", "stříbrošedá"),
     "bilapk": ("white, Pardubický kraj", "bílá, Pardubický kraj"),
+    "ricanyzelena": ("MHD Říčany, white with the green band", "MHD Říčany, bílá se zeleným pruhem"),
 }
 
 AGENCY = {
@@ -975,6 +1010,7 @@ AGENCY = {
     "MHDJicin": ("MHD Jičín", "MHD Jičín"),
     "MHDNovaPaka": ("MHD Nová Paka", "MHD Nová Paka"),
     "MHDKostelec": ("MHD Kostelec nad Orlicí", "MHD Kostelec nad Orlicí"),
+    "MHDRicany": ("MHD Říčany", "MHD Říčany"),
 }
 
 MIDI = ("midibus", "midibus")
@@ -1026,6 +1062,17 @@ FAMILIES = {
              "Sprite: the DPMP NovoCiti Life sheet (VTPsim's Urbino 8 body shortened to\n"
              "7.9 m), white with the black glasshouse and front mask as on the BusLine\n"
              "car (photo seznam-autobusu 330687), plus the KHK rear sticker."),
+    "vehicle-bus/mhd-ricany/novociti_life": dict(
+        agency="MHDRicany", type="NovoCiti_Life", name="Isuzu NovoCiti Life", role=MIDI,
+        copyright=VTP, job=repaint_job(NOVO_BASE, NOVO_SPEC, sticker=False),
+        liveries=[("ricanyzelena", "ČSAD Benešov")],
+        fields=fields(430000, 50, 90, 7, 140, 5, 2025),
+        note="Isuzu NOVO Citi Life Class II facelift, 7.9 m low-floor midibus, doors 1-2.\n"
+             "MHD Říčany (PID town lines, ČSAD Benešov) since 9/2025: 30001-30009, white\n"
+             "with the green lower body and the white band (fleet desk 2026-11-02).\n"
+             "Sprite: the DPMP NovoCiti Life sheet (VTPsim's Urbino 8 body shortened to\n"
+             "7.9 m) repainted by zone (photos seznam-autobusu 429107, 431788); the\n"
+             "facelift front is drawn as the green mask under the windscreen."),
     "vehicle-bus/iredo/sprinter_519": dict(
         agency="IREDO", type="Sprinter_519", name="Mercedes-Benz Sprinter 519 CDI", role=MINI,
         copyright=VZ, job=render_job(SPRINTER_CDS),

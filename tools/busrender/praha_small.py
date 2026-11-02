@@ -483,13 +483,49 @@ SPRINTER = dict(
                 bands=[(3.20, 4.60)], rub=None, zcant=2.40),
 )
 
+# Fleet desk 2026-11-02 (PID regional sheets, photos seznam-autobusu.cz): the
+# other Sprinter-based minibuses on PID lines, all PID grey-red, on the
+# Erduman body (at 1x the converters differ only in length and roof), and the
+# Iveco Daily-based Vehixel Cytios 4 with its shorter, steeper bonnet.
+# KHMC Mercedes-Benz Sprinter 519 CDI (Lutan 1817, 2024; photos 439986, 413332):
+# the taller low-floor box body, 7.7 m, the A/C over the rear
+SPR_KHMC = mk(SPRINTER, L=7.70, glass=(0.85, 7.45),
+              pods=[(0.80, 1.10, 0.34, 1.02, "disp"), (5.40, 7.10, 0.22, 0.72, "ac")])
+# KHMC Sprinter 519 CDI City (Kokořínský SOK 1358 / 1359, 2018, the W906 front;
+# photos 266172, 276086, before the grey-red repaint)
+SPR_KHMC_CITY = SPR_KHMC
+# CMS Auto Mercedes-Benz Sprinter 519 CDI (Martin Uher 1110, 2024; photo 453041)
+SPR_CMS = SPRINTER
+# Mercedes-Benz Sprinter II City 35 (Martin Uher 1105, 2017, the W906 front;
+# photos 391129, 367748): 7.7 m, the door behind the front axle
+SPR_CITY35 = mk(SPRINTER, L=7.67, glass=(0.85, 7.42),
+                pods=[(0.80, 1.10, 0.34, 1.02, "disp"), (5.30, 7.00, 0.20, 0.70, "ac")])
+# Irisbus Vehixel Cytios 4 (Martin Uher 1107, 2012, Iveco Daily 65C; photos
+# 428239, 398388): the box body over a short steep Daily bonnet, 7.6 m
+CYTIOS = mk(SPRINTER, L=7.60, axles=[0.95, 4.70], hood=1.05,
+            rake=[(0.35, 1.40), (0.50, 1.85), (0.60, 2.82)], glass=(0.75, 7.35),
+            pods=[(0.60, 0.90, 0.34, 1.02, "disp"), (5.20, 6.90, 0.20, 0.70, "ac")])
+# the Erduman in plain white (ČSAD AUTOBUSY České Budějovice 17212, 2024,
+# Strakonice; photo 426561): every grey and red of scheme A turned white
+SPRINTER_W = mk(SPRINTER, livery=dict(kind="A", blocks_r=[], blocks_l=[], bands=[], rub=None,
+                                      zcant=2.40, white=True))
+
 # family dir -> {livery colour: model spec}
 FAMILIES = {
     "vehicle-bus/praha/bmc_neocity_8_5": {"pidsedocervena": NEOCITY, "pidcervenomodrobila": NEOCITY_TRI},
     "vehicle-bus/praha/bmc_procity_10_6": {"pidcervenomodrobila": PROCITY, "pidsedocervena": PROCITY_A},
     "vehicle-bus/praha/temsa_md9_le": {"pidsedocervena": TEMSA},
     "vehicle-bus/praha/sprinter_519_erduman": {"pidsedocervena": SPRINTER},
+    "vehicle-bus/pid/sprinter_519_khmc": {"pidsedocervena": SPR_KHMC},
+    "vehicle-bus/pid/sprinter_519_khmc_city": {"pidsedocervena": SPR_KHMC_CITY},
+    "vehicle-bus/pid/sprinter_519_cms": {"pidsedocervena": SPR_CMS},
+    "vehicle-bus/pid/sprinter_city_35": {"pidsedocervena": SPR_CITY35},
+    "vehicle-bus/pid/vehixel_cytios_4": {"pidsedocervena": CYTIOS},
+    "vehicle-bus/jikord/sprinter_519_erduman": {"bila": SPRINTER_W},
 }
+
+# white repaint of scheme A (SPRINTER_W): (top, side) pair as GREY / RED
+WHITE_A = ((0xF4, 0xF4, 0xF2), (0xEC, 0xEC, 0xEA))
 
 SPECIAL = {
     0x244B67, 0x395E7C, 0x4C7191, 0x6084A7, 0x7497BD, 0x88ABD3, 0x9CBEE9, 0xB0D2FF,
@@ -506,6 +542,12 @@ def build(sp):
     for d in DIRS:
         img, _ = render(d, m.boxes(), m.tex, m.L, np.array(ORIGINS[d]))
         tiles.append(img)
+    if sp["livery"].get("white"):
+        faces = list(SH) + ["top"]
+        remap = {col(src, f): col(WHITE_A, f) for src in (GREY, RED) for f in faces}
+        for img in tiles:
+            for a, b in remap.items():
+                img[np.all(img == a, axis=2)] = b
     return tiles
 
 

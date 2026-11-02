@@ -1,0 +1,55 @@
+agency: PID
+type: "Irizar_i4_14M"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "Irizar i4 14M"
+  family_cs: "Irizar i4 14M"
+
+# Irizar i4 14M (Scania K 6x2*4) high-floor intercity coach, 13.97 m, tag axle,
+# doors 1-1-0: ČSAD Česká Lípa 5 (1082-1091, 2024, PID contract subcontract, the
+# red IDOL 'časovka' sticker left out) and KAD's 2 PID cars, in PID 2021 grey-
+# red (pidsedocervena). The white KAD cars are the VZ-IREDO object.
+# Sprite: original box-model render (vojtechzicha): IrizarI4 of
+# iredo_coachmodels.py painted in the PID liveries of
+# tools/busrender/pid.py.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "Irizar_i4_14M"
+    display_id: "Irizar i4 14M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 800000
+      payload: 78
+      speed: 100
+      weight: 14
+      runningcost: 32
+      fixed_cost: 163
+      intro_year: 2022
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 10
+      engine_type: diesel
+      power: 302
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · ČSAD Česká Lípa, KAD"
+    name_cs: "PID šedo-červená · ČSAD Česká Lípa, KAD"

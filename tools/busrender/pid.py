@@ -172,6 +172,12 @@ PSorICN12 = body("PSorICN12", CM.SorICN)
 PSorICN105 = body("PSorICN105", CM.SorICN105)
 PSorC105 = body("PSorC105", M.SorC105)
 PSorC95 = body("PSorC95", M.SorC95)
+# fleet desk 2026-11-02 (PID regional sheets): types seen on PID lines in the grey-red
+PIrizarI4 = body("PIrizarI4", CM.IrizarI4)
+PCrosswayLine13 = body("PCrosswayLine13", M.CrosswayLine13)
+# the LE LINE 12M hybrid: the battery / supercapacitor box over the middle roof
+# (as the DPMP LE CITY 12M hybrid, iredo_models.CrosswayLECity12Hybrid)
+PCrosswayLELineHybrid = body("PCrosswayLELineHybrid", M.CrosswayLELine, AC=(2.5, 8.6))
 
 
 class _CrosswayLELine13(M.CrosswayLELine):
@@ -329,6 +335,14 @@ def _uw12cng_a():
     import dpmhk as H
     import praha as PR
     return H.mk(PR.PUW12A, pods=[(1.6, 8.6, 0.36, 1.00, "body")])
+
+
+def _ebn11():
+    import dpmhk as H
+    # SOR EBN 11,1 (ARRIVA autobusy 7631 / 7633, 2019, Kutná Hora): the older SOR
+    # face, a red column from the front door over the front axle and one over the
+    # rear axle up to the rear door (photos seznam-autobusu 431780, 431767)
+    return H.mk(H.MODELS["ebn11"], reds=[(1.75, 3.75), (7.05, 8.85)])
 
 
 PID_GREY_SIDE = (0xC0, 0xC2, 0xC5)
@@ -971,6 +985,34 @@ FAMILIES = dict([
           "Scania Citywide LE 12M (diesel): 1 bus (ČSAD Polkost, 2019) in " + GR,
           "VTPsim's pak128.cs Citywide LE suburban (frozen in tools/busrender/src/odis/) ported"
           " by odis_town.port_native, repainted, the PID columns by pid.pid_decal.", "VTPsim"),
+    # ------------------------------------------------------------ fleet desk 2026-11-02
+    fam("irizar_i4_14m", "Irizar_i4_14M", "Irizar i4 14M", BUS,
+        f_(800000, 78, 100, 14, 32, 163, 2022, 10, "diesel", 302, 54, smoke=SMOKE),
+        [(A("ČSAD Česká Lípa, KAD"), "pid-a")],
+        PIrizarI4,
+        "Irizar i4 14M (Scania K 6x2*4) high-floor intercity coach, 13.97 m, tag axle,"
+        " doors 1-1-0: ČSAD Česká Lípa 5 (1082-1091, 2024, PID contract subcontract,"
+        " the red IDOL 'časovka' sticker left out) and KAD's 2 PID cars, in " + GR +
+        " The white KAD cars are the VZ-IREDO object."),
+    fam("crossway_line_13m", "Crossway_Line_13M", "Iveco Crossway LINE 13M", BUS,
+        f_(650000, 88, 100, 12, 26, 133, 2018, 9, "diesel", 265, 54, smoke=SMOKE),
+        [(A("KAD"), "pid-a")],
+        PCrosswayLine13,
+        "Iveco Crossway LINE 13M high-floor interurban, tag axle: KAD 1422 in " + GR),
+    fam("crossway_le_line_12m_hybrid", "Crossway_LE_Line_12M_Hybrid",
+        "Iveco Crossway LE LINE 12M Hybrid", BUS,
+        f_(700000, 92, 100, 12, 28, 143, 2023, 8, "diesel", 243, 54, smoke=SMOKE),
+        [(A("Ondřej Platil"), "pid-a")],
+        PCrosswayLELineHybrid,
+        "Iveco Crossway LE LINE 12M Hybrid, the battery box over the middle roof: Ondřej"
+        " Platil, Louny 1463 (2023, PID subcontract since 4/2026) in " + GR + " Roof box"
+        " drawn as the DPMP LE CITY hybrid's; not photo-checked."),
+    city("sor_ebn_11_1", "SOR_EBN_11_1", "SOR EBN 11,1",
+         T.one("SOR_EBN_11_1", "EBN 11,1", T.EBUS,
+               f_(900000, 85, 80, 12, 20, 150, 2019, 8, "battery", 120, 57)),
+         [(A("ARRIVA autobusy"), praha_rows(_ebn11, "A"))],
+         "SOR EBN 11,1 battery bus, 11.1 m, doors 2-2-2, the older SOR face: ARRIVA"
+         " autobusy 7631 / 7633 (2019, ex MHD Kutná Hora, PID lines of Kutnohorsko) in " + GR),
 ])
 
 

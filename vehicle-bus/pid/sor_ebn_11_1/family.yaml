@@ -1,0 +1,52 @@
+agency: PID
+type: "SOR_EBN_11_1"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "SOR EBN 11,1"
+  family_cs: "SOR EBN 11,1"
+
+# SOR EBN 11,1 battery bus, 11.1 m, doors 2-2-2, the older SOR face: ARRIVA
+# autobusy 7631 / 7633 (2019, ex MHD Kutná Hora, PID lines of Kutnohorsko) in
+# PID 2021 grey-red (pidsedocervena).
+# Sprite: original box-model render (vojtechzicha): the dpmhk.py body painted by
+# praha.py PVeh in the PID liveries, spec in tools/busrender/pid.py.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_EBN_11_1"
+    display_id: "EBN 11,1"
+    role_en: "electric bus"
+    role_cs: "elektrobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 900000
+      payload: 85
+      speed: 80
+      weight: 12
+      runningcost: 20
+      fixed_cost: 150
+      intro_year: 2019
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: battery
+      power: 120
+      gear: 57
+
+liveries:
+  - color: pidsedocervena
+    name_en: "PID grey-red · ARRIVA autobusy"
+    name_cs: "PID šedo-červená · ARRIVA autobusy"
