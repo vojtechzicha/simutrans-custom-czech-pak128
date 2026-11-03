@@ -15,6 +15,9 @@ display:
   family_cs: "Mercedes-Benz Conecto LF"
 
 # Mercedes-Benz Conecto LF II, 18 units on Příbram MHD (Arriva).
+# Liveries: red all over (VTPsim's sheet), and the red-black of most of the
+# fleet in 2026 (the black skirt along the lower side, photo seznam-autobusu
+# 254265 of 9522), repainted from the red sheet by tools/busrender/pribram.py.
 
 vehicles:
   - id: "Conecto_LF"
@@ -48,3 +51,6 @@ liveries:
   - color: pribramcervena
     name_en: "Příbram, red"
     name_cs: "Příbram, červená"
+  - color: pribramcervenocerna
+    name_en: "Příbram, red-black"
+    name_cs: "Příbram, červeno-černá"

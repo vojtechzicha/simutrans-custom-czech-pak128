@@ -12,10 +12,13 @@ VZ-PID object; these paks hold only the regions' and operators' own paint.
     idol/     agency IDOL   -> VZ-IDOL-bus     Liberecký kraj (IDOL)
     jikord/   agency JIKORD -> VZ-JIKORD-bus   Jihočeský kraj (IDESKA)
     duk/      agency DUK    -> VZ-DUK-bus      Ústecký kraj (DÚK)
+    vdv/      agency VDV    -> VZ-VDV-bus      Kraj Vysočina (VDV, Veřejná doprava Vysočiny)
 
 Scope: the buses the PID live map showed on the twelve Středočeský okres
 sheets on 2026-11-02 (fleet desk request of simutrans-timetable-4d), paint
-checked on seznam-autobusu.cz the same day.
+checked on seznam-autobusu.cz the same day; widened on 2026-11-03 (owner:
+"if something exists in the real PID, it should be modeled") to every
+region's paint the register gives for the buses on those sheets.
 
 Bodies and liveries are those of iredo_models.py / iredo_coachmodels.py (the
 coach pipeline, the low shape), with the liveries and the few new bodies
@@ -163,8 +166,104 @@ class DukZelena(M.Livery):
         return None
 
 
-for _lv in (Idol, Ideska, Busem, DukZelena):
+class Vdv(M.Livery):
+    """VDV (Veřejná doprava Vysočiny, Kraj Vysočina): white, the black glazing
+    band, panels of green and light-green chevrons on the lower side (between
+    the middle door and the rear axle, and from the rear axle to the rear
+    corner) and on the lower front corner, the small VDV mark behind the middle
+    door. ČSAD AUTOBUSY České Budějovice 18151 (Crossway LE LINE 14,5M, photo
+    seznam-autobusu 451432); the same 'bílá & polep VDV, zelené šipky' on its
+    18101-18106 (LE LINE 10,8M) and ABOUT ME 18154 (14,5M), all on PID line 401
+    in 2026."""
+    slug = "vdv"
+    sticker = False
+    GREEN = (0x8C, 0xC4, 0x3E)
+    LIGHT = (0xC8, 0xE2, 0x9C)
+    disp = (0x62, 0xD6, 0x4A)                           # green LED displays
+
+    def chevron(self, bus, x, k):
+        c = bus.colidx(x, 0.0)
+        return self.GREEN if (c + k) % 2 == 0 else self.LIGHT
+
+    def side(self, bus, x, k, right):
+        L = bus.real_len
+        b0 = sill(bus, x)
+        if not 1 <= k < b0:
+            return None
+        if 0.56 * L <= x < 0.76 * L or 0.86 * L <= x < L - 0.20:
+            return self.chevron(bus, x, k)
+        if x < 0.55 and 2 <= k < b0:
+            return self.chevron(bus, x, k)
+        return None
+
+
+for _lv in (Idol, Ideska, Busem, DukZelena, Vdv):
     M.LIVERIES[_lv.slug] = _lv
+
+
+# ====================================================================== repaints
+# VTPsim's midibus and Scania sheets, repainted zone by zone (odis_town.repaint,
+# the artist's shading kept), for the regions' paint on bodies the box models
+# don't have
+def _T():
+    import odis_town as T
+    return T
+
+
+DUK_ZONES = {"white": (DukZelena.body, DukZelena.roof)}
+IDESKA_ZONES = {"white": (Ideska.body, Ideska.roof)}
+MINT = (0xBC, 0xE6, 0xC6)                               # ČSAD Liberec light green
+MINT_ROOF = (0xC8, 0xEC, 0xD0)
+MINT_ZONES = {"white": (MINT, MINT_ROOF)}
+
+
+def _side_band(colour, f0, f1, z0, z1):
+    """decals(): `colour` on the side faces between body fractions f0..f1 and
+    heights z0..z1 m, shaded like the paint it replaces"""
+    def draw(o, paint, geo, d, r):
+        T = _T()
+        import numpy as np
+        if d not in T.SIDE:
+            return o
+        o = o.copy()
+        side = (geo["face"] == 4) | (geo["face"] == 5)
+        for y, x in zip(*np.where(paint & side)):
+            f, z = float(geo["frac"][y, x]), float(geo["z"][y, x])
+            if f0 <= f < f1 and z0 <= z < z1:
+                o[y, x] = colour
+        return o
+    return draw
+
+
+def stratos_mint():
+    """VTPsim's Stratos LE 37 (the Prague trikolóra sheet) all in the ČSAD
+    Liberec light green, white LED displays"""
+    import pid as P
+    T = _T()
+    return T.repaint(T.load_rows("vehicle-bus/praha/stratos_le_37/sprites/pidcervenomodrobila.png"),
+                     P.z_any_light, MINT_ZONES, [[7.0, 7.5, 8.0]], None, None, None,
+                     T.disp(T.LEDW, frm=(0xF0A018, 0xF7A21B, 0xECEEE4)))
+
+
+def rosero_ideska():
+    """VTPsim's Rošero First (the white Prague sheet) in the IDESKA petrol green
+    with the green bar at the rear corner"""
+    import pid as P
+    T = _T()
+    return T.repaint(T.load_rows("vehicle-bus/praha/rosero_first/sprites/bila.png"), P.z_any_light,
+                     IDESKA_ZONES, [[7.0, 7.5, 8.0]], _side_band(Ideska.GREEN, 0.90, 0.99, 0.45, 1.75),
+                     None, None, T.disp(Ideska.disp, frm=(0xF0A018, 0xF7A21B, 0xECEEE4)))
+
+
+def citywide_duk():
+    """VTPsim's pak128.cs Citywide LE suburban (frozen in src/odis/, ported as
+    for pid.py) all in the DÚK green, white LED displays"""
+    import pid as P
+    T = _T()
+    Ls = [[11.5, 12.0, 12.5]]
+    return T.repaint(P.scania_port("CZ-ODIS-ScaniaCitywideLE128M_Suburban-Green", Ls)(), P.z_any_light,
+                     DUK_ZONES, Ls, None, None, None,
+                     T.disp(DukZelena.disp, frm=(0xF0A018, 0xF7A21B, 0xECEEE4)))
 
 
 # ====================================================================== bodies
@@ -270,18 +369,25 @@ class VectioULE(VectioFace, M.CrosswayLELine108):
 IDOL = ("IDOL", "IDOL", "IDOL", "vehicle-bus/idol")
 JIKORD = ("JIKORD", "IDESKA", "IDESKA", "vehicle-bus/jikord")
 DUK = ("DUK", "DÚK", "DÚK", "vehicle-bus/duk")
+VDV = ("VDV", "VDV", "VDV", "vehicle-bus/vdv")
 
 LIVERY = {
     "idol": ("white, IDOL", "bílá, IDOL"),
     "ideska": ("IDESKA petrol green", "IDESKA, tmavě zelená se zelenými pruhy"),
     "busem": ("white, busem", "bílá, busem"),
     "dukzelena": ("DÚK green", "DÚK, zelená"),
+    "svetlezelena": ("light green", "světle zelená"),
+    "vdv": ("VDV white, green chevrons", "VDV, bílá se zelenými šipkami"),
 }
 
 
-def fam(region, model, type_, name, role, liveries, flds, note):
+def fam(region, model, type_, name, role, liveries, flds, note, rows=None, copyright="vojtechzicha",
+        sprite=None):
+    """model: a box-model body class; rows: {livery slug: function returning the
+    rows} for the repainted sheets (then model is None and sprite says how)"""
     return dict(region=region, model=model, type=type_, name=name, role=role,
-                liveries=liveries, fields=flds, note=note)
+                liveries=liveries, fields=flds, note=note, rows=rows or {}, copyright=copyright,
+                sprite=sprite)
 
 
 FAMILIES = {
@@ -291,8 +397,8 @@ FAMILIES = {
         fields(650000, 88, 100, 12, 265, 9, 2018),
         "Iveco Crossway LINE 13M high-floor interurban, tag axle, doors 1-2-0. On PID\n"
         "lines (Mladoboleslavsko, Mělnicko) 2026: BusLine LK 270 (2025, photo\n"
-        "seznam-autobusu 433880), white with the IDOL logos. The live map also gave a\n"
-        "ČSAD Liberec LINE 13M (11695), not found in the register (inferred)."),
+        "seznam-autobusu 433880), white with the IDOL logos, and ČSAD Liberec 11695\n"
+        "(register 'VKT, bílá', the IDOL logos on photo seznam-autobusu 435867)."),
     "idol/crossway_pro_12m": fam(IDOL, CrosswayPro12, "Crossway_Pro_12M", "Iveco Crossway PRO 12M", BUS,
         [("idol", "BusLine LK, ČSAD Liberec")],
         fields(640000, 80, 100, 11, 265, 8, 2015),
@@ -312,6 +418,34 @@ FAMILIES = {
         fields(590000, 86, 100, 12, 243, 9, 2006),
         "Irisbus Crossway 12,8M high-floor interurban. On PID lines (line 345) 2026:\n"
         "ČSAD Liberec 777 (2012, ex Diendorfer / ABAS), white with the IDOL logos."),
+    "idol/irisbus_crossway_le_10_8m": fam(IDOL, M.IrisbusCrosswayLE108, "Irisbus_Crossway_LE_10_8M",
+        "Irisbus Crossway LE 10,8M", BUS,
+        [("idol", "ČSAD Liberec")],
+        fields(570000, 80, 100, 10, 213, 7, 2013, run=23, fixed=116),
+        "Irisbus Crossway LE 10,8M low-entry. On PID lines 2026: ČSAD Liberec 642\n"
+        "(live map 10642), white with the IDOL logos (photo seznam-autobusu 322625)."),
+    "idol/crossway_le_line_12m": fam(IDOL, M.CrosswayLELine, "Crossway_LE_Line_12M",
+        "Iveco Crossway LE LINE 12M", BUS,
+        [("idol", "ČSAD Liberec")],
+        fields(640000, 92, 100, 11, 243, 8, 2014, run=26, fixed=131),
+        "Iveco Crossway LE LINE 12M low-entry interurban. On PID lines 2026: ČSAD\n"
+        "Liberec 11611, 11645, 11697, white (register 2026-11-03), the IDOL logos as\n"
+        "on every ČSAD Liberec bus of the kraj contract."),
+    "idol/crossway_le_line_14_5m": fam(IDOL, M.CrosswayLELine145, "Crossway_LE_Line_14_5M",
+        "Iveco Crossway LE LINE 14,5M", BUS,
+        [("idol", "ČSAD Liberec")],
+        fields(720000, 110, 100, 14, 265, 10, 2018, run=29, fixed=147),
+        "Iveco Crossway LE LINE 14,5M, three axles. On PID lines 2026: ČSAD Liberec\n"
+        "645, 654 (live map 10645, 10654), 11656 (2021), white with the IDOL logos\n"
+        "(register 2026-11-03)."),
+    "idol/stratos_le_37": fam(IDOL, None, "Stratos_LE_37", "SKD Iveco Stratos LE 37", MIDI,
+        [("svetlezelena", "ČSAD Liberec")],
+        fields(290000, 37, 90, 5, 132, 5, 2016, run=15, fixed=80),
+        "SKD Iveco Stratos LE 37 midibus. On PID lines 2026: ČSAD Liberec 759 (live map\n"
+        "10759), light green (photo seznam-autobusu 154795).",
+        rows={"svetlezelena": stratos_mint}, copyright="VTPsim",
+        sprite="VTPsim's Stratos LE 37 (the Prague sheet, vehicle-bus/praha/stratos_le_37)\n"
+               "repainted by odis_town.repaint in tools/busrender/regions.py."),
     # ------------------------------------------------------------ JIKORD
     "jikord/evadys_13m": fam(JIKORD, Evadys13, "Evadys_13M", "Iveco Evadys 13M", BUS,
         [("ideska", "ČSAD AUTOBUSY České Budějovice")],
@@ -326,6 +460,30 @@ FAMILIES = {
         "Iveco Crossway LINE 10,8M high-floor interurban, doors 1-2-0. On PID lines\n"
         "(Příbramsko) 2026: ČSAD AUTOBUSY České Budějovice 17231 / 17233 (2017,\n"
         "Písek), white with the busem lettering (photo seznam-autobusu 273658)."),
+    "jikord/rosero_first": fam(JIKORD, None, "Rosero_First", "Rošero First FCLLI", MIDI,
+        [("ideska", "BusLine jižní Čechy")],
+        fields(300000, 38, 90, 6, 132, 5, 2021, run=15, fixed=82),
+        "ROŠERO-P First FCLLI low-entry midibus on the Iveco Daily. On PID lines\n"
+        "(Příbramsko) 2026: BusLine jižní Čechy 17011, the IDESKA scheme (register\n"
+        "2026-11-03; no photo, the scheme as on the IDESKA Evadys, inferred).",
+        rows={"ideska": rosero_ideska}, copyright="VTPsim",
+        sprite="VTPsim's Rošero First (the white Prague sheet, vehicle-bus/praha/rosero_first)\n"
+               "repainted by odis_town.repaint in tools/busrender/regions.py."),
+    # ------------------------------------------------------------ VDV
+    "vdv/crossway_le_line_10_8m": fam(VDV, M.CrosswayLELine108, "Crossway_LE_Line_10_8M",
+        "Iveco Crossway LE LINE 10,8M", BUS,
+        [("vdv", "ČSAD AUTOBUSY České Budějovice")],
+        fields(590000, 80, 100, 10, 210, 7, 2014, run=24, fixed=120),
+        "Iveco Crossway LE LINE 10,8M low-entry. On PID line 401 2026: ČSAD AUTOBUSY\n"
+        "České Budějovice 18101, 18102, 18104, 18106, the VDV white with green chevrons\n"
+        "(register 2026-11-03; drawn after 18151, photo seznam-autobusu 451432)."),
+    "vdv/crossway_le_line_14_5m": fam(VDV, M.CrosswayLELine145, "Crossway_LE_Line_14_5M",
+        "Iveco Crossway LE LINE 14,5M", BUS,
+        [("vdv", "ČSAD AUTOBUSY České Budějovice, ABOUT ME")],
+        fields(720000, 110, 100, 14, 265, 10, 2018, run=29, fixed=147),
+        "Iveco Crossway LE LINE 14,5M, three axles. On PID line 401 2026: ČSAD AUTOBUSY\n"
+        "České Budějovice 18151-18153 and ABOUT ME 18154, the VDV white with green\n"
+        "chevrons (photo seznam-autobusu 451432)."),
     # ------------------------------------------------------------ DÚK
     "duk/vectio_u_le": fam(DUK, VectioULE, "Vectio_U_LE", "Otokar Vectio U LE", MIDI,
         [("dukzelena", "DSÚK")],
@@ -334,6 +492,20 @@ FAMILIES = {
         "On PID lines (Kladensko, Rakovnicko; lines 708 and others) 2026: DSÚK 12908 /\n"
         "12940 / 12942 / 12943 (2023, Louny), DÚK green (photos seznam-autobusu\n"
         "368238, 444644)."),
+    "duk/setra_s_415_le_business": fam(DUK, CM.SetraS415LE, "Setra_S_415_LE_business",
+        "Setra S 415 LE business", BUS,
+        [("dukzelena", "UMBRELLA")],
+        fields(680000, 90, 100, 11, 260, 8, 2014, run=27, fixed=139),
+        "Setra S 415 LE business. On PID lines (Rakovnicko, line 415) 2026: UMBRELLA\n"
+        "City Lines 12425, DÚK green (photo seznam-autobusu 444247)."),
+    "duk/citywide_le_12m": fam(DUK, None, "Citywide_LE_12M", "Scania Citywide LE 12M", BUS,
+        [("dukzelena", "DSÚK")],
+        fields(780000, 95, 85, 12, 206, 8, 2019, run=30, fixed=148, gear=55),
+        "Scania Citywide LE 12M. On PID lines 2026: DSÚK 12536, 12555, 12557, 12559, DÚK\n"
+        "green (photos seznam-autobusu 391501, 388911); their advert bands left out.",
+        rows={"dukzelena": citywide_duk}, copyright="VTPsim",
+        sprite="VTPsim's pak128.cs Citywide LE suburban (frozen in tools/busrender/src/odis/)\n"
+               "ported by odis_town.port_native, repainted in tools/busrender/regions.py."),
 }
 
 
@@ -348,7 +520,7 @@ def yaml_text(key, f):
         "image_offset: [0, 0]",
         "# Windows light up at night only while passengers are aboard.",
         "windows_lit_when_loaded: true",
-        "copyright: vojtechzicha",
+        f"copyright: {f['copyright']}",
         "",
         "display:",
         f'  agency_en: "{en}"',
@@ -358,9 +530,14 @@ def yaml_text(key, f):
         "",
     ]
     lines += ["# " + ln for ln in f["note"].split("\n")]
+    if m is None:
+        sprite = f["sprite"].splitlines()
+        lines += ["# Sprite: " + sprite[0]] + ["# " + ln for ln in sprite[1:]]
+    else:
+        lines += [
+            f"# Sprite: original box-model render (vojtechzicha), model {m.__name__} of",
+            f"# tools/busrender/{m.__module__}.py; regenerate with tools/busrender/regions.py."]
     lines += [
-        f"# Sprite: original box-model render (vojtechzicha), model {m.__name__} of",
-        f"# tools/busrender/{m.__module__}.py; regenerate with tools/busrender/regions.py.",
         "# Generated by tools/busrender/regions.py --yaml.",
         "",
         "vehicles:",
@@ -399,7 +576,10 @@ def main(argv):
         os.makedirs(os.path.join(d, "sprites"), exist_ok=True)
         rows_all = []
         for slug, _ in f["liveries"]:
-            rows = [row_for(f["model"], slug)]
+            if slug in f["rows"]:
+                rows = f["rows"][slug]()
+            else:
+                rows = [row_for(f["model"], slug)]
             rows_all += rows
             save_rows(rows, os.path.join(d, "sprites", f"{slug}.png"))
         if do_yaml:

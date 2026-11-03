@@ -1,0 +1,52 @@
+agency: DPPraha
+type: "Crossway_LE_City_12M"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+display:
+  agency_en: "DPP"
+  agency_cs: "DPP"
+  family_en: "Iveco Crossway LE City 12M"
+  family_cs: "Iveco Crossway LE City 12M"
+
+# Iveco Crossway LE CITY 12M: 12 x 2.55 m, 3 doors, about 96 places, Cursor 9
+# 265 kW, 85 km/h. DPP 4510 (2017), on regional PID lines (373, 351) in 2026.
+# Livery: the DPP city red-white of the Crossways (crossway_le_12_8m) with the
+# blue roof (register "městské schéma, červeno-bílá & modrá střecha", photo
+# seznam-autobusu 207861).
+# Sprite: original box-model render (vojtechzicha): the iredo_models.py
+# Crossway LE CITY 12M body painted by tools/busrender/crossway_town.py
+# (t-dpp-blue). Regenerate with tools/busrender/crossway_town.py.
+
+vehicles:
+  - id: "Crossway_LE_City_12M"
+    display_id: "Crossway LE City 12M"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 640000
+      payload: 96
+      speed: 85
+      weight: 12
+      runningcost: 26
+      fixed_cost: 133
+      intro_year: 2013
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 265
+      gear: 56
+      smoke: Diesel_small
+
+liveries:
+  - color: dppcervenobila
+    name_en: "DPP red-white, blue roof"
+    name_cs: "DPP červeno-bílá, modrá střecha"

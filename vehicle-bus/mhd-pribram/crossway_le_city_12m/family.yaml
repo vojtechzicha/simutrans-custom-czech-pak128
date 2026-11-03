@@ -15,6 +15,8 @@ display:
   family_cs: "Iveco Crossway LE City 12M"
 
 # Iveco Crossway LE City 12M, 1 unit on Příbram MHD (Arriva).
+# Liveries: red all over, and the red-black (9829 in 2026: the black skirt along
+# the lower side, photo of the Conecto 9522, seznam-autobusu 254265).
 # Sprite: original box-model render (vojtechzicha): the iredo_models.py
 # Crossway LE CITY 12M body painted by tools/busrender/crossway_town.py (until
 # 2026-10-28 the hand-drawn upstream sheet). Regenerate with
@@ -50,3 +52,6 @@ liveries:
   - color: pribramcervena
     name_en: "Příbram, red"
     name_cs: "Příbram, červená"
+  - color: pribramcervenocerna
+    name_en: "Příbram, red-black"
+    name_cs: "Příbram, červeno-černá"

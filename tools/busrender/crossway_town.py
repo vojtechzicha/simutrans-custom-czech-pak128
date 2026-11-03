@@ -148,6 +148,16 @@ town("t-arriva-prerov", [("rise", (1.95, 3.45, 2, 5), WHITE)], body=ARRIVA_BLUE,
      ac=ARRIVA_ROOF, bumper=ARRIVA_BLUE, disp=LEDG)
 # Příbram (Arriva): red all over
 town("t-pribram", body=PRIBRAM_RED, roof=PRIBRAM_RED, bumper=PRIBRAM_RED)
+# Příbram red-black (MHD Příbram "červeno-černá", 13 of the 16 town buses in
+# 2026): red, the black skirt along the lower side under the wheel-arch tops
+# (photo seznam-autobusu 254265 of the Conecto 9522, the same on 9829)
+town("t-pribram-rc", [("skirt", 2, BLACK)], body=PRIBRAM_RED, roof=PRIBRAM_RED, bumper=PRIBRAM_RED)
+# the DPP city red-white of 4510 (Crossway LE CITY 12M, 2017): as t-dpp with
+# the blue roof (register "městské schéma, červeno-bílá & modrá střecha",
+# photo seznam-autobusu 207861); the blue of the trikolóra (praha.py "B")
+DPP_BLUE = (0x26, 0x57, 0xAD)
+town("t-dpp-blue", [("sill", 1, DPP_RED), ("lower", 2, DPP_RED)], roof=DPP_BLUE, ac=DPP_BLUE,
+     bumper=DPP_RED, front=DPP_FRONT)
 
 
 class CrosswayLECity12NP(O.Regio, M.CrosswayLECity12):
@@ -179,11 +189,13 @@ FAMILIES = {
     "dpmp/crossway_le_city_12m": {"dpmpbilocervena": [("CrosswayLECity12", "t-dpmp"),
                                                       ("CrosswayLECity12Hybrid", "t-dpmp-hybrid")]},
     "dpp/crossway_le_12_8m": {"dppcervenobila": [("IrisbusCrosswayLE128", "t-dpp")]},
+    "dpp/crossway_le_city_12m": {"dppcervenobila": [("CrosswayLECity12", "t-dpp-blue")]},
     "dpp/crossway_le_city_14_5m": {"pidsedocervena": [("CrosswayLECity145Pid", "pid-a")]},
     "mhd-cesky-tesin/crossway_le_city_10_8m": {"ceskytesinbilozluta": [("CrosswayLECity108x3", "t-tesin")]},
     "mhd-frydek-mistek/crossway_le_city_12m": {"3csadbilozelena": [("CrosswayLECity12", "3csadbilozelena")]},
     "mhd-prerov/crossway_le_city_12m": {"arrivamodra": [("CrosswayLECity12", "t-arriva-prerov")]},
-    "mhd-pribram/crossway_le_city_12m": {"pribramcervena": [("CrosswayLECity12", "t-pribram")]},
+    "mhd-pribram/crossway_le_city_12m": {"pribramcervena": [("CrosswayLECity12", "t-pribram")],
+                                         "pribramcervenocerna": [("CrosswayLECity12", "t-pribram-rc")]},
     "mhd-tabor/crossway_le_city_12m_cng": {"comettbila": [("OCrosswayLECity", "t-comett")]},
     "praha/crossway_le_12_8m": {"bila": [("IrisbusCrosswayLE128", "bilapk")],
                                 "pidcervenomodrobila": [("IrisbusCrosswayLE128", "pid-b")]},

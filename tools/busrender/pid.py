@@ -14,7 +14,11 @@ regional lines use those objects.
 Scope: the 2024 contracts (35 areas, 13 operators, about 1,530 buses) and the
 direct awards, October 2026 (seznam-autobusu registers, open-ended periods; 11
 days of deployment records). 92 % wear the PID 2021 grey-red, 6 % the old
-red-blue-white "trikolóra"; advert wraps get no object.
+red-blue-white "trikolóra". Operators' own schemes get an object too (owner,
+2026-11-03: "if something exists in the real PID, it should be modeled"):
+here when the operator is a PID one, in a neighbouring region's pak
+(regions.py) when the paint is that region's. Advert wraps get no object, full
+or rear-only (owner, 2026-11-03); the bus takes its base paint.
 
 Liveries (on the IREDO coach-pipeline bodies; colours as praha.py "A" / "B"):
   pidsedocervena       PID 2021 grey-red: grey body, black glazing band up to
@@ -24,6 +28,7 @@ Liveries (on the IREDO coach-pipeline bodies; colours as praha.py "A" / "B"):
                        the lower front and rear
   pidcervenomodrobila  the old trikolóra: blue roof and cant, black glazing
                        band, white band, red lower body, red bumpers
+  arrivacitycervena    ARRIVA CITY's plain red (SOR CN 8,5 9034)
 """
 import os
 import sys
@@ -172,6 +177,22 @@ PSorICN12 = body("PSorICN12", CM.SorICN)
 PSorICN105 = body("PSorICN105", CM.SorICN105)
 PSorC105 = body("PSorC105", M.SorC105)
 PSorC95 = body("PSorC95", M.SorC95)
+# fleet desk 2026-11-03 (owner: "if something exists in the real PID, it should be
+# modeled"): operators' own paint on PID regional lines gets its object too
+class ArrivaCityRed(M.Livery):
+    """ARRIVA CITY's plain red (the Arriva red of its small SORs): red body and
+    roof, the black glazing band, the Arriva lettering left out. 9034 (SOR CN
+    8,5, line X390; photos seznam-autobusu 309933, 294748)."""
+    slug = "arrivacitycervena"
+    sticker = False
+    body = (0xD8, 0x22, 0x1C)
+    roof = (0xDE, 0x2C, 0x24)
+    ac = (0xDE, 0x2C, 0x24)
+    seam = (0xB8, 0x1C, 0x16)
+
+
+M.LIVERIES[ArrivaCityRed.slug] = ArrivaCityRed
+PSorCN85 = type("PSorCN85", (M.SorCN85,), {"DISP": M.LED})
 # fleet desk 2026-11-02 (PID regional sheets): types seen on PID lines in the grey-red
 PIrizarI4 = body("PIrizarI4", CM.IrizarI4)
 PCrosswayLine13 = body("PCrosswayLine13", M.CrosswayLine13)
@@ -994,6 +1015,14 @@ FAMILIES = dict([
         " doors 1-1-0: ČSAD Česká Lípa 5 (1082-1091, 2024, PID contract subcontract,"
         " the red IDOL 'časovka' sticker left out) and KAD's 2 PID cars, in " + GR +
         " The white KAD cars are the VZ-IREDO object."),
+    fam("sor_cn_8_5", "SOR_CN_8_5", "SOR CN 8,5", MIDI,
+        f_(420000, 55, 90, 8, 19, 95, 2008, 6, "diesel", 160, 54, smoke=SMOKE),
+        [(("arrivacitycervena", "red · Arriva City", "červená · Arriva City"), "arrivacitycervena")],
+        PSorCN85,
+        "SOR CN 8,5 low-entry midibus: ARRIVA CITY 9034 on line X390 (Benešovsko) in"
+        " 2026, plain red with the black glazing band (photos seznam-autobusu 309933,"
+        " 294748); the operator's own paint, an object since the owner's rule of"
+        " 2026-11-03."),
     fam("crossway_line_13m", "Crossway_Line_13M", "Iveco Crossway LINE 13M", BUS,
         f_(650000, 88, 100, 12, 26, 133, 2018, 9, "diesel", 265, 54, smoke=SMOKE),
         [(A("KAD"), "pid-a")],

@@ -26,6 +26,8 @@ display:
 # white roof A/C units, one on the rear half of the front section and one on
 # the front half of the rear section, flanking the bellows (photos of 5017,
 # 5073, 5093).
+# Livery bilofialova: DPP's "90 let trolejbusů" anniversary scheme of 2026 (5025,
+# 5050): the red-white with purple for red (photo seznam-autobusu 444625).
 # Sprite: original box-model render (vojtechzicha): the dpmhk.py SOR NB 18 body
 # on the common SOR base, painted by tools/busrender/praha.py PVeh. Regenerate
 # with tools/busrender/praha.py.
@@ -88,3 +90,6 @@ liveries:
   - color: dppcervenobila
     name_en: "DPP red-white"
     name_cs: "DPP červeno-bílá"
+  - color: bilofialova
+    name_en: "white-purple, 90 years of trolleybuses"
+    name_cs: "bílo-fialová, 90 let trolejbusů"

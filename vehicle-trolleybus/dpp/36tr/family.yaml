@@ -21,8 +21,9 @@ display:
 # 75 total (Prague interior, seznam-autobusu); empty weight not published
 # (~13 t estimated).
 # Livery: shipped in the PID grey-red it wore 7/2025-5/2026 (and on line 52);
-# since 5/2026 it carries a temporary purple "90 years of trolleybuses" wrap,
-# which is not modelled. Grey body and roof fairing, black window band, black
+# since 5/2026 it carries the purple "90 years of trolleybuses" anniversary scheme,
+# drawn as its own livery (fialova: purple all over, the A rules without the
+# columns; photos seznam-autobusu 451541, 449328). Grey body and roof fairing, black window band, black
 # windscreen surround / front face of the roof dome, grey lower mask with the
 # red block on the vehicle's left, red panels over both axles repeated on the
 # roof fairing, grey rear cap, black rear window, red block on the lower rear;
@@ -63,3 +64,6 @@ liveries:
   - color: pidsedocervena
     name_en: "PID grey-red"
     name_cs: "PID šedo-červená"
+  - color: fialova
+    name_en: "purple, 90 years of trolleybuses"
+    name_cs: "fialová, 90 let trolejbusů"

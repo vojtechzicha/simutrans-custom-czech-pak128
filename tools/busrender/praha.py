@@ -14,6 +14,11 @@ Liveries (texture rules on the dpmhk Veh model):
   C  dppcervenobila        DPP city red-white: white roof, black glazing band, white
                            band, red lower body; black front cap with the red SOR trim.
   W  bila                  plain white (#F2F2F0), black glazing band.
+  F  bilofialova           DPP's "90 let trolejbusů" anniversary scheme (2026) on the
+                           NB 18: C with purple for red, the white band under the
+                           windscreen.
+  V  fialova               the same anniversary purple all over (36Tr 509): A with
+                           purple for grey and red, no columns.
 
 Bodies: SOR NS 12 / NS 18 and Iveco Urbanway 12M from dpmhk.py (repainted, the
 NS 12 diesel roof and rear engine louvres added as spec keys), plus the SOR NC 18
@@ -50,7 +55,15 @@ PAL = {
     # plain white
     "W": dict(body=(0xF2, 0xF2, 0xF0), red=None, roof=(0xF4, 0xF4, 0xF2),
               trim=(0xF2, 0xF2, 0xF0), white=(0xF2, 0xF2, 0xF0)),
+    # DPP "90 let trolejbusů" (2026, photos seznam-autobusu 444625 of NB 18 5025,
+    # 451541 / 449328 of 36Tr 509): white over purple (F, painted as C) and purple
+    # all over (V, painted as A)
+    "F": dict(body=(0xFA, 0xFA, 0xFA), red=(0x74, 0x5C, 0xC4), roof=(0xFF, 0xFF, 0xFF),
+              trim=(0x74, 0x5C, 0xC4), white=(0xFA, 0xFA, 0xFA)),
+    "V": dict(body=(0x74, 0x5C, 0xC4), red=(0x74, 0x5C, 0xC4), roof=(0x80, 0x6A, 0xCC),
+              trim=(0x74, 0x5C, 0xC4), white=None),
 }
+ALIAS = {"F": "C", "V": "A"}     # palette key -> the scheme whose rules paint it
 ZWHITE = 0.87      # top of the red lower body under the white band (B, C): 2 px of white
 
 # ------------------------------------------------------------------ bodies
@@ -121,6 +134,8 @@ class PVeh(Veh):
     def setup_livery(self):
         sp = self.sp
         self.P = PAL[self.liv]
+        self.pkey = self.liv
+        self.liv = ALIAS.get(self.liv, self.liv)
         self.TRIM = self.P["trim"]
         self.ROOF = self.P["roof"]
         self.reds = [(self.M(a), self.M(b)) for a, b in sp.get("reds", [])]
@@ -386,7 +401,7 @@ class PVeh(Veh):
                 if z < 0.70:
                     return sh(P["red"], f)
                 if z < 1.12:
-                    return sh(P["white"], f) if L == "B" else BLACK
+                    return sh(P["white"], f) if L == "B" or self.pkey == "F" else BLACK
             if a > HW - 0.08:
                 return BLACK if L in ("A", "C") else sh(P["white"], f)
             if inr(z, 2.36, 2.62) and a < 1.00:
@@ -572,7 +587,8 @@ def build(sp, livery):
 
 A, B, C, W = "pidsedocervena", "pidcervenomodrobila", "dppcervenobila", "bila"
 MC = "mestskacervenobila"
-KEY = {A: "A", B: "B", C: "C", W: "W", MC: "C"}
+F, V = "bilofialova", "fialova"
+KEY = {A: "A", B: "B", C: "C", W: "W", MC: "C", F: "F", V: "V"}
 
 # SOR NB 12 City: the A/C unit just behind the front roof edge (every photo);
 # scheme A with the red blocks between doors 1-2 and 3-4 (3694)
@@ -626,7 +642,7 @@ FAMILIES = {
     "vehicle-bus/praha/sor_nc_18": {W: [NC18]},
     "vehicle-bus/dpp/sor_ns_18": {C: [DNS18]},
     "vehicle-bus/dpp/sor_nb_12": {C: [DNB12], B: [DNB12], A: [DNB12A]},
-    "vehicle-bus/dpp/sor_nb_18": {C: [DNB18]},
+    "vehicle-bus/dpp/sor_nb_18": {C: [DNB18], F: [DNB18]},
     "vehicle-bus/praha/sor_nb_12": {B: [DNB12], W: [DNB12], MC: [DNB12]},
     "vehicle-bus/dpp/ens_12": {A: [DENS12]},
     "vehicle-trolleybus/dpp/tns_12": {A: [DTNS12]},
@@ -634,7 +650,7 @@ FAMILIES = {
     "vehicle-bus/brno/urbanway_12m": {W: [PUW12W]},
     "vehicle-bus/dpp/urbanway_18m_hybrid": {A: [DUW18H]},
     "vehicle-bus/dpp/e_city_36bb": {A: [DECITY]},
-    "vehicle-trolleybus/dpp/36tr": {A: [D36TR]},
+    "vehicle-trolleybus/dpp/36tr": {A: [D36TR], V: [mk(D36TR, reds=[])]},
     "vehicle-bus/dpp/streetway_12m": {A: [DSW12]},
     "vehicle-bus/praha/streetway_12m": {A: [DSW12]},
     "vehicle-bus/dpp/streetway_18m": {A: [DSW18]},

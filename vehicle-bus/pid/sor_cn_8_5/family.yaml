@@ -1,0 +1,54 @@
+agency: PID
+type: "SOR_CN_8_5"
+# Sprites carry their own lane placement (body footprint on the median of
+# native pak128.cs 12 m buses), so no extra shift.
+image_offset: [0, 0]
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: vojtechzicha
+
+display:
+  agency_en: "PID"
+  agency_cs: "PID"
+  family_en: "SOR CN 8,5"
+  family_cs: "SOR CN 8,5"
+
+# SOR CN 8,5 low-entry midibus: ARRIVA CITY 9034 on line X390 (Benešovsko) in
+# 2026, plain red with the black glazing band (photos seznam-autobusu 309933,
+# 294748); the operator's own paint, an object since the owner's rule of
+# 2026-11-03.
+# Sprite: original box-model render (vojtechzicha): SorCN85 of iredo_models.py
+# painted in the PID liveries of tools/busrender/pid.py.
+# Regenerate with tools/busrender/pid.py (family.yaml: --yaml).
+
+vehicles:
+  - id: "SOR_CN_8_5"
+    display_id: "SOR CN 8,5"
+    role_en: "midibus"
+    role_cs: "midibus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 420000
+      payload: 55
+      speed: 90
+      weight: 8
+      runningcost: 19
+      fixed_cost: 95
+      intro_year: 2008
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 6
+      engine_type: diesel
+      power: 160
+      gear: 54
+      smoke: Diesel_small
+
+liveries:
+  - color: arrivacitycervena
+    name_en: "red · Arriva City"
+    name_cs: "červená · Arriva City"
