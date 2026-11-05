@@ -1,0 +1,57 @@
+agency: Praha
+type: "Conecto_LF"
+image_offset: [0, 0]         # buses: sprites carry their own lane placement
+# Windows light up at night only while passengers are aboard.
+windows_lit_when_loaded: true
+copyright: VTPsim
+display:
+  agency_en: "Praha"
+  agency_cs: "Praha"
+  family_en: "Mercedes-Benz Conecto LF"
+  family_cs: "Mercedes-Benz Conecto LF"
+
+# Mercedes-Benz Conecto LF II, 12 m, doors 2-2-2.
+# The IKEA line: IKEA 2 (103116), Černý Most - IKEA Černý Most, IKEA's free
+# shuttle. One bus works it every day in autumn 2026 (seznam-autobusu duty log
+# 15 Sep - 5 Nov 2026; 3AZ 3724 stood in on 23-24 Sep): ARRIVA STŘEDNÍ ČECHY
+# 9501, 4SF 7497 (2017, ex-demonstrator, MHD Hořovice until 11/2024).
+# Livery since 12/2024, "CVR IKEA, bílá s grafikou švédské tajgy" (photos
+# seznam-autobusu 413770, 415105, 417104): white front and roof; both sides
+# wrapped up to the roof edge with a dark Swedish forest over green moss, the
+# blue-yellow IKEA box in the window band (door side between the front axle
+# and the middle door, off side just behind the driver), a small IKEA logo on
+# the front panel. The rear is on no photo and is kept white (unverified).
+# Sprite: VTPsim's white Conecto LF (vehicle-bus/mhd-kolin/conecto_lf) with
+# the wrap painted on its side faces by tools/busrender/praha_ikea.py.
+
+vehicles:
+  - id: "Conecto_LF"
+    display_id: "Conecto LF"
+    role_en: "bus"
+    role_cs: "autobus"
+    row: 0
+    prev: []
+    next: []
+    fields:
+      cost: 800000
+      payload: 95
+      speed: 80
+      weight: 11
+      runningcost: 24
+      fixed_cost: 135
+      intro_year: 2014
+      intro_month: 1
+      retire_year: 2060
+      retire_month: 12
+      waytype: road
+      freight: Passagiere
+      length: 8
+      engine_type: diesel
+      power: 220
+      gear: 55
+      smoke: Diesel_small
+
+liveries:
+  - color: ikea
+    name_en: "IKEA, Swedish taiga · Arriva Střední Čechy"
+    name_cs: "IKEA, švédská tajga · Arriva Střední Čechy"
