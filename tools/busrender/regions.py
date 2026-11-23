@@ -477,6 +477,15 @@ FAMILIES = {
         "Iveco Crossway LE LINE 10,8M low-entry. On PID line 401 2026: ČSAD AUTOBUSY\n"
         "České Budějovice 18101, 18102, 18104, 18106, the VDV white with green chevrons\n"
         "(register 2026-11-03; drawn after 18151, photo seznam-autobusu 451432)."),
+    "vdv/crossway_le_line_12m": fam(VDV, M.CrosswayLELine, "Crossway_LE_Line_12M",
+        "Iveco Crossway LE LINE 12M", BUS,
+        [("vdv", "ČSAD AUTOBUSY České Budějovice")],
+        fields(720000, 81, 100, 12, 265, 8, 2019, run=26, fixed=130, gear=56, intro_month=6),
+        "Iveco Crossway LE LINE 12M low-entry. VDV line 250 Pelhřimov - Humpolec -\n"
+        "Havlíčkův Brod 2026: ČSAD AUTOBUSY České Budějovice, 35 buses at the Pelhřimov\n"
+        "and Humpolec depots (e.g. 7J9 6315, 7J8 4832), register 'bílá & polep VDV,\n"
+        "zelené šipky' (fleet desk simutrans-timetable-04, 2026-11-23); the paint of the\n"
+        "VDV 10,8M / 14,5M. Stats as the DPMB Crossway LE LINE 12M."),
     "vdv/crossway_le_line_14_5m": fam(VDV, M.CrosswayLELine145, "Crossway_LE_Line_14_5M",
         "Iveco Crossway LE LINE 14,5M", BUS,
         [("vdv", "ČSAD AUTOBUSY České Budějovice, ABOUT ME")],

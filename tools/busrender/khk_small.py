@@ -524,6 +524,74 @@ class RRicany(RLivery):
         return self.GREEN if px.h >= 0.85 else None
 
 
+class RIcom(RLivery):
+    """ICOM transport's MHD Pelhřimov scheme, 'ICOM, modrá s bílým přechodem'
+    (NovoCiti Life 7J0 8265 / 8266, 2019, and the facelifts 7J8 3720, 1AM U521,
+    2025; photos vhdfoto 41661, 41665-41667, 41670, 43532): white roof and roof
+    pod, the black glasshouse with the black band over the windows, a violet-blue
+    lower body with a cloudy white-lilac fade, lightest between the axles and
+    full blue towards the rear corner, the skirt and the front door; the big
+    'ICOM transport' (navy capitals over a violet box) in the light middle of
+    each side. Front: white under the black mask, the bumper's lower edge blue.
+    Rear: black above, blue below with the white ICOM box. Outside IREDO: no
+    kraj sticker."""
+    body = WHITE
+    roof = WHITE
+    sticker = False
+    BLUE = (0x56, 0x58, 0xD2)                       # violet-blue, darkest
+    STEPS = [BLUE, (0x7E, 0x80, 0xDE), (0xA8, 0xAA, 0xEA), (0xD2, 0xD3, 0xF4),
+             (0xEA, 0xEA, 0xF8)]                    # blue .. lilac-white
+    NAVY = (0x24, 0x28, 0x86)                       # "ICOM" capitals
+    BOX = (0x60, 0x50, 0xC8)                        # the violet "transport" box
+
+    @staticmethod
+    def light(u):
+        """lightness of the fade along the side, 0 (blue) .. 1 (lightest);
+        u = 0 front .. 1 rear"""
+        if u <= 0.18 or u >= 0.84:
+            return 0.0
+        if u < 0.36:
+            return (u - 0.18) / 0.18
+        if u <= 0.62:
+            return 1.0
+        return (0.84 - u) / 0.22
+
+    def tone(self, lv, px):
+        """lightness lv quantised to STEPS with a checker dither (the cloudy look)"""
+        t = lv * (len(self.STEPS) - 1)
+        i = int(t)
+        f = t - i
+        if i >= len(self.STEPS) - 1:
+            return self.STEPS[-1]
+        dith = 0.5 if (px.x + px.y) % 2 else 0.0
+        return self.STEPS[i + 1] if f > 0.25 + dith * 0.5 else self.STEPS[i]
+
+    def side(self, px):
+        if px.rk < 1:
+            return None                             # roof edge: white
+        lv = self.light(px.u)
+        if px.kb == 0:
+            lv *= 0.35                              # the skirt row darker
+        # the logo in the light middle: navy "ICOM" on the first row under the
+        # windows, the violet box under it
+        if 0.40 <= px.u <= 0.60 and px.kb > 0:
+            if px.rk == 1:
+                return self.NAVY if int(px.seen()) % 3 != 2 else self.STEPS[-1]
+            if px.rk == 2:
+                return self.BOX
+        return self.tone(lv, px)
+
+    def front(self, px):
+        return self.BLUE if px.h >= 0.88 else None
+
+    def rear(self, px):
+        if px.h < 0.45:
+            return None
+        if px.h < 0.80 and 0.30 <= px.lr <= 0.70:
+            return self.STEPS[-1]                   # the white ICOM box
+        return self.BLUE
+
+
 def repaint(tiles, spec, liv, ref=0xEE, roof_k=1.05, ac=None, sticker=True, pods=True):
     """repaint a base row; ac = (u0, u1) draws a flat roof A/C box; pods: the
     grey roof pixels of the base are a roof pod (else only roof lines)"""
@@ -643,7 +711,7 @@ NOVO_SPEC = {
 
 RLIVERIES = {"bila": RBila, "transdev": RTransdev, "cds": RCDS, "ptransport": RPTransport,
              "bilocerna": RBiloCerna, "dvurkralove": DvurKralove, "bilapk": RBilaPK,
-             "ricanyzelena": RRicany}
+             "ricanyzelena": RRicany, "icommodra": RIcom}
 
 
 def repaint_job(base, spec, ac=None, sticker=True, pods=True):
@@ -1003,6 +1071,7 @@ LIVNAME = {
     "stribrna": ("silver-grey", "stříbrošedá"),
     "bilapk": ("white, Pardubický kraj", "bílá, Pardubický kraj"),
     "ricanyzelena": ("MHD Říčany, white with the green band", "MHD Říčany, bílá se zeleným pruhem"),
+    "icommodra": ("ICOM blue with the white fade", "ICOM, modrá s bílým přechodem"),
 }
 
 AGENCY = {
@@ -1011,6 +1080,7 @@ AGENCY = {
     "MHDNovaPaka": ("MHD Nová Paka", "MHD Nová Paka"),
     "MHDKostelec": ("MHD Kostelec nad Orlicí", "MHD Kostelec nad Orlicí"),
     "MHDRicany": ("MHD Říčany", "MHD Říčany"),
+    "MHDPelhrimov": ("MHD Pelhřimov", "MHD Pelhřimov"),
 }
 
 MIDI = ("midibus", "midibus")
@@ -1073,6 +1143,20 @@ FAMILIES = {
              "Sprite: the DPMP NovoCiti Life sheet (VTPsim's Urbino 8 body shortened to\n"
              "7.9 m) repainted by zone (photos seznam-autobusu 429107, 431788); the\n"
              "facelift front is drawn as the green mask under the windscreen."),
+    "vehicle-bus/mhd-pelhrimov/novociti_life": dict(
+        agency="MHDPelhrimov", type="NovoCiti_Life", name="Isuzu NovoCiti Life", role=MIDI,
+        copyright=VTP, job=repaint_job(NOVO_BASE, NOVO_SPEC, sticker=False),
+        liveries=[("icommodra", "ICOM transport")],
+        fields=fields(420000, 50, 90, 7, 140, 5, 2019),
+        note="Isuzu NOVO Citi Life, 7.9 m low-floor midibus, doors 1-2.\n"
+             "MHD Pelhřimov (ICOM transport, Kraj Vysočina) 2026: 7J0 8265, 7J0 8266 (Class\n"
+             "I, 2019), 7J8 3720 (Class II facelift, 2025), 1AM U521 (Class I facelift,\n"
+             "2025), all in ICOM's blue with the white fade (register 'ICOM, modrá s bílým\n"
+             "přechodem'; fleet desk simutrans-timetable-04, 2026-11-23). One object for\n"
+             "the four; stats as the IREDO NovoCiti Life.\n"
+             "Sprite: the DPMP NovoCiti Life sheet (VTPsim's Urbino 8 body shortened to\n"
+             "7.9 m) repainted by zone (RIcom; photos vhdfoto 41661, 41665-41667, 41670,\n"
+             "43532): the fade dithered in four steps, the ICOM logo between the axles."),
     "vehicle-bus/iredo/sprinter_519": dict(
         agency="IREDO", type="Sprinter_519", name="Mercedes-Benz Sprinter 519 CDI", role=MINI,
         copyright=VZ, job=render_job(SPRINTER_CDS),
