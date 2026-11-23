@@ -568,7 +568,9 @@ class RIcom(RLivery):
 
     def side(self, px):
         if px.rk < 1:
-            return None                             # roof edge: white
+            # the black band runs up to the roof: only the top row (the white
+            # roof shoulder) stays white
+            return None if int(round(px.h * px.H)) == 0 else BLACK
         lv = self.light(px.u)
         if px.kb == 0:
             lv *= 0.35                              # the skirt row darker
